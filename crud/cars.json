@@ -11,16 +11,11 @@
     "inIndex": false,
     "inView": false
     },
-    {
-        "name": "make_id",
-        "dbType": "integer",
-        "htmlType": "number",
-        "validations": "required",
-        "searchable": true
-    },
+
     {
         "name": "model_id",
-        "dbType": "integer",
+        "dbType": "integer:unsigned:foreign,models,id",
+        "relation": "mt1,CarModel,model_id,id",
         "htmlType": "number",
         "searchable": true
     },
@@ -40,7 +35,8 @@
     },
     {
         "name": "category_id",
-        "dbType": "integer",
+        "dbType": "integer:unsigned:foreign,car_categories,id",
+        "relation": "mt1,CarCategory,category_id,id",
         "htmlType": "number",
         "validations": "required"
     },
@@ -51,13 +47,15 @@
     },
     {
         "name": "condition_id",
-        "dbType": "integer",
+        "dbType": "integer:unsigned:foreign,car_conditions,id",
+        "relation": "mt1,CarCondition,condition_id,id",
         "htmlType": "number",
         "validations": "required"
     },
     {
         "name": "state_id",
-        "dbType": "integer",
+        "dbType": "integer:unsigned:foreign,car_states,id",
+        "relation": "mt1,CarState,state_id,id",
         "htmlType": "number",
         "validations": "required"
     },
@@ -85,7 +83,8 @@
     },
     {
         "name": "stand_id",
-        "dbType": "string",
+        "dbType": "integer:unsigned:foreign,stands,id",
+        "relation": "mt1,Stand,stand_id,id",
         "htmlType": "text"
     },
     {
@@ -145,7 +144,8 @@
     },
     {
         "name": "transmission_id",
-        "dbType": "string",
+        "dbType": "integer:unsigned:foreign,car_transmissions,id",
+        "relation": "mt1,CarTransmission,transmission_id,id",
         "htmlType": "text"
     },
     {
@@ -165,7 +165,8 @@
     },
     {
         "name": "drive_id",
-        "dbType": "string",
+        "dbType": "integer:unsigned:foreign,car_drives,id",
+        "relation": "mt1,CarDrive,drive_id,id",
         "htmlType": "text"
     },
     {
@@ -180,7 +181,8 @@
     },
     {
         "name": "class_id",
-        "dbType": "string",
+        "dbType": "integer:unsigned:foreign,car_classes,id",
+        "relation": "mt1,CarClass,class_id,id",
         "htmlType": "text"
     },
     {

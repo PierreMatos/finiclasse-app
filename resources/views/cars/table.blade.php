@@ -2,8 +2,7 @@
     <table class="table" id="cars-table">
         <thead>
             <tr>
-                <th>Make Id</th>
-        <th>Model Id</th>
+                <th>Model Id</th>
         <th>Variant</th>
         <th>Motorization</th>
         <th>Category Id</th>
@@ -52,8 +51,7 @@
         <tbody>
         @foreach($cars as $car)
             <tr>
-                <td>{{ $car->make_id }}</td>
-            <td>{{ $car->model_id }}</td>
+                <td>{{ $car->model_id }}</td>
             <td>{{ $car->variant }}</td>
             <td>{{ $car->motorization }}</td>
             <td>{{ $car->category_id }}</td>

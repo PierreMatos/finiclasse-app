@@ -16,9 +16,9 @@ class CarsSeeder extends Seeder
     public function run()
     {
         \DB::table('cars')->delete();
-
+        
         Car::factory()
-        ->count(10)
+        ->count(20)
         ->create();
 
         // factory(\App\Models\Car::class,15)->create();

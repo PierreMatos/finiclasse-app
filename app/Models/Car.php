@@ -9,9 +9,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Class Car
  * @package App\Models
- * @version May 26, 2021, 10:58 am UTC
+ * @version May 26, 2021, 5:01 pm UTC
  *
- * @property integer $make_id
+ * @property \App\Models\CarModel $model
+ * @property \App\Models\CarCategory $category
+ * @property \App\Models\CarCondition $condition
+ * @property \App\Models\CarState $state
+ * @property \App\Models\Stand $stand
+ * @property \App\Models\CarTransmission $transmission
+ * @property \App\Models\CarDrive $drive
+ * @property \App\Models\CarClass $class
  * @property integer $model_id
  * @property string $variant
  * @property integer $motorization
@@ -23,7 +30,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property integer $warranty_stand
  * @property integer $warranty_make
  * @property string $plate
- * @property string $stand_id
+ * @property integer $stand_id
  * @property integer $price
  * @property integer $price_base
  * @property integer $price_new
@@ -35,14 +42,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property boolean $deductible
  * @property integer $power
  * @property integer $km
- * @property string $transmission_id
+ * @property integer $transmission_id
  * @property string $color_interior
  * @property string $color_exterior
  * @property boolean $metallic_color
- * @property string $drive_id
+ * @property integer $drive_id
  * @property integer $door
  * @property integer $seats
- * @property string $class_id
+ * @property integer $class_id
  * @property integer $autonomy
  * @property integer $emissions
  * @property integer $iuc
@@ -70,7 +77,6 @@ class Car extends Model
 
 
     public $fillable = [
-        'make_id',
         'model_id',
         'variant',
         'motorization',
@@ -123,7 +129,6 @@ class Car extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'make_id' => 'integer',
         'model_id' => 'integer',
         'variant' => 'string',
         'motorization' => 'integer',
@@ -135,7 +140,7 @@ class Car extends Model
         'warranty_stand' => 'integer',
         'warranty_make' => 'integer',
         'plate' => 'string',
-        'stand_id' => 'string',
+        'stand_id' => 'integer',
         'price' => 'integer',
         'price_base' => 'integer',
         'price_new' => 'integer',
@@ -147,14 +152,14 @@ class Car extends Model
         'deductible' => 'boolean',
         'power' => 'integer',
         'km' => 'integer',
-        'transmission_id' => 'string',
+        'transmission_id' => 'integer',
         'color_interior' => 'string',
         'color_exterior' => 'string',
         'metallic_color' => 'boolean',
-        'drive_id' => 'string',
+        'drive_id' => 'integer',
         'door' => 'integer',
         'seats' => 'integer',
-        'class_id' => 'string',
+        'class_id' => 'integer',
         'autonomy' => 'integer',
         'emissions' => 'integer',
         'iuc' => 'integer',
@@ -175,7 +180,6 @@ class Car extends Model
      * @var array
      */
     public static $rules = [
-        'make_id' => 'required',
         'variant' => 'required',
         'motorization' => 'required',
         'category_id' => 'required',
@@ -183,5 +187,67 @@ class Car extends Model
         'state_id' => 'required'
     ];
 
-    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function model()
+    {
+        return $this->belongsTo(\App\Models\CarModel::class, 'model_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function category()
+    {
+        return $this->belongsTo(\App\Models\CarCategory::class, 'category_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function condition()
+    {
+        return $this->belongsTo(\App\Models\CarCondition::class, 'condition_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function state()
+    {
+        return $this->belongsTo(\App\Models\CarState::class, 'state_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function stand()
+    {
+        return $this->belongsTo(\App\Models\Stand::class, 'stand_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function transmission()
+    {
+        return $this->belongsTo(\App\Models\CarTransmission::class, 'transmission_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function drive()
+    {
+        return $this->belongsTo(\App\Models\CarDrive::class, 'drive_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function class()
+    {
+        return $this->belongsTo(\App\Models\CarClass::class, 'class_id', 'id');
+    }
 }

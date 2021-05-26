@@ -1,9 +1,3 @@
-<!-- Make Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('make_id', 'Make Id:') !!}
-    <p>{{ $car->make_id }}</p>
-</div>
-
 <!-- Model Id Field -->
 <div class="col-sm-12">
     {!! Form::label('model_id', 'Model Id:') !!}

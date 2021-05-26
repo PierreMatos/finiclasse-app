@@ -1,9 +1,3 @@
-<!-- Make Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('make_id', 'Make Id:') !!}
-    {!! Form::number('make_id', null, ['class' => 'form-control']) !!}
-</div>
-
 <!-- Model Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('model_id', 'Model Id:') !!}

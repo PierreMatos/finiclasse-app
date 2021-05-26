@@ -16,19 +16,18 @@ class CreateCarsTable extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('make_id');
-            $table->integer('model_id');
+            $table->integer('model_id')->unsigned();
             $table->string('variant');
             $table->integer('motorization');
-            $table->integer('category_id');
+            $table->integer('category_id')->unsigned();
             $table->dateTime('registration');
-            $table->integer('condition_id');
-            $table->integer('state_id');
+            $table->integer('condition_id')->unsigned();
+            $table->integer('state_id')->unsigned();
             $table->integer('komm');
             $table->integer('warranty_stand');
             $table->integer('warranty_make');
             $table->string('plate');
-            $table->string('stand_id');
+            $table->integer('stand_id')->unsigned();
             $table->integer('price');
             $table->integer('price_base');
             $table->integer('price_new');
@@ -40,14 +39,14 @@ class CreateCarsTable extends Migration
             $table->boolean('deductible');
             $table->integer('power');
             $table->integer('km');
-            $table->string('transmission_id');
+            $table->integer('transmission_id')->unsigned();
             $table->string('color_interior');
             $table->string('color_exterior');
             $table->boolean('metallic_color');
-            $table->string('drive_id');
+            $table->integer('drive_id')->unsigned();
             $table->integer('door');
             $table->integer('seats');
-            $table->string('class_id');
+            $table->integer('class_id')->unsigned();
             $table->integer('autonomy');
             $table->integer('emissions');
             $table->integer('iuc');
@@ -62,6 +61,14 @@ class CreateCarsTable extends Migration
             $table->integer('consumption');
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('model_id')->references('id')->on('models');
+            $table->foreign('category_id')->references('id')->on('car_categories');
+            $table->foreign('condition_id')->references('id')->on('car_conditions');
+            $table->foreign('state_id')->references('id')->on('car_states');
+            $table->foreign('stand_id')->references('id')->on('stands');
+            $table->foreign('transmission_id')->references('id')->on('car_transmissions');
+            $table->foreign('drive_id')->references('id')->on('car_drives');
+            $table->foreign('class_id')->references('id')->on('car_classes');
         });
     }
 
