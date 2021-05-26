@@ -1,0 +1,55 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false,
+        "inView": false
+    },
+    {
+        "name": "name",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "make_id",
+        "dbType": "integer:unsigned:foreign,makes,id",
+        "relation": "mt1,Make,make_id,id",
+        "htmlType": "number",
+        "validations": "required"
+    },
+    {
+        "name": "car_category_id",
+        "dbType": "integer:unsigned:foreign,car_categories,id",
+        "relation": "mt1,CarCategory,car_category_id,id",
+        "htmlType": "number",
+        "validations": "required"
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "datetime",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inIndex": false
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "datetime",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inIndex": false
+    }
+]

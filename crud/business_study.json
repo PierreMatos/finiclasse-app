@@ -1,0 +1,119 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false,
+        "inView": false
+    },
+    {
+        "name": "client_id",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "car_id",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "extras_total",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "sub_total",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "total_benefits",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "selling_price",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "tradein_id",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "tradein_diff",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "settle_amount",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "total_diff_amount",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "total_discount_amount",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "total_discount_perc",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "iva",
+        "dbType": "integer",
+        "htmlType": "number"
+    },    
+    {
+        "name": "isv",
+        "dbType": "integer",
+        "htmlType": "number"
+    },    
+    {
+        "name": "business_study_authorization_id",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "datetime",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inIndex": false
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "datetime",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inIndex": false
+    },
+    {
+        "name": "deleted_at",
+        "dbType": "timestamp",
+        "htmlType": "datetime",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inIndex": false
+    }
+]

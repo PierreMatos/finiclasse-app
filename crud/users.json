@@ -1,0 +1,129 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false,
+        "inView": false
+    },
+    {
+        "name": "name",
+        "dbType": "string:nullable",
+        "htmlType": "text",
+        "validations":"validations:nullable"
+    },
+    {
+        "name": "email",
+        "dbType": "string",
+        "htmlType": "email",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "email_verified_at",
+        "dbType": "timestamp:nullable",
+        "htmlType": "datetime",
+        "validations": "validations:nullable",
+        "inForm": false,
+        "inIndex": false,
+        "searchable": false,
+        "fillable": false,
+        "inView": false
+    },
+    {
+        "name": "password",
+        "dbType": "string:nullable",
+        "htmlType": "password",
+        "validations": "validations:nullable",
+        "inForm": false,
+        "inIndex": false,
+        "searchable": false,
+        "fillable": false,
+        "inView": false
+    },
+    {
+        "name": "city",
+        "dbType": "string:nullable",
+        "htmlType": "text",
+        "validations": "validations:nullable"
+    },
+    {
+        "name": "adress",
+        "dbType": "string:nullable",
+        "htmlType": "text",
+        "validations":"validations:nullable"
+    },
+    {
+        "name": "zip_code",
+        "dbType": "string:nullable",
+        "htmlType": "text",
+        "validations":"validations:nullable"
+    },
+    {
+        "name": "phone",
+        "dbType": "integer:nullable",
+        "htmlType": "number",
+        "validations":"validations:nullable"
+    },
+    {
+        "name": "mobile_phone",
+        "dbType": "integer:nullable",
+        "htmlType": "number",
+        "validations":"validations:nullable"
+    },
+    {
+        "name": "nif",
+        "dbType": "integer:nullable",
+        "htmlType": "number",
+        "validations":"validations:nullable"
+    },
+    {
+        "name": "gdpr_confirmation",
+        "dbType": "timestamp:nullable",
+        "htmlType": "datetime",
+        "validations":"validations:nullable"
+    },
+    {
+        "name": "gdpr_rejection",
+        "dbType": "timestamp:nullable",
+        "htmlType": "datetime",
+        "validations":"validations:nullable"
+    },
+    {
+        "name": "gdpr_type",
+        "dbType": "string:nullable",
+        "htmlType": "text",
+        "validations":"validations:nullable"
+    },
+    {
+        "name": "finiclasse_employee",
+        "dbType": "boolean:nullable",
+        "htmlType": "checkbox",
+        "validations":"validations:nullable"
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "datetime",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inIndex": false
+    },
+    { 
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "datetime",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inIndex": false    
+    }
+]

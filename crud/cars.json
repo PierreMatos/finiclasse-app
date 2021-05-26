@@ -1,0 +1,266 @@
+[
+    {
+    "name": "id",
+    "dbType": "increments",
+    "htmlType": "",
+    "validations": "",
+    "searchable": false,
+    "fillable": false,
+    "primary": true,
+    "inForm": false,
+    "inIndex": false,
+    "inView": false
+    },
+    {
+        "name": "make_id",
+        "dbType": "integer",
+        "htmlType": "number",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "model_id",
+        "dbType": "integer",
+        "htmlType": "number",
+        "searchable": true
+    },
+    {
+        "name": "variant",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "motorization",
+        "dbType": "integer",
+        "htmlType": "number",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "category_id",
+        "dbType": "integer",
+        "htmlType": "number",
+        "validations": "required"
+    },
+    {
+        "name": "registration",
+        "dbType": "dateTime",
+        "htmlType": "date"
+    },
+    {
+        "name": "condition_id",
+        "dbType": "integer",
+        "htmlType": "number",
+        "validations": "required"
+    },
+    {
+        "name": "state_id",
+        "dbType": "integer",
+        "htmlType": "number",
+        "validations": "required"
+    },
+    {
+        "name": "komm",
+        "dbType": "integer",
+        "htmlType": "number",
+        "searchable": true
+    },
+    {
+        "name": "warranty_stand",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "warranty_make",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "plate",
+        "dbType": "string",
+        "htmlType": "text",
+        "searchable": true
+    },
+    {
+        "name": "stand_id",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "price",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "price_base",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "price_new",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "price_campaign",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "tradein",
+        "dbType": "boolean",
+        "htmlType": "checkbox"
+    },
+    {
+        "name": "tradein_purchase",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "tradein_sale",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "felxible",
+        "dbType": "boolean",
+        "htmlType": "checkbox"
+    },
+    {
+        "name": "deductible",
+        "dbType": "boolean",
+        "htmlType": "checkbox"
+    },
+    {
+        "name": "power",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "km",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "transmission_id",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "color_interior",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "color_exterior",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "metallic_color",
+        "dbType": "boolean",
+        "htmlType": "checkbox"
+    },
+    {
+        "name": "drive_id",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "door",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "seats",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "class_id",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "autonomy",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "emissions",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "iuc",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "registration_count",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "order_date",
+        "dbType": "dateTime",
+        "htmlType": "date"
+    },
+    {
+        "name": "arrival_date",
+        "dbType": "dateTime",
+        "htmlType": "date"
+    },
+    {
+        "name": "delivery_date",
+        "dbType": "dateTime",
+        "htmlType": "date"
+    },
+    {
+        "name": "chassi_number",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "iuc_expiration_date",
+        "dbType": "dateTime",
+        "htmlType": "date"
+    },
+    {
+        "name": "inspection_expiration_date",
+        "dbType": "dateTime",
+        "htmlType": "date"
+    },
+    {
+        "name": "tradein_observations",
+        "dbType": "string",
+        "htmlType": "text"
+    },
+    {
+        "name": "consumption",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "datetime",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inIndex": false
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "datetime",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inIndex": false
+    }
+]

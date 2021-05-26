@@ -1,0 +1,125 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false,
+        "inView": false
+    },
+    {
+        "name": "client_id",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "vendor_id",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "car_id",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "price",
+        "dbType": "integer",
+        "htmlType": "number"
+    }, 
+    {
+        "name": "pos_number",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "pos_number",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "prop_value",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "financing_value",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "tradein",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "open_conntact_date",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "last_contact_date",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "next_contact_date",
+        "dbType": "integer",
+        "htmlType": "number"
+    },
+    {
+        "name": "contract",
+        "dbType": "string",
+        "htmlType": "file"
+    },
+    {
+        "name": "test_drive",
+        "dbType": "boolean",
+        "htmlType": "checkbox"
+    },
+    {
+        "name": "state_id",
+        "dbType": "integer",
+        "htmlType": "number",
+        "validations": "required"
+    },
+    {
+        "name": "comment",
+        "dbType": "text",
+        "htmlType": "textarea"
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "datetime",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inIndex": false
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "datetime",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inIndex": false
+    },
+    {
+        "name": "deleted_at",
+        "dbType": "timestamp",
+        "htmlType": "datetime",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inIndex": false
+    }
+]
