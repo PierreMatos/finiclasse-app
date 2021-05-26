@@ -19,7 +19,7 @@ class ProposalStatesSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
-                'name' => 'Open',
+                'name' => 'Aberto',
                 'order' => 1,
                 'color' => '#fffff',
                 'visible' => 1,
@@ -29,7 +29,7 @@ class ProposalStatesSeeder extends Seeder
             1 => 
             array (
                 'id' => 2,
-                'name' => 'Close',
+                'name' => 'Fechado',
                 'order' => 2,
                 'color' => '#fffff',
                 'visible' => 1,
@@ -39,7 +39,7 @@ class ProposalStatesSeeder extends Seeder
             2 => 
             array (
                 'id' => 3,
-                'name' => 'Pending',
+                'name' => 'Pendente',
                 'order' => 3,
                 'color' => '#fffff',
                 'visible' => 1,
@@ -49,7 +49,7 @@ class ProposalStatesSeeder extends Seeder
             3 => 
             array (
                 'id' => 4,
-                'name' => 'Lost',
+                'name' => 'Perdido',
                 'order' => 4,
                 'color' => '#fffff',
                 'visible' => 1,

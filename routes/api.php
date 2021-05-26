@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Resources\UserResource as UserResource;
 use App\Http\Resources\ClientResource as ClientResource;
 use App\Http\Controllers\API\StandAPIController;
+use App\Http\Controllers\API\CarAPIController;
 
 // use App\Http\Controllers\API\CarModelAPIController;
 use App\Models\User as User;
@@ -41,6 +42,9 @@ Route::resource('users', App\Http\Controllers\API\UserAPIController::class);
 //     return new ClientResource($client);
 // });
 
+// Route::resource('cars', CarAPIController::class)->name('cars');
+// Route::resource('cars', [CarAPIController::class])->name('stands');
+Route::get('cars', [CarAPIController::class,'index']);
 
 // Route::resource('stands', 'API\StandAPIController');
 Route::get('/stands', [ StandAPIController::class, 'index'])->name('stands');
@@ -52,7 +56,6 @@ Route::resource('proposal_states', App\Http\Controllers\API\ProposalStatesAPICon
 Route::resource('makes', App\Http\Controllers\API\MakeAPIController::class);
 
 Route::resource('car_models', CarModelAPIController::class);
-// 
 
 Route::resource('car_categories', App\Http\Controllers\API\CarCategoryAPIController::class);
 

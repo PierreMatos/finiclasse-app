@@ -66,3 +66,5 @@ Route::resource('carStates', App\Http\Controllers\CarStateController::class);
 Route::resource('carTransmissions', App\Http\Controllers\CarTransmissionController::class);
 
 Route::resource('carModels', App\Http\Controllers\CarModelController::class);
+
+Route::resource('cars', App\Http\Controllers\CarController::class);
