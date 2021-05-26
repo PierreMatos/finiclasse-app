@@ -9,7 +9,7 @@ class CarModelResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $requests
+     * @param  \Illuminate\Http\Request  $requestss
      * @return array
      */
     public function toArray($request)
