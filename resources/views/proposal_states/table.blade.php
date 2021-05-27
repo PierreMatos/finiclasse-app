@@ -10,19 +10,19 @@
             </tr>
         </thead>
         <tbody>
-        @foreach($proposalStates as $proposalStates)
+        @foreach($proposalStates as $proposalState)
             <tr>
-                <td>{{ $proposalStates->name }}</td>
-            <td>{{ $proposalStates->order }}</td>
-            <td>{{ $proposalStates->color }}</td>
-            <td>{{ $proposalStates->visible }}</td>
+                <td>{{ $proposalState->name }}</td>
+            <td>{{ $proposalState->order }}</td>
+            <td>{{ $proposalState->color }}</td>
+            <td>{{ $proposalState->visible }}</td>
                 <td width="120">
-                    {!! Form::open(['route' => ['proposalStates.destroy', $proposalStates->id], 'method' => 'delete']) !!}
+                    {!! Form::open(['route' => ['proposalStates.destroy', $proposalState->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('proposalStates.show', [$proposalStates->id]) }}" class='btn btn-default btn-xs'>
+                        <a href="{{ route('proposalStates.show', [$proposalState->id]) }}" class='btn btn-default btn-xs'>
                             <i class="far fa-eye"></i>
                         </a>
-                        <a href="{{ route('proposalStates.edit', [$proposalStates->id]) }}" class='btn btn-default btn-xs'>
+                        <a href="{{ route('proposalStates.edit', [$proposalState->id]) }}" class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>
                         {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}

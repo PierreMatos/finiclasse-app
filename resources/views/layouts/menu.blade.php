@@ -39,13 +39,6 @@
 </li>
 
 
-<li class="nav-item">
-    <a href="{{ route('proposalStates.index') }}"
-       class="nav-link {{ Request::is('proposalStates*') ? 'active' : '' }}">
-        <p>Proposal States</p>
-    </a>
-</li>
-
 
 <li class="nav-item">
     <a href="{{ route('makes.index') }}"
@@ -131,6 +124,54 @@
     <a href="{{ route('cars.index') }}"
        class="nav-link {{ Request::is('cars*') ? 'active' : '' }}">
         <p>Cars</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('proposalStates.index') }}"
+       class="nav-link {{ Request::is('proposalStates*') ? 'active' : '' }}">
+        <p>Proposal States</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('benefits.index') }}"
+       class="nav-link {{ Request::is('benefits*') ? 'active' : '' }}">
+        <p>Benefits</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('businenssStudyAuthorizations.index') }}"
+       class="nav-link {{ Request::is('businenssStudyAuthorizations*') ? 'active' : '' }}">
+        <p>Businenss Study Authorizations</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('businessStudies.index') }}"
+       class="nav-link {{ Request::is('businessStudies*') ? 'active' : '' }}">
+        <p>Business Studies</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('benefitsBusinessStudies.index') }}"
+       class="nav-link {{ Request::is('benefitsBusinessStudies*') ? 'active' : '' }}">
+        <p>Benefits Business Studies</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('proposals.index') }}"
+       class="nav-link {{ Request::is('proposals*') ? 'active' : '' }}">
+        <p>Proposals</p>
     </a>
 </li>
 

@@ -42,11 +42,6 @@
         "htmlType": "number"
     },
     {
-        "name": "tradein_id",
-        "dbType": "integer",
-        "htmlType": "number"
-    },
-    {
         "name": "tradein_diff",
         "dbType": "integer",
         "htmlType": "number"
@@ -83,7 +78,14 @@
     },    
     {
         "name": "business_study_authorization_id",
-        "dbType": "integer",
+        "dbType": "integer:unsigned:foreign,business_study_authorizations,id",
+        "relation": "mt1,BusinessStudyAuthorization,business_study_authorization_id,id",
+        "htmlType": "number"
+    },
+    {
+        "name": "tradein_id",
+        "dbType": "integer:unsigned:foreign,cars,id",
+        "relation": "mt1,Car,tradein_id,id",
         "htmlType": "number"
     },
     {

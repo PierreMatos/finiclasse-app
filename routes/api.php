@@ -6,6 +6,7 @@ use App\Http\Resources\UserResource as UserResource;
 use App\Http\Resources\ClientResource as ClientResource;
 use App\Http\Controllers\API\StandAPIController;
 use App\Http\Controllers\API\CarAPIController;
+use App\Http\Controllers\API\ProposalAPIController;
 
 // use App\Http\Controllers\API\CarModelAPIController;
 use App\Models\User as User;
@@ -45,13 +46,14 @@ Route::resource('users', App\Http\Controllers\API\UserAPIController::class);
 // Route::resource('cars', CarAPIController::class)->name('cars');
 // Route::resource('cars', [CarAPIController::class])->name('stands');
 Route::get('cars', [CarAPIController::class,'index']);
+Route::get('proposals', [ProposalAPIController::class,'index']);
 
 // Route::resource('stands', 'API\StandAPIController');
 Route::get('/stands', [ StandAPIController::class, 'index'])->name('stands');
 
 // Route::resource('stands', App\Http\Controllers\API\StandAPIController::class);
 
-Route::resource('proposal_states', App\Http\Controllers\API\ProposalStatesAPIController::class);
+
 
 Route::resource('makes', App\Http\Controllers\API\MakeAPIController::class);
 
@@ -68,3 +70,15 @@ Route::resource('car_drives', App\Http\Controllers\API\CarDriveAPIController::cl
 Route::resource('car_states', App\Http\Controllers\API\CarStateAPIController::class);
 
 Route::resource('car_transmissions', App\Http\Controllers\API\CarTransmissionAPIController::class);
+
+Route::resource('proposal_states', App\Http\Controllers\API\ProposalStateAPIController::class);
+
+Route::resource('benefits', App\Http\Controllers\API\BenefitAPIController::class);
+
+Route::resource('businenss_study_authorizations', App\Http\Controllers\API\BusinenssStudyAuthorizationAPIController::class);
+
+Route::resource('business_studies', App\Http\Controllers\API\BusinessStudyAPIController::class);
+
+Route::resource('benefits_business_studies', App\Http\Controllers\API\BenefitsBusinessStudyAPIController::class);
+
+// Route::resource('proposals', App\Http\Controllers\API\ProposalAPIController::class);

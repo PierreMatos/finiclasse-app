@@ -13,16 +13,12 @@
     },
     {
         "name": "client_id",
-        "dbType": "integer",
+        "dbType": "integer:unsigned:foreign,users,id",
+        "relation": "mt1,User,client_id,id",
         "htmlType": "number"
     },
     {
         "name": "vendor_id",
-        "dbType": "integer",
-        "htmlType": "number"
-    },
-    {
-        "name": "car_id",
         "dbType": "integer",
         "htmlType": "number"
     },
@@ -37,27 +33,17 @@
         "htmlType": "number"
     },
     {
-        "name": "pos_number",
-        "dbType": "integer",
-        "htmlType": "number"
-    },
-    {
         "name": "prop_value",
         "dbType": "integer",
         "htmlType": "number"
     },
     {
-        "name": "financing_value",
+        "name": "financing_id",
         "dbType": "integer",
         "htmlType": "number"
     },
     {
-        "name": "tradein",
-        "dbType": "integer",
-        "htmlType": "number"
-    },
-    {
-        "name": "open_conntact_date",
+        "name": "first_contact_date",
         "dbType": "integer",
         "htmlType": "number"
     },
@@ -83,7 +69,15 @@
     },
     {
         "name": "state_id",
-        "dbType": "integer",
+        "dbType": "integer:unsigned:foreign,proposal_states,id",
+        "relation": "mt1,ProposalState,state_id,id",
+        "htmlType": "number",
+        "validations": "required"
+    },
+    {
+        "name": "business_study_id",
+        "dbType": "integer:unsigned:foreign,business_studies,id",
+        "relation": "mt1,BusinessStudy,business_study_id,id",
         "htmlType": "number",
         "validations": "required"
     },

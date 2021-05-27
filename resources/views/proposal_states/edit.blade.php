@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Edit Proposal States</h1>
+                    <h1>Edit Proposal State</h1>
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
 
         <div class="card">
 
-            {!! Form::model($proposalStates, ['route' => ['proposalStates.update', $proposalStates->id], 'method' => 'patch']) !!}
+            {!! Form::model($proposalState, ['route' => ['proposalStates.update', $proposalState->id], 'method' => 'patch']) !!}
 
             <div class="card-body">
                 <div class="row">

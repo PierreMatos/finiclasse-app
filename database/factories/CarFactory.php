@@ -34,7 +34,7 @@ class CarFactory extends Factory
         $current = Carbon::now();
 
         return [
-        'make_id' => Make::all()->random()->id,
+        // 'make_id' => Make::all()->random()->id,
         'model_id' => CarModel::all()->random()->id,
         'variant' =>  $this->faker->randomElement(['Station','AMG','Cupra','BlackSeries','Performance','Sport']),
         'motorization' => $this->faker->randomElement(['180','200','220','300','320','500']),

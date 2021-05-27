@@ -1,0 +1,76 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false,
+        "inView": false
+    },
+    {
+        "name": "name",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "description",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "value",
+        "dbType": "integer",
+        "htmlType": "number",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "document",
+        "dbType": "string",
+        "htmlType": "file"
+    },
+    {
+        "name": "financing_id",
+        "dbType": "integer:unsigned:foreign,financings,id",
+        "relation": "mt1,Financing,financing_id,id",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "proposal_id",
+        "dbType": "integer:unsigned:foreign,proposals,id",
+        "relation": "mt1,Proposal,proposal_id,id",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "datetime",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inIndex": false
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "datetime",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inIndex": false
+    }
+]

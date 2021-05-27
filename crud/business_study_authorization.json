@@ -30,7 +30,8 @@
     },
     {
         "name": "responsible_id",
-        "dbType": "integer",
+        "dbType": "integer:unsigned:foreign,users,id",
+        "relation": "mt1,User,responsible_id,id",
         "htmlType": "number"
     },
     {
@@ -51,16 +52,6 @@
     },
     {
         "name": "updated_at",
-        "dbType": "timestamp",
-        "htmlType": "datetime",
-        "validations": "",
-        "searchable": false,
-        "fillable": false,
-        "primary": false,
-        "inIndex": false
-    },
-    {
-        "name": "deleted_at",
         "dbType": "timestamp",
         "htmlType": "datetime",
         "validations": "",

@@ -48,15 +48,5 @@
         "fillable": false,
         "primary": false,
         "inIndex": false
-    },
-    {
-        "name": "deleted_at",
-        "dbType": "timestamp",
-        "htmlType": "datetime",
-        "validations": "",
-        "searchable": false,
-        "fillable": false,
-        "primary": false,
-        "inIndex": false
     }
 ]

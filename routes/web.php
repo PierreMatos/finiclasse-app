@@ -45,7 +45,7 @@ Route::resource('users', App\Http\Controllers\UserController::class);
 
 Route::resource('stands', App\Http\Controllers\StandController::class);
 
-Route::resource('proposalStates', App\Http\Controllers\ProposalStatesController::class);
+
 
 Route::resource('makes', App\Http\Controllers\MakeController::class);
 
@@ -80,3 +80,15 @@ Route::resource('carModels', App\Http\Controllers\CarModelController::class);
 
 
 Route::resource('cars', App\Http\Controllers\CarController::class);
+
+Route::resource('proposalStates', App\Http\Controllers\ProposalStateController::class);
+
+Route::resource('benefits', App\Http\Controllers\BenefitController::class);
+
+Route::resource('businenssStudyAuthorizations', App\Http\Controllers\BusinenssStudyAuthorizationController::class);
+
+Route::resource('businessStudies', App\Http\Controllers\BusinessStudyController::class);
+
+Route::resource('benefitsBusinessStudies', App\Http\Controllers\BenefitsBusinessStudyController::class);
+
+Route::resource('proposals', App\Http\Controllers\ProposalController::class);
