@@ -91,4 +91,12 @@ Route::resource('businessStudies', App\Http\Controllers\BusinessStudyController:
 
 Route::resource('benefitsBusinessStudies', App\Http\Controllers\BenefitsBusinessStudyController::class);
 
+
+
+
+
 Route::resource('proposals', App\Http\Controllers\ProposalController::class);
+
+Route::resource('financings', App\Http\Controllers\FinancingController::class);
+
+Route::resource('financingProposals', App\Http\Controllers\FinancingProposalController::class);

@@ -2,22 +2,23 @@
 
 namespace App\Repositories;
 
-use App\Models\Proposal;
+use App\Models\Financing;
 use App\Repositories\BaseRepository;
 
 /**
- * Class ProposalRepository
+ * Class FinancingRepository
  * @package App\Repositories
- * @version May 27, 2021, 1:14 pm UTC
+ * @version May 27, 2021, 1:15 pm UTC
 */
 
-class ProposalRepository extends BaseRepository
+class FinancingRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+        'name',
+        'description'
     ];
 
     /**
@@ -35,6 +36,6 @@ class ProposalRepository extends BaseRepository
      **/
     public function model()
     {
-        return Proposal::class;
+        return Financing::class;
     }
 }

@@ -28,12 +28,6 @@
     {!! Form::number('prop_value', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Financing Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('financing_id', 'Financing Id:') !!}
-    {!! Form::number('financing_id', null, ['class' => 'form-control']) !!}
-</div>
-
 <!-- First Contact Date Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('first_contact_date', 'First Contact Date:') !!}

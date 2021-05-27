@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Class Proposal
  * @package App\Models
- * @version May 26, 2021, 9:18 pm UTC
+ * @version May 27, 2021, 1:14 pm UTC
  *
  * @property \App\Models\User $client
  * @property \App\Models\ProposalState $state
@@ -19,7 +19,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property integer $price
  * @property integer $pos_number
  * @property integer $prop_value
- * @property integer $financing_id
  * @property integer $first_contact_date
  * @property integer $last_contact_date
  * @property integer $next_contact_date
@@ -48,7 +47,6 @@ class Proposal extends Model
         'price',
         'pos_number',
         'prop_value',
-        'financing_id',
         'first_contact_date',
         'last_contact_date',
         'next_contact_date',
@@ -71,7 +69,6 @@ class Proposal extends Model
         'price' => 'integer',
         'pos_number' => 'integer',
         'prop_value' => 'integer',
-        'financing_id' => 'integer',
         'first_contact_date' => 'integer',
         'last_contact_date' => 'integer',
         'next_contact_date' => 'integer',

@@ -38,11 +38,6 @@
         "htmlType": "number"
     },
     {
-        "name": "financing_id",
-        "dbType": "integer",
-        "htmlType": "number"
-    },
-    {
         "name": "first_contact_date",
         "dbType": "integer",
         "htmlType": "number"
@@ -98,16 +93,6 @@
     },
     {
         "name": "updated_at",
-        "dbType": "timestamp",
-        "htmlType": "datetime",
-        "validations": "",
-        "searchable": false,
-        "fillable": false,
-        "primary": false,
-        "inIndex": false
-    },
-    {
-        "name": "deleted_at",
         "dbType": "timestamp",
         "htmlType": "datetime",
         "validations": "",

@@ -168,10 +168,28 @@
 </li>
 
 
+
+
 <li class="nav-item">
     <a href="{{ route('proposals.index') }}"
        class="nav-link {{ Request::is('proposals*') ? 'active' : '' }}">
         <p>Proposals</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('financings.index') }}"
+       class="nav-link {{ Request::is('financings*') ? 'active' : '' }}">
+        <p>Financings</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('financingProposals.index') }}"
+       class="nav-link {{ Request::is('financingProposals*') ? 'active' : '' }}">
+        <p>Financing Proposals</p>
     </a>
 </li>
 

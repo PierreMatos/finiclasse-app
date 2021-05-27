@@ -7,7 +7,6 @@
         <th>Price</th>
         <th>Pos Number</th>
         <th>Prop Value</th>
-        <th>Financing Id</th>
         <th>First Contact Date</th>
         <th>Last Contact Date</th>
         <th>Next Contact Date</th>
@@ -27,7 +26,6 @@
             <td>{{ $proposal->price }}</td>
             <td>{{ $proposal->pos_number }}</td>
             <td>{{ $proposal->prop_value }}</td>
-            <td>{{ $proposal->financing_id }}</td>
             <td>{{ $proposal->first_contact_date }}</td>
             <td>{{ $proposal->last_contact_date }}</td>
             <td>{{ $proposal->next_contact_date }}</td>

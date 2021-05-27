@@ -28,12 +28,6 @@
     <p>{{ $proposal->prop_value }}</p>
 </div>
 
-<!-- Financing Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('financing_id', 'Financing Id:') !!}
-    <p>{{ $proposal->financing_id }}</p>
-</div>
-
 <!-- First Contact Date Field -->
 <div class="col-sm-12">
     {!! Form::label('first_contact_date', 'First Contact Date:') !!}
@@ -92,11 +86,5 @@
 <div class="col-sm-12">
     {!! Form::label('updated_at', 'Updated At:') !!}
     <p>{{ $proposal->updated_at }}</p>
-</div>
-
-<!-- Deleted At Field -->
-<div class="col-sm-12">
-    {!! Form::label('deleted_at', 'Deleted At:') !!}
-    <p>{{ $proposal->deleted_at }}</p>
 </div>
 

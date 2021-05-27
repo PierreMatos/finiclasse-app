@@ -81,4 +81,12 @@ Route::resource('business_studies', App\Http\Controllers\API\BusinessStudyAPICon
 
 Route::resource('benefits_business_studies', App\Http\Controllers\API\BenefitsBusinessStudyAPIController::class);
 
-// Route::resource('proposals', App\Http\Controllers\API\ProposalAPIController::class);
+// 
+
+
+
+Route::resource('proposals', App\Http\Controllers\API\ProposalAPIController::class);
+
+Route::resource('financings', App\Http\Controllers\API\FinancingAPIController::class);
+
+Route::resource('financing_proposals', App\Http\Controllers\API\FinancingProposalAPIController::class);
