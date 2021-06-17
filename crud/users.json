@@ -107,6 +107,12 @@
         "validations":"validations:nullable"
     },
     {
+        "name": "stand_id",
+        "dbType": "integer:unsigned:foreign,stands,id",
+        "relation": "mt1,Stand,stand_id,id",
+        "htmlType": "text"
+    },
+    {
         "name": "created_at",
         "dbType": "timestamp",
         "htmlType": "datetime",

@@ -5,14 +5,13 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+
 /**
  * Class User
  * @package App\Models
- * @version May 6, 2021, 9:58 pm UTC
+ * @version June 17, 2021, 9:21 am UTC
  *
+ * @property \App\Models\Stand $stand
  * @property string $name
  * @property string $email
  * @property string $city
@@ -25,12 +24,13 @@ use Illuminate\Notifications\Notifiable;
  * @property string $gdpr_rejection
  * @property string $gdpr_type
  * @property boolean $finiclasse_employee
+ * @property integer $stand_id
  */
-class User extends Authenticatable
+class User extends Model
 {
     use SoftDeletes;
 
-    use HasFactory, Notifiable;
+    use HasFactory;
 
     public $table = 'users';
     
@@ -51,7 +51,8 @@ class User extends Authenticatable
         'gdpr_confirmation',
         'gdpr_rejection',
         'gdpr_type',
-        'finiclasse_employee'
+        'finiclasse_employee',
+        'stand_id'
     ];
 
     /**
@@ -71,7 +72,8 @@ class User extends Authenticatable
         'mobile_phone' => 'integer',
         'nif' => 'integer',
         'gdpr_type' => 'string',
-        'finiclasse_employee' => 'boolean'
+        'finiclasse_employee' => 'boolean',
+        'stand_id' => 'integer'
     ];
 
     /**
@@ -96,5 +98,11 @@ class User extends Authenticatable
         'finiclasse_employee' => 'validations:nullable'
     ];
 
-    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function stand()
+    {
+        return $this->belongsTo(\App\Models\Stand::class, 'stand_id', 'id');
+    }
 }

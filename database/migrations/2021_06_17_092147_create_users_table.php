@@ -30,8 +30,10 @@ class CreateUsersTable extends Migration
             $table->timestamp('gdpr_rejection')->nullable();
             $table->string('gdpr_type')->nullable();
             $table->boolean('finiclasse_employee')->nullable();
+            $table->integer('stand_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('stand_id')->references('id')->on('stands');
         });
     }
 

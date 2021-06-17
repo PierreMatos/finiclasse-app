@@ -1,33 +1,5 @@
-<li class="nav-item">
-    <a href="{{ route('users.index') }}"
-       class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
-        <p>Users</p>
-    </a>
-</li>
 
 
-<li class="nav-item">
-    <a href="{{ route('users.index') }}"
-       class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
-        <p>Users</p>
-    </a>
-</li>
-
-
-<li class="nav-item">
-    <a href="{{ route('users.index') }}"
-       class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
-        <p>Users</p>
-    </a>
-</li>
-
-
-<li class="nav-item">
-    <a href="{{ route('users.index') }}"
-       class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
-        <p>Users</p>
-    </a>
-</li>
 
 
 
@@ -120,13 +92,6 @@
 
 
 
-<li class="nav-item">
-    <a href="{{ route('cars.index') }}"
-       class="nav-link {{ Request::is('cars*') ? 'active' : '' }}">
-        <p>Cars</p>
-    </a>
-</li>
-
 
 <li class="nav-item">
     <a href="{{ route('proposalStates.index') }}"
@@ -190,6 +155,30 @@
     <a href="{{ route('financingProposals.index') }}"
        class="nav-link {{ Request::is('financingProposals*') ? 'active' : '' }}">
         <p>Financing Proposals</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('carFuels.index') }}"
+       class="nav-link {{ Request::is('carFuels*') ? 'active' : '' }}">
+        <p>Car Fuels</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('cars.index') }}"
+       class="nav-link {{ Request::is('cars*') ? 'active' : '' }}">
+        <p>Cars</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('users.index') }}"
+       class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
+        <p>Users</p>
     </a>
 </li>
 

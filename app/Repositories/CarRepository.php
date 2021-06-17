@@ -8,7 +8,7 @@ use App\Repositories\BaseRepository;
 /**
  * Class CarRepository
  * @package App\Repositories
- * @version May 26, 2021, 5:01 pm UTC
+ * @version June 16, 2021, 11:28 am UTC
 */
 
 class CarRepository extends BaseRepository

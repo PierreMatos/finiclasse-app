@@ -170,6 +170,12 @@
         "htmlType": "text"
     },
     {
+        "name": "fuel_id",
+        "dbType": "integer:unsigned:foreign,car_fuels,id",
+        "relation": "mt1,CarFuel,fuel_id,id",
+        "htmlType": "text"
+    },
+    {
         "name": "door",
         "dbType": "integer",
         "htmlType": "number"

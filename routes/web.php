@@ -41,7 +41,7 @@ Route::post(
     '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generateFromFile'
 )->name('io_generator_builder_generate_from_file');
 
-Route::resource('users', App\Http\Controllers\UserController::class);
+
 
 Route::resource('stands', App\Http\Controllers\StandController::class);
 
@@ -79,7 +79,7 @@ Route::resource('carModels', App\Http\Controllers\CarModelController::class);
 
 
 
-Route::resource('cars', App\Http\Controllers\CarController::class);
+
 
 Route::resource('proposalStates', App\Http\Controllers\ProposalStateController::class);
 
@@ -100,3 +100,9 @@ Route::resource('proposals', App\Http\Controllers\ProposalController::class);
 Route::resource('financings', App\Http\Controllers\FinancingController::class);
 
 Route::resource('financingProposals', App\Http\Controllers\FinancingProposalController::class);
+
+Route::resource('carFuels', App\Http\Controllers\CarFuelController::class);
+
+Route::resource('cars', App\Http\Controllers\CarController::class);
+
+Route::resource('users', App\Http\Controllers\UserController::class);

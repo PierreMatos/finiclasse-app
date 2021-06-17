@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Class Car
  * @package App\Models
- * @version May 26, 2021, 5:01 pm UTC
+ * @version June 16, 2021, 11:28 am UTC
  *
  * @property \App\Models\CarModel $model
  * @property \App\Models\CarCategory $category
@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property \App\Models\Stand $stand
  * @property \App\Models\CarTransmission $transmission
  * @property \App\Models\CarDrive $drive
+ * @property \App\Models\CarFuel $fuel
  * @property \App\Models\CarClass $class
  * @property integer $model_id
  * @property string $variant
@@ -47,6 +48,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $color_exterior
  * @property boolean $metallic_color
  * @property integer $drive_id
+ * @property integer $fuel_id
  * @property integer $door
  * @property integer $seats
  * @property integer $class_id
@@ -105,6 +107,7 @@ class Car extends Model
         'color_exterior',
         'metallic_color',
         'drive_id',
+        'fuel_id',
         'door',
         'seats',
         'class_id',
@@ -157,6 +160,7 @@ class Car extends Model
         'color_exterior' => 'string',
         'metallic_color' => 'boolean',
         'drive_id' => 'integer',
+        'fuel_id' => 'integer',
         'door' => 'integer',
         'seats' => 'integer',
         'class_id' => 'integer',
@@ -241,6 +245,14 @@ class Car extends Model
     public function drive()
     {
         return $this->belongsTo(\App\Models\CarDrive::class, 'drive_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function fuel()
+    {
+        return $this->belongsTo(\App\Models\CarFuel::class, 'fuel_id', 'id');
     }
 
     /**

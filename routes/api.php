@@ -27,7 +27,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::resource('users', App\Http\Controllers\API\UserAPIController::class);
+
 
 // Route::get('/user', function () {
 
@@ -90,3 +90,7 @@ Route::resource('proposals', App\Http\Controllers\API\ProposalAPIController::cla
 Route::resource('financings', App\Http\Controllers\API\FinancingAPIController::class);
 
 Route::resource('financing_proposals', App\Http\Controllers\API\FinancingProposalAPIController::class);
+
+Route::resource('car_fuels', App\Http\Controllers\API\CarFuelAPIController::class);
+
+Route::resource('users', App\Http\Controllers\API\UserAPIController::class);

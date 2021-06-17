@@ -70,6 +70,12 @@
     <p>{{ $user->finiclasse_employee }}</p>
 </div>
 
+<!-- Stand Id Field -->
+<div class="col-sm-12">
+    {!! Form::label('stand_id', 'Stand Id:') !!}
+    <p>{{ $user->stand_id }}</p>
+</div>
+
 <!-- Created At Field -->
 <div class="col-sm-12">
     {!! Form::label('created_at', 'Created At:') !!}

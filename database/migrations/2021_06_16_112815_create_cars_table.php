@@ -44,6 +44,7 @@ class CreateCarsTable extends Migration
             $table->string('color_exterior');
             $table->boolean('metallic_color');
             $table->integer('drive_id')->unsigned();
+            $table->integer('fuel_id')->unsigned();
             $table->integer('door');
             $table->integer('seats');
             $table->integer('class_id')->unsigned();
@@ -68,6 +69,7 @@ class CreateCarsTable extends Migration
             $table->foreign('stand_id')->references('id')->on('stands');
             $table->foreign('transmission_id')->references('id')->on('car_transmissions');
             $table->foreign('drive_id')->references('id')->on('car_drives');
+            $table->foreign('fuel_id')->references('id')->on('car_fuels');
             $table->foreign('class_id')->references('id')->on('car_classes');
         });
     }

@@ -192,6 +192,12 @@
     {!! Form::text('drive_id', null, ['class' => 'form-control']) !!}
 </div>
 
+<!-- Fuel Id Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('fuel_id', 'Fuel Id:') !!}
+    {!! Form::text('fuel_id', null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Door Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('door', 'Door:') !!}

@@ -14,6 +14,7 @@
         <th>Gdpr Rejection</th>
         <th>Gdpr Type</th>
         <th>Finiclasse Employee</th>
+        <th>Stand Id</th>
                 <th colspan="3">Action</th>
             </tr>
         </thead>
@@ -32,6 +33,7 @@
             <td>{{ $user->gdpr_rejection }}</td>
             <td>{{ $user->gdpr_type }}</td>
             <td>{{ $user->finiclasse_employee }}</td>
+            <td>{{ $user->stand_id }}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

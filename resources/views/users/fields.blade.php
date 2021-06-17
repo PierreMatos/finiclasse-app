@@ -60,3 +60,10 @@
         {!! Form::label('finiclasse_employee', 'Finiclasse Employee', ['class' => 'form-check-label']) !!}
     </div>
 </div>
+
+
+<!-- Stand Id Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('stand_id', 'Stand Id:') !!}
+    {!! Form::text('stand_id', null, ['class' => 'form-control']) !!}
+</div>

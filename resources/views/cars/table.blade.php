@@ -30,6 +30,7 @@
         <th>Color Exterior</th>
         <th>Metallic Color</th>
         <th>Drive Id</th>
+        <th>Fuel Id</th>
         <th>Door</th>
         <th>Seats</th>
         <th>Class Id</th>
@@ -79,6 +80,7 @@
             <td>{{ $car->color_exterior }}</td>
             <td>{{ $car->metallic_color }}</td>
             <td>{{ $car->drive_id }}</td>
+            <td>{{ $car->fuel_id }}</td>
             <td>{{ $car->door }}</td>
             <td>{{ $car->seats }}</td>
             <td>{{ $car->class_id }}</td>

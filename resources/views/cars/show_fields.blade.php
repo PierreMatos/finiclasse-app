@@ -166,6 +166,12 @@
     <p>{{ $car->drive_id }}</p>
 </div>
 
+<!-- Fuel Id Field -->
+<div class="col-sm-12">
+    {!! Form::label('fuel_id', 'Fuel Id:') !!}
+    <p>{{ $car->fuel_id }}</p>
+</div>
+
 <!-- Door Field -->
 <div class="col-sm-12">
     {!! Form::label('door', 'Door:') !!}

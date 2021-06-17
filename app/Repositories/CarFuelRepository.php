@@ -2,22 +2,22 @@
 
 namespace App\Repositories;
 
-use App\Models\User;
+use App\Models\CarFuel;
 use App\Repositories\BaseRepository;
 
 /**
- * Class UserRepository
+ * Class CarFuelRepository
  * @package App\Repositories
- * @version June 17, 2021, 9:21 am UTC
+ * @version June 16, 2021, 11:28 am UTC
 */
 
-class UserRepository extends BaseRepository
+class CarFuelRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        'email'
+        'name'
     ];
 
     /**
@@ -35,6 +35,6 @@ class UserRepository extends BaseRepository
      **/
     public function model()
     {
-        return User::class;
+        return CarFuel::class;
     }
 }

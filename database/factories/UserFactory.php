@@ -36,6 +36,7 @@ class UserFactory extends Factory
         'gdpr_rejection' => $this->faker->date('Y-m-d H:i:s'),
         'gdpr_type' => $this->faker->word,
         'finiclasse_employee' => $this->faker->word,
+        'stand_id' => $this->faker->randomDigitNotNull,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];
