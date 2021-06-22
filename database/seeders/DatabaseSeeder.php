@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProposalStatesSeeder::class);
         $this->call(StandsSeeder::class);
         $this->call(MakesStatesSeeder::class);
+        $this->call(CarConditionsSeeder::class);
         $this->call(CarCategoriesSeeder::class);
         $this->call(CarModelsSeeder::class);
         $this->call(CarsSeeder::class);

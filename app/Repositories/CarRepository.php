@@ -18,6 +18,7 @@ class CarRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'model_id',
+        'category_id',
         'variant',
         'motorization',
         'komm',

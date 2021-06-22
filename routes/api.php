@@ -60,7 +60,7 @@ Route::resource('makes', App\Http\Controllers\API\MakeAPIController::class);
 
 Route::resource('car_models', CarModelAPIController::class);
 
-Route::resource('car_categories', App\Http\Controllers\API\CarCategoryAPIController::class);
+Route::resource('car_categories', CarCategoryAPIController::class);
 
 Route::resource('car_classes', App\Http\Controllers\API\CarClassAPIController::class);
 
