@@ -30,7 +30,7 @@ class CreateBusinessStudiesTable extends Migration
             $table->integer('iva');
             $table->integer('isv');
             $table->integer('business_study_authorization_id')->unsigned();
-            $table->integer('tradein_id')->unsigned();
+            $table->integer('tradein_id')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('business_study_authorization_id')->references('id')->on('business_study_authorizations');

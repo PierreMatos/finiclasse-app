@@ -9,7 +9,9 @@ use App\Repositories\CarRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\CarResource;
+use App\Http\Resources\CarCollection;
 use Response;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CarController
@@ -41,7 +43,11 @@ class CarAPIController extends AppBaseController
             $request->get('limit')
         );
 
-        return $this->sendResponse(CarResource::collection($cars), 'Cars retrieved successfully');
+
+        return (new CarCollection(Car::paginate(5)));
+        return $this->sendResponse(new CarCollection(Car::paginate(5)), 'Cars retrieved successfully');
+        // return $this->sendResponse(CarCollection::collection(Car::all()), 'Cars retrieved successfully');
+        // return $this->sendResponse(CarCollection::collection($cars), 'Cars retrieved successfully');
     }
 
     /**
@@ -128,5 +134,23 @@ class CarAPIController extends AppBaseController
         $car->delete();
 
         return $this->sendSuccess('Car deleted successfully');
+    }
+
+    public function addImage(Request $request){
+        
+        // $path = $request->file('avatar')->store('avatars', 'public');
+        $path = $request->file('avatar');
+
+        // return $path;
+
+        $car = Car::find(3);
+        // $car->addMedia($path)->toMediaCollection();
+
+        $mediaItems = $car->getMedia();
+        // return $mediaItems;
+        // return  $car->getFirstMediaUrl();
+        return $this->sendResponse(new CarResource($car), 'Car saved successfully');
+
+
     }
 }

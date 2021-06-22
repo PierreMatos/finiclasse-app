@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Proposal;
+
 
 class ProposalsSeeder extends Seeder
 {
@@ -13,6 +15,10 @@ class ProposalsSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \DB::table('proposals')->delete();
+
+        Proposal::factory()
+        ->count(10)
+        ->create();
     }
 }

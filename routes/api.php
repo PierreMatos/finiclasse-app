@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Resources\UserResource as UserResource;
 use App\Http\Resources\ClientResource as ClientResource;
 use App\Http\Controllers\API\StandAPIController;
-use App\Http\Controllers\API\CarAPIController;
-use App\Http\Controllers\API\ProposalAPIController;
+// use App\Http\Controllers\APIv2\CarAPIController;
+// use App\Http\Controllers\API\ProposalAPIController;
 
 // use App\Http\Controllers\API\CarModelAPIController;
 use App\Models\User as User;
@@ -43,10 +43,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return new ClientResource($client);
 // });
 
-// Route::resource('cars', CarAPIController::class)->name('cars');
+Route::resource('cars', CarAPIController::class);
 // Route::resource('cars', [CarAPIController::class])->name('stands');
-Route::get('cars', [CarAPIController::class,'index']);
-Route::get('proposals', [ProposalAPIController::class,'index']);
+// Route::get('cars', [CarAPIController::class,'index']);
+Route::post('addImage', [CarAPIController::class,'addImage']);
+// Route::get('proposals', [ProposalAPIController::class,'index']);
 
 // Route::resource('stands', 'API\StandAPIController');
 Route::get('/stands', [ StandAPIController::class, 'index'])->name('stands');
@@ -74,10 +75,11 @@ Route::resource('car_transmissions', App\Http\Controllers\API\CarTransmissionAPI
 Route::resource('proposal_states', App\Http\Controllers\API\ProposalStateAPIController::class);
 
 Route::resource('benefits', App\Http\Controllers\API\BenefitAPIController::class);
+Route::get('benefits', [App\Http\Controllers\API\BenefitAPIController::class,'index']);
 
 Route::resource('businenss_study_authorizations', App\Http\Controllers\API\BusinenssStudyAuthorizationAPIController::class);
 
-Route::resource('business_studies', App\Http\Controllers\API\BusinessStudyAPIController::class);
+Route::get('business_studies', [App\Http\Controllers\API\BusinessStudyAPIController::class,'index']);
 
 Route::resource('benefits_business_studies', App\Http\Controllers\API\BenefitsBusinessStudyAPIController::class);
 
@@ -85,7 +87,8 @@ Route::resource('benefits_business_studies', App\Http\Controllers\API\BenefitsBu
 
 
 
-Route::resource('proposals', App\Http\Controllers\API\ProposalAPIController::class);
+Route::resource('proposals', ProposalAPIController::class);
+// Route::resource('proposals', App\Http\Controllers\API\ProposalAPIController::class);
 
 Route::resource('financings', App\Http\Controllers\API\FinancingAPIController::class);
 

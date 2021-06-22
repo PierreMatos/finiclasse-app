@@ -5,6 +5,8 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * Class Car
@@ -65,17 +67,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $tradein_observations
  * @property integer $consumption
  */
-class Car extends Model
+class Car extends Model implements HasMedia
 {
     use SoftDeletes;
-
+    use InteractsWithMedia;
     use HasFactory;
 
     public $table = 'cars';
     
 
     protected $dates = ['deleted_at'];
-
 
 
     public $fillable = [

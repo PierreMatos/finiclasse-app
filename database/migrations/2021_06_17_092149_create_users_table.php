@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('name')->nullable();
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
             $table->string('password')->nullable();
             $table->string('city')->nullable();
             $table->string('adress')->nullable();
@@ -30,7 +31,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('gdpr_rejection')->nullable();
             $table->string('gdpr_type')->nullable();
             $table->boolean('finiclasse_employee')->nullable();
-            $table->integer('stand_id')->unsigned();
+            $table->integer('stand_id')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('stand_id')->references('id')->on('stands');

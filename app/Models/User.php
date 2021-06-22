@@ -5,6 +5,8 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Class User
@@ -26,10 +28,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property boolean $finiclasse_employee
  * @property integer $stand_id
  */
-class User extends Model
+class User extends Authenticatable
 {
     use SoftDeletes;
-
     use HasFactory;
 
     public $table = 'users';
@@ -42,6 +43,7 @@ class User extends Model
     public $fillable = [
         'name',
         'email',
+        'password',
         'city',
         'adress',
         'zip_code',
@@ -53,6 +55,16 @@ class User extends Model
         'gdpr_type',
         'finiclasse_employee',
         'stand_id'
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
     ];
 
     /**

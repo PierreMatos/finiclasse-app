@@ -93,6 +93,7 @@ class BusinessStudy extends Model
      * @var array
      */
     public static $rules = [
+        'client_id' => 'required'
         
     ];
 

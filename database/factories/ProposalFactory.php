@@ -4,6 +4,10 @@ namespace Database\Factories;
 
 use App\Models\Proposal;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
+use App\Models\ProposalState;
+use App\Models\BusinessStudy;
+
 
 class ProposalFactory extends Factory
 {
@@ -22,8 +26,8 @@ class ProposalFactory extends Factory
     public function definition()
     {
         return [
-            'client_id' => $this->faker->randomDigitNotNull,
-        'vendor_id' => $this->faker->randomDigitNotNull,
+        'client_id' => User::all()->random()->id,
+        'vendor_id' => User::all()->random()->id,
         'price' => $this->faker->randomDigitNotNull,
         'pos_number' => $this->faker->randomDigitNotNull,
         'prop_value' => $this->faker->randomDigitNotNull,
@@ -31,9 +35,9 @@ class ProposalFactory extends Factory
         'last_contact_date' => $this->faker->randomDigitNotNull,
         'next_contact_date' => $this->faker->randomDigitNotNull,
         'contract' => $this->faker->word,
-        'test_drive' => $this->faker->word,
-        'state_id' => $this->faker->randomDigitNotNull,
-        'business_study_id' => $this->faker->randomDigitNotNull,
+        'test_drive' => $this->faker->randomElement([0,1]),
+        'state_id' =>  ProposalState::all()->random()->id,
+        'business_study_id' =>  BusinessStudy::all()->random()->id,
         'comment' => $this->faker->text,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s')

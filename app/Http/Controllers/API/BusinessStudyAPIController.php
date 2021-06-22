@@ -41,6 +41,7 @@ class BusinessStudyAPIController extends AppBaseController
             $request->get('limit')
         );
 
+        return BusinessStudy::all();    
         return $this->sendResponse(BusinessStudyResource::collection($businessStudies), 'Business Studies retrieved successfully');
     }
 
