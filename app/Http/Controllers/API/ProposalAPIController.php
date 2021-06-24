@@ -28,7 +28,7 @@ class ProposalAPIController extends AppBaseController
 
     /**
      * Display a listing of the Proposal.
-     * GET|HEAD /proposals
+     * GET|HEAD /proposalss
      *
      * @param Request $request
      * @return Response
