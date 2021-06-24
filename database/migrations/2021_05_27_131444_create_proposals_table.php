@@ -21,9 +21,9 @@ class CreateProposalsTable extends Migration
             $table->integer('price');
             $table->integer('pos_number');
             $table->integer('prop_value');
-            $table->integer('first_contact_date');
-            $table->integer('last_contact_date');
-            $table->integer('next_contact_date');
+            $table->timestamp('first_contact_date')->nullable();
+            $table->timestamp('last_contact_date')->nullable();
+            $table->timestamp('next_contact_date')->nullable();
             $table->string('contract');
             $table->boolean('test_drive');
             $table->integer('state_id')->unsigned();

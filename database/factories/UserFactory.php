@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Stand;
+
 
 class UserFactory extends Factory
 {
@@ -22,21 +24,21 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word,
-        'email' => $this->faker->word,
+        'name' => $this->faker->word,
+        'email' => $this->faker->email,
         'email_verified_at' => $this->faker->date('Y-m-d H:i:s'),
-        'password' => $this->faker->word,
-        'city' => $this->faker->word,
-        'adress' => $this->faker->word,
-        'zip_code' => $this->faker->word,
-        'phone' => $this->faker->randomDigitNotNull,
-        'mobile_phone' => $this->faker->randomDigitNotNull,
+        'password' => $this->faker->md5,
+        'city' => $this->faker->city,
+        'adress' => $this->faker->streetAddress,
+        'zip_code' => $this->faker->postcode,
+        'mobile_phone' => $this->faker->randomNumber($nbDigits = 9, $strict = false),
+        'phone' => $this->faker->randomNumber($nbDigits = 9, $strict = false),
         'nif' => $this->faker->randomDigitNotNull,
         'gdpr_confirmation' => $this->faker->date('Y-m-d H:i:s'),
         'gdpr_rejection' => $this->faker->date('Y-m-d H:i:s'),
         'gdpr_type' => $this->faker->word,
-        'finiclasse_employee' => $this->faker->word,
-        'stand_id' => $this->faker->randomDigitNotNull,
+        'finiclasse_employee' => $this->faker->boolean,
+        'stand_id' => Stand::all()->random()->id,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];

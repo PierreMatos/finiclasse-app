@@ -100,6 +100,14 @@ class Proposal extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
+    public function vendor()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'vendor_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
     public function state()
     {
         return $this->belongsTo(\App\Models\ProposalState::class, 'state_id', 'id');

@@ -25,21 +25,22 @@ class ProposalFactory extends Factory
      */
     public function definition()
     {
+        dd( $this->faker->randomNumber($nbDigits = 5, $strict = false));
         return [
         'client_id' => User::all()->random()->id,
         'vendor_id' => User::all()->random()->id,
-        'price' => $this->faker->randomDigitNotNull,
-        'pos_number' => $this->faker->randomDigitNotNull,
-        'prop_value' => $this->faker->randomDigitNotNull,
+        'price' => $this->faker->randomNumber($nbDigits = 5, $strict = false),
+        'pos_number' => $this->faker->randomNumber($nbDigits = 9, $strict = false),
+        'prop_value' => $this->faker->randomNumber($nbDigits = 4, $strict = false),
         'financing_id' => Financing::all()->random()->id,
-        'first_contact_date' => $this->faker->randomDigitNotNull,
-        'last_contact_date' => $this->faker->randomDigitNotNull,
-        'next_contact_date' => $this->faker->randomDigitNotNull,
+        'first_contact_date' => $this->faker->date('Y-m-d H:i:s'),
+        'last_contact_date' => $this->faker->date('Y-m-d H:i:s'),
+        'next_contact_date' => $this->faker->date('Y-m-d H:i:s'),
         'contract' => $this->faker->word,
-        'test_drive' => $this->faker->word,
+        'test_drive' => $this->faker->boolean,
         'state_id' => ProposalState::all()->random()->id,
         'business_study_id' => BusinessStudy::all()->random()->id,
-        'comment' => $this->faker->text,
+        'comment' => $this->faker->setence,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s'),
         'deleted_at' => $this->faker->date('Y-m-d H:i:s')

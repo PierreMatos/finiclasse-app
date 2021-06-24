@@ -16,8 +16,8 @@ class ProposalResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'client_id' => $this->client_id,
-            'vendor_id' => $this->vendor_id,
+            'client' => $this->client->name ?? '',
+            'vendor' => $this->vendor->name ?? '',
             'price' => $this->price,
             'pos_number' => $this->pos_number,
             'prop_value' => $this->prop_value,
@@ -26,7 +26,7 @@ class ProposalResource extends JsonResource
             'next_contact_date' => $this->next_contact_date,
             'contract' => $this->contract,
             'test_drive' => $this->test_drive,
-            'state_id' => $this->state_id,
+            'state' => $this->state->name ?? '',
             'business_study_id' => $this->business_study_id,
             'comment' => $this->comment,
             'created_at' => $this->created_at,

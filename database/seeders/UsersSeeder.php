@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\User;
+
 
 class UsersSeeder extends Seeder
 {
@@ -15,6 +17,10 @@ class UsersSeeder extends Seeder
     {
         \DB::table('users')->delete();
         
+        User::factory()
+        ->count(10)
+        ->create();
+        
         \DB::table('users')->insert(array (
             0 => 
             array (
@@ -22,8 +28,8 @@ class UsersSeeder extends Seeder
                 'name' => 'User1',
                 'email' => 'admin@demo.com',
                 'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
-                'api_token' => 'PivvPlsQWxPl1bB5KrbKNBuraJit0PrUZekQUgtLyTRuyBq921atFtoR1HuA',
                 'remember_token' => 'T4PQhFvBcAA7k02f7ejq4I7z7QKKnvxQLV0oqGnuS6Ktz6FdWULrWrzZ3oYn',
+                'stand_1' => 1,
                 'created_at' => '2018-08-06 22:58:41',
                 'updated_at' => '2019-09-27 07:49:45',
             ),
@@ -33,8 +39,8 @@ class UsersSeeder extends Seeder
                 'name' => 'User2',
                 'email' => 'manager@demo.com',
                 'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
-                'api_token' => 'tVSfIKRSX2Yn8iAMoUS3HPls84ycS8NAxO2dj2HvePbbr4WHorp4gIFRmFwB',
                 'remember_token' => '5nysjzVKI4LU92bjRqMUSYdOaIo1EcPC3pIMb6Tcj2KXSUMriGrIQ1iwRdd0',
+                'stand_1' => 1,
                 'created_at' => '2018-08-14 17:06:28',
                 'updated_at' => '2019-09-25 22:09:35',
             ),
@@ -44,8 +50,8 @@ class UsersSeeder extends Seeder
                 'name' => 'User3',
                 'email' => 'salesman@demo.com',
                 'password' => '$2y$10$EBubVy3wDbqNbHvMQwkj3OTYVitL8QnHvh/zV0ICVOaSbALy5dD0K',
-                'api_token' => 'fXLu7VeYgXDu82SkMxlLPG1mCAXc4EBIx6O5isgYVIKFQiHah0xiOHmzNsBv',
                 'remember_token' => 'V6PIUfd8JdHT2zkraTlnBcRSINZNjz5Ou7N0WtUGRyaTweoaXKpSfij6UhqC',
+                'stand_1' => 1,
                 'created_at' => '2019-10-12 22:31:26',
                 'updated_at' => '2020-03-29 17:44:30',
                 
@@ -56,48 +62,12 @@ class UsersSeeder extends Seeder
                 'name' => 'user4',
                 'email' => 'client@demo.com',
                 'password' => '$2y$10$pmdnepS1FhZUMqOaFIFnNO0spltJpziz3j13UqyEwShmLhokmuoei',
-                'api_token' => 'Czrsk9rwD0c75NUPkzNXM2WvbxYHKj8p0nG29pjKT0PZaTgMVzuVyv4hOlte',
+                'stand_1' => 1,
                 'remember_token' => NULL,
                 'created_at' => '2019-10-15 17:55:39',
                 'updated_at' => '2020-03-29 17:59:39',
                
-            ),
-            4 => 
-            array (
-                'id' => 5,
-                'name' => 'Sanchez Roberto',
-                'email' => 'driver@demo.com',
-                'password' => '$2y$10$T/jwzYDJfC8c9CdD5PbpuOKvEXlpv4.RR1jMT0PgIMT.fzeGw67JO',
-                'api_token' => 'OuMsmU903WMcMhzAbuSFtxBekZVdXz66afifRo3YRCINi38jkXJ8rpN0FcfS',
-                'remember_token' => NULL,
-                'created_at' => '2019-12-15 18:49:44',
-                'updated_at' => '2020-03-29 17:22:10',
-                'braintree_id' => NULL,
-                'paypal_email' => NULL,
-                'stripe_id' => NULL,
-                'card_brand' => NULL,
-                'card_last_four' => NULL,
-                'trial_ends_at' => NULL,
-                'device_token' => NULL,
-            ),
-            5 => 
-            array (
-                'id' => 6,
-                'name' => 'John Doe',
-                'email' => 'driver1@demo.com',
-                'password' => '$2y$10$YF0jCx2WCQtfZOq99hR8kuXsAE0KSnu5OYSomRtI9iCVguXDoDqVm',
-                'api_token' => 'zh9mzfNO2iPtIxj6k4Jpj8flaDyOsxmlGRVUZRnJqOGBr8IuDyhb3cGoncvS',
-                'remember_token' => NULL,
-                'created_at' => '2020-03-29 17:28:04',
-                'updated_at' => '2020-03-29 17:28:04',
-                'braintree_id' => NULL,
-                'paypal_email' => NULL,
-                'stripe_id' => NULL,
-                'card_brand' => NULL,
-                'card_last_four' => NULL,
-                'trial_ends_at' => NULL,
-                'device_token' => NULL,
-            ),
+            )
         ));
     }
 }
