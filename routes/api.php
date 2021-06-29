@@ -29,7 +29,6 @@ Route::post('addImage', [CarAPIController::class,'addImage']);
 
 // Route::get('/stands', [ StandAPIController::class, 'index'])->name('stands');
 
-Route::resource('stands', StandAPIController::class);
 
 Route::resource('makes', MakeAPIController::class);
 
