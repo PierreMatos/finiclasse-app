@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\UserResource;
 use Response;
+use Validator;
+use Illuminate\Support\Facades\Auth;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 /**
  * Class UserController
@@ -20,10 +24,12 @@ class UserAPIController extends AppBaseController
 {
     /** @var  UserRepository */
     private $userRepository;
+    public $token = true;
 
     public function __construct(UserRepository $userRepo)
     {
         $this->userRepository = $userRepo;
+        $this->middleware('auth:api2', ['except' => ['login', 'register']]);
     }
 
     /**
@@ -128,5 +134,82 @@ class UserAPIController extends AppBaseController
         $user->delete();
 
         return $this->sendSuccess('User deleted successfully');
+    }
+
+    function regist (Request $request) {
+        
+        $validator = Validator::make($request->all(), 
+        [ 
+        'name' => 'required',
+        'email' => 'required|email',
+        'password' => 'required',  
+        'c_password' => 'required|same:password', 
+      ]);  
+      
+             if ($validator->fails()) {  
+                 return response()->json(['error'=>$validator->errors()], 401); 
+             }   
+      
+      
+             $user = new User();
+             $user->name = $request->name;
+             $user->email = $request->email;
+             $user->password = bcrypt($request->password);
+             $user->save();
+       
+            //  if ($this->token) {
+            //      return $this->login($request);
+            //  }
+       
+             return response()->json([
+                 'success' => true,
+                 'data' => $user
+             ], Response::HTTP_OK);
+
+    }
+
+    public function login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+                    'email' => ['required', 'string', 'email', 'max:255'],
+                    'password' => 'required|string|min:6',
+                ]);
+        
+        if ($validator->fails()) {  
+            return response()->json(['error'=>$validator->errors()], 401); 
+        }   
+        
+                //$input = $request->only('email', 'password');
+                $jwt_token = null;
+        
+                if (!$jwt_token = JWTAuth::attempt($validator->validated())) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Invalid Email or Password',
+                    ], Response::HTTP_UNAUTHORIZED);
+                }
+        
+                return $this->createNewToken($jwt_token);
+
+                return response()->json([
+                    'success' => true,
+                    'token' => $jwt_token,
+                ]);
+    }
+
+     /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function createNewToken($token){
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'user' => auth()->user()
+        ]);
     }
 }

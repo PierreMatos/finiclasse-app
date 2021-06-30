@@ -2,9 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Resources\UserResource as UserResource;
-use App\Http\Resources\ClientResource as ClientResource;
-use App\Models\User as User;
+// use App\Http\Controllers\AuthController;
+use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\UserAPIController;
+// use App\Http\Resources\UserResource as UserResource;
+// use App\Http\Resources\ClientResource as ClientResource;
+// use App\Models\User as User;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,48 +25,67 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
+Route::post('register', [UserAPIController::class, 'register']);
 
-Route::resource('cars', CarAPIController::class);
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth'
 
-Route::post('addImage', [CarAPIController::class,'addImage']);
+], function ($router) {
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/refresh', [AuthController::class, 'refresh']);
+    Route::get('/me', [AuthController::class, 'me']);   
+     
+    // Route::post('after', [AuthController::class, 'dsa']);
 
-// Route::get('/stands', [ StandAPIController::class, 'index'])->name('stands');
-
+});
 
 Route::resource('makes', MakeAPIController::class);
 
-Route::resource('car_models', CarModelAPIController::class);
+Route::middleware('auth:api')->group(function () {
 
-Route::resource('car_categories', CarCategoryAPIController::class);
+    Route::resource('cars', CarAPIController::class);
 
-Route::resource('car_classes', CarClassAPIController::class);
+    Route::post('addImage', [CarAPIController::class,'addImage']);
 
-Route::resource('car_conditions', CarConditionAPIController::class);
+    // Route::get('/stands', [ StandAPIController::class, 'index'])->name('stands');
 
-Route::resource('car_drives', CarDriveAPIController::class);
 
-Route::resource('car_states', CarStateAPIController::class);
+    Route::resource('car_models', CarModelAPIController::class);
 
-Route::resource('car_transmissions', CarTransmissionAPIController::class);
+    Route::resource('car_categories', CarCategoryAPIController::class);
 
-Route::resource('proposal_states', ProposalStateAPIController::class);
+    Route::resource('car_classes', CarClassAPIController::class);
 
-Route::resource('benefits', BenefitAPIController::class);
-// Route::get('benefits', [App\Http\Controllers\API\BenefitAPIController::class,'index']);
+    Route::resource('car_conditions', CarConditionAPIController::class);
 
-Route::resource('businenss_study_authorizations', BusinenssStudyAuthorizationAPIController::class);
+    Route::resource('car_drives', CarDriveAPIController::class);
 
-Route::resource('business_studies', BusinessStudyAPIController::class);
+    Route::resource('car_states', CarStateAPIController::class);
 
-Route::resource('benefits_business_studies', BenefitsBusinessStudyAPIController::class);
+    Route::resource('car_transmissions', CarTransmissionAPIController::class);
 
-Route::resource('proposals', ProposalAPIController::class);
-// Route::resource('proposals', App\Http\Controllers\API\ProposalAPIController::class);
+    Route::resource('proposal_states', ProposalStateAPIController::class);
 
-Route::resource('financings', FinancingAPIController::class);
+    Route::resource('benefits', BenefitAPIController::class);
+    // Route::get('benefits', [App\Http\Controllers\API\BenefitAPIController::class,'index']);
 
-Route::resource('financing_proposals', FinancingProposalAPIController::class);
+    Route::resource('businenss_study_authorizations', BusinenssStudyAuthorizationAPIController::class);
 
-Route::resource('car_fuels', CarFuelAPIController::class);
+    Route::resource('business_studies', BusinessStudyAPIController::class);
 
-Route::resource('users', UserAPIController::class);
+    Route::resource('benefits_business_studies', BenefitsBusinessStudyAPIController::class);
+
+    Route::resource('proposals', ProposalAPIController::class);
+    // Route::resource('proposals', App\Http\Controllers\API\ProposalAPIController::class);
+
+    Route::resource('financings', FinancingAPIController::class);
+
+    Route::resource('financing_proposals', FinancingProposalAPIController::class);
+
+    Route::resource('car_fuels', CarFuelAPIController::class);
+
+    Route::resource('users', UserAPIController::class);
+
+});

@@ -22,7 +22,8 @@
         "laravel/ui": "3.0",
         "laravelcollective/html": "^6.2",
         "spatie/laravel-medialibrary": "9.0.0",
-        "spatie/laravel-permission": "^4.0"
+        "spatie/laravel-permission": "^4.0",
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
