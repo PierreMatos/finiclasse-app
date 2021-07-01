@@ -9,8 +9,11 @@ use App\Repositories\ProposalRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\ProposalResource;
+use App\Http\Resources\ProposalCollection;
 use Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 
 /**
  * Class ProposalController
@@ -36,11 +39,28 @@ class ProposalAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $proposals = $this->proposalRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+
+        $pages=5;
+
+        if ($request->state != null) {
+
+            $proposals = Proposal::where('state_id','=',$request->state)
+            ->where('vendor_id','=',Auth::id())
+            ->simplePaginate($pages);
+
+        } else {
+
+            $proposals = Proposal::simplePaginate($pages);
+
+        }
+        
+
+        return new ProposalCollection($proposals);
+
+        return $this->sendResponse(ProposalResource::collection($proposals), 'Proposals retrieved successfully');
+
+        return $proposals->paginate(5);
+        return new ProposalCollection($proposals::simplePaginate());
 
         // $proposals->paginate(2);
         return new ProposalResource(Proposal::paginate(2));

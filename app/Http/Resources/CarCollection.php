@@ -30,8 +30,6 @@ class CarCollection extends ResourceCollection
 
         }
 
-
-
         return $carCollection;
 
     }
