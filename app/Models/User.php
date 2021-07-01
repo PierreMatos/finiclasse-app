@@ -140,4 +140,16 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsTo(\App\Models\Stand::class, 'stand_id', 'id');
     }
+
+    public function leads()
+    {
+    return $this->belongsToMany(\App\Models\User::class, 'leads_users', 'user_id', 'vendor_id');
+    }
+
+    // Same table, self referencing, but change the key order
+    public function myLeads()
+    {
+    return $this->belongsToMany(\App\Models\User::class, 'leads_users', 'vendor_id', 'client_id');
+    }
+
 }

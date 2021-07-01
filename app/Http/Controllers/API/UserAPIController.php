@@ -29,7 +29,7 @@ class UserAPIController extends AppBaseController
     public function __construct(UserRepository $userRepo)
     {
         $this->userRepository = $userRepo;
-        $this->middleware('auth:api2', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
     /**
@@ -46,6 +46,8 @@ class UserAPIController extends AppBaseController
             $request->get('skip'),
             $request->get('limit')
         );
+
+        return response()->json($users, 200); 
 
         return $this->sendResponse(UserResource::collection($users), 'Users retrieved successfully');
     }
@@ -136,7 +138,7 @@ class UserAPIController extends AppBaseController
         return $this->sendSuccess('User deleted successfully');
     }
 
-    function regist (Request $request) {
+    function register (Request $request) {
         
         $validator = Validator::make($request->all(), 
         [ 
@@ -211,5 +213,37 @@ class UserAPIController extends AppBaseController
             'expires_in' => auth()->factory()->getTTL() * 60,
             'user' => auth()->user()
         ]);
+    }
+
+       /**
+     * Display a listing of the Clients.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function getClients(Request $request)
+    {
+
+        // dd(Auth::user()->myLeads);
+
+        // $clients= collect([]);
+        
+        // foreach( Auth::user()->myLeads as $lead ) {
+
+        // $clients->push($lead);
+
+        // }
+        // dd('ola');
+
+        // $clients = User::where('finiclasse_employee','=',1)->get();
+        // $clients = Auth::user()->myLeads;
+
+        $clients = Auth::user()->myLeads;
+        // return response()->json($clients, 200); 
+
+        return $this->sendResponse(UserResource::collection($clients), 'Users retrieved successfully');
+
+
     }
 }

@@ -37,21 +37,31 @@ class CarAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $cars = $this->carRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        if ($request->condition != null) {
 
+            $cars = Car::where('condition_id','=',$request->condition)->simplePaginate(5);
 
-        return $this->sendResponse(CarResource::collection($cars), 'Benefits retrieved successfully');
+        } else {
+
+            $cars = Car::simplePaginate(5);
+
+        }
         
+        return new CarCollection($cars);
+        // return $this->sendResponse(new CarCollection($cars), 'Cars retrieved successfully');
 
-        // return CarResource::collection($cars2);
-        // return (new CarCollection(Car::paginate(5)));
+        //return JSON with Resource
+            // return CarCollection::collection($data, [
+            //     'success' => true,
+            //     'message' => 'Cars retrieved successfully',
+            // ]);
+
+
+
+            // return (new CarResource(Car::paginate(5)));
         // return $this->sendResponse(new CarCollection(Car::paginate(5)), 'Cars retrieved successfully');
         // return $this->sendResponse(CarCollection::collection(Car::all()), 'Cars retrieved successfully');
-        return $this->sendResponse(CarResource::collection($cars), 'Cars retrieved successfully');
+        // return $this->sendResponse(CarResource::collection($cars), 'Cars retrieved successfully');
     }
 
     /**

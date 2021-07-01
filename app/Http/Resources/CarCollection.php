@@ -14,14 +14,25 @@ class CarCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        // return parent::toArray($request);
 
-        return [
-            'data' => $this->collection,
-            'links' => [
-                'self' => 'link-value',
-            ],
-        ];
+        $carCollection = collect([]);
+
+        foreach ($this->collection as $car) {
+
+            $carCollection->push([
+                'id' => $car->id,
+                'make' => $car->model->make->name ?? '',
+                'model' => $car->model->name ?? '',
+                'motorization' => $car->motorization,
+                'price' => $car->price,
+                'condition' => $car->condition->name,
+            ]);
+
+        }
+
+
+
+        return $carCollection;
 
     }
 }

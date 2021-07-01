@@ -42,4 +42,10 @@ class CarRepository extends BaseRepository
     {
         return Car::class;
     }
+
+    public function carByState($condition){
+
+        return Car::where('condition_id','==',$condition);
+
+    }
 }

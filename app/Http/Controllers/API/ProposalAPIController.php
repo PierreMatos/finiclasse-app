@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\ProposalResource;
 use Response;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class ProposalController
@@ -41,6 +42,10 @@ class ProposalAPIController extends AppBaseController
             $request->get('limit')
         );
 
+        // $proposals->paginate(2);
+        return new ProposalResource(Proposal::paginate(2));
+
+        return $this->sendResponse(ProposalResource::collection($proposals), 'Proposals retrieved successfully');
         return $this->sendResponse(ProposalResource::collection($proposals), 'Proposals retrieved successfully');
     }
 
@@ -52,7 +57,7 @@ class ProposalAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateProposalAPIRequest $request)
+    public function store(Request $request)
     {
         $input = $request->all();
 

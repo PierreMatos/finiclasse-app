@@ -118,6 +118,7 @@ abstract class BaseRepository
      */
     public function all($search = [], $skip = null, $limit = null, $columns = ['*'])
     {
+
         $query = $this->allQuery($search, $skip, $limit);
 
         return $query->get($columns);

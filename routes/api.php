@@ -4,7 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\AuthController;
 use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\UserAPIController;
+// use App\Http\Controllers\API\ProposalAPIController;
+// use App\Http\Controllers\API\UserAPIController;
+// use App\Http\Controllers\API\ProposalAPIController;
 // use App\Http\Resources\UserResource as UserResource;
 // use App\Http\Resources\ClientResource as ClientResource;
 // use App\Models\User as User;
@@ -25,7 +27,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::post('register', [UserAPIController::class, 'register']);
+Route::post('register', 'UserAPIController@register');
 
 Route::group([
     'middleware' => 'api',
@@ -43,14 +45,17 @@ Route::group([
 
 Route::resource('makes', MakeAPIController::class);
 
+
+
 Route::middleware('auth:api')->group(function () {
 
     Route::resource('cars', CarAPIController::class);
 
+    Route::get('clients', [App\Http\Controllers\API\UserAPIController::class, 'getClients']);
+
     Route::post('addImage', [CarAPIController::class,'addImage']);
 
     // Route::get('/stands', [ StandAPIController::class, 'index'])->name('stands');
-
 
     Route::resource('car_models', CarModelAPIController::class);
 
@@ -77,6 +82,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::resource('benefits_business_studies', BenefitsBusinessStudyAPIController::class);
 
+    // Route::get('proposals', [ProposalAPIController::class,'store']);
     Route::resource('proposals', ProposalAPIController::class);
     // Route::resource('proposals', App\Http\Controllers\API\ProposalAPIController::class);
 
