@@ -22,8 +22,8 @@ class BenefitFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word,
-        'type' => $this->faker->word,
+        'name' => $this->faker->word,
+        'type' => $this->faker->randomElement(['%','€']),
         'amount' => $this->faker->randomDigitNotNull,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s'),

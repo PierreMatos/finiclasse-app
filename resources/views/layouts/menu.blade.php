@@ -183,3 +183,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('campaigns.index') }}"
+       class="nav-link {{ Request::is('campaigns*') ? 'active' : '' }}">
+        <p>Campaigns</p>
+    </a>
+</li>
+
+

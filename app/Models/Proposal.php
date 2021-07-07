@@ -85,8 +85,8 @@ class Proposal extends Model
      * @var array
      */
     public static $rules = [
-        'state_id' => 'required',
-        'business_study_id' => 'required'
+        // 'state_id' => 'required',
+        // 'business_study_id' => 'required'
     ];
 
     /**

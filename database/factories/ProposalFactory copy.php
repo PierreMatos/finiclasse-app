@@ -25,7 +25,7 @@ class ProposalFactory extends Factory
      */
     public function definition()
     {
-        dd( $this->faker->randomNumber($nbDigits = 5, $strict = false));
+        // dd( $this->faker->randomNumber($nbDigits = 5, $strict = false));
         return [
         'client_id' => User::all()->random()->id,
         'vendor_id' => User::all()->random()->id,

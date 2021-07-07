@@ -94,4 +94,6 @@ Route::middleware('auth:api')->group(function () {
 
     Route::resource('users', UserAPIController::class);
 
+    Route::resource('campaigns', CampaignAPIController::class);
+
 });

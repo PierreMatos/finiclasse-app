@@ -115,7 +115,8 @@ class ProposalAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateProposalAPIRequest $request)
+    // public function update($id, UpdateProposalAPIRequest $request)
+    public function update($id, Request $request)
     {
         $input = $request->all();
 

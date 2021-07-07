@@ -3,10 +3,10 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Financing;
+use App\Models\Campaign;
 
 
-class FinancingsSeeder extends Seeder
+class CampaignsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,9 +15,9 @@ class FinancingsSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('financings')->delete();
+        \DB::table('campaigns')->delete();
 
-        Financing::factory()
+        Campaign::factory()
         ->count(5)
         ->create();
     }

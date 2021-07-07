@@ -106,3 +106,5 @@ Route::resource('carFuels', App\Http\Controllers\CarFuelController::class);
 Route::resource('cars', App\Http\Controllers\CarController::class);
 
 Route::resource('users', App\Http\Controllers\UserController::class);
+
+Route::resource('campaigns', App\Http\Controllers\CampaignController::class);

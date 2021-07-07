@@ -66,6 +66,19 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property string $inspection_expiration_date
  * @property string $tradein_observations
  * @property integer $consumption
+ * @property integer $extras_total
+ * @property integer $sub_total
+ * @property integer $total_benefits
+ * @property integer $selling_price
+ * @property integer $buying_price
+ * @property integer $tradein_id
+ * @property integer $tradein_diff
+ * @property integer $settle_amount
+ * @property integer $total_diff_amount
+ * @property integer $total_discount_amount
+ * @property integer $total_discount_perc
+ * @property integer $iva
+ * @property integer $isv
  */
 class Car extends Model implements HasMedia
 {
@@ -123,7 +136,19 @@ class Car extends Model implements HasMedia
         'iuc_expiration_date',
         'inspection_expiration_date',
         'tradein_observations',
-        'consumption'
+        'consumption',
+        'extras_total',
+        'sub_total',
+        'total_benefits',
+        'selling_price',
+        'tradein_id',
+        'tradein_diff',
+        'settle_amount',
+        'total_diff_amount',
+        'total_discount_amount',
+        'total_discount_perc',
+        'iva',
+        'isv'
     ];
 
     /**
@@ -176,7 +201,19 @@ class Car extends Model implements HasMedia
         'iuc_expiration_date' => 'datetime',
         'inspection_expiration_date' => 'datetime',
         'tradein_observations' => 'string',
-        'consumption' => 'integer'
+        'consumption' => 'integer',
+        'extras_total' => 'integer',
+        'sub_total' => 'integer',
+        'total_benefits' => 'integer',
+        'selling_price' => 'integer',
+        'tradein_id' => 'integer',
+        'tradein_diff' => 'integer',
+        'settle_amount' => 'integer',
+        'total_diff_amount' => 'integer',
+        'total_discount_amount' => 'integer',
+        'total_discount_perc' => 'integer',
+        'iva' => 'integer',
+        'isv' => 'integer'
     ];
 
     /**
@@ -189,7 +226,8 @@ class Car extends Model implements HasMedia
         'motorization' => 'required',
         'category_id' => 'required',
         'condition_id' => 'required',
-        'state_id' => 'required'
+        'state_id' => 'required',
+        'model_id' => 'required'
     ];
 
     /**
