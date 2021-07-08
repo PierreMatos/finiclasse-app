@@ -17,9 +17,7 @@ class FinancingProposalRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'name',
-        'description',
-        'value',
+
         'financing_id',
         'proposal_id'
     ];

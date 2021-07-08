@@ -48,7 +48,7 @@ class UserAPIController extends AppBaseController
             $request->get('limit')
         );
 
-        return response()->json($users, 200); 
+        // return response()->json($users, 200); 
 
         return $this->sendResponse(UserResource::collection($users), 'Users retrieved successfully');
     }

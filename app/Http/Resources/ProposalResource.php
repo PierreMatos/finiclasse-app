@@ -14,6 +14,25 @@ class ProposalResource extends JsonResource
      */
     public function toArray($request)
     {
+        $benefits = collect();
+
+        // dd($this->benefits);
+
+        // if ($this->benefits != null ){
+
+        //     foreach ($this->beneftis as $benefit) {
+        //         $benefits->push([
+        //         'id' => $this->benfetits->id,
+        //         'name' => $this->name,
+        //         'type' => $this->type,
+        //         'amount' => $this->amount,]
+        //         );
+        //  }
+
+        // }
+        // dd($benefits);
+
+
         return [
             'id' => $this->id,
             'client_id' => $this->client->id ?? '',
@@ -37,21 +56,17 @@ class ProposalResource extends JsonResource
             'contract' => $this->contract,
             'test_drive' => $this->test_drive,
             'state' => $this->state->name ?? '',
-            // 'business_study_id' => $this->business_study_id,
-            // 'business_study' => [
+            
             'car_id' => $this->car_id,
             'tradein_id' => $this->tradein_id,
-            // 'car_model' => $this->car->model->name,
-            // 'tradein_model' => $this->tradein->model->name,
-            // 'business_study_authorization_id' => $this->businessStudy->businessStudyAuthorization, // TODO USER_ID
+           
             'total_diff_amount' => $this->total_diff_amount,
             'total_discount_amount' => $this->total_discount_amount,
             'total_discount_perc' => $this->total_discount_perc,
-            // 'benefits' => [
-            //     'benefit_id' => $this->benefits->name
-            // ],
-            // ],
             'comment' => $this->comment,
+            'benefits' => $this->benefits,
+            'campaigns' => $this->campaigns,
+            'financings' => $this->financings,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

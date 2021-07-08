@@ -40,22 +40,28 @@ class ProposalAPIController extends AppBaseController
     public function index(Request $request)
     {
 
-        $pages=5;
+        // $pages=5;
 
-        if ($request->state != null) {
+        // if ($request->state != null) {
 
-            $proposals = Proposal::where('state_id','=',$request->state)
-            ->where('vendor_id','=',Auth::id())
-            ->simplePaginate($pages);
+        //     $proposals = Proposal::where('state_id','=',$request->state)
+        //     ->where('vendor_id','=',Auth::id())
+        //     ->simplePaginate($pages);
 
-        } else {
+        // } else {
 
-            $proposals = Proposal::simplePaginate($pages);
+        //     $proposals = Proposal::simplePaginate($pages);
 
-        }
+        // }
         
 
-        return new ProposalCollection($proposals);
+        $proposals = $this->proposalRepository->all(
+            $request->except(['skip', 'limit']),
+            $request->get('skip'),
+            $request->get('limit')
+        );
+
+        return new ProposalCollection(Proposal::paginate());
 
         return $this->sendResponse(ProposalResource::collection($proposals), 'Proposals retrieved successfully');
 

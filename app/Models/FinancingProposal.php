@@ -34,10 +34,6 @@ class FinancingProposal extends Model
 
 
     public $fillable = [
-        'name',
-        'description',
-        'value',
-        'document',
         'financing_id',
         'proposal_id'
     ];
@@ -48,11 +44,6 @@ class FinancingProposal extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
-        'name' => 'string',
-        'description' => 'string',
-        'value' => 'integer',
-        'document' => 'string',
         'financing_id' => 'integer',
         'proposal_id' => 'integer'
     ];
@@ -63,9 +54,6 @@ class FinancingProposal extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required',
-        'description' => 'required',
-        'value' => 'required',
         'financing_id' => 'required',
         'proposal_id' => 'required'
     ];
@@ -73,7 +61,7 @@ class FinancingProposal extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function financing()
+    public function financings()
     {
         return $this->belongsTo(\App\Models\Financing::class, 'financing_id', 'id');
     }

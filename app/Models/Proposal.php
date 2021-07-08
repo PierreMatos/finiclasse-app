@@ -162,4 +162,31 @@ class Proposal extends Model
         return $this->belongsTo(\App\Models\Car::class, 'tradein_id', 'id');
     }
 
+    /**
+     * The benefits that belong to the proposal.
+     */
+    public function benefits()
+    {
+        // return $this->belongsToMany(Benefit::class);
+        return $this->belongsToMany(Benefit::class, 'benefits_proposals');
+    }
+
+    /**
+     * The campaigns that belong to the proposal.
+     */
+    public function campaigns()
+    {
+        // return $this->belongsToMany(Benefit::class);
+        return $this->belongsToMany(Campaign::class, 'campaigns_proposals');
+    }
+
+    /**
+     * The financings that belong to the proposal.
+     */
+    public function financings()
+    {
+        // return $this->belongsToMany(Benefit::class);
+        return $this->belongsToMany(Financing::class, 'financing_proposals');
+    }
+
 }

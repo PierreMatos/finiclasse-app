@@ -15,6 +15,13 @@ class CarCollection extends ResourceCollection
     public function toArray($request)
     {
 
+        // return [
+            // 'data' => $this->collection,
+            // 'id' => $this->id,
+            // 'make' => $this->model->make->name ?? '',
+            // 'model_id' => $this->model->name ?? '',
+        // ];
+
         $carCollection = collect([]);
 
         foreach ($this->collection as $car) {
@@ -25,7 +32,7 @@ class CarCollection extends ResourceCollection
                 'model' => $car->model->name ?? '',
                 'motorization' => $car->motorization,
                 'price' => $car->price,
-                'condition' => $car->condition->name,
+                'condition' => $car->condition->name ?? '',
             ]);
 
         }

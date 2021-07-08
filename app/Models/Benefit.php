@@ -57,4 +57,12 @@ class Benefit extends Model
     ];
 
     
+        /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function proposal()
+    {
+        return $this->belongsTo(\App\Models\Proposals::class, 'proposal_id', 'id');
+    }
+    
 }

@@ -54,11 +54,26 @@ class FinancingProposalAPIController extends AppBaseController
      */
     public function store(Request $request)
     {
-        $input = $request->all();
 
-        $financingProposal = $this->financingProposalRepository->create($input);
+        return 'oi';
+        $inputs = $request->all();
 
-        return $this->sendResponse(new FinancingProposalResource($financingProposal), 'Financing Proposal saved successfully');
+        // DELTE RECORDS BEFORE INSERTING NEW
+        $deletedRows = FinancingProposal::where('proposal_id', $inputs[0]['proposal_id'])->delete();
+
+        $items = collect();
+
+        
+        foreach ($inputs as $input){
+
+            // ADD NEW FINANCINGS TO PROPOSAL
+            $newFinancingProposal = $this->financingProposalRepository->create($input);
+
+            $items->push($newFinancingProposal);
+
+       }
+
+        return $this->sendResponse(FinancingProposalResource::collection($items), 'Financing Proposal saved successfully');
     }
 
     /**
