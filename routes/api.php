@@ -45,7 +45,7 @@ Route::group([
 
 
 
-
+// Route::group(['middleware' => ['role:admin']], function () {
 Route::middleware('auth:api')->group(function () {
 
     Route::resource('makes', MakeAPIController::class);
@@ -97,4 +97,9 @@ Route::middleware('auth:api')->group(function () {
 
     Route::resource('campaigns', CampaignAPIController::class);
 
+    Route::resource('benefits_proposals', BenefitsProposalsAPIController::class);
+    
+    Route::resource('campaigns_proposals', CampaignsProposalsAPIController::class);
+    
 });
+

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreateCarAPIRequest;
 use App\Http\Requests\API\UpdateCarAPIRequest;
 use App\Models\Car;
+use App\Models\User;
 use App\Repositories\CarRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
@@ -38,6 +39,7 @@ class CarAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+
         if ($request->condition != null) {
 
             $cars = Car::where('condition_id','=',$request->condition)->simplePaginate(5);

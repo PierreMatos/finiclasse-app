@@ -191,3 +191,19 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('benefitsProposals.index') }}"
+       class="nav-link {{ Request::is('benefitsProposals*') ? 'active' : '' }}">
+        <p>Benefits Proposals</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('campaignsProposals.index') }}"
+       class="nav-link {{ Request::is('campaignsProposals*') ? 'active' : '' }}">
+        <p>Campaigns Proposals</p>
+    </a>
+</li>
+
+

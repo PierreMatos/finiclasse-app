@@ -119,8 +119,9 @@ abstract class BaseRepository
     public function all($search = [], $skip = null, $limit = null, $columns = ['*'])
     {
 
-        // $search = ['name' => 'Ibiza'];
+        // $search = ['proposal_id' => 22];
 
+        // dd($search);
         $query = $this->allQuery($search, $skip, $limit);
 
         return $query->get($columns);

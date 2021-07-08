@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
+
 /**
  * Class UserController
  * @package App\Http\Controllers\API

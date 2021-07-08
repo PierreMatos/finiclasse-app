@@ -47,6 +47,9 @@ class ProposalResource extends JsonResource
             'total_diff_amount' => $this->total_diff_amount,
             'total_discount_amount' => $this->total_discount_amount,
             'total_discount_perc' => $this->total_discount_perc,
+            // 'benefits' => [
+            //     'benefit_id' => $this->benefits->name
+            // ],
             // ],
             'comment' => $this->comment,
             'created_at' => $this->created_at,

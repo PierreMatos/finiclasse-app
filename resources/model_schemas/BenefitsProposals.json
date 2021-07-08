@@ -1,0 +1,70 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false,
+        "inView": false
+    },
+    {
+        "name": "benefit_id",
+        "dbType": "integer:unsigned:foreign,benefits,id",
+        "htmlType": "number",
+        "validations": "",
+        "searchable": false,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "proposal_id",
+        "dbType": "integer:unsigned:foreign,proposals,id",
+        "htmlType": "number",
+        "validations": "",
+        "searchable": false,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "datetime",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": true,
+        "inIndex": false,
+        "inView": true
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "datetime",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": true,
+        "inIndex": false,
+        "inView": true
+    },
+    {
+        "type": "relation",
+        "relation": "mt1,Benefits,benefit_id,id"
+    },
+    {
+        "type": "relation",
+        "relation": "mt1,Proposals,proposal_id,id"
+    }
+]

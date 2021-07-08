@@ -52,7 +52,7 @@ class FinancingProposalAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateFinancingProposalAPIRequest $request)
+    public function store(Request $request)
     {
         $input = $request->all();
 

@@ -1,0 +1,46 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false,
+        "inView": false
+    },
+    {
+        "name": "campaign_id",
+        "dbType":  "integer:unsigned:foreign,campaigns,id",
+        "relation": "mt1,Campaigns,benefit_id,id",
+        "htmlType": "number"
+    },
+    {
+        "name": "proposal_id",
+        "dbType": "integer:unsigned:foreign,proposals,id",
+        "relation": "mt1,Proposals,proposal_id,id",
+        "htmlType": "number"
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "datetime",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inIndex": false
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "datetime",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inIndex": false
+    }
+]
