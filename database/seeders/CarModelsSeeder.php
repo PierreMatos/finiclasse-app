@@ -19,8 +19,8 @@ class CarModelsSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
-                'name' => 'A',
-                'make_id' => 1,
+                'name' => 'Ibiza',
+                'make_id' => 2,
                 'car_category_id' => 1,
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',
@@ -110,6 +110,16 @@ class CarModelsSeeder extends Seeder
             array (
                 'id' => 11,
                 'name' => 'GLS',
+                'make_id' => 1,
+                'car_category_id' => 1,
+                'created_at' => '2019-10-22 15:50:48',
+                'updated_at' => '2019-10-22 15:50:48',
+            ),
+            
+            11 => 
+            array (
+                'id' => 12,
+                'name' => 'A',
                 'make_id' => 1,
                 'car_category_id' => 1,
                 'created_at' => '2019-10-22 15:50:48',

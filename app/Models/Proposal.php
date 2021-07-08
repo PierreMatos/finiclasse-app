@@ -25,8 +25,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $contract
  * @property boolean $test_drive
  * @property integer $state_id
- * @property integer $business_study_id
  * @property string $comment
+ * @property integer $tradein_id
+ * @property integer $tradein_diff
+ * @property integer $settle_amount
+ * @property integer $total_diff_amount
+ * @property integer $total_discount_amount
+ * @property integer $total_discount_perc
+ * @property integer $authorization_id
+ * @property integer $car_id
+ * @property integer $tradein_id
+ * 
+ * 
  */
 class Proposal extends Model
 {
@@ -53,8 +63,16 @@ class Proposal extends Model
         'contract',
         'test_drive',
         'state_id',
-        'business_study_id',
-        'comment'
+        'comment',
+        'tradein_diff',
+        'settle_amount',
+        'total_diff_amount',
+        'total_discount_amount',
+        'total_discount_perc',
+        'authorization_user_id',
+        'car_id',
+        'tradein_id'
+
     ];
 
     /**
@@ -75,8 +93,15 @@ class Proposal extends Model
         'contract' => 'string',
         'test_drive' => 'boolean',
         'state_id' => 'integer',
-        'business_study_id' => 'integer',
-        'comment' => 'string'
+        'comment' => 'string',
+        'tradein_diff' => 'integer',
+        'settle_amount' => 'integer',
+        'total_diff_amount' => 'integer',
+        'total_discount_amount' => 'integer',
+        'total_discount_perc' => 'integer',
+        'car_id' => 'integer',
+        'tradein_id' => 'integer'
+
     ];
 
     /**
@@ -116,8 +141,25 @@ class Proposal extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function businessStudy()
+    // public function businessStudy()
+    // {
+    //     return $this->belongsTo(\App\Models\BusinessStudy::class, 'business_study_id', 'id');
+    // }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function car()
     {
-        return $this->belongsTo(\App\Models\BusinessStudy::class, 'business_study_id', 'id');
+        return $this->belongsTo(\App\Models\Car::class, 'car_id', 'id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function tradein()
+    {
+        return $this->belongsTo(\App\Models\Car::class, 'tradein_id', 'id');
+    }
+
 }

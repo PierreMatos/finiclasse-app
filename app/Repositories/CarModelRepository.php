@@ -17,7 +17,8 @@ class CarModelRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'name'
+        'name',
+        'make_id'
     ];
 
     /**

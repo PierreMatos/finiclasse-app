@@ -39,13 +39,14 @@ class ProposalResource extends JsonResource
             'state' => $this->state->name ?? '',
             // 'business_study_id' => $this->business_study_id,
             // 'business_study' => [
-                'new_car_id' => $this->businessStudy->car_id,
-                'old_car_id' => $this->businessStudy->tradein_id,
-                // 'business_study_authorization_id' => $this->businessStudy->businessStudyAuthorization, // TODO USER_ID
-                'total_diff_amount' => $this->businessStudy->total_diff_amount,
-                'total_discount_amount' => $this->businessStudy->total_discount_amount,
-                'total_discount_perc' => $this->businessStudy->total_discount_perc,
-
+            'car_id' => $this->car_id,
+            'tradein_id' => $this->tradein_id,
+            // 'car_model' => $this->car->model->name,
+            // 'tradein_model' => $this->tradein->model->name,
+            // 'business_study_authorization_id' => $this->businessStudy->businessStudyAuthorization, // TODO USER_ID
+            'total_diff_amount' => $this->total_diff_amount,
+            'total_discount_amount' => $this->total_discount_amount,
+            'total_discount_perc' => $this->total_discount_perc,
             // ],
             'comment' => $this->comment,
             'created_at' => $this->created_at,

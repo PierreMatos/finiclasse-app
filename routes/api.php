@@ -43,11 +43,12 @@ Route::group([
 
 });
 
-Route::resource('makes', MakeAPIController::class);
 
 
 
 Route::middleware('auth:api')->group(function () {
+
+    Route::resource('makes', MakeAPIController::class);
 
     Route::resource('cars', CarAPIController::class);
 

@@ -89,6 +89,14 @@ class CarFactory extends Factory
         'inspection_expiration_date' => $current,
         'tradein_observations' => $this->faker->word,
         'consumption' => $this->faker->randomDigitNotNull,
+        'extras_total' => $this->faker->randomNumber($nbDigits = 5, $strict = false),
+        'sub_total' => $this->faker->randomNumber($nbDigits = 5, $strict = false),
+        'buying_price' => $this->faker->randomNumber($nbDigits = 5, $strict = false),
+        'selling_price' => $this->faker->randomNumber($nbDigits = 5, $strict = false),
+        'iva' => $this->faker->randomNumber($nbDigits = 5, $strict = false),
+        'isv' => $this->faker->randomNumber($nbDigits = 5, $strict = false),
+        'ptl' => $this->faker->randomNumber($nbDigits = 4, $strict = false),
+        'sigpu' => $this->faker->randomNumber($nbDigits = 3, $strict = false),
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];

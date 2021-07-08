@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 use App\Models\ProposalState;
 use App\Models\BusinessStudy;
+use App\Models\Car;
 
 
 class ProposalFactory extends Factory
@@ -39,6 +40,13 @@ class ProposalFactory extends Factory
         'state_id' =>  ProposalState::all()->random()->id,
         'business_study_id' =>  BusinessStudy::all()->random()->id,
         'comment' => $this->faker->sentence,
+        'tradein_diff' => $this->faker->randomDigitNotNull,
+        'settle_amount' => $this->faker->randomDigitNotNull,
+        'total_diff_amount' => $this->faker->randomDigitNotNull,
+        'total_discount_amount' => $this->faker->randomDigitNotNull,
+        'total_discount_perc' => $this->faker->randomDigitNotNull,  
+        'car_id' => Car::all()->random()->id,
+        'tradein_id' => Car::all()->random()->id,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];

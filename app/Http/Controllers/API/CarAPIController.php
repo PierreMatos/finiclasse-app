@@ -12,6 +12,7 @@ use App\Http\Resources\CarResource;
 use App\Http\Resources\CarCollection;
 use Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * Class CarController
@@ -72,8 +73,13 @@ class CarAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateCarAPIRequest $request)
+    public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), Car::$rules);
+
+        // $validated = $request->validate(Car::$rules);
+
+        // dd($validator);
         $input = $request->all();
 
         $car = $this->carRepository->create($input);

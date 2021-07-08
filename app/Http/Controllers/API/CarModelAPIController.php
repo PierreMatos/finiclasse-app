@@ -35,6 +35,8 @@ class CarModelAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $abc = CarModel::find(1);
+        // dd($carModels = $this->carModelRepository->getFieldsSearchable());
         $carModels = $this->carModelRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
