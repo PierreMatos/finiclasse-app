@@ -58,6 +58,9 @@ class BenefitsProposalsAPIController extends AppBaseController
     {
         $inputs = $request->all();
 
+        // DELTE RECORDS BEFORE INSERTING NEW
+        $deletedRows = BenefitsProposals::where('proposal_id', $inputs[0]['proposal_id'])->delete();
+
         $items = collect();
 
         foreach ($inputs as $input){

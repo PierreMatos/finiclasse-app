@@ -55,7 +55,6 @@ class FinancingProposalAPIController extends AppBaseController
     public function store(Request $request)
     {
 
-        return 'oi';
         $inputs = $request->all();
 
         // DELTE RECORDS BEFORE INSERTING NEW
@@ -63,7 +62,6 @@ class FinancingProposalAPIController extends AppBaseController
 
         $items = collect();
 
-        
         foreach ($inputs as $input){
 
             // ADD NEW FINANCINGS TO PROPOSAL
