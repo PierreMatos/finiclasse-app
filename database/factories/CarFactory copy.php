@@ -30,7 +30,7 @@ class CarFactory extends Factory
      * @return array
      */
     public function definition()
-    {
+    {   
         $current = Carbon::now();
 
         return [

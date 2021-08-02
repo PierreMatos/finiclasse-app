@@ -28,9 +28,9 @@ class CarState extends Model
     protected $dates = ['deleted_at'];
 
 
-
     public $fillable = [
         'name',
+        'description',
         'order',
         'color',
         'visible'
@@ -44,6 +44,7 @@ class CarState extends Model
     protected $casts = [
         'id' => 'integer',
         'name' => 'string',
+        'description' => 'string',
         'order' => 'integer',
         'color' => 'string',
         'visible' => 'boolean'
@@ -57,6 +58,5 @@ class CarState extends Model
     public static $rules = [
         'name' => 'required'
     ];
-
     
 }

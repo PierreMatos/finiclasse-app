@@ -85,7 +85,12 @@ class ProposalAPIController extends AppBaseController
      */
     public function store(Request $request)
     {
+
         $input = $request->all();
+        
+        // if (proposta completa) {
+            // authorization($input->id);
+        // }
 
         $proposal = $this->proposalRepository->create($input);
 
@@ -160,5 +165,28 @@ class ProposalAPIController extends AppBaseController
         $proposal->delete();
 
         return $this->sendSuccess('Proposal deleted successfully');
+    }
+
+    public function authorization($id){
+
+        $proposal = Proposal::find($id);
+        
+        $diff = $proposal->total_discount_perc;
+
+        foreach ($authorizations as $authorization) {
+
+            $min = $authorization->min;
+            $max = $authorization->max;
+
+            if($diff > $min && $diff < $max) {
+
+                $proposal->authorization_id = $authorization->id;
+            
+            }
+
+        }
+
+        return $proposal;
+
     }
 }

@@ -17,6 +17,7 @@ class CarStateResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'description' => $this->description,
             'order' => $this->order,
             'color' => $this->color,
             'visible' => $this->visible,

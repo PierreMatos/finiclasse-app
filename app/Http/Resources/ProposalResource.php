@@ -67,6 +67,7 @@ class ProposalResource extends JsonResource
             'benefits' => $this->benefits,
             'campaigns' => $this->campaigns,
             'financings' => $this->financings,
+            // 'authorization' => $this->authorization
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];
