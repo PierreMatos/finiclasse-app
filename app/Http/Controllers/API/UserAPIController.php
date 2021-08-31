@@ -61,7 +61,7 @@ class UserAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateUserAPIRequest $request)
+    public function store(Request $request)
     {
         $input = $request->all();
 
@@ -226,25 +226,10 @@ class UserAPIController extends AppBaseController
     public function getClients(Request $request)
     {
 
-        // dd(Auth::user()->myLeads);
-
-        // $clients= collect([]);
-        
-        // foreach( Auth::user()->myLeads as $lead ) {
-
-        // $clients->push($lead);
-
-        // }
-        // dd('ola');
-
-        // $clients = User::where('finiclasse_employee','=',1)->get();
-        // $clients = Auth::user()->myLeads;
-
         $clients = Auth::user()->myLeads;
         // return response()->json($clients, 200); 
 
         return $this->sendResponse(UserResource::collection($clients), 'Users retrieved successfully');
-
 
     }
 }

@@ -30,7 +30,6 @@ class ProposalResource extends JsonResource
         //  }
 
         // }
-        // dd($benefits);
 
 
         return [
@@ -39,6 +38,7 @@ class ProposalResource extends JsonResource
             'client' => [
                 'name' => $this->client->name ?? '',
                 'email' => $this->client->email ?? '',
+                'client_type' => $this->client->clientType->name ?? '',
                 'nif' => $this->client->nif ?? '',
                 'city' => $this->city,
                 'adress' => $this->client->adress ?? '',

@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class CarFuelsSeeder extends Seeder
+class ClientTypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,57 +13,42 @@ class CarFuelsSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('car_fuels')->delete();
+        \DB::table('client_types')->delete();
 
-        \DB::table('car_fuels')->insert(array (
+        \DB::table('client_types')->insert(array (
 
         0 => 
             array (
                 'id' => 1,
-                'name' => 'Gasolina',
-                'order' => 1,
-                'visible' => 1,
-                'color' => '#fffff',
+                'name' => 'Particular',
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',
             ),
         1 => 
             array (
                 'id' => 2,
-                'name' => 'Diesel',
-                'order' => 2,
-                'visible' => 1,
-                'color' => '#fffff',
+                'name' => 'Empresa',
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',
             ),
         2 => 
             array (
                 'id' => 3,
-                'name' => 'Elétrico',
-                'order' => 2,
-                'visible' => 1,
-                'color' => '#fffff',
+                'name' => 'Frotista',
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',
             ),
-            2 => 
+        3 => 
             array (
-                'id' => 3,
-                'name' => 'Híbrido',
-                'order' => 2,
-                'visible' => 1,
-                'color' => '#fffff',
+                'id' => 4,
+                'name' => 'Grande Frotista',
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',
             ),
-            2 => 
+        4 => 
             array (
-                'id' => 3,
-                'name' => 'GPL',
-                'order' => 2,
-                'visible' => 1,
-                'color' => '#fffff',
+                'id' => 5,
+                'name' => 'ENI',
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',
             ),

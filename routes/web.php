@@ -151,3 +151,5 @@ Route::resource('campaigns', App\Http\Controllers\CampaignController::class);
 Route::resource('benefitsProposals', App\Http\Controllers\BenefitsProposalsController::class);
 
 Route::resource('campaignsProposals', App\Http\Controllers\CampaignsProposalsController::class);
+
+Route::resource('clientTypes', App\Http\Controllers\ClientTypeController::class);

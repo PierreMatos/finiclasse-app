@@ -100,6 +100,9 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('benefits_proposals', BenefitsProposalsAPIController::class);
     
     Route::resource('campaigns_proposals', CampaignsProposalsAPIController::class);
-    
+
+    Route::resource('client_types', ClientTypeAPIController::class);
+
 });
+
 

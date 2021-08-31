@@ -19,8 +19,8 @@ class AddFieldsToProposalsTable extends Migration
             $table->integer('total_diff_amount')->nullable();
             $table->integer('total_discount_amount')->nullable();
             $table->integer('total_discount_perc')->nullable();
-            $table->integer('car_id')->nullable()->nullable();
-            $table->integer('tradein_id')->nullable()->nullable();
+            $table->integer('car_id')->unsigned()->nullable();
+            $table->integer('tradein_id')->unsigned()->nullable();
 
             $table->foreign('car_id')->references('id')->on('cars');
             $table->foreign('tradein_id')->references('id')->on('cars');

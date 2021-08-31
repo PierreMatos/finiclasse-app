@@ -31,6 +31,8 @@ class UserResource extends JsonResource
             'gdpr_type' => $this->gdpr_type,
             'finiclasse_employee' => $this->finiclasse_employee,
             'stand' => $this->stand->name ?? '',
+            'service_car_plate' => $this->serviceCar->plate ?? '',
+            'client_type' => $this->clientType->name ?? '',
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

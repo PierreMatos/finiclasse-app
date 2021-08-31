@@ -207,3 +207,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('clientTypes.index') }}"
+       class="nav-link {{ Request::is('clientTypes*') ? 'active' : '' }}">
+        <p>Client Types</p>
+    </a>
+</li>
+
+

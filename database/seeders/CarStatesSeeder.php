@@ -77,6 +77,18 @@ class CarStatesSeeder extends Seeder
                 'updated_at' => '2019-10-22 15:50:48',
             ),  
 
+            4 => 
+            array (
+                'id' => 5,
+                'name' => 'Vendido',
+                'description' => 'Esta viatura que esteve em sistema e foi vendida entretanto, deixando de fazer parte das listagens',
+                'order' => 1,
+                'color' => '#fffff',
+                'visible' => 0,
+                'created_at' => '2019-10-22 15:50:48',
+                'updated_at' => '2019-10-22 15:50:48',
+            ),  
+
         ));
 
     }

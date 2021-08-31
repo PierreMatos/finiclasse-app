@@ -28,6 +28,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property string $gdpr_type
  * @property boolean $finiclasse_employee
  * @property integer $stand_id
+ * @property integer $client_type_id
+ * @property integer $service_car_id
  */
 class User extends Authenticatable implements JWTSubject
 {
@@ -77,7 +79,9 @@ class User extends Authenticatable implements JWTSubject
         'gdpr_rejection',
         'gdpr_type',
         'finiclasse_employee',
-        'stand_id'
+        'stand_id',
+        'client_type_id',
+        'service_car_id'
     ];
 
     /**
@@ -108,7 +112,9 @@ class User extends Authenticatable implements JWTSubject
         'nif' => 'integer',
         'gdpr_type' => 'string',
         'finiclasse_employee' => 'boolean',
-        'stand_id' => 'integer'
+        'stand_id' => 'integer',
+        'client_type_id' => 'integer',
+        'service_car_id' => 'integer'
     ];
 
     /**
@@ -117,7 +123,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     public static $rules = [
-        'name' => 'validations:nullable',
+        'name' => 'required',
         'email' => 'required',
         'email_verified_at' => 'validations:nullable',
         'password' => 'validations:nullable',
@@ -150,6 +156,22 @@ class User extends Authenticatable implements JWTSubject
     public function myLeads()
     {
     return $this->belongsToMany(\App\Models\User::class, 'leads_users', 'vendor_id', 'client_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function clientType()
+    {
+        return $this->belongsTo(\App\Models\ClientType::class, 'client_type_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function serviceCar()
+    {
+        return $this->belongsTo(\App\Models\Car::class, 'service_car_id', 'id');
     }
 
 }
