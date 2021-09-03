@@ -215,3 +215,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('carClasses.index') }}"
+       class="nav-link {{ Request::is('carClasses*') ? 'active' : '' }}">
+        <p>Car Classes</p>
+    </a>
+</li>
+
+

@@ -20,12 +20,12 @@ class CreateCarsTable extends Migration
             $table->string('variant')->nullable();
             $table->integer('motorization')->nullable();
             $table->integer('category_id')->unsigned();
-            $table->dateTime('registration')->nullable();
+            $table->integer('registration')->nullable();
             $table->integer('condition_id')->unsigned();
             $table->integer('state_id')->unsigned();
             $table->integer('komm')->nullable();
-            $table->integer('warranty_stand')->nullable();
-            $table->integer('warranty_make')->nullable();
+            $table->string('warranty_stand')->nullable();
+            $table->string('warranty_make')->nullable();
             $table->string('plate')->nullable();
             $table->integer('stand_id')->unsigned()->nullable();
             $table->integer('price')->nullable();

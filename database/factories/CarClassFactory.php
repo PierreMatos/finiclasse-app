@@ -22,11 +22,7 @@ class CarClassFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word,
-        'order' => $this->faker->randomDigitNotNull,
-        'color' => $this->faker->word,
-        'visible' => $this->faker->word,
-        'created_at' => $this->faker->date('Y-m-d H:i:s'),
+            'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];
     }

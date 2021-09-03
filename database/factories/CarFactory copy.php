@@ -15,7 +15,7 @@ use Carbon\Carbon;
 use App\Models\Car;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CarFactory extends Factory
+class CarFactoryCopy extends Factory
 {
     /**
      * The name of the factory's corresponding model.
@@ -39,12 +39,12 @@ class CarFactory extends Factory
         'variant' =>  $this->faker->randomElement(['Station','AMG','Cupra','BlackSeries','Performance','Sport']),
         'motorization' => $this->faker->randomElement(['180','200','220','300','320','500']),
         'category_id' => CarCategory::all()->random()->id,
-        'registration' => $current,
+        'registration' =>  '2018',
         'condition_id' => CarCondition::all()->random()->id,
         'state_id' =>  CarState::all()->random()->id,
         'komm' => $this->faker->randomDigitNotNull,
-        'warranty_stand' => $this->faker->randomDigitNotNull,
-        'warranty_make' => $this->faker->randomDigitNotNull,
+        'warranty_stand' =>  $this->faker->randomNumber($nbDigits = 9, $strict = false),
+        'warranty_make' =>  $this->faker->randomNumber($nbDigits = 9, $strict = false),
         'plate' => $this->faker->word,
         'stand_id' =>  Stand::all()->random()->id,
         'price' => $this->faker->randomDigitNotNull,

@@ -42,7 +42,7 @@ class CarFactory extends Factory
         'variant' =>  $this->faker->randomElement(['Station','AMG','Cupra','BlackSeries','Performance','Sport']),
         'motorization' => $this->faker->randomElement(['180','200','220','300','320','500']),
         'category_id' => CarCategory::all()->random()->id,
-        'registration' => $current,
+        // 'registration' => '2018',
         'condition_id' => CarCondition::all()->random()->id,
         'state_id' =>  CarState::all()->random()->id,
         'komm' => $this->faker->randomDigitNotNull,

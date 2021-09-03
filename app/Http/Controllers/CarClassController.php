@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\CarClassDataTable;
+use App\Http\Requests;
 use App\Http\Requests\CreateCarClassRequest;
 use App\Http\Requests\UpdateCarClassRequest;
 use App\Repositories\CarClassRepository;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Http\Request;
 use Flash;
+use App\Http\Controllers\AppBaseController;
 use Response;
+use Illuminate\Http\Request;
+
 
 class CarClassController extends AppBaseController
 {
@@ -23,16 +26,16 @@ class CarClassController extends AppBaseController
     /**
      * Display a listing of the CarClass.
      *
-     * @param Request $request
-     *
+     * @param CarClassDataTable $carClassDataTable
      * @return Response
      */
     public function index(Request $request)
     {
-        $carClasses = $this->carClassRepository->all();
+        $carclasses = $this->carClassRepository->all() ;
 
         return view('car_classes.index')
-            ->with('carClasses', $carClasses);
+            ->with('carclasses', $carclasses);
+        // return $carClassDataTable->render('car_classes.index');
     }
 
     /**
@@ -66,7 +69,7 @@ class CarClassController extends AppBaseController
     /**
      * Display the specified CarClass.
      *
-     * @param int $id
+     * @param  int $id
      *
      * @return Response
      */
@@ -86,7 +89,7 @@ class CarClassController extends AppBaseController
     /**
      * Show the form for editing the specified CarClass.
      *
-     * @param int $id
+     * @param  int $id
      *
      * @return Response
      */
@@ -106,7 +109,7 @@ class CarClassController extends AppBaseController
     /**
      * Update the specified CarClass in storage.
      *
-     * @param int $id
+     * @param  int              $id
      * @param UpdateCarClassRequest $request
      *
      * @return Response
@@ -131,9 +134,7 @@ class CarClassController extends AppBaseController
     /**
      * Remove the specified CarClass from storage.
      *
-     * @param int $id
-     *
-     * @throws \Exception
+     * @param  int $id
      *
      * @return Response
      */

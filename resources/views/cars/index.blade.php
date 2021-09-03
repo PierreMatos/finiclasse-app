@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <section class="content-header">
         <div class="container-fluid">
@@ -26,7 +25,6 @@
         <div class="card">
             <div class="card-body p-0">
                 @include('cars.table')
-
                 <div class="card-footer clearfix float-right">
                     <div class="float-right">
                         
@@ -36,6 +34,29 @@
 
         </div>
     </div>
-
 @endsection
+@push('page_scripts')
 
+<script>
+var table =
+$('#cars-table').DataTable( {
+    autoFill: true,
+    dom: 'Bfrtip',
+    buttons: [
+        'copy', 'excel', 'pdf'
+    ]
+} );
+
+$('.tab_button').on('click',function(){
+    if(this.id == "all"){
+        $('#cars-table').DataTable();
+    }else{
+        regExSearch = '^\\s' + this.id +'\\s*$';
+        table.search(regExSearch, true, false).draw();
+        // table.column(columnNo).search(regExSearch, true, false).draw();
+    }
+})
+
+
+</script>
+@endpush

@@ -9,12 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Class CarClass
  * @package App\Models
- * @version May 8, 2021, 11:30 am UTC
+ * @version September 2, 2021, 2:24 pm UTC
  *
- * @property string $name
- * @property integer $order
- * @property string $color
- * @property boolean $visible
  */
 class CarClass extends Model
 {
@@ -30,10 +26,7 @@ class CarClass extends Model
 
 
     public $fillable = [
-        'name',
-        'order',
-        'color',
-        'visible'
+        
     ];
 
     /**
@@ -42,11 +35,7 @@ class CarClass extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
-        'name' => 'string',
-        'order' => 'integer',
-        'color' => 'string',
-        'visible' => 'boolean'
+        'id' => 'integer'
     ];
 
     /**
@@ -55,7 +44,7 @@ class CarClass extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required'
+        
     ];
 
     

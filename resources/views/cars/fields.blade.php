@@ -252,7 +252,13 @@
             format: 'YYYY-MM-DD HH:mm:ss',
             useCurrent: true,
             sideBySide: true
-        })
+        });
+        
+$('#table_id2').DataTable( {
+} );
+$('#cars-table').DataTable( {
+} );
+
     </script>
 @endpush
 
