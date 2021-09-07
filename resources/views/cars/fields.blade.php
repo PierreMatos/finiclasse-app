@@ -1,7 +1,26 @@
+<!-- Make Name Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('make_id', 'Marca:') !!}
+        <select name="album_id" class="input-group form-control custom-select selectedPost">
+                <option disabled selected value=""></option>
+                @foreach ($makes as $make)
+                    <option value="{{ $make->id }}">{{ $make->name }}</option>
+                @endforeach
+        </select>
+    <!-- {!! Form::number('make_id', null, ['class' => 'form-control']) !!} -->
+</div>
+
 <!-- Model Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('model_id', 'Model Id:') !!}
-    {!! Form::number('model_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('model_id', 'Modelo:') !!}
+        <select name="album_id" class="input-group form-control custom-select selectedPost">
+                <option disabled selected value=""></option>
+                @foreach ($models as $model)
+                    //condition make selecionado anteriormente
+                    <option value="{{ $model->id }}">{{ $model->name }}</option>
+                @endforeach
+        </select>
+    <!-- {!! Form::number('model_id', null, ['class' => 'form-control']) !!} -->
 </div>
 
 <!-- Variant Field -->

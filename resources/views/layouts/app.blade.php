@@ -19,8 +19,8 @@
           crossorigin="anonymous"/>
 
     <!-- Datatables -->
-    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.0/css/dataTables.bootstrap5.min.css"/> -->
-    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.11.0/af-2.3.7/b-2.0.0/b-colvis-2.0.0/b-html5-2.0.0/b-print-2.0.0/cr-1.5.4/date-1.1.1/r-2.2.9/sb-1.2.0/sl-1.3.3/datatables.min.css"/>
+ 
 
     <!-- iCheck -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css"
@@ -35,6 +35,11 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
           integrity="sha512-aEe/ZxePawj0+G2R+AaIxgrQuKT68I28qh+wgLrcAJOz3rxCP+TwrK5SPN+E5I+1IQjNtcfvb96HDagwrKRdBw=="
           crossorigin="anonymous"/>
+
+
+          <!-- Styles -->
+     <!-- <link rel="stylesheet" href="{{ mix('css/fini/app.css') }}"> -->
+
 
     @yield('third_party_stylesheets')
 
@@ -143,16 +148,13 @@
 
  <!-- DataTables -->
  
- <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.0/af-2.3.7/b-2.0.0/cr-1.5.4/r-2.2.9/sl-1.3.3/datatables.min.js"></script>
- <script type="text/javascript" src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
- <script type="text/javascript" src="https://cdn.datatables.net/1.11.0/js/dataTables.bootstrap5.min.js"></script> -->
-
- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.11.0/af-2.3.7/b-2.0.0/b-colvis-2.0.0/b-html5-2.0.0/b-print-2.0.0/cr-1.5.4/date-1.1.1/r-2.2.9/sb-1.2.0/sl-1.3.3/datatables.min.css"/>
- 
  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
  <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.11.0/af-2.3.7/b-2.0.0/b-colvis-2.0.0/b-html5-2.0.0/b-print-2.0.0/cr-1.5.4/date-1.1.1/r-2.2.9/sb-1.2.0/sl-1.3.3/datatables.min.js"></script>
  
+         <!-- Scripts -->
+        <!-- <script src="{{ mix('js/app.js') }}" defer></script> -->
+
 <script>
     $(function () {
         bsCustomFileInput.init();

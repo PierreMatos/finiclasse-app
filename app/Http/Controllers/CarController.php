@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateCarRequest;
 use App\Http\Requests\UpdateCarRequest;
 use App\Repositories\CarRepository;
+use App\Repositories\MakeRepository;
+use App\Repositories\CarModelRepository;
+use App\Repositories\CarConditionRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -14,10 +17,16 @@ class CarController extends AppBaseController
 {
     /** @var  CarRepository */
     private $carRepository;
+    /** @var  CarConditionRepository */
+    private $carConditionRepository;
 
-    public function __construct(CarRepository $carRepo)
+    public function __construct(CarRepository $carRepo, CarConditionRepository $carConditionRepo, 
+    MakeRepository $makeRepo, CarModelRepository $modelRepo)
     {
         $this->carRepository = $carRepo;
+        $this->makeRepository = $makeRepo;
+        $this->modelRepository = $modelRepo;
+        $this->carConditionRepository = $carConditionRepo;
     }
 
     /**
@@ -30,9 +39,11 @@ class CarController extends AppBaseController
     public function index(Request $request)
     {
         $cars = $this->carRepository->all();
+        $carConditions = $this->carConditionRepository->all();
 
         return view('cars.index')
-            ->with('cars', $cars);
+            ->with('cars', $cars)
+            ->with('carConditions', $carConditions);
     }
 
     /**
@@ -42,7 +53,12 @@ class CarController extends AppBaseController
      */
     public function create()
     {
-        return view('cars.create');
+        $makes = $this->makeRepository->all();
+        $models = $this->modelRepository->all();
+
+        return view('cars.create')
+        ->with('makes', $makes)
+        ->with('models', $models);
     }
 
     /**

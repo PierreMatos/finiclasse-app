@@ -38,25 +38,75 @@
 @push('page_scripts')
 
 <script>
+
+// SET DEFUALT STATE OF TABLES IN THE PAGE
+$('.table-responsive').hide();
+$('#Todos-table-div').show();
+
+//tabela todos -pode ficar em função
 var table =
-$('#cars-table').DataTable( {
+$('#Todos-table').DataTable( {
+    language: {
+        search: "_INPUT_",
+        searchPlaceholder: "Search..."
+    },
     autoFill: true,
-    dom: 'Bfrtip',
+    responsive: true,
+    "dom": '<"top float-left"f><"float-right"B>rt<"bottom"<"float-left"p>l<"float-right"i>><"clear">',
+
+    
     buttons: [
-        'copy', 'excel', 'pdf'
+        {
+            text: 'Todos',
+            action: function () {
+                table.search('').draw();
+            }
+        },
+        {
+            text: 'Mercedes',
+            action: function () {
+                table.search('Mercedes').draw();
+            }
+        },
+        {
+            text: 'Seat',
+            action: function () {
+                table.search('Seat').draw();
+            }
+        }
     ]
 } );
 
+// TOGGLES OF DATATABLES
 $('.tab_button').on('click',function(){
-    if(this.id == "all"){
-        $('#cars-table').DataTable();
+    var id = this.id
+    if(id == 'Todos'){
+        $('.table-responsive').hide();
+        $('#Todos-table-div').show();
+        
     }else{
-        regExSearch = '^\\s' + this.id +'\\s*$';
-        table.search(regExSearch, true, false).draw();
-        // table.column(columnNo).search(regExSearch, true, false).draw();
+        var idDiv = '#'+id+'-table-div';
+        var idTable = '#'+id+'-table';
+
+        $('.table-responsive').hide();
+        $(idDiv).show();
+
+        $(idTable).DataTable( {
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Search..."
+            },
+            autoFill: true,
+            retrieve: true,
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'excel', 'pdf'
+            ]
+      
+        } );
+
     }
 })
-
 
 </script>
 @endpush
