@@ -6,7 +6,14 @@ use App\Http\Requests\CreateCarRequest;
 use App\Http\Requests\UpdateCarRequest;
 use App\Repositories\CarRepository;
 use App\Repositories\MakeRepository;
+use App\Repositories\StandRepository;
+use App\Repositories\CarTransmissionRepository;
 use App\Repositories\CarModelRepository;
+use App\Repositories\CarFuelRepository;
+use App\Repositories\CarDriveRepository;
+use App\Repositories\CarStateRepository;
+use App\Repositories\CarClassRepository;
+use App\Repositories\CarCategoryRepository;
 use App\Repositories\CarConditionRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
@@ -19,14 +26,42 @@ class CarController extends AppBaseController
     private $carRepository;
     /** @var  CarConditionRepository */
     private $carConditionRepository;
+    /** @var  MakeRepository */
+    private $MakeRepository;
+    /** @var  CarModelRepository */
+    private $CarModelRepository;
+    /** @var  CarCategoryRepository */
+    private $CarCategoryRepository;
+    /** @var  CarStateRepository */
+    private $CarStateRepository;
+    /** @var  StandRepository */
+    private $StandRepository;
+    /** @var  CarTransmissionRepository */
+    private $CarTransmissionRepository;
+    /** @var  CarDriveRepository */
+    private $CarDriveRepository;
+    /** @var  CarFuelRepository */
+    private $CarFuelRepository;
+    /** @var  CarClassRepository */
+    private $CarClassRepository;
 
     public function __construct(CarRepository $carRepo, CarConditionRepository $carConditionRepo, 
-    MakeRepository $makeRepo, CarModelRepository $modelRepo)
+    MakeRepository $makeRepo, CarModelRepository $modelRepo, CarCategoryRepository $carCategoryRepo,
+    CarStateRepository $carStateRepo, StandRepository $standRepo, CarFuelRepository $carFuelRepo,
+    CarTransmissionRepository $carTransmissionRepo, CarDriveRepository $carDriveRepo,
+    CarClassRepository $carClassRepo)
     {
         $this->carRepository = $carRepo;
         $this->makeRepository = $makeRepo;
         $this->modelRepository = $modelRepo;
+        $this->standRepository = $standRepo;
+        $this->carStateRepository = $carStateRepo;
+        $this->carFuelRepository = $carFuelRepo;
+        $this->carDriveRepository = $carDriveRepo;
         $this->carConditionRepository = $carConditionRepo;
+        $this->carCategoryRepository = $carCategoryRepo;
+        $this->carTransmissionRepository = $carTransmissionRepo;
+        $this->carClassRepository = $carClassRepo;
     }
 
     /**
@@ -55,9 +90,25 @@ class CarController extends AppBaseController
     {
         $makes = $this->makeRepository->all();
         $models = $this->modelRepository->all();
+        $carCategories = $this->carCategoryRepository->all();
+        $carConditions = $this->carConditionRepository->all();
+        $carStates = $this->carStateRepository->all();
+        $stands = $this->standRepository->all();
+        $carTransmissions = $this->carTransmissionRepository->all();
+        $carDrives = $this->carDriveRepository->all();
+        $carFuels = $this->carFuelRepository->all();
+        $carClasses = $this->carClassRepository->all();
 
         return view('cars.create')
+        ->with('stands', $stands)
         ->with('makes', $makes)
+        ->with('carDrives', $carDrives)
+        ->with('carFuels', $carFuels)
+        ->with('carClasses', $carClasses)
+        ->with('carTransmissions', $carTransmissions)
+        ->with('carCategories', $carCategories)
+        ->with('carConditions', $carConditions)
+        ->with('carStates', $carStates)
         ->with('models', $models);
     }
 
@@ -110,13 +161,61 @@ class CarController extends AppBaseController
     {
         $car = $this->carRepository->find($id);
 
+  
+        // dd($car);
+        $model = $this->modelRepository->find($car->model->id);
+
+        $carModel = $this->modelRepository->find($car->model->id);
+        $carMake = $this->makeRepository->find($car->model->make->id);
+        $carMake = $this->makeRepository->find($car->model->make->id);
+
+        $makes = $this->makeRepository->all();
+        $models = $this->modelRepository->all();
+        $carCategories = $this->carCategoryRepository->all();
+        $carConditions = $this->carConditionRepository->all();
+        $carStates = $this->carStateRepository->all();
+        $stands = $this->standRepository->all();
+        $carTransmissions = $this->carTransmissionRepository->all();
+        $carDrives = $this->carDriveRepository->all();
+        $carFuels = $this->carFuelRepository->all();
+        $carClasses = $this->carClassRepository->all();
+
+        // dd($model->name);
+        return view('cars.create')
+        ->with('car', $car)
+        ->with('carModel', $model)
+        ->with('carModel', $carModel)
+        ->with('carMake', $carMake)
+        ->with('stands', $stands)
+        ->with('makes', $makes)
+        ->with('carDrives', $carDrives)
+        ->with('carFuels', $carFuels)
+        ->with('carClasses', $carClasses)
+        ->with('carTransmissions', $carTransmissions)
+        ->with('carCategories', $carCategories)
+        ->with('carConditions', $carConditions)
+        ->with('carStates', $carStates)
+        ->with('models', $models);
+        
+
         if (empty($car)) {
             Flash::error('Car not found');
 
             return redirect(route('cars.index'));
         }
 
-        return view('cars.edit')->with('car', $car);
+        return view('cars.edit')
+        ->with('car', $car)
+        ->with('stands', $stands)
+        ->with('makes', $makes)
+        ->with('carDrives', $carDrives)
+        ->with('carFuels', $carFuels)
+        ->with('carClasses', $carClasses)
+        ->with('carTransmissions', $carTransmissions)
+        ->with('carCategories', $carCategories)
+        ->with('carConditions', $carConditions)
+        ->with('carStates', $carStates)
+        ->with('models', $models);
     }
 
     /**
