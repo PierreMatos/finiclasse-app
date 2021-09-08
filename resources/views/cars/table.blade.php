@@ -22,14 +22,14 @@
         <th>Make</th>
         <th>Model</th>
         <th>Variant</th>
-        <!-- <th>Condition</th> -->
-        <th>State</th>
-        <!-- <th>Komm</th> -->
         <th>Plate</th>
         <th>Stand</th>
+        <!-- <th>Komm</th> -->
         <th>Price</th>
-        <th colspan="3">Action</th>
-        <!-- <th >Action</th> -->
+        <!-- <th>Stand</th>
+        <th>Price</th> -->
+        <!-- <th colspan="3">Action</th> -->
+        <th >Action</th>
             </tr>
         </thead>
         <tbody>

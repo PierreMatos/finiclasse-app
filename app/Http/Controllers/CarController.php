@@ -161,42 +161,38 @@ class CarController extends AppBaseController
     {
         $car = $this->carRepository->find($id);
 
-  
-        // dd($car);
-        $model = $this->modelRepository->find($car->model->id);
+        // $model = $this->modelRepository->find($car->model->id);
+        // $make = $this->makeRepository->find($car->model->make->id);
 
-        $carModel = $this->modelRepository->find($car->model->id);
-        $carMake = $this->makeRepository->find($car->model->make->id);
-        $carMake = $this->makeRepository->find($car->model->make->id);
+        // VARIAVEIS REFERENTE AO CARRO ($carXpto)
+        //construir o array com os dados do carros e resrantes atributos completos
+        $carData = ([
+            'car' => $car,
+            'model' => $car->model,
+            'make' => $car->model->make,
+            'category' => $car->category,
+            'condition' => $car->condition,
+            'state' => $car->state,
+            'stand' => $car->stand,
+            'transmission' => $car->transmission,
+            'fuel' => $car->fuel,
+            'class' => $car->class,
+            'drive' => $car->drive,
+        ]);
 
+        // dd($car->motorization);
+        // VARIAVEIS REFERENTES AS LISTAGENS DE MODELOS ($modelName)
         $makes = $this->makeRepository->all();
         $models = $this->modelRepository->all();
-        $carCategories = $this->carCategoryRepository->all();
-        $carConditions = $this->carConditionRepository->all();
-        $carStates = $this->carStateRepository->all();
+        $categories = $this->carCategoryRepository->all();
+        $conditions = $this->carConditionRepository->all();
+        $states = $this->carStateRepository->all();
         $stands = $this->standRepository->all();
-        $carTransmissions = $this->carTransmissionRepository->all();
-        $carDrives = $this->carDriveRepository->all();
-        $carFuels = $this->carFuelRepository->all();
-        $carClasses = $this->carClassRepository->all();
+        $transmissions = $this->carTransmissionRepository->all();
+        $drives = $this->carDriveRepository->all();
+        $fuels = $this->carFuelRepository->all();
+        $classes = $this->carClassRepository->all();
 
-        // dd($model->name);
-        return view('cars.create')
-        ->with('car', $car)
-        ->with('carModel', $model)
-        ->with('carModel', $carModel)
-        ->with('carMake', $carMake)
-        ->with('stands', $stands)
-        ->with('makes', $makes)
-        ->with('carDrives', $carDrives)
-        ->with('carFuels', $carFuels)
-        ->with('carClasses', $carClasses)
-        ->with('carTransmissions', $carTransmissions)
-        ->with('carCategories', $carCategories)
-        ->with('carConditions', $carConditions)
-        ->with('carStates', $carStates)
-        ->with('models', $models);
-        
 
         if (empty($car)) {
             Flash::error('Car not found');
@@ -206,15 +202,25 @@ class CarController extends AppBaseController
 
         return view('cars.edit')
         ->with('car', $car)
+        ->with('carModel', $carData['model'])
+        ->with('carMake', $carData['make'])
+        ->with('carCategory', $carData['category'])
+        ->with('carCondition', $carData['condition'])
+        ->with('carState', $carData['state'])
+        ->with('carTransmission', $carData['transmission'])
+        ->with('carFuel', $carData['fuel'])
+        ->with('carClass', $carData['class'])
+        ->with('carDrive', $carData['drive'])
+        ->with('carStand', $carData['stand'])
         ->with('stands', $stands)
         ->with('makes', $makes)
-        ->with('carDrives', $carDrives)
-        ->with('carFuels', $carFuels)
-        ->with('carClasses', $carClasses)
-        ->with('carTransmissions', $carTransmissions)
-        ->with('carCategories', $carCategories)
-        ->with('carConditions', $carConditions)
-        ->with('carStates', $carStates)
+        ->with('drives', $drives)
+        ->with('fuels', $fuels)
+        ->with('classes', $classes)
+        ->with('transmissions', $transmissions)
+        ->with('categories', $categories)
+        ->with('conditions', $conditions)
+        ->with('states', $states)
         ->with('models', $models);
     }
 

@@ -52,7 +52,7 @@ $('#Todos-table').DataTable( {
     },
     autoFill: true,
     responsive: true,
-    "dom": '<"top float-left"f><"float-right"B>rt<"bottom"<"float-left"p>l<"float-right"i>><"clear">',
+    "dom": '<"top float-left"f><"float-right"B>rt<"bottom"<"float-left"p><"float-right"l>><"clear">',
 
     
     buttons: [
