@@ -22,7 +22,6 @@ class ProposalResource extends JsonResource
         // foreach($items as $item){
         //    $images->push($item->getUrl());
         // }
-
         return [
             'id' => $this->id,
             'client_id' => $this->client->id ?? '',
@@ -38,7 +37,7 @@ class ProposalResource extends JsonResource
                 'mobile_phone' => $this->client->mobile_phone ?? '',
             ],
             'vendor' => $this->vendor->name ?? '',
-            'price' => $this->price,
+            'price' => $this->car->price ?? '',
             'pos_number' => $this->pos_number,
             'prop_value' => $this->prop_value,
             'first_contact_date' => $this->first_contact_date,
@@ -56,17 +55,19 @@ class ProposalResource extends JsonResource
             'tradein_id' => $this->tradein_id,
             'tradein' => [
                 'make' => $this->tradein->model->make->name ?? '',
+                'make_id' => $this->tradein->model->make->id ?? '',
                 'model' => $this->tradein->model->name ?? '',
+                'model_id' => $this->tradein->model->id ?? '',
                 'category' => $this->tradein->category->name ?? '',
+                'category_id' => $this->tradein->category->id ?? '',
                 'km' => $this->tradein->km ?? '',
                 'motorization' => $this->tradein->motorization ?? '',
                 'registration' => $this->tradein->registration ?? '',
-                'tradein_sale' => $this->tradein->sale ?? '',
+                'tradein_sale' => $this->tradein->tradein_sale ?? '',
                 'price' => $this->tradein->price ?? '',
                 'tradein_observations' => $this->tradein->tradein_observations ?? '',
                 // cat, km, motor,reg,fuel,valor de compra, valor de venda, obs, 
                 // array de imagens
-                'price' => $this->car->price ?? '',
                 'images' => [$images] ?? '',
             ],
             'total_diff_amount' => $this->total_diff_amount,

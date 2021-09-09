@@ -76,6 +76,7 @@ class CarController extends AppBaseController
     {
         $cars = $this->carRepository->all();
         $newCars = Car::where('condition_id','=',1)->get();
+        $usedCars = Car::where('condition_id','=',2)->get();
         // $cars = Car::with('stand')->paginate(10);
         // $cars2 = $this->carRepository->withAll();
         $carConditions = $this->carConditionRepository->all();
@@ -84,6 +85,7 @@ class CarController extends AppBaseController
         return view('cars.index')
             ->with('cars', $cars)
             ->with('newCars', $newCars)
+            ->with('usedCars', $usedCars)
             ->with('carData', $carData)
             ->with('carConditions', $carConditions);
     }
@@ -95,29 +97,33 @@ class CarController extends AppBaseController
      */
     public function create()
     {
-        $makes = $this->makeRepository->all();
-        $models = $this->modelRepository->all();
-        $carCategories = $this->carCategoryRepository->all();
-        $carConditions = $this->carConditionRepository->all();
-        $carStates = $this->carStateRepository->all();
-        $stands = $this->standRepository->all();
-        $carTransmissions = $this->carTransmissionRepository->all();
-        $carDrives = $this->carDriveRepository->all();
-        $carFuels = $this->carFuelRepository->all();
-        $carClasses = $this->carClassRepository->all();
+      // VARIAVEIS REFERENTES AS LISTAGENS DE MODELOS ($modelName)
+      $models = $this->modelRepository->all();
+      $makes = $this->makeRepository->all();
+      $categories = $this->carCategoryRepository->all();
+      $conditions = $this->carConditionRepository->all();
+      $states = $this->carStateRepository->all();
+      $stands = $this->standRepository->all();
+      $transmissions = $this->carTransmissionRepository->all();
+      $drives = $this->carDriveRepository->all();
+      $fuels = $this->carFuelRepository->all();
+      $classes = $this->carClassRepository->all();
+
+      $carData = ([
+          'models' => $models,
+          'makes' => $makes,
+          'categories' => $categories,
+          'conditions' => $conditions,
+          'states' => $states,
+          'stands' => $stands,
+          'transmissions' => $transmissions,
+          'drives' => $drives,
+          'fuels' => $fuels,
+          'classes' => $classes
+      ]);
 
         return view('cars.create')
-        ->with('stands', $stands)
-        ->with('makes', $makes)
-        ->with('carDrives', $carDrives)
-        ->with('carMake', $carMake)
-        ->with('carFuels', $carFuels)
-        ->with('carClasses', $carClasses)
-        ->with('carTransmissions', $carTransmissions)
-        ->with('carCategories', $carCategories)
-        ->with('carConditions', $carConditions)
-        ->with('carStates', $carStates)
-        ->with('models', $models);
+        ->with('carData', $carData);
     }
 
     /**
@@ -282,28 +288,34 @@ class CarController extends AppBaseController
         $totalRecordswithFilter = Car::select('count(*) as allcount')->where('model_id', 'like', '%' .$searchValue . '%')->count();
 
         
-        // // Fetch records
-        // $records = Car::orderBy($columnName,$columnSortOrder)
-        //        ->where('employees.name', 'like', '%' .$searchValue . '%')
-        //       ->select('employees.*')
-        //       ->skip($start)
-        //       ->take($rowperpage)
-        //       ->get();
+        // Fetch records
+        $records = Car::orderBy($columnName,$columnSortOrder)
+            //    ->where('car.model.name', 'like', '%' .$searchValue . '%')
+            //   ->select('cars.*')
+              ->skip($start)
+              ->take($rowperpage)
+              ->get();
 
-        // $data_arr = array();
+        $data_arr = array();
 
-        $records =  $this->carRepository->all();
+        // $records =  $this->carRepository->all();
         foreach($records as $record){
-           $id = $record->model->make->name;
-           $model = $record->model->name;
-           $variant = $record->variant;
-           $plate = $record->plate;
+        //    $id = $record->model->make->name;
+        //    $model = $record->model->name;
+        //    $variant = $record->variant;
+        //    $plate = $record->plate;
 
            $data_arr[] = array(
-               "make" => $id,
-               "model" => $model,
-               "variant" => $variant,
-               "plate" => $plate
+               "id" => $record->id,
+               "model" => $record->model->name,
+               "variant" => $record->variant,
+               "state" => $record->state,
+            //    "condition" => $record->condition,
+            //    "komm" => $record->komm,
+               "plate" => $record->plate,
+               "stand" => $record->stand->name ?? '',
+               "price" => $record->price,
+               "action" => "nada"
            );
         }
 

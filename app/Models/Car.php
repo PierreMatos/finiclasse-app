@@ -288,4 +288,5 @@ class Car extends Model implements HasMedia
     {
         return $this->belongsTo(\App\Models\CarClass::class, 'class_id', 'id');
     }
+
 }
