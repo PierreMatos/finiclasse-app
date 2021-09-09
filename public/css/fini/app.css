@@ -1,3 +1,43 @@
 div.dataTables_wrapper div.dataTables_filter {
     text-align: left !important;
 }
+
+/* DATATABLES COSTUME */
+.top{
+    /* margin-left:3%; */
+    /* width: 100%; */
+    padding-top: 40px;   
+    padding-bottom: 70px;   
+}
+
+.dataTable{
+    margin-top:50px;
+} 
+.table.dataTable>thead .sorting, table.dataTable>thead .sorting_asc{
+    background-color: #F5F6FA;
+}
+.dataTables_wrapper {
+    width:94%;
+}
+.table-responsive {
+    margin-left:3%
+}
+.dt-buttons{
+    text-align:right!important;
+}
+div.dataTables_wrapper div.dataTables_filter input {
+    width: 200%;
+}
+.btn-secondary{
+    background-color: #fff;
+    color:#131523;
+    border: 1px solid #D7DBEC
+}
+.btn-secondary:not(:disabled):not(.disabled).active{
+    background-color: #0058FF;
+    color:#fff;
+}
+.btn-secondary:hover{
+    background-color: #0058FF;
+    color:#fff;
+}

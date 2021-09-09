@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -143,6 +144,9 @@ Route::resource('financingProposals', App\Http\Controllers\FinancingProposalCont
 Route::resource('carFuels', App\Http\Controllers\CarFuelController::class);
 
 Route::resource('cars', App\Http\Controllers\CarController::class);
+// Route::get( ['carController', 'getCars'])->name('getCars');
+Route::get('/getcars', [CarController::class, 'getCars'])->name('getcars');
+
 
 Route::resource('users', App\Http\Controllers\UserController::class);
 

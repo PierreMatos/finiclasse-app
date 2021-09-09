@@ -11,7 +11,7 @@ use App\Repositories\BaseRepository;
  * @version June 16, 2021, 11:28 am UTC
 */
 
-class CarRepository extends BaseRepository
+class CarRepository  extends BaseRepository 
 {
     /**
      * @var array
@@ -47,5 +47,23 @@ class CarRepository extends BaseRepository
 
         return Car::where('condition_id','==',$condition);
 
+    }
+
+     /**
+     * Sets relations for eager loading.
+     *
+     * @param $relations
+     * @return $this
+     */
+    public function withAll($pagination = null)
+    {
+
+        $query = $this->with('stand', 'state');
+
+        if ($pagination) {
+            return $query->paginate($pagination);
+        }
+
+        return $query->get();
     }
 }

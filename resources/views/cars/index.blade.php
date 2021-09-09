@@ -52,9 +52,16 @@ $('#Todos-table').DataTable( {
     },
     autoFill: true,
     responsive: true,
+    processing: true,
+             serverSide: true,
+             ajax: "{{route('getcars')}}",
+             columns: [
+                 { data: 'make' },
+                 { data: 'model' },
+                 { data: 'variant' },
+                 { data: 'plate' },
+             ],
     "dom": '<"top float-left"f><"float-right"B>rt<"bottom"<"float-left"p><"float-right"l>><"clear">',
-
-    
     buttons: [
         {
             text: 'Todos',
@@ -98,7 +105,9 @@ $('.tab_button').on('click',function(){
             },
             autoFill: true,
             retrieve: true,
-            dom: 'Bfrtip',
+            "dom": '<"top float-left"f><"float-right"B>rt<"bottom"<"float-left"p><"float-right"l>><"clear">',
+
+            // dom: 'Bfrtip',
             buttons: [
                 'copy', 'excel', 'pdf'
             ]

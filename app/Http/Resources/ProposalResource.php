@@ -16,21 +16,12 @@ class ProposalResource extends JsonResource
     {
         $benefits = collect();
 
-        // dd($this->benefits);
+        $images = collect();
 
-        // if ($this->benefits != null ){
-
-        //     foreach ($this->beneftis as $benefit) {
-        //         $benefits->push([
-        //         'id' => $this->benfetits->id,
-        //         'name' => $this->name,
-        //         'type' => $this->type,
-        //         'amount' => $this->amount,]
-        //         );
-        //  }
-
+        // $items = $this->tradein->getMedia();
+        // foreach($items as $item){
+        //    $images->push($item->getUrl());
         // }
-
 
         return [
             'id' => $this->id,
@@ -64,9 +55,19 @@ class ProposalResource extends JsonResource
             ],
             'tradein_id' => $this->tradein_id,
             'tradein' => [
-                'name' => $this->tradein->model->make->name ?? '',
+                'make' => $this->tradein->model->make->name ?? '',
                 'model' => $this->tradein->model->name ?? '',
+                'category' => $this->tradein->category->name ?? '',
+                'km' => $this->tradein->km ?? '',
+                'motorization' => $this->tradein->motorization ?? '',
+                'registration' => $this->tradein->registration ?? '',
+                'tradein_sale' => $this->tradein->sale ?? '',
+                'price' => $this->tradein->price ?? '',
+                'tradein_observations' => $this->tradein->tradein_observations ?? '',
+                // cat, km, motor,reg,fuel,valor de compra, valor de venda, obs, 
+                // array de imagens
                 'price' => $this->car->price ?? '',
+                'images' => [$images] ?? '',
             ],
             'total_diff_amount' => $this->total_diff_amount,
             'total_discount_amount' => $this->total_discount_amount,

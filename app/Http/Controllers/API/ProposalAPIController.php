@@ -63,16 +63,16 @@ class ProposalAPIController extends AppBaseController
 
         return new ProposalCollection(Proposal::paginate());
 
-        return $this->sendResponse(ProposalResource::collection($proposals), 'Proposals retrieved successfully');
+        // return $this->sendResponse(ProposalResource::collection($proposals), 'Proposals retrieved successfully');
 
-        return $proposals->paginate(5);
-        return new ProposalCollection($proposals::simplePaginate());
+        // return $proposals->paginate(5);
+        // return new ProposalCollection($proposals::simplePaginate());
 
-        // $proposals->paginate(2);
-        return new ProposalResource(Proposal::paginate(2));
+        // // $proposals->paginate(2);
+        // return new ProposalResource(Proposal::paginate(2));
 
-        return $this->sendResponse(ProposalResource::collection($proposals), 'Proposals retrieved successfully');
-        return $this->sendResponse(ProposalResource::collection($proposals), 'Proposals retrieved successfully');
+        // return $this->sendResponse(ProposalResource::collection($proposals), 'Proposals retrieved successfully');
+        // return $this->sendResponse(ProposalResource::collection($proposals), 'Proposals retrieved successfully');
     }
 
     /**

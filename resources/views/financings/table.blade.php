@@ -3,17 +3,17 @@
         <thead>
             <tr>
                 <th>Name</th>
-        <th>Description</th>
-        <th>Document</th>
-                <th colspan="3">Action</th>
+                <th>Description</th>
+                <th>Document</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
         @foreach($financings as $financing)
             <tr>
                 <td>{{ $financing->name }}</td>
-            <td>{{ $financing->description }}</td>
-            <td>{{ $financing->document }}</td>
+                <td>{{ $financing->description }}</td>
+                <td>{{ $financing->document }}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['financings.destroy', $financing->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

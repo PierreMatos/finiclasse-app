@@ -18,7 +18,8 @@ class FinancingRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'name',
-        'description'
+        'description',
+        'document'
     ];
 
     /**

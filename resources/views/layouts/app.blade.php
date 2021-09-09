@@ -38,7 +38,7 @@
 
 
           <!-- Styles -->
-     <!-- <link rel="stylesheet" href="{{ mix('css/fini/app.css') }}"> -->
+     <link rel="stylesheet" href="{{ mix('css/fini/app.css') }}">
 
 
     @yield('third_party_stylesheets')

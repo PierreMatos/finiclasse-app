@@ -16,6 +16,7 @@ use App\Repositories\CarClassRepository;
 use App\Repositories\CarCategoryRepository;
 use App\Repositories\CarConditionRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Car;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
@@ -74,10 +75,34 @@ class CarController extends AppBaseController
     public function index(Request $request)
     {
         $cars = $this->carRepository->all();
+        $newCars = Car::where('condition_id','=',1)->get();
+        // $cars = Car::with('stand')->paginate(10);
+        // $cars2 = $this->carRepository->withAll();
         $carConditions = $this->carConditionRepository->all();
+        $carData = [];
+
+        // foreach($cars as $car){
+        // dd($newCars);
+
+        //         $carData[] = [
+        //         'car' => $car,
+        //         'model' => $car->model->name,
+        //         'make' => $car->model->make->name,
+        //         'category' => $car->category->name,
+        //         'condition' => $car->condition->name,
+        //         'state' => $car->state->name,
+        //         // 'transmission' => $car->transmission->name,
+        //         'fuel' => $car->fuel->name,
+        //         'class' => $car->class->name,
+        //         'drive' => $car->drive->name,
+        //         ];
+        //         // dd($car->fuel->name);
+        //     }
 
         return view('cars.index')
             ->with('cars', $cars)
+            ->with('newCars', $newCars)
+            ->with('carData', $carData)
             ->with('carConditions', $carConditions);
     }
 
@@ -103,6 +128,7 @@ class CarController extends AppBaseController
         ->with('stands', $stands)
         ->with('makes', $makes)
         ->with('carDrives', $carDrives)
+        ->with('carMake', $carMake)
         ->with('carFuels', $carFuels)
         ->with('carClasses', $carClasses)
         ->with('carTransmissions', $carTransmissions)
@@ -159,31 +185,12 @@ class CarController extends AppBaseController
      */
     public function edit($id)
     {
+        // DADOS DO CARRO PARA EDITAR
         $car = $this->carRepository->find($id);
-
-        // $model = $this->modelRepository->find($car->model->id);
-        // $make = $this->makeRepository->find($car->model->make->id);
-
-        // VARIAVEIS REFERENTE AO CARRO ($carXpto)
-        //construir o array com os dados do carros e resrantes atributos completos
-        $carData = ([
-            'car' => $car,
-            'model' => $car->model,
-            'make' => $car->model->make,
-            'category' => $car->category,
-            'condition' => $car->condition,
-            'state' => $car->state,
-            'stand' => $car->stand,
-            'transmission' => $car->transmission,
-            'fuel' => $car->fuel,
-            'class' => $car->class,
-            'drive' => $car->drive,
-        ]);
-
-        // dd($car->motorization);
+        
         // VARIAVEIS REFERENTES AS LISTAGENS DE MODELOS ($modelName)
-        $makes = $this->makeRepository->all();
         $models = $this->modelRepository->all();
+        $makes = $this->makeRepository->all();
         $categories = $this->carCategoryRepository->all();
         $conditions = $this->carConditionRepository->all();
         $states = $this->carStateRepository->all();
@@ -193,6 +200,18 @@ class CarController extends AppBaseController
         $fuels = $this->carFuelRepository->all();
         $classes = $this->carClassRepository->all();
 
+        $carData = ([
+            'models' => $models,
+            'makes' => $makes,
+            'categories' => $categories,
+            'conditions' => $conditions,
+            'states' => $states,
+            'stands' => $stands,
+            'transmissions' => $transmissions,
+            'drives' => $drives,
+            'fuels' => $fuels,
+            'classes' => $classes
+        ]);
 
         if (empty($car)) {
             Flash::error('Car not found');
@@ -202,26 +221,7 @@ class CarController extends AppBaseController
 
         return view('cars.edit')
         ->with('car', $car)
-        ->with('carModel', $carData['model'])
-        ->with('carMake', $carData['make'])
-        ->with('carCategory', $carData['category'])
-        ->with('carCondition', $carData['condition'])
-        ->with('carState', $carData['state'])
-        ->with('carTransmission', $carData['transmission'])
-        ->with('carFuel', $carData['fuel'])
-        ->with('carClass', $carData['class'])
-        ->with('carDrive', $carData['drive'])
-        ->with('carStand', $carData['stand'])
-        ->with('stands', $stands)
-        ->with('makes', $makes)
-        ->with('drives', $drives)
-        ->with('fuels', $fuels)
-        ->with('classes', $classes)
-        ->with('transmissions', $transmissions)
-        ->with('categories', $categories)
-        ->with('conditions', $conditions)
-        ->with('states', $states)
-        ->with('models', $models);
+        ->with('carData', $carData);
     }
 
     /**
@@ -274,4 +274,66 @@ class CarController extends AppBaseController
 
         return redirect(route('cars.index'));
     }
+
+    
+       
+         // Fetch records
+     public function getCars(Request $request){
+
+        ## Read value
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length"); // Rows display per page
+
+        $columnIndex_arr = $request->get('order');
+        $columnName_arr = $request->get('columns');
+        $order_arr = $request->get('order');
+        $search_arr = $request->get('search');
+
+        $columnIndex = $columnIndex_arr[0]['column']; // Column index
+        $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+        $searchValue = $search_arr['value']; // Search value
+
+        // Total records
+        $totalRecords = Car::select('count(*) as allcount')->count();
+        $totalRecordswithFilter = Car::select('count(*) as allcount')->where('model_id', 'like', '%' .$searchValue . '%')->count();
+
+        
+        // // Fetch records
+        // $records = Car::orderBy($columnName,$columnSortOrder)
+        //        ->where('employees.name', 'like', '%' .$searchValue . '%')
+        //       ->select('employees.*')
+        //       ->skip($start)
+        //       ->take($rowperpage)
+        //       ->get();
+
+        // $data_arr = array();
+
+        $records =  $this->carRepository->all();
+        foreach($records as $record){
+           $id = $record->model->make->name;
+           $model = $record->model->name;
+           $variant = $record->variant;
+           $plate = $record->plate;
+
+           $data_arr[] = array(
+               "make" => $id,
+               "model" => $model,
+               "variant" => $variant,
+               "plate" => $plate
+           );
+        }
+
+        $response = array(
+           "draw" => intval($draw),
+           "iTotalRecords" => $totalRecords,
+           "iTotalDisplayRecords" => $totalRecordswithFilter,
+           "aaData" => $data_arr
+        );
+
+        return response()->json($response); 
+     }
+
+    
 }
