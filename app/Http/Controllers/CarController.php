@@ -81,24 +81,6 @@ class CarController extends AppBaseController
         $carConditions = $this->carConditionRepository->all();
         $carData = [];
 
-        // foreach($cars as $car){
-        // dd($newCars);
-
-        //         $carData[] = [
-        //         'car' => $car,
-        //         'model' => $car->model->name,
-        //         'make' => $car->model->make->name,
-        //         'category' => $car->category->name,
-        //         'condition' => $car->condition->name,
-        //         'state' => $car->state->name,
-        //         // 'transmission' => $car->transmission->name,
-        //         'fuel' => $car->fuel->name,
-        //         'class' => $car->class->name,
-        //         'drive' => $car->drive->name,
-        //         ];
-        //         // dd($car->fuel->name);
-        //     }
-
         return view('cars.index')
             ->with('cars', $cars)
             ->with('newCars', $newCars)
