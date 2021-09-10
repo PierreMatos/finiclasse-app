@@ -17,10 +17,10 @@ div.dataTables_wrapper div.dataTables_filter {
     background-color: #F5F6FA;
 }
 .dataTables_wrapper {
-    width:94%;
+    /* width:94%; */
 }
 .table-responsive {
-    margin-left:3%
+    /* margin-left:3% */
 }
 .dt-buttons{
     text-align:right!important;
@@ -49,4 +49,33 @@ div.dataTables_wrapper div.dataTables_filter input {
 .btn-secondary:hover{
     background-color: #0058FF;
     color:#fff;
+}
+.btn-approved{
+    /* background-color: rgb(168, 236, 168); */
+}
+.btn-approved:not(:disabled):not(.disabled).active{
+    background-color: #C4E7CC;
+    color:#000;
+}
+.btn-approved:hover{
+    background-color: #C4E7CC;
+    color:#000;
+    border: 1px solid #D7DBEC
+}
+.btn-pending:not(:disabled):not(.disabled).active{
+    background-color: #FFEEBB;
+    color:#000;
+}
+.btn-pending:hover{
+    background-color: #FFEEBB;
+    color:#000;
+}
+.btn-pending{
+    /* background-color: yellow; */
+}
+.bg-nav{
+    background-color: #f4f6f9;
+}
+.box-none{
+    box-shadow: none;
 }

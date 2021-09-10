@@ -100,7 +100,8 @@ class ProposalController extends AppBaseController
             return redirect(route('proposals.index'));
         }
 
-        return view('proposals.edit')->with('proposal', $proposal);
+        return view('proposals.edit')
+            ->with('proposal', $proposal);
     }
 
     /**

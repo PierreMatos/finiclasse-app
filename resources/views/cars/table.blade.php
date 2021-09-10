@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs">
+<ul class="nav nav-tabs bg-nav">
     <li class="nav-item">
         <a class="nav-link active tab_button" id="Todos" data-toggle="tab" href="#home">Todos</a>
       </li>

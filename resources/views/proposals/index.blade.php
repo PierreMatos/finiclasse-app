@@ -10,7 +10,7 @@
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
                        href="{{ route('proposals.create') }}">
-                        Add New
+                        {{__('Add New')}}
                     </a>
                 </div>
             </div>
@@ -38,4 +38,73 @@
     </div>
 
 @endsection
+@push('page_scripts')
 
+<script>
+    //tabela todos -pode ficar em função
+var table =
+$('#proposals-table').DataTable( {
+    language: {
+            search: "_INPUT_",
+            searchPlaceholder: "Search..."
+        },
+        
+        autoFill: true,
+        retrieve: true,
+        responsive:true,
+        "dom": '<"top" <"float-left"f><"float-right"B>>rt<"bottom mt-4"<"float-left"p><"float-right"l>><"clear">',
+        columnDefs: [
+            {
+            targets: 0,
+            searchable: true,
+            // visible: false
+            }
+        ],
+        buttons: [
+        {
+            text: 'Todos',
+            action: function () {
+                table.search('').draw();
+                table.button(1).active( false );
+                table.button(2).active( false );
+                table.button(3).active( false );
+                this.active( true );
+            }
+        },
+        {
+            text: 'Aberto',
+            className:'btn-approved',
+            action: function () {
+                table.search('Aberto').draw();
+                table.button(0).active( false );
+                table.button(2).active( false );
+                table.button(3).active( false );
+                this.active( true );
+            }
+        },
+        {
+            text: 'Pendente',
+            className:'btn-pending',
+            action: function () {
+                table.search('Pendente').draw();
+                table.button(0).active( false );
+                table.button(1).active( false );
+                table.button(3).active( false );
+                this.active( true );
+            }
+        },
+        {
+            text: 'Perdido',
+            action: function () {
+                table.search('Perdido').draw();
+                table.button(0).active( false );
+                table.button(1).active( false );
+                table.button(2).active( false );
+                this.active( true );
+            }
+        }
+    ]
+} );
+
+</script>
+@endpush

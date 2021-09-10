@@ -9,7 +9,7 @@
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
                        href="{{ route('cars.create') }}">
-                        Add New
+                       {{__('Add New')}}
                     </a>
                 </div>
             </div>
@@ -22,7 +22,7 @@
 
         <div class="clearfix"></div>
 
-        <div class="card">
+        <div class="card box-none">
             <div class="card-body p-0">
                 @include('cars.table')
                 <div class="card-footer clearfix float-right">

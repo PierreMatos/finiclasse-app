@@ -165,26 +165,6 @@
     });
 </script>
 
-<script>
-//  $(document).ready( function () {
-//     $('#table_id2').DataTable();
-//     ordering: true
-// } ); 
-
-// var table = $('#table_id2').DataTable();
- 
-// new $.fn.dataTable.Buttons( table, {
-//     buttons: [
-//         'copy', 'excel', 'pdf'
-//     ]
-// } );
-
-// $('#table_id2').DataTable( {
-// } );
-// $('#cars-table').DataTable( {
-// } );
-
-</script>
 
 @yield('third_party_scripts')
 
