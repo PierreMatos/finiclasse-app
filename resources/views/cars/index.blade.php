@@ -47,42 +47,46 @@ $('#Todos-table-div').show();
 var table =
 $('#Todos-table').DataTable( {
     language: {
-        search: "_INPUT_",
-        searchPlaceholder: "Search..."
-    },
-    autoFill: true,
-    responsive: true,
-    processing: true,
-             serverSide: true,
-             ajax: "{{route('getcars')}}",
-             columns: [
-                 { data: 'make' },
-                 { data: 'model' },
-                 { data: 'variant' },
-                 { data: 'plate' },
-             ],
-    "dom": '<"top float-left"f><"float-right"B>rt<"bottom"<"float-left"p><"float-right"l>><"clear">',
-    buttons: [
+            search: "_INPUT_",
+            searchPlaceholder: "Search..."
+        },
+        
+        autoFill: true,
+        retrieve: true,
+        responsive:true,
+        "dom": '<"top" <"float-left"f><"float-right"B>>rt<"bottom mt-4"<"float-left"p><"float-right"l>><"clear">',
+        buttons: [
         {
             text: 'Todos',
             action: function () {
                 table.search('').draw();
+                table.button(1).active( false );
+                table.button(2).active( false );
+                this.active( true );
             }
         },
         {
             text: 'Mercedes',
             action: function () {
                 table.search('Mercedes').draw();
+                table.button(0).active( false );
+                table.button(2).active( false );
+                this.active( true );
             }
         },
         {
             text: 'Seat',
             action: function () {
                 table.search('Seat').draw();
+                table.button(0).active( false );
+                table.button(1).active( false );
+                this.active( true );
             }
         }
     ]
 } );
+
+table.button(0).active( true );
 
 // TOGGLES OF DATATABLES
 $('.tab_button').on('click',function(){
@@ -98,23 +102,53 @@ $('.tab_button').on('click',function(){
         $('.table-responsive').hide();
         $(idDiv).show();
 
-        $(idTable).DataTable( {
+       var tableCondition = $(idTable).DataTable( {
             language: {
-                search: "_INPUT_",
-                searchPlaceholder: "Search..."
-            },
-            autoFill: true,
-            retrieve: true,
-            "dom": '<"top float-left"f><"float-right"B>rt<"bottom"<"float-left"p><"float-right"l>><"clear">',
+            search: "_INPUT_",
+            searchPlaceholder: "Search..."
+        },
+        
+        autoFill: true,
+        retrieve: true,
+        responsive:true,
+        "dom": '<"top" <"float-left w-200"f><"float-right"B>>rt<"bottom mt-4"<"float-left"p><"float-right"l>><"clear">',
 
-            // dom: 'Bfrtip',
-            buttons: [
-                'copy', 'excel', 'pdf'
-            ]
-      
+        buttons: [
+        {
+            text: 'Todos',
+            active:true,
+            action: function () {
+                tableCondition.search('').draw();
+                tableCondition.button(1).active( false );
+                tableCondition.button(2).active( false );
+                this.active( true );
+            }
+        },
+        {
+            text: 'Mercedes',
+            action: function () {
+                tableCondition.search('Mercedes').draw();
+                tableCondition.button(0).active( false );
+                tableCondition.button(2).active( false );
+                this.active( true );
+            }
+        },
+        {
+            text: 'Seat',
+            action: function () {
+                tableCondition.search('Seat').draw();
+                tableCondition.button(0).active( false );
+                tableCondition.button(1).active( false );
+                this.active( true );
+            }
+        }
+    ]
         } );
 
     }
+    tableCondition.button(0).active(true)
+    tableCondition.button(1).active(false)
+    tableCondition.button(2).active(false)
 })
 
 </script>

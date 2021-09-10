@@ -28,6 +28,15 @@ div.dataTables_wrapper div.dataTables_filter {
 div.dataTables_wrapper div.dataTables_filter input {
     width: 200%;
 }
+@media only screen and (max-width: 400px) {
+    div.dataTables_wrapper div.dataTables_filter input {
+        width: 100%;
+    }
+    .top{
+        padding-top: 7%;   
+        padding-bottom: 7%;   
+    }
+}
 .btn-secondary{
     background-color: #fff;
     color:#131523;

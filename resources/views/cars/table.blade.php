@@ -14,31 +14,26 @@
   </ul>
 
 <!-- TABLE FOR PAGE INITIALIZATION WITH ALL CARS -->
-  <div class="table-responsive" id="Todos-table-div">
+  <div class="table-responsive container" id="Todos-table-div">
     <table class="table"  id="Todos-table" >
         <thead>
             <tr>
-        <!-- <th>Avatar</th> -->
+        <th>Avatar</th>
         <th>Make</th>
         <th>Model</th>
-        <th>Variant</th>
         <th>Plate</th>
-        <th>Stand</th>
         <th>Price</th>
-        <!-- <th >Action</th>    -->
+        <th >Action</th>   
             </tr>
         </thead>
         <tbody>
         @foreach($cars as $car)
-
             <tr>
-            <td><img src="{{ $car->getFirstMediaUrl()}}" style="max-width: 100px;"/></td>
+            <td><img src="{{ $car->getFirstMediaUrl('cars','thumb') }}" style="max-width: 100px;"/></td>
             <td>{{$car->model->make->name}}</td>
             <td>{{ $car->model->name }}</td>
-            <td>{{ $car->variant }}</td>
             <td>{{ $car->plate }}</td>
             <td>{{ $car->price }}</td>  
-            <!-- <td>{{ $car->price }}</td> -->
                 <td width="120">
                     {!! Form::open(['route' => ['cars.destroy', $car->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
@@ -53,7 +48,6 @@
                     {!! Form::close() !!}
                 </td>
             </tr>
-
         @endforeach
         </tbody>
     </table>
@@ -66,34 +60,24 @@
     <table class="table"  id="{{$carCondition->name}}-table" >
         <thead>
             <tr>
-        <!-- <th>Avatar</th> -->
+        <th>Avatar</th>
         <th>Make</th>
         <th>Model</th>
-        <th>Variant</th>
-        <th>Condition</th>
-        <th>State</th>
-        <th>Komm</th>
         <th>Plate</th>
-        <th>Stand</th>
         <th>Price</th>
         <th>Action</th>
-        <!-- <th >Action</th> -->
             </tr>
         </thead>
         <tbody>
         @foreach($cars as $car)
 
-          @if  ($car->condition->name == $carCondition->name)
+          @if($car->condition->name == $carCondition->name)
             <tr>
-            <td><img src="{{ $car->getFirstMediaUrl()}}" style="max-width: 100px;"/></td>
+            <td><img src="{{ $car->getFirstMediaUrl('carThumb','thumb')}}" style="max-width: 100px;"/></td>
             <td>{{$car->model->make->name}}</td>
             <td>{{ $car->model->name }}</td>
-            <td>{{ $car->variant }}</td>
-            <td>{{ $car->condition->name }}</td>
-            <td>{{ $car->state->name }}</td>
-            <td>{{ $car->komm }}</td>
             <td>{{ $car->plate }}</td>
-            <!-- <td>{{ $car->price }}</td> -->
+            <td>{{ $car->price}}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['cars.destroy', $car->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
