@@ -1,88 +1,143 @@
-<!-- Client Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('client_id', 'Client Id:') !!}
-    {!! Form::number('client_id', null, ['class' => 'form-control']) !!}
-</div>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a class="nav-link active" id="proposal-tab" data-toggle="tab" href="#proposal" role="tab" aria-controls="proposal" aria-selected="true">Proposta</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="client-tab" data-toggle="tab" href="#client" role="tab" aria-controls="client" aria-selected="false">Cliente</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="cars-tab" data-toggle="tab" href="#cars" role="tab" aria-controls="cars" aria-selected="false">Viaituras</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="tradein-tab" data-toggle="tab" href="#tradein" role="tab" aria-controls="tradein" aria-selected="false">Retoma</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="financings-tab" data-toggle="tab" href="#financings" role="tab" aria-controls="financings" aria-selected="false">Financiamento</a>
+  </li>
+</ul>
 
-<!-- Vendor Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('vendor_id', 'Vendor Id:') !!}
-    {!! Form::number('vendor_id', null, ['class' => 'form-control']) !!}
-</div>
 
-<!-- Price Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('price', 'Price:') !!}
-    {!! Form::number('price', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Pos Number Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('pos_number', 'Pos Number:') !!}
-    {!! Form::number('pos_number', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Prop Value Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('prop_value', 'Prop Value:') !!}
-    {!! Form::number('prop_value', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- First Contact Date Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('first_contact_date', 'First Contact Date:') !!}
-    {!! Form::number('first_contact_date', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Last Contact Date Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('last_contact_date', 'Last Contact Date:') !!}
-    {!! Form::number('last_contact_date', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Next Contact Date Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('next_contact_date', 'Next Contact Date:') !!}
-    {!! Form::number('next_contact_date', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Contract Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('contract', 'Contract:') !!}
-    <div class="input-group">
-        <div class="custom-file">
-            {!! Form::file('contract', ['class' => 'custom-file-input']) !!}
-            {!! Form::label('contract', 'Choose file', ['class' => 'custom-file-label']) !!}
+<!-- Tab panes -->
+<div class="tab-content mt-2 container">
+        
+    <div class="tab-pane active" id="proposal" role="tabpanel" aria-labelledby="proposal-tab">
+        <div class="row">
         </div>
     </div>
-</div>
-<div class="clearfix"></div>
 
+    <div class="tab-pane" id="client" role="tabpanel" aria-labelledby="client-tab">
+        <div class="row">
 
-<!-- Test Drive Field -->
-<div class="form-group col-sm-6">
-    <div class="form-check">
-        {!! Form::hidden('test_drive', 0, ['class' => 'form-check-input']) !!}
-        {!! Form::checkbox('test_drive', '1', null, ['class' => 'form-check-input']) !!}
-        {!! Form::label('test_drive', 'Test Drive', ['class' => 'form-check-label']) !!}
+            <!-- Client Id Field -->
+            <div class="form-group col-sm-4">
+                {!! Form::label('client_id', 'Client Email:') !!}
+                {!! Form::text('client_id', $proposal->client->name ? $proposal->client->name  : 'null' , ['class' => 'form-control','disabled']) !!}
+            </div>
+
+            <!-- Client Email Field -->
+            <div class="form-group col-sm-4">
+                {!! Form::label('client_email', 'Client Id:') !!}
+                {!! Form::text('client_email', $proposal->client->email ? $proposal->client->email  : 'null' , ['class' => 'form-control','disabled']) !!}
+            </div>
+
+            <!-- Client Type Field -->
+            <div class="form-group col-sm-4">
+                {!! Form::label('client_id', 'Client Type:') !!}
+                {!! Form::text('client_id', $proposal->client->type ? $proposal->client->type  : 'null' , ['class' => 'form-control','disabled']) !!}
+            </div>
+
+            <!-- Client Distrito Field -->
+            <div class="form-group col-sm-4">
+                {!! Form::label('client_email', 'Client Id:') !!}
+                {!! Form::text('client_email', $proposal->client->city ? $proposal->client->city  : 'null' , ['class' => 'form-control','disabled']) !!}
+            </div>
+
+        </div>
     </div>
-</div>
 
 
-<!-- State Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('state_id', 'State Id:') !!}
-    {!! Form::number('state_id', null, ['class' => 'form-control']) !!}
-</div>
 
-<!-- Business Study Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('business_study_id', 'Business Study Id:') !!}
-    {!! Form::number('business_study_id', null, ['class' => 'form-control']) !!}
-</div>
+    <!-- Vendor Id Field -->
+    <div class="form-group col-sm-4">
+        {!! Form::label('vendor_id', 'Vendor Id:') !!}
+        {!! Form::number('vendor_id', null, ['class' => 'form-control', 'disabled']) !!}
+    </div>
 
-<!-- Comment Field -->
-<div class="form-group col-sm-12 col-lg-12">
-    {!! Form::label('comment', 'Comment:') !!}
-    {!! Form::textarea('comment', null, ['class' => 'form-control']) !!}
+    <!-- Price Field -->
+    <div class="form-group col-sm-4">
+        {!! Form::label('price', 'Price:') !!}
+        {!! Form::number('price', null, ['class' => 'form-control']) !!}
+    </div>
+
+    <!-- Pos Number Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('pos_number', 'Pos Number:') !!}
+        {!! Form::number('pos_number', null, ['class' => 'form-control']) !!}
+    </div>
+
+    <!-- Prop Value Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('prop_value', 'Prop Value:') !!}
+        {!! Form::number('prop_value', null, ['class' => 'form-control']) !!}
+    </div>
+
+    <!-- First Contact Date Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('first_contact_date', 'First Contact Date:') !!}
+        {!! Form::number('first_contact_date', null, ['class' => 'form-control']) !!}
+    </div>
+
+    <!-- Last Contact Date Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('last_contact_date', 'Last Contact Date:') !!}
+        {!! Form::number('last_contact_date', null, ['class' => 'form-control']) !!}
+    </div>
+
+    <!-- Next Contact Date Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('next_contact_date', 'Next Contact Date:') !!}
+        {!! Form::number('next_contact_date', null, ['class' => 'form-control']) !!}
+    </div>
+
+    <!-- Contract Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('contract', 'Contract:') !!}
+        <div class="input-group">
+            <div class="custom-file">
+                {!! Form::file('contract', ['class' => 'custom-file-input']) !!}
+                {!! Form::label('contract', 'Choose file', ['class' => 'custom-file-label']) !!}
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+
+    <!-- Test Drive Field -->
+    <div class="form-group col-sm-6">
+        <div class="form-check">
+            {!! Form::hidden('test_drive', 0, ['class' => 'form-check-input']) !!}
+            {!! Form::checkbox('test_drive', '1', null, ['class' => 'form-check-input']) !!}
+            {!! Form::label('test_drive', 'Test Drive', ['class' => 'form-check-label']) !!}
+        </div>
+    </div>
+
+
+    <!-- State Id Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('state_id', 'State Id:') !!}
+        {!! Form::number('state_id', null, ['class' => 'form-control']) !!}
+    </div>
+
+    <!-- Business Study Id Field -->
+    <div class="form-group col-sm-6">
+        {!! Form::label('business_study_id', 'Business Study Id:') !!}
+        {!! Form::number('business_study_id', null, ['class' => 'form-control']) !!}
+    </div>
+
+    <!-- Comment Field -->
+    <div class="form-group col-sm-12 col-lg-12">
+        {!! Form::label('comment', 'Comment:') !!}
+        {!! Form::textarea('comment', null, ['class' => 'form-control']) !!}
+    </div>
 </div>

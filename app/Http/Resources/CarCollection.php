@@ -39,6 +39,8 @@ class CarCollection extends ResourceCollection
                 'model' => $car->model->name ?? '',
                 'motorization' => $car->motorization,
                 'price' => $car->price,
+                'km' => $car->km,
+                'registration' => $car->registration,
                 'condition' => $car->condition->name ?? '',
                 'avatar' => $car->getFirstMediaUrl() ?? '',
             ]);
