@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+
 
 /**
  * Class Car
@@ -214,7 +216,7 @@ class Car extends Model implements HasMedia
         'category_id' => 'required',
         'condition_id' => 'required',
         'state_id' => 'required',
-        'model_id' => 'required'
+        'model_id' => 'required',
     ];
 
     /**
@@ -287,6 +289,15 @@ class Car extends Model implements HasMedia
     public function class()
     {
         return $this->belongsTo(\App\Models\CarClass::class, 'class_id', 'id');
+    }
+
+    // CREATE THUMBNAIL
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+              ->width(368)
+              ->height(232)
+              ->sharpen(10);
     }
 
 }

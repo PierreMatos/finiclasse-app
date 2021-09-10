@@ -375,6 +375,30 @@
         </div>
     </div>
 
+    <div class="tab-pane" id="fotos" role="tabpanel" aria-labelledby="fotos-tab">
+        <div class="row">    
+
+            <!-- Fotos Field -->
+            <div class="form-group col-sm-12">
+                {!! Form::label('image', 'Images:') !!}
+                <div class="input-group" style="height: 125px;">
+                    <div class="custom-file">
+                        <input type="file" id="image[]" name="image[]" multiple class="custom-file-input">
+                        <label for="image[]" class="custom-file-label"><span>Drag or drop the image, or add more
+                                on</span>
+                            <br>
+                            <i class="fa fa-plus" aria-hidden="true" style="margin-top: 5px;"></i>
+                        </label>
+                    </div>
+                </div>
+                <small class="form-text text-muted">Do not change if you want to continue with the same images.</small>
+            </div>
+
+<div class="clearfix"></div>
+
+        </div>
+    </div>
+
 
 
 

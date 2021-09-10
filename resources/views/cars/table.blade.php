@@ -29,7 +29,7 @@
         <tbody>
         @foreach($cars as $car)
             <tr>
-            <td><img src="{{ $car->getFirstMediaUrl()}}" style="max-width: 100px;"/></td>
+            <td><img src="{{ $car->getFirstMediaUrl('cars','thumb') }}" style="max-width: 100px;"/></td>
             <td>{{$car->model->make->name}}</td>
             <td>{{ $car->model->name }}</td>
             <td>{{ $car->plate }}</td>
@@ -73,7 +73,7 @@
 
           @if($car->condition->name == $carCondition->name)
             <tr>
-            <td><img src="{{ $car->getFirstMediaUrl()}}" style="max-width: 100px;"/></td>
+            <td><img src="{{ $car->getFirstMediaUrl('carThumb','thumb')}}" style="max-width: 100px;"/></td>
             <td>{{$car->model->make->name}}</td>
             <td>{{ $car->model->name }}</td>
             <td>{{ $car->plate }}</td>

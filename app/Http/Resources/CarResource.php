@@ -15,9 +15,10 @@ class CarResource extends JsonResource
     public function toArray($request)
     {
         $images = collect();
-        $items = $this->getMedia();
+        $items = $this->getMedia('cars');
         foreach($items as $item){
-           $images->push($item->getUrl());
+            $images->push($item->getUrl());
+            $images->push($item->getUrl('thumb'));
         }
 
         return [
@@ -70,7 +71,7 @@ class CarResource extends JsonResource
             'consumption' => $this->consumption,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'avatar' => $this->getFirstMediaUrl(),
+            'avatar' => $this->getFirstMediaUrl('cars','thumb'),
             'images' => [$images]
                
         ];

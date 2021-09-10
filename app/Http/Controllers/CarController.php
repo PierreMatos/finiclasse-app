@@ -135,9 +135,17 @@ class CarController extends AppBaseController
      */
     public function store(CreateCarRequest $request)
     {
+
         $input = $request->all();
 
         $car = $this->carRepository->create($input);
+
+        if ($request->hasFile('image')) {
+            $fileAdders = $car->addMultipleMediaFromRequest(['image'])
+                ->each(function ($fileAdder) {
+                    $fileAdder->toMediaCollection('cars');
+                });
+        }
 
         Flash::success('Car saved successfully.');
 
@@ -222,7 +230,33 @@ class CarController extends AppBaseController
      */
     public function update($id, UpdateCarRequest $request)
     {
+        $request->validate([
+            'image' => 'array|max:4',
+            'image.*' => 'nullable|mimes:jpeg,png,jpg|dimensions:max_width=5000,max_height=5000|file|max:10000'
+        ]);
+
         $car = $this->carRepository->find($id);
+
+        //Apagar imagem antiga se for mudada
+        if($request->hasFile('image')){
+            $car->clearMediaCollection('cars');
+        }
+
+        //Verificar se a imagem existe
+        $file = $request->file('image');
+
+        if($request->hasFile('image') == null) {
+            //Passar a variable input sem colocar nova imagem
+            $input = $request->all();
+        } else {
+            //Actualizar imagem se colocar uma nova
+            $input = $request->all();
+
+            $fileAdders = $car->addMultipleMediaFromRequest(['image'])
+                ->each(function ($fileAdder) {
+                    $fileAdder->toMediaCollection('cars');
+            }); 
+        }
 
         if (empty($car)) {
             Flash::error('Car not found');
@@ -248,6 +282,7 @@ class CarController extends AppBaseController
      */
     public function destroy($id)
     {
+        $product = $this->productRepository->update($input, $id)->with('categories', $categories);
         $car = $this->carRepository->find($id);
 
         if (empty($car)) {
