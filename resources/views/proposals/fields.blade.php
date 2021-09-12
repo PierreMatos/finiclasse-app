@@ -7,7 +7,7 @@
     <a class="nav-link" id="client-tab" data-toggle="tab" href="#client" role="tab" aria-controls="client" aria-selected="false">Cliente</a>
   </li>
   <li class="nav-item" role="presentation">
-    <a class="nav-link" id="cars-tab" data-toggle="tab" href="#cars" role="tab" aria-controls="cars" aria-selected="false">Viaituras</a>
+    <a class="nav-link" id="cars-tab" data-toggle="tab" href="#cars" role="tab" aria-controls="cars" aria-selected="false">Viaturas</a>
   </li>
   <li class="nav-item" role="presentation">
     <a class="nav-link" id="tradein-tab" data-toggle="tab" href="#tradein" role="tab" aria-controls="tradein" aria-selected="false">Retoma</a>
@@ -29,28 +29,106 @@
     <div class="tab-pane" id="client" role="tabpanel" aria-labelledby="client-tab">
         <div class="row">
 
-            <!-- Client Id Field -->
+            <!-- Client Name Field -->
             <div class="form-group col-sm-4">
-                {!! Form::label('client_id', 'Client Email:') !!}
-                {!! Form::text('client_id', $proposal->client->name ? $proposal->client->name  : 'null' , ['class' => 'form-control','disabled']) !!}
+                {!! Form::label('client_name', 'Client Name:') !!}
+                {!! Form::text('client_name', $proposal->client->name ? $proposal->client->name  : 'null' , ['class' => 'form-control','disabled']) !!}
             </div>
 
             <!-- Client Email Field -->
             <div class="form-group col-sm-4">
-                {!! Form::label('client_email', 'Client Id:') !!}
+                {!! Form::label('client_email', 'Client Email:') !!}
                 {!! Form::text('client_email', $proposal->client->email ? $proposal->client->email  : 'null' , ['class' => 'form-control','disabled']) !!}
             </div>
 
             <!-- Client Type Field -->
             <div class="form-group col-sm-4">
-                {!! Form::label('client_id', 'Client Type:') !!}
-                {!! Form::text('client_id', $proposal->client->type ? $proposal->client->type  : 'null' , ['class' => 'form-control','disabled']) !!}
+                {!! Form::label('client_type', 'Client Type:') !!}
+                {!! Form::text('client_type', $proposal->client->type ? $proposal->client->type  : 'null' , ['class' => 'form-control','disabled']) !!}
             </div>
 
-            <!-- Client Distrito Field -->
+            <!-- Client City Field -->
             <div class="form-group col-sm-4">
-                {!! Form::label('client_email', 'Client Id:') !!}
-                {!! Form::text('client_email', $proposal->client->city ? $proposal->client->city  : 'null' , ['class' => 'form-control','disabled']) !!}
+                {!! Form::label('client_city', 'Cidade:') !!}
+                {!! Form::text('client_city', $proposal->client->city ? $proposal->client->city  : 'null' , ['class' => 'form-control','disabled']) !!}
+            </div>
+
+            <!-- Client Adress Field -->
+            <div class="form-group col-sm-4">
+                {!! Form::label('client_adress', 'Morada:') !!}
+                {!! Form::text('client_adress', $proposal->client->adress ? $proposal->client->adress  : 'null' , ['class' => 'form-control','disabled']) !!}
+            </div>
+
+            <!-- Client Zip Code Field -->
+            <div class="form-group col-sm-4">
+                {!! Form::label('client_zip_code', 'Cod Postal:') !!}
+                {!! Form::text('client_zip_code', $proposal->client->zip_code ? $proposal->client->zip_code  : 'null' , ['class' => 'form-control','disabled']) !!}
+            </div>
+
+            <!-- Client  Phone -->
+            <div class="form-group col-sm-4">
+                {!! Form::label('client_phone', 'Telefone:') !!}
+                {!! Form::text('client_phone', $proposal->client->phone ? $proposal->client->mobile_phone  : 'null' , ['class' => 'form-control','disabled']) !!}
+            </div>
+
+            <!-- Client Mobile Phone -->
+            <div class="form-group col-sm-4">
+                {!! Form::label('client_mobile_phone', 'Telemovel:') !!}
+                {!! Form::text('client_mobile_phone', $proposal->client->mobile_phone ? $proposal->client->mobile_mobile_phone  : 'null' , ['class' => 'form-control','disabled']) !!}
+            </div>
+
+        </div>
+    </div>
+
+    <div class="tab-pane" id="cars" role="tabpanel" aria-labelledby="cars-tab">
+        <div class="row">
+
+            <!-- Client Name Field -->
+            <div class="form-group col-sm-4">
+                {!! Form::label('client_name', 'Client Name:') !!}
+                {!! Form::text('client_name', $proposal->client->name ? $proposal->client->name  : 'null' , ['class' => 'form-control','disabled']) !!}
+            </div>
+
+            <!-- Client Email Field -->
+            <div class="form-group col-sm-4">
+                {!! Form::label('client_email', 'Client Email:') !!}
+                {!! Form::text('client_email', $proposal->client->email ? $proposal->client->email  : 'null' , ['class' => 'form-control','disabled']) !!}
+            </div>
+
+            <!-- Client Type Field -->
+            <div class="form-group col-sm-4">
+                {!! Form::label('client_type', 'Client Type:') !!}
+                {!! Form::text('client_type', $proposal->client->type ? $proposal->client->type  : 'null' , ['class' => 'form-control','disabled']) !!}
+            </div>
+
+            <!-- Client City Field -->
+            <div class="form-group col-sm-4">
+                {!! Form::label('client_city', 'Cidade:') !!}
+                {!! Form::text('client_city', $proposal->client->city ? $proposal->client->city  : 'null' , ['class' => 'form-control','disabled']) !!}
+            </div>
+
+            <!-- Client Adress Field -->
+            <div class="form-group col-sm-4">
+                {!! Form::label('client_adress', 'Morada:') !!}
+                {!! Form::text('client_adress', $proposal->client->adress ? $proposal->client->adress  : 'null' , ['class' => 'form-control','disabled']) !!}
+            </div>
+
+            <!-- Client Zip Code Field -->
+            <div class="form-group col-sm-4">
+                {!! Form::label('client_zip_code', 'Cod Postal:') !!}
+                {!! Form::text('client_zip_code', $proposal->client->zip_code ? $proposal->client->zip_code  : 'null' , ['class' => 'form-control','disabled']) !!}
+            </div>
+
+            <!-- Client  Phone -->
+            <div class="form-group col-sm-4">
+                {!! Form::label('client_phone', 'Telefone:') !!}
+                {!! Form::text('client_phone', $proposal->client->phone ? $proposal->client->mobile_phone  : 'null' , ['class' => 'form-control','disabled']) !!}
+            </div>
+
+            <!-- Client Mobile Phone -->
+            <div class="form-group col-sm-4">
+                {!! Form::label('client_mobile_phone', 'Telemovel:') !!}
+                {!! Form::text('client_mobile_phone', $proposal->client->mobile_phone ? $proposal->client->mobile_mobile_phone  : 'null' , ['class' => 'form-control','disabled']) !!}
             </div>
 
         </div>

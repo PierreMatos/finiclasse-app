@@ -57,7 +57,7 @@ $('#proposals-table').DataTable( {
             {
             targets: 0,
             searchable: true,
-            // visible: false
+            visible: false
             }
         ],
         buttons: [

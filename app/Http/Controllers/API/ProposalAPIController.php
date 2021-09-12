@@ -13,7 +13,8 @@ use App\Http\Resources\ProposalCollection;
 use Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\MessageBag;
+use \Illuminate\Support\Facades\Validator;
 
 /**
  * Class ProposalController
@@ -88,6 +89,15 @@ class ProposalAPIController extends AppBaseController
 
         $input = $request->all();
         
+        $validator = Validator::make($request->all(), [
+            'vendor_id' => 'required',
+        ]);
+
+        if($validator->fails()){
+        return $this->sendResponse('','Proposal saved successfully',300);
+
+            return $validator->errors()->toJson();
+        }
         // if (proposta completa) {
             // authorization($input->id);
         // }
