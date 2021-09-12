@@ -1,15 +1,27 @@
 <?php
 
 namespace Database\Seeders;
-use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
-use App\Models\User;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Database\Seeder;
+use App\Models\User;
+use App\Repositories\UserRepository;
+
 
 class RolesAndPermissionsSeeder extends Seeder
 {
-    public function run()
-    {
+
+     /** @var  UserRepository */
+     private $userRepository;
+
+     public function __construct(UserRepository $userRepo)
+     {
+         $this->userRepository = $userRepo;
+     }
+
+
+    public function run() {
+
         \DB::table('roles')->delete();
         \DB::table('permissions')->delete();
         \DB::table('model_has_roles')->delete();
@@ -19,10 +31,27 @@ class RolesAndPermissionsSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         // create permissions
-        Permission::create(['name' => 'list car models']);
-        Permission::create(['name' => 'delete articles']);
-        Permission::create(['name' => 'publish articles']);
-        Permission::create(['name' => 'unpublish articles']);
+        // permissoes por modulos
+        //TODO detalhar ao CRUD de cada model
+
+        // Permission::create(['name' => 'benefits business studys']);
+        // Permission::create(['name' => 'benefits']);
+        // Permission::create(['name' => 'business study authorizations']);
+        // Permission::create(['name' => 'business studys']);
+        // Permission::create(['name' => 'campaigns']);
+        // Permission::create(['name' => 'car categories']);
+        // Permission::create(['name' => 'car classes']);
+        // Permission::create(['name' => 'car conditions']);
+        // Permission::create(['name' => 'car drives']);
+        // Permission::create(['name' => 'car fuels']);
+        // Permission::create(['name' => 'car models']);
+        // Permission::create(['name' => 'cars']);
+        // Permission::create(['name' => 'clients']);
+        // Permission::create(['name' => 'financings']);
+        // Permission::create(['name' => 'makes']);
+        // Permission::create(['name' => 'proposals']);
+        // Permission::create(['name' => 'stands']);
+        // Permission::create(['name' => 'dashboard']);
 
         // create roles and assign created permissions
 
@@ -30,17 +59,33 @@ class RolesAndPermissionsSeeder extends Seeder
         // $role = Role::create(['name' => 'admin']);
         // $role->givePermissionTo('list car models');
 
-        // or may be done by chaining
-        $role = Role::create(['name' => 'moderator'])
-            ->givePermissionTo(['publish articles', 'unpublish articles']);
-
+        // or may be done by 
+        
         $role = Role::create(['name' => 'admin']);
-        $role->givePermissionTo(Permission::all());
+            // ->givePermissionTo(Permission::all());
 
-        $user = User::find(1);
+        $role = Role::create(['name' => 'Administrador']);
+            // ->givePermissionTo(['dashboard', 'clients', 'cars', 'proposals', 'clients', 'financings']);
 
-        $user->assignRole('admin');
-        $user->hasAllRoles(Role::all());
-        // $role->givePermissionTo('edit articles');
+        $role = Role::create(['name' => 'Diretor comercial']);
+            // ->givePermissionTo(['clients', 'cars', 'proposals', 'clients', 'financings']);
+
+        $role = Role::create(['name' => 'Chefe de vendas']);
+            // ->givePermissionTo(['clients', 'cars', 'proposals', 'clients', 'financings']);
+       
+        $role = Role::create(['name' => 'Vendedor']);
+            // ->givePermissionTo(['cars', 'proposals']);
+       
+        // $role = Role::create(['name' => 'cliente'])
+        //     ->givePermissionTo(['my proposal']);
+
+        
+
+        // tribuir roles a users
+        $this->userRepository->find(1)->assignRole('admin');
+        $this->userRepository->find(2)->assignRole('Administrador');
+        $this->userRepository->find(3)->assignRole('Chefe de vendas');
+        $this->userRepository->find(4)->assignRole('Vendedor');
+        
     }
 }
