@@ -44,7 +44,7 @@
  var table =  $('#financings-table').DataTable( {
         language: {
             search: "_INPUT_",
-            searchPlaceholder: "Search..."
+            searchPlaceholder: "{{__('Search...')}}"
         },
         
         autoFill: true,

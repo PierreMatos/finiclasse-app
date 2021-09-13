@@ -1,54 +1,38 @@
-<div class="table-responsive">
-    <table class="table" id="users-table">
+<div class="table-responsive container" id="clients-div">
+    <table class="table" id="clients-table">
         <thead>
             <tr>
-                <th>Name</th>
-        <th>Email</th>
-        <th>City</th>
-        <th>Adress</th>
-        <th>Zip Code</th>
-        <th>Phone</th>
-        <th>Mobile Phone</th>
-        <th>Nif</th>
-        <th>Gdpr Confirmation</th>
-        <th>Gdpr Rejection</th>
-        <th>Gdpr Type</th>
-        <th>Finiclasse Employee</th>
-        <th>Stand Id</th>
-                <th colspan="3">Action</th>
+                <th>{{__('Name')}}</th>
+                <th>{{__('Email')}}</th>
+                <th>{{__('City')}}</th>
+                <th>{{__('Stand')}}</th>
+                <th>{{__('Client Type')}}</th>
+                <th>{{__('Action')}}</th>
             </tr>
         </thead>
         <tbody>
-        @foreach($users as $user)
-            <tr>
-                <td>{{ $user->name }}</td>
-            <td>{{ $user->email }}</td>
-            <td>{{ $user->city }}</td>
-            <td>{{ $user->adress }}</td>
-            <td>{{ $user->zip_code }}</td>
-            <td>{{ $user->phone }}</td>
-            <td>{{ $user->mobile_phone }}</td>
-            <td>{{ $user->nif }}</td>
-            <td>{{ $user->gdpr_confirmation }}</td>
-            <td>{{ $user->gdpr_rejection }}</td>
-            <td>{{ $user->gdpr_type }}</td>
-            <td>{{ $user->finiclasse_employee }}</td>
-            <td>{{ $user->stand_id }}</td>
-                <td width="120">
-                    {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete']) !!}
-                    <div class='btn-group'>
-                        <a href="{{ route('users.show', [$user->id]) }}" class='btn btn-default btn-xs'>
-                            <i class="far fa-eye"></i>
-                        </a>
-                        <a href="{{ route('users.edit', [$user->id]) }}" class='btn btn-default btn-xs'>
-                            <i class="far fa-edit"></i>
-                        </a>
-                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
-                    </div>
-                    {!! Form::close() !!}
-                </td>
-            </tr>
-        @endforeach
+            @foreach ($users as $user)
+                <tr>
+                    <td>{{ isset($user->name) ? $user->name : '' }}</td>
+                    <td>{{ isset($user->email) ? $user->email : '' }}</td>
+                    <td>{{ isset($user->city) ? $user->city : '' }}</td>
+                    <td>{{ isset($user->stand->name) ? $user->stand->name : '' }}</td>
+                    <td>{{ isset($user->clientType->name) ? $user->clientType->name : '' }}</td>
+                    <td width="120">
+                        {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete']) !!}
+                        <div class='btn-group'>
+                            <a href="{{ route('users.show', [$user->id]) }}" class='btn btn-default btn-xs'>
+                                <i class="far fa-eye"></i>
+                            </a>
+                            <a href="{{ route('users.edit', [$user->id]) }}" class='btn btn-default btn-xs'>
+                                <i class="far fa-edit"></i>
+                            </a>
+                            {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                        </div>
+                        {!! Form::close() !!}
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 </div>
