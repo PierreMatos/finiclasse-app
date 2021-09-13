@@ -180,8 +180,8 @@
 
 @can('users.index')
 <li class="nav-item">
-    <a href="{{ route('users.index') }}"
-       class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
+    <a href="{{ route('getClients') }}"
+       class="nav-link {{ Request::is('clients*') ? 'active' : '' }}">
         <p>Clientes</p>
     </a>
 </li>

@@ -101,6 +101,15 @@ class CarAPIController extends AppBaseController
 
         $car = $this->carRepository->create($input);
 
+        if ($request->hasFile('image')) {
+            $fileAdders = $car->addMultipleMediaFromRequest(['image'])
+                ->each(function ($fileAdder) {
+                    $fileAdder->toMediaCollection('cars');
+                });
+        }
+
+        $car = $this->carRepository->create($input);
+
         return $this->sendResponse(new CarResource($car), 'Car saved successfully');
     }
 

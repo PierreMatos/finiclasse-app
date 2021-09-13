@@ -9,6 +9,7 @@ use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\UserResource;
+use App\Http\Resources\ClientResource;
 use Response;
 use Validator;
 use Illuminate\Support\Facades\Auth;
@@ -64,6 +65,15 @@ class UserAPIController extends AppBaseController
     public function store(Request $request)
     {
         $input = $request->all();
+
+        $validator = Validator::make($request->all(), [
+            'vendor_id' => 'required',
+        ]);
+
+        if($validator->fails()){
+
+            return $validator->errors()->toJson();
+        }
 
         $user = $this->userRepository->create($input);
 
@@ -226,10 +236,12 @@ class UserAPIController extends AppBaseController
     public function getClients(Request $request)
     {
 
-        $clients = Auth::user()->myLeads;
+        $clients = Auth::user()->leads;
         // return response()->json($clients, 200); 
 
-        return $this->sendResponse(UserResource::collection($clients), 'Users retrieved successfully');
+        // User::where(('vendor_id', Auth::user()->id));
+        // dd($clients);
+        return $this->sendResponse(ClientResource::collection($clients), 'Clients retrieved successfully');
 
     }
 }
