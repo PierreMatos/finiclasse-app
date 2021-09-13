@@ -76,7 +76,7 @@
         <option selected value="">--</option>
         @foreach ($userData['clientTypes'] as $model)
             <!--condition make selecionado anteriormente-->
-            @if ($model->id == (isset($user->model->id) ? $user->model->id : 'null'))
+            @if ($model->id == (isset($user->model->id) ? $user->model->id : ''))
                 <option selected value="{{ $user->model->id }}">{{ $user->model->name }}</option>
             @else
                 <option value="{{ $model->id }}">{{ $model->name }}</option>

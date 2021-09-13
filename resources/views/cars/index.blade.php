@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Cars</h1>
+                    <h1>{{ __('Cars') }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right" href="{{ route('cars.create') }}">
@@ -46,9 +46,13 @@
             $('#Todos-table').DataTable({
                 language: {
                     search: "_INPUT_",
-                    searchPlaceholder: "{{ __('Search...') }}"
+                    searchPlaceholder: "{{ __('Search...') }}",
+                    paginate: {
+                        "previous": "{{ __('Previous') }}",
+                        "next": "{{ __('Next') }}"
+                    },
+                    lengthMenu: "{{ __('Show') }} _MENU_ {{ __('Entries') }}",
                 },
-
                 autoFill: true,
                 retrieve: true,
                 responsive: true,
@@ -102,9 +106,13 @@
                 var tableCondition = $(idTable).DataTable({
                     language: {
                         search: "_INPUT_",
-                        searchPlaceholder: "Search..."
+                        searchPlaceholder: "{{ __('Search...') }}",
+                        paginate: {
+                            "previous": "{{ __('Previous') }}",
+                            "next": "{{ __('Next') }}"
+                        },
+                        lengthMenu: "{{ __('Show') }} _MENU_ {{ __('Entries') }}",
                     },
-
                     autoFill: true,
                     retrieve: true,
                     responsive: true,

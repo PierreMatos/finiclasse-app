@@ -50,7 +50,6 @@
                 },
                 lengthMenu: "{{ __('Show') }} _MENU_ {{ __('Entries') }}",
             },
-
             autoFill: true,
             retrieve: true,
             responsive: true,
