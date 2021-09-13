@@ -107,7 +107,7 @@ class CarAPIController extends AppBaseController
                     $fileAdder->toMediaCollection('cars');
                 });
         }
-        
+
         $car = $this->carRepository->create($input);
 
         return $this->sendResponse(new CarResource($car), 'Car saved successfully');

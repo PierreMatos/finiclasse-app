@@ -37,4 +37,29 @@ class UserRepository extends BaseRepository
     {
         return User::class;
     }
+
+    // filter clients by roles
+    public function getClients($user)
+    {
+        
+        if ($user->hasRole(['admin', 'Administrador', 'Diretor comercial'])){
+        
+            $clients = User::where('finiclasse_employee', '=', 0)->get();
+
+            return $clients;
+
+        }elseif($user->hasRole(['Chefe de vendas'])){
+
+            $clients = User::where('finiclasse_employee', '=', 0)
+
+                ->where('stand_id','=', $user->stand_id)->get();
+
+                return $clients;
+        }
+    }
+
+    public function getVendors(){
+
+        
+    }
 }

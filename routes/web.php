@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -148,6 +149,7 @@ Route::resource('cars', App\Http\Controllers\CarController::class);
 Route::get('/getcars', [CarController::class, 'getCars'])->name('getcars');
 
 
+Route::get('clients',[UserController::class, 'getClients'])->name('getClients');
 Route::resource('users', App\Http\Controllers\UserController::class);
 
 Route::resource('campaigns', App\Http\Controllers\CampaignController::class);

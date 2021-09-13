@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\UserRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Flash;
 use Response;
 
@@ -154,5 +156,22 @@ class UserController extends AppBaseController
         return redirect(route('users.index'));
     }
 
+    /**
+     * Display a listing of the Clients.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function getClients(Request $request)
+    {
+
+        $user = Auth::user();
+       
+        $clients =  $this->userRepository->getClients($user);
+       
+        return view('users.index')
+            ->with('users', $clients);
+    }
    
 }
