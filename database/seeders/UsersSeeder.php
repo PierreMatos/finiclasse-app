@@ -17,9 +17,9 @@ class UsersSeeder extends Seeder
     {
         \DB::table('users')->delete();
         
-        User::factory()
-        ->count(10)
-        ->create();
+        // User::factory()
+        // ->count(10)
+        // ->create();
         
         \DB::table('users')->insert(array (
             0 => 
@@ -86,5 +86,9 @@ class UsersSeeder extends Seeder
                
             )
         ));
+
+        User::factory()
+        ->count(10)
+        ->create();
     }
 }

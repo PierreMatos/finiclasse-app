@@ -94,7 +94,6 @@ class ProposalAPIController extends AppBaseController
         ]);
 
         if($validator->fails()){
-        return $this->sendResponse('','Proposal saved successfully',300);
 
             return $validator->errors()->toJson();
         }

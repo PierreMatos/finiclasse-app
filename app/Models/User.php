@@ -149,16 +149,26 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(\App\Models\Stand::class, 'stand_id', 'id');
     }
 
+     /**
+     * Get all of the clients for the user.
+     */
+    public function leads2()
+    {
+        return $this->belongsToMany(\App\Models\User::class, 'leads_users', 'vendor_id', 'id');
+    }
+    /**
+     * Get all of the posts for the user.
+     */
     public function leads()
     {
-    return $this->belongsToMany(\App\Models\User::class, 'leads_users', 'user_id', 'vendor_id');
+        return $this->belongsToMany(User::class, 'leads_users', 'vendor_id', 'client_id');
     }
 
     // Same table, self referencing, but change the key order
-    public function myLeads()
-    {
-    return $this->belongsToMany(\App\Models\User::class, 'leads_users', 'vendor_id', 'client_id');
-    }
+    // public function myLeads()
+    // {
+    // return $this->belongsToMany(\App\Models\User::class, 'leads_users', 'vendor_id', 'id');
+    // }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -18,6 +18,7 @@ class ClientResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
+            'client_type' => $this->clientType->name ?? '',
         ];
     }
 }
