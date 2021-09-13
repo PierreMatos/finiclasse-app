@@ -62,9 +62,10 @@ class ProposalAPIController extends AppBaseController
             $request->get('limit')
         );
 
-        return new ProposalCollection(Proposal::paginate());
+        // this is working
+        // return new ProposalCollection(Proposal::paginate());
 
-        // return $this->sendResponse(ProposalResource::collection($proposals), 'Proposals retrieved successfully');
+        return $this->sendResponse(new ProposalCollection($proposals), 'Proposals retrieved successfully');
 
         // return $proposals->paginate(5);
         // return new ProposalCollection($proposals::simplePaginate());
