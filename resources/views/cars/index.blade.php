@@ -116,7 +116,7 @@
                     autoFill: true,
                     retrieve: true,
                     responsive: true,
-                    "dom": '<"top" <"float-left w-200"f><"float-right"B>>rt<"bottom mt-4"<"float-left"p><"float-right"l>><"clear">',
+                    "dom": '<"top" <"float-left"f><"float-right"B>>rt<"bottom mt-4"<"float-left"p><"float-right"l>><"clear">',
 
                     buttons: [{
                             text: 'Todos',

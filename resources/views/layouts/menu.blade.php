@@ -230,12 +230,3 @@
     </a>
 </li>
 @endcan
-
-@can('tradeinStates.index')
-<li class="nav-item">
-    <a href="{{ route('tradeinStates.index') }}"
-       class="nav-link {{ Request::is('tradeinStates*') ? 'active' : '' }}">
-        <p>Tradein States</p>
-    </a>
-</li>
-@endcan
