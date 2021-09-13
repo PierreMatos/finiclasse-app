@@ -112,6 +112,7 @@ class Proposal extends Model
     public static $rules = [
         // 'state_id' => 'required',
         // 'business_study_id' => 'required'
+        'vendor_id' => 'required'
     ];
 
     /**

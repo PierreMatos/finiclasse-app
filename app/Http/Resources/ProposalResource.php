@@ -18,6 +18,11 @@ class ProposalResource extends JsonResource
 
         $images = collect();
 
+        // $items = $this->car->getMedia('cars');
+        // foreach($items as $item){
+        //     $images->push($item->getUrl());
+        //     $images->push($item->getUrl('thumb'));
+        // }
         // $items = $this->tradein->getMedia();
         // foreach($items as $item){
         //    $images->push($item->getUrl());
@@ -51,6 +56,7 @@ class ProposalResource extends JsonResource
                 'name' => $this->car->model->make->name ?? '',
                 'model' => $this->car->model->name ?? '',
                 'price' => $this->car->price ?? '',
+                // 'avatar' => $this->car->getFirstMediaUrl('cars','thumb'),
             ],
             'tradein_id' => $this->tradein_id,
             'tradein' => [
