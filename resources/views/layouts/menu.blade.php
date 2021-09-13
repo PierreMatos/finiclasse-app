@@ -135,7 +135,7 @@
 <li class="nav-item">
     <a href="{{ route('proposals.index') }}"
        class="nav-link {{ Request::is('proposals*') ? 'active' : '' }}">
-        <p>Proposals</p>
+        <p>Negócios</p>
     </a>
 </li>
 @endcan
@@ -144,7 +144,7 @@
 <li class="nav-item">
     <a href="{{ route('financings.index') }}"
        class="nav-link {{ Request::is('financings*') ? 'active' : '' }}">
-        <p>Financings</p>
+        <p>Financiamentos</p>
     </a>
 </li>
 @endcan
@@ -173,7 +173,7 @@
 <li class="nav-item">
     <a href="{{ route('cars.index') }}"
        class="nav-link {{ Request::is('cars*') ? 'active' : '' }}">
-        <p>Cars</p>
+        <p>Viaturas</p>
     </a>
 </li>
 @endcan
@@ -182,7 +182,7 @@
 <li class="nav-item">
     <a href="{{ route('users.index') }}"
        class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
-        <p>Users</p>
+        <p>Clientes</p>
     </a>
 </li>
 @endcan

@@ -1,90 +1,91 @@
 <!-- Name Field -->
-<div class="col-sm-12">
-    {!! Form::label('name', 'Name:') !!}
-    <p>{{ $user->name }}</p>
+<div class="form-group col-sm-4">
+    <label>{{ __('Name') }}</label>
+    {!! Form::text('name', isset($user->name) ? $user->name : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
 <!-- Email Field -->
-<div class="col-sm-12">
-    {!! Form::label('email', 'Email:') !!}
-    <p>{{ $user->email }}</p>
+<div class="form-group col-sm-4">
+    <label>{{ __('Email') }}</label>
+    {!! Form::email('email', isset($user->email) ? $user->email : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
 <!-- City Field -->
-<div class="col-sm-12">
-    {!! Form::label('city', 'City:') !!}
-    <p>{{ $user->city }}</p>
+<div class="form-group col-sm-4">
+    <label>{{ __('City') }}</label>
+    {!! Form::text('city', isset($user->city) ? $user->city : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
 <!-- Adress Field -->
-<div class="col-sm-12">
-    {!! Form::label('adress', 'Adress:') !!}
-    <p>{{ $user->adress }}</p>
+<div class="form-group col-sm-4">
+    <label>{{ __('Address') }}</label>
+    {!! Form::text('adress', isset($user->adress) ? $user->adress : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
 <!-- Zip Code Field -->
-<div class="col-sm-12">
-    {!! Form::label('zip_code', 'Zip Code:') !!}
-    <p>{{ $user->zip_code }}</p>
+<div class="form-group col-sm-4">
+    <label>{{ __('Zip Code') }}</label>
+    {!! Form::text('zip_code', isset($user->zip_code) ? $user->zip_code : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
 <!-- Phone Field -->
-<div class="col-sm-12">
-    {!! Form::label('phone', 'Phone:') !!}
-    <p>{{ $user->phone }}</p>
+<div class="form-group col-sm-4">
+    <label>{{ __('Phone') }}</label>
+    {!! Form::number('phone', isset($user->phone) ? $user->phone : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
 <!-- Mobile Phone Field -->
-<div class="col-sm-12">
-    {!! Form::label('mobile_phone', 'Mobile Phone:') !!}
-    <p>{{ $user->mobile_phone }}</p>
+<div class="form-group col-sm-4">
+    <label>{{ __('Mobile Phone') }}</label>
+    {!! Form::number('mobile_phone', isset($user->mobile_phone) ? $user->mobile_phone : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
 <!-- Nif Field -->
-<div class="col-sm-12">
-    {!! Form::label('nif', 'Nif:') !!}
-    <p>{{ $user->nif }}</p>
-</div>
-
-<!-- Gdpr Confirmation Field -->
-<div class="col-sm-12">
-    {!! Form::label('gdpr_confirmation', 'Gdpr Confirmation:') !!}
-    <p>{{ $user->gdpr_confirmation }}</p>
-</div>
-
-<!-- Gdpr Rejection Field -->
-<div class="col-sm-12">
-    {!! Form::label('gdpr_rejection', 'Gdpr Rejection:') !!}
-    <p>{{ $user->gdpr_rejection }}</p>
+<div class="form-group col-sm-4">
+    <label>{{ __('Nif') }}</label>
+    {!! Form::number('nif', isset($user->nif) ? $user->nif : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
 <!-- Gdpr Type Field -->
-<div class="col-sm-12">
-    {!! Form::label('gdpr_type', 'Gdpr Type:') !!}
-    <p>{{ $user->gdpr_type }}</p>
+<div class="form-group col-sm-4">
+    <label>{{ __('Gdpr Type') }}</label>
+    {!! Form::text('gdpr_type', isset($user->gdpr_type) ? $user->gdpr_type : '' , ['class' => 'form-control', 'disabled']) !!}
+</div>
+
+<!-- Gdpr Rejection Field -->
+<div class="form-group col-sm-4">
+    {!! Form::label('gdpr_rejection', 'Gdpr Rejection:') !!}
+    {!! Form::text('gdpr_rejection', isset($user->gdpr_rejection) ? $user->gdpr_rejection : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
 <!-- Finiclasse Employee Field -->
-<div class="col-sm-12">
-    {!! Form::label('finiclasse_employee', 'Finiclasse Employee:') !!}
-    <p>{{ $user->finiclasse_employee }}</p>
+<div class="form-group col-sm-4">
+    <label>{{ __('Finiclasse Employee') }}</label>
+    {!! Form::text('finiclasse_employee', isset($user->finiclasse_employee) ? $user->finiclasse_employee : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
 <!-- Stand Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('stand_id', 'Stand Id:') !!}
-    <p>{{ $user->stand_id }}</p>
+<div class="form-group col-sm-4">
+    <label>{{ __('Stand') }}</label>
+    {!! Form::text('stand_id', isset($user->stand->name) ? $user->stand->name : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
+<!-- Client Type Field -->
+<div class="form-group col-sm-4">
+    <label>{{ __('Client Type') }}</label>
+    {!! Form::text('client_type_id', isset($user->clientType->name) ? $user->clientType->name : '' , ['class' => 'form-control', 'disabled']) !!}
+</div>
+
+
 <!-- Created At Field -->
-<div class="col-sm-12">
-    {!! Form::label('created_at', 'Created At:') !!}
-    <p>{{ $user->created_at }}</p>
+<div class="form-group col-sm-4">
+    <label>{{ __('Created At') }}</label>
+    {!! Form::text('created_at', isset($user->created_at) ? $user->created_at : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
 <!-- Updated At Field -->
-<div class="col-sm-12">
-    {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{{ $user->updated_at }}</p>
+<div class="form-group col-sm-4">
+    <label>{{ __('Updated At') }}</label>
+    {!! Form::text('updated_at', isset($user->updated_at) ? $user->updated_at : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 

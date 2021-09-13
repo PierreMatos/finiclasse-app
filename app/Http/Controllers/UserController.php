@@ -2,22 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateUserRequest;
-use App\Http\Requests\UpdateUserRequest;
-use App\Repositories\UserRepository;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Http\Request;
 use Flash;
 use Response;
+use Illuminate\Http\Request;
+use App\Repositories\UserRepository;
+use App\Repositories\StandRepository;
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Repositories\ClientTypeRepository;
+use App\Http\Controllers\AppBaseController;
 
 class UserController extends AppBaseController
 {
     /** @var  UserRepository */
     private $userRepository;
+    private $standRepository;
+    private $clientTypeRepository;
 
-    public function __construct(UserRepository $userRepo)
+    public function __construct(UserRepository $userRepo, StandRepository $standRepo, ClientTypeRepository $clientTypeRepo)
     {
         $this->userRepository = $userRepo;
+        $this->standRepository = $standRepo;
+        $this->clientTypeRepository = $clientTypeRepo;
     }
 
     /**
@@ -42,7 +48,17 @@ class UserController extends AppBaseController
      */
     public function create()
     {
-        return view('users.create');
+        // VARIAVEIS REFERENTES AS LISTAGENS DE MODELOS ($modelName)
+        $stands = $this->standRepository->all();
+        $clientTypes = $this->clientTypeRepository->all();
+
+        $userData = ([
+            'stands' => $stands,
+            'clientTypes' => $clientTypes,
+        ]);
+
+        return view('users.create')
+            ->with('userData', $userData);
     }
 
     /**
@@ -92,7 +108,17 @@ class UserController extends AppBaseController
      */
     public function edit($id)
     {
+        // DADOS DO Cliente PARA EDITAR
         $user = $this->userRepository->find($id);
+
+        // VARIAVEIS REFERENTES AS LISTAGENS DE MODELOS ($modelName)
+        $stands = $this->standRepository->all();
+        $clientTypes = $this->clientTypeRepository->all();
+
+        $userData = ([
+            'stands' => $stands,
+            'clientTypes' => $clientTypes,
+        ]);
 
         if (empty($user)) {
             Flash::error('User not found');
@@ -100,7 +126,9 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        return view('users.edit')->with('user', $user);
+        return view('users.edit')
+            ->with('user', $user)
+            ->with('userData', $userData);
     }
 
     /**
@@ -153,6 +181,4 @@ class UserController extends AppBaseController
 
         return redirect(route('users.index'));
     }
-
-   
 }
