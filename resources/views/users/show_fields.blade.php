@@ -58,12 +58,6 @@
     {!! Form::text('gdpr_rejection', isset($user->gdpr_rejection) ? $user->gdpr_rejection : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
-<!-- Finiclasse Employee Field -->
-<div class="form-group col-sm-4">
-    <label>{{ __('Finiclasse Employee') }}</label>
-    {!! Form::text('finiclasse_employee', isset($user->finiclasse_employee) ? $user->finiclasse_employee : '' , ['class' => 'form-control', 'disabled']) !!}
-</div>
-
 <!-- Stand Id Field -->
 <div class="form-group col-sm-4">
     <label>{{ __('Stand') }}</label>
@@ -87,5 +81,14 @@
 <div class="form-group col-sm-4">
     <label>{{ __('Updated At') }}</label>
     {!! Form::text('updated_at', isset($user->updated_at) ? $user->updated_at : '' , ['class' => 'form-control', 'disabled']) !!}
+</div>
+
+<!-- Finiclasse Employee Field -->
+<div class="form-group col-sm-4">
+    <div class="form-check" style="margin-top: 37px;">
+        <input type="hidden" name="finiclasse_employee" value="0" disabled>
+        <input type="checkbox" name="finiclasse_employee" value="1" {{ ($user->finiclasse_employee == "1" ? ' checked' : '') }} disabled>
+        <label>{{ __('Finiclasse Employee') }}</label>
+    </div>
 </div>
 

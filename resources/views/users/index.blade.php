@@ -43,7 +43,12 @@
         var table = $('#clients-table').DataTable({
             language: {
                 search: "_INPUT_",
-                searchPlaceholder: "{{ __('Search...') }}"
+                searchPlaceholder: "{{ __('Search...') }}",
+                paginate: {
+                    "previous": "{{ __('Previous') }}",
+                    "next": "{{ __('Next') }}"
+                },
+                lengthMenu: "{{ __('Show') }} _MENU_ {{ __('Entries') }}",
             },
 
             autoFill: true,
