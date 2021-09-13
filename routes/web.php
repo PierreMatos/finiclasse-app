@@ -161,3 +161,5 @@ Route::resource('campaignsProposals', App\Http\Controllers\CampaignsProposalsCon
 Route::resource('clientTypes', App\Http\Controllers\ClientTypeController::class);
 
 Route::resource('carClasses', App\Http\Controllers\CarClassController::class);
+
+Route::resource('tradeinStates', App\Http\Controllers\TradeinStateController::class);

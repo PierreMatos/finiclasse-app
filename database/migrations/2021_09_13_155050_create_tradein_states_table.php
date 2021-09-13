@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCarClassesTable extends Migration
+class CreateTradeinStatesTable extends Migration
 {
 
     /**
@@ -14,8 +14,12 @@ class CreateCarClassesTable extends Migration
      */
     public function up()
     {
-        Schema::create('car_classes', function (Blueprint $table) {
+        Schema::create('tradein_states', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->integer('order');
+            $table->string('color');
+            $table->boolean('visible');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +32,6 @@ class CreateCarClassesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('car_classes');
+        Schema::drop('tradein_states');
     }
 }

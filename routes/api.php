@@ -106,3 +106,6 @@ Route::middleware('auth:api')->group(function () {
 });
 
 
+
+
+Route::resource('tradein_states', App\Http\Controllers\API\TradeinStateAPIController::class);
