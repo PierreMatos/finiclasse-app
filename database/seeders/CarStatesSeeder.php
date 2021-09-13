@@ -89,6 +89,18 @@ class CarStatesSeeder extends Seeder
                 'updated_at' => '2019-10-22 15:50:48',
             ),  
 
+            5 => 
+            array (
+                'id' => 6,
+                'name' => 'Proposta',
+                'description' => 'Esta viatura provém de uma retoma que pende aceitação',
+                'order' => 1,
+                'color' => '#fffff',
+                'visible' => 0,
+                'created_at' => '2019-10-22 15:50:48',
+                'updated_at' => '2019-10-22 15:50:48',
+            ),  
+
         ));
 
     }

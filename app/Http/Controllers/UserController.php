@@ -13,6 +13,7 @@ use App\Repositories\ClientTypeRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Support\Facades\Auth;
 
+
 class UserController extends AppBaseController
 {
     /** @var  UserRepository */
