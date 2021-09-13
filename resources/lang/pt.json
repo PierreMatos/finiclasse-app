@@ -721,6 +721,15 @@
     "Created At": "Criado em",
     "Updated At": "Atualizado em",
     "Show": "Mostrar",
-    "Entries": "Registros"
+    "Entries": "Registros",
+    "Cars": "Viaturas",
+    "Price": "Preço",
+    "Plate": "Matrícula",
+    "Model": "Modelo",
+    "Make": "Marca",
+    "Avatar": "Avatar",
+    "Create car": "Criar Viatura",
+    "Edit car": "Editar Viatura",
+    "Car": "Viatura"
 
 }

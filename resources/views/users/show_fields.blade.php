@@ -70,19 +70,6 @@
     {!! Form::text('client_type_id', isset($user->clientType->name) ? $user->clientType->name : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
-
-<!-- Created At Field -->
-<div class="form-group col-sm-4">
-    <label>{{ __('Created At') }}</label>
-    {!! Form::text('created_at', isset($user->created_at) ? $user->created_at : '' , ['class' => 'form-control', 'disabled']) !!}
-</div>
-
-<!-- Updated At Field -->
-<div class="form-group col-sm-4">
-    <label>{{ __('Updated At') }}</label>
-    {!! Form::text('updated_at', isset($user->updated_at) ? $user->updated_at : '' , ['class' => 'form-control', 'disabled']) !!}
-</div>
-
 <!-- Finiclasse Employee Field -->
 <div class="form-group col-sm-4">
     <div class="form-check" style="margin-top: 37px;">

@@ -1,276 +1,316 @@
-<!-- Model Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('model_id', 'Model Id:') !!}
-    <p>{{ $car->model_id }}</p>
-</div>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="geral-tab" data-toggle="tab" href="#geral" role="tab" aria-controls="geral"
+            aria-selected="true">Geral</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="caracteristicas-tab" data-toggle="tab" href="#caracteristicas" role="tab"
+            aria-controls="caracteristicas" aria-selected="false">Caracteristicas</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="equipamento-tab" data-toggle="tab" href="#equipamento" role="tab"
+            aria-controls="equipamento" aria-selected="false">Equipamento</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="fotos-tab" data-toggle="tab" href="#fotos" role="tab" aria-controls="fotos"
+            aria-selected="false">Fotos</a>
+    </li>
+</ul>
 
-<!-- Variant Field -->
-<div class="col-sm-12">
-    {!! Form::label('variant', 'Variant:') !!}
-    <p>{{ $car->variant }}</p>
-</div>
+<!-- Tab panes -->
+<div class="tab-content mt-2 container">
 
-<!-- Motorization Field -->
-<div class="col-sm-12">
-    {!! Form::label('motorization', 'Motorization:') !!}
-    <p>{{ $car->motorization }}</p>
-</div>
+    <div class="tab-pane active" id="geral" role="tabpanel" aria-labelledby="geral-tab">
+        <div class="row">
+            <!-- Make Id Field -->
+            <div class="form-group col-md-3">
+                {!! Form::label('make_id', 'Marca') !!}
+                {!! Form::text('make_id', isset($car->model->make->name) ? $car->model->make->name : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Category Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('category_id', 'Category Id:') !!}
-    <p>{{ $car->category_id }}</p>
-</div>
+            <!-- Model Id Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('model_id', 'Modelo') !!}
+                {!! Form::text('model_id', isset($car->model->name) ? $car->model->name : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Registration Field -->
-<div class="col-sm-12">
-    {!! Form::label('registration', 'Registration:') !!}
-    <p>{{ $car->registration }}</p>
-</div>
+            <!-- Variant Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('variant', 'Variante') !!}
+                {!! Form::text('variant', isset($car->variant) ? $car->variant : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Condition Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('condition_id', 'Condition Id:') !!}
-    <p>{{ $car->condition_id }}</p>
-</div>
+            <!-- Motorization Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('motorization', 'Motorização') !!}
+                {!! Form::number('motorization', isset($car->motorization) ? $car->motorization : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- State Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('state_id', 'State Id:') !!}
-    <p>{{ $car->state_id }}</p>
-</div>
+            <!-- Category Id Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('category_id', 'Categoria') !!}
+                {!! Form::text('category_id', isset($car->category->name) ? $car->category->name : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Komm Field -->
-<div class="col-sm-12">
-    {!! Form::label('komm', 'Komm:') !!}
-    <p>{{ $car->komm }}</p>
-</div>
+            <!-- Registration Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('registration', 'Registo') !!}
+                {!! Form::text('registration', isset($car->registration) ? $car->registration : '', ['class' => 'form-control', 'id' => 'registration', 'disabled']) !!}
+            </div>
 
-<!-- Warranty Stand Field -->
-<div class="col-sm-12">
-    {!! Form::label('warranty_stand', 'Warranty Stand:') !!}
-    <p>{{ $car->warranty_stand }}</p>
-</div>
+            <!-- Condition Id Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('condition_id', 'Condição') !!}
+                {!! Form::text('condition_id', isset($car->condition->name) ? $car->condition->name : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Warranty Make Field -->
-<div class="col-sm-12">
-    {!! Form::label('warranty_make', 'Warranty Make:') !!}
-    <p>{{ $car->warranty_make }}</p>
-</div>
+            <!-- State Id Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('state_id', 'Estado') !!}
+                {!! Form::text('state_id', isset($car->state->name) ? $car->state->name : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Plate Field -->
-<div class="col-sm-12">
-    {!! Form::label('plate', 'Plate:') !!}
-    <p>{{ $car->plate }}</p>
-</div>
+            <!-- Komm Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('komm', 'Komm') !!}
+                {!! Form::text('komm', isset($car->komm) ? $car->komm : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Stand Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('stand_id', 'Stand Id:') !!}
-    <p>{{ $car->stand_id }}</p>
-</div>
+            <!-- Warranty Stand Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('warranty_stand', 'Garantia stand (meses)') !!}
+                {!! Form::text('warranty_stand', isset($car->warranty_stand) ? $car->warranty_stand : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Price Field -->
-<div class="col-sm-12">
-    {!! Form::label('price', 'Price:') !!}
-    <p>{{ $car->price }}</p>
-</div>
+            <!-- Warranty Make Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('warranty_make', 'Garantia fabricante (meses)') !!}
+                {!! Form::text('warranty_make', isset($car->warranty_make) ? $car->warranty_make : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Price Base Field -->
-<div class="col-sm-12">
-    {!! Form::label('price_base', 'Price Base:') !!}
-    <p>{{ $car->price_base }}</p>
-</div>
+            <!-- Plate Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('plate', 'Matrícula') !!}
+                {!! Form::text('plate', isset($car->plate) ? $car->plate : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Price New Field -->
-<div class="col-sm-12">
-    {!! Form::label('price_new', 'Price New:') !!}
-    <p>{{ $car->price_new }}</p>
-</div>
+            <!-- Stand Id Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('stand_id', 'Stand') !!}
+                {!! Form::text('stand_id', isset($car->stand->name) ? $car->stand->name : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Price Campaign Field -->
-<div class="col-sm-12">
-    {!! Form::label('price_campaign', 'Price Campaign:') !!}
-    <p>{{ $car->price_campaign }}</p>
-</div>
+            <!-- Price Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('price', 'Preço') !!}
+                {!! Form::number('price', isset($car->price) ? $car->price : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Tradein Field -->
-<div class="col-sm-12">
-    {!! Form::label('tradein', 'Tradein:') !!}
-    <p>{{ $car->tradein }}</p>
-</div>
+            <!-- Price Base Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('price_base', 'Preço base') !!}
+                {!! Form::number('price_base', isset($car->price_base) ? $car->price_base : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Tradein Purchase Field -->
-<div class="col-sm-12">
-    {!! Form::label('tradein_purchase', 'Tradein Purchase:') !!}
-    <p>{{ $car->tradein_purchase }}</p>
-</div>
+            <!-- Price Campaign Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('order_date', 'Preço de campanha') !!}
+                {!! Form::number('order_date', isset($car->price_campaign) ? $car->price_campaign : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Tradein Sale Field -->
-<div class="col-sm-12">
-    {!! Form::label('tradein_sale', 'Tradein Sale:') !!}
-    <p>{{ $car->tradein_sale }}</p>
-</div>
+            <!-- Order Date Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('order_date', 'Data de encomenda') !!}
+                {!! Form::text('order_date', isset($car->order_date) ? $car->order_date : '', ['class' => 'form-control', 'id' => 'order_date', 'disabled']) !!}
+            </div>
 
-<!-- Felxible Field -->
-<div class="col-sm-12">
-    {!! Form::label('felxible', 'Felxible:') !!}
-    <p>{{ $car->felxible }}</p>
-</div>
+            <!-- Arrival Date Field -->
+            <div class="form-group col-md-3">
+                {!! Form::label('arrival_date', 'Data de chegada') !!}
+                {!! Form::text('arrival_date', isset($car->arrival_date) ? $car->arrival_date : '', ['class' => 'form-control', 'id' => 'arrival_date', 'disabled']) !!}
+            </div>
 
-<!-- Deductible Field -->
-<div class="col-sm-12">
-    {!! Form::label('deductible', 'Deductible:') !!}
-    <p>{{ $car->deductible }}</p>
-</div>
+            <!-- Delivery Date Field -->
+            <div class="form-group col-md-3">
+                {!! Form::label('delivery_date', 'Data de entrega') !!}
+                {!! Form::text('delivery_date', isset($car->delivery_date) ? $car->delivery_date : '', ['class' => 'form-control', 'id' => 'delivery_date', 'disabled']) !!}
+            </div>
 
-<!-- Power Field -->
-<div class="col-sm-12">
-    {!! Form::label('power', 'Power:') !!}
-    <p>{{ $car->power }}</p>
-</div>
+            <!-- Tradein Purchase Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('tradein_purchase', 'Preço compra de retoma') !!}
+                {!! Form::number('tradein_purchase', isset($car->tradein_purchase) ? $car->tradein_purchase : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Km Field -->
-<div class="col-sm-12">
-    {!! Form::label('km', 'Km:') !!}
-    <p>{{ $car->km }}</p>
-</div>
+            <!-- Tradein Sale Field -->
+            <div class="form-group col-md-3">
+                {!! Form::label('tradein_sale', 'Preço venda de retoma') !!}
+                {!! Form::number('tradein_sale', isset($car->tradein_sale) ? $car->tradein_sale : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Transmission Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('transmission_id', 'Transmission Id:') !!}
-    <p>{{ $car->transmission_id }}</p>
-</div>
+            <!-- Price New Field -->
+            <div class="form-group col-md-3">
+                {!! Form::label('price_new', 'Preço em novo') !!}
+                {!! Form::number('price_new', isset($car->price_new) ? $car->price_new : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Color Interior Field -->
-<div class="col-sm-12">
-    {!! Form::label('color_interior', 'Color Interior:') !!}
-    <p>{{ $car->color_interior }}</p>
-</div>
+            <div class="col-md-3">
+                <!-- Tradein Field -->
+                <div class="form-group">
+                    <div class="form-check">
+                        {!! Form::hidden('tradein', 0, ['class' => 'form-check-input']) !!}
+                        {!! Form::checkbox('tradein', '1', isset($car->tradein) ? $car->tradein : '', ['class' => 'form-check-input', 'disabled']) !!}
+                        {!! Form::label('tradein', 'Retoma', ['class' => 'form-check-label']) !!}
+                    </div>
+                </div>
 
-<!-- Color Exterior Field -->
-<div class="col-sm-12">
-    {!! Form::label('color_exterior', 'Color Exterior:') !!}
-    <p>{{ $car->color_exterior }}</p>
-</div>
+                <!-- Felxible Field -->
+                <div class="form-group">
+                    <div class="form-check">
+                        {!! Form::hidden('felxible', 0, ['class' => 'form-check-input']) !!}
+                        {!! Form::checkbox('felxible', '1', isset($car->felxible) ? $car->felxible : '', ['class' => 'form-check-input', 'disabled']) !!}
+                        {!! Form::label('felxible', 'Preço flexível', ['class' => 'form-check-label']) !!}
+                    </div>
+                </div>
 
-<!-- Metallic Color Field -->
-<div class="col-sm-12">
-    {!! Form::label('metallic_color', 'Metallic Color:') !!}
-    <p>{{ $car->metallic_color }}</p>
-</div>
+                <!-- Deductible Field -->
+                <div class="form-group">
+                    <div class="form-check">
+                        {!! Form::hidden('deductible', 0, ['class' => 'form-check-input']) !!}
+                        {!! Form::checkbox('deductible', '1', isset($car->deductible) ? $car->deductible : '', ['class' => 'form-check-input', 'disabled']) !!}
+                        {!! Form::label('deductible', 'IVA dedutível', ['class' => 'form-check-label']) !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<!-- Drive Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('drive_id', 'Drive Id:') !!}
-    <p>{{ $car->drive_id }}</p>
-</div>
+    <div class="tab-pane" id="caracteristicas" role="tabpanel" aria-labelledby="caracteristicas-tab">
+        <div class="row">
 
-<!-- Fuel Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('fuel_id', 'Fuel Id:') !!}
-    <p>{{ $car->fuel_id }}</p>
-</div>
+            <!-- Fuel Id Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('fuel_id', 'Combustível') !!}
+                {!! Form::text('fuel_id', isset($car->fuel->name) ? $car->fuel->name : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Door Field -->
-<div class="col-sm-12">
-    {!! Form::label('door', 'Door:') !!}
-    <p>{{ $car->door }}</p>
-</div>
+            <!-- Power Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('power', 'Potência') !!}
+                {!! Form::text('power', isset($car->power) ? $car->power : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Seats Field -->
-<div class="col-sm-12">
-    {!! Form::label('seats', 'Seats:') !!}
-    <p>{{ $car->seats }}</p>
-</div>
+            <!-- Km Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('km', 'Quilômetros') !!}
+                {!! Form::text('km', isset($car->km) ? $car->km : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Class Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('class_id', 'Class Id:') !!}
-    <p>{{ $car->class_id }}</p>
-</div>
+            <!-- Transmission Id Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('transmission_id', 'Transmissão') !!}
+                {!! Form::text('fuel_id', isset($car->transmission->name) ? $car->transmission->name : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Autonomy Field -->
-<div class="col-sm-12">
-    {!! Form::label('autonomy', 'Autonomy:') !!}
-    <p>{{ $car->autonomy }}</p>
-</div>
+            <!-- Color Interior Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('color_interior', 'Cor interior') !!}
+                {!! Form::text('color_interior', isset($car->color_interior) ? $car->color_interior : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Emissions Field -->
-<div class="col-sm-12">
-    {!! Form::label('emissions', 'Emissions:') !!}
-    <p>{{ $car->emissions }}</p>
-</div>
+            <!-- Color Exterior Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('color_exterior', 'Cor exterior') !!}
+                {!! Form::text('color_exterior', isset($car->color_exterior) ? $car->color_exterior : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Iuc Field -->
-<div class="col-sm-12">
-    {!! Form::label('iuc', 'Iuc:') !!}
-    <p>{{ $car->iuc }}</p>
-</div>
+            <!-- Metallic Color Field -->
+            <div class="form-group col-md-3">
+                <div class="form-check" style="margin-top: 37px;">
+                    <input type="hidden" name="metallic_color" value="0" disabled>
+                    <input type="checkbox" name="metallic_color" value="1"
+                        {{ $car->metallic_color == '1' ? ' checked' : '' }} disabled>
+                    <label>Pintura metalizada</label>
+                </div>
+            </div>
 
-<!-- Registration Count Field -->
-<div class="col-sm-12">
-    {!! Form::label('registration_count', 'Registration Count:') !!}
-    <p>{{ $car->registration_count }}</p>
-</div>
+            <!-- Drive Id Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('drive_id', 'Tração') !!}
+                {!! Form::text('drive_id', isset($car->drive->name) ? $car->drive->name : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Order Date Field -->
-<div class="col-sm-12">
-    {!! Form::label('order_date', 'Order Date:') !!}
-    <p>{{ $car->order_date }}</p>
-</div>
+            <!-- Door Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('door', 'Portas') !!}
+                {!! Form::text('door', isset($car->door) ? $car->door : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Arrival Date Field -->
-<div class="col-sm-12">
-    {!! Form::label('arrival_date', 'Arrival Date:') !!}
-    <p>{{ $car->arrival_date }}</p>
-</div>
+            <!-- Seats Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('seats', 'Lotação') !!}
+                {!! Form::text('seats', isset($car->seats) ? $car->seats : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Delivery Date Field -->
-<div class="col-sm-12">
-    {!! Form::label('delivery_date', 'Delivery Date:') !!}
-    <p>{{ $car->delivery_date }}</p>
-</div>
+            <!-- Class Id Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('class_id', 'Classe') !!}
+                {!! Form::text('drive_id', isset($car->class->name) ? $car->class->name : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Chassi Number Field -->
-<div class="col-sm-12">
-    {!! Form::label('chassi_number', 'Chassi Number:') !!}
-    <p>{{ $car->chassi_number }}</p>
-</div>
+            <!-- Autonomy Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('autonomy', 'Autonomia máxima') !!}
+                {!! Form::number('autonomy', isset($car->autonomy) ? $car->autonomy : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Iuc Expiration Date Field -->
-<div class="col-sm-12">
-    {!! Form::label('iuc_expiration_date', 'Iuc Expiration Date:') !!}
-    <p>{{ $car->iuc_expiration_date }}</p>
-</div>
+            <!-- Emissions Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('emissions', 'Emissões CO2') !!}
+                {!! Form::number('emissions', isset($car->emissions) ? $car->emissions : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Inspection Expiration Date Field -->
-<div class="col-sm-12">
-    {!! Form::label('inspection_expiration_date', 'Inspection Expiration Date:') !!}
-    <p>{{ $car->inspection_expiration_date }}</p>
-</div>
+            <!-- Iuc Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('iuc', 'IUC') !!}
+                {!! Form::number('iuc', isset($car->iuc) ? $car->iuc : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Tradein Observations Field -->
-<div class="col-sm-12">
-    {!! Form::label('tradein_observations', 'Tradein Observations:') !!}
-    <p>{{ $car->tradein_observations }}</p>
-</div>
+            <!-- Registration Count Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('registration_count', 'Nº de registos') !!}
+                {!! Form::number('registration_count', isset($car->registration_count) ? $car->registration_count : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
 
-<!-- Consumption Field -->
-<div class="col-sm-12">
-    {!! Form::label('consumption', 'Consumption:') !!}
-    <p>{{ $car->consumption }}</p>
-</div>
+            <!-- Consumption Field -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('consumption', 'Consumo combinado') !!}
+                {!! Form::number('consumption', isset($car->consumption) ? $car->consumption : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
+        </div>
+    </div>
 
-<!-- Created At Field -->
-<div class="col-sm-12">
-    {!! Form::label('created_at', 'Created At:') !!}
-    <p>{{ $car->created_at }}</p>
-</div>
+    <div class="tab-pane" id="equipamento" role="tabpanel" aria-labelledby="equipamento-tab">
+        <div class="row">
+            <!-- Equipment Field -->
+            <div class="form-group col-12">
+                {!! Form::label('equipment', 'Equipamento extra') !!}
+                {!! Form::textarea('equipment', '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
+        </div>
+    </div>
 
-<!-- Updated At Field -->
-<div class="col-sm-12">
-    {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{{ $car->updated_at }}</p>
+    <div class="tab-pane" id="fotos" role="tabpanel" aria-labelledby="fotos-tab">
+        <div class="row">
+            <!-- Fotos Field -->
+            <div class="form-group col-sm-12">
+                {!! Form::label('image', 'Fotos') !!}
+                @foreach ($car->getMedia('cars') as $media)
+                    <p><img src="{{ $media->getUrl() }}"></p>
+                @endforeach
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
 </div>
-
