@@ -126,19 +126,19 @@ class User extends Authenticatable implements JWTSubject
      */
     public static $rules = [
         'name' => 'required',
-        'email' => 'required',
-        'email_verified_at' => 'validations:nullable',
-        'password' => 'validations:nullable',
-        'city' => 'validations:nullable',
-        'adress' => 'validations:nullable',
-        'zip_code' => 'validations:nullable',
-        'phone' => 'validations:nullable',
-        'mobile_phone' => 'validations:nullable',
-        'nif' => 'validations:nullable',
-        'gdpr_confirmation' => 'validations:nullable',
-        'gdpr_rejection' => 'validations:nullable',
-        'gdpr_type' => 'validations:nullable',
-        'finiclasse_employee' => 'validations:nullable'
+        'email' => 'email|required',
+        'email_verified_at' => 'nullable',
+        'password' => 'nullable',
+        'city' => 'nullable',
+        'adress' => 'nullable',
+        'zip_code' => 'nullable',
+        'phone' => 'nullable',
+        'mobile_phone' => 'nullable',
+        'nif' => 'nullable',
+        'gdpr_confirmation' => 'nullable',
+        'gdpr_rejection' => 'nullable',
+        'gdpr_type' => 'nullable',
+        'finiclasse_employee' => 'nullable'
     ];
 
     /**

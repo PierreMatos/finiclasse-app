@@ -55,6 +55,8 @@
             },
             autoFill: true,
             responsive: true,
+            retrieve: true,
+            order: [],
             processing: true,
             serverSide: true,
             ajax: "{{route('getcars')}}",
@@ -128,6 +130,7 @@
                 },
                 autoFill: true,
                 retrieve: true,
+                order: [],
                 "dom": '<"top float-left"f><"float-right"B>rt<"bottom"<"float-left"p><"float-right"l>><"clear">',
             });
 

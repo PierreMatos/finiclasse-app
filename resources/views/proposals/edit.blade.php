@@ -5,8 +5,8 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <!-- <h1>Edit Proposal</h1> -->
-                    <h1>{{ isset($proposal->vendor->name) ? $proposal->vendor->name : '' }}</h1>
+                    <!-- <h1>{{__('Edit proposal')}}</h1> -->
+                    <h1>{{__('Edit')}} {{ isset($proposal->vendor->name) ? $proposal->vendor->name : '' }}</h1>
                 </div>
             </div>
         </div>
@@ -20,23 +20,23 @@
         <ul class="nav nav-tabs bg-nav" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <a class="nav-link active" id="client-tab" data-toggle="tab" href="#clients" role="tab" aria-controls="client"
-                    aria-selected="false">Cliente</a>
+                    aria-selected="false">{{__('Client')}}</a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="cars-tab" data-toggle="tab" href="#cars" role="tab" aria-controls="cars"
-                    aria-selected="false">Viaturas</a>
+                    aria-selected="false">{{__('Car')}}</a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="tradein-tab" data-toggle="tab" href="#tradeins" role="tab"
-                    aria-controls="tradein" aria-selected="false">Retoma</a>
+                    aria-controls="tradein" aria-selected="false">{{__('Tradein')}}</a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="financings-tab" data-toggle="tab" href="#financings" role="tab"
-                    aria-controls="financings" aria-selected="false">Financiamento</a>
+                    aria-controls="financings" aria-selected="false">{{__('Financing')}}</a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="proposals-tab" data-toggle="tab" href="#proposals" role="tab"
-                    aria-controls="proposals" aria-selected="false">Proposta</a>
+                    aria-controls="proposals" aria-selected="false">{{__('Proposal')}}</a>
             </li>
         </ul>
 

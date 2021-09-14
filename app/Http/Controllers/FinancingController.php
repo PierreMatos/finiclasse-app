@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateFinancingRequest;
-use App\Http\Requests\UpdateFinancingRequest;
-use App\Repositories\FinancingRepository;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Http\Request;
 use Flash;
 use Response;
+use App\Models\Financing;
+use Illuminate\Http\Request;
+use App\Repositories\FinancingRepository;
+use App\Http\Controllers\AppBaseController;
+use Spatie\MediaLibrary\Support\MediaStream;
+use App\Http\Requests\CreateFinancingRequest;
+use App\Http\Requests\UpdateFinancingRequest;
 
 class FinancingController extends AppBaseController
 {
@@ -55,6 +57,18 @@ class FinancingController extends AppBaseController
     public function store(CreateFinancingRequest $request)
     {
         $input = $request->all();
+
+        $document = $request->file('document');
+
+        if ($request->hasFile('document') == null) {
+            //Passar a variable input sem colocar nova imagem
+            $input = $request->all();
+        } else {
+            //Actualizar imagem se colocar uma nova
+            $input = $request->all();
+            $financing = $this->financingRepository->create($input);
+            $financing->addMedia($document)->toMediaCollection('financing');
+        }
 
         $financing = $this->financingRepository->create($input);
 
@@ -115,13 +129,30 @@ class FinancingController extends AppBaseController
     {
         $financing = $this->financingRepository->find($id);
 
+        //Apagar imagem antiga se for mudada  
+        if ($request->hasFile('document')) {
+            $financing->clearMediaCollection('financing');
+        }
+
+        //Verificar se o file existe
+        $document = $request->file('document');
+
+        if ($request->hasFile('document') == null) {
+            //Passar a variable input sem colocar nova imagem
+            $input = $request->all();
+        } else {
+            //Actualizar imagem se colocar uma nova
+            $input = $request->all();
+            $financing->addMedia($document)->toMediaCollection('financing');
+        }
+
         if (empty($financing)) {
             Flash::error('Financing not found');
 
             return redirect(route('financings.index'));
         }
 
-        $financing = $this->financingRepository->update($request->all(), $id);
+        $financing = $this->financingRepository->update($input, $id);
 
         Flash::success('Financing updated successfully.');
 
@@ -148,9 +179,22 @@ class FinancingController extends AppBaseController
         }
 
         $this->financingRepository->delete($id);
+        $financing->clearMediaCollection('financing');
 
         Flash::success('Financing deleted successfully.');
 
         return redirect(route('financings.index'));
+    }
+
+    public function download(Financing $financing, $id)
+    {
+        $financing = $this->financingRepository->find($id);
+
+        // Let's get some media.
+        $downloads = $financing->getMedia('financing');
+
+        // Download the files associated with the media in a streamed way.
+        // No prob if your files are very large.
+        return MediaStream::create('files.zip')->addMedia($downloads);
     }
 }
