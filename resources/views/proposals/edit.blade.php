@@ -16,6 +16,30 @@
 
         @include('adminlte-templates::common.errors')
 
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs bg-nav" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="client-tab" data-toggle="tab" href="#clients" role="tab" aria-controls="client"
+                    aria-selected="false">Cliente</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="cars-tab" data-toggle="tab" href="#cars" role="tab" aria-controls="cars"
+                    aria-selected="false">Viaturas</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="tradein-tab" data-toggle="tab" href="#tradeins" role="tab"
+                    aria-controls="tradein" aria-selected="false">Retoma</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="financings-tab" data-toggle="tab" href="#financings" role="tab"
+                    aria-controls="financings" aria-selected="false">Financiamento</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="proposals-tab" data-toggle="tab" href="#proposals" role="tab"
+                    aria-controls="proposals" aria-selected="false">Proposta</a>
+            </li>
+        </ul>
+
         <div class="card">
 
             {!! Form::model($proposal, ['route' => ['proposals.update', $proposal->id], 'method' => 'patch', 'files' => true]) !!}
@@ -26,12 +50,12 @@
                 </div>
             </div>
 
-            <div class="card-footer">
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('proposals.index') }}" class="btn btn-default">Cancel</a>
-            </div>
+            <!-- <div class="card-footer">
+                {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+                <a href="{{ route('proposals.index') }}" class="btn btn-default">{{ __('Cancel') }}</a>
+            </div> -->
 
-           {!! Form::close() !!}
+            {!! Form::close() !!}
 
         </div>
     </div>

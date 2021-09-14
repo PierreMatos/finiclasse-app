@@ -730,6 +730,13 @@
     "Avatar": "Avatar",
     "Create car": "Criar Viatura",
     "Edit car": "Editar Viatura",
-    "Car": "Viatura"
-
+    "Car": "Viatura",
+    "Proposals": "Negócios",
+    "Vendor": "Vendedor",
+    "Date": "Data",
+    "Create Proposal": "Criar negócio",
+    "Edit Proposal": "Editar negócio",
+    "Proposal": "Negócio",
+    "Success": "Aprovar",
+    "Reject": "Rejeitar"
 }

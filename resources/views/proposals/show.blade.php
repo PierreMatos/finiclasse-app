@@ -5,7 +5,8 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Proposal Details</h1>
+                    <!-- <h1>Proposal</h1> -->
+                    <h1>{{ isset($proposal->vendor->name) ? $proposal->vendor->name : '' }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-default float-right"
