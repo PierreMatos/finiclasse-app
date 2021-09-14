@@ -72,6 +72,8 @@ class ProposalResource extends JsonResource
                 'tradein_sale' => $this->tradein->tradein_sale ?? '',
                 'price' => $this->tradein->price ?? '',
                 'tradein_observations' => $this->tradein->tradein_observations ?? '',
+                'fuel_id' => $this->tradein->fuel->id ?? '',
+                'state_id' => $this->tradein->state->id ?? '',
                 // cat, km, motor,reg,fuel,valor de compra, valor de venda, obs, 
                 // array de imagens
                 'images' => [$images] ?? '',

@@ -38,6 +38,12 @@ class PermissionsSeeder extends Seeder
      */
     public function run()
     {
+         // Reset cached roles and permissions
+         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+         
+        \DB::table('permissions')->delete();
+        \DB::table('role_has_permissions')->delete();
+
         $routesArr =array();
         $routeCollection = Route::getRoutes();
         try{
@@ -62,7 +68,7 @@ class PermissionsSeeder extends Seeder
 
             $admin->givePermissionTo($permission);
                 // array_push($routesArr, $route->getName());
-                    if (Str::contains($route->getName(), ['cars', 'financings', 'users', 'proposals', 'vendors'])){
+                    if (Str::contains($route->getName(), ['cars', 'financings', 'users', 'proposals', 'vendors', 'home'])){
                         $Administrador->givePermissionTo($permission);
                         $DiretorComercial->givePermissionTo($permission);
                         $ChefeDeVendas->givePermissionTo($permission);

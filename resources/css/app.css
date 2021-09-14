@@ -79,3 +79,6 @@ div.dataTables_wrapper div.dataTables_filter input {
 .box-none{
     box-shadow: none;
 }
+.treeview i{
+margin-right: .5rem!important;
+}

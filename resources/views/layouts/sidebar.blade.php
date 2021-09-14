@@ -11,7 +11,7 @@
                     <a href="#" class="brand-link nav-link bg-black dropdown-toggle" data-toggle="dropdown">
                         <!-- <img src="https://assets.infyom.com/logo/blue_logo_150x150.png"
                             class="brand-image  img-circle elevation-2" alt="User Image"> -->
-                            <i class="brand-image mt-1 elevation-2 fas fa-user-tie"></i>
+                            <i class="brand-image mt-2 elevation-2 fas fa-user-circle"></i>
                         <span class="brand-text d-none d-md-inline">{{ Auth::user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">

@@ -202,6 +202,24 @@ class UserController extends AppBaseController
         return view('users.index')
             ->with('users', $clients);
     }
+
+    /**
+     * Display a listing of the Clients.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function getVendors(Request $request)
+    {
+
+        $user = Auth::user();
+       
+        $vendors =  $this->userRepository->getVendors($user);
+       
+        return view('users.index')
+            ->with('users', $vendors);
+    }
    
 
 }

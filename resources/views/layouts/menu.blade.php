@@ -2,10 +2,11 @@
 
 
 
-@can('home.index')
-<li class="nav-item">
-    <a href="{{ route('homr.index') }}"
-       class="nav-link {{ Request::is('home*') ? 'active' : '' }}">
+@can('home')
+<li class="treeview">
+    <a href="{{ route('home') }}"
+    class="nav-link {{ Request::is('home*') ? 'active' : '' }}">
+    <i class="fas fa-home"></i>
         <p>Home</p>
     </a>
 </li>
@@ -141,18 +142,20 @@
 
 
 @can('proposals.index')
-<li class="nav-item">
+<li class="treeview">
     <a href="{{ route('proposals.index') }}"
        class="nav-link {{ Request::is('proposals*') ? 'active' : '' }}">
+       <i class="fas fa-file-contract"></i>
         <p>Negócios</p>
     </a>
 </li>
 @endcan
 
 @can('financings.index')
-<li class="nav-item">
+<li class="treeview">
     <a href="{{ route('financings.index') }}"
        class="nav-link {{ Request::is('financings*') ? 'active' : '' }}">
+       <i class="fas fa-money-check"></i>
         <p>Financiamentos</p>
     </a>
 </li>
@@ -177,19 +180,32 @@
 @endcan
 
 @can('cars.index')
-<li class="nav-item">
+<li class="treeview">
     <a href="{{ route('cars.index') }}"
        class="nav-link {{ Request::is('cars*') ? 'active' : '' }}">
+       <i class="fas fa-car"></i>
         <p>Viaturas</p>
     </a>
 </li>
 @endcan
 
+<!-- TODO criar role para ver clientes e vendedores -->
 @can('users.index')
-<li class="nav-item">
+<li class="treeview">
     <a href="{{ route('getClients') }}"
        class="nav-link {{ Request::is('clients*') ? 'active' : '' }}">
+       <i class="fas fa-users"></i>
         <p>Clientes</p>
+    </a>
+</li>
+@endcan
+
+@can('users.index')
+<li class="treeview">
+    <a href="{{ route('getVendors') }}"
+       class="nav-link {{ Request::is('vendors*') ? 'active' : '' }}">
+       <i class="fas fa-user-tie"></i>
+        <p>Vendedores</p>
     </a>
 </li>
 @endcan

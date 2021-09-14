@@ -58,8 +58,20 @@ class UserRepository extends BaseRepository
         }
     }
 
-    public function getVendors(){
+    public function getVendors($user){
 
+        if ($user->hasRole(['admin', 'Administrador', 'Diretor comercial'])){
         
+            $vendors = User::role('Vendedor')->get(); 
+
+            return $vendors;
+
+        }elseif($user->hasRole(['Chefe de vendas'])){
+
+            $vendors = User::role('Vendedor')
+            ->where('stand_id','=', $user->stand_id)->get();
+
+                return $vendors;
+        }
     }
 }

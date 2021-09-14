@@ -150,6 +150,7 @@ Route::get('/getcars', [CarController::class, 'getCars'])->name('getcars');
 
 
 Route::get('clients',[UserController::class, 'getClients'])->name('getClients');
+Route::get('vendors',[UserController::class, 'getVendors'])->name('getVendors');
 Route::resource('users', App\Http\Controllers\UserController::class);
 
 Route::resource('campaigns', App\Http\Controllers\CampaignController::class);
