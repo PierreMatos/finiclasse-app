@@ -6,6 +6,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FinancingController;
+use App\Http\Controllers\ProposalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -112,17 +113,6 @@ Route::get('/config-cache', function() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 Route::resource('proposalStates', App\Http\Controllers\ProposalStateController::class);
 
 Route::resource('benefits', App\Http\Controllers\BenefitController::class);
@@ -145,9 +135,12 @@ Route::resource('financingProposals', App\Http\Controllers\FinancingProposalCont
 
 Route::resource('carFuels', App\Http\Controllers\CarFuelController::class);
 
+
 Route::resource('cars', App\Http\Controllers\CarController::class);
 // Route::get( ['carController', 'getCars'])->name('getCars');
 Route::get('/getcars', [CarController::class, 'getCars'])->name('getcars');
+// Route::get('/carstate/{car_id}/{state_id}/{price}', [CarController::class, 'carState'])->name('carstate');
+Route::POST('/carstate', [CarController::class, 'carState'])->name('carstate');
 
 
 Route::get('clients',[UserController::class, 'getClients'])->name('getClients');

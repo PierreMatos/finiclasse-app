@@ -24,7 +24,9 @@
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="cars-tab" data-toggle="tab" href="#cars" role="tab" aria-controls="cars"
+                
                     aria-selected="false">{{__('Car')}}</a>
+
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="tradein-tab" data-toggle="tab" href="#tradeins" role="tab"
@@ -60,3 +62,46 @@
         </div>
     </div>
 @endsection
+
+@push('page_scripts')
+
+    <script>
+
+        // $('.trade').on('click', function() {
+        //     let price = document.getElementById("tradein_purchase").value;
+        //     var url = "{{route('carstate', ['','',''])}}"+"/"+this.id+"/"+this.value+"/"+price;
+        //     console.log(url);
+        //     window.location.href=url;
+        // });
+        
+
+   
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+   
+    $(".trade").click(function(e){
+  
+        e.preventDefault();
+   
+        var price = $("input[name=tradein_purchase]").val();
+        // var password = $("input[name=password]").val();
+        // var email = $("input[name=email]").val();
+   
+        $.ajax({
+            type: "post",
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'), '_method': 'patch'},
+           url:"{{ route('carstate') }}",
+           data:{car:this.id, state:this.value, price:price},
+           success:function(data){
+              alert(data.success);
+           }
+        });
+  
+    });
+    </script>
+
+@endpush
+
