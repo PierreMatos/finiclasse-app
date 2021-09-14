@@ -158,7 +158,6 @@
 </li>
 @endcan
 
-
 @can('carFuels.index')
 <li class="nav-item">
     <a href="{{ route('carFuels.index') }}"
@@ -167,7 +166,6 @@
     </a>
 </li>
 @endcan
-
 
 @can('cars.index')
 <li class="nav-item">
@@ -196,7 +194,6 @@
 </li>
 @endcan
 
-
 @can('benefitsProposals.index')
 <li class="nav-item">
     <a href="{{ route('benefitsProposals.index') }}"
@@ -216,7 +213,6 @@
 </li>
 @endcan
 
-
 @can('clientTypes.index')
 <li class="nav-item">
     <a href="{{ route('clientTypes.index') }}"
@@ -235,4 +231,11 @@
 </li>
 @endcan
 
-
+@can('tradeinStates.index')
+<li class="nav-item">
+    <a href="{{ route('tradeinStates.index') }}"
+       class="nav-link {{ Request::is('tradeinStates*') ? 'active' : '' }}">
+        <p>Tradein States</p>
+    </a>
+</li>
+@endcan
