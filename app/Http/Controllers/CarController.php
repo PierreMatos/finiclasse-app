@@ -282,7 +282,6 @@ class CarController extends AppBaseController
      */
     public function destroy($id)
     {
-        $product = $this->productRepository->update($input, $id)->with('categories', $categories);
         $car = $this->carRepository->find($id);
 
         if (empty($car)) {
@@ -335,10 +334,6 @@ class CarController extends AppBaseController
 
         // $records =  $this->carRepository->all();
         foreach($records as $record){
-        //    $id = $record->model->make->name;
-        //    $model = $record->model->name;
-        //    $variant = $record->variant;
-        //    $plate = $record->plate;
 
            $data_arr[] = array(
                "id" => $record->id,
@@ -364,5 +359,36 @@ class CarController extends AppBaseController
         return response()->json($response); 
      }
 
+     public function carState($car,$state){
+
+        $car = $this->carRepository->find($car);
+
+        if (empty($car)) {
+            Flash::error('Car not found');
+
+            return redirect(route('proposals.index'));
+        }
+        
+        if ($state = 0){
+
+             //delete car
+
+             $this->carRepository->delete($id);
+
+            Flash::success('Car deleted successfully.');
+
+            return redirect(route('proposals.index'));
+
+         }else{
+
+            //update $car with $state
+            $car = $this->carRepository->update(['posts.status'=> 'closed'], $car);
+
+            Flash::success('Retoma aceite com sucesso.');
+
+            return redirect(route('proposals.index'));
+
+         }
+     }
     
 }

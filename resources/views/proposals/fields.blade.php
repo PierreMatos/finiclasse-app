@@ -204,8 +204,9 @@
 
         <div style="float: right;">
 
-            <button type="button" class="btn btn-success">{{ __('Success') }}</button>
-            <button type="button" class="btn btn-danger" style="margin-right: 20px;">{{ __('Reject') }}</button>
+
+        <button type="button" id="{{$proposal->tradein->id}}" value="3" class="trade btn btn-info" > Aceitar</button>
+        <button type="button" id="{{$proposal->tradein->id}}" value="0" class="trade btn btn-info" > Rejeitar</button>
 
             @if ($proposal->tradein_id != '')
                 <a href="{{ route('cars.show', [$proposal->tradein->id]) }}">Ver tudo</a>

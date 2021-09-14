@@ -24,7 +24,7 @@
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="cars-tab" data-toggle="tab" href="#cars" role="tab" aria-controls="cars"
-                    aria-selected="false">Viaturas</a>
+                    aria-selected="false">Viatura</a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="tradein-tab" data-toggle="tab" href="#tradeins" role="tab"
@@ -60,3 +60,17 @@
         </div>
     </div>
 @endsection
+
+@push('page_scripts')
+
+    <script>
+        $('.trade').on('click', function() {
+            var url = "{{route('carstate', ['',''])}}"+"/"+this.id+"/"+this.value;
+            console.log(url);
+            window.location.href=url;
+        });
+        
+    </script>
+
+@endpush
+
