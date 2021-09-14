@@ -138,7 +138,8 @@ Route::resource('carFuels', App\Http\Controllers\CarFuelController::class);
 Route::resource('cars', App\Http\Controllers\CarController::class);
 // Route::get( ['carController', 'getCars'])->name('getCars');
 Route::get('/getcars', [CarController::class, 'getCars'])->name('getcars');
-Route::get('/carstate/{car_id}/{state_id}', [CarController::class, 'carState'])->name('carstate');
+// Route::get('/carstate/{car_id}/{state_id}/{price}', [CarController::class, 'carState'])->name('carstate');
+Route::POST('/carstate', [CarController::class, 'carState'])->name('carstate');
 
 
 Route::get('clients',[UserController::class, 'getClients'])->name('getClients');

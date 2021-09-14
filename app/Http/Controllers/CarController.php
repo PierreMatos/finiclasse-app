@@ -359,21 +359,22 @@ class CarController extends AppBaseController
         return response()->json($response); 
      }
 
-     public function carState($car,$state){
+     public function carState(Request $request){
 
-        $car = $this->carRepository->find($car);
 
-        if (empty($car)) {
+        $car = $this->carRepository->find($request->car);
+
+        if (empty($request->car)) {
             Flash::error('Car not found');
 
             return redirect(route('proposals.index'));
         }
         
-        if ($state = 0){
+        if ($request->state = 0){
 
              //delete car
 
-             $this->carRepository->delete($id);
+             $this->carRepository->delete($request->car);
 
             Flash::success('Car deleted successfully.');
 
@@ -382,7 +383,7 @@ class CarController extends AppBaseController
          }else{
 
             //update $car with $state
-            $car = $this->carRepository->update(['posts.status'=> 'closed'], $car);
+            $car = $this->carRepository->update(['state_id'=> $request->state, 'tradein_purchase' => $request->price], $request->car);
 
             Flash::success('Retoma aceite com sucesso.');
 

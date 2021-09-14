@@ -64,12 +64,41 @@
 @push('page_scripts')
 
     <script>
-        $('.trade').on('click', function() {
-            var url = "{{route('carstate', ['',''])}}"+"/"+this.id+"/"+this.value;
-            console.log(url);
-            window.location.href=url;
-        });
+
+        // $('.trade').on('click', function() {
+        //     let price = document.getElementById("tradein_purchase").value;
+        //     var url = "{{route('carstate', ['','',''])}}"+"/"+this.id+"/"+this.value+"/"+price;
+        //     console.log(url);
+        //     window.location.href=url;
+        // });
         
+
+   
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+   
+    $(".trade").click(function(e){
+  
+        e.preventDefault();
+   
+        var price = $("input[name=tradein_purchase]").val();
+        // var password = $("input[name=password]").val();
+        // var email = $("input[name=email]").val();
+   
+        $.ajax({
+            type: "post",
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'), '_method': 'patch'},
+           url:"{{ route('carstate') }}",
+           data:{car:this.id, state:this.value, price:price},
+           success:function(data){
+              alert(data.success);
+           }
+        });
+  
+    });
     </script>
 
 @endpush
