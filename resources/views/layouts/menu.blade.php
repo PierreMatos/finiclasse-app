@@ -2,6 +2,15 @@
 
 
 
+@can('home.index')
+<li class="nav-item">
+    <a href="{{ route('homr.index') }}"
+       class="nav-link {{ Request::is('home*') ? 'active' : '' }}">
+        <p>Home</p>
+    </a>
+</li>
+@endcan
+
 @can('stands.index')
 <li class="nav-item">
     <a href="{{ route('stands.index') }}"
