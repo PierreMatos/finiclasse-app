@@ -2,13 +2,13 @@
     <table class="table" id="proposals-table">
         <thead>
             <tr>
-                <th>Estado</th>
-                <th>Client</th>
-                <th>Vendor</th>
-                <th>Car</th>
-                <th>Date</th>
-                <th>Price</th>
-                <th>Action</th>
+                <th>{{__('State')}}</th>
+                <th>{{__('Client')}}</th>
+                <th>{{__('Vendor')}}</th>
+                <th>{{__('Car')}}</th>
+                <th>{{__('Date')}}</th>
+                <th>{{__('Price')}}</th>
+                <th>{{__('Action')}}</th>
             </tr>
         </thead>
         <tbody>
@@ -16,17 +16,17 @@
             <tr style="background-color:{{$proposal->state->color}}">
                 <td>{{ isset($proposal->state->name) ? $proposal->state->name : '' }}</td>
                 <td>{{ isset($proposal->client->name) ? $proposal->client->name : '' }}</td>
-                <td>{{isset($proposal->vendor->name) ? $proposal->vendor->name : ''}}</td>
+                <td>{{ isset($proposal->vendor->name) ? $proposal->vendor->name : '' }}</td>
                 <td>{{ isset($proposal->car->model->make->name) ? $proposal->car->model->make->name : ''}}</td>
                 <td>{{ isset($proposal->first_contact_date) ? $proposal->first_contact_date : ''}}</td>
-                <td>{{ isset($proposal->price) ? $proposal->price : 'null' }}</td>
+                <td>{{ isset($proposal->price) ? $proposal->price : '' }}</td>
                 
                 <td width="120">
                     {!! Form::open(['route' => ['proposals.destroy', $proposal->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('proposals.show', [$proposal->id]) }}" class='btn btn-default btn-xs'>
+                        <!-- <a href="{{ route('proposals.show', [$proposal->id]) }}" class='btn btn-default btn-xs'>
                             <i class="far fa-eye"></i>
-                        </a>
+                        </a> -->
                         <a href="{{ route('proposals.edit', [$proposal->id]) }}" class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>

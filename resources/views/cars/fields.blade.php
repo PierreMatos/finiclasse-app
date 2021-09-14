@@ -1,23 +1,3 @@
-<!-- Nav tabs -->
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-        <a class="nav-link active" id="geral-tab" data-toggle="tab" href="#geral" role="tab" aria-controls="geral"
-            aria-selected="true">Geral</a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link" id="caracteristicas-tab" data-toggle="tab" href="#caracteristicas" role="tab"
-            aria-controls="caracteristicas" aria-selected="false">Caracteristicas</a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link" id="equipamento-tab" data-toggle="tab" href="#equipamento" role="tab"
-            aria-controls="equipamento" aria-selected="false">Equipamento</a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link" id="fotos-tab" data-toggle="tab" href="#fotos" role="tab" aria-controls="fotos"
-            aria-selected="false">Fotos</a>
-    </li>
-</ul>
-
 <!-- Tab panes -->
 <div class="tab-content mt-2 container">
 
@@ -84,9 +64,9 @@
                 </select>
             </div>
 
-            <!-- Registration Field -->
+            <!-- Ano Field -->
             <div class="form-group col-md-3">
-                {!! Form::label('registration', 'Registo') !!}
+                {!! Form::label('registration', 'Ano') !!}
                 {!! Form::text('registration', isset($car->registration) ? $car->registration : '', ['class' => 'form-control', 'id' => 'registration']) !!}
             </div>
 

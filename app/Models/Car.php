@@ -77,6 +77,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property integer $isv
  * @property integer $ptl
  * @property integer $sigpu
+ * @property string $equipment
  */
 class Car extends Model implements HasMedia
 {
@@ -142,7 +143,8 @@ class Car extends Model implements HasMedia
         'ptl',
         'sigpu',
         'iva',
-        'isv'
+        'isv',
+        'equipment'
     ];
 
     /**
@@ -203,7 +205,8 @@ class Car extends Model implements HasMedia
         'iva' => 'integer',
         'isv' => 'integer',
         'ptl' => 'integer',
-        'sigpu' => 'integer'
+        'sigpu' => 'integer',
+        'equipment' => 'string'
     ];
 
     /**
