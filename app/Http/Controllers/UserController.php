@@ -42,7 +42,7 @@ class UserController extends AppBaseController
         return view('users.index')
             ->with('users', $users);
     }
-
+    
     /**
      * Show the form for creating a new User.
      *
@@ -194,7 +194,6 @@ class UserController extends AppBaseController
      */
     public function getClients(Request $request)
     {
-
         $user = Auth::user();
        
         $clients =  $this->userRepository->getClients($user);
@@ -212,12 +211,11 @@ class UserController extends AppBaseController
      */
     public function getVendors(Request $request)
     {
-
         $user = Auth::user();
        
         $vendors =  $this->userRepository->getVendors($user);
        
-        return view('users.index')
+        return view('vendors.index')
             ->with('users', $vendors);
     }
    

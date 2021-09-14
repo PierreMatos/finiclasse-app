@@ -734,9 +734,19 @@
     "Proposals": "Negócios",
     "Vendor": "Vendedor",
     "Date": "Data",
-    "Create Proposal": "Criar negócio",
-    "Edit Proposal": "Editar negócio",
+    "Create proposal": "Criar negócio",
+    "Edit proposal": "Editar negócio",
     "Proposal": "Negócio",
     "Success": "Aprovar",
-    "Reject": "Rejeitar"
+    "Reject": "Rejeitar",
+    "Financings": "Financiamentos",
+    "Description": "Descrição",
+    "Contract": "Contrato",
+    "Tradein": "Retoma",
+    "Financing": "Financiamento",
+    "Create financing": "Criar financiamento",
+    "Edit financing": "Editar financiamento",
+    "Vendors": "Vendedores",
+    "Create vendor": "Criar vendedor",
+    "Sign In": "Entrar"
 }

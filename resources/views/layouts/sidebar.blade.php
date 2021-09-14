@@ -14,23 +14,13 @@
                             <i class="brand-image mt-2 elevation-2 fas fa-user-circle"></i>
                         <span class="brand-text d-none d-md-inline">{{ Auth::user()->name }}</span>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <!-- User image -->
-                        <li class="user-header bg-primary">
-                            <img src="https://assets.infyom.com/logo/blue_logo_150x150.png"
-                                class="img-circle elevation-2"
-                                alt="User Image">
-                            <p>
-                                {{ Auth::user()->name }}
-                                <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small>
-                            </p>
-                        </li>
+                    <ul class="dropdown-menu dropdown-menu-lg">
                         <!-- Menu Footer-->
-                        <li class="user-footer">
-                            <a href="#" class="btn btn-default btn-flat">Profile</a>
-                            <a href="#" class="btn btn-default btn-flat float-right"
+                        <li class="user-footer" style="text-align: center; display: grid;">
+                            <a href="#" class="btn btn-default btn-flat">Perfil</a>
+                            <a href="#" class="btn btn-default btn-flat"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Sign out
+                                Log Out
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf

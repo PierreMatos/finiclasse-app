@@ -44,7 +44,7 @@ class UserRepository extends BaseRepository
         
         if ($user->hasRole(['admin', 'Administrador', 'Diretor comercial'])){
         
-            $clients = User::where('finiclasse_employee', '=', 0)->get();
+            $clients = User::where('finiclasse_employee', '=', 0)->orderBy('created_at', 'desc')->get();
 
             return $clients;
 
@@ -52,7 +52,7 @@ class UserRepository extends BaseRepository
 
             $clients = User::where('finiclasse_employee', '=', 0)
 
-                ->where('stand_id','=', $user->stand_id)->get();
+                ->where('stand_id','=', $user->stand_id)->orderBy('created_at', 'desc')->get();
 
                 return $clients;
         }
@@ -62,14 +62,14 @@ class UserRepository extends BaseRepository
 
         if ($user->hasRole(['admin', 'Administrador', 'Diretor comercial'])){
         
-            $vendors = User::role('Vendedor')->get(); 
+            $vendors = User::role('Vendedor')->orderBy('created_at', 'desc')->get(); 
 
             return $vendors;
 
         }elseif($user->hasRole(['Chefe de vendas'])){
 
             $vendors = User::role('Vendedor')
-            ->where('stand_id','=', $user->stand_id)->get();
+            ->where('stand_id','=', $user->stand_id)->orderBy('created_at', 'desc')->get();
 
                 return $vendors;
         }

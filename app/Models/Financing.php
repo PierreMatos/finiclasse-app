@@ -5,6 +5,9 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * Class Financing
@@ -15,10 +18,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $description
  * @property string $document
  */
-class Financing extends Model
+class Financing extends Model implements HasMedia
 {
     use SoftDeletes;
-
+    use InteractsWithMedia;
     use HasFactory;
 
     public $table = 'financings';
@@ -53,7 +56,8 @@ class Financing extends Model
      */
     public static $rules = [
         'name' => 'required',
-        'description' => 'required'
+        'description' => 'required',
+        'document' => 'nullable'
     ];
 
     

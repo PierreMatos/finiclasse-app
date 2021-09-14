@@ -28,7 +28,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($cars as $car)
+            @foreach ($cars->sortByDesc('created_at') as $car)
                 <tr>
                     <td><img src="{{ $car->getFirstMediaUrl('cars', 'thumb') }}" style="max-width: 100px;" /></td>
                     <td>{{ $car->model->make->name }}</td>
@@ -70,7 +70,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($cars as $car)
+                @foreach ($cars->sortByDesc('created_at') as $car)
 
                     @if ($car->condition->name == $carCondition->name)
                         <tr style="background-color:{{isset($car->state->color) ? $car->state->color : ''}}">

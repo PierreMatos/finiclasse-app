@@ -102,7 +102,7 @@ return [
     'prohibited_unless'    => 'Este campo é proibido a menos que :other esteja em :values.',
     'regex'                => 'Este formato é inválido.',
     'relatable'            => 'Este campo pode não estar associado a este recurso.',
-    'required'             => 'Este campo é obrigatório.',
+    'required'             => 'Este :attribute é obrigatório.',
     'required_if'          => 'Este campo é obrigatório quando :other é :value.',
     'required_unless'      => 'Este campo é obrigatório, a menos que :other esteja em :values.',
     'required_with'        => 'Este campo é obrigatório quando :values estiverem presentes.',

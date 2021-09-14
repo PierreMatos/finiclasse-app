@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FinancingController;
 use App\Http\Controllers\ProposalController;
 
 /*
@@ -143,8 +144,9 @@ Route::POST('/carstate', [CarController::class, 'carState'])->name('carstate');
 
 
 Route::get('clients',[UserController::class, 'getClients'])->name('getClients');
-Route::get('vendors',[UserController::class, 'getVendors'])->name('getVendors');
+Route::get('vendorslist',[UserController::class, 'getVendors'])->name('getVendors');
 Route::resource('users', App\Http\Controllers\UserController::class);
+Route::resource('vendors', App\Http\Controllers\UserController::class);
 
 Route::resource('campaigns', App\Http\Controllers\CampaignController::class);
 
@@ -155,4 +157,8 @@ Route::resource('campaignsProposals', App\Http\Controllers\CampaignsProposalsCon
 Route::resource('clientTypes', App\Http\Controllers\ClientTypeController::class);
 
 Route::resource('carClasses', App\Http\Controllers\CarClassController::class);
+
+ // Download
+
+ Route::get('/download-financing{id}', [FinancingController::class, 'download']);
 
