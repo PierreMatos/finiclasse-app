@@ -40,7 +40,7 @@
                 <!-- </li>
             </li> -->
     <div class="sidebar bg-white">
-        <nav class="mt-2">
+        <nav class="mt-3">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 @include('layouts.menu')
             </ul>

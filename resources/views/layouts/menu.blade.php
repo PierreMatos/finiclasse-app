@@ -155,7 +155,7 @@
 <li class="treeview">
     <a href="{{ route('financings.index') }}"
        class="nav-link {{ Request::is('financings*') ? 'active' : '' }}">
-       <i class="fas fa-money-check"></i>
+       <i class="fas fa-credit-card"></i>
         <p>Financiamentos</p>
     </a>
 </li>
