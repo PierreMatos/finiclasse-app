@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Stand;
+use App\Models\ClientType;
 
 
 class UserFactory extends Factory
@@ -39,6 +40,7 @@ class UserFactory extends Factory
         'gdpr_type' => $this->faker->word,
         'finiclasse_employee' => 0,
         'stand_id' => Stand::all()->random()->id,
+        'client_type_id' => ClientType::all()->random()->id,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];
