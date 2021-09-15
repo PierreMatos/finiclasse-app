@@ -28,7 +28,8 @@ class CarCollection extends ResourceCollection
         foreach ($this->collection as $car) {
 
             $images = collect();
-            $items = $car->getMedia();
+            $items = $car->getMedia('cars');
+            $avatar = $car->getFirstMediaUrl('cars','thumb');
             foreach($items as $item){
                $images->push($item->getUrl());
             }
@@ -42,7 +43,7 @@ class CarCollection extends ResourceCollection
                 'km' => $car->km,
                 'registration' => $car->registration,
                 'condition' => $car->condition->name ?? '',
-                'avatar' => $car->getFirstMediaUrl() ?? '',
+                'avatar' => $avatar,
                 'created_at' => $car->created_at,
                 'created_at_diff' => $car->created_at->diffForHumans(),
                 'updated_at' => $car->updated_at->isoFormat('D/M/Y'),
