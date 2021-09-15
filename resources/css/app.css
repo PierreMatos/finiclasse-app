@@ -2,87 +2,109 @@ div.dataTables_wrapper div.dataTables_filter {
     text-align: left !important;
 }
 
+
 /* DATATABLES COSTUME */
-.top{
+
+.top {
     /* margin-left:3%; */
     /* width: 100%; */
-    padding-top: 40px;   
-    padding-bottom: 70px;   
+    padding-top: 40px;
+    padding-bottom: 70px;
 }
 
-.dataTable{
-    margin-top:50px;
-} 
-.table.dataTable>thead .sorting, table.dataTable>thead .sorting_asc{
+.dataTable {
+    margin-top: 50px;
+}
+
+.table.dataTable>thead .sorting,
+table.dataTable>thead .sorting_asc {
     background-color: #F5F6FA;
 }
+
 .dataTables_wrapper {
     /* width:94%; */
 }
+
 .table-responsive {
     /* margin-left:3% */
 }
-.dt-buttons{
-    text-align:right!important;
+
+.dt-buttons {
+    text-align: right!important;
 }
+
 div.dataTables_wrapper div.dataTables_filter input {
     width: 200%;
 }
+
 @media only screen and (max-width: 400px) {
     div.dataTables_wrapper div.dataTables_filter input {
         width: 100%;
     }
-    .top{
-        padding-top: 7%;   
-        padding-bottom: 7%;   
+    .top {
+        padding-top: 7%;
+        padding-bottom: 7%;
     }
 }
-.btn-secondary{
+
+.btn-secondary {
     background-color: #fff;
-    color:#131523;
+    color: #131523;
     border: 1px solid #D7DBEC
 }
-.btn-secondary:not(:disabled):not(.disabled).active{
+
+.btn-secondary:not(:disabled):not(.disabled).active {
     background-color: #0058FF;
-    color:#fff;
+    color: #fff;
 }
-.btn-secondary:hover{
+
+.btn-secondary:hover {
     background-color: #0058FF;
-    color:#fff;
+    color: #fff;
 }
-.btn-approved{
+
+.btn-approved {
     /* background-color: rgb(168, 236, 168); */
 }
-.btn-approved:not(:disabled):not(.disabled).active{
+
+.btn-approved:not(:disabled):not(.disabled).active {
     background-color: #C4E7CC;
-    color:#000;
+    color: #000;
 }
-.btn-approved:hover{
+
+.btn-approved:hover {
     background-color: #C4E7CC;
-    color:#000;
+    color: #000;
     border: 1px solid #D7DBEC
 }
-.btn-pending:not(:disabled):not(.disabled).active{
+
+.btn-pending:not(:disabled):not(.disabled).active {
     background-color: #FFEEBB;
-    color:#000;
+    color: #000;
 }
-.btn-pending:hover{
+
+.btn-pending:hover {
     background-color: #FFEEBB;
-    color:#000;
+    color: #000;
 }
-.btn-pending{
+
+.btn-pending {
     /* background-color: yellow; */
 }
-.bg-nav{
+
+.bg-nav {
     background-color: #f4f6f9;
 }
-.box-none{
+
+.box-none {
     box-shadow: none;
 }
-.treeview i{
-margin-right: .5rem;
-width: 20px;
+
+.treeview i {
+    margin-right: .5rem;
+    width: 20px;
 }
-.treeview{
+
+.treeview {
     font-family: 'Poppins';
 }
