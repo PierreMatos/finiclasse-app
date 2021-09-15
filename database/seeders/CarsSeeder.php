@@ -132,7 +132,7 @@ class CarsSeeder extends Seeder
             ),
             
             
-            // MAKE MEDIA SEEDER~
+            // MAKE MEDIA SEEDER
 
         ));
 

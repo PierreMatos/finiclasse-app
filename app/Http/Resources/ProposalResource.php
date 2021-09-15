@@ -16,17 +16,20 @@ class ProposalResource extends JsonResource
     {
         $benefits = collect();
 
+        $imagesTradein = collect();
         $images = collect();
 
-        // $items = $this->car->getMedia('cars');
-        // foreach($items as $item){
-        //     $images->push($item->getUrl());
-        //     $images->push($item->getUrl('thumb'));
-        // }
-        // $items = $this->tradein->getMedia();
-        // foreach($items as $item){
-        //    $images->push($item->getUrl());
-        // }
+        $items = $this->car->getMedia('cars');
+        foreach($items as $item){
+            $images->push($item->getUrl());
+            $images->push($item->getUrl('thumb'));
+        }
+
+        $items = $this->tradein->getMedia('cars');
+        foreach($items as $item){
+           $imagesTradein->push($item->getUrl());
+        }
+
         return [
             'id' => $this->id,
             'client_id' => $this->client->id ?? '',
@@ -56,7 +59,8 @@ class ProposalResource extends JsonResource
                 'name' => $this->car->model->make->name ?? '',
                 'model' => $this->car->model->name ?? '',
                 'price' => $this->car->price ?? '',
-                // 'avatar' => $this->car->getFirstMediaUrl('cars','thumb'),
+                'avatar' => $this->car->getFirstMediaUrl('cars','thumb'),
+                'images' => $images ?? '',
             ],
             'tradein_id' => $this->tradein_id,
             'tradein' => [
@@ -76,7 +80,8 @@ class ProposalResource extends JsonResource
                 'state_id' => $this->tradein->state->id ?? '',
                 // cat, km, motor,reg,fuel,valor de compra, valor de venda, obs, 
                 // array de imagens
-                'images' => [$images] ?? '',
+                'avatar' => $this->tradein->getFirstMediaUrl('cars','thumb'),
+                'images' => $imagesTradein ?? '',
             ],
             'total_diff_amount' => $this->total_diff_amount,
             'total_discount_amount' => $this->total_discount_amount,

@@ -39,7 +39,7 @@ class CarFactory extends Factory
         return [
         // 'make_id' => Make::all()->random()->id,
         'model_id' => CarModel::all()->random()->id,
-        'variant' =>  $this->faker->randomElement(['Station','AMG','Cupra','BlackSeries','Performance','Sport']),
+        'variant' =>  $this->faker->randomElement(['Station','Comfort','Style','Cabrio','Performance','Sport']),
         'motorization' => $this->faker->randomElement(['180','200','220','300','320','500']),
         'category_id' => CarCategory::all()->random()->id,
         // 'registration' => '2018',
