@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Carbon\Carbon;
 
 class ProposalCollection extends ResourceCollection
 {
@@ -30,6 +31,8 @@ class ProposalCollection extends ResourceCollection
 
         foreach ($this->collection as $proposal) {
 
+            $avatar_tradein = '';
+            $avatar = '';
             // dd($proposal->id);
             if($proposal->car !== null) {
                $avatar = $proposal->car->getFirstMediaUrl('cars','thumb');
@@ -98,7 +101,9 @@ class ProposalCollection extends ResourceCollection
             'financings' => $proposal->financings,
             // 'authorization' => $proposal->authorization
             'created_at' => $proposal->created_at,
-            'updated_at' => $proposal->updated_at
+            'created_at_diff' => $proposal->created_at->diffForHumans(),
+            'updated_at' => $proposal->updated_at->isoFormat('D/M/Y'),
+            'updated_at_diff' => $proposal->updated_at->diffForHumans()
             ]);
 
         }

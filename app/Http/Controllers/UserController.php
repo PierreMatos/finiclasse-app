@@ -116,10 +116,12 @@ class UserController extends AppBaseController
         // VARIAVEIS REFERENTES AS LISTAGENS DE MODELOS ($modelName)
         $stands = $this->standRepository->all();
         $clientTypes = $this->clientTypeRepository->all();
+        $vendors =  $this->userRepository->getVendors(Auth::user());
 
         $userData = ([
             'stands' => $stands,
             'clientTypes' => $clientTypes,
+            'vendors' => $vendors,
         ]);
 
         if (empty($user)) {

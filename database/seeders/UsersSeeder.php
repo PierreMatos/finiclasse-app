@@ -50,8 +50,8 @@ class UsersSeeder extends Seeder
             array (
                 'id' => 3,
                 'name' => 'Chefe de vendas',
-                'email' => 'chefedevendas@demo.com',
-                'password' => '$2y$10$EBubVy3wDbqNbHvMQwkj3OTYVitL8QnHvh/zV0ICVOaSbALy5dD0K',
+                'email' => 'chefedevendasguarda@demo.com',
+                'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
                 'remember_token' => 'V6PIUfd8JdHT2zkraTlnBcRSINZNjz5Ou7N0WtUGRyaTweoaXKpSfij6UhqC',
                 'stand_id' => 1,
                 'finiclasse_employee' => 1,
@@ -62,9 +62,22 @@ class UsersSeeder extends Seeder
             3 => 
             array (
                 'id' => 4,
-                'name' => 'Vendedor',
-                'email' => 'vendedor@demo.com',
-                'password' => '$2y$10$pmdnepS1FhZUMqOaFIFnNO0spltJpziz3j13UqyEwShmLhokmuoei',
+                'name' => 'Chefe de vendas',
+                'email' => 'chefedevendasviseu@demo.com',
+                'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
+                'remember_token' => 'V6PIUfd8JdHT2zkraTlnBcRSINZNjz5Ou7N0WtUGRyaTweoaXKpSfij6UhqC',
+                'stand_id' => 2,
+                'finiclasse_employee' => 1,
+                'created_at' => '2019-10-12 22:31:26',
+                'updated_at' => '2020-03-29 17:44:30',
+                
+            ),
+            4 => 
+            array (
+                'id' => 5,
+                'name' => 'Vendedor 1',
+                'email' => 'vendedor1@demo.com',
+                'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
                 'stand_id' => 1,
                 'finiclasse_employee' => 1,
                 'remember_token' => NULL,
@@ -72,18 +85,54 @@ class UsersSeeder extends Seeder
                 'updated_at' => '2020-03-29 17:59:39',
                
             ),
-            4 => 
+            5 => 
             array (
-                'id' => 5,
+                'id' => 6,
+                'name' => 'Vendedor 2',
+                'email' => 'vendedor2@demo.com',
+                'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
+                'stand_id' => 1,
+                'finiclasse_employee' => 1,
+                'remember_token' => NULL,
+                'created_at' => '2019-10-15 17:55:39',
+                'updated_at' => '2020-03-29 17:59:39',
+               
+            ),
+            6 => 
+            array (
+                'id' => 7,
+                'name' => 'Vendedor 3',
+                'email' => 'vendedor3@demo.com',
+                'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
+                'stand_id' => 2,
+                'finiclasse_employee' => 1,
+                'remember_token' => NULL,
+                'created_at' => '2019-10-15 17:55:39',
+                'updated_at' => '2020-03-29 17:59:39',
+            ),
+            7 => 
+            array (
+                'id' => 8,
+                'name' => 'Vendedor 4',
+                'email' => 'vendedor4@demo.com',
+                'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
+                'stand_id' => 2,
+                'finiclasse_employee' => 1,
+                'remember_token' => NULL,
+                'created_at' => '2019-10-15 17:55:39',
+                'updated_at' => '2020-03-29 17:59:39',
+            ),
+            8 => 
+            array (
+                'id' => 9,
                 'name' => 'Cliente',
                 'email' => 'cliente@demo.com',
-                'password' => '$2y$10$pmdnepS1FhZUMqOaFIFnNO0spltJpziz3j13UqyEwShmLhokmuoei',
+                'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
                 'stand_id' => 1,
                 'finiclasse_employee' => 0,
                 'remember_token' => NULL,
                 'created_at' => '2019-10-15 17:55:39',
                 'updated_at' => '2020-03-29 17:59:39',
-               
             )
         ));
 

@@ -85,7 +85,11 @@ class RolesAndPermissionsSeeder extends Seeder
         $this->userRepository->find(1)->assignRole('admin');
         $this->userRepository->find(2)->assignRole('Administrador');
         $this->userRepository->find(3)->assignRole('Chefe de vendas');
-        $this->userRepository->find(4)->assignRole('Vendedor');
+        $this->userRepository->find(4)->assignRole('Chefe de vendas');
+        $this->userRepository->find(5)->assignRole('Vendedor');
+        $this->userRepository->find(6)->assignRole('Vendedor');
+        $this->userRepository->find(7)->assignRole('Vendedor');
+        $this->userRepository->find(8)->assignRole('Vendedor');
         
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Carbon\Carbon;
 
 class CarResource extends JsonResource
 {
@@ -72,7 +73,11 @@ class CarResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'avatar' => $this->getFirstMediaUrl('cars','thumb'),
-            'images' => [$images]
+            'images' => $images,
+            'created_at' => $this->created_at,
+            'created_at_diff' => $this->created_at->diffForHumans(),
+            'updated_at' => $this->updated_at->isoFormat('D/M/Y'),
+            'updated_at_diff' => $this->updated_at->diffForHumans()
                
         ];
     }
