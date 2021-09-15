@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Carbon\Carbon;
 
 class ProposalResource extends JsonResource
 {
@@ -19,15 +20,21 @@ class ProposalResource extends JsonResource
         $imagesTradein = collect();
         $images = collect();
 
-        $items = $this->car->getMedia('cars');
-        foreach($items as $item){
-            $images->push($item->getUrl());
-            $images->push($item->getUrl('thumb'));
+        if($this->car !== null) {
+            $items = $this->car->getMedia('cars');
+            $carAvatar = $this->car->getFirstMediaUrl('cars','thumb');
+            foreach($items as $item){
+                $images->push($item->getUrl());
+                $images->push($item->getUrl('thumb'));
+            }
         }
 
-        $items = $this->tradein->getMedia('cars');
-        foreach($items as $item){
-           $imagesTradein->push($item->getUrl());
+        if($this->tradein !== null) {
+            $items = $this->tradein->getMedia('cars');
+            $tradeinAvatar = $this->tradein->getFirstMediaUrl('cars','thumb');
+            foreach($items as $item){
+            $imagesTradein->push($item->getUrl());
+            }
         }
 
         return [
@@ -59,7 +66,7 @@ class ProposalResource extends JsonResource
                 'name' => $this->car->model->make->name ?? '',
                 'model' => $this->car->model->name ?? '',
                 'price' => $this->car->price ?? '',
-                'avatar' => $this->car->getFirstMediaUrl('cars','thumb'),
+                'avatar' => $carAvatar ?? '',
                 'images' => $images ?? '',
             ],
             'tradein_id' => $this->tradein_id,
@@ -80,7 +87,7 @@ class ProposalResource extends JsonResource
                 'state_id' => $this->tradein->state->id ?? '',
                 // cat, km, motor,reg,fuel,valor de compra, valor de venda, obs, 
                 // array de imagens
-                'avatar' => $this->tradein->getFirstMediaUrl('cars','thumb'),
+                'avatar' => $tradeinAvatar ?? '',
                 'images' => $imagesTradein ?? '',
             ],
             'total_diff_amount' => $this->total_diff_amount,
@@ -92,7 +99,10 @@ class ProposalResource extends JsonResource
             'financings' => $this->financings,
             // 'authorization' => $this->authorization
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'created_at_diff' => $this->created_at->diffForHumans(),
+            'updated_at' => $this->updated_at->isoFormat('D/M/Y'),
+            'updated_at_diff' => $this->updated_at->diffForHumans()
+
         ];
     }
 }

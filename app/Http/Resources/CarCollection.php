@@ -43,6 +43,10 @@ class CarCollection extends ResourceCollection
                 'registration' => $car->registration,
                 'condition' => $car->condition->name ?? '',
                 'avatar' => $car->getFirstMediaUrl() ?? '',
+                'created_at' => $car->created_at,
+                'created_at_diff' => $car->created_at->diffForHumans(),
+                'updated_at' => $car->updated_at->isoFormat('D/M/Y'),
+                'updated_at_diff' => $car->updated_at->diffForHumans()
             ]);
 
         }

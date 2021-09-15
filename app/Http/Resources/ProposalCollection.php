@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Carbon\Carbon;
 
 class ProposalCollection extends ResourceCollection
 {
@@ -97,8 +98,10 @@ class ProposalCollection extends ResourceCollection
             'campaigns' => $proposal->campaigns,
             'financings' => $proposal->financings,
             // 'authorization' => $proposal->authorization
-            'created_at' => $proposal->created_at,
-            'updated_at' => $proposal->updated_at
+            'created_at' => $this->created_at,
+            'created_at_diff' => $this->created_at->diffForHumans(),
+            'updated_at' => $this->updated_at->isoFormat('D/M/Y'),
+            'updated_at_diff' => $this->updated_at->diffForHumans()
             ]);
 
         }
