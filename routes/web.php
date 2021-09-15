@@ -105,6 +105,9 @@ Route::get('/config-cache', function() {
     return '<h1>Clear Config cleared</h1>';
 });
 
+Route::get('/foo', function () {
+    Artisan::call('storage:link');
+});
 // Route::get('/updateapp', function()
 // {
 //     Artisan::call('dump-autoload');
