@@ -38,10 +38,3 @@
     </div>
 
 </aside>
-
-<style>
-    .main-sidebar {
-        width: 280px;
-    }
-
-</style>

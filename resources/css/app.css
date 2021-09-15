@@ -108,3 +108,28 @@ div.dataTables_wrapper div.dataTables_filter input {
 .treeview {
     font-family: 'Poppins';
 }
+
+.main-sidebar {
+    width: 280px;
+}
+
+.content-wrapper {
+    margin-left: 280px !important;
+}
+
+.main-header {
+    margin-left: 280px !important;
+}
+
+.layout-fixed .brand-link {
+    width: 280px !important;
+}
+
+.logoImg {
+    height: 22px;
+    vertical-align: inherit;
+}
+
+.main-footer {
+    margin-left: 280px !important;
+}

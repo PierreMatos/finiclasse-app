@@ -110,7 +110,7 @@
         <!-- Main Footer -->
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
-                <b>Version</b> 3.0.5
+                <b>Versão</b> 1.0
             </div>
             <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
             reserved.
@@ -182,23 +182,3 @@
 </body>
 
 </html>
-
-<style>
-    .content-wrapper {
-        margin-left: 280px !important;
-    }
-
-    .main-header {
-        margin-left: 280px !important;
-    }
-
-    .layout-fixed .brand-link {
-        width: 280px !important;
-    }
-
-    .logoImg {
-        height: 22px;
-        vertical-align: inherit;
-    }
-
-</style>
