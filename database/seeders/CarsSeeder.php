@@ -136,8 +136,8 @@ class CarsSeeder extends Seeder
 
         ));
 
-        Car::factory()
-        ->count(10)
-        ->create();
+        // Car::factory()
+        // ->count(10)
+        // ->create();
     }
 }

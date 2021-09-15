@@ -24,7 +24,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-        'name' => $this->faker->word,
+        'name' => $this->faker->name,
         'email' => $this->faker->email,
         'email_verified_at' => $this->faker->date('Y-m-d H:i:s'),
         'password' => $this->faker->md5,
@@ -37,7 +37,7 @@ class UserFactory extends Factory
         'gdpr_confirmation' => $this->faker->date('Y-m-d H:i:s'),
         'gdpr_rejection' => $this->faker->date('Y-m-d H:i:s'),
         'gdpr_type' => $this->faker->word,
-        'finiclasse_employee' => $this->faker->boolean,
+        'finiclasse_employee' => 0,
         'stand_id' => Stand::all()->random()->id,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s')

@@ -134,6 +134,15 @@ class CarModelsSeeder extends Seeder
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',
             ),
+            13 => 
+            array (
+                'id' => 14,
+                'name' => 'C',
+                'make_id' => 2,
+                'car_category_id' => 1,
+                'created_at' => '2019-10-22 15:50:48',
+                'updated_at' => '2019-10-22 15:50:48',
+            ),
         ));
     }
 }

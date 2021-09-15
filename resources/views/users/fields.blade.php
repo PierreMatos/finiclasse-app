@@ -86,6 +86,26 @@
     <!-- {!! Form::number('model_id', null, ['class' => 'form-control']) !!} -->
 </div>
 
+
+<!-- Vendor lead Field -->
+<div class="form-group col-md-4">
+    <label>{{ __('Lead') }}</label>
+    <select name="model_id" class="input-group form-control custom-select selectedPost">
+        <option selected value="">--</option>
+        @foreach ($userData['vendors'] as $vendor)
+            <!--condition make selecionado anteriormente-->
+            @if ($vendor->id == (isset($user->vendor->id) ? $user->vendor->id : ''))
+                <option selected value="{{ $user->vendor->id }}">{{ $user->vendor->name }}</option>
+            @else
+                <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
+            @endif
+        @endforeach
+    </select>
+    <!-- {!! Form::number('model_id', null, ['class' => 'form-control']) !!} -->
+</div>
+
+
+
 <!-- Finiclasse Employee Field -->
 <div class="form-group col-sm-4">
     <div class="form-check" style="margin-top: 37px;">

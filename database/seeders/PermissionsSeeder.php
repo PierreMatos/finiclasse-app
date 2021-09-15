@@ -12,7 +12,6 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Str;
 
 
-
 class PermissionsSeeder extends Seeder
 {
     //$ php artisan db:seed --class=PermissionsTableSeeder
@@ -63,10 +62,13 @@ class PermissionsSeeder extends Seeder
             }
         }
         foreach ($routeCollection as $route) {
-            if ((!Str::contains( $route->getName(), 'api'))){
+            if ((!Str::contains( $route->getName(), 'api')) && $route->getName() != null ){
+                // if($route->getName() != null) {
+                // }
             $permission = Permission::create(['name' => $route->getName()]);
 
             $admin->givePermissionTo($permission);
+
                 // array_push($routesArr, $route->getName());
                     if (Str::contains($route->getName(), ['cars', 'financings', 'users', 'proposals', 'vendors', 'home'])){
                         $Administrador->givePermissionTo($permission);
