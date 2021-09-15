@@ -19,9 +19,9 @@ use App\Http\Controllers\ProposalController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [
+    HomeController::class, 'index'
+]);
 
 Auth::routes();
 

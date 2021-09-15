@@ -163,4 +163,8 @@
         border-color: #000;
     }
 
+    .login-box {
+        padding-bottom: 100px;
+    }
+
 </style>
