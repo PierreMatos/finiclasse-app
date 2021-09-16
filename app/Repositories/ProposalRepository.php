@@ -37,4 +37,12 @@ class ProposalRepository extends BaseRepository
     {
         return Proposal::class;
     }
+
+    public function getProposals($user){
+
+        $proposals = Proposal::where('vendor_id', '=', $user)->orderBy('created_at', 'desc')->get();
+
+        return $proposals;
+
+    }
 }

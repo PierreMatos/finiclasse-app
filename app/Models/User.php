@@ -173,4 +173,9 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(\App\Models\Car::class, 'service_car_id', 'id');
     }
 
+    public function vendor()
+    {
+        return $this->belongsToMany(User::class, 'leads_users', 'client_id', 'vendor_id');
+    }
+
 }

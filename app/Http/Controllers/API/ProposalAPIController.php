@@ -55,12 +55,9 @@ class ProposalAPIController extends AppBaseController
 
         // }
         
+        
 
-        $proposals = $this->proposalRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $proposals = $this->proposalRepository->getProposals(Auth::id());
 
         // this is working
         // return new ProposalCollection(Proposal::paginate());

@@ -81,7 +81,7 @@ class RolesAndPermissionsSeeder extends Seeder
 
         
 
-        // tribuir roles a users
+        // atribuir roles a users
         $this->userRepository->find(1)->assignRole('admin');
         $this->userRepository->find(2)->assignRole('Administrador');
         $this->userRepository->find(3)->assignRole('Chefe de vendas');
