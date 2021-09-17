@@ -142,6 +142,11 @@ class CarController extends AppBaseController
      */
     public function store(CreateCarRequest $request)
     {
+        $request->validate([
+            'image' => 'array|max:4',
+            'image.*' => 'nullable|mimes:jpeg,png,jpg|dimensions:max_width=5000,max_height=5000|file|max:10000'
+        ]);
+
         $input = $request->all();
 
         $car = $this->carRepository->create($input);
@@ -236,6 +241,8 @@ class CarController extends AppBaseController
      */
     public function update($id, UpdateCarRequest $request)
     {
+        dd($request->image);
+
         $request->validate([
             'image' => 'array|max:4',
             'image.*' => 'nullable|mimes:jpeg,png,jpg|dimensions:max_width=5000,max_height=5000|file|max:10000'
