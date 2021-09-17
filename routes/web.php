@@ -19,16 +19,11 @@ use App\Http\Controllers\ProposalController;
 |
 */
 
-Route::get('/', [
-    HomeController::class, 'index'
-]);
-
 Auth::routes();
 
-Route::get('/home', [
+Route::get('/', [
     HomeController::class, 'index'
 ])->name('home');
-
 
 Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder')->name('io_generator_builder');
 

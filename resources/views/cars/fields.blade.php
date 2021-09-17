@@ -55,8 +55,8 @@
                 {!! Form::label('category_id', 'Categoria') !!}
                 <select name="category_id" class="input-group form-control custom-select selectedPost">
                     @foreach ($carData['categories'] as $category)
-                        @if ($category->id == isset($car->category->id))
-                            <option selected value="{{ $car->category->id }}">{{ $car->category->name }}</option>
+                        @if ($category->id == isset($car->category->id) ? $car->category->id : ''))
+                            <option selected value="{{ $category->id }}">{{ $category->name }}</option>
                         @else
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endif
@@ -86,7 +86,7 @@
                 <select name="condition_id" class="input-group form-control custom-select selectedPost">
                     @foreach ($carData['conditions'] as $condition)
                         @if ($condition->id == isset($car->condition->id))
-                            <option selected value="{{ $car->condition->id }}">{{ $car->condition->name }}
+                            <option selected value="{{ $condition->id }}">{{ $condition->name }}
                             </option>
                         @else
                             <option value="{{ $condition->id }}">{{ $condition->name }}</option>
@@ -101,7 +101,7 @@
                 <select name="state_id" class="input-group form-control custom-select selectedPost">
                     @foreach ($carData['states'] as $state)
                         @if ($state->id == isset($car->state->id))
-                            <option selected value="{{ $car->state->id }}">{{ $car->state->name }}</option>
+                            <option selected value="{{ $state->id }}">{{ $state->name }}</option>
                         @else
                             <option value="{{ $state->id }}">{{ $state->name }}</option>
                         @endif
@@ -139,7 +139,7 @@
                 <select name="stand_id" class="input-group form-control custom-select selectedPost">
                     @foreach ($carData['stands'] as $stand)
                         @if ($stand->id == isset($car->stand->id))
-                            <option selected value="{{ $car->stand->id }}">{{ $car->stand->name }}</option>
+                            <option selected value="{{ $stand->id }}">{{ $stand->name }}</option>
                         @else
                             <option value="{{ $stand->id }}">{{ $stand->name }}</option>
                         @endif
@@ -271,7 +271,7 @@
                 <select name="fuel_id" class="input-group form-control custom-select selectedPost">
                     @foreach ($carData['fuels'] as $fuel)
                         @if ($fuel->id == isset($car->fuel->id))
-                            <option selected value="{{ $car->fuel->id }}">{{ $car->fuel->name }}</option>
+                            <option selected value="{{ $fuel->id }}">{{ $fuel->name }}</option>
                         @else
                             <option value="{{ $fuel->id }}">{{ $fuel->name }}</option>
                         @endif
@@ -297,7 +297,7 @@
                 <select name="transmission_id" class="input-group form-control custom-select selectedPost">
                     @foreach ($carData['transmissions'] as $transmission)
                         @if ($transmission->id == isset($car->transmission->id))
-                            <option selected value="{{ $car->transmission->id }}">{{ $car->transmission->name }}
+                            <option selected value="{{ $transmission->id }}">{{ $transmission->name }}
                             </option>
                         @else
                             <option value="{{ $transmission->id }}">{{ $transmission->name }}</option>
@@ -334,7 +334,7 @@
                 <select name="drive_id" class="input-group form-control custom-select selectedPost">
                     @foreach ($carData['drives'] as $drive)
                         @if ($drive->id == isset($car->drive->id))
-                            <option selected value="{{ $car->drive->id }}">{{ $car->drive->name }}</option>
+                            <option selected value="{{ $drive->id }}">{{ $drive->name }}</option>
                         @else
                             <option value="{{ $drive->id }}">{{ $drive->name }}</option>
                         @endif
@@ -360,7 +360,7 @@
                 <select name="class_id" class="input-group form-control custom-select selectedPost">
                     @foreach ($carData['classes'] as $class)
                         @if ($class->id == isset($car->class->id))
-                            <option selected value="{{ $car->class->id }}">{{ $car->class->name }}</option>
+                            <option selected value="{{ $class->id }}">{{ $class->name }}</option>
                         @else
                             <option value="{{ $class->id }}">{{ $class->name }}</option>
                         @endif

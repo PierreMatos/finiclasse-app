@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use Flash;
 use Response;
+use App\Models\User;
+use App\Models\LeadUser;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Auth;
 use App\Repositories\StandRepository;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\ClientTypeRepository;
 use App\Http\Controllers\AppBaseController;
-use Illuminate\Support\Facades\Auth;
 
 
 class UserController extends AppBaseController
@@ -53,10 +55,12 @@ class UserController extends AppBaseController
         // VARIAVEIS REFERENTES AS LISTAGENS DE MODELOS ($modelName)
         $stands = $this->standRepository->all();
         $clientTypes = $this->clientTypeRepository->all();
+        $vendors =  $this->userRepository->getVendors(Auth::user());
 
         $userData = ([
             'stands' => $stands,
             'clientTypes' => $clientTypes,
+            'vendors' => $vendors,
         ]);
 
         return view('users.create')

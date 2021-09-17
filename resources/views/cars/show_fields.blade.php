@@ -276,7 +276,7 @@
             <!-- Equipment Field -->
             <div class="form-group col-12">
                 {!! Form::label('equipment', 'Equipamento extra') !!}
-                {!! Form::textarea('equipment', '', ['class' => 'form-control', 'disabled']) !!}
+                {!! Form::textarea('equipment', isset($car->equipment) ? $car->equipment : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
         </div>
     </div>

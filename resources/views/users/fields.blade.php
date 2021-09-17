@@ -59,7 +59,7 @@
         <option selected value="">--</option>
         @foreach ($userData['stands'] as $model)
             <!--condition make selecionado anteriormente-->
-            @if ($model->id == (isset($user->model->id) ? $user->model->id : 'null'))
+            @if ($model->id == (isset($user->model->id) ? $user->model->id : ''))
                 <option selected value="{{ $user->model->id }}">{{ $user->model->name }}</option>
             @else
                 <option value="{{ $model->id }}">{{ $model->name }}</option>
@@ -86,7 +86,6 @@
     <!-- {!! Form::number('model_id', null, ['class' => 'form-control']) !!} -->
 </div>
 
-
 <!-- Vendor lead Field -->
 <div class="form-group col-md-4">
     <label>{{ __('Lead') }}</label>
@@ -103,8 +102,6 @@
     </select>
     <!-- {!! Form::number('model_id', null, ['class' => 'form-control']) !!} -->
 </div>
-
-
 
 <!-- Finiclasse Employee Field -->
 <div class="form-group col-sm-4">
