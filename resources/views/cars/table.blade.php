@@ -31,7 +31,7 @@
             @foreach ($cars->sortByDesc('created_at') as $car)
                 <tr>
                     @if (!$car->getFirstMediaUrl('cars', 'thumb'))
-                        <td><img src="https://lh3.googleusercontent.com/proxy/8h1dkipeIyFkuxqEUa3_ba0uWqtsA5v-_HhoZSTqVHBAhgOUj1YW4OsZ_rx0aJJ8ofKFt-h4-DSB6ONqqhXWyoyuWeDEm3yaMWaIWlpof5EbW3HXB_ur4MiHFhsg4E51TZRJlDAtKrCUWc2PtmON8ZNHoTFNHHkF3ec0A9gzISN11wi9KmhJ"
+                        <td><img src="storage/images/noPhoto.jpg"
                                 style="max-width: 100px;" /></td>
                     @else
                         <td><img src="{{ $car->getFirstMediaUrl('cars', 'thumb') }}" style="max-width: 100px;" /></td>
@@ -80,7 +80,7 @@
                     @if ($car->condition->name == $carCondition->name)
                         <tr style="background-color:{{ isset($car->state->color) ? $car->state->color : '' }}">
                             @if (!$car->getFirstMediaUrl('cars', 'thumb'))
-                                <td><img src="https://lh3.googleusercontent.com/proxy/8h1dkipeIyFkuxqEUa3_ba0uWqtsA5v-_HhoZSTqVHBAhgOUj1YW4OsZ_rx0aJJ8ofKFt-h4-DSB6ONqqhXWyoyuWeDEm3yaMWaIWlpof5EbW3HXB_ur4MiHFhsg4E51TZRJlDAtKrCUWc2PtmON8ZNHoTFNHHkF3ec0A9gzISN11wi9KmhJ"
+                                <td><img src="storage/images/noPhoto.jpg"
                                         style="max-width: 100px;" /></td>
                             @else
                                 <td><img src="{{ $car->getFirstMediaUrl('cars', 'thumb') }}"

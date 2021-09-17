@@ -269,7 +269,7 @@
      return e.href == url;
    });
    
-   currentLink[0].classList.add("active")
-   currentLink[0].closest(".nav-treeview").style.display="block";
-   currentLink[0].closest(".has-treeview").classList.add("active");
+   //currentLink[0].classList.add("active")
+   //currentLink[0].closest(".nav-treeview").style.display="block";
+   //currentLink[0].closest(".has-treeview").classList.add("active");
 </script>

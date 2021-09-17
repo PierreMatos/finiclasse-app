@@ -17,7 +17,7 @@
     <ul class="dropdown-menu dropdown-menu-lg">
         <!-- Menu Footer-->
         <li class="user-footer" style="text-align: center; display: grid;">
-            <a href="#" class="btn btn-default btn-flat">Perfil</a>
+            <!-- <a href="#" class="btn btn-default btn-flat">Perfil</a> -->
             <a href="#" class="btn btn-default btn-flat"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 Log Out

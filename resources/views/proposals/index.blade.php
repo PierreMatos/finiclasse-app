@@ -67,6 +67,7 @@
                 }],
                 buttons: [{
                         text: 'Todos',
+                        className: 'active',
                         action: function() {
                             table.search('').draw();
                             table.button(1).active(false);
@@ -99,6 +100,7 @@
                     },
                     {
                         text: 'Perdido',
+                        className: 'btn-lost',
                         action: function() {
                             table.search('Perdido').draw();
                             table.button(0).active(false);

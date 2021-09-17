@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateCarRequest;
-use App\Http\Requests\UpdateCarRequest;
+use Flash;
+use Response;
+use App\Models\Car;
+use App\Models\CarModel;
+use Illuminate\Http\Request;
 use App\Repositories\CarRepository;
 use App\Repositories\MakeRepository;
 use App\Repositories\StandRepository;
-use App\Repositories\CarTransmissionRepository;
-use App\Repositories\CarModelRepository;
+use App\Http\Requests\CreateCarRequest;
+use App\Http\Requests\UpdateCarRequest;
 use App\Repositories\CarFuelRepository;
-use App\Repositories\CarDriveRepository;
-use App\Repositories\CarStateRepository;
 use App\Repositories\CarClassRepository;
+use App\Repositories\CarDriveRepository;
+use App\Repositories\CarModelRepository;
+use App\Repositories\CarStateRepository;
+use App\Http\Controllers\AppBaseController;
 use App\Repositories\CarCategoryRepository;
 use App\Repositories\CarConditionRepository;
-use App\Http\Controllers\AppBaseController;
-use App\Models\Car;
-use Illuminate\Http\Request;
-use Flash;
-use Response;
+use App\Repositories\CarTransmissionRepository;
 
 class CarController extends AppBaseController
 {
@@ -133,6 +134,12 @@ class CarController extends AppBaseController
             ->with('carData', $carData);
     }
 
+    public function fetchModel(Request $request)
+    {
+        $data['models'] = CarModel::where("make_id", $request->make_id)->get(["name", "id"]);
+        return response()->json($data);
+    }
+
     /**
      * Store a newly created Car in storage.
      *
@@ -142,11 +149,6 @@ class CarController extends AppBaseController
      */
     public function store(CreateCarRequest $request)
     {
-        $request->validate([
-            'image' => 'array|max:4',
-            'image.*' => 'nullable|mimes:jpeg,png,jpg|dimensions:max_width=5000,max_height=5000|file|max:10000'
-        ]);
-
         $input = $request->all();
 
         $car = $this->carRepository->create($input);
@@ -241,8 +243,6 @@ class CarController extends AppBaseController
      */
     public function update($id, UpdateCarRequest $request)
     {
-        dd($request->image);
-
         $request->validate([
             'image' => 'array|max:4',
             'image.*' => 'nullable|mimes:jpeg,png,jpg|dimensions:max_width=5000,max_height=5000|file|max:10000'

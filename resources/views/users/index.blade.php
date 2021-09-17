@@ -58,6 +58,7 @@
 
             buttons: [{
                     text: 'Todos',
+                    className: 'active',
                     action: function() {
                         table.search('').draw();
                         table.button(1).active(false);
@@ -71,7 +72,7 @@
                 {
                     text: 'Particular',
                     action: function() {
-                        table.search('particular').draw();
+                        table.search('Particular').draw();
                         table.button(0).active(false);
                         table.button(2).active(false);
                         table.button(3).active(false);

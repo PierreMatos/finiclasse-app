@@ -63,10 +63,6 @@ div.dataTables_wrapper div.dataTables_filter input {
     color: #fff;
 }
 
-.btn-approved {
-    /* background-color: rgb(168, 236, 168); */
-}
-
 .btn-approved:not(:disabled):not(.disabled).active {
     background-color: #C4E7CC;
     color: #000;
@@ -88,8 +84,14 @@ div.dataTables_wrapper div.dataTables_filter input {
     color: #000;
 }
 
-.btn-pending {
-    /* background-color: yellow; */
+.btn-lost:not(:disabled):not(.disabled).active {
+    background-color: #F6C8CC;
+    color: #000;
+}
+
+.btn-lost:hover {
+    background-color: #F6C8CC;
+    color: #000;
 }
 
 .bg-nav {
@@ -109,27 +111,13 @@ div.dataTables_wrapper div.dataTables_filter input {
     font-family: 'Poppins';
 }
 
-.main-sidebar {
-    width: 280px;
-}
-
-.content-wrapper {
-    margin-left: 280px !important;
-}
-
-.main-header {
-    margin-left: 280px !important;
-}
-
-.layout-fixed .brand-link {
-    width: 280px !important;
-}
-
 .logoImg {
     height: 22px;
     vertical-align: inherit;
 }
 
-.main-footer {
-    margin-left: 280px !important;
+@media only screen and (min-width: 1025px) {
+    .nav-sidebar .menu-open>.nav-link i.right {
+        right: 6rem;
+    }
 }

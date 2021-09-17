@@ -135,6 +135,7 @@ Route::resource('carFuels', App\Http\Controllers\CarFuelController::class);
 
 
 Route::resource('cars', App\Http\Controllers\CarController::class);
+Route::post('fetch-models', [CarController::class, 'fetchModel']);
 // Route::get( ['carController', 'getCars'])->name('getCars');
 Route::get('/getcars', [CarController::class, 'getCars'])->name('getcars');
 // Route::get('/carstate/{car_id}/{state_id}/{price}', [CarController::class, 'carState'])->name('carstate');

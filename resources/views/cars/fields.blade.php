@@ -7,7 +7,7 @@
             <!-- Make Name Field -->
             <div class="form-group col-md-3">
                 {!! Form::label('make_id', 'Marca') !!}
-                <select name="make" class="input-group form-control custom-select selectedPost">
+                <select name="make_id" class="input-group form-control custom-select selectedPost" id="make_id">
                     <option selected value="">--</option>
                     @foreach ($carData['makes'] as $make)
                         @if ($make->id == (isset($car->model->make->id) ? $car->model->make->id : ''))
@@ -18,24 +18,14 @@
                         @endif
                     @endforeach
                 </select>
-                <!-- {!! Form::number('make_id', null, ['class' => 'form-control']) !!} -->
             </div>
 
             <!-- Model Id Field -->
             <div class="form-group col-md-3">
                 {!! Form::label('model_id', 'Modelo') !!}
-                <select name="model_id" class="input-group form-control custom-select selectedPost">
-                    <option selected value="">--</option>
-                    @foreach ($carData['models'] as $model)
-                        <!--condition make selecionado anteriormente-->
-                        @if ($model->id == (isset($car->model->id) ? $car->model->id : ''))
-                            <option selected value="{{ $car->model->id }}">{{ $car->model->name }}</option>
-                        @else
-                            <option value="{{ $model->id }}">{{ $model->name }}</option>
-                        @endif
-                    @endforeach
+                <select name="model_id" class="input-group form-control custom-select selectedPost" id="model_id" disabled>
+
                 </select>
-                <!-- {!! Form::number('model_id', null, ['class' => 'form-control']) !!} -->
             </div>
 
             <!-- Variant Field -->
@@ -426,3 +416,29 @@
         </div>
     </div>
 </div>
+
+@push('page_scripts')
+    <script type="text/javascript">
+        $('#make_id').on('change', function() {
+            var idMake = this.value;
+            $("#model_id").html('');
+            $.ajax({
+                url: "{{ url('fetch-models') }}",
+                type: "POST",
+                data: {
+                    make_id: idMake,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $('#model_id').html('<option value="">--</option>');
+                    $.each(result.models, function(key, value) {
+                        $("#model_id").append('<option value="' + value
+                            .id + '">' + value.name + '</option>');
+                    });
+                    $( "#model_id" ).prop( "disabled", false );
+                }
+            });
+        });
+    </script>
+@endpush
