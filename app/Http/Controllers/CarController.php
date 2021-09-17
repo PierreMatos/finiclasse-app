@@ -46,12 +46,19 @@ class CarController extends AppBaseController
     /** @var  CarClassRepository */
     private $CarClassRepository;
 
-    public function __construct(CarRepository $carRepo, CarConditionRepository $carConditionRepo, 
-    MakeRepository $makeRepo, CarModelRepository $modelRepo, CarCategoryRepository $carCategoryRepo,
-    CarStateRepository $carStateRepo, StandRepository $standRepo, CarFuelRepository $carFuelRepo,
-    CarTransmissionRepository $carTransmissionRepo, CarDriveRepository $carDriveRepo,
-    CarClassRepository $carClassRepo)
-    {
+    public function __construct(
+        CarRepository $carRepo,
+        CarConditionRepository $carConditionRepo,
+        MakeRepository $makeRepo,
+        CarModelRepository $modelRepo,
+        CarCategoryRepository $carCategoryRepo,
+        CarStateRepository $carStateRepo,
+        StandRepository $standRepo,
+        CarFuelRepository $carFuelRepo,
+        CarTransmissionRepository $carTransmissionRepo,
+        CarDriveRepository $carDriveRepo,
+        CarClassRepository $carClassRepo
+    ) {
         $this->carRepository = $carRepo;
         $this->makeRepository = $makeRepo;
         $this->modelRepository = $modelRepo;
@@ -75,8 +82,8 @@ class CarController extends AppBaseController
     public function index(Request $request)
     {
         $cars = $this->carRepository->all();
-        $newCars = Car::where('condition_id','=',1)->get();
-        $usedCars = Car::where('condition_id','=',2)->get();
+        $newCars = Car::where('condition_id', '=', 1)->get();
+        $usedCars = Car::where('condition_id', '=', 2)->get();
         // $cars = Car::with('stand')->paginate(10);
         // $cars2 = $this->carRepository->withAll();
         $carConditions = $this->carConditionRepository->all();
@@ -97,33 +104,33 @@ class CarController extends AppBaseController
      */
     public function create()
     {
-      // VARIAVEIS REFERENTES AS LISTAGENS DE MODELOS ($modelName)
-      $models = $this->modelRepository->all();
-      $makes = $this->makeRepository->all();
-      $categories = $this->carCategoryRepository->all();
-      $conditions = $this->carConditionRepository->all();
-      $states = $this->carStateRepository->all();
-      $stands = $this->standRepository->all();
-      $transmissions = $this->carTransmissionRepository->all();
-      $drives = $this->carDriveRepository->all();
-      $fuels = $this->carFuelRepository->all();
-      $classes = $this->carClassRepository->all();
+        // VARIAVEIS REFERENTES AS LISTAGENS DE MODELOS ($modelName)
+        $models = $this->modelRepository->all();
+        $makes = $this->makeRepository->all();
+        $categories = $this->carCategoryRepository->all();
+        $conditions = $this->carConditionRepository->all();
+        $states = $this->carStateRepository->all();
+        $stands = $this->standRepository->all();
+        $transmissions = $this->carTransmissionRepository->all();
+        $drives = $this->carDriveRepository->all();
+        $fuels = $this->carFuelRepository->all();
+        $classes = $this->carClassRepository->all();
 
-      $carData = ([
-          'models' => $models,
-          'makes' => $makes,
-          'categories' => $categories,
-          'conditions' => $conditions,
-          'states' => $states,
-          'stands' => $stands,
-          'transmissions' => $transmissions,
-          'drives' => $drives,
-          'fuels' => $fuels,
-          'classes' => $classes
-      ]);
+        $carData = ([
+            'models' => $models,
+            'makes' => $makes,
+            'categories' => $categories,
+            'conditions' => $conditions,
+            'states' => $states,
+            'stands' => $stands,
+            'transmissions' => $transmissions,
+            'drives' => $drives,
+            'fuels' => $fuels,
+            'classes' => $classes
+        ]);
 
         return view('cars.create')
-        ->with('carData', $carData);
+            ->with('carData', $carData);
     }
 
     /**
@@ -135,7 +142,6 @@ class CarController extends AppBaseController
      */
     public function store(CreateCarRequest $request)
     {
-
         $input = $request->all();
 
         $car = $this->carRepository->create($input);
@@ -183,7 +189,7 @@ class CarController extends AppBaseController
     {
         // DADOS DO CARRO PARA EDITAR
         $car = $this->carRepository->find($id);
-        
+
         // VARIAVEIS REFERENTES AS LISTAGENS DE MODELOS ($modelName)
         $models = $this->modelRepository->all();
         $makes = $this->makeRepository->all();
@@ -216,8 +222,8 @@ class CarController extends AppBaseController
         }
 
         return view('cars.edit')
-        ->with('car', $car)
-        ->with('carData', $carData);
+            ->with('car', $car)
+            ->with('carData', $carData);
     }
 
     /**
@@ -238,14 +244,14 @@ class CarController extends AppBaseController
         $car = $this->carRepository->find($id);
 
         //Apagar imagem antiga se for mudada
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $car->clearMediaCollection('cars');
         }
 
         //Verificar se a imagem existe
         $file = $request->file('image');
 
-        if($request->hasFile('image') == null) {
+        if ($request->hasFile('image') == null) {
             //Passar a variable input sem colocar nova imagem
             $input = $request->all();
         } else {
@@ -255,7 +261,7 @@ class CarController extends AppBaseController
             $fileAdders = $car->addMultipleMediaFromRequest(['image'])
                 ->each(function ($fileAdder) {
                     $fileAdder->toMediaCollection('cars');
-            }); 
+                });
         }
 
         if (empty($car)) {
@@ -297,10 +303,11 @@ class CarController extends AppBaseController
         return redirect(route('cars.index'));
     }
 
-    
-       
-         // Fetch records
-     public function getCars(Request $request){
+
+
+    // Fetch records
+    public function getCars(Request $request)
+    {
 
         ## Read value
         $draw = $request->get('draw');
@@ -319,47 +326,48 @@ class CarController extends AppBaseController
 
         // Total records
         $totalRecords = Car::select('count(*) as allcount')->count();
-        $totalRecordswithFilter = Car::select('count(*) as allcount')->where('model_id', 'like', '%' .$searchValue . '%')->count();
+        $totalRecordswithFilter = Car::select('count(*) as allcount')->where('model_id', 'like', '%' . $searchValue . '%')->count();
 
-        
+
         // Fetch records
-        $records = Car::orderBy($columnName,$columnSortOrder)
+        $records = Car::orderBy($columnName, $columnSortOrder)
             //    ->where('car.model.name', 'like', '%' .$searchValue . '%')
             //   ->select('cars.*')
-              ->skip($start)
-              ->take($rowperpage)
-              ->get();
+            ->skip($start)
+            ->take($rowperpage)
+            ->get();
 
         $data_arr = array();
 
         // $records =  $this->carRepository->all();
-        foreach($records as $record){
+        foreach ($records as $record) {
 
-           $data_arr[] = array(
-               "id" => $record->id,
-               "model" => $record->model->name,
-               "variant" => $record->variant,
-               "state" => $record->state,
-            //    "condition" => $record->condition,
-            //    "komm" => $record->komm,
-               "plate" => $record->plate,
-               "stand" => $record->stand->name ?? '',
-               "price" => $record->price,
-               "action" => "nada"
-           );
+            $data_arr[] = array(
+                "id" => $record->id,
+                "model" => $record->model->name,
+                "variant" => $record->variant,
+                "state" => $record->state,
+                //    "condition" => $record->condition,
+                //    "komm" => $record->komm,
+                "plate" => $record->plate,
+                "stand" => $record->stand->name ?? '',
+                "price" => $record->price,
+                "action" => "nada"
+            );
         }
 
         $response = array(
-           "draw" => intval($draw),
-           "iTotalRecords" => $totalRecords,
-           "iTotalDisplayRecords" => $totalRecordswithFilter,
-           "aaData" => $data_arr
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
         );
 
-        return response()->json($response); 
-     }
+        return response()->json($response);
+    }
 
-     public function carState(Request $request){
+    public function carState(Request $request)
+    {
 
 
         $car = $this->carRepository->find($request->car);
@@ -369,27 +377,24 @@ class CarController extends AppBaseController
 
             return redirect(route('proposals.index'));
         }
-        
-        if ($request->state = 0){
 
-             //delete car
+        if ($request->state = 0) {
 
-             $this->carRepository->delete($request->car);
+            //delete car
+
+            $this->carRepository->delete($request->car);
 
             Flash::success('Car deleted successfully.');
 
             return redirect(route('proposals.index'));
-
-         }else{
+        } else {
 
             //update $car with $state
-            $car = $this->carRepository->update(['state_id'=> $request->state, 'tradein_purchase' => $request->price], $request->car);
+            $car = $this->carRepository->update(['state_id' => $request->state, 'tradein_purchase' => $request->price], $request->car);
 
             Flash::success('Retoma aceite com sucesso.');
 
             return redirect(route('proposals.index'));
-
-         }
-     }
-    
+        }
+    }
 }

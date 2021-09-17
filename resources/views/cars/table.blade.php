@@ -19,7 +19,7 @@
     <table class="table" id="Todos-table">
         <thead>
             <tr>
-                <th>{{ __('Avatar') }}</th>
+                <th>{{ __('Photo') }}</th>
                 <th>{{ __('Make') }}</th>
                 <th>{{ __('Model') }}</th>
                 <th>{{ __('Plate') }}</th>
@@ -30,11 +30,16 @@
         <tbody>
             @foreach ($cars->sortByDesc('created_at') as $car)
                 <tr>
-                    <td><img src="{{ $car->getFirstMediaUrl('cars', 'thumb') }}" style="max-width: 100px;" /></td>
+                    @if (!$car->getFirstMediaUrl('cars', 'thumb'))
+                        <td><img src="https://lh3.googleusercontent.com/proxy/8h1dkipeIyFkuxqEUa3_ba0uWqtsA5v-_HhoZSTqVHBAhgOUj1YW4OsZ_rx0aJJ8ofKFt-h4-DSB6ONqqhXWyoyuWeDEm3yaMWaIWlpof5EbW3HXB_ur4MiHFhsg4E51TZRJlDAtKrCUWc2PtmON8ZNHoTFNHHkF3ec0A9gzISN11wi9KmhJ"
+                                style="max-width: 100px;" /></td>
+                    @else
+                        <td><img src="{{ $car->getFirstMediaUrl('cars', 'thumb') }}" style="max-width: 100px;" /></td>
+                    @endif
                     <td>{{ $car->model->make->name }}</td>
                     <td>{{ $car->model->name }}</td>
                     <td>{{ $car->plate }}</td>
-                    <td>{{ $car->price }}</td>
+                    <td>{{ $car->price . ' €' }}</td>
                     <td width="120">
                         {!! Form::open(['route' => ['cars.destroy', $car->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
@@ -61,7 +66,7 @@
         <table class="table" id="{{ $carCondition->name }}-table">
             <thead>
                 <tr>
-                    <th>{{ __('Avatar') }}</th>
+                    <th>{{ __('Photo') }}</th>
                     <th>{{ __('Make') }}</th>
                     <th>{{ __('Model') }}</th>
                     <th>{{ __('Plate') }}</th>
@@ -73,13 +78,18 @@
                 @foreach ($cars->sortByDesc('created_at') as $car)
 
                     @if ($car->condition->name == $carCondition->name)
-                        <tr style="background-color:{{isset($car->state->color) ? $car->state->color : ''}}">
-                            <td><img src="{{ $car->getFirstMediaUrl('carThumb', 'thumb') }}"
-                                    style="max-width: 100px;" /></td>
+                        <tr style="background-color:{{ isset($car->state->color) ? $car->state->color : '' }}">
+                            @if (!$car->getFirstMediaUrl('cars', 'thumb'))
+                                <td><img src="https://lh3.googleusercontent.com/proxy/8h1dkipeIyFkuxqEUa3_ba0uWqtsA5v-_HhoZSTqVHBAhgOUj1YW4OsZ_rx0aJJ8ofKFt-h4-DSB6ONqqhXWyoyuWeDEm3yaMWaIWlpof5EbW3HXB_ur4MiHFhsg4E51TZRJlDAtKrCUWc2PtmON8ZNHoTFNHHkF3ec0A9gzISN11wi9KmhJ"
+                                        style="max-width: 100px;" /></td>
+                            @else
+                                <td><img src="{{ $car->getFirstMediaUrl('cars', 'thumb') }}"
+                                        style="max-width: 100px;" /></td>
+                            @endif
                             <td>{{ $car->model->make->name }}</td>
                             <td>{{ $car->model->name }}</td>
                             <td>{{ $car->plate }}</td>
-                            <td>{{ $car->price }}</td>
+                            <td>{{ $car->price . ' €' }}</td>
                             <td width="120">
                                 {!! Form::open(['route' => ['cars.destroy', $car->id], 'method' => 'delete']) !!}
                                 <div class='btn-group'>

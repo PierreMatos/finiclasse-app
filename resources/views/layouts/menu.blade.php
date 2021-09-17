@@ -1,6 +1,6 @@
 @can('home')
     <li class="treeview">
-        <a href="{{ route('home') }}" class="nav-link {{ Request::is('home*') ? 'active' : '' }}">
+        <a href="{{ route('home') }}" class="nav-link {{ Request::is('/*') ? 'active' : '' }}">
             <i class="fas fa-home"></i>
             <p>Home</p>
         </a>
@@ -261,3 +261,15 @@
         @endcan
     </ul>
 </li>
+
+<script>
+   var url = window.location;
+   const allLinks = document.querySelectorAll('.nav-item a');
+   const currentLink = [...allLinks].filter(e => {
+     return e.href == url;
+   });
+   
+   currentLink[0].classList.add("active")
+   currentLink[0].closest(".nav-treeview").style.display="block";
+   currentLink[0].closest(".has-treeview").classList.add("active");
+</script>

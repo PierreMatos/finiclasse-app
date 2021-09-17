@@ -60,6 +60,7 @@ class CreateCarsTable extends Migration
             $table->dateTime('inspection_expiration_date')->nullable();
             $table->string('tradein_observations')->nullable();
             $table->integer('consumption')->nullable();
+            $table->longText('equipment')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('model_id')->references('id')->on('models');
