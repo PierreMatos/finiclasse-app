@@ -102,7 +102,7 @@ class UsersSeeder extends Seeder
                 'name' => 'José Teixeira',
                 'email' => 'jose.teixeira@finiclasse.pt',
                 'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
-                'stand_id' => 1,
+                'stand_id' => 2,
                 'finiclasse_employee' => 1,
                 'remember_token' => NULL,
                 'created_at' => '2019-10-15 17:55:39',

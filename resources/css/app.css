@@ -114,11 +114,11 @@ div.dataTables_wrapper div.dataTables_filter input {
 }
 
 .content-wrapper {
-    margin-left: 280px !important;
+    margin-left: 280px;
 }
 
 .main-header {
-    margin-left: 280px !important;
+    margin-left: 280px;
 }
 
 .layout-fixed .brand-link {

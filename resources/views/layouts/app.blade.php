@@ -91,7 +91,7 @@
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         <img src="https://www.finiclasse.pt/img/logo.png" class="logoImg brand-image elevation-2"
                             alt="User Image">
-                        <!-- <span class="d-none d-md-inline">{{ Auth::user()->name }}</span> -->
+                        <span class="d-none d-md-inline">{{ isset(Auth::user()->name) ? Auth::user()->name : '' }}</span>
                     </a>
                 </div>
             </ul>
