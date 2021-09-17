@@ -62,34 +62,26 @@ class RolesAndPermissionsSeeder extends Seeder
         // or may be done by 
         
         $role = Role::create(['name' => 'admin']);
-            // ->givePermissionTo(Permission::all());
 
         $role = Role::create(['name' => 'Administrador']);
-            // ->givePermissionTo(['dashboard', 'clients', 'cars', 'proposals', 'clients', 'financings']);
 
         $role = Role::create(['name' => 'Diretor comercial']);
-            // ->givePermissionTo(['clients', 'cars', 'proposals', 'clients', 'financings']);
 
         $role = Role::create(['name' => 'Chefe de vendas']);
-            // ->givePermissionTo(['clients', 'cars', 'proposals', 'clients', 'financings']);
        
         $role = Role::create(['name' => 'Vendedor']);
-            // ->givePermissionTo(['cars', 'proposals']);
        
-        // $role = Role::create(['name' => 'cliente'])
-        //     ->givePermissionTo(['my proposal']);
-
         
 
         // atribuir roles a users
-        $this->userRepository->find(1)->assignRole('admin');
-        $this->userRepository->find(2)->assignRole('Administrador');
-        $this->userRepository->find(3)->assignRole('Chefe de vendas');
-        $this->userRepository->find(4)->assignRole('Chefe de vendas');
-        $this->userRepository->find(5)->assignRole('Vendedor');
-        $this->userRepository->find(6)->assignRole('Vendedor');
-        $this->userRepository->find(7)->assignRole('Vendedor');
-        $this->userRepository->find(8)->assignRole('Vendedor');
+        // $this->userRepository->find(1)->assignRole('admin');
+        // $this->userRepository->find(2)->assignRole('Administrador');
+        // $this->userRepository->find(3)->assignRole('Chefe de vendas');
+        // $this->userRepository->find(4)->assignRole('Chefe de vendas');
+        // $this->userRepository->find(5)->assignRole('Vendedor');
+        // $this->userRepository->find(6)->assignRole('Vendedor');
+        // $this->userRepository->find(7)->assignRole('Vendedor');
+        // $this->userRepository->find(8)->assignRole('Vendedor');
         
     }
 }

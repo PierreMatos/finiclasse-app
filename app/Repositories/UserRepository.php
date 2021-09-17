@@ -71,7 +71,7 @@ class UserRepository extends BaseRepository
             $vendors = User::role('Vendedor')
             ->where('stand_id','=', $user->stand_id)->orderBy('created_at', 'desc')->get();
 
-                return $vendors;
+            return $vendors;
         }
     }
 }

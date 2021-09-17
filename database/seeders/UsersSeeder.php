@@ -82,56 +82,7 @@ class UsersSeeder extends Seeder
                 'updated_at' => '2020-03-29 17:44:30',
                 
             ),
-            4 => 
-            array (
-                'id' => 5,
-                'name' => 'Vendedor 1',
-                'email' => 'vendedor1@demo.com',
-                'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
-                'stand_id' => 1,
-                'finiclasse_employee' => 1,
-                'remember_token' => NULL,
-                'created_at' => '2019-10-15 17:55:39',
-                'updated_at' => '2020-03-29 17:59:39',
-               
-            ),
-            5 => 
-            array (
-                'id' => 6,
-                'name' => 'Vendedor 2',
-                'email' => 'vendedor2@demo.com',
-                'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
-                'stand_id' => 1,
-                'finiclasse_employee' => 1,
-                'remember_token' => NULL,
-                'created_at' => '2019-10-15 17:55:39',
-                'updated_at' => '2020-03-29 17:59:39',
-               
-            ),
-            6 => 
-            array (
-                'id' => 7,
-                'name' => 'Vendedor 3',
-                'email' => 'vendedor3@demo.com',
-                'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
-                'stand_id' => 2,
-                'finiclasse_employee' => 1,
-                'remember_token' => NULL,
-                'created_at' => '2019-10-15 17:55:39',
-                'updated_at' => '2020-03-29 17:59:39',
-            ),
-            7 => 
-            array (
-                'id' => 8,
-                'name' => 'Vendedor 4',
-                'email' => 'vendedor4@demo.com',
-                'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
-                'stand_id' => 2,
-                'finiclasse_employee' => 1,
-                'remember_token' => NULL,
-                'created_at' => '2019-10-15 17:55:39',
-                'updated_at' => '2020-03-29 17:59:39',
-            ),
+            
             8 => 
             array (
                 'id' => 9,
