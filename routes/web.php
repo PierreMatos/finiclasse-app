@@ -110,6 +110,11 @@ Route::middleware(['auth'])->group(function () {
     // Download
     Route::get('/download-financing{id}', [FinancingController::class, 'download']);
 
+    // Validate Create RGPD with Email
+    Route::get('createValidateRGPD/{id}', [UserController::class, 'createValidateRGPD'])->name('createValidateRGPD');
+
+    // Infy0m
+
     Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder')->name('io_generator_builder');
 
     Route::get('field_template', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@fieldTemplate')->name('io_field_template');
@@ -168,4 +173,20 @@ Route::middleware(['auth'])->group(function () {
     //     echo 'dump-autoload complete';
     // });
 
+});
+
+// Validate Store RGPD with Email
+Route::get('storeValidateRGPD/{id}', [UserController::class, 'storeValidateRGPD'])->name('storeValidateRGPD');
+
+/*
+Route::get('/mailable', function () {
+    $user = App\Models\User::first();
+
+    return new App\Mail\ValidateRGPD($user);
+});
+*/
+
+// Thankyou page
+Route::get('thankyou', function () {
+    return view('thankyou');
 });
