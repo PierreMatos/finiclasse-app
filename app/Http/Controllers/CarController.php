@@ -83,6 +83,7 @@ class CarController extends AppBaseController
     public function index(Request $request)
     {
         $cars = $this->carRepository->all();
+        
         $newCars = Car::where('condition_id', '=', 1)->get();
         $usedCars = Car::where('condition_id', '=', 2)->get();
         // $cars = Car::with('stand')->paginate(10);
