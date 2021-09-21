@@ -118,6 +118,23 @@ div.dataTables_wrapper div.dataTables_filter input {
 
 @media only screen and (min-width: 1025px) {
     .nav-sidebar .menu-open>.nav-link i.right {
-        right: 6rem;
+        position: inherit;
+        margin-left: 50px;
     }
+    .nav-sidebar .nav-link>p>.right {
+        position: inherit;
+        margin-left: 50px;
+    }
+}
+
+.notValidated {
+    background-color: #F6C8CC;
+}
+
+.validated {
+    background-color: #C4E7CC;
+}
+
+.imgCar {
+    max-width: 100px;
 }

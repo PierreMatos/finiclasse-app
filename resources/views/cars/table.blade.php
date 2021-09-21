@@ -31,10 +31,9 @@
             @foreach ($cars->sortByDesc('created_at') as $car)
                 <tr>
                     @if (!$car->getFirstMediaUrl('cars', 'thumb'))
-                        <td><img src="storage/images/noPhoto.jpg"
-                                style="max-width: 100px;" /></td>
+                        <td><img src="storage/images/noPhoto.jpg" class="imgCar" /></td>
                     @else
-                        <td><img src="{{ $car->getFirstMediaUrl('cars', 'thumb') }}" style="max-width: 100px;" /></td>
+                        <td><img src="{{ $car->getFirstMediaUrl('cars', 'thumb') }}" class="imgCar" /></td>
                     @endif
                     <td>{{ $car->model->make->name }}</td>
                     <td>{{ $car->model->name }}</td>
