@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\AuthController;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\UserAPIController;
 // use App\Http\Controllers\API\ProposalAPIController;
 // use App\Http\Controllers\API\UserAPIController;
 // use App\Http\Controllers\API\ProposalAPIController;
@@ -29,6 +30,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('register', 'UserAPIController@register');
 
+// Validate RGPD with Email
+Route::get('storeValidateRGPD/{id}', [UserAPIController::class, 'storeValidateRGPD'])->name('storeValidateRGPD');
+
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
@@ -42,8 +46,6 @@ Route::group([
     // Route::post('after', [AuthController::class, 'dsa']);
 
 });
-
-
 
 // Route::group(['middleware' => ['role:admin']], function () {
 Route::middleware('auth:api')->group(function () {
@@ -102,6 +104,9 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('campaigns_proposals', CampaignsProposalsAPIController::class);
 
     Route::resource('client_types', ClientTypeAPIController::class);
+
+    // Validate RGPD with Email
+    Route::get('createValidateRGPD/{id}', [UserAPIController::class, 'createValidateRGPD'])->name('createValidateRGPD');
 
 });
 

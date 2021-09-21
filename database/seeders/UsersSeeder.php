@@ -181,18 +181,31 @@ class UsersSeeder extends Seeder
                 'remember_token' => NULL,
                 'created_at' => '2019-10-15 17:55:39',
                 'updated_at' => '2020-03-29 17:59:39',
+            ),
+            16 => 
+            array (
+                'id' => 17,
+                'name' => 'Orlando Carvalho',
+                'email' => 'orlando.carvalho31@gmail.com',
+                'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
+                'remember_token' => '5nysjzVKI4LU92bjRqMUSYdOaIo1EcPC3pIMb6Tcj2KXSUMriGrIQ1iwRdd0',
+                'stand_id' => 1,
+                'finiclasse_employee' => 1,
+                'created_at' => '2018-08-14 17:06:28',
+                'updated_at' => '2019-09-25 22:09:35',
             )
 
         ));
 
           // atribuir roles a users
-          $this->userRepository->find(16)->assignRole('Administrador');
           $this->userRepository->find(13)->assignRole('Administrador');
-          $this->userRepository->find(15)->assignRole('Chefe de vendas');
+          $this->userRepository->find(16)->assignRole('Administrador');
+          $this->userRepository->find(17)->assignRole('Administrador');
           $this->userRepository->find(11)->assignRole('Chefe de vendas');
-          $this->userRepository->find(14)->assignRole('Vendedor');
-          $this->userRepository->find(12)->assignRole('Vendedor');
+          $this->userRepository->find(15)->assignRole('Chefe de vendas');
           $this->userRepository->find(10)->assignRole('Vendedor');
+          $this->userRepository->find(12)->assignRole('Vendedor');
+          $this->userRepository->find(14)->assignRole('Vendedor');
 
         User::factory()
         ->count(10)

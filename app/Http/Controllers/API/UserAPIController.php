@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\CreateUserAPIRequest;
-use App\Http\Requests\API\UpdateUserAPIRequest;
-use App\Models\User;
-use App\Repositories\UserRepository;
-use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use App\Http\Resources\UserResource;
-use App\Http\Resources\ClientResource;
+use JWTAuth;
 use Response;
 use Validator;
+use Carbon\Carbon;
+use App\Models\User;
+use App\Mail\ValidateRGPD;
+use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
+use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
-use JWTAuth;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Resources\ClientResource;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\API\CreateUserAPIRequest;
+use App\Http\Requests\API\UpdateUserAPIRequest;
 
 
 /**
@@ -244,5 +247,14 @@ class UserAPIController extends AppBaseController
         // dd($clients);
         return $this->sendResponse(ClientResource::collection($clients), 'Clients retrieved successfully');
 
+    }
+
+    public function createValidateRGPD($id) 
+    {   
+        $user = $this->userRepository->find($id);
+
+        Mail::send(new ValidateRGPD($user));
+
+        return $this->sendSuccess('E-mail enviado com sucesso!');
     }
 }

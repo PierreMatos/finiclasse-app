@@ -6,15 +6,17 @@ use Flash;
 use Response;
 use App\Models\User;
 use App\Models\LeadUser;
+use App\Mail\ValidateRGPD;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use App\Repositories\StandRepository;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\ClientTypeRepository;
 use App\Http\Controllers\AppBaseController;
-
+use Carbon\Carbon;
 
 class UserController extends AppBaseController
 {
@@ -161,7 +163,11 @@ class UserController extends AppBaseController
 
         Flash::success('User updated successfully.');
 
-        return redirect(route('users.index'));
+        if ($user->finiclasse_employee == 0) {
+            return redirect(route('getClients'));
+        } else {
+            return redirect(route('getVendors'));
+        }
     }
 
     /**
@@ -225,5 +231,25 @@ class UserController extends AppBaseController
             ->with('users', $vendors);
     }
    
+    public function createValidateRGPD($id) 
+    {   
+        $user = $this->userRepository->find($id);
 
+        Mail::send(new ValidateRGPD($user));
+
+        Flash::success('E-mail enviado com sucesso!');
+
+        return redirect(route('users.index'));
+    }
+
+    public function storeValidateRGPD($id) 
+    {
+        $user = $this->userRepository->find($id);
+
+        $timestamp = Carbon::now();
+
+        $user = $this->userRepository->update(['gdpr_confirmation' => $timestamp, 'gdpr_type' => "Email"], $id);
+
+        return view('thankyou');
+    }
 }
