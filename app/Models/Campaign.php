@@ -5,6 +5,8 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * Class Campaign
@@ -22,10 +24,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $beginning
  * @property string $end
  */
-class Campaign extends Model
+class Campaign extends Model implements HasMedia
 {
     use SoftDeletes;
-
+    use InteractsWithMedia;
     use HasFactory;
 
     public $table = 'campaigns';
@@ -69,7 +71,6 @@ class Campaign extends Model
     public static $rules = [
         'name' => 'required',
         'description' => 'required',
-        'type' => 'required'
     ];
 
     /**

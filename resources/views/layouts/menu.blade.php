@@ -263,13 +263,16 @@
 </li>
 
 <script>
-   var url = window.location;
-   const allLinks = document.querySelectorAll('.nav-item a');
-   const currentLink = [...allLinks].filter(e => {
-     return e.href == url;
-   });
-   
-   //currentLink[0].classList.add("active")
-   //currentLink[0].closest(".nav-treeview").style.display="block";
-   //currentLink[0].closest(".has-treeview").classList.add("active");
+    var url = window.location;
+    const allLinks = document.querySelectorAll('.nav-item a');
+    const currentLink = [...allLinks].filter(e => {
+        return e.href == url;
+    });
+
+    if (typeof currentLink[0] !== 'undefined') {
+        if (currentLink[0].closest(".nav-treeview") !== null) {
+            currentLink[0].classList.add("active");
+            currentLink[0].closest(".nav-treeview").style.display = "block";
+        }
+    }
 </script>
