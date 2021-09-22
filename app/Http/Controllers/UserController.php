@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Flash;
 use Response;
+use Validator;
 use App\Models\User;
 use App\Models\LeadUser;
 use App\Mail\ValidateRGPD;
@@ -79,6 +80,19 @@ class UserController extends AppBaseController
     public function store(CreateUserRequest $request)
     {
         $input = $request->all();
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'sometimes|unique:users',
+            'nif' => 'sometimes|nullable|unique:users',
+        ]);
+        
+        if($validator->fails()){
+
+        Flash::error($validator->errors());
+        return redirect(route('users.index'));
+
+            // return $validator->errors()->toJson();
+        }
 
         $user = $this->userRepository->create($input);
 

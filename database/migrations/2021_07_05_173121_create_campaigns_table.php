@@ -17,13 +17,13 @@ class CreateCampaignsTable extends Migration
         Schema::create('campaigns', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('description');
-            $table->integer('make_id')->unsigned();
-            $table->integer('model_id')->unsigned();
-            $table->string('type');
-            $table->integer('amount');
-            $table->dateTime('beginning');
-            $table->dateTime('end');
+            $table->string('description')->nullable();
+            $table->integer('make_id')->unsigned()->nullable();
+            $table->integer('model_id')->unsigned()->nullable();
+            $table->string('type')->nullable();
+            $table->integer('amount')->nullable();
+            $table->dateTime('beginning')->nullable();
+            $table->dateTime('end')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('make_id')->references('id')->on('makes');

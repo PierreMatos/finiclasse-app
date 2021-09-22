@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreateProposalAPIRequest;
 use App\Http\Requests\API\UpdateProposalAPIRequest;
 use App\Models\Proposal;
+use App\Models\Car;
 use App\Repositories\ProposalRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
@@ -101,6 +102,8 @@ class ProposalAPIController extends AppBaseController
 
         $proposal = $this->proposalRepository->create($input);
 
+        
+
         return $this->sendResponse(new ProposalResource($proposal), 'Proposal saved successfully');
     }
 
@@ -146,6 +149,12 @@ class ProposalAPIController extends AppBaseController
         }
 
         $proposal = $this->proposalRepository->update($input, $id);
+
+        //camaigns
+        $campaigns = $request->campaigns;
+        
+        // sync without detaching
+        $proposal->campaigns()->sync($campaigns, false);
 
         return $this->sendResponse(new ProposalResource($proposal), 'Proposal updated successfully');
     }
@@ -195,5 +204,99 @@ class ProposalAPIController extends AppBaseController
 
         return $proposal;
 
+    }
+
+    public function businessStudy(Request $request) {
+
+        //TODO pagar modelo de business study
+
+        // 
+        $proposal = Proposal::find($request->id);
+        
+        $taxas = ['iva' => 23];
+        
+        // dd($proposal->campaigns->first()->pivot->value);
+        
+        foreach($proposal->campaigns as $campaign){
+
+            dd($campaign->pivot->value);
+
+        }
+
+        if (!empty($proposal->car)) {
+            
+            $preTotalExtras = $proposal->car->extras_total;
+            $basePrice = $proposal->car->price_base;
+            $ptl = $proposal->car->ptl;
+            $sigpu = $proposal->car->sigpu;
+            $isv =  $proposal->car->isv;
+            $isv =  $proposal->car->isv;
+            $totalTransf = 0;
+            $isentIva = null;
+            $sell = 43000;
+            $diffTradein = 0;
+            $settleValue = 0;
+            $ivaTX = 0.23;
+
+            // total benefits
+            $totalBenefits = 0;
+            foreach($proposal->benefits as $benefit){
+                if ($benefit->type == '%'){
+                $totalBenefits += $benefit->value * ($basePrice + $Extras);
+                }elseif($benefit->type == '€'){
+                    $totalBenefits += $benefit->value;
+                }
+            }
+
+            // $totalBenefits = [$BenefitN * ($basePrice + $Extras)];
+            
+            $totalExtras = $preTotalExtras + $ptl + $sigpu + $totalTransf;
+            $subTotal = $basePrice + $totalExtras - $totalBenefits;
+
+            // IVA
+            if (is_null($isentIva)) { 
+                $iva =  $ivaTX * ($subTotal + $isv); 
+            } else { 
+                $iva = 0; 
+            }
+
+            $total = $subTotal + $isv + $iva;
+            
+            // DISCONT
+            if (is_null($isentIva)) { ($total - $sell) / (1 + $iva) + $totalBenefits; } else { $total - $sell + $totalBenefits;}
+            $txblBase = $subTotal + $isv;
+            $totalValue = $txblBase + $iva;
+
+            // TRADE in
+            if (!empty($proposal->tradein)){ 
+                $purchasePrice = $proposal->tradein->tradein_purchase; 
+                $sellingPrice = $proposal->tradein->tradein_sale; 
+                $diffTradein = 0;
+                $settleValue = $sell - $purchasePrice;
+            }
+            
+            //diff
+            $dif = ($total - $sell) - $diffTradein;
+            //desc
+            if (is_null($isentIva)) {  $desc = $settleValue / (1 + $iva ); } else{ $desc = $dif; }
+            //%
+            $profit = $desc / ( $totalBenefits + $isv - ( $ptl + $sigpu + $totalTransf ));
+
+        }else {
+
+            return 'car not found';
+        }
+
+        $results = [
+            'iva' => $iva,
+            'valor a liquidar' => $settleValue,
+            'desc' => $desc,
+            'dif' => $dif,
+            'profit' => $profit
+        ];
+
+        return $results;
+        return 'dif é: '.$dif.'desc é: '.$desc.'A margem é de: '.$profit;
+        
     }
 }

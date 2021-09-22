@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\AuthController;
 use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\UserAPIController;
+// use App\Http\Controllers\API\UserAPIController;
 // use App\Http\Controllers\API\ProposalAPIController;
 // use App\Http\Controllers\API\UserAPIController;
 // use App\Http\Controllers\API\ProposalAPIController;
@@ -30,9 +30,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('register', 'UserAPIController@register');
 
-// Validate RGPD with Email
-Route::get('storeValidateRGPD/{id}', [UserAPIController::class, 'storeValidateRGPD'])->name('storeValidateRGPD');
-
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
@@ -55,6 +52,9 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('cars', CarAPIController::class);
 
     Route::get('clients', [App\Http\Controllers\API\UserAPIController::class, 'getClients']);
+    //business study
+    Route::get('businessstudy', [App\Http\Controllers\API\ProposalAPIController::class, 'businessStudy'])->name('businessstudy');
+
 
     Route::post('addImage', [CarAPIController::class,'addImage']);
 
@@ -106,8 +106,10 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('client_types', ClientTypeAPIController::class);
 
     // Validate RGPD with Email
-    Route::get('createValidateRGPD/{id}', [UserAPIController::class, 'createValidateRGPD'])->name('createValidateRGPD');
+    Route::get('createValidateRGPD', [App\Http\Controllers\API\UserAPIController::class, 'createValidateRGPD'])->name('createValidateRGPD');
+    
 
+    
 });
 
 
