@@ -138,3 +138,11 @@ div.dataTables_wrapper div.dataTables_filter input {
 .imgCar {
     max-width: 100px;
 }
+
+.gdprDiv {
+    display: inline-grid;
+}
+
+.gdprLabel {
+    margin-left: 20px;
+}

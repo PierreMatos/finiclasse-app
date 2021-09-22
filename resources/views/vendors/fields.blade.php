@@ -55,42 +55,40 @@
 <!-- Stand Id Field -->
 <div class="form-group col-md-4">
     <label>{{ __('Stand') }}</label>
-    <select name="model_id" class="input-group form-control custom-select selectedPost">
+    <select name="stand_id" class="input-group form-control custom-select selectedPost">
         <option selected value="">--</option>
-        @foreach ($userData['stands'] as $model)
+        @foreach ($userData['stands'] as $stand)
             <!--condition make selecionado anteriormente-->
-            @if ($model->id == (isset($user->model->id) ? $user->model->id : 'null'))
-                <option selected value="{{ $user->model->id }}">{{ $user->model->name }}</option>
+            @if ($stand->id == (isset($user->stand->id) ? $user->stand->id : ''))
+                <option selected value="{{ $stand->id }}">{{ $stand->name }}</option>
             @else
-                <option value="{{ $model->id }}">{{ $model->name }}</option>
+                <option value="{{ $stand->id }}">{{ $stand->name }}</option>
             @endif
         @endforeach
     </select>
-    <!-- {!! Form::number('model_id', null, ['class' => 'form-control']) !!} -->
 </div>
 
-<!-- Client Type Field -->
+<!-- Service Car Field -->
 <div class="form-group col-md-4">
-    <label>{{ __('Client Type') }}</label>
-    <select name="model_id" class="input-group form-control custom-select selectedPost">
+    <label>{{ __('Service Car') }}</label>
+    <select name="service_car_id" class="input-group form-control custom-select selectedPost">
         <option selected value="">--</option>
-        @foreach ($userData['clientTypes'] as $model)
+        @foreach ($userData['cars'] as $serviceCar)
             <!--condition make selecionado anteriormente-->
-            @if ($model->id == (isset($user->model->id) ? $user->model->id : ''))
-                <option selected value="{{ $user->model->id }}">{{ $user->model->name }}</option>
+            @if ($serviceCar->id == (isset($user->serviceCar->id) ? $user->serviceCar->id : ''))
+                <option selected value="{{ $serviceCar->id }}">{{ $serviceCar->plate }}</option>
             @else
-                <option value="{{ $model->id }}">{{ $model->name }}</option>
+                <option value="{{ $serviceCar->id }}">{{ $serviceCar->plate }}</option>
             @endif
         @endforeach
     </select>
-    <!-- {!! Form::number('model_id', null, ['class' => 'form-control']) !!} -->
 </div>
 
 <!-- Finiclasse Employee Field -->
 <div class="form-group col-sm-4">
     <div class="form-check" style="margin-top: 37px;">
-        {!! Form::hidden('finiclasse_employee', 0, ['class' => 'form-check-input']) !!}
-        {!! Form::checkbox('finiclasse_employee', '1', null, ['class' => 'form-check-input']) !!}
+        {!! Form::hidden('finiclasse_employee', 0, null, ['class' => 'form-check-input']) !!}
+        {!! Form::checkbox('finiclasse_employee', '1', ['class' => 'form-check-input']) !!}
         <label>{{ __('Finiclasse Employee') }}</label>
     </div>
 </div>

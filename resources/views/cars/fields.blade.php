@@ -21,12 +21,35 @@
             </div>
 
             <!-- Model Id Field -->
-            <div class="form-group col-md-3">
-                {!! Form::label('model_id', 'Modelo') !!}
-                <select name="model_id" class="input-group form-control custom-select selectedPost" id="model_id" disabled>
+            @if (Route::is('cars.create'))
+                <div class="form-group col-md-3">
+                    {!! Form::label('model_id', 'Modelo') !!}
+                    <select name="model_id" class="input-group form-control custom-select selectedPost" id="model_id"
+                        disabled>
+                    </select>
+                </div>
+            @else
+                <div class="form-group col-md-3">
+                    {!! Form::label('model_id', 'Modelo') !!}
+                    <select name="model_id" class="input-group form-control custom-select selectedPost" id="model_id">
+                        <option selected value="">--</option>
+                        @foreach ($carData['models'] as $model)
 
-                </select>
-            </div>
+                            @if ($model->make->id == $car->model->make->id)
+
+                                @if ($model->id == (isset($car->model->id) ? $car->model->id : ''))
+                                    <option selected value="{{ $car->model->id }}">{{ $car->model->name }}
+                                    </option>
+                                @else
+                                    <option value="{{ $model->id }}">{{ $model->name }}</option>
+                                @endif
+
+                            @endif
+
+                        @endforeach
+                    </select>
+                </div>
+            @endif
 
             <!-- Variant Field -->
             <div class="form-group col-md-3">
@@ -317,7 +340,6 @@
                 </div>
             </div>
 
-
             <!-- Drive Id Field -->
             <div class="form-group col-md-3">
                 {!! Form::label('drive_id', 'Tração') !!}
@@ -436,7 +458,7 @@
                         $("#model_id").append('<option value="' + value
                             .id + '">' + value.name + '</option>');
                     });
-                    $( "#model_id" ).prop( "disabled", false );
+                    $("#model_id").prop("disabled", false);
                 }
             });
         });
