@@ -47,67 +47,69 @@
 </div>
 
 <!-- Gdpr Type Field -->
-<div class="form-group col-sm-4">
-    <label>{{ __('Gdpr Type') }}</label>
-    {!! Form::text('gdpr_type', null, ['class' => 'form-control']) !!}
-</div>
+@if (Route::is('users.create'))
+    <div class="form-group col-sm-4 gdprDiv">
+        <label>{{ __('Gdpr Type') }}</label>
+        <div>
+            <label class="radio inline">
+                {!! Form::radio('gdpr_type', 'email') !!}
+                Email
+            </label>
+            <label class="radio inline gdprLabel">
+                {!! Form::radio('gdpr_type', 'sms') !!}
+                SMS
+            </label>
+        </div>
+    </div>
+@endif
 
 <!-- Stand Id Field -->
 <div class="form-group col-md-4">
     <label>{{ __('Stand') }}</label>
-    <select name="model_id" class="input-group form-control custom-select selectedPost">
+    <select name="stand_id" class="input-group form-control custom-select selectedPost">
         <option selected value="">--</option>
-        @foreach ($userData['stands'] as $model)
+        @foreach ($userData['stands'] as $stand)
             <!--condition make selecionado anteriormente-->
-            @if ($model->id == (isset($user->model->id) ? $user->model->id : ''))
-                <option selected value="{{ $user->model->id }}">{{ $user->model->name }}</option>
+            @if ($stand->id == (isset($user->stand->id) ? $user->stand->id : ''))
+                <option selected value="{{ $stand->id }}">{{ $stand->name }}</option>
             @else
-                <option value="{{ $model->id }}">{{ $model->name }}</option>
+                <option value="{{ $stand->id }}">{{ $stand->name }}</option>
             @endif
         @endforeach
     </select>
-    <!-- {!! Form::number('model_id', null, ['class' => 'form-control']) !!} -->
 </div>
 
 <!-- Client Type Field -->
 <div class="form-group col-md-4">
     <label>{{ __('Client Type') }}</label>
-    <select name="model_id" class="input-group form-control custom-select selectedPost">
+    <select name="client_type_id" class="input-group form-control custom-select selectedPost">
         <option selected value="">--</option>
-        @foreach ($userData['clientTypes'] as $model)
+        @foreach ($userData['clientTypes'] as $clientType)
             <!--condition make selecionado anteriormente-->
-            @if ($model->id == (isset($user->model->id) ? $user->model->id : ''))
-                <option selected value="{{ $user->model->id }}">{{ $user->model->name }}</option>
+            @if ($clientType->id == (isset($user->clientType->id) ? $user->clientType->id : ''))
+                <option selected value="{{ $clientType->id }}">{{ $clientType->name }}</option>
             @else
-                <option value="{{ $model->id }}">{{ $model->name }}</option>
+                <option value="{{ $clientType->id }}">{{ $clientType->name }}</option>
             @endif
         @endforeach
     </select>
-    <!-- {!! Form::number('model_id', null, ['class' => 'form-control']) !!} -->
 </div>
 
 <!-- Vendor lead Field -->
 <div class="form-group col-md-4">
     <label>{{ __('Lead') }}</label>
-    <select name="model_id" class="input-group form-control custom-select selectedPost">
+    <select name="vendor_id" class="input-group form-control custom-select selectedPost">
         <option selected value="">--</option>
-        @foreach ($userData['vendors'] as $vendor)
+        @foreach ($userData['leads'] as $leads)
             <!--condition make selecionado anteriormente-->
-            @if ($vendor->id == (isset($user->vendor->id) ? $user->vendor->id : ''))
-                <option selected value="{{ $user->vendor->id }}">{{ $user->vendor->name }}</option>
+            @if ($leads->id == (isset($user->leads->id) ? $user->leads->id : ''))
+                <option selected value="{{ $leads->id }}">{{ $leads->name }}</option>
             @else
-                <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
+                <option value="{{ $leads->id }}">{{ $leads->name }}</option>
             @endif
         @endforeach
     </select>
-    <!-- {!! Form::number('model_id', null, ['class' => 'form-control']) !!} -->
 </div>
 
 <!-- Finiclasse Employee Field -->
-<div class="form-group col-sm-4">
-    <div class="form-check" style="margin-top: 37px;">
-        {!! Form::hidden('finiclasse_employee', 0, ['class' => 'form-check-input']) !!}
-        {!! Form::checkbox('finiclasse_employee', '1', null, ['class' => 'form-check-input']) !!}
-        <label>{{ __('Finiclasse Employee') }}</label>
-    </div>
-</div>
+<input type="hidden" name="finiclasse_employee" value="0">

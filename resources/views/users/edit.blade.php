@@ -28,7 +28,7 @@
 
             <div class="card-footer">
                 {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
-                @if($user->finiclasse_employee == 0)
+                @if($user->gdpr_confirmation == '')
                     <a class="btn btn-primary" href="{{ route('createValidateRGPD', [$user->id]) }}">{{ __('RGPD Validate') }}</a>
                 @endif
                 <a href="{{ route('users.index') }}" class="btn btn-default">{{ __('Cancel') }}</a>

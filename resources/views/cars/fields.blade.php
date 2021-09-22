@@ -340,7 +340,6 @@
                 </div>
             </div>
 
-
             <!-- Drive Id Field -->
             <div class="form-group col-md-3">
                 {!! Form::label('drive_id', 'Tração') !!}
@@ -459,7 +458,7 @@
                         $("#model_id").append('<option value="' + value
                             .id + '">' + value.name + '</option>');
                     });
-                    $( "#model_id" ).prop( "disabled", false );
+                    $("#model_id").prop("disabled", false);
                 }
             });
         });

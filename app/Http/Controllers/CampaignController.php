@@ -9,6 +9,7 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use Spatie\MediaLibrary\Support\MediaStream;
 
 class CampaignController extends AppBaseController
 {
@@ -55,6 +56,18 @@ class CampaignController extends AppBaseController
     public function store(CreateCampaignRequest $request)
     {
         $input = $request->all();
+
+        $document = $request->file('document');
+
+        if ($request->hasFile('document') == null) {
+            //Passar a variable input sem colocar nova imagem
+            $input = $request->all();
+        } else {
+            //Actualizar imagem se colocar uma nova
+            $input = $request->all();
+            $campaign = $this->campaignRepository->create($input);
+            $campaign->addMedia($document)->toMediaCollection('campaigns');
+        }
 
         $campaign = $this->campaignRepository->create($input);
 
@@ -115,13 +128,30 @@ class CampaignController extends AppBaseController
     {
         $campaign = $this->campaignRepository->find($id);
 
+        //Apagar imagem antiga se for mudada  
+        if ($request->hasFile('document')) {
+            $campaign->clearMediaCollection('campaigns');
+        }
+
+        //Verificar se o file existe
+        $document = $request->file('document');
+
+        if ($request->hasFile('document') == null) {
+            //Passar a variable input sem colocar nova imagem
+            $input = $request->all();
+        } else {
+            //Actualizar imagem se colocar uma nova
+            $input = $request->all();
+            $campaign->addMedia($document)->toMediaCollection('campaigns');
+        }
+
         if (empty($campaign)) {
             Flash::error('Campaign not found');
 
             return redirect(route('campaigns.index'));
         }
 
-        $campaign = $this->campaignRepository->update($request->all(), $id);
+        $campaign = $this->campaignRepository->update($input, $id);
 
         Flash::success('Campaign updated successfully.');
 
@@ -148,6 +178,7 @@ class CampaignController extends AppBaseController
         }
 
         $this->campaignRepository->delete($id);
+        $campaign->clearMediaCollection('campaigns');
 
         Flash::success('Campaign deleted successfully.');
 

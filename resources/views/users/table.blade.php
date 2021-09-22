@@ -12,7 +12,7 @@
         </thead>
         <tbody>
             @foreach ($users as $user)
-                <tr>
+                <tr @if($user->gdpr_confirmation == null) class="notValidated" @else class="validated" @endif>
                     <td>{{ isset($user->name) ? $user->name : '' }}</td>
                     <td>{{ isset($user->email) ? $user->email : '' }}</td>
                     <td>{{ isset($user->city) ? $user->city : '' }}</td>

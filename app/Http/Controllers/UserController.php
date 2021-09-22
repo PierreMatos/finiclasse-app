@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use Flash;
 use Response;
 use Validator;
+use Carbon\Carbon;
+use App\Models\Car;
 use App\Models\User;
 use App\Models\LeadUser;
 use App\Mail\ValidateRGPD;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
+use App\Repositories\CarRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -17,7 +21,6 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\ClientTypeRepository;
 use App\Http\Controllers\AppBaseController;
-use Carbon\Carbon;
 
 class UserController extends AppBaseController
 {
@@ -25,12 +28,14 @@ class UserController extends AppBaseController
     private $userRepository;
     private $standRepository;
     private $clientTypeRepository;
+    private $carRepository;
 
-    public function __construct(UserRepository $userRepo, StandRepository $standRepo, ClientTypeRepository $clientTypeRepo)
+    public function __construct(UserRepository $userRepo, StandRepository $standRepo, ClientTypeRepository $clientTypeRepo, CarRepository $carRepo)
     {
         $this->userRepository = $userRepo;
         $this->standRepository = $standRepo;
         $this->clientTypeRepository = $clientTypeRepo;
+        $this->carRepository = $carRepo;
     }
 
     /**
@@ -47,7 +52,7 @@ class UserController extends AppBaseController
         return view('users.index')
             ->with('users', $users);
     }
-    
+
     /**
      * Show the form for creating a new User.
      *
@@ -58,16 +63,26 @@ class UserController extends AppBaseController
         // VARIAVEIS REFERENTES AS LISTAGENS DE MODELOS ($modelName)
         $stands = $this->standRepository->all();
         $clientTypes = $this->clientTypeRepository->all();
-        $vendors =  $this->userRepository->getVendors(Auth::user());
+        $cars = Car::whereNotNull('plate')->get();
+        $leads =  $this->userRepository->getVendors(Auth::user());
 
         $userData = ([
             'stands' => $stands,
             'clientTypes' => $clientTypes,
-            'vendors' => $vendors,
+            'cars' => $cars,
+            'leads' => $leads,
         ]);
 
-        return view('users.create')
-            ->with('userData', $userData);
+        $url = url()->previous();
+        $route = app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
+
+        if ($route == 'getClients') {
+            return view('users.create')
+                ->with('userData', $userData);
+        } elseif ($route == 'getVendors') {
+            return view('vendors.create')
+                ->with('userData', $userData);
+        }
     }
 
     /**
@@ -96,9 +111,22 @@ class UserController extends AppBaseController
 
         $user = $this->userRepository->create($input);
 
+        if ($user->gdpr_type == "email") {
+            Mail::send(new ValidateRGPD($user));
+        } elseif ($user->gdpr_type == "sms") {
+            // Something
+        }
+
         Flash::success('User saved successfully.');
 
-        return redirect(route('users.index'));
+        $url = url()->previous();
+        $route = app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
+
+        if ($route == 'users.create') {
+            return redirect(route('getClients'));
+        } elseif ($route == 'vendors.create') {
+            return redirect(route('getVendors'));
+        }
     }
 
     /**
@@ -136,12 +164,14 @@ class UserController extends AppBaseController
         // VARIAVEIS REFERENTES AS LISTAGENS DE MODELOS ($modelName)
         $stands = $this->standRepository->all();
         $clientTypes = $this->clientTypeRepository->all();
-        $vendors =  $this->userRepository->getVendors(Auth::user());
+        $cars = Car::whereNotNull('plate')->get();
+        $leads =  $this->userRepository->getVendors(Auth::user());
 
         $userData = ([
             'stands' => $stands,
             'clientTypes' => $clientTypes,
-            'vendors' => $vendors,
+            'cars' => $cars,
+            'leads' => $leads,
         ]);
 
         if (empty($user)) {
@@ -177,9 +207,12 @@ class UserController extends AppBaseController
 
         Flash::success('User updated successfully.');
 
-        if ($user->finiclasse_employee == 0) {
+        $url = url()->previous();
+        $route = app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
+
+        if ($route == 'users.create') {
             return redirect(route('getClients'));
-        } else {
+        } elseif ($route == 'vendors.create') {
             return redirect(route('getVendors'));
         }
     }
@@ -207,9 +240,15 @@ class UserController extends AppBaseController
 
         Flash::success('User deleted successfully.');
 
-        return redirect(route('users.index'));
-    }
+        $url = url()->previous();
+        $route = app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
 
+        if ($route == 'getClients') {
+            return redirect(route('getClients'));
+        } elseif ($route == 'getVendors') {
+            return redirect(route('getVendors'));
+        }
+    }
 
     /**
      * Display a listing of the Clients.
@@ -221,9 +260,9 @@ class UserController extends AppBaseController
     public function getClients(Request $request)
     {
         $user = Auth::user();
-       
+
         $clients =  $this->userRepository->getClients($user);
-       
+
         return view('users.index')
             ->with('users', $clients);
     }
@@ -238,15 +277,15 @@ class UserController extends AppBaseController
     public function getVendors(Request $request)
     {
         $user = Auth::user();
-       
+
         $vendors =  $this->userRepository->getVendors($user);
-       
+
         return view('vendors.index')
             ->with('users', $vendors);
     }
-   
-    public function createValidateRGPD($id) 
-    {   
+
+    public function createValidateRGPD($id)
+    {
         $user = $this->userRepository->find($id);
 
         Mail::send(new ValidateRGPD($user));
@@ -256,13 +295,13 @@ class UserController extends AppBaseController
         return redirect(route('users.index'));
     }
 
-    public function storeValidateRGPD($id) 
+    public function storeValidateRGPD($id)
     {
         $user = $this->userRepository->find($id);
 
         $timestamp = Carbon::now();
 
-        $user = $this->userRepository->update(['gdpr_confirmation' => $timestamp, 'gdpr_type' => "Email"], $id);
+        $user = $this->userRepository->update(['gdpr_confirmation' => $timestamp, 'gdpr_type' => "email"], $id);
 
         return view('thankyou');
     }
