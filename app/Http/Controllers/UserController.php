@@ -97,7 +97,7 @@ class UserController extends AppBaseController
             'email' => 'sometimes|unique:users',
             'nif' => 'sometimes|nullable|unique:users',
         ]);
-      
+
         $input = $request->all();
 
         $url = Route::currentRouteName();
@@ -107,12 +107,10 @@ class UserController extends AppBaseController
         } elseif ($url == 'sellers.store') {
             $user = $this->userRepository->create($input)->assignRole('Vendedor');
         }
-        
-        if($validator->fails()){
 
-          Flash::error($validator->errors());
-          return redirect(route('users.index'));
-
+        if ($validator->fails()) {
+            Flash::error($validator->errors());
+            return redirect(route('users.index'));
         }
 
         $user = $this->userRepository->create($input);

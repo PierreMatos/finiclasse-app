@@ -8,7 +8,7 @@
 <div class="col-sm-6">
     {!! Form::label('document', 'Contrato') !!}
     <div class="form-control disabledColor">
-        @foreach ($financing->getMedia('financing') as $media)
+        @foreach ($financing->getMedia('financings') as $media)
             <p>{{ $media->name }}</p>
         @endforeach
     </div>

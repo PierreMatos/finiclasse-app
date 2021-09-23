@@ -34,6 +34,15 @@
     </li>
 @endcan
 
+@can('benefits.index')
+    <li class="treeview">
+        <a href="{{ route('benefits.index') }}" class="nav-link {{ Request::is('benefits*') ? 'active' : '' }}">
+            <i class="fas fa-euro-sign"></i>
+            <p>Benefícios</p>
+        </a>
+    </li>
+@endcan
+
 @can('cars.index')
     <li class="treeview">
         <a href="{{ route('cars.index') }}" class="nav-link {{ Request::is('cars*') ? 'active' : '' }}">
@@ -205,16 +214,6 @@
                     class="nav-link {{ Request::is('campaignsProposals*') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Campanhas Negócios</p>
-                </a>
-            </li>
-        @endcan
-
-        @can('benefits.index')
-            <li class="treeview">
-                <a href="{{ route('benefits.index') }}"
-                    class="nav-link {{ Request::is('benefits*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Benefícios</p>
                 </a>
             </li>
         @endcan

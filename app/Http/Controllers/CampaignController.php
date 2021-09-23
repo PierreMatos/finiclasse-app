@@ -63,6 +63,7 @@ class CampaignController extends AppBaseController
         if ($request->hasFile('document') == null) {
             //Passar a variable input sem colocar nova imagem
             $input = $request->all();
+            $campaign = $this->campaignRepository->create($input);
         } else {
             //Actualizar imagem se colocar uma nova
             $input = $request->all();

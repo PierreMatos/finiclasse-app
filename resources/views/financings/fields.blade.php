@@ -8,7 +8,7 @@
 <div class="form-group col-sm-6">
     <label>{{ __('Contract') }}</label>
     @if (Route::is('financings.edit'))
-        @foreach ($financing->getMedia('financing') as $media)
+        @foreach ($financing->getMedia('financings') as $media)
             <span>({{ $media->name }})</span>
         @endforeach
     @endif

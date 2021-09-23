@@ -111,6 +111,7 @@ Route::middleware(['auth'])->group(function () {
     // Download
     Route::get('/download-financing{id}', [FinancingController::class, 'download']);
     Route::get('/download-campaign{id}', [CampaignController::class, 'download']);
+    Route::get('/download-benefit{id}', [BenefitController::class, 'download']);
 
     // Validate Create RGPD with Email
     Route::get('createValidateRGPD/{id}', [UserController::class, 'createValidateRGPD'])->name('createValidateRGPD');

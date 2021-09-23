@@ -29,7 +29,7 @@ class FinancingController extends AppBaseController
      *
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $financings = $this->financingRepository->all();
 
@@ -63,11 +63,12 @@ class FinancingController extends AppBaseController
         if ($request->hasFile('document') == null) {
             //Passar a variable input sem colocar nova imagem
             $input = $request->all();
+            $financing = $this->financingRepository->create($input);
         } else {
             //Actualizar imagem se colocar uma nova
             $input = $request->all();
             $financing = $this->financingRepository->create($input);
-            $financing->addMedia($document)->toMediaCollection('financing');
+            $financing->addMedia($document)->toMediaCollection('financings');
         }
 
         Flash::success('Financing saved successfully.');
@@ -129,7 +130,7 @@ class FinancingController extends AppBaseController
 
         //Apagar imagem antiga se for mudada  
         if ($request->hasFile('document')) {
-            $financing->clearMediaCollection('financing');
+            $financing->clearMediaCollection('financings');
         }
 
         //Verificar se o file existe
@@ -141,7 +142,7 @@ class FinancingController extends AppBaseController
         } else {
             //Actualizar imagem se colocar uma nova
             $input = $request->all();
-            $financing->addMedia($document)->toMediaCollection('financing');
+            $financing->addMedia($document)->toMediaCollection('financings');
         }
 
         if (empty($financing)) {
@@ -177,7 +178,7 @@ class FinancingController extends AppBaseController
         }
 
         $this->financingRepository->delete($id);
-        $financing->clearMediaCollection('financing');
+        $financing->clearMediaCollection('financings');
 
         Flash::success('Financing deleted successfully.');
 
@@ -189,7 +190,7 @@ class FinancingController extends AppBaseController
         $financing = $this->financingRepository->find($id);
 
         // Let's get some media.
-        $downloads = $financing->getMedia('financing');
+        $downloads = $financing->getMedia('financings');
 
         // Download the files associated with the media in a streamed way.
         // No prob if your files are very large.

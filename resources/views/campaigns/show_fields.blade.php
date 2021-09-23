@@ -6,7 +6,7 @@
 
 <!-- Document Field -->
 <div class="col-sm-6">
-    {!! Form::label('document', 'Contrato') !!}
+    {!! Form::label('document', 'Documento') !!}
     <div class="form-control disabledColor">
         @foreach ($campaign->getMedia('campaigns') as $media)
             <p>{{ $media->name }}</p>

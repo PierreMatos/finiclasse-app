@@ -9,9 +9,8 @@
                     <h1>{{ __('Show') }} {{ isset($campaign->name) ? $campaign->name : '' }}</h1>
                 </div>
                 <div class="col-sm-6">
-                    <a class="btn btn-default float-right"
-                       href="{{ route('campaigns.index') }}">
-                       {{ __('Back') }}
+                    <a class="btn btn-default float-right" href="{{ route('campaigns.index') }}">
+                        {{ __('Back') }}
                     </a>
                 </div>
             </div>

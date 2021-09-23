@@ -9,6 +9,7 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use Spatie\MediaLibrary\Support\MediaStream;
 
 class BenefitController extends AppBaseController
 {
@@ -56,7 +57,18 @@ class BenefitController extends AppBaseController
     {
         $input = $request->all();
 
-        $benefit = $this->benefitRepository->create($input);
+        $document = $request->file('document');
+
+        if ($request->hasFile('document') == null) {
+            //Passar a variable input sem colocar nova imagem
+            $input = $request->all();
+            $benefit = $this->benefitRepository->create($input);
+        } else {
+            //Actualizar imagem se colocar uma nova
+            $input = $request->all();
+            $benefit = $this->benefitRepository->create($input);
+            $benefit->addMedia($document)->toMediaCollection('benefits');
+        }
 
         Flash::success('Benefit saved successfully.');
 
@@ -115,13 +127,30 @@ class BenefitController extends AppBaseController
     {
         $benefit = $this->benefitRepository->find($id);
 
+        //Apagar imagem antiga se for mudada  
+        if ($request->hasFile('document')) {
+            $benefit->clearMediaCollection('benefits');
+        }
+
+        //Verificar se o file existe
+        $document = $request->file('document');
+
+        if ($request->hasFile('document') == null) {
+            //Passar a variable input sem colocar nova imagem
+            $input = $request->all();
+        } else {
+            //Actualizar imagem se colocar uma nova
+            $input = $request->all();
+            $benefit->addMedia($document)->toMediaCollection('benefits');
+        }
+
         if (empty($benefit)) {
             Flash::error('Benefit not found');
 
             return redirect(route('benefits.index'));
         }
 
-        $benefit = $this->benefitRepository->update($request->all(), $id);
+        $benefit = $this->benefitRepository->update($input, $id);
 
         Flash::success('Benefit updated successfully.');
 
@@ -148,9 +177,22 @@ class BenefitController extends AppBaseController
         }
 
         $this->benefitRepository->delete($id);
+        $benefit->clearMediaCollection('benefits');
 
         Flash::success('Benefit deleted successfully.');
 
         return redirect(route('benefits.index'));
+    }
+
+    public function download(Benefit $benefit, $id)
+    {
+        $benefit = $this->benefitRepository->find($id);
+
+        // Let's get some media.
+        $downloads = $benefit->getMedia('benefits');
+
+        // Download the files associated with the media in a streamed way.
+        // No prob if your files are very large.
+        return MediaStream::create('files.zip')->addMedia($downloads);
     }
 }
