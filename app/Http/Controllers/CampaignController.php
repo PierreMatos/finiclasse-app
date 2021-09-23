@@ -6,6 +6,7 @@ use App\Http\Requests\CreateCampaignRequest;
 use App\Http\Requests\UpdateCampaignRequest;
 use App\Repositories\CampaignRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Campaign;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
@@ -68,8 +69,6 @@ class CampaignController extends AppBaseController
             $campaign = $this->campaignRepository->create($input);
             $campaign->addMedia($document)->toMediaCollection('campaigns');
         }
-
-        $campaign = $this->campaignRepository->create($input);
 
         Flash::success('Campaign saved successfully.');
 
@@ -183,5 +182,17 @@ class CampaignController extends AppBaseController
         Flash::success('Campaign deleted successfully.');
 
         return redirect(route('campaigns.index'));
+    }
+
+    public function download(Campaign $campaign, $id)
+    {
+        $campaign = $this->campaignRepository->find($id);
+
+        // Let's get some media.
+        $downloads = $campaign->getMedia('campaigns');
+
+        // Download the files associated with the media in a streamed way.
+        // No prob if your files are very large.
+        return MediaStream::create('files.zip')->addMedia($downloads);
     }
 }

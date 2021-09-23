@@ -1,60 +1,70 @@
 <!-- Name Field -->
-<div class="col-sm-12">
-    {!! Form::label('name', 'Name:') !!}
-    <p>{{ $campaign->name }}</p>
+<div class="form-group col-sm-6">
+    {!! Form::label('name', 'Nome') !!}
+    {!! Form::text('name', isset($campaign->name) ? $campaign->name : '', ['class' => 'form-control', 'disabled']) !!}
+</div>
+
+<!-- Document Field -->
+<div class="col-sm-6">
+    {!! Form::label('document', 'Contrato') !!}
+    <div class="form-control disabledColor">
+        @foreach ($campaign->getMedia('campaigns') as $media)
+            <p>{{ $media->name }}</p>
+        @endforeach
+    </div>
 </div>
 
 <!-- Description Field -->
-<div class="col-sm-12">
-    {!! Form::label('description', 'Description:') !!}
-    <p>{{ $campaign->description }}</p>
+<div class="form-group col-sm-12">
+    {!! Form::label('description', 'Descrição') !!}
+    {!! Form::textarea('description', isset($campaign->description) ? $campaign->description : '', ['class' => 'form-control', 'disabled']) !!}
 </div>
 
-<!-- Make Id Field -->
+<!-- Make Id Field
 <div class="col-sm-12">
     {!! Form::label('make_id', 'Make Id:') !!}
     <p>{{ $campaign->make_id }}</p>
-</div>
+</div> -->
 
-<!-- Model Id Field -->
+<!-- Model Id Field
 <div class="col-sm-12">
     {!! Form::label('model_id', 'Model Id:') !!}
     <p>{{ $campaign->model_id }}</p>
-</div>
+</div> -->
 
-<!-- Type Field -->
+<!-- Type Field
 <div class="col-sm-12">
     {!! Form::label('type', 'Type:') !!}
     <p>{{ $campaign->type }}</p>
-</div>
+</div> -->
 
-<!-- Amount Field -->
+<!-- Amount Field
 <div class="col-sm-12">
     {!! Form::label('amount', 'Amount:') !!}
     <p>{{ $campaign->amount }}</p>
-</div>
+</div> -->
 
-<!-- Beginning Field -->
+<!-- Beginning Field
 <div class="col-sm-12">
     {!! Form::label('beginning', 'Beginning:') !!}
     <p>{{ $campaign->beginning }}</p>
-</div>
+</div> -->
 
-<!-- End Field -->
+<!-- End Field
 <div class="col-sm-12">
     {!! Form::label('end', 'End:') !!}
     <p>{{ $campaign->end }}</p>
-</div>
+</div> -->
 
-<!-- Created At Field -->
+<!-- Created At Field
 <div class="col-sm-12">
     {!! Form::label('created_at', 'Created At:') !!}
     <p>{{ $campaign->created_at }}</p>
-</div>
+</div> -->
 
-<!-- Updated At Field -->
+<!-- Updated At Field
 <div class="col-sm-12">
     {!! Form::label('updated_at', 'Updated At:') !!}
     <p>{{ $campaign->updated_at }}</p>
-</div>
+</div> -->
 

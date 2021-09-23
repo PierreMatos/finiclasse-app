@@ -5,10 +5,10 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>{{ __('Vendors') }}</h1>
+                    <h1>{{ __('Sellers') }}</h1>
                 </div>
                 <div class="col-sm-6">
-                    <a class="btn btn-primary float-right" href="{{ route('vendors.create') }}">
+                    <a class="btn btn-primary float-right" href="{{ route('sellers.create') }}">
                         {{ __('Add New') }}
                     </a>
                 </div>
@@ -24,7 +24,7 @@
 
         <div class="card">
             <div class="card-body p-0">
-                @include('vendors.table')
+                @include('sellers.table')
 
                 <div class="card-footer clearfix float-right">
                     <div class="float-right">
@@ -40,7 +40,7 @@
 
 @push('page_scripts')
     <script>
-        var table = $('#vendors-table').DataTable({
+        var table = $('#sellers-table').DataTable({
             language: {
                 search: "_INPUT_",
                 searchPlaceholder: "{{ __('Search...') }}",

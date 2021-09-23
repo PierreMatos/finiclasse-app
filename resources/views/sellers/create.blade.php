@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>{{__('Create vendor')}}</h1>
+                    <h1>{{__('Create seller')}}</h1>
                 </div>
             </div>
         </div>
@@ -17,19 +17,19 @@
 
         <div class="card">
 
-            {!! Form::open(['route' => 'users.store']) !!}
+            {!! Form::open(['route' => 'sellers.store']) !!}
 
             <div class="card-body">
 
                 <div class="row">
-                    @include('vendors.fields')
+                    @include('sellers.fields')
                 </div>
 
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('vendors.index') }}" class="btn btn-default">{{ __('Cancel') }}</a>
+                <a href="{{ route('getSellers') }}" class="btn btn-default">{{ __('Cancel') }}</a>
             </div>
 
             {!! Form::close() !!}

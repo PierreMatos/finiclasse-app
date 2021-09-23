@@ -29,7 +29,7 @@
 
             <div class="card-footer">
                 {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('users.index') }}" class="btn btn-default">{{ __('Cancel') }}</a>
+                <a href="{{ route('getClients') }}" class="btn btn-default">{{ __('Cancel') }}</a>
             </div>
 
             {!! Form::close() !!}

@@ -70,8 +70,6 @@ class FinancingController extends AppBaseController
             $financing->addMedia($document)->toMediaCollection('financing');
         }
 
-        $financing = $this->financingRepository->create($input);
-
         Flash::success('Financing saved successfully.');
 
         return redirect(route('financings.index'));

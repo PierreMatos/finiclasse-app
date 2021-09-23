@@ -25,6 +25,15 @@
     </li>
 @endcan
 
+@can('campaigns.index')
+    <li class="treeview">
+        <a href="{{ route('campaigns.index') }}" class="nav-link {{ Request::is('campaigns*') ? 'active' : '' }}">
+            <i class="fas fa-percent"></i>
+            <p>Campanhas</p>
+        </a>
+    </li>
+@endcan
+
 @can('cars.index')
     <li class="treeview">
         <a href="{{ route('cars.index') }}" class="nav-link {{ Request::is('cars*') ? 'active' : '' }}">
@@ -37,7 +46,7 @@
 <!-- TODO criar role para ver clientes e vendedores -->
 @can('users.index')
     <li class="treeview">
-        <a href="{{ route('getClients') }}" class="nav-link {{ Request::is('clients*') ? 'active' : '' }}">
+        <a href="{{ route('getClients') }}" class="nav-link {{ Request::is('clients-list*') ? 'active' : '' }}">
             <i class="fas fa-users"></i>
             <p>Clientes</p>
         </a>
@@ -46,7 +55,7 @@
 
 @can('users.index')
     <li class="treeview">
-        <a href="{{ route('getVendors') }}" class="nav-link {{ Request::is('vendors*') ? 'active' : '' }}">
+        <a href="{{ route('getSellers') }}" class="nav-link {{ Request::is('sellers-list*') ? 'active' : '' }}">
             <i class="fas fa-user-tie"></i>
             <p>Vendedores</p>
         </a>
@@ -186,16 +195,6 @@
                     class="nav-link {{ Request::is('financingProposals*') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Financiamento Negócios</p>
-                </a>
-            </li>
-        @endcan
-
-        @can('campaigns.index')
-            <li class="treeview">
-                <a href="{{ route('campaigns.index') }}"
-                    class="nav-link {{ Request::is('campaigns*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Campanhas</p>
                 </a>
             </li>
         @endcan

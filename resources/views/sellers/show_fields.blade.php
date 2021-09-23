@@ -52,22 +52,16 @@
     {!! Form::text('gdpr_type', isset($user->gdpr_type) ? $user->gdpr_type : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
-<!-- Gdpr Rejection Field -->
-<div class="form-group col-sm-4">
-    {!! Form::label('gdpr_rejection', 'Gdpr Rejection:') !!}
-    {!! Form::text('gdpr_rejection', isset($user->gdpr_rejection) ? $user->gdpr_rejection : '' , ['class' => 'form-control', 'disabled']) !!}
-</div>
-
 <!-- Stand Id Field -->
 <div class="form-group col-sm-4">
     <label>{{ __('Stand') }}</label>
     {!! Form::text('stand_id', isset($user->stand->name) ? $user->stand->name : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
-<!-- Client Type Field -->
+<!-- Service Car Field -->
 <div class="form-group col-sm-4">
-    <label>{{ __('Client Type') }}</label>
-    {!! Form::text('client_type_id', isset($user->clientType->name) ? $user->clientType->name : '' , ['class' => 'form-control', 'disabled']) !!}
+    <label>{{ __('Service Car') }}</label>
+    {!! Form::text('service_car_id', isset($user->serviceCar->plate) ? $user->serviceCar->plate : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
 <!-- Finiclasse Employee Field -->

@@ -11,12 +11,12 @@ use App\Models\User;
 use App\Models\LeadUser;
 use App\Mail\ValidateRGPD;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
 use App\Repositories\CarRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Repositories\StandRepository;
+use Illuminate\Support\Facades\Route;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\ClientTypeRepository;
@@ -64,7 +64,7 @@ class UserController extends AppBaseController
         $stands = $this->standRepository->all();
         $clientTypes = $this->clientTypeRepository->all();
         $cars = Car::whereNotNull('plate')->get();
-        $leads =  $this->userRepository->getVendors(Auth::user());
+        $leads =  $this->userRepository->getSellers(Auth::user());
 
         $userData = ([
             'stands' => $stands,
@@ -73,14 +73,13 @@ class UserController extends AppBaseController
             'leads' => $leads,
         ]);
 
-        $url = url()->previous();
-        $route = app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
+        $url = Route::currentRouteName();
 
-        if ($route == 'getClients') {
+        if ($url == 'users.create') {
             return view('users.create')
                 ->with('userData', $userData);
-        } elseif ($route == 'getVendors') {
-            return view('vendors.create')
+        } elseif ($url == 'sellers.create') {
+            return view('sellers.create')
                 ->with('userData', $userData);
         }
     }
@@ -94,19 +93,26 @@ class UserController extends AppBaseController
      */
     public function store(CreateUserRequest $request)
     {
-        $input = $request->all();
-
         $validator = Validator::make($request->all(), [
             'email' => 'sometimes|unique:users',
             'nif' => 'sometimes|nullable|unique:users',
         ]);
+      
+        $input = $request->all();
+
+        $url = Route::currentRouteName();
+
+        if ($url == 'users.store') {
+            $user = $this->userRepository->create($input);
+        } elseif ($url == 'sellers.store') {
+            $user = $this->userRepository->create($input)->assignRole('Vendedor');
+        }
         
         if($validator->fails()){
 
-        Flash::error($validator->errors());
-        return redirect(route('users.index'));
+          Flash::error($validator->errors());
+          return redirect(route('users.index'));
 
-            // return $validator->errors()->toJson();
         }
 
         $user = $this->userRepository->create($input);
@@ -119,13 +125,10 @@ class UserController extends AppBaseController
 
         Flash::success('User saved successfully.');
 
-        $url = url()->previous();
-        $route = app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
-
-        if ($route == 'users.create') {
+        if ($url == 'users.store') {
             return redirect(route('getClients'));
-        } elseif ($route == 'vendors.create') {
-            return redirect(route('getVendors'));
+        } elseif ($url == 'sellers.store') {
+            return redirect(route('getSellers'));
         }
     }
 
@@ -146,7 +149,15 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        return view('users.show')->with('user', $user);
+        $url = Route::currentRouteName();
+
+        if ($url == 'users.show') {
+            return view('users.show')
+                ->with('user', $user);
+        } elseif ($url == 'sellers.show') {
+            return view('sellers.show')
+                ->with('user', $user);
+        }
     }
 
     /**
@@ -165,7 +176,7 @@ class UserController extends AppBaseController
         $stands = $this->standRepository->all();
         $clientTypes = $this->clientTypeRepository->all();
         $cars = Car::whereNotNull('plate')->get();
-        $leads =  $this->userRepository->getVendors(Auth::user());
+        $leads =  $this->userRepository->getSellers(Auth::user());
 
         $userData = ([
             'stands' => $stands,
@@ -180,9 +191,17 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        return view('users.edit')
-            ->with('user', $user)
-            ->with('userData', $userData);
+        $url = Route::currentRouteName();
+
+        if ($url == 'users.edit') {
+            return view('users.edit')
+                ->with('user', $user)
+                ->with('userData', $userData);
+        } elseif ($url == 'sellers.edit') {
+            return view('sellers.edit')
+                ->with('user', $user)
+                ->with('userData', $userData);
+        }
     }
 
     /**
@@ -207,13 +226,12 @@ class UserController extends AppBaseController
 
         Flash::success('User updated successfully.');
 
-        $url = url()->previous();
-        $route = app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
+        $url = Route::currentRouteName();
 
-        if ($route == 'users.create') {
+        if ($url == 'users.update') {
             return redirect(route('getClients'));
-        } elseif ($route == 'vendors.create') {
-            return redirect(route('getVendors'));
+        } elseif ($url == 'sellers.update') {
+            return redirect(route('getSellers'));
         }
     }
 
@@ -240,13 +258,12 @@ class UserController extends AppBaseController
 
         Flash::success('User deleted successfully.');
 
-        $url = url()->previous();
-        $route = app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
+        $url = Route::currentRouteName();
 
-        if ($route == 'getClients') {
+        if ($url == 'users.destroy') {
             return redirect(route('getClients'));
-        } elseif ($route == 'getVendors') {
-            return redirect(route('getVendors'));
+        } elseif ($url == 'sellers.destroy') {
+            return redirect(route('getSellers'));
         }
     }
 
@@ -257,7 +274,7 @@ class UserController extends AppBaseController
      *
      * @return Response
      */
-    public function getClients(Request $request)
+    public function getClients()
     {
         $user = Auth::user();
 
@@ -274,14 +291,14 @@ class UserController extends AppBaseController
      *
      * @return Response
      */
-    public function getVendors(Request $request)
+    public function getSellers()
     {
         $user = Auth::user();
 
-        $vendors =  $this->userRepository->getVendors($user);
+        $sellers =  $this->userRepository->getSellers($user);
 
-        return view('vendors.index')
-            ->with('users', $vendors);
+        return view('sellers.index')
+            ->with('users', $sellers);
     }
 
     public function createValidateRGPD($id)
@@ -292,7 +309,7 @@ class UserController extends AppBaseController
 
         Flash::success('E-mail enviado com sucesso!');
 
-        return redirect(route('users.index'));
+        return redirect(route('getClients'));
     }
 
     public function storeValidateRGPD($id)
