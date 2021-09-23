@@ -7,7 +7,7 @@
 
 <p>Lorem ipsum</p>
 
-@component('mail::button', ['url' => 'http://127.0.0.1:8000/storeValidateRGPD/'.$user->id, 'color' => 'green'])
+@component('mail::button', ['url' => route('storeValidateRGPD',$user->id), 'color' => 'green'])
 CONFIRMAR VALIDAÇÃO
 @endcomponent
 

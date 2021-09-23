@@ -18,6 +18,9 @@ class CreateBenefitsProposalsTable extends Migration
             $table->increments('id');
             $table->integer('benefit_id')->unsigned();
             $table->integer('proposal_id')->unsigned();
+            $table->string('name')->nullable();
+            $table->integer('value')->nullable();
+            $table->string('type')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('benefit_id')->references('id')->on('benefits');

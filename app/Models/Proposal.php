@@ -169,7 +169,7 @@ class Proposal extends Model
     public function benefits()
     {
         // return $this->belongsToMany(Benefit::class);
-        return $this->belongsToMany(Benefit::class, 'benefits_proposals');
+        return $this->belongsToMany(Benefit::class, 'benefits_proposals')->withPivot('type', 'value', 'name');
     }
 
     /**
@@ -178,7 +178,7 @@ class Proposal extends Model
     public function campaigns()
     {
         // return $this->belongsToMany(Benefit::class);
-        return $this->belongsToMany(Campaign::class, 'campaigns_proposals');
+        return $this->belongsToMany(Campaign::class, 'campaigns_proposals')->withPivot('type', 'value', 'name');
     }
 
     /**

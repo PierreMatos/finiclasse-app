@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Flash;
 use Response;
+use Validator;
 use Carbon\Carbon;
 use App\Models\Car;
 use App\Models\User;
@@ -92,6 +93,11 @@ class UserController extends AppBaseController
      */
     public function store(CreateUserRequest $request)
     {
+        $validator = Validator::make($request->all(), [
+            'email' => 'sometimes|unique:users',
+            'nif' => 'sometimes|nullable|unique:users',
+        ]);
+      
         $input = $request->all();
 
         $url = Route::currentRouteName();
@@ -101,6 +107,15 @@ class UserController extends AppBaseController
         } elseif ($url == 'sellers.store') {
             $user = $this->userRepository->create($input)->assignRole('Vendedor');
         }
+        
+        if($validator->fails()){
+
+          Flash::error($validator->errors());
+          return redirect(route('users.index'));
+
+        }
+
+        $user = $this->userRepository->create($input);
 
         if ($user->gdpr_type == "email") {
             Mail::send(new ValidateRGPD($user));

@@ -71,6 +71,8 @@ class UserAPIController extends AppBaseController
 
         $validator = Validator::make($request->all(), [
             'vendor_id' => 'required',
+            'email' => 'unique:users',
+            'nif' => 'sometimes|nullable|unique:users',
         ]);
 
         if($validator->fails()){
@@ -79,6 +81,7 @@ class UserAPIController extends AppBaseController
         }
 
         $user = $this->userRepository->create($input);
+
         $user->vendor()->attach($request->vendor_id);
 
         return $this->sendResponse(new UserResource($user), 'User saved successfully');
@@ -249,8 +252,10 @@ class UserAPIController extends AppBaseController
 
     }
 
-    public function createValidateRGPD($id) 
+    public function createValidateRGPD(Request $request) 
     {   
+        
+        $id = $request->id;
         $user = $this->userRepository->find($id);
 
         Mail::send(new ValidateRGPD($user));

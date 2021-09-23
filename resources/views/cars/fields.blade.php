@@ -34,18 +34,14 @@
                     <select name="model_id" class="input-group form-control custom-select selectedPost" id="model_id">
                         <option selected value="">--</option>
                         @foreach ($carData['models'] as $model)
-
                             @if ($model->make->id == $car->model->make->id)
-
                                 @if ($model->id == (isset($car->model->id) ? $car->model->id : ''))
-                                    <option selected value="{{ $car->model->id }}">{{ $car->model->name }}
+                                <option selected value="{{ $car->model->id }}">{{ $car->model->name }}
                                     </option>
-                                @else
+                                    @else
                                     <option value="{{ $model->id }}">{{ $model->name }}</option>
-                                @endif
-
+                                @endif                                
                             @endif
-
                         @endforeach
                     </select>
                 </div>
@@ -163,19 +159,19 @@
             <!-- Price Field -->
             <div class="form-group col-md-3">
                 {!! Form::label('price', 'Preço') !!}
-                {!! Form::number('price', isset($car->price) ? $car->price : '', ['class' => 'form-control']) !!}
+                {!! Form::number('price', isset($car->price) ? $car->price : '', ['class' => 'form-control','step' => 'any']) !!}
             </div>
 
             <!-- Price Base Field -->
             <div class="form-group col-md-3">
                 {!! Form::label('price_base', 'Preço base') !!}
-                {!! Form::number('price_base', isset($car->price_base) ? $car->price_base : '', ['class' => 'form-control']) !!}
+                {!! Form::number('price_base', isset($car->price_base) ? $car->price_base : '', ['class' => 'form-control' ,'step' => 'any']) !!}
             </div>
 
             <!-- Price Campaign Field -->
             <div class="form-group col-md-3">
                 {!! Form::label('price_campaign', 'Preço de campanha') !!}
-                {!! Form::number('price_campaign', isset($car->price_campaign) ? $car->price_campaign : '', ['class' => 'form-control']) !!}
+                {!! Form::number('price_campaign', isset($car->price_campaign) ? $car->price_campaign : '', ['class' => 'form-control','step' => 'any']) !!}
             </div>
 
             <!-- Order Date Field -->
@@ -229,19 +225,19 @@
             <!-- Tradein Purchase Field -->
             <div class="form-group col-md-3">
                 {!! Form::label('tradein_purchase', 'Preço compra de retoma') !!}
-                {!! Form::number('tradein_purchase', isset($car->tradein_purchase) ? $car->tradein_purchase : '', ['class' => 'form-control']) !!}
+                {!! Form::number('tradein_purchase', isset($car->tradein_purchase) ? $car->tradein_purchase : '', ['class' => 'form-control','step' => 'any']) !!}
             </div>
 
             <!-- Tradein Sale Field -->
             <div class="form-group col-md-3">
                 {!! Form::label('tradein_sale', 'Preço venda de retoma') !!}
-                {!! Form::number('tradein_sale', isset($car->tradein_sale) ? $car->tradein_sale : '', ['class' => 'form-control']) !!}
+                {!! Form::number('tradein_sale', isset($car->tradein_sale) ? $car->tradein_sale : '', ['class' => 'form-control','step' => 'any']) !!}
             </div>
 
             <!-- Price New Field -->
             <div class="form-group col-md-3">
                 {!! Form::label('price_new', 'Preço em novo') !!}
-                {!! Form::number('price_new', isset($car->price_new) ? $car->price_new : '', ['class' => 'form-control']) !!}
+                {!! Form::number('price_new', isset($car->price_new) ? $car->price_new : '', ['class' => 'form-control','step' => 'any']) !!}
             </div>
 
             <div class="col-md-3">
@@ -258,7 +254,7 @@
                 <div class="form-group">
                     <div class="form-check">
                         {!! Form::hidden('felxible', 0, ['class' => 'form-check-input']) !!}
-                        {!! Form::checkbox('felxible', '1', isset($car->felxible) ? $car->felxible : '', ['class' => 'form-check-input']) !!}
+                        {!! Form::checkbox('felxible', '1', isset($car->felxible) ? $car->felxible : '', ['class' => 'form-check-input','step' => 'any']) !!}
                         {!! Form::label('felxible', 'Preço flexível', ['class' => 'form-check-label']) !!}
                     </div>
                 </div>
@@ -395,7 +391,7 @@
             <!-- Iuc Field -->
             <div class="form-group col-md-3">
                 {!! Form::label('iuc', 'IUC') !!}
-                {!! Form::number('iuc', isset($car->iuc) ? $car->iuc : '', ['class' => 'form-control']) !!}
+                {!! Form::number('iuc', isset($car->iuc) ? $car->iuc : '', ['class' => 'form-control','step' => 'any']) !!}
             </div>
 
             <!-- Registration Count Field -->
@@ -407,7 +403,7 @@
             <!-- Consumption Field -->
             <div class="form-group col-md-3">
                 {!! Form::label('consumption', 'Consumo combinado') !!}
-                {!! Form::number('consumption', isset($car->consumption) ? $car->consumption : '', ['class' => 'form-control']) !!}
+                {!! Form::number('consumption', isset($car->consumption) ? $car->consumption : '', ['class' => 'form-control','step' => 'any']) !!}
             </div>
         </div>
     </div>

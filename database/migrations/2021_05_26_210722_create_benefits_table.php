@@ -18,7 +18,7 @@ class CreateBenefitsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('type');
-            $table->integer('amount');
+            $table->decimal('amount'13,2);
             $table->timestamps();
             $table->softDeletes();
         });

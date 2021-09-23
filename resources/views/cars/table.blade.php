@@ -38,7 +38,7 @@
                     <td>{{ $car->model->make->name }}</td>
                     <td>{{ $car->model->name }}</td>
                     <td>{{ $car->plate }}</td>
-                    <td>{{ $car->price . ' €' }}</td>
+                    <td> @money($car->price)</td>
                     <td width="120">
                         {!! Form::open(['route' => ['cars.destroy', $car->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>

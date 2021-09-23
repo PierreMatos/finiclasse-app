@@ -135,7 +135,7 @@
             <div class="form-group col-sm-8">
                 <p>Preço Final (incl. IVA)</p>
                 @if ($proposal->car_id != '')
-                    <h2>{{ $proposal->car->price . ' €' }}</h2>
+                    <h2>@money($proposal->car->price)</h2>
                 @endif
             </div>
 
@@ -189,7 +189,7 @@
                 <div class="form-group col-sm-6">
                     <p>Preço de compra</p>
                     @if ($proposal->tradein_id != '')
-                        <h2>{{ $proposal->tradein->tradein_purchase . ' €' }}</h2>
+                        <h2>@money($proposal->tradein->tradein_purchase)</h2>
                         <div class="form-group col-sm-4">
                             {!! Form::text('tradein_purchase', isset( $proposal->tradein->tradein_purchase) ?  $proposal->tradein->tradein_purchase : '', ['class' => 'form-control', 'id'=>'tradein_purchase']) !!}
                         </div>
@@ -199,7 +199,7 @@
                     <div class="form-group"></div>
                     <p>Preço de venda</p>
                     @if ($proposal->tradein_id != '')
-                        <h2>{{ $proposal->tradein->tradein_sale . ' €' }}</h2>
+                        <h2>@money($proposal->tradein->tradein_sale)</h2>
                     @endif
                 </div>
             </div>
@@ -252,19 +252,19 @@
             <!-- Proposal Value Field -->
             <div class="form-group col-sm-4">
                 <p>Valor do negócio</p>
-                <h2>{{ $proposal->prop_value . ' €' }}</h2>
+                <h2>@money($proposal->prop_value)</h2>
             </div>
 
             <!-- Financial Value Field -->
             <div class="form-group col-sm-4">
                 <p>Valor do financiamento</p>
-                <h2>{{ $proposal->prop_value . ' €' }}</h2>
+                <h2>@money($proposal->prop_value)</h2>
             </div>
 
             <!-- Tradein Value Field -->
             <div class="form-group col-sm-4">
                 <p>Valor da retoma</p>
-                <h2>{{ $proposal->prop_value . ' €' }}</h2>
+                <h2>@money($proposal->prop_value)</h2>
             </div>
 
             <!-- Proposal Number Field -->

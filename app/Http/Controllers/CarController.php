@@ -305,7 +305,6 @@ class CarController extends AppBaseController
         }
 
         $this->carRepository->delete($id);
-        $car->clearMediaCollection('cars');
 
         Flash::success('Car deleted successfully.');
 
