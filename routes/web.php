@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CampaignController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
@@ -85,10 +86,10 @@ Route::middleware(['auth'])->group(function () {
     Route::POST('/carstate', [CarController::class, 'carState'])->name('carstate');
 
 
-    Route::get('clients', [UserController::class, 'getClients'])->name('getClients');
-    Route::get('vendorslist', [UserController::class, 'getVendors'])->name('getVendors');
+    Route::get('clients-list', [UserController::class, 'getClients'])->name('getClients');
+    Route::get('sellers-list', [UserController::class, 'getSellers'])->name('getSellers');
     Route::resource('users', App\Http\Controllers\UserController::class);
-    Route::resource('vendors', App\Http\Controllers\UserController::class);
+    Route::resource('sellers', App\Http\Controllers\UserController::class);
 
     Route::resource('campaigns', App\Http\Controllers\CampaignController::class);
 
@@ -109,6 +110,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Download
     Route::get('/download-financing{id}', [FinancingController::class, 'download']);
+    Route::get('/download-campaign{id}', [CampaignController::class, 'download']);
 
     // Validate Create RGPD with Email
     Route::get('createValidateRGPD/{id}', [UserController::class, 'createValidateRGPD'])->name('createValidateRGPD');

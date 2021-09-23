@@ -5,12 +5,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Campaign Details</h1>
+                    <!-- <h1>Campaign Details</h1> -->
+                    <h1>{{ __('Show') }} {{ isset($campaign->name) ? $campaign->name : '' }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-default float-right"
                        href="{{ route('campaigns.index') }}">
-                        Back
+                       {{ __('Back') }}
                     </a>
                 </div>
             </div>

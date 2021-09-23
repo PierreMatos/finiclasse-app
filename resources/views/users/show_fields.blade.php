@@ -52,12 +52,6 @@
     {!! Form::text('gdpr_type', isset($user->gdpr_type) ? $user->gdpr_type : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
-<!-- Gdpr Rejection Field -->
-<div class="form-group col-sm-4">
-    {!! Form::label('gdpr_rejection', 'Gdpr Rejection:') !!}
-    {!! Form::text('gdpr_rejection', isset($user->gdpr_rejection) ? $user->gdpr_rejection : '' , ['class' => 'form-control', 'disabled']) !!}
-</div>
-
 <!-- Stand Id Field -->
 <div class="form-group col-sm-4">
     <label>{{ __('Stand') }}</label>
@@ -68,6 +62,12 @@
 <div class="form-group col-sm-4">
     <label>{{ __('Client Type') }}</label>
     {!! Form::text('client_type_id', isset($user->clientType->name) ? $user->clientType->name : '' , ['class' => 'form-control', 'disabled']) !!}
+</div>
+
+<!-- Vendor lead Field -->
+<div class="form-group col-sm-4">
+    <label>{{ __('Lead') }}</label>
+    {!! Form::text('vendor_id', isset($user->leads->name) ? $user->leads->name : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
 <!-- Finiclasse Employee Field -->

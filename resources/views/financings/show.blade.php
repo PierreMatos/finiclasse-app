@@ -6,7 +6,7 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <!-- <h1>{{ __('Financing') }}</h1> -->
-                    <h1>{{ __('Mostrar') }} {{ isset($financing->name) ? $financing->name : '' }}</h1>
+                    <h1>{{ __('Show') }} {{ isset($financing->name) ? $financing->name : '' }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-default float-right" href="{{ route('financings.index') }}">

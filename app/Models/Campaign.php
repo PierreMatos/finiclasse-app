@@ -71,6 +71,7 @@ class Campaign extends Model implements HasMedia
     public static $rules = [
         'name' => 'required',
         'description' => 'required',
+        'document' => 'nullable|mimes:pdf'
     ];
 
     /**

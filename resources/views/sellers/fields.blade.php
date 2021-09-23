@@ -85,10 +85,4 @@
 </div>
 
 <!-- Finiclasse Employee Field -->
-<div class="form-group col-sm-4">
-    <div class="form-check" style="margin-top: 37px;">
-        {!! Form::hidden('finiclasse_employee', 0, null, ['class' => 'form-check-input']) !!}
-        {!! Form::checkbox('finiclasse_employee', '1', ['class' => 'form-check-input']) !!}
-        <label>{{ __('Finiclasse Employee') }}</label>
-    </div>
-</div>
+<input type="hidden" name="finiclasse_employee" value="1">

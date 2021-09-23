@@ -5,8 +5,8 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <!-- <h1>{{__('Edit client')}}</h1> -->
-                    <h1>{{__('Edit')}} {{ isset($user->name) ? $user->name : '' }}</h1>
+                    <!-- <h1>{{ __('Edit client') }}</h1> -->
+                    <h1>{{ __('Edit') }} {{ isset($user->name) ? $user->name : '' }}</h1>
                 </div>
             </div>
         </div>
@@ -28,13 +28,23 @@
 
             <div class="card-footer">
                 {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
-                @if($user->gdpr_confirmation == '')
-                    <a class="btn btn-primary" href="{{ route('createValidateRGPD', [$user->id]) }}">{{ __('RGPD Validate') }}</a>
+                @if ($user->gdpr_confirmation == '')
+                    <div class="btn dropdown show">
+                        <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ __('RGPD Validate') }}
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="{{ route('createValidateRGPD', [$user->id]) }}">E-mail</a>
+                            <a class="dropdown-item" href="#">SMS</a>
+                        </div>
+                    </div>
                 @endif
-                <a href="{{ route('users.index') }}" class="btn btn-default">{{ __('Cancel') }}</a>
+                <a href="{{ route('getClients') }}" class="btn btn-default">{{ __('Cancel') }}</a>
             </div>
 
-           {!! Form::close() !!}
+            {!! Form::close() !!}
 
         </div>
     </div>

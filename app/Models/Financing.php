@@ -56,7 +56,7 @@ class Financing extends Model implements HasMedia
     public static $rules = [
         'name' => 'required',
         'description' => 'required',
-        'document' => 'nullable'
+        'document' => 'nullable|mimes:pdf'
     ];
 
     

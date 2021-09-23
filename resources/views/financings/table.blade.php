@@ -17,7 +17,7 @@
                         <td><a href="/download-financing{{ $financing->id }}" class="btn download"><i
                                     class="far fa-file-alt" aria-hidden="true"></i></a></td>
                     @else
-                        <td>Sem documento</td>
+                        <td>{{ __('No document') }}</td>
                     @endif
                     <td width="120">
                         {!! Form::open(['route' => ['financings.destroy', $financing->id], 'method' => 'delete']) !!}
@@ -28,7 +28,7 @@
                             <a href="{{ route('financings.edit', [$financing->id]) }}" class='btn btn-default btn-xs'>
                                 <i class="far fa-edit"></i>
                             </a>
-                            {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                            {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Tem a certeza?')"]) !!}
                         </div>
                         {!! Form::close() !!}
                     </td>

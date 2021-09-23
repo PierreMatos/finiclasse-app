@@ -9,7 +9,7 @@
                     <h1>{{__('Show')}} {{ isset($user->name) ? $user->name : '' }}</h1>
                 </div>
                 <div class="col-sm-6">
-                    <a class="btn btn-default float-right" href="{{ route('users.index') }}">
+                    <a class="btn btn-default float-right" href="{{ route('getClients') }}">
                         {{ __('Back') }}
                     </a>
                 </div>

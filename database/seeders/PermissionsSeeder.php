@@ -70,7 +70,7 @@ class PermissionsSeeder extends Seeder
             $admin->givePermissionTo($permission);
 
                 // array_push($routesArr, $route->getName());
-                    if (Str::contains($route->getName(), ['cars', 'financings', 'users', 'proposals', 'vendors', 'home'])){
+                    if (Str::contains($route->getName(), ['cars', 'financings', 'users', 'proposals', 'sellers', 'home'])){
                         $Administrador->givePermissionTo($permission);
                         $DiretorComercial->givePermissionTo($permission);
                         $ChefeDeVendas->givePermissionTo($permission);
