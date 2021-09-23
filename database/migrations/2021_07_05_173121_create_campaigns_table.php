@@ -21,7 +21,7 @@ class CreateCampaignsTable extends Migration
             $table->integer('make_id')->unsigned()->nullable();
             $table->integer('model_id')->unsigned()->nullable();
             $table->string('type')->nullable();
-            $table->integer('amount')->nullable();
+            $table->decimal('amount',13,2)->nullable();
             $table->dateTime('beginning')->nullable();
             $table->dateTime('end')->nullable();
             $table->timestamps();

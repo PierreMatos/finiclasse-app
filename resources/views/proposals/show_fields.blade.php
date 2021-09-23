@@ -13,7 +13,7 @@
 <!-- Price Field -->
 <div class="col-sm-12">
     {!! Form::label('price', 'Price:') !!}
-    <p>{{ $proposal->price }}</p>
+    <p>@money($proposal->price)</p>
 </div>
 
 <!-- Pos Number Field -->

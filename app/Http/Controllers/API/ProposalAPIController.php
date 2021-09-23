@@ -151,10 +151,26 @@ class ProposalAPIController extends AppBaseController
         $proposal = $this->proposalRepository->update($input, $id);
 
         //camaigns
-        $campaigns = $request->campaigns;
-        
-        // sync without detaching
-        $proposal->campaigns()->sync($campaigns, false);
+        if (!empty($request->campaigns)){
+                
+            $campaigns = $request->campaigns;
+
+            $proposal->campaigns()->detach();
+
+            $proposal->campaigns()->sync($campaigns);
+
+        }
+
+        //benefits
+        if (!empty($request->benefits)){
+                
+            $benefits = $request->benefits;
+
+            $proposal->benefits()->detach();
+
+            $proposal->benefits()->sync($benefits); 
+
+        }
 
         return $this->sendResponse(new ProposalResource($proposal), 'Proposal updated successfully');
     }
@@ -254,7 +270,7 @@ class ProposalAPIController extends AppBaseController
             $subTotal = $basePrice + $totalExtras - $totalBenefits;
 
             // IVA
-            if (is_null($isentIva)) { 
+            if (is_null($isentIva)) {
                 $iva =  $ivaTX * ($subTotal + $isv); 
             } else { 
                 $iva = 0; 
