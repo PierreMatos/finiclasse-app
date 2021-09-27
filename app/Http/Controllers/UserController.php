@@ -97,7 +97,7 @@ class UserController extends AppBaseController
             'email' => 'sometimes|unique:users',
             'nif' => 'sometimes|nullable|unique:users',
         ]);
-      
+
         $input = $request->all();
 
         if($validator->fails()){
@@ -121,6 +121,7 @@ class UserController extends AppBaseController
             $user->vendor()->attach($request->vendor_id);
         
          }
+
 
         // $user = $this->userRepository->create($input);
 

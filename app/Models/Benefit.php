@@ -5,6 +5,8 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * Class Benefit
@@ -15,10 +17,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $type
  * @property integer $amount
  */
-class Benefit extends Model
+class Benefit extends Model implements HasMedia
 {
     use SoftDeletes;
-
+    use InteractsWithMedia;
     use HasFactory;
 
     public $table = 'benefits';
@@ -53,7 +55,7 @@ class Benefit extends Model
      */
     public static $rules = [
         'name' => 'required',
-        'type' => 'required'
+        'document' => 'nullable|mimes:pdf'
     ];
 
     

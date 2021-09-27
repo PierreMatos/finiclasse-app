@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Create Benefit</h1>
+                    <h1>{{__('Create benefit')}}</h1>
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
 
         <div class="card">
 
-            {!! Form::open(['route' => 'benefits.store']) !!}
+            {!! Form::open(['route' => 'benefits.store', 'files' => true]) !!}
 
             <div class="card-body">
 
@@ -28,8 +28,8 @@
             </div>
 
             <div class="card-footer">
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('benefits.index') }}" class="btn btn-default">Cancel</a>
+                {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+                <a href="{{ route('benefits.index') }}" class="btn btn-default">{{ __('Cancel') }}</a>
             </div>
 
             {!! Form::close() !!}

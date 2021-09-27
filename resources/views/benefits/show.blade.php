@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Benefit Details</h1>
+                    <!-- <h1>Benefit Details</h1> -->
+                    <h1>{{ __('Show') }} {{ isset($benefit->name) ? $benefit->name : '' }}</h1>
                 </div>
                 <div class="col-sm-6">
-                    <a class="btn btn-default float-right"
-                       href="{{ route('benefits.index') }}">
-                        Back
+                    <a class="btn btn-default float-right" href="{{ route('benefits.index') }}">
+                        {{ __('Back') }}
                     </a>
                 </div>
             </div>

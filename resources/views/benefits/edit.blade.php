@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Edit Benefit</h1>
+                    <h1>{{ __('Edit') }} {{ isset($benefit->name) ? $benefit->name : '' }}</h1>
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
 
         <div class="card">
 
-            {!! Form::model($benefit, ['route' => ['benefits.update', $benefit->id], 'method' => 'patch']) !!}
+            {!! Form::model($benefit, ['route' => ['benefits.update', $benefit->id], 'method' => 'patch', 'files' => true]) !!}
 
             <div class="card-body">
                 <div class="row">
@@ -26,8 +26,8 @@
             </div>
 
             <div class="card-footer">
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('benefits.index') }}" class="btn btn-default">Cancel</a>
+                {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+                <a href="{{ route('benefits.index') }}" class="btn btn-default">{{ __('Cancel') }}</a>
             </div>
 
            {!! Form::close() !!}

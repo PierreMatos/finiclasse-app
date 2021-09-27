@@ -17,8 +17,8 @@ class CreateBenefitsTable extends Migration
         Schema::create('benefits', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('type');
-            $table->decimal('amount'13,2);
+            $table->string('type')->nullable();
+            $table->decimal('amount')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

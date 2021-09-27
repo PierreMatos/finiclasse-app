@@ -57,6 +57,7 @@
         </tbody>
     </table>
 </div>
+
 @foreach ($carConditions as $carCondition)
 
     <!-- FILTRED TABLES TO TOGGLE -->
@@ -79,8 +80,7 @@
                     @if ($car->condition->name == $carCondition->name)
                         <tr style="background-color:{{ isset($car->state->color) ? $car->state->color : '' }}">
                             @if (!$car->getFirstMediaUrl('cars', 'thumb'))
-                                <td><img src="storage/images/noPhoto.jpg"
-                                        style="max-width: 100px;" /></td>
+                                <td><img src="storage/images/noPhoto.jpg" style="max-width: 100px;" /></td>
                             @else
                                 <td><img src="{{ $car->getFirstMediaUrl('cars', 'thumb') }}"
                                         style="max-width: 100px;" /></td>
