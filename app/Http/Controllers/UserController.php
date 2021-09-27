@@ -100,6 +100,13 @@ class UserController extends AppBaseController
       
         $input = $request->all();
 
+        if($validator->fails()){
+
+            Flash::error($validator->errors());
+            return redirect(route('users.index'));
+  
+          }
+
         $url = Route::currentRouteName();
 
         if ($url == 'users.store') {
@@ -108,14 +115,14 @@ class UserController extends AppBaseController
             $user = $this->userRepository->create($input)->assignRole('Vendedor');
         }
         
-        if($validator->fails()){
+        //atribuir lead user a vendedor
+        if($request->vendor_id){
 
-          Flash::error($validator->errors());
-          return redirect(route('users.index'));
+            $user->vendor()->attach($request->vendor_id);
+        
+         }
 
-        }
-
-        $user = $this->userRepository->create($input);
+        // $user = $this->userRepository->create($input);
 
         if ($user->gdpr_type == "email") {
             Mail::send(new ValidateRGPD($user));
@@ -223,6 +230,13 @@ class UserController extends AppBaseController
         }
 
         $user = $this->userRepository->update($request->all(), $id);
+
+        //atribuir lead user a vendedor
+        if($request->vendor_id){
+
+            $user->vendor()->attach($request->vendor_id);
+
+        }
 
         Flash::success('User updated successfully.');
 

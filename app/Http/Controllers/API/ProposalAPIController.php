@@ -233,11 +233,7 @@ class ProposalAPIController extends AppBaseController
         
         // dd($proposal->campaigns->first()->pivot->value);
         
-        foreach($proposal->campaigns as $campaign){
-
-            dd($campaign->pivot->value);
-
-        }
+       
 
         if (!empty($proposal->car)) {
             
@@ -253,21 +249,45 @@ class ProposalAPIController extends AppBaseController
             $diffTradein = 0;
             $settleValue = 0;
             $ivaTX = 0.23;
+            $totalCampaigns = 0;
+            $totalBenefits = 0;
+            $subTotal = 0.0;
+
+
+            // total campaigns
+            foreach($proposal->campaigns as $campaign){
+
+                if($campaign->pivot->type == '%'){
+    
+                    $totalCampaigns += ($campaign->pivot->value/100) * ($basePrice + $preTotalExtras);
+    
+                }elseif($campaign->pivot->type == '€'){
+
+                    $totalCampaigns += $campaign->pivot->value - ($basePrice + $preTotalExtras);
+
+                }
+    
+            }
 
             // total benefits
-            $totalBenefits = 0;
             foreach($proposal->benefits as $benefit){
-                if ($benefit->type == '%'){
-                $totalBenefits += $benefit->value * ($basePrice + $Extras);
-                }elseif($benefit->type == '€'){
-                    $totalBenefits += $benefit->value;
+                
+                if ($benefit->pivot->type == '%'){
+
+                    $totalBenefits += ($benefit->pivot->value/100) * ($basePrice + $preTotalExtras);
+
+                }elseif($benefit->pivot->type == '€'){
+
+                    $totalBenefits += $benefit->pivot->value;
+
                 }
+
             }
 
             // $totalBenefits = [$BenefitN * ($basePrice + $Extras)];
             
             $totalExtras = $preTotalExtras + $ptl + $sigpu + $totalTransf;
-            $subTotal = $basePrice + $totalExtras - $totalBenefits;
+            $subTotal = $basePrice + $totalExtras - ($totalBenefits + $totalCampaigns);
 
             // IVA
             if (is_null($isentIva)) {
@@ -304,7 +324,13 @@ class ProposalAPIController extends AppBaseController
         }
 
         $results = [
+            'Preço Base' => $basePrice,
+            'Total Extras' => $totalExtras,
+            'Sub Total'  => $subTotal,
+            'ISV' => $isv,
+            'IVA Taxa' => $ivaTX,
             'iva' => $iva,
+            'Total' => $total,
             'valor a liquidar' => $settleValue,
             'desc' => $desc,
             'dif' => $dif,

@@ -116,7 +116,7 @@ class UserAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateUserAPIRequest $request)
+    public function update($id, Request $request)
     {
         $input = $request->all();
 
@@ -125,6 +125,10 @@ class UserAPIController extends AppBaseController
 
         if (empty($user)) {
             return $this->sendError('User not found');
+        }
+
+        if ($request->signature) {
+           ($user->addMediaFromBase64($request->signature)->toMediaCollection('signatures'));
         }
 
         $user = $this->userRepository->update($input, $id);
