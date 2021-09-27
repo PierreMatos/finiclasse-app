@@ -67,7 +67,7 @@
 <!-- Vendor lead Field -->
 <div class="form-group col-sm-4">
     <label>{{ __('Lead') }}</label>
-    {!! Form::text('vendor_id', isset($user->leads->name) ? $user->leads->name : '' , ['class' => 'form-control', 'disabled']) !!}
+    {!! Form::text('vendor_id', isset($user->vendor) ? $user->vendor->first()->name : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
 <!-- Finiclasse Employee Field -->

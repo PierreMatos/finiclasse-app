@@ -9,6 +9,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * Class User
@@ -32,12 +35,14 @@ use Spatie\Permission\Traits\HasRoles;
  * @property integer $client_type_id
  * @property integer $service_car_id
  */
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable implements JWTSubject, HasMedia
 {
     use SoftDeletes;
     use HasFactory;
     use Notifiable;
     use HasRoles;
+    use InteractsWithMedia;
+
 
     public $table = 'users';
     
@@ -155,6 +160,13 @@ class User extends Authenticatable implements JWTSubject
     public function leads()
     {
         return $this->belongsToMany(User::class, 'leads_users', 'vendor_id', 'client_id');
+    }
+    /**
+     * Get all of the posts for the user.
+     */
+    public function vendor()
+    {
+        return $this->belongsToMany(User::class, 'leads_users', 'client_id', 'vendor_id');
     }
 
     /**
