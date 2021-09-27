@@ -26,17 +26,11 @@ Route::get('/', [
     HomeController::class, 'index'
 ])->name('home');
 
-
-
 Route::middleware(['auth'])->group(function () {
 
     Route::resource('stands', App\Http\Controllers\StandController::class);
 
-
-
     Route::resource('makes', App\Http\Controllers\MakeController::class);
-
-
 
     Route::resource('carCategories', App\Http\Controllers\CarCategoryController::class);
 
@@ -54,8 +48,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('carModels', App\Http\Controllers\CarModelController::class);
 
-
-
     Route::resource('proposalStates', App\Http\Controllers\ProposalStateController::class);
 
     Route::resource('benefits', App\Http\Controllers\BenefitController::class);
@@ -66,10 +58,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('benefitsBusinessStudies', App\Http\Controllers\BenefitsBusinessStudyController::class);
 
-
-
-
-
     Route::resource('proposals', App\Http\Controllers\ProposalController::class);
 
     Route::resource('financings', App\Http\Controllers\FinancingController::class);
@@ -78,13 +66,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('carFuels', App\Http\Controllers\CarFuelController::class);
 
-
     Route::resource('cars', App\Http\Controllers\CarController::class);
     // Route::get( ['carController', 'getCars'])->name('getCars');
     Route::get('/getcars', [CarController::class, 'getCars'])->name('getcars');
     // Route::get('/carstate/{car_id}/{state_id}/{price}', [CarController::class, 'carState'])->name('carstate');
     Route::POST('/carstate', [CarController::class, 'carState'])->name('carstate');
-
 
     Route::get('clients-list', [UserController::class, 'getClients'])->name('getClients');
     Route::get('sellers-list', [UserController::class, 'getSellers'])->name('getSellers');
@@ -116,6 +102,13 @@ Route::middleware(['auth'])->group(function () {
     // Validate Create RGPD with Email
     Route::get('createValidateRGPD/{id}', [UserController::class, 'createValidateRGPD'])->name('createValidateRGPD');
 
+    // PDF
+    Route::get('pdf/{id}', function ($id) {
+        $user = App\Models\User::where('id', $id)->first();
+        $pdf = PDF::loadView('pdf', ['user' => $user]);
+        return $pdf->stream('pdf_rgpd.pdf');
+    });
+
     // Infy0m
 
     Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder')->name('io_generator_builder');
@@ -132,7 +125,6 @@ Route::middleware(['auth'])->group(function () {
         'generator_builder/generate-from-file',
         '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generateFromFile'
     )->name('io_generator_builder_generate_from_file');
-
 
     Route::get('/clear-cache', function () {
         $exitCode = Artisan::call('cache:clear');
