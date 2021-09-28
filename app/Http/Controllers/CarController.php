@@ -8,6 +8,7 @@ use App\Models\Car;
 use App\Models\CarModel;
 use Illuminate\Http\Request;
 use App\Repositories\CarRepository;
+use Illuminate\Support\Facades\Log;
 use App\Repositories\MakeRepository;
 use App\Repositories\StandRepository;
 use App\Http\Requests\CreateCarRequest;
@@ -83,7 +84,7 @@ class CarController extends AppBaseController
     public function index(Request $request)
     {
         $cars = $this->carRepository->all();
-        
+
         $newCars = Car::where('condition_id', '=', 1)->get();
         $usedCars = Car::where('condition_id', '=', 2)->get();
         // $cars = Car::with('stand')->paginate(10);
@@ -404,5 +405,33 @@ class CarController extends AppBaseController
 
             return redirect(route('proposals.index'));
         }
+    }
+
+    public function newCars()
+    {
+        $newCars = Car::where('condition_id', '=', 1)->get();
+        $car = $this->carRepository->all();
+        $makes = $this->makeRepository->all();
+        $models = $this->modelRepository->all();
+
+        $carData = ([
+            'makes' => $makes,
+            'models' => $models,
+        ]);
+
+        return view('cars.newCars')
+            ->with('newCars', $newCars)
+            ->with('carData', $carData);
+    }
+
+    public function newCarsPost(CreateCarRequest $request)
+    {
+        $input = $request->all();
+
+        $car = $this->carRepository->create($input);
+
+        Log::info($input);
+
+        return response()->json(['success' => 'Got Simple Ajax Request.']);
     }
 }
