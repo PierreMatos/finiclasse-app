@@ -18,6 +18,7 @@ use App\Repositories\CarClassRepository;
 use App\Repositories\CarDriveRepository;
 use App\Repositories\CarModelRepository;
 use App\Repositories\CarStateRepository;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\AppBaseController;
 use App\Repositories\CarCategoryRepository;
 use App\Repositories\CarConditionRepository;
@@ -410,13 +411,12 @@ class CarController extends AppBaseController
     public function newCars()
     {
         $newCars = Car::where('condition_id', '=', 1)->get();
-        $car = $this->carRepository->all();
-        $makes = $this->makeRepository->all();
         $models = $this->modelRepository->all();
+        $states = $this->carStateRepository->all();
 
         $carData = ([
-            'makes' => $makes,
             'models' => $models,
+            'states' => $states,
         ]);
 
         return view('cars.newCars')
@@ -426,12 +426,24 @@ class CarController extends AppBaseController
 
     public function newCarsPost(CreateCarRequest $request)
     {
-        $input = $request->all();
+        $validator = Validator::make($request->all(), [
+            'model_id' => 'required',
+            'komm' => 'required',
+            'state_id' => 'required',
+            'order_date' => 'required',
+        ]);
 
-        $car = $this->carRepository->create($input);
+        if ($validator->passes()) {
 
-        Log::info($input);
+            $input = $request->all();
 
-        return response()->json(['success' => 'Got Simple Ajax Request.']);
+            $car = $this->carRepository->create($input);
+
+            Log::info($input);
+
+            return response()->json(['success' => 'Novo carro adicionado!']);
+        }
+
+        return response()->json(['error'=>$validator->errors()]);
     }
 }
