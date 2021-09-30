@@ -209,7 +209,7 @@ class Car extends Model implements HasMedia
         'ptl' => 'float',
         'sigpu' => 'float',
         'equipment' => 'string',
-        'observations' => 'text',
+        'observations' => 'string',
         'est' => 'integer'
     ];
 
