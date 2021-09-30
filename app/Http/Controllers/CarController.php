@@ -11,6 +11,7 @@ use App\Repositories\CarRepository;
 use Illuminate\Support\Facades\Log;
 use App\Repositories\MakeRepository;
 use App\Repositories\StandRepository;
+use Illuminate\Support\Facades\Route;
 use App\Http\Requests\CreateCarRequest;
 use App\Http\Requests\UpdateCarRequest;
 use App\Repositories\CarFuelRepository;
@@ -310,7 +311,14 @@ class CarController extends AppBaseController
 
         Flash::success('Car deleted successfully.');
 
-        return redirect(route('cars.index'));
+        $url = url()->previous();
+        $route = app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
+
+        if ($route == 'cars.index') {
+            return redirect(route('cars.index'));
+        } elseif ($route == 'newCars') {
+            return redirect(route('newCars'));
+        }
     }
 
 
@@ -413,10 +421,12 @@ class CarController extends AppBaseController
         $newCars = Car::where('condition_id', '=', 1)->get();
         $models = $this->modelRepository->all();
         $states = $this->carStateRepository->all();
+        $stands = $this->standRepository->all();
 
         $carData = ([
             'models' => $models,
             'states' => $states,
+            'stands' => $stands
         ]);
 
         return view('cars.newCars')
@@ -429,8 +439,11 @@ class CarController extends AppBaseController
         $validator = Validator::make($request->all(), [
             'model_id' => 'required',
             'komm' => 'required',
+            'color_exterior' => 'required',
+            'est' => 'required',
             'state_id' => 'required',
             'order_date' => 'required',
+            'observations' => 'required',
         ]);
 
         if ($validator->passes()) {
@@ -441,9 +454,9 @@ class CarController extends AppBaseController
 
             Log::info($input);
 
-            return response()->json(['success' => 'Novo carro adicionado!']);
+            return response()->json();
         }
 
-        return response()->json(['error'=>$validator->errors()]);
+        return response()->json(['error' => $validator->errors()]);
     }
 }

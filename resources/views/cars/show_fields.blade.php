@@ -84,25 +84,25 @@
             <!-- Price Field -->
             <div class="form-group col-sm-3">
                 {!! Form::label('price', 'Preço') !!}
-                {!! Form::text('price', isset($car->price) ? number_format($car->price,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
+                {!! Form::number('price', isset($car->price) ? number_format($car->price,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
 
             <!-- Price Base Field -->
             <div class="form-group col-sm-3">
                 {!! Form::label('price_base', 'Preço base') !!}
-                {!! Form::text('price_base', isset($car->price_base) ? number_format($car->price_base,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
+                {!! Form::number('price_base', isset($car->price_base) ? number_format($car->price_base,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
 
             <!-- Price Campaign Field -->
             <div class="form-group col-sm-3">
                 {!! Form::label('order_date', 'Preço de campanha') !!}
-                {!! Form::text('order_date', isset($car->price_campaign) ? number_format($car->price_campaign,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
+                {!! Form::number('order_date', isset($car->price_campaign) ? number_format($car->price_campaign,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
 
             <!-- Order Date Field -->
             <div class="form-group col-sm-3">
                 {!! Form::label('order_date', 'Data de encomenda') !!}
-                {!! Form::text('order_date', isset($car->order_date) ? number_format($car->order_date,2).' €' : '', ['class' => 'form-control', 'id' => 'order_date', 'disabled']) !!}
+                {!! Form::text('order_date', isset($car->order_date) ? $car->order_date : '', ['class' => 'form-control', 'id' => 'order_date', 'disabled']) !!}
             </div>
 
             <!-- Arrival Date Field -->
@@ -120,19 +120,19 @@
             <!-- Tradein Purchase Field -->
             <div class="form-group col-sm-3">
                 {!! Form::label('tradein_purchase', 'Preço compra de retoma') !!}
-                {!! Form::text('tradein_purchase', isset($car->tradein_purchase) ? number_format($car->tradein_purchase,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
+                {!! Form::number('tradein_purchase', isset($car->tradein_purchase) ? number_format($car->tradein_purchase,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
 
             <!-- Tradein Sale Field -->
             <div class="form-group col-md-3">
                 {!! Form::label('tradein_sale', 'Preço venda de retoma') !!}
-                {!! Form::text('tradein_sale', isset($car->tradein_sale) ? number_format($car->tradein_sale,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
+                {!! Form::number('tradein_sale', isset($car->tradein_sale) ? number_format($car->tradein_sale,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
 
             <!-- Price New Field -->
             <div class="form-group col-md-3">
                 {!! Form::label('price_new', 'Preço em novo') !!}
-                {!! Form::text('price_new', isset($car->price_new) ? number_format($car->price_new,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
+                {!! Form::number('price_new', isset($car->price_new) ? number_format($car->price_new,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
 
             <div class="col-md-3">
@@ -145,11 +145,11 @@
                     </div>
                 </div>
 
-                <!-- Felxible Field -->
-                <div class="form-group">
+                 <!-- Felxible Field -->
+                 <div class="form-group">
                     <div class="form-check">
                         {!! Form::hidden('felxible', 0, ['class' => 'form-check-input']) !!}
-                        {!! Form::checkbox('felxible', '1', isset($car->felxible) ? number_format($car->felxible,2) : '', ['class' => 'form-check-input', 'disabled']) !!}
+                        {!! Form::checkbox('felxible', '1', isset($car->felxible) ? $car->felxible : '', ['class' => 'form-check-input', 'disabled']) !!}
                         {!! Form::label('felxible', 'Preço flexível', ['class' => 'form-check-label']) !!}
                     </div>
                 </div>

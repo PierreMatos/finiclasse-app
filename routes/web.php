@@ -72,7 +72,7 @@ Route::middleware(['auth'])->group(function () {
     // Route::get( ['carController', 'getCars'])->name('getCars');
     Route::get('/getcars', [CarController::class, 'getCars'])->name('getcars');
     // Route::get('/carstate/{car_id}/{state_id}/{price}', [CarController::class, 'carState'])->name('carstate');
-    Route::POST('/carstate', [CarController::class, 'carState'])->name('carstate');
+    Route::post('/carstate', [CarController::class, 'carState'])->name('carstate');
 
     Route::get('clients-list', [UserController::class, 'getClients'])->name('getClients');
     Route::get('sellers-list', [UserController::class, 'getSellers'])->name('getSellers');
