@@ -215,11 +215,13 @@ class Car extends Model implements HasMedia
      * @var array
      */
     public static $rules = [
+        /*
         'motorization' => 'required',
         'category_id' => 'required',
         'condition_id' => 'required',
         'state_id' => 'required',
         'model_id' => 'required',
+        */
     ];
 
     /**
