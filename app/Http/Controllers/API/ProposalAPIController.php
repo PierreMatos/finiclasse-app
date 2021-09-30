@@ -87,26 +87,31 @@ class ProposalAPIController extends AppBaseController
     public function store(Request $request)
     {
 
-        $input = $request->all();
         
         $validator = Validator::make($request->all(), [
             'vendor_id' => 'required',
         ]);
-
+        
         if($validator->fails()){
-
+            
             return $validator->errors()->toJson();
         }
+
         // if (proposta completa) {
             // authorization($input->id);
-        // }
+            // }
 
-        $proposal->initial_business_study_id = new businessStudy();
-        $proposal->final_business_study_id = new businessStudy();
+        $initialBusinessStudy = new BusinessStudy();
+        $initialBusinessStudy->save();
+        $finalBusinessStudy = new BusinessStudy();
+        $finalBusinessStudy->save();
+
+        $request->request->add(['initial_business_study_id' => $initialBusinessStudy->id]); //add request
+        $request->request->add(['final_business_study_id' => $finalBusinessStudy->id]); //add request
+        $input = $request->all();
 
         $proposal = $this->proposalRepository->create($input);
 
-        
 
         return $this->sendResponse(new ProposalResource($proposal), 'Proposal saved successfully');
     }
@@ -228,7 +233,7 @@ class ProposalAPIController extends AppBaseController
 
     public function businessStudy(Request $request) {
 
-        //TODO pagar modelo de business study
+        //TODO pegar modelo de business study
 
         // 
         $proposal = Proposal::find($request->id);

@@ -71,7 +71,9 @@ class Proposal extends Model
         'total_discount_perc',
         'authorization_user_id',
         'car_id',
-        'tradein_id'
+        'tradein_id',
+        'initial_business_study_id',
+        'final_business_study_id'
 
     ];
 
@@ -100,7 +102,9 @@ class Proposal extends Model
         'total_discount_amount' => 'integer',
         'total_discount_perc' => 'integer',
         'car_id' => 'integer',
-        'tradein_id' => 'integer'
+        'tradein_id' => 'integer',
+        'initial_business_study_id' => 'integer',
+        'final_business_study_id' => 'integer'
 
     ];
 
@@ -142,10 +146,11 @@ class Proposal extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    // public function businessStudy()
-    // {
-    //     return $this->belongsTo(\App\Models\BusinessStudy::class, 'business_study_id', 'id');
-    // }
+
+     public function businessStudy()
+    {
+        return $this->belongsTo(\App\Models\BusinessStudy::class, 'business_study_id', 'id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

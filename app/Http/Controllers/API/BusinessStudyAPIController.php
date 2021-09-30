@@ -102,6 +102,12 @@ class BusinessStudyAPIController extends AppBaseController
             return $this->sendError('Business Study not found');
         }
 
+        // com os novos valores, volta a re-calcular a margem e guarda os novos valores
+        // dd($businessStudy->initialProposal);
+        dd($this->calculate($businessStudy->initialProposal));
+        $FSd = $this->calculate($businessStudy->initialProposal);
+
+
         $businessStudy = $this->businessStudyRepository->update($input, $id);
 
         return $this->sendResponse(new BusinessStudyResource($businessStudy), 'BusinessStudy updated successfully');
@@ -129,5 +135,124 @@ class BusinessStudyAPIController extends AppBaseController
         $businessStudy->delete();
 
         return $this->sendSuccess('Business Study deleted successfully');
+    }
+
+    public function calculate($proposal){
+
+        
+        // $proposal = Proposal::find($request->id);
+        
+        //get proposal-> campanhas, benefits,... 
+        $taxas = ['iva' => 23];
+        
+        // dd($proposal->campaigns->first()->pivot->value);
+        
+       
+
+        if (!empty($proposal->car)) {
+            
+            $preTotalExtras = $proposal->car->extras_total;
+            $basePrice = $proposal->car->price_base;
+            $ptl = $proposal->car->ptl;
+            $sigpu = $proposal->car->sigpu;
+            $isv =  $proposal->car->isv;
+            $isv =  $proposal->car->isv;
+            $totalTransf = 0;
+            $isentIva = null;
+            $sell = 43000;
+            $diffTradein = 0;
+            $settleValue = 0;
+            $ivaTX = 0.23;
+            $totalCampaigns = 0;
+            $totalBenefits = 0;
+            $subTotal = 0.0;
+
+
+            // total campaigns
+            foreach($proposal->campaigns as $campaign){
+
+                if($campaign->pivot->type == '%'){
+    
+                    $totalCampaigns += ($campaign->pivot->value/100) * ($basePrice + $preTotalExtras);
+    
+                }elseif($campaign->pivot->type == '€'){
+
+                    $totalCampaigns += $campaign->pivot->value - ($basePrice + $preTotalExtras);
+
+                }
+    
+            }
+
+            // total benefits
+            foreach($proposal->benefits as $benefit){
+                
+                if ($benefit->pivot->type == '%'){
+
+                    $totalBenefits += ($benefit->pivot->value/100) * ($basePrice + $preTotalExtras);
+
+                }elseif($benefit->pivot->type == '€'){
+
+                    $totalBenefits += $benefit->pivot->value;
+
+                }
+
+            }
+
+            // $totalBenefits = [$BenefitN * ($basePrice + $Extras)];
+            
+            $totalExtras = $preTotalExtras + $ptl + $sigpu + $totalTransf;
+            $subTotal = $basePrice + $totalExtras - ($totalBenefits + $totalCampaigns);
+
+            // IVA
+            if (is_null($isentIva)) {
+                $iva =  $ivaTX * ($subTotal + $isv); 
+            } else { 
+                $iva = 0; 
+            }
+
+            $total = $subTotal + $isv + $iva;
+            
+            // DISCONT
+            if (is_null($isentIva)) { ($total - $sell) / (1 + $iva) + $totalBenefits; } else { $total - $sell + $totalBenefits;}
+            $txblBase = $subTotal + $isv;
+            $totalValue = $txblBase + $iva;
+
+            // TRADE in
+            if (!empty($proposal->tradein)){ 
+                $purchasePrice = $proposal->tradein->tradein_purchase; 
+                $sellingPrice = $proposal->tradein->tradein_sale; 
+                $diffTradein = 0;
+                $settleValue = $sell - $purchasePrice;
+            }
+            
+            //diff
+            $dif = ($total - $sell) - $diffTradein;
+            //desc
+            if (is_null($isentIva)) {  $desc = $settleValue / (1 + $iva ); } else{ $desc = $dif; }
+            //%
+            $profit = $desc / ( $totalBenefits + $isv - ( $ptl + $sigpu + $totalTransf ));
+
+        }else {
+
+            return 'car not found';
+        }
+
+        $results = [
+            'Preço Base' => $basePrice,
+            'Total Extras' => $totalExtras,
+            'Sub Total'  => $subTotal,
+            'ISV' => $isv,
+            'IVA Taxa' => $ivaTX,
+            'iva' => $iva,
+            'Total' => $total,
+            'valor a liquidar' => $settleValue,
+            'desc' => $desc,
+            'dif' => $dif,
+            'profit' => $profit
+        ];
+
+        return $results;
+        return 'dif é: '.$dif.'desc é: '.$desc.'A margem é de: '.$profit;
+        
     }
 }

@@ -14,18 +14,19 @@ class BenefitResource extends JsonResource
      */
     public function toArray($request)
     {
-        foreach ($this->collection as $benefit) {
+        // foreach ($this->collection as $benefit) {
 
-        $pdf = $benefit->getFirstMediaUrl('benefits');
+        // $pdf = $benefit->getFirstMediaUrl('benefits');
 
-        }
+        // }
 
         return [
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'type' => $this->type,
-            'amount' => $this->amount,
+            'pdf' => $this->getFirstMediaUrl('benefits'),
+            // 'type' => $this->type,
+            // 'amount' => $this->amount,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'deleted_at' => $this->deleted_at

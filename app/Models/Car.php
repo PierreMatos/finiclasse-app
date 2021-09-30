@@ -144,7 +144,9 @@ class Car extends Model implements HasMedia
         'sigpu',
         'iva',
         'isv',
-        'equipment'
+        'equipment',
+        'observations',
+        'est'
     ];
 
     /**
@@ -206,7 +208,9 @@ class Car extends Model implements HasMedia
         'isv' => 'float',
         'ptl' => 'float',
         'sigpu' => 'float',
-        'equipment' => 'string'
+        'equipment' => 'string',
+        'observations' => 'text',
+        'est' => 'integer'
     ];
 
     /**

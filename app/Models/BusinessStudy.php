@@ -44,8 +44,9 @@ class BusinessStudy extends Model
 
 
     public $fillable = [
-        'client_id',
-        'car_id',
+        // 'client_id',
+        // 'car_id',
+        'id',
         'extras_total',
         'sub_total',
         'total_benefits',
@@ -69,8 +70,8 @@ class BusinessStudy extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'client_id' => 'integer',
-        'car_id' => 'integer',
+        // 'client_id' => 'integer',
+        // 'car_id' => 'integer',
         'extras_total' => 'integer',
         'sub_total' => 'integer',
         'total_benefits' => 'integer',
@@ -93,7 +94,6 @@ class BusinessStudy extends Model
      * @var array
      */
     public static $rules = [
-        'client_id' => 'required'
         
     ];
 
@@ -112,4 +112,13 @@ class BusinessStudy extends Model
     {
         return $this->belongsTo(\App\Models\Car::class, 'tradein_id', 'id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function initialProposal()
+    {
+        return $this->hasOne(\App\Models\Proposal::class, 'initial_business_study_id' , 'id');
+    }
+
 }

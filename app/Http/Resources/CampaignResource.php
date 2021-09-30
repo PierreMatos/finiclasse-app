@@ -18,6 +18,7 @@ class CampaignResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'pdf' => $this->getFirstMediaUrl('campaigns'),
             'make_id' => $this->make_id,
             'model_id' => $this->model_id,
             'type' => $this->type,
