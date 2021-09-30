@@ -27,6 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        
         $latestProposals = Proposal::latest()->take(5)->get();
         $carsCount = Car::count();
         $proposalsCount = Proposal::count();

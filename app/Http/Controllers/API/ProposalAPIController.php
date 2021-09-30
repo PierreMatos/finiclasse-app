@@ -6,6 +6,7 @@ use App\Http\Requests\API\CreateProposalAPIRequest;
 use App\Http\Requests\API\UpdateProposalAPIRequest;
 use App\Models\Proposal;
 use App\Models\Car;
+use App\Models\BusinessStudy;
 use App\Repositories\ProposalRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
@@ -99,6 +100,9 @@ class ProposalAPIController extends AppBaseController
         // if (proposta completa) {
             // authorization($input->id);
         // }
+
+        $proposal->initial_business_study_id = new businessStudy();
+        $proposal->final_business_study_id = new businessStudy();
 
         $proposal = $this->proposalRepository->create($input);
 

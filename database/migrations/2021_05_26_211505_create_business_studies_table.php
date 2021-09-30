@@ -16,10 +16,10 @@ class CreateBusinessStudiesTable extends Migration
     {
         Schema::create('business_studies', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('client_id');
-            $table->integer('car_id');
-            $table->integer('extras_total');
-            $table->integer('sub_total');
+            // $table->integer('client_id');
+            // $table->integer('car_id');
+            $table->integer('extras_total')->nullable();
+            $table->integer('sub_total')->nullable();
             $table->integer('total_benefits');
             $table->integer('selling_price');
             $table->integer('tradein_diff');

@@ -259,11 +259,21 @@ class UserAPIController extends AppBaseController
     public function createValidateRGPD(Request $request) 
     {   
         
-        $id = $request->id;
-        $user = $this->userRepository->find($id);
+        $validator = Validator::make($request->all(), [
+            'id' => 'required', 'integer',
+            'type' => 'required',
+        ]);
 
-        Mail::send(new ValidateRGPD($user));
+        if ($validator->fails()) {  
+            return response()->json(['error'=>$validator->errors()], 401); 
+        }else{   
+        
+            $id = $request->id;
+            $user = $this->userRepository->find($id);
 
-        return $this->sendSuccess('E-mail enviado com sucesso!');
+            Mail::send(new ValidateRGPD($user));
+
+            return $this->sendSuccess('E-mail enviado com sucesso!');
+        }
     }
 }

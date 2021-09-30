@@ -3,6 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\BenefitsProposalsResource;
+use App\Http\Resources\CampaignsProposalsResource;
 use Carbon\Carbon;
 
 class ProposalResource extends JsonResource
@@ -15,7 +17,6 @@ class ProposalResource extends JsonResource
      */
     public function toArray($request)
     {
-        $benefits = collect();
 
         $imagesTradein = collect();
         $images = collect();
@@ -94,8 +95,10 @@ class ProposalResource extends JsonResource
             'total_discount_amount' => $this->total_discount_amount,
             'total_discount_perc' => $this->total_discount_perc,
             'comment' => $this->comment,
-            'benefits' => $this->benefits,
-            'campaigns' => $this->campaigns,
+            'benefits' => BenefitsProposalsResource::collection($this->benefits),
+            // 'benefits' => $this->benefits,
+            'campaigns' => CampaignsProposalsResource::collection($this->campaigns),
+            // 'campaigns' => $this->campaigns,
             'financings' => $this->financings,
             // 'authorization' => $this->authorization
             'created_at' => $this->created_at,

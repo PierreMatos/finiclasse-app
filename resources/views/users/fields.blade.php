@@ -1,3 +1,6 @@
+<img src="http://127.0.0.1:8000/storage/media/242/media-librarySBrQ7b"/>
+
+
 <!-- Name Field -->
 <div class="form-group col-sm-4">
     <label>{{ __('Name') }}</label>
@@ -100,12 +103,12 @@
     <label>{{ __('Lead') }}</label>
     <select name="vendor_id" class="input-group form-control custom-select selectedPost">
         <option selected value="">--</option>
-        @foreach ($userData['leads'] as $leads)
+        @foreach ($userData['leads'] as $lead)
             <!--condition make selecionado anteriormente-->
-            @if ($leads->id == (isset($user->vendor) ? $user->vendor->first()->id : ''))
+            @if ($lead->id == (isset($user->vendor->first()->id) ? $user->vendor->first()->id : ''))
                 <option selected value="{{$user->vendor->first()->id }}">{{ $user->vendor->first()->name }}</option>
             @else
-                <option value="{{ $leads->id }}">{{ $leads->name }}</option>
+                <option value="{{ $lead->id }}">{{ $lead->name }}</option>
             @endif
         @endforeach
     </select>

@@ -14,6 +14,12 @@ class BenefitResource extends JsonResource
      */
     public function toArray($request)
     {
+        foreach ($this->collection as $benefit) {
+
+        $pdf = $benefit->getFirstMediaUrl('benefits');
+
+        }
+
         return [
             'id' => $this->id,
             'name' => $this->name,

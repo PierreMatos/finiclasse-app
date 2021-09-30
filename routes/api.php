@@ -105,8 +105,8 @@ Route::middleware('auth:api')->group(function () {
 
     Route::resource('client_types', ClientTypeAPIController::class);
 
-    // Validate RGPD with Email
-    Route::get('createValidateRGPD', [App\Http\Controllers\API\UserAPIController::class, 'createValidateRGPD'])->name('createValidateRGPD');
+    // Validate RGPD with Email or SMS
+    Route::POST('notify_rgpd', [App\Http\Controllers\API\UserAPIController::class, 'createValidateRGPD'])->name('notify_rgpd');
     
 
     
