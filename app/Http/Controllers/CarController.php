@@ -8,8 +8,10 @@ use App\Models\Car;
 use App\Models\CarModel;
 use Illuminate\Http\Request;
 use App\Repositories\CarRepository;
+use Illuminate\Support\Facades\Log;
 use App\Repositories\MakeRepository;
 use App\Repositories\StandRepository;
+use Illuminate\Support\Facades\Route;
 use App\Http\Requests\CreateCarRequest;
 use App\Http\Requests\UpdateCarRequest;
 use App\Repositories\CarFuelRepository;
@@ -17,6 +19,7 @@ use App\Repositories\CarClassRepository;
 use App\Repositories\CarDriveRepository;
 use App\Repositories\CarModelRepository;
 use App\Repositories\CarStateRepository;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\AppBaseController;
 use App\Repositories\CarCategoryRepository;
 use App\Repositories\CarConditionRepository;
@@ -83,7 +86,7 @@ class CarController extends AppBaseController
     public function index(Request $request)
     {
         $cars = $this->carRepository->all();
-        
+
         $newCars = Car::where('condition_id', '=', 1)->get();
         $usedCars = Car::where('condition_id', '=', 2)->get();
         // $cars = Car::with('stand')->paginate(10);
@@ -308,7 +311,14 @@ class CarController extends AppBaseController
 
         Flash::success('Car deleted successfully.');
 
-        return redirect(route('cars.index'));
+        $url = url()->previous();
+        $route = app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
+
+        if ($route == 'cars.index') {
+            return redirect(route('cars.index'));
+        } elseif ($route == 'newCars') {
+            return redirect(route('newCars'));
+        }
     }
 
 
@@ -404,5 +414,49 @@ class CarController extends AppBaseController
 
             return redirect(route('proposals.index'));
         }
+    }
+
+    public function newCars()
+    {
+        $newCars = Car::where('condition_id', '=', 1)->get();
+        $models = $this->modelRepository->all();
+        $states = $this->carStateRepository->all();
+        $stands = $this->standRepository->all();
+
+        $carData = ([
+            'models' => $models,
+            'states' => $states,
+            'stands' => $stands
+        ]);
+
+        return view('cars.newCars')
+            ->with('newCars', $newCars)
+            ->with('carData', $carData);
+    }
+
+    public function newCarsPost(CreateCarRequest $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'model_id' => 'required',
+            'komm' => 'required',
+            'color_exterior' => 'required',
+            'est' => 'required',
+            'state_id' => 'required',
+            'order_date' => 'required',
+            'observations' => 'required',
+        ]);
+
+        if ($validator->passes()) {
+
+            $input = $request->all();
+
+            $car = $this->carRepository->create($input);
+
+            Log::info($input);
+
+            return response()->json();
+        }
+
+        return response()->json(['error' => $validator->errors()]);
     }
 }

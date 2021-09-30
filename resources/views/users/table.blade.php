@@ -6,7 +6,7 @@
                 <th>{{__('Email')}}</th>
                 <th>{{__('City')}}</th>
                 <th>{{__('Stand')}}</th>
-                <th>{{__('Client Type')}}</th>
+                <th>{{__('Client')}}</th>
                 <th>{{__('Action')}}</th>
             </tr>
         </thead>
