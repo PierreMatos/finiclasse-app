@@ -36,7 +36,15 @@
 
             <div class="row newCarTable col-md-12">
                 <div class="form-group col-md-2">
-                    <select name="model_id" class="input-group form-control custom-select formMargin" id="model_id">
+                    <select name="make_id" class="input-group form-control custom-select formMargin" id="make_id">
+                        <option selected value="" disabled>{{ __('Make') }}</option>
+                        @foreach ($carData['makes'] as $make)
+                            <option value="{{ $make->id }}">{{ $make->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <select name="model_id" class="input-group form-control custom-select formMargin" disabled id="model_id">
                         <option selected value="" disabled>{{ __('Model') }}</option>
                         @foreach ($carData['models'] as $model)
                             <option value="{{ $model->id }}">{{ $model->name }}</option>
@@ -44,15 +52,15 @@
                     </select>
                 </div>
                 <div class="form-group col-md-2">
-                    <input type="number" name="komm" id="komm" placeholder="{{ __('Komm') }}"
-                        class="form-control formMargin">
-                </div>
-                <div class="form-group col-md-2">
                     <input type="text" name="color_exterior" id="color_exterior" placeholder="{{ __('Color') }}"
                         class="form-control formMargin">
                 </div>
                 <div class="form-group col-md-2">
                     <input type="number" name="est" id="est" placeholder="{{ __('Est') }}"
+                        class="form-control formMargin">
+                </div>
+                <div class="form-group col-md-2">
+                    <input type="number" name="komm" id="komm" placeholder="{{ __('Komm') }}"
                         class="form-control formMargin">
                 </div>
                 <div class="form-group col-md-2">
@@ -75,7 +83,7 @@
                     <input type="text" name="order_date" id="order_date" placeholder="{{ __('Production') }}"
                         class="form-control formMargin"></td>
                 </div>
-                <div class="form-group col-md-8">
+                <div class="form-group col-md-6">
                     <input type="text" name="observations" id="observations" placeholder="{{ __('Observations') }}"
                         class="form-control formMargin"></td>
                 </div>
@@ -116,11 +124,11 @@
                         <table class="table" id="{{ $stand->id }}-table">
                             <thead>
                                 <tr>
+                                    <th>{{ __('Make') }}</th>
                                     <th>{{ __('Model') }}</th>
-                                    <th>{{ __('Komm') }}</th>
                                     <th>{{ __('Color') }}</th>
                                     <th>{{ __('Est') }}</th>
-                                    <th>{{ __('Stand') }}</th>
+                                    <th>{{ __('Komm') }}</th>
                                     <th>{{ __('State') }}</th>
                                     <th>{{ __('Production') }}</th>
                                     <th>{{ __('Observations') }}</th>
@@ -131,11 +139,11 @@
                                 @foreach ($newCars->sortByDesc('created_at') as $car)
                                     @if ($car->stand->name == $stand->name)
                                         <tr>
+                                            <td>{{ $car->model->make->name }}</td>
                                             <td>{{ $car->model->name }}</td>
-                                            <td>{{ $car->komm }}</td>
                                             <td>{{ $car->color_exterior }}</td>
                                             <td>{{ $car->est }}</td>
-                                            <td>{{ $car->stand->name }}</td>
+                                            <td>{{ $car->komm }}</td>
                                             <td>{{ $car->state->name }}</td>
                                             <td>{{ date('d-m-y', strtotime($car->order_date)) }}</td>
                                             <td>{{ $car->observations }}</td>
@@ -199,8 +207,40 @@
                 responsive: true,
                 order: [],
                 "dom": '<"top" <"float-left"f><"float-right"B>>rt<"bottom mt-4"<"float-left"p><"float-right"l>><"clear">',
-                buttons: []
+                buttons: [
+                    {
+                        text: 'Todos',
+                        active: true,
+                        action: function() {
+                            table.search('').draw();
+                            table.button(1).active(false);
+                            table.button(2).active(false);
+                            this.active(true);
+                        }
+                    },
+                    {
+                        text: 'Encomendado',
+                        action: function() {
+                            table.search('Encomendado').draw();
+                            table.button(0).active(false);
+                            table.button(2).active(false);
+                            this.active(true);
+                        }
+                    },
+                    {
+                        text: 'Disponivel',
+                        action: function() {
+                            table.search('Disponivel').draw();
+                            table.button(0).active(false);
+                            table.button(1).active(false);
+                            this.active(true);
+                        }
+                    }
+                ]
             });
+            table.button(0).active(true)
+            table.button(1).active(false)
+            table.button(2).active(false)
         // FIM PARA APAGAR
 
         // Table
@@ -213,7 +253,7 @@
             $('.table-responsive').hide();
             $(idDiv).show();
 
-            var table = $(idTable).DataTable({
+            var tableCondition = $(idTable).DataTable({
                 language: {
                     search: "_INPUT_",
                     searchPlaceholder: "{{ __('Search...') }}",
@@ -229,8 +269,40 @@
                 order: [],
                 "dom": '<"top" <"float-left w-200"f><"float-right"B>>rt<"bottom mt-4"<"float-left"p><"float-right"l>><"clear">',
 
-                buttons: []
+                buttons: [
+                    {
+                        text: 'Todos',
+                        active: true,
+                        action: function() {
+                            tableCondition.search('').draw();
+                            tableCondition.button(1).active(false);
+                            tableCondition.button(2).active(false);
+                            this.active(true);
+                        }
+                    },
+                    {
+                        text: 'Encomendado',
+                        action: function() {
+                            tableCondition.search('Encomendado').draw();
+                            tableCondition.button(0).active(false);
+                            tableCondition.button(2).active(false);
+                            this.active(true);
+                        }
+                    },
+                    {
+                        text: 'Disponivel',
+                        action: function() {
+                            tableCondition.search('Disponivel').draw();
+                            tableCondition.button(0).active(false);
+                            tableCondition.button(1).active(false);
+                            this.active(true);
+                        }
+                    }
+                ]
             });
+            tableCondition.button(0).active(true)
+            tableCondition.button(1).active(false)
+            tableCondition.button(2).active(false)
         });
 
         // Ajax Setup
@@ -245,6 +317,7 @@
                     }
                 });
 
+                var make_id = $("#make_id").val();
                 var model_id = $("#model_id").val();
                 var komm = $("#komm").val();
                 var color_exterior = $("#color_exterior").val();
@@ -258,6 +331,7 @@
                     type: 'POST',
                     url: "{{ route('newCarsPost') }}",
                     data: {
+                        make_id: make_id,
                         model_id: model_id,
                         komm: komm,
                         color_exterior: color_exterior,
@@ -323,6 +397,30 @@
         $('#order_date').datetimepicker({
             format: 'YYYY-MM-DD',
             useCurrent: true,
+        });
+
+        // Marca-Modelo relation
+
+        $('#make_id').on('change', function() {
+            var idMake = this.value;
+            $("#model_id").html('');
+            $.ajax({
+                url: "{{ url('fetch-models') }}",
+                type: "POST",
+                data: {
+                    make_id: idMake,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $('#model_id').html('<option value="">--</option>');
+                    $.each(result.models, function(key, value) {
+                        $("#model_id").append('<option value="' + value
+                            .id + '">' + value.name + '</option>');
+                    });
+                    $("#model_id").prop("disabled", false);
+                }
+            });
         });
     </script>
 @endpush
