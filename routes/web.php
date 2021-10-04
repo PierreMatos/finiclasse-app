@@ -69,6 +69,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('cars', App\Http\Controllers\CarController::class);
     Route::get('new', [CarController::class, 'newCars'])->name('newCars');
     Route::post('new', [CarController::class, 'newCarsPost'])->name('newCarsPost');
+    Route::post('new/update/{id}', [CarController::class, 'newCarsUpdate'])->name('newCarsUpdate');
     // Route::get( ['carController', 'getCars'])->name('getCars');
     Route::get('/getcars', [CarController::class, 'getCars'])->name('getcars');
     // Route::get('/carstate/{car_id}/{state_id}/{price}', [CarController::class, 'carState'])->name('carstate');

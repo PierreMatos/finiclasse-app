@@ -44,7 +44,8 @@
                     </select>
                 </div>
                 <div class="form-group col-md-2">
-                    <select name="model_id" class="input-group form-control custom-select formMargin" disabled id="model_id">
+                    <select name="model_id" class="input-group form-control custom-select formMargin" disabled
+                        id="model_id">
                         <option selected value="" disabled>{{ __('Model') }}</option>
                         @foreach ($carData['models'] as $model)
                             <option value="{{ $model->id }}">{{ $model->name }}</option>
@@ -52,7 +53,7 @@
                     </select>
                 </div>
                 <div class="form-group col-md-2">
-                    <input type="text" name="color_exterior" id="color_exterior" placeholder="{{ __('Color') }}"
+                    <input type="number" name="color_exterior" id="color_exterior" placeholder="{{ __('Color') }}"
                         class="form-control formMargin">
                 </div>
                 <div class="form-group col-md-2">
@@ -91,7 +92,7 @@
                     <button class="btn btn-success btn-submit form-control">{{ __('Save') }}</button></td>
                 </div>
             </div>
-            
+
         </form>
 
         <div class="card box-none">
@@ -106,68 +107,92 @@
                     @endforeach
                 </ul>
 
-                <!--
-                <ul class="nav nav-tabs bg-nav">
-                    @foreach ($carData['stands'] as $stand)
-                        <li class="nav-item">
-                            <a class="nav-link tab_button @if (Auth::user()->stand_id == $stand->id) active @elseif(Auth::user()->stand_id == '') {{ $loop->first ? 'active' : '' }} @endif" id="{{ $stand->id }}"
-                                data-toggle="tab" href="#menu1">{{ $stand->name }}</a>
-                        </li>
-                    @endforeach
-                </ul>
-                -- >
+                <!--<ul class="nav nav-tabs bg-nav">
+                        @foreach ($carData['stands'] as $stand)
+                            <li class="nav-item">
+                                <a class="nav-link tab_button @if (Auth::user()->stand_id == $stand->id) active @elseif(Auth::user()->stand_id == '') {{ $loop->first ? 'active' : '' }} @endif" id="{{ $stand->id }}"
+                                    data-toggle="tab" href="#menu1">{{ $stand->name }}</a>
+                            </li>
+                        @endforeach
+                    </ul>-- >
 
-                @foreach ($carData['stands'] as $stand)
+                    @foreach ($carData['stands'] as $stand)
 
                     <!-- TABLE FOR PAGE INITIALIZATION WITH ALL CARS -->
-                    <div class="table-responsive container" id="{{ $stand->id }}-table-div">
-                        <table class="table" id="{{ $stand->id }}-table">
-                            <thead>
-                                <tr>
-                                    <th>{{ __('Make') }}</th>
-                                    <th>{{ __('Model') }}</th>
-                                    <th>{{ __('Color') }}</th>
-                                    <th>{{ __('Est') }}</th>
-                                    <th>{{ __('Komm') }}</th>
-                                    <th>{{ __('State') }}</th>
-                                    <th>{{ __('Production') }}</th>
-                                    <th>{{ __('Observations') }}</th>
-                                    <th>{{ __('Action') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($newCars->sortByDesc('created_at') as $car)
-                                    @if ($car->stand->name == $stand->name)
-                                        <tr>
+                <div class="table-responsive container" id="{{ $stand->id }}-table-div">
+                    <table class="table" id="{{ $stand->id }}-table">
+                        <thead>
+                            <tr>
+                                <th>{{ __('Make') }}</th>
+                                <th>{{ __('Model') }}</th>
+                                <th>{{ __('Color') }}</th>
+                                <th>{{ __('Est') }}</th>
+                                <th>{{ __('Komm') }}</th>
+                                <th>{{ __('State') }}</th>
+                                <th>{{ __('Production') }}</th>
+                                <th>{{ __('Observations') }}</th>
+                                <th>{{ __('Action') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($newCars->sortByDesc('created_at') as $car)
+                                @if ($car->stand->name == $stand->name)
+                                    <tr>
+                                        <form method="POST" action="{{ route('newCarsUpdate', $car->id) }}"
+                                            id="newCarsUpdate">
+                                            @csrf
                                             <td>{{ $car->model->make->name }}</td>
                                             <td>{{ $car->model->name }}</td>
-                                            <td>{{ $car->color_exterior }}</td>
-                                            <td>{{ $car->est }}</td>
+                                            <td><input type="number"
+                                                    id="color_exterior{{ $car->id }}" name="color_exterior"
+                                                    class="form-control" value="{{ $car->color_exterior }}"></td>
+                                            <td><input type="number"
+                                                    id="est{{ $car->id }}" name="est" value="{{ $car->est }}"
+                                                    class="form-control"></td>
                                             <td>{{ $car->komm }}</td>
-                                            <td>{{ $car->state->name }}</td>
-                                            <td>{{ date('d-m-y', strtotime($car->order_date)) }}</td>
-                                            <td>{{ $car->observations }}</td>
-                                            <td width="120">
-                                                {!! Form::open(['route' => ['cars.destroy', $car->id], 'method' => 'delete']) !!}
-                                                <div class='btn-group'>
-                                                    <a href="{{ route('cars.show', [$car->id]) }}"
-                                                        class='btn btn-default btn-xs'>
-                                                        <i class="far fa-eye"></i>
-                                                    </a>
-                                                    <a href="{{ route('cars.edit', [$car->id]) }}"
-                                                        class='btn btn-default btn-xs'>
-                                                        <i class="far fa-edit"></i>
-                                                    </a>
-                                                    {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Tem a certeza?')"]) !!}
-                                                </div>
-                                                {!! Form::close() !!}
+                                            <td>
+                                                <select onchange="this.form.submit()" id="state_id{{ $car->id }}"
+                                                    name="state_id" class="input-group form-control custom-select" style="width: auto;">
+                                                    @foreach ($carData['states'] as $state)
+                                                        @if ($state->id == (isset($car->state->id) ? $car->state->id : ''))
+                                                            <option selected value="{{ $state->id }}">
+                                                                {{ $state->name }}</option>
+                                                        @else
+                                                            <option value="{{ $state->id }}">{{ $state->name }}
+                                                            </option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
                                             </td>
-                                        </tr>
-                                    @endif
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                                            <td>{{ date('d-m-y', strtotime($car->order_date)) }}</td>
+                                            <td><input type="text"
+                                                    id="observations{{ $car->id }}" name="observations"
+                                                    class="form-control" value="{{ Str::limit($car->observations, 12) }}"></td>
+                                            <td width="120">
+                                                <input type="hidden" name="id" value="{{ $car->id }}">
+                                                <button type="submit" id="submitUpdate" class="btn btn-dark update"
+                                                    style="display: none">{{ __('Update') }}</button>
+                                        </form>
+                                        {!! Form::open(['route' => ['cars.destroy', $car->id], 'method' => 'delete']) !!}
+                                        <div class='btn-group'>
+                                            <a href="{{ route('cars.show', [$car->id]) }}"
+                                                class='btn btn-default btn-xs'>
+                                                <i class="far fa-eye"></i>
+                                            </a>
+                                            <a href="{{ route('cars.edit', [$car->id]) }}"
+                                                class='btn btn-default btn-xs'>
+                                                <i class="far fa-edit"></i>
+                                            </a>
+                                            {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Tem a certeza?')"]) !!}
+                                        </div>
+                                        {!! Form::close() !!}
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
                 @endforeach
 
@@ -207,8 +232,7 @@
                 responsive: true,
                 order: [],
                 "dom": '<"top" <"float-left"f><"float-right"B>>rt<"bottom mt-4"<"float-left"p><"float-right"l>><"clear">',
-                buttons: [
-                    {
+                buttons: [{
                         text: 'Todos',
                         active: true,
                         action: function() {
@@ -238,9 +262,9 @@
                     }
                 ]
             });
-            table.button(0).active(true)
-            table.button(1).active(false)
-            table.button(2).active(false)
+        table.button(0).active(true)
+        table.button(1).active(false)
+        table.button(2).active(false)
         // FIM PARA APAGAR
 
         // Table
@@ -269,8 +293,7 @@
                 order: [],
                 "dom": '<"top" <"float-left w-200"f><"float-right"B>>rt<"bottom mt-4"<"float-left"p><"float-right"l>><"clear">',
 
-                buttons: [
-                    {
+                buttons: [{
                         text: 'Todos',
                         active: true,
                         action: function() {
@@ -422,6 +445,14 @@
                 }
             });
         });
+
+        // Submit form on update Enter press
+
+        $('#submitUpdate').keypress(function(e) {
+            if (e.keyCode == 13) {
+                $('#submitUpdate').submit();
+            }
+        });
     </script>
 @endpush
 
@@ -457,6 +488,14 @@
 
     .formMargin {
         margin-right: 10px;
+    }
+
+    td .form-control {
+        border: none;
+    }
+
+    td .form-control:focus {
+        border: 1px solid #80bdff;
     }
 
 </style>
