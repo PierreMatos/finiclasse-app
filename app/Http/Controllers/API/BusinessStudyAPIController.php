@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreateBusinessStudyAPIRequest;
 use App\Http\Requests\API\UpdateBusinessStudyAPIRequest;
 use App\Models\BusinessStudy;
+use App\Models\Proposal;
 use App\Repositories\BusinessStudyRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
@@ -104,8 +105,8 @@ class BusinessStudyAPIController extends AppBaseController
 
         // com os novos valores, volta a re-calcular a margem e guarda os novos valores
         // dd($businessStudy->initialProposal);
-        dd($this->calculate($businessStudy->initialProposal));
-        $FSd = $this->calculate($businessStudy->initialProposal);
+        // dd($this->calculate($businessStudy->initialProposal));
+        $this->calculate($businessStudy->initialProposal);
 
 
         $businessStudy = $this->businessStudyRepository->update($input, $id);
@@ -137,17 +138,16 @@ class BusinessStudyAPIController extends AppBaseController
         return $this->sendSuccess('Business Study deleted successfully');
     }
 
-    public function calculate($proposal){
+    public function calculate($request){
 
-        
-        // $proposal = Proposal::find($request->id);
+        $proposal = Proposal::find($request->id);
         
         //get proposal-> campanhas, benefits,... 
         $taxas = ['iva' => 23];
         
         // dd($proposal->campaigns->first()->pivot->value);
-        
-       
+
+        // dd( $proposal->car);
 
         if (!empty($proposal->car)) {
             
@@ -166,7 +166,6 @@ class BusinessStudyAPIController extends AppBaseController
             $totalCampaigns = 0;
             $totalBenefits = 0;
             $subTotal = 0.0;
-
 
             // total campaigns
             foreach($proposal->campaigns as $campaign){

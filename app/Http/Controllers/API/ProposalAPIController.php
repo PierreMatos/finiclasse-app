@@ -235,7 +235,7 @@ class ProposalAPIController extends AppBaseController
 
         //TODO pegar modelo de business study
 
-        // 
+        // estudo de negocio inicial e final
         $proposal = Proposal::find($request->id);
         
         $taxas = ['iva' => 23];
@@ -261,6 +261,8 @@ class ProposalAPIController extends AppBaseController
             $totalCampaigns = 0;
             $totalBenefits = 0;
             $subTotal = 0.0;
+            $sellingPrice = 0;
+            $purchasePrice = 0;
 
 
             // total campaigns
@@ -323,9 +325,13 @@ class ProposalAPIController extends AppBaseController
             //diff
             $dif = ($total - $sell) - $diffTradein;
             //desc
-            if (is_null($isentIva)) {  $desc = $settleValue / (1 + $iva ); } else{ $desc = $dif; }
+            if (is_null($isentIva)) { 
+                 $desc = $dif / (1 + $ivaTX ); 
+                } else{ 
+                    $desc = $dif;
+                 }
             //%
-            $profit = $desc / ( $totalBenefits + $isv - ( $ptl + $sigpu + $totalTransf ));
+            $profit = $desc / ( $totalBenefits + $isv ) - ( $ptl + $sigpu + $totalTransf );
 
         }else {
 
@@ -334,12 +340,21 @@ class ProposalAPIController extends AppBaseController
 
         $results = [
             'Preço Base' => $basePrice,
+            'Total Extras' => $preTotalExtras,
+            'PTL' => $ptl,
+            'SIGPU' => $sigpu,
+            'Total Trans' => $totalTransf,
+            'Total Apoios' => $totalBenefits,
             'Total Extras' => $totalExtras,
             'Sub Total'  => $subTotal,
             'ISV' => $isv,
             'IVA Taxa' => $ivaTX,
             'iva' => $iva,
             'Total' => $total,
+            'Venda (static)' => $sell,
+            'Valor de compra' => $sellingPrice,
+            'Valor de venda' => $purchasePrice,
+            'Dif de retoma' => $diffTradein,
             'valor a liquidar' => $settleValue,
             'desc' => $desc,
             'dif' => $dif,
