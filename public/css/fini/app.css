@@ -21,30 +21,12 @@ table.dataTable>thead .sorting_asc {
     background-color: #F5F6FA;
 }
 
-.dataTables_wrapper {
-    /* width:94%; */
-}
-
-.table-responsive {
-    /* margin-left:3% */
-}
-
 .dt-buttons {
     text-align: right!important;
 }
 
 div.dataTables_wrapper div.dataTables_filter input {
     width: 200%;
-}
-
-@media only screen and (max-width: 400px) {
-    div.dataTables_wrapper div.dataTables_filter input {
-        width: 100%;
-    }
-    .top {
-        padding-top: 7%;
-        padding-bottom: 7%;
-    }
 }
 
 .btn-secondary {
@@ -104,7 +86,6 @@ div.dataTables_wrapper div.dataTables_filter input {
 
 .treeview i {
     margin-right: .5rem;
-    width: 20px;
 }
 
 .treeview {
@@ -114,17 +95,6 @@ div.dataTables_wrapper div.dataTables_filter input {
 .logoImg {
     height: 22px;
     vertical-align: inherit;
-}
-
-@media only screen and (min-width: 1025px) {
-    .nav-sidebar .menu-open>.nav-link i.right {
-        position: inherit;
-        margin-left: 50px;
-    }
-    .nav-sidebar .nav-link>p>.right {
-        position: inherit;
-        margin-left: 50px;
-    }
 }
 
 .notValidated {
@@ -153,4 +123,33 @@ div.dataTables_wrapper div.dataTables_filter input {
 
 .disabledColor {
     background-color: #e9ecef;
+}
+
+@media only screen and (max-width: 414px) {
+    div.dataTables_wrapper div.dataTables_length label {
+        margin-top: 20px;
+        padding-bottom: 20px;
+    }
+    .layout-fixed .main-sidebar {
+        background-color: #fff;
+    }
+    .sidebar {
+        overflow: inherit;
+    }
+    .main-sidebar {
+        overflow-y: inherit;
+    }
+    .layout-fixed .brand-link {
+        height: 56px;
+    }
+    .dropdown-toggle::after {
+        margin-top: 6px;
+    }
+    .dropdown-menu-lg {
+        min-width: 10rem;
+    }
+}
+
+.menuDropActive {
+    background-color: #007bff1f;
 }

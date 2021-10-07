@@ -43,14 +43,34 @@
     </li>
 @endcan
 
-@can('cars.index')
-    <li class="treeview">
-        <a href="{{ route('cars.index') }}" class="nav-link {{ Request::is('cars*') ? 'active' : '' }}">
-            <i class="fas fa-car"></i>
-            <p>Viaturas</p>
-        </a>
-    </li>
-@endcan
+<li class="treeview nav-item has-treeview">
+    <a href="#" class="nav-link" id="viaturas">
+        <i class="fas fa-car"></i>
+        <p>
+            Viaturas
+            <i class="fas fa-angle-left right"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        @can('cars.index')
+            <li class="treeview">
+                <a href="{{ route('cars.index') }}" class="nav-link {{ Request::is('cars*') ? 'active' : '' }}">
+                    <i class="fas fa-list-ul"></i>
+                    <p>Todos</p>
+                </a>
+            </li>
+        @endcan
+
+        @can('cars.index')
+            <li class="treeview">
+                <a href="{{ route('newCars') }}" class="nav-link {{ Request::is('newCars*') ? 'active' : '' }}">
+                    <i class="fas fa-plus-square"></i>
+                    <p>Novos</p>
+                </a>
+            </li>
+        @endcan
+    </ul>
+</li>
 
 <!-- TODO criar role para ver clientes e vendedores -->
 @can('users.index')
@@ -71,8 +91,8 @@
     </li>
 @endcan
 
-<li class="treeview nav-item">
-    <a href="#" class="nav-link">
+<li class="treeview nav-item has-treeview">
+    <a href="#" class="nav-link" id="definicoes">
         <i class="fa fa-cog"></i>
         <p>
             Definições
@@ -83,7 +103,7 @@
         @can('stands.index')
             <li class="treeview">
                 <a href="{{ route('stands.index') }}" class="nav-link {{ Request::is('stands*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="fas fa-eye"></i>
                     <p>Stands</p>
                 </a>
             </li>
@@ -93,7 +113,7 @@
             <li class="treeview">
                 <a href="{{ route('clientTypes.index') }}"
                     class="nav-link {{ Request::is('clientTypes*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="fas fa-eye"></i>
                     <p>Clientes Tipos</p>
                 </a>
             </li>
@@ -102,8 +122,8 @@
         @can('makes.index')
             <li class="treeview">
                 <a href="{{ route('makes.index') }}" class="nav-link {{ Request::is('makes*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Viaturas Marcas</p>
+                    <i class="fas fa-eye"></i>
+                    <p>V. Marcas</p>
                 </a>
             </li>
         @endcan
@@ -112,8 +132,8 @@
             <li class="treeview">
                 <a href="{{ route('carModels.index') }}"
                     class="nav-link {{ Request::is('carModels*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Viaturas Modelos</p>
+                    <i class="fas fa-eye"></i>
+                    <p>V. Modelos</p>
                 </a>
             </li>
         @endcan
@@ -122,8 +142,8 @@
             <li class="treeview">
                 <a href="{{ route('carCategories.index') }}"
                     class="nav-link {{ Request::is('carCategories*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Viaturas Categorias</p>
+                    <i class="fas fa-eye"></i>
+                    <p>V. Categorias</p>
                 </a>
             </li>
         @endcan
@@ -132,8 +152,8 @@
             <li class="treeview">
                 <a href="{{ route('carClasses.index') }}"
                     class="nav-link {{ Request::is('carClasses*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Viaturas Classes</p>
+                    <i class="fas fa-eye"></i>
+                    <p>V. Classes</p>
                 </a>
             </li>
         @endcan
@@ -142,8 +162,8 @@
             <li class="treeview">
                 <a href="{{ route('carConditions.index') }}"
                     class="nav-link {{ Request::is('carConditions*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Viaturas Condições</p>
+                    <i class="fas fa-eye"></i>
+                    <p>V. Condições</p>
                 </a>
             </li>
         @endcan
@@ -152,8 +172,8 @@
             <li class="treeview">
                 <a href="{{ route('carDrives.index') }}"
                     class="nav-link {{ Request::is('carDrives*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Viaturas Trações</p>
+                    <i class="fas fa-eye"></i>
+                    <p>V. Trações</p>
                 </a>
             </li>
         @endcan
@@ -162,8 +182,8 @@
             <li class="treeview">
                 <a href="{{ route('carStates.index') }}"
                     class="nav-link {{ Request::is('carStates*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Viaturas Estados</p>
+                    <i class="fas fa-eye"></i>
+                    <p>V. Estados</p>
                 </a>
             </li>
         @endcan
@@ -172,8 +192,8 @@
             <li class="treeview">
                 <a href="{{ route('carTransmissions.index') }}"
                     class="nav-link {{ Request::is('carTransmissions*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Viaturas Transmissões</p>
+                    <i class="fas fa-eye"></i>
+                    <p>V. Transmissões</p>
                 </a>
             </li>
         @endcan
@@ -182,8 +202,8 @@
             <li class="treeview">
                 <a href="{{ route('carFuels.index') }}"
                     class="nav-link {{ Request::is('carFuels*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Viaturas Combustíveis</p>
+                    <i class="fas fa-eye"></i>
+                    <p>V. Combustíveis</p>
                 </a>
             </li>
         @endcan
@@ -192,8 +212,8 @@
             <li class="treeview">
                 <a href="{{ route('proposalStates.index') }}"
                     class="nav-link {{ Request::is('proposalStates*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Negócios Estados</p>
+                    <i class="fas fa-eye"></i>
+                    <p>Neg. Estados</p>
                 </a>
             </li>
         @endcan
@@ -202,8 +222,8 @@
             <li class="treeview">
                 <a href="{{ route('financingProposals.index') }}"
                     class="nav-link {{ Request::is('financingProposals*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Financiamento Negócios</p>
+                    <i class="fas fa-eye"></i>
+                    <p>Fin. Negócios</p>
                 </a>
             </li>
         @endcan
@@ -212,8 +232,8 @@
             <li class="treeview">
                 <a href="{{ route('campaignsProposals.index') }}"
                     class="nav-link {{ Request::is('campaignsProposals*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Campanhas Negócios</p>
+                    <i class="fas fa-eye"></i>
+                    <p>Campanhas Neg.</p>
                 </a>
             </li>
         @endcan
@@ -222,8 +242,8 @@
             <li class="treeview">
                 <a href="{{ route('benefitsProposals.index') }}"
                     class="nav-link {{ Request::is('benefitsProposals*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Benefícios Negócios</p>
+                    <i class="fas fa-eye"></i>
+                    <p>Benefícios Neg.</p>
                 </a>
             </li>
         @endcan
@@ -232,8 +252,8 @@
             <li class="treeview">
                 <a href="{{ route('benefitsBusinessStudies.index') }}"
                     class="nav-link {{ Request::is('benefitsBusinessStudies*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Benefits Business Studies</p>
+                    <i class="fas fa-eye"></i>
+                    <p>Benefícios Estudos</p>
                 </a>
             </li>
         @endcan
@@ -242,8 +262,8 @@
             <li class="treeview">
                 <a href="{{ route('businenssStudyAuthorizations.index') }}"
                     class="nav-link {{ Request::is('businenssStudyAuthorizations*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Businenss Study Authorizations</p>
+                    <i class="fas fa-eye"></i>
+                    <p>Estudo Aut.</p>
                 </a>
             </li>
         @endcan
@@ -252,25 +272,35 @@
             <li class="treeview">
                 <a href="{{ route('businessStudies.index') }}"
                     class="nav-link {{ Request::is('businessStudies*') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Business Studies</p>
+                    <i class="fas fa-eye"></i>
+                    <p>Estudos Neg.</p>
                 </a>
             </li>
         @endcan
     </ul>
 </li>
 
-<script>
-    var url = window.location;
-    const allLinks = document.querySelectorAll('.nav-item a');
-    const currentLink = [...allLinks].filter(e => {
-        return e.href == url;
-    });
+@push('page_scripts')
+    <script>
+        $(document).ready(function() {
+            var url = window.location;
+            const allLinks = document.querySelectorAll('.nav-item a');
+            const currentLink = [...allLinks].filter(e => {
+                return e.href == url;
+            });
 
-    if (typeof currentLink[0] !== 'undefined') {
-        if (currentLink[0].closest(".nav-treeview") !== null) {
-            currentLink[0].classList.add("active");
-            currentLink[0].closest(".nav-treeview").style.display = "block";
-        }
-    }
-</script>
+            //fix for "cannot read property 'style' of null" on windows.location urls not in the nav, indefined on edit/create pages with id number
+            if (typeof currentLink[0] !== 'undefined') {
+                if (currentLink[0].closest(".nav-treeview") !== null) {
+                    currentLink[0].classList.add("active");
+                    currentLink[0].closest(".nav-treeview").style.display = 'block';
+                    currentLink[0].closest(".has-treeview").classList.add("active");
+                    currentLink[0].closest(".has-treeview").classList.add("menu-open");
+                }
+
+                $('.menu-open #viaturas').addClass('menuDropActive');
+                $('.menu-open #definicoes').addClass('menuDropActive');    
+            }
+        });
+    </script>
+@endpush

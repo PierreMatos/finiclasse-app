@@ -386,8 +386,6 @@ class CarController extends AppBaseController
 
     public function carState(Request $request)
     {
-
-
         $car = $this->carRepository->find($request->car);
 
         if (empty($request->car)) {
@@ -419,11 +417,13 @@ class CarController extends AppBaseController
     public function newCars()
     {
         $newCars = Car::where('condition_id', '=', 1)->get();
+        $makes = $this->makeRepository->all();
         $models = $this->modelRepository->all();
         $states = $this->carStateRepository->all();
         $stands = $this->standRepository->all();
 
         $carData = ([
+            'makes' => $makes,
             'models' => $models,
             'states' => $states,
             'stands' => $stands
@@ -437,6 +437,7 @@ class CarController extends AppBaseController
     public function newCarsPost(CreateCarRequest $request)
     {
         $validator = Validator::make($request->all(), [
+            'make_id' => 'required',
             'model_id' => 'required',
             'komm' => 'required',
             'color_exterior' => 'required',
@@ -452,9 +453,25 @@ class CarController extends AppBaseController
 
             $car = $this->carRepository->create($input);
 
-            Log::info($input);
+            return response()->json($car);
+        }
 
-            return response()->json();
+        return response()->json(['error' => $validator->errors()]);
+    }
+
+    public function newCarsUpdate($id, UpdateCarRequest $request)
+    {
+        $validator = Validator::make($request->all(), [
+           
+        ]);
+
+        if ($validator->passes()) {
+
+            $car = $this->carRepository->find($id);
+
+            $car = $this->carRepository->update($request->all(), $id);
+
+            return response()->json($car);
         }
 
         return response()->json(['error' => $validator->errors()]);
