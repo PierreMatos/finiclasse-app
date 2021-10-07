@@ -25,6 +25,10 @@
             <ul></ul>
         </div>
 
+        <div class="flash">
+            @include('flash::message')
+        </div>
+
         <div class="clearfix"></div>
 
         <form id="addNewCar" class="container">
@@ -82,14 +86,14 @@
                 </div>
                 <div class="form-group col-md-2">
                     <input type="text" name="order_date" id="order_date" placeholder="{{ __('Production') }}"
-                        class="form-control formMargin"></td>
+                        class="form-control formMargin">
                 </div>
                 <div class="form-group col-md-6">
                     <input type="text" name="observations" id="observations" placeholder="{{ __('Observations') }}"
-                        class="form-control formMargin"></td>
+                        class="form-control formMargin">
                 </div>
                 <div class="form-group col-md-2">
-                    <button class="btn btn-success btn-submit form-control">{{ __('Save') }}</button></td>
+                    <button class="btn btn-success btn-submit form-control">{{ __('Save') }}</button>
                 </div>
             </div>
 
@@ -108,17 +112,17 @@
                 </ul>
 
                 <!--<ul class="nav nav-tabs bg-nav">
-                        @foreach ($carData['stands'] as $stand)
-                            <li class="nav-item">
-                                <a class="nav-link tab_button @if (Auth::user()->stand_id == $stand->id) active @elseif(Auth::user()->stand_id == '') {{ $loop->first ? 'active' : '' }} @endif" id="{{ $stand->id }}"
-                                    data-toggle="tab" href="#menu1">{{ $stand->name }}</a>
-                            </li>
-                        @endforeach
-                    </ul>-- >
+                                                @foreach ($carData['stands'] as $stand)
+                                                    <li class="nav-item">
+                                                        <a class="nav-link tab_button @if (Auth::user()->stand_id == $stand->id) active @elseif(Auth::user()->stand_id == '') {{ $loop->first ? 'active' : '' }} @endif" id="{{ $stand->id }}"
+                                                            data-toggle="tab" href="#menu1">{{ $stand->name }}</a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>-- >
 
-                    @foreach ($carData['stands'] as $stand)
+                                            @foreach ($carData['stands'] as $stand)
 
-                    <!-- TABLE FOR PAGE INITIALIZATION WITH ALL CARS -->
+                                            <!-- TABLE FOR PAGE INITIALIZATION WITH ALL CARS -->
                 <div class="table-responsive container" id="{{ $stand->id }}-table-div">
                     <table class="table" id="{{ $stand->id }}-table">
                         <thead>
@@ -129,6 +133,7 @@
                                 <th>{{ __('Est') }}</th>
                                 <th>{{ __('Komm') }}</th>
                                 <th>{{ __('State') }}</th>
+                                <th id="search" style="display: none;">Teste</th>
                                 <th>{{ __('Production') }}</th>
                                 <th>{{ __('Observations') }}</th>
                                 <th>{{ __('Action') }}</th>
@@ -138,54 +143,55 @@
                             @foreach ($newCars->sortByDesc('created_at') as $car)
                                 @if ($car->stand->name == $stand->name)
                                     <tr>
-                                        <form method="POST" action="{{ route('newCarsUpdate', $car->id) }}"
-                                            id="newCarsUpdate">
-                                            @csrf
-                                            <td>{{ $car->model->make->name }}</td>
-                                            <td>{{ $car->model->name }}</td>
-                                            <td><input type="number"
-                                                    id="color_exterior{{ $car->id }}" name="color_exterior"
-                                                    class="form-control" value="{{ $car->color_exterior }}"></td>
-                                            <td><input type="number"
-                                                    id="est{{ $car->id }}" name="est" value="{{ $car->est }}"
-                                                    class="form-control"></td>
-                                            <td>{{ $car->komm }}</td>
-                                            <td>
-                                                <select onchange="this.form.submit()" id="state_id{{ $car->id }}"
-                                                    name="state_id" class="input-group form-control custom-select" style="width: auto;">
-                                                    @foreach ($carData['states'] as $state)
-                                                        @if ($state->id == (isset($car->state->id) ? $car->state->id : ''))
-                                                            <option selected value="{{ $state->id }}">
-                                                                {{ $state->name }}</option>
-                                                        @else
-                                                            <option value="{{ $state->id }}">{{ $state->name }}
-                                                            </option>
-                                                        @endif
-                                                    @endforeach
-                                                </select>
-                                            </td>
-                                            <td>{{ date('d-m-y', strtotime($car->order_date)) }}</td>
-                                            <td><input type="text"
-                                                    id="observations{{ $car->id }}" name="observations"
-                                                    class="form-control" value="{{ Str::limit($car->observations, 12) }}"></td>
-                                            <td width="120">
-                                                <input type="hidden" name="id" value="{{ $car->id }}">
-                                                <button type="submit" id="submitUpdate" class="btn btn-dark update"
-                                                    style="display: none">{{ __('Update') }}</button>
-                                        </form>
-                                        {!! Form::open(['route' => ['cars.destroy', $car->id], 'method' => 'delete']) !!}
-                                        <div class='btn-group'>
-                                            <a href="{{ route('cars.show', [$car->id]) }}"
-                                                class='btn btn-default btn-xs'>
-                                                <i class="far fa-eye"></i>
-                                            </a>
-                                            <a href="{{ route('cars.edit', [$car->id]) }}"
-                                                class='btn btn-default btn-xs'>
-                                                <i class="far fa-edit"></i>
-                                            </a>
-                                            {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Tem a certeza?')"]) !!}
-                                        </div>
-                                        {!! Form::close() !!}
+                                        <td>{{ $car->model->make->name }}</td>
+                                        <td><span class="form-control">{{ $car->model->name }}</span></td>
+                                        <td>
+                                            <input onfocusout="updateForm({{ $car->id }})" type="number" id="color_exterior{{ $car->id }}"
+                                                name="color_exterior" class="form-control"
+                                                value="{{ $car->color_exterior }}">
+                                        </td>
+                                        <td><input onfocusout="updateForm({{ $car->id }})" type="number" id="est{{ $car->id }}" name="est"
+                                                class="form-control" value="{{ $car->est }}"></td>
+                                        <td><span class="form-control"
+                                                style="margin-top: 3px;">{{ $car->komm }}</span></td>
+                                        <td>
+                                            <select onchange="updateForm({{ $car->id }})" id="state_id{{ $car->id }}" name="state_id"
+                                                class="input-group form-control custom-select" style="width: auto;">
+                                                @foreach ($carData['states'] as $state)
+                                                    @if ($state->id == (isset($car->state->id) ? $car->state->id : ''))
+                                                        <option selected value="{{ $state->id }}">
+                                                            {{ $state->name }}</option>
+                                                    @else
+                                                        <option value="{{ $state->id }}">{{ $state->name }}
+                                                        </option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td style="display: none;">{{ $car->state->name }}</td>
+                                        <td><span
+                                                class="form-control">{{ date('d-m-y', strtotime($car->order_date)) }}</span>
+                                        </td>
+                                        <td><input onfocusout="updateForm({{ $car->id }})" type="text" id="observations{{ $car->id }}" name="observations"
+                                                class="form-control" value="{{ Str::limit($car->observations, 12) }}">
+                                        </td>
+                                        <td width="120">
+                                            <input type="hidden" name="id" value="{{ $car->id }}">
+                                            <button id="submitUpdate" class="btn btn-success form-control"
+                                                onfocusout="updateForm({{ $car->id }})" style="display: none;">{{ __('Update') }}</button>
+                                            {!! Form::open(['route' => ['cars.destroy', $car->id], 'method' => 'delete']) !!}
+                                            <div class='btn-group'>
+                                                <a href="{{ route('cars.show', [$car->id]) }}"
+                                                    class='btn btn-default btn-xs'>
+                                                    <i class="far fa-eye"></i>
+                                                </a>
+                                                <a href="{{ route('cars.edit', [$car->id]) }}"
+                                                    class='btn btn-default btn-xs'>
+                                                    <i class="far fa-edit"></i>
+                                                </a>
+                                                {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Tem a certeza?')"]) !!}
+                                            </div>
+                                            {!! Form::close() !!}
                                         </td>
                                     </tr>
                                 @endif
@@ -236,7 +242,7 @@
                         text: 'Todos',
                         active: true,
                         action: function() {
-                            table.search('').draw();
+                            table.column('#search').search('').draw();
                             table.button(1).active(false);
                             table.button(2).active(false);
                             this.active(true);
@@ -245,7 +251,7 @@
                     {
                         text: 'Encomendado',
                         action: function() {
-                            table.search('Encomendado').draw();
+                            table.column('#search').search('Encomendado').draw();
                             table.button(0).active(false);
                             table.button(2).active(false);
                             this.active(true);
@@ -254,7 +260,7 @@
                     {
                         text: 'Disponivel',
                         action: function() {
-                            table.search('Disponivel').draw();
+                            table.column('#search').search('Disponivel').draw();
                             table.button(0).active(false);
                             table.button(1).active(false);
                             this.active(true);
@@ -297,7 +303,7 @@
                         text: 'Todos',
                         active: true,
                         action: function() {
-                            tableCondition.search('').draw();
+                            tableCondition.column('#search').search('').draw();
                             tableCondition.button(1).active(false);
                             tableCondition.button(2).active(false);
                             this.active(true);
@@ -306,7 +312,7 @@
                     {
                         text: 'Encomendado',
                         action: function() {
-                            tableCondition.search('Encomendado').draw();
+                            tableCondition.column('#search').search('Encomendado').draw();
                             tableCondition.button(0).active(false);
                             tableCondition.button(2).active(false);
                             this.active(true);
@@ -315,7 +321,7 @@
                     {
                         text: 'Disponivel',
                         action: function() {
-                            tableCondition.search('Disponivel').draw();
+                            tableCondition.column('#search').search('Disponivel').draw();
                             tableCondition.button(0).active(false);
                             tableCondition.button(1).active(false);
                             this.active(true);
@@ -328,7 +334,7 @@
             tableCondition.button(2).active(false)
         });
 
-        // Ajax Setup
+        // Ajax Setup Create
 
         $(document).ready(function() {
             $(".btn-submit").click(function(e) {
@@ -415,6 +421,81 @@
             });
         });
 
+        // Ajax Setup Edit
+
+        function updateCar(id) {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            var color_exterior = $("#color_exterior" + id).val();
+            var est = $("#est" + id).val();
+            var stand_id = $("#stand_id" + id).val();
+            var state_id = $("#state_id" + id).val();
+            var observations = $("#observations" + id).val();
+
+            $.ajax({
+                type: 'POST',
+                url: "/new/update/" + id,
+                data: {
+                    id: id,
+                    color_exterior: color_exterior,
+                    est: est,
+                    stand_id: stand_id,
+                    state_id: state_id,
+                    observations: observations,
+                },
+                success: function(data) {
+                    if ($.isEmptyObject(data.error)) {
+                        printSuccessMsg(data.error);
+                        $(".print-error-msg").css('display', 'none');
+
+                        $('#1-table').load(location.href + ' #1-table>*');
+                        $('#2-table').load(location.href + ' #2-table>*');
+                    } else {
+                        printErrorMsg(data.error);
+                    }
+                }
+            });
+
+            setTimeout(function() {
+                $(".btn-submit").removeAttr('disabled').css({
+                    'pointer-events': 'inherit',
+                    'cursor': 'pointer',
+                    'opacity': 'inherit'
+                });
+            }, 3000);
+
+            function printSuccessMsg(msg) {
+                $(".print-success-msg").find("ul").html('');
+                $(".print-success-msg").css('display', 'block');
+                $(".print-success-msg").find("ul").append('<li>Novo carro actualizado</li>');
+
+                setTimeout(function() {
+                    $('.print-success-msg').fadeOut('fast');
+                }, 3000);
+            }
+
+            function printErrorMsg(msg) {
+                $(".print-error-msg").find("ul").html('');
+                $(".print-error-msg").css('display', 'block');
+                $.each(msg, function(key, value) {
+                    $(".print-error-msg").find("ul").append('<li>' + value + '</li>');
+                });
+            }
+        }
+
+        // Submit form on update
+
+        function updateForm(id) {
+            setTimeout(function() {
+                updateCar(id);
+            }, 1000);
+        }
+
         // Production datapicker
 
         $('#order_date').datetimepicker({
@@ -444,14 +525,6 @@
                     $("#model_id").prop("disabled", false);
                 }
             });
-        });
-
-        // Submit form on update Enter press
-
-        $('#submitUpdate').keypress(function(e) {
-            if (e.keyCode == 13) {
-                $('#submitUpdate').submit();
-            }
         });
     </script>
 @endpush

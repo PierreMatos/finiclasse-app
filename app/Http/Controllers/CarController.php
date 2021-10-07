@@ -461,13 +461,19 @@ class CarController extends AppBaseController
 
     public function newCarsUpdate($id, UpdateCarRequest $request)
     {
-        $car = $this->carRepository->find($id);
+        $validator = Validator::make($request->all(), [
+           
+        ]);
 
-        $car = $this->carRepository->update($request->all(), $id);
+        if ($validator->passes()) {
 
-        Flash::success('Car updated successfully.');
+            $car = $this->carRepository->find($id);
 
-        return redirect(route('newCars'));
-    
+            $car = $this->carRepository->update($request->all(), $id);
+
+            return response()->json($car);
+        }
+
+        return response()->json(['error' => $validator->errors()]);
     }
 }
