@@ -141,7 +141,7 @@
                         </thead>
                         <tbody>
                             @foreach ($newCars->sortByDesc('created_at') as $car)
-                                @if ($car->stand->name == $stand->name)
+                                @if ((isset($car->stand->name)) == ($stand->name))
                                     <tr>
                                         <td>{{ $car->model->make->name }}</td>
                                         <td><span class="form-control">{{ $car->model->name }}</span></td>

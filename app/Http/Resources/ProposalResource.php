@@ -69,6 +69,16 @@ class ProposalResource extends JsonResource
                 'price' => $this->car->price ?? '',
                 'avatar' => $carAvatar ?? '',
                 'images' => $images ?? '',
+                'komm' => $this->komm,
+                'price_base' => $this->price_base,
+                'extras_total' => $this->extras_total,
+                'sub_total' => $this->sub_total,
+                'ptl' => $this->ptl,
+                'isv' => $this->isv,
+                'iva' => $this->iva,
+                'total'
+
+
             ],
             'tradein_id' => $this->tradein_id,
             'tradein' => [

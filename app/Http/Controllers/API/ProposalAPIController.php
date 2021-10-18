@@ -240,7 +240,9 @@ class ProposalAPIController extends AppBaseController
         
         $taxas = ['iva' => 23];
         
-        // dd($proposal->campaigns->first()->pivot->value);
+        // if this.proposal->business study exists then initial.proposal => proposal->businessStudy
+
+        //no metodo
         
        
 
@@ -338,6 +340,9 @@ class ProposalAPIController extends AppBaseController
             return 'car not found';
         }
 
+
+        
+        
         $results = [
             'Preço Base' => $basePrice,
             'Total Extras' => $preTotalExtras,
@@ -358,7 +363,10 @@ class ProposalAPIController extends AppBaseController
             'valor a liquidar' => $settleValue,
             'desc' => $desc,
             'dif' => $dif,
-            'profit' => $profit
+            'profit' => $profit,
+            'benefits' => $proposal->benefits,
+            'campaigns' => $proposal->campaigns,
+            'tradein' => $proposal->tradein,
         ];
 
         return $results;

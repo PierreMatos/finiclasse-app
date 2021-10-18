@@ -38,6 +38,8 @@ class CarCollection extends ResourceCollection
                 'id' => $car->id,
                 'make' => $car->model->make->name ?? '',
                 'model' => $car->model->name ?? '',
+                'state_id' => $car->state->id ?? '',
+                'state_name' => $car->state->name ?? '',
                 'motorization' => $car->motorization,
                 'price' => $car->price,
                 'km' => $car->km,

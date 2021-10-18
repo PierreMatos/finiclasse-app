@@ -59,7 +59,7 @@ class CarStatesSeeder extends Seeder
                 'name' => 'Reservado',
                 'description' => 'Esta viatura encontra-se reservada e não pode ser vendida',
                 'order' => 1,
-                'color' => '#fffff',
+                'color' => '#C0E6EC',
                 'visible' => 0,
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',
@@ -77,25 +77,25 @@ class CarStatesSeeder extends Seeder
                 'updated_at' => '2019-10-22 15:50:48',
             ),  
 
-            4 => 
+            5 => 
             array (
-                'id' => 5,
+                'id' => 6,
                 'name' => 'Vendido',
                 'description' => 'Esta viatura que esteve em sistema e foi vendida entretanto, deixando de fazer parte das listagens',
                 'order' => 1,
-                'color' => '#fffff',
+                'color' => '#F5F6FA',
                 'visible' => 0,
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',
             ),  
 
-            5 => 
+            6 => 
             array (
-                'id' => 6,
+                'id' => 7,
                 'name' => 'Proposta',
-                'description' => 'Esta viatura provém de uma retoma que pende aceitação',
+                'description' => 'Esta viatura provém de uma retoma que pende  aceitação',
                 'order' => 1,
-                'color' => '#fffff',
+                'color' => '#FFEEBB',
                 'visible' => 0,
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',

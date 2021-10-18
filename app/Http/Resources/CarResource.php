@@ -19,7 +19,7 @@ class CarResource extends JsonResource
         $items = $this->getMedia('cars');
         foreach($items as $item){
             $images->push($item->getUrl());
-            $images->push($item->getUrl('thumb'));
+            // $images->push($item->getUrl('thumb'));
         }
 
         return [

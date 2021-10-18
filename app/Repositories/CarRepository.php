@@ -61,9 +61,19 @@ class CarRepository  extends BaseRepository
         $query = $this->with('stand', 'state');
 
         if ($pagination) {
+
             return $query->paginate($pagination);
         }
 
         return $query->get();
+    }
+
+    // RETURNS CAR LIST WITHAOUT 'POS' state CARS
+
+    public function all ($search = [], $skip = null, $limit = null, $columns = ['*']){
+
+        $query = $this->allQuery($search, $skip, $limit);
+
+        return $query->get($columns);
     }
 }
