@@ -153,6 +153,12 @@ class CarController extends AppBaseController
      */
     public function store(CreateCarRequest $request)
     {
+        $request->validate([
+            'make_id' => 'required',
+            'model_id' => 'required',
+            'motorization' => 'required',
+        ]);
+
         $input = $request->all();
 
         $car = $this->carRepository->create($input);
@@ -164,7 +170,7 @@ class CarController extends AppBaseController
                 });
         }
 
-        Flash::success('Car saved successfully.');
+        Flash::success(__('translation.car saved'));
 
         return redirect(route('cars.index'));
     }
@@ -181,7 +187,7 @@ class CarController extends AppBaseController
         $car = $this->carRepository->find($id);
 
         if (empty($car)) {
-            Flash::error('Car not found');
+            Flash::error(__('translation.car not found'));
 
             return redirect(route('cars.index'));
         }
@@ -227,7 +233,7 @@ class CarController extends AppBaseController
         ]);
 
         if (empty($car)) {
-            Flash::error('Car not found');
+            Flash::error(__('translation.car not found'));
 
             return redirect(route('cars.index'));
         }
@@ -276,14 +282,14 @@ class CarController extends AppBaseController
         }
 
         if (empty($car)) {
-            Flash::error('Car not found');
+            Flash::error(__('translation.car not found'));
 
             return redirect(route('cars.index'));
         }
 
         $car = $this->carRepository->update($request->all(), $id);
 
-        Flash::success('Car updated successfully.');
+        Flash::success(__('translation.car updated'));
 
         return redirect(route('cars.index'));
     }
@@ -302,14 +308,14 @@ class CarController extends AppBaseController
         $car = $this->carRepository->find($id);
 
         if (empty($car)) {
-            Flash::error('Car not found');
+            Flash::error(__('translation.car not found'));
 
             return redirect(route('cars.index'));
         }
 
         $this->carRepository->delete($id);
 
-        Flash::success('Car deleted successfully.');
+        Flash::success(__('translation.car deleted'));
 
         $url = url()->previous();
         $route = app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
@@ -389,7 +395,7 @@ class CarController extends AppBaseController
         $car = $this->carRepository->find($request->car);
 
         if (empty($request->car)) {
-            Flash::error('Car not found');
+            Flash::error(__('translation.car not found'));
 
             return redirect(route('proposals.index'));
         }
@@ -400,7 +406,7 @@ class CarController extends AppBaseController
 
             $this->carRepository->delete($request->car);
 
-            Flash::success('Car deleted successfully.');
+            Flash::success(__('translation.car deleted'));
 
             return redirect(route('proposals.index'));
         } else {
@@ -408,7 +414,7 @@ class CarController extends AppBaseController
             //update $car with $state
             $car = $this->carRepository->update(['state_id' => $request->state, 'tradein_purchase' => $request->price], $request->car);
 
-            Flash::success('Retoma aceite com sucesso.');
+            Flash::success(__('translation.retoma accepted'));
 
             return redirect(route('proposals.index'));
         }

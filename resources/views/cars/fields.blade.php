@@ -419,6 +419,7 @@
     </div>
 
     <div class="tab-pane" id="fotos" role="tabpanel" aria-labelledby="fotos-tab">
+        @if (Route::is('cars.create'))
         <div class="row">
             <!-- Fotos Field -->
             <div class="form-group col-sm-12">
@@ -432,6 +433,30 @@
             </div>
             <div class="clearfix"></div>
         </div>
+        @else
+        <div class="row">
+            <!-- Fotos Field -->
+            <div class="form-group col-sm-12">
+                {!! Form::label('image', 'Fotos') !!}
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" id="image[]" name="image[]" multiple class="custom-file-input">
+                        <label for="image[]" class="custom-file-label">Adicione uma ou mais fotos</label>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="row">
+            <!-- Fotos Field -->
+            <div class="form-group col-sm-12">
+                @foreach ($car->getMedia('cars') as $media)
+                    <p><img width="100%" src="{{ $media->getUrl() }}"></p>
+                @endforeach
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        @endif
     </div>
 </div>
 

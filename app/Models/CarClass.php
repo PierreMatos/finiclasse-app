@@ -19,14 +19,17 @@ class CarClass extends Model
     use HasFactory;
 
     public $table = 'car_classes';
-    
+
 
     protected $dates = ['deleted_at'];
 
 
 
     public $fillable = [
-        
+        'name',
+        'order',
+        'color',
+        'visible'
     ];
 
     /**
@@ -35,7 +38,11 @@ class CarClass extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer'
+        'id' => 'integer',
+        'name' => 'string',
+        'order' => 'integer',
+        'color' => 'string',
+        'visible' => 'boolean'
     ];
 
     /**
@@ -44,8 +51,6 @@ class CarClass extends Model
      * @var array
      */
     public static $rules = [
-        
+        'name' => 'required'
     ];
-
-    
 }

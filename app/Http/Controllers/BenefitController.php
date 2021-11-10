@@ -6,6 +6,7 @@ use App\Http\Requests\CreateBenefitRequest;
 use App\Http\Requests\UpdateBenefitRequest;
 use App\Repositories\BenefitRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Benefit;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
@@ -70,7 +71,7 @@ class BenefitController extends AppBaseController
             $benefit->addMedia($document)->toMediaCollection('benefits');
         }
 
-        Flash::success('Benefit saved successfully.');
+        Flash::success(__('translation.benefit saved'));
 
         return redirect(route('benefits.index'));
     }
@@ -87,7 +88,7 @@ class BenefitController extends AppBaseController
         $benefit = $this->benefitRepository->find($id);
 
         if (empty($benefit)) {
-            Flash::error('Benefit not found');
+            Flash::error(__('translation.benefit not found'));
 
             return redirect(route('benefits.index'));
         }
@@ -107,7 +108,7 @@ class BenefitController extends AppBaseController
         $benefit = $this->benefitRepository->find($id);
 
         if (empty($benefit)) {
-            Flash::error('Benefit not found');
+            Flash::error(__('translation.benefit not found'));
 
             return redirect(route('benefits.index'));
         }
@@ -145,14 +146,14 @@ class BenefitController extends AppBaseController
         }
 
         if (empty($benefit)) {
-            Flash::error('Benefit not found');
+            Flash::error(__('translation.benefit not found'));
 
             return redirect(route('benefits.index'));
         }
 
         $benefit = $this->benefitRepository->update($input, $id);
 
-        Flash::success('Benefit updated successfully.');
+        Flash::success(__('translation.benefit updated'));
 
         return redirect(route('benefits.index'));
     }
@@ -171,7 +172,7 @@ class BenefitController extends AppBaseController
         $benefit = $this->benefitRepository->find($id);
 
         if (empty($benefit)) {
-            Flash::error('Benefit not found');
+            Flash::error(__('translation.benefit not found'));
 
             return redirect(route('benefits.index'));
         }
@@ -179,7 +180,7 @@ class BenefitController extends AppBaseController
         $this->benefitRepository->delete($id);
         $benefit->clearMediaCollection('benefits');
 
-        Flash::success('Benefit deleted successfully.');
+        Flash::success(__('translation.benefit deleted'));
 
         return redirect(route('benefits.index'));
     }

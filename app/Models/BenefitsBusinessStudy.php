@@ -49,7 +49,8 @@ class BenefitsBusinessStudy extends Model
      * @var array
      */
     public static $rules = [
-        
+        'benefits_id' => 'required',
+        'business_study_id' => 'required'
     ];
 
     

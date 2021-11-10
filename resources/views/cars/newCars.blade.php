@@ -72,7 +72,12 @@
                     <select name="stand_id" class="input-group form-control custom-select formMargin" id="stand_id">
                         <option selected value="" disabled>{{ __('Stand') }}</option>
                         @foreach ($carData['stands'] as $stand)
-                            <option value="{{ $stand->id }}">{{ $stand->name }}</option>
+                            @if (!Auth::user()->hasRole('Chefe de vendas'))
+                                <option value="{{ $stand->id }}">{{ $stand->name }}</option>
+                            @elseif((Auth::user()->hasRole('Chefe de vendas')) && (Auth::user()->stand_id ==
+                                $stand->id))
+                                <option value="{{ $stand->id }}">{{ $stand->name }}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
@@ -104,101 +109,206 @@
 
                 <ul class="nav nav-tabs bg-nav">
                     @foreach ($carData['stands'] as $stand)
-                        <li class="nav-item">
-                            <a class="nav-link tab_button {{ $loop->first ? 'active' : '' }}" id="{{ $stand->id }}"
-                                data-toggle="tab" href="#menu1">{{ $stand->name }}</a>
-                        </li>
+                        @if (!Auth::user()->hasRole('Chefe de vendas'))
+                            <li class="nav-item">
+                                <a class="nav-link tab_button {{ $loop->first ? 'active' : '' }}"
+                                    id="{{ $stand->id }}" data-toggle="tab" href="#menu1">{{ $stand->name }}</a>
+                            </li>
+                        @endif
+                        @if (Auth::user()->hasRole('Chefe de vendas') && Auth::user()->stand_id == $stand->id)
+                            <li class="nav-item">
+                                <a class="nav-link tab_button active btnClick" id="{{ $stand->id }}" data-toggle="tab"
+                                    href="#menu1">{{ $stand->name }}</a>
+                            </li>
+                        @endif
                     @endforeach
                 </ul>
 
-                <!--<ul class="nav nav-tabs bg-nav">
-                                                @foreach ($carData['stands'] as $stand)
-                                                    <li class="nav-item">
-                                                        <a class="nav-link tab_button @if (Auth::user()->stand_id == $stand->id) active @elseif(Auth::user()->stand_id == '') {{ $loop->first ? 'active' : '' }} @endif" id="{{ $stand->id }}"
-                                                            data-toggle="tab" href="#menu1">{{ $stand->name }}</a>
-                                                    </li>
-                                                @endforeach
-                                            </ul>-- >
+                {{-- <ul class="nav nav-tabs bg-nav">
+                @foreach ($carData['stands'] as $stand)
+                    <li class="nav-item">
+                        <a class="nav-link tab_button @if (Auth::user()->stand_id == $stand->id) active @elseif(Auth::user()->stand_id == '') {{ $loop->first ? 'active' : '' }} @endif" id="{{ $stand->id }}"
+                            data-toggle="tab" href="#menu1">{{ $stand->name }}
+                        </a>
+                    </li>
+                @endforeach
+                </ul> --}}
 
-                                            @foreach ($carData['stands'] as $stand)
+                @foreach ($carData['stands'] as $stand)
 
-                                            <!-- TABLE FOR PAGE INITIALIZATION WITH ALL CARS -->
-                <div class="table-responsive container" id="{{ $stand->id }}-table-div">
-                    <table class="table" id="{{ $stand->id }}-table">
-                        <thead>
-                            <tr>
-                                <th>{{ __('Make') }}</th>
-                                <th>{{ __('Model') }}</th>
-                                <th>{{ __('Color') }}</th>
-                                <th>{{ __('Est') }}</th>
-                                <th>{{ __('Komm') }}</th>
-                                <th>{{ __('State') }}</th>
-                                <th id="search" style="display: none;">Teste</th>
-                                <th>{{ __('Production') }}</th>
-                                <th>{{ __('Observations') }}</th>
-                                <th>{{ __('Action') }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($newCars->sortByDesc('created_at') as $car)
-                                @if ((isset($car->stand->name)) == ($stand->name))
+                    @if (!Auth::user()->hasRole('Chefe de vendas'))
+
+                        <!-- TABLE FOR PAGE INITIALIZATION WITH ALL CARS -->
+                        <div class="table-responsive container" id="{{ $stand->id }}-table-div">
+                            <table class="table" id="{{ $stand->id }}-table">
+                                <thead>
                                     <tr>
-                                        <td>{{ $car->model->make->name }}</td>
-                                        <td><span class="form-control">{{ $car->model->name }}</span></td>
-                                        <td>
-                                            <input onfocusout="updateForm({{ $car->id }})" type="number" id="color_exterior{{ $car->id }}"
-                                                name="color_exterior" class="form-control"
-                                                value="{{ $car->color_exterior }}">
-                                        </td>
-                                        <td><input onfocusout="updateForm({{ $car->id }})" type="number" id="est{{ $car->id }}" name="est"
-                                                class="form-control" value="{{ $car->est }}"></td>
-                                        <td><span class="form-control"
-                                                style="margin-top: 3px;">{{ $car->komm }}</span></td>
-                                        <td>
-                                            <select onchange="updateForm({{ $car->id }})" id="state_id{{ $car->id }}" name="state_id"
-                                                class="input-group form-control custom-select" style="width: auto;">
-                                                @foreach ($carData['states'] as $state)
-                                                    @if ($state->id == (isset($car->state->id) ? $car->state->id : ''))
-                                                        <option selected value="{{ $state->id }}">
-                                                            {{ $state->name }}</option>
-                                                    @else
-                                                        <option value="{{ $state->id }}">{{ $state->name }}
-                                                        </option>
-                                                    @endif
-                                                @endforeach
-                                            </select>
-                                        </td>
-                                        <td style="display: none;">{{ $car->state->name }}</td>
-                                        <td><span
-                                                class="form-control">{{ date('d-m-y', strtotime($car->order_date)) }}</span>
-                                        </td>
-                                        <td><input onfocusout="updateForm({{ $car->id }})" type="text" id="observations{{ $car->id }}" name="observations"
-                                                class="form-control" value="{{ Str::limit($car->observations, 12) }}">
-                                        </td>
-                                        <td width="120">
-                                            <input type="hidden" name="id" value="{{ $car->id }}">
-                                            <button id="submitUpdate" class="btn btn-success form-control"
-                                                onfocusout="updateForm({{ $car->id }})" style="display: none;">{{ __('Update') }}</button>
-                                            {!! Form::open(['route' => ['cars.destroy', $car->id], 'method' => 'delete']) !!}
-                                            <div class='btn-group'>
-                                                <a href="{{ route('cars.show', [$car->id]) }}"
-                                                    class='btn btn-default btn-xs'>
-                                                    <i class="far fa-eye"></i>
-                                                </a>
-                                                <a href="{{ route('cars.edit', [$car->id]) }}"
-                                                    class='btn btn-default btn-xs'>
-                                                    <i class="far fa-edit"></i>
-                                                </a>
-                                                {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Tem a certeza?')"]) !!}
-                                            </div>
-                                            {!! Form::close() !!}
-                                        </td>
+                                        <th>{{ __('Make') }}</th>
+                                        <th>{{ __('Model') }}</th>
+                                        <th>{{ __('Color') }}</th>
+                                        <th>{{ __('Est') }}</th>
+                                        <th>{{ __('Komm') }}</th>
+                                        <th>{{ __('State') }}</th>
+                                        <th id="search" class="d-none">State Hidden</th>
+                                        <th>{{ __('Production') }}</th>
+                                        <th>{{ __('Observations') }}</th>
+                                        <th>{{ __('Action') }}</th>
                                     </tr>
-                                @endif
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                                </thead>
+                                <tbody>
+                                    @foreach ($newCars->sortByDesc('created_at') as $car)
+                                        @if ($car->stand->name == $stand->name)
+                                            <tr>
+                                                <td>{{ $car->model->make->name }}</td>
+                                                <td><span class="form-control">{{ $car->model->name }}</span></td>
+                                                <td>
+                                                    <input onfocusout="updateForm({{ $car->id }})" type="number"
+                                                        id="color_exterior{{ $car->id }}" name="color_exterior"
+                                                        class="form-control" value="{{ $car->color_exterior }}">
+                                                </td>
+                                                <td><input onfocusout="updateForm({{ $car->id }})" type="number"
+                                                        id="est{{ $car->id }}" name="est" class="form-control"
+                                                        value="{{ $car->est }}"></td>
+                                                <td><span class="form-control"
+                                                        style="margin-top: 3px;">{{ $car->komm }}</span></td>
+                                                <td>
+                                                    <select onchange="updateForm({{ $car->id }})"
+                                                        id="state_id{{ $car->id }}" name="state_id"
+                                                        class="input-group form-control custom-select" style="width: auto;">
+                                                        @foreach ($carData['states'] as $state)
+                                                            @if ($state->id == (isset($car->state->id) ? $car->state->id : ''))
+                                                                <option selected value="{{ $state->id }}">
+                                                                    {{ $state->name }}</option>
+                                                            @else
+                                                                <option value="{{ $state->id }}">{{ $state->name }}
+                                                                </option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td id="state_id{{ $car->id }}" name="state_id"
+                                                    class="d-none">{{ $car->state->name }}</td>
+                                                <td><span
+                                                        class="form-control">{{ date('d-m-y', strtotime($car->order_date)) }}</span>
+                                                </td>
+                                                <td><input onfocusout="updateForm({{ $car->id }})" type="text"
+                                                        id="observations{{ $car->id }}" name="observations"
+                                                        class="form-control"
+                                                        value="{{ Str::limit($car->observations, 12) }}">
+                                                </td>
+                                                <td width="120">
+                                                    <input type="hidden" name="id" value="{{ $car->id }}">
+                                                    <button id="submitUpdate" class="btn btn-success form-control"
+                                                        onfocusout="updateForm({{ $car->id }})"
+                                                        style="display: none;">{{ __('Update') }}</button>
+                                                    {!! Form::open(['route' => ['cars.destroy', $car->id], 'method' => 'delete']) !!}
+                                                    <div class='btn-group'>
+                                                        <a href="{{ route('cars.show', [$car->id]) }}"
+                                                            class='btn btn-default btn-xs'>
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                        <a href="{{ route('cars.edit', [$car->id]) }}"
+                                                            class='btn btn-default btn-xs'>
+                                                            <i class="far fa-edit"></i>
+                                                        </a>
+                                                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Tem a certeza?')"]) !!}
+                                                    </div>
+                                                    {!! Form::close() !!}
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
+                    @elseif((Auth::user()->hasRole('Chefe de vendas')) && (Auth::user()->stand_id == $stand->id))
+
+                        <!-- TABLE FOR PAGE INITIALIZATION WITH ALL CARS -->
+                        <div class="table-responsive container" id="{{ $stand->id }}-table-div">
+                            <table class="table" id="{{ $stand->id }}-table">
+                                <thead>
+                                    <tr>
+                                        <th>{{ __('Make') }}</th>
+                                        <th>{{ __('Model') }}</th>
+                                        <th>{{ __('Color') }}</th>
+                                        <th>{{ __('Est') }}</th>
+                                        <th>{{ __('Komm') }}</th>
+                                        <th>{{ __('State') }}</th>
+                                        <th id="search" class="d-none">State Hidden</th>
+                                        <th>{{ __('Production') }}</th>
+                                        <th>{{ __('Observations') }}</th>
+                                        <th>{{ __('Action') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($newCars->sortByDesc('created_at') as $car)
+                                        @if ($car->stand->name == $stand->name)
+                                            <tr>
+                                                <td>{{ $car->model->make->name }}</td>
+                                                <td><span class="form-control">{{ $car->model->name }}</span></td>
+                                                <td>
+                                                    <input onfocusout="updateForm({{ $car->id }})" type="number"
+                                                        id="color_exterior{{ $car->id }}" name="color_exterior"
+                                                        class="form-control" value="{{ $car->color_exterior }}">
+                                                </td>
+                                                <td><input onfocusout="updateForm({{ $car->id }})" type="number"
+                                                        id="est{{ $car->id }}" name="est" class="form-control"
+                                                        value="{{ $car->est }}"></td>
+                                                <td><span class="form-control"
+                                                        style="margin-top: 3px;">{{ $car->komm }}</span></td>
+                                                <td>
+                                                    <select onchange="updateForm({{ $car->id }})"
+                                                        id="state_id{{ $car->id }}" name="state_id"
+                                                        class="input-group form-control custom-select" style="width: auto;">
+                                                        @foreach ($carData['states'] as $state)
+                                                            @if ($state->id == (isset($car->state->id) ? $car->state->id : ''))
+                                                                <option selected value="{{ $state->id }}">
+                                                                    {{ $state->name }}</option>
+                                                            @else
+                                                                <option value="{{ $state->id }}">{{ $state->name }}
+                                                                </option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td id="state_id{{ $car->id }}" name="state_id"
+                                                    class="d-none">{{ $car->state->name }}</td>
+                                                <td><span
+                                                        class="form-control">{{ date('d-m-y', strtotime($car->order_date)) }}</span>
+                                                </td>
+                                                <td><input onfocusout="updateForm({{ $car->id }})" type="text"
+                                                        id="observations{{ $car->id }}" name="observations"
+                                                        class="form-control"
+                                                        value="{{ Str::limit($car->observations, 12) }}">
+                                                </td>
+                                                <td width="120">
+                                                    <input type="hidden" name="id" value="{{ $car->id }}">
+                                                    <button id="submitUpdate" class="btn btn-success form-control"
+                                                        onfocusout="updateForm({{ $car->id }})"
+                                                        style="display: none;">{{ __('Update') }}</button>
+                                                    {!! Form::open(['route' => ['cars.destroy', $car->id], 'method' => 'delete']) !!}
+                                                    <div class='btn-group'>
+                                                        <a href="{{ route('cars.show', [$car->id]) }}"
+                                                            class='btn btn-default btn-xs'>
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                        <a href="{{ route('cars.edit', [$car->id]) }}"
+                                                            class='btn btn-default btn-xs'>
+                                                            <i class="far fa-edit"></i>
+                                                        </a>
+                                                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Tem a certeza?')"]) !!}
+                                                    </div>
+                                                    {!! Form::close() !!}
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
+                    @endif
 
                 @endforeach
 
@@ -217,7 +327,12 @@
     <script>
         // SET DEFUALT STATE OF TABLES IN THE PAGE
 
+        $(document).ready(function() {
+            $(".btnClick").trigger("click");
+        });
+
         // INICIO PARA APAGAR (Colocar dinamico)
+
         $('#1-table-div').show();
         $('#2-table-div').hide();
 
@@ -561,6 +676,10 @@
 
     .formMargin {
         margin-right: 10px;
+    }
+
+    td {
+        vertical-align: middle !important;
     }
 
     td .form-control {

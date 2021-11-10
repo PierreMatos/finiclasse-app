@@ -34,12 +34,6 @@
     {!! Form::number('selling_price', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Tradein Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('tradein_id', 'Tradein Id:') !!}
-    {!! Form::number('tradein_id', null, ['class' => 'form-control']) !!}
-</div>
-
 <!-- Tradein Diff Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('tradein_diff', 'Tradein Diff:') !!}

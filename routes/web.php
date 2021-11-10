@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\CampaignController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\FinancingController;
+use App\Http\Controllers\BenefitController;
+use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\ProposalController;
+use App\Http\Controllers\FinancingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,7 +57,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('businessStudies', App\Http\Controllers\BusinessStudyController::class);
 
-    Route::resource('benefitsBusinessStudies', App\Http\Controllers\BenefitsBusinessStudyController::class);
+    Route::resource('benefitBusinessStudies', App\Http\Controllers\BenefitsBusinessStudyController::class);
 
     Route::resource('proposals', App\Http\Controllers\ProposalController::class);
 
@@ -82,9 +83,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('campaigns', App\Http\Controllers\CampaignController::class);
 
-    Route::resource('benefitsProposals', App\Http\Controllers\BenefitsProposalsController::class);
+    Route::resource('benefitProposals', App\Http\Controllers\BenefitsProposalsController::class);
 
-    Route::resource('campaignsProposals', App\Http\Controllers\CampaignsProposalsController::class);
+    Route::resource('campaignProposals', App\Http\Controllers\CampaignsProposalsController::class);
 
     Route::resource('clientTypes', App\Http\Controllers\ClientTypeController::class);
 
@@ -187,4 +188,10 @@ Route::get('/mailable', function () {
 // Thankyou page
 Route::get('thankyou', function () {
     return view('thankyou');
+});
+
+Route::get('/mailable', function () {
+    $proposal = App\Models\Proposal::find(600);
+
+    return new App\Mail\ProposalOrder($proposal);
 });

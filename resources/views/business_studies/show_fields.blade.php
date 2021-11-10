@@ -34,12 +34,6 @@
     <p>{{ $businessStudy->selling_price }}</p>
 </div>
 
-<!-- Tradein Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('tradein_id', 'Tradein Id:') !!}
-    <p>{{ $businessStudy->tradein_id }}</p>
-</div>
-
 <!-- Tradein Diff Field -->
 <div class="col-sm-12">
     {!! Form::label('tradein_diff', 'Tradein Diff:') !!}

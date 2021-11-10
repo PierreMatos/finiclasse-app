@@ -44,8 +44,8 @@ class BusinessStudy extends Model
 
 
     public $fillable = [
-        // 'client_id',
-        // 'car_id',
+        'client_id',
+        'car_id',
         'id',
         'extras_total',
         'sub_total',
@@ -70,13 +70,12 @@ class BusinessStudy extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        // 'client_id' => 'integer',
-        // 'car_id' => 'integer',
+        'client_id' => 'integer',
+        'car_id' => 'integer',
         'extras_total' => 'integer',
         'sub_total' => 'integer',
         'total_benefits' => 'integer',
         'selling_price' => 'integer',
-        'tradein_id' => 'integer',
         'tradein_diff' => 'integer',
         'settle_amount' => 'integer',
         'total_diff_amount' => 'integer',
@@ -94,7 +93,10 @@ class BusinessStudy extends Model
      * @var array
      */
     public static $rules = [
-        
+        'client_id' => 'required',
+        'car_id' => 'required',
+        'business_study_authorization_id' => 'required',
+        'tradein_id' => 'required'
     ];
 
     /**

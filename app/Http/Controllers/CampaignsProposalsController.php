@@ -60,7 +60,7 @@ class CampaignsProposalsController extends AppBaseController
 
         Flash::success('Campaigns Proposals saved successfully.');
 
-        return redirect(route('campaignsProposals.index'));
+        return redirect(route('campaignProposals.index'));
     }
 
     /**
@@ -77,7 +77,7 @@ class CampaignsProposalsController extends AppBaseController
         if (empty($campaignsProposals)) {
             Flash::error('Campaigns Proposals not found');
 
-            return redirect(route('campaignsProposals.index'));
+            return redirect(route('campaignProposals.index'));
         }
 
         return view('campaigns_proposals.show')->with('campaignsProposals', $campaignsProposals);
@@ -97,7 +97,7 @@ class CampaignsProposalsController extends AppBaseController
         if (empty($campaignsProposals)) {
             Flash::error('Campaigns Proposals not found');
 
-            return redirect(route('campaignsProposals.index'));
+            return redirect(route('campaignProposals.index'));
         }
 
         return view('campaigns_proposals.edit')->with('campaignsProposals', $campaignsProposals);
@@ -118,14 +118,14 @@ class CampaignsProposalsController extends AppBaseController
         if (empty($campaignsProposals)) {
             Flash::error('Campaigns Proposals not found');
 
-            return redirect(route('campaignsProposals.index'));
+            return redirect(route('campaignProposals.index'));
         }
 
         $campaignsProposals = $this->campaignsProposalsRepository->update($request->all(), $id);
 
         Flash::success('Campaigns Proposals updated successfully.');
 
-        return redirect(route('campaignsProposals.index'));
+        return redirect(route('campaignProposals.index'));
     }
 
     /**
@@ -144,13 +144,13 @@ class CampaignsProposalsController extends AppBaseController
         if (empty($campaignsProposals)) {
             Flash::error('Campaigns Proposals not found');
 
-            return redirect(route('campaignsProposals.index'));
+            return redirect(route('campaignProposals.index'));
         }
 
         $this->campaignsProposalsRepository->delete($id);
 
         Flash::success('Campaigns Proposals deleted successfully.');
 
-        return redirect(route('campaignsProposals.index'));
+        return redirect(route('campaignProposals.index'));
     }
 }

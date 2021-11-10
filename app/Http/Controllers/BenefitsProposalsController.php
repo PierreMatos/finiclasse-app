@@ -60,7 +60,7 @@ class BenefitsProposalsController extends AppBaseController
 
         Flash::success('Benefits Proposals saved successfully.');
 
-        return redirect(route('benefitsProposals.index'));
+        return redirect(route('benefitProposals.index'));
     }
 
     /**
@@ -77,7 +77,7 @@ class BenefitsProposalsController extends AppBaseController
         if (empty($benefitsProposals)) {
             Flash::error('Benefits Proposals not found');
 
-            return redirect(route('benefitsProposals.index'));
+            return redirect(route('benefitProposals.index'));
         }
 
         return view('benefits_proposals.show')->with('benefitsProposals', $benefitsProposals);
@@ -97,7 +97,7 @@ class BenefitsProposalsController extends AppBaseController
         if (empty($benefitsProposals)) {
             Flash::error('Benefits Proposals not found');
 
-            return redirect(route('benefitsProposals.index'));
+            return redirect(route('benefitProposals.index'));
         }
 
         return view('benefits_proposals.edit')->with('benefitsProposals', $benefitsProposals);
@@ -118,14 +118,14 @@ class BenefitsProposalsController extends AppBaseController
         if (empty($benefitsProposals)) {
             Flash::error('Benefits Proposals not found');
 
-            return redirect(route('benefitsProposals.index'));
+            return redirect(route('benefitProposals.index'));
         }
 
         $benefitsProposals = $this->benefitsProposalsRepository->update($request->all(), $id);
 
         Flash::success('Benefits Proposals updated successfully.');
 
-        return redirect(route('benefitsProposals.index'));
+        return redirect(route('benefitProposals.index'));
     }
 
     /**
@@ -144,13 +144,13 @@ class BenefitsProposalsController extends AppBaseController
         if (empty($benefitsProposals)) {
             Flash::error('Benefits Proposals not found');
 
-            return redirect(route('benefitsProposals.index'));
+            return redirect(route('benefitProposals.index'));
         }
 
         $this->benefitsProposalsRepository->delete($id);
 
         Flash::success('Benefits Proposals deleted successfully.');
 
-        return redirect(route('benefitsProposals.index'));
+        return redirect(route('benefitProposals.index'));
     }
 }

@@ -20,7 +20,7 @@
                     <td>{{ $benefit->amount }}</td>
                     -->
                     @if ($benefit->getFirstMediaUrl('benefits') != '')
-                        <td><a href="/download-campaign{{ $benefit->id }}" class="btn download"><i
+                        <td><a href="/download-benefit{{ $benefit->id }}" class="btn download"><i
                                     class="far fa-file-alt" aria-hidden="true"></i></a></td>
                     @else
                         <td>{{ __('No document') }}</td>

@@ -71,7 +71,7 @@ class FinancingController extends AppBaseController
             $financing->addMedia($document)->toMediaCollection('financings');
         }
 
-        Flash::success('Financing saved successfully.');
+        Flash::success(__('translation.financing saved'));
 
         return redirect(route('financings.index'));
     }
@@ -88,7 +88,7 @@ class FinancingController extends AppBaseController
         $financing = $this->financingRepository->find($id);
 
         if (empty($financing)) {
-            Flash::error('Financing not found');
+            Flash::error(__('translation.financing not found'));
 
             return redirect(route('financings.index'));
         }
@@ -108,7 +108,7 @@ class FinancingController extends AppBaseController
         $financing = $this->financingRepository->find($id);
 
         if (empty($financing)) {
-            Flash::error('Financing not found');
+            Flash::error(__('translation.financing not found'));
 
             return redirect(route('financings.index'));
         }
@@ -146,14 +146,14 @@ class FinancingController extends AppBaseController
         }
 
         if (empty($financing)) {
-            Flash::error('Financing not found');
+            Flash::error(__('translation.financing not found'));
 
             return redirect(route('financings.index'));
         }
 
         $financing = $this->financingRepository->update($input, $id);
 
-        Flash::success('Financing updated successfully.');
+        Flash::success(__('translation.financing updated'));
 
         return redirect(route('financings.index'));
     }
@@ -172,7 +172,7 @@ class FinancingController extends AppBaseController
         $financing = $this->financingRepository->find($id);
 
         if (empty($financing)) {
-            Flash::error('Financing not found');
+            Flash::error(__('translation.financing not found'));
 
             return redirect(route('financings.index'));
         }
@@ -180,7 +180,7 @@ class FinancingController extends AppBaseController
         $this->financingRepository->delete($id);
         $financing->clearMediaCollection('financings');
 
-        Flash::success('Financing deleted successfully.');
+        Flash::success(__('translation.financing deleted'));
 
         return redirect(route('financings.index'));
     }
