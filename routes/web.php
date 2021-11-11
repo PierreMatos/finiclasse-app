@@ -23,11 +23,11 @@ use App\Http\Controllers\FinancingController;
 
 Auth::routes();
 
-Route::get('/', [
-    HomeController::class, 'index'
-])->name('home');
+Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe de vendas']], function () {
 
-Route::middleware(['auth'])->group(function () {
+    Route::get('/', [
+        HomeController::class, 'index'
+    ])->name('home');
 
     Route::resource('stands', App\Http\Controllers\StandController::class);
 
@@ -162,36 +162,18 @@ Route::middleware(['auth'])->group(function () {
         $exitCode = Artisan::call('config:cache');
         return '<h1>Clear Config cleared</h1>';
     });
-
-    Route::get('/foo', function () {
-        Artisan::call('storage:link');
+    
+    Route::get('/mailable', function () {
+        $proposal = App\Models\Proposal::find(600);
+    
+        return new App\Mail\ProposalOrder($proposal);
     });
-    // Route::get('/updateapp', function()
-    // {
-    //     Artisan::call('dump-autoload');
-    //     echo 'dump-autoload complete';
-    // });
-
 });
 
 // Validate Store RGPD with Email
 Route::get('storeValidateRGPD/{id}', [UserController::class, 'storeValidateRGPD'])->name('storeValidateRGPD');
 
-/*
-Route::get('/mailable', function () {
-    $user = App\Models\User::first();
-
-    return new App\Mail\ValidateRGPD($user);
-});
-*/
-
 // Thankyou page
 Route::get('thankyou', function () {
     return view('thankyou');
-});
-
-Route::get('/mailable', function () {
-    $proposal = App\Models\Proposal::find(600);
-
-    return new App\Mail\ProposalOrder($proposal);
 });

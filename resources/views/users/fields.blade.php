@@ -103,8 +103,8 @@
         <option selected value="">--</option>
         @foreach ($userData['leads'] as $lead)
             <!--condition make selecionado anteriormente-->
-            @if ($lead->id == (isset($user->vendor->id) ? $user->vendor->id : ''))
-                <option selected value="{{$user->vendor->id }}">{{ $user->vendor->name }}</option>
+            @if ($lead->id == (isset($user->vendor->first()->id) ? $user->vendor->first()->id : ''))
+                <option selected value="{{$user->vendor->first()->id }}">{{ $user->vendor->first()->name }}</option>
             @else
                 <option value="{{ $lead->id }}">{{ $lead->name }}</option>
             @endif
