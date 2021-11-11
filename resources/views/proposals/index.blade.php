@@ -73,6 +73,7 @@
                             table.button(1).active(false);
                             table.button(2).active(false);
                             table.button(3).active(false);
+                            table.button(4).active(false);
                             this.active(true);
                         }
                     },
@@ -84,6 +85,7 @@
                             table.button(0).active(false);
                             table.button(2).active(false);
                             table.button(3).active(false);
+                            table.button(4).active(false);
                             this.active(true);
                         }
                     },
@@ -95,6 +97,7 @@
                             table.button(0).active(false);
                             table.button(1).active(false);
                             table.button(3).active(false);
+                            table.button(4).active(false);
                             this.active(true);
                         }
                     },
@@ -106,6 +109,19 @@
                             table.button(0).active(false);
                             table.button(1).active(false);
                             table.button(2).active(false);
+                            table.button(4).active(false);
+                            this.active(true);
+                        }
+                    },
+                    {
+                        text: 'Fechado',
+                        className: 'btn-close',
+                        action: function() {
+                            table.search('Fechado').draw();
+                            table.button(0).active(false);
+                            table.button(1).active(false);
+                            table.button(2).active(false);
+                            table.button(3).active(false);
                             this.active(true);
                         }
                     }
