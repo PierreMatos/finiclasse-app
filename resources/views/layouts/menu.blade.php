@@ -43,8 +43,8 @@
     </li>
 @endcan
 
-<li class="treeview nav-item has-treeview">
-    <a href="#" class="nav-link" id="viaturas">
+<li class="treeview nav-item {{ Request::is('cars*', 'new*') ? 'menu-open' : '' }} has-treeview">
+    <a href="#" class="nav-link {{ Request::is('cars*', 'new*') ? 'menuDropActive' : '' }}" id="viaturas">
         <i class="fas fa-car"></i>
         <p>
             Viaturas
@@ -63,7 +63,7 @@
 
         @can('cars.index')
             <li class="treeview">
-                <a href="{{ route('newCars') }}" class="nav-link {{ Request::is('newCars*') ? 'active' : '' }}">
+                <a href="{{ route('newCars') }}" class="nav-link {{ Request::is('new*') ? 'active' : '' }}">
                     <i class="fas fa-plus-square"></i>
                     <p>Novos</p>
                 </a>
@@ -92,8 +92,8 @@
 @endcan
 
 @if (Auth::user()->hasRole(['admin', 'Administrador', 'Diretor comercial']))
-    <li class="treeview nav-item has-treeview">
-        <a href="#" class="nav-link" id="definicoes">
+    <li class="treeview nav-item {{ !Request::is('/*', 'proposals*', 'financings*', 'campaigns*', 'benefits*', 'cars*', 'new*', 'clients-list*', 'sellers-list*') ? 'menu-open' : '' }} has-treeview">
+        <a href="#" class="nav-link {{ !Request::is('/*', 'proposals*', 'financings*', 'campaigns*', 'benefits*', 'cars*', 'new*', 'clients-list*', 'sellers-list*') ? 'menuDropActive' : '' }}" id="viaturas"" id="definicoes">
             <i class="fa fa-cog"></i>
             <p>
                 Definições
