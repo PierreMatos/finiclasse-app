@@ -100,8 +100,11 @@
                         @foreach ($latestProposal as $proposal)
                             <tr>
 
-                                <td><img src="{{ $proposal->car->getFirstMediaUrl('cars', 'thumb') }}"
-                                        style="max-width: 100px;" /></td>
+                                <td>
+                                  @isset($proposal->car) 
+                                    <img src="{{ $proposal->car->getFirstMediaUrl('cars', 'thumb') }}"
+                                        style="max-width: 100px;" />
+                                  @endisset</td>
                                 <td>{{ isset($proposal->car->model->make->name) ? $proposal->car->model->make->name : '' }}
                                 </td>
                                 <td>{{ isset($proposal->client->name) ? $proposal->client->name : '' }}</td>
