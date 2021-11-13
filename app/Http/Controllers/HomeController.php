@@ -27,18 +27,26 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
-        $latestProposals = Proposal::latest()->take(5)->get();
+
         $carsCount = Car::count();
-        $proposalsCount = Proposal::count();
         $clientsCount = User::where('finiclasse_employee', '==', '0')->count();
 
+        // Propostas abertas
+        $proposalOpen = Proposal::query()->with('state')->where('state_id', '=', 1)->count();
 
+        // Percentagem de propostas fechadas 
+        $proposals = Proposal::count();
+        $proposalClose = Proposal::query()->with('state')->where('state_id', '=', 2)->count();
+        $proposalClosePer = ($proposalClose / $proposals) * 100;
+
+        // Ultimas propostas
+        $latestProposals = Proposal::latest()->take(5)->get();
 
         return view('home')
-        ->with('carsCount', $carsCount)
-        ->with('proposalsCount', $proposalsCount)
-        ->with('clientsCount', $clientsCount)
-        ->with('latestProposal', $latestProposals);
+            ->with('carsCount', $carsCount)
+            ->with('clientsCount', $clientsCount)
+            ->with('proposalOpen', $proposalOpen)
+            ->with('proposalClosePer', $proposalClosePer)
+            ->with('latestProposal', $latestProposals);
     }
 }

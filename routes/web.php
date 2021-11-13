@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\CampaignController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\FinancingController;
+use App\Http\Controllers\BenefitController;
+use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\ProposalController;
+use App\Http\Controllers\FinancingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,13 +23,11 @@ use App\Http\Controllers\ProposalController;
 
 Auth::routes();
 
-// Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
-Route::middleware(['auth','can:stands.index'])->group(function () {
-    
-Route::get('/', [
-    HomeController::class, 'index'
-])->name('home');
+Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe de vendas']], function () {
 
+    Route::get('/', [
+        HomeController::class, 'index'
+    ])->name('home');
 
     Route::resource('stands', App\Http\Controllers\StandController::class);
 
@@ -58,7 +57,7 @@ Route::get('/', [
 
     Route::resource('businessStudies', App\Http\Controllers\BusinessStudyController::class);
 
-    Route::resource('benefitsBusinessStudies', App\Http\Controllers\BenefitsBusinessStudyController::class);
+    Route::resource('benefitBusinessStudies', App\Http\Controllers\BenefitsBusinessStudyController::class);
 
     Route::resource('proposals', App\Http\Controllers\ProposalController::class);
 
@@ -84,9 +83,9 @@ Route::get('/', [
 
     Route::resource('campaigns', App\Http\Controllers\CampaignController::class);
 
-    Route::resource('benefitsProposals', App\Http\Controllers\BenefitsProposalsController::class);
+    Route::resource('benefitProposals', App\Http\Controllers\BenefitsProposalsController::class);
 
-    Route::resource('campaignsProposals', App\Http\Controllers\CampaignsProposalsController::class);
+    Route::resource('campaignProposals', App\Http\Controllers\CampaignsProposalsController::class);
 
     Route::resource('clientTypes', App\Http\Controllers\ClientTypeController::class);
 
@@ -163,28 +162,16 @@ Route::get('/', [
         $exitCode = Artisan::call('config:cache');
         return '<h1>Clear Config cleared</h1>';
     });
-
-    Route::get('/foo', function () {
-        Artisan::call('storage:link');
+    
+    Route::get('/mailable', function () {
+        $proposal = App\Models\Proposal::find(600);
+    
+        return new App\Mail\ProposalOrder($proposal);
     });
-    // Route::get('/updateapp', function()
-    // {
-    //     Artisan::call('dump-autoload');
-    //     echo 'dump-autoload complete';
-    // });
-
 });
 
 // Validate Store RGPD with Email
 Route::get('storeValidateRGPD/{id}', [UserController::class, 'storeValidateRGPD'])->name('storeValidateRGPD');
-
-/*
-Route::get('/mailable', function () {
-    $user = App\Models\User::first();
-
-    return new App\Mail\ValidateRGPD($user);
-});
-*/
 
 // Thankyou page
 Route::get('thankyou', function () {

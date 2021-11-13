@@ -17,7 +17,7 @@
 
         <div class="card">
 
-            {!! Form::model($campaignsProposals, ['route' => ['campaignsProposals.update', $campaignsProposals->id], 'method' => 'patch']) !!}
+            {!! Form::model($campaignsProposals, ['route' => ['campaignProposals.update', $campaignsProposals->id], 'method' => 'patch']) !!}
 
             <div class="card-body">
                 <div class="row">
@@ -27,7 +27,7 @@
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('campaignsProposals.index') }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route('campaignProposals.index') }}" class="btn btn-default">Cancel</a>
             </div>
 
            {!! Form::close() !!}

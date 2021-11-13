@@ -67,11 +67,21 @@ div.dataTables_wrapper div.dataTables_filter input {
 }
 
 .btn-lost:not(:disabled):not(.disabled).active {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-lost:hover {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-close:not(:disabled):not(.disabled).active {
     background-color: #F6C8CC;
     color: #000;
 }
 
-.btn-lost:hover {
+.btn-close:hover {
     background-color: #F6C8CC;
     color: #000;
 }

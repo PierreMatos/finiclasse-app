@@ -23,7 +23,7 @@ class BenefitsProposals extends Model
     use HasFactory;
 
     public $table = 'benefits_proposals';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -51,7 +51,8 @@ class BenefitsProposals extends Model
      * @var array
      */
     public static $rules = [
-        
+        'benefit_id' => 'required',
+        'proposal_id' => 'required'
     ];
 
     /**

@@ -159,7 +159,7 @@ class User extends Authenticatable implements JWTSubject, HasMedia
      */
     public function leads()
     {
-        return $this->belongsToMany(User::class, 'leads_users', 'vendor_id', 'client_id');
+        return $this->belongsToMany(User::class, 'leads_users', 'vendor_id', 'client_id', 'id');
     }
     /**
      * Get all of the posts for the user.

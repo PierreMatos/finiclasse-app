@@ -65,7 +65,7 @@ class UserController extends AppBaseController
         $stands = $this->standRepository->all();
         $clientTypes = $this->clientTypeRepository->all();
         $cars = Car::whereNotNull('plate')->get();
-        $leads =  $this->userRepository->getSellers(Auth::user());
+        $leads = $this->userRepository->getSellers(Auth::user());
 
         $userData = ([
             'stands' => $stands,
@@ -101,12 +101,12 @@ class UserController extends AppBaseController
 
         $input = $request->all();
 
-        if($validator->fails()){
+        if($validator->fails()) {
 
             Flash::error($validator->errors());
             return redirect(route('users.index'));
   
-          }
+        }
 
         $url = Route::currentRouteName();
 
@@ -132,7 +132,7 @@ class UserController extends AppBaseController
             // Something
         }
 
-        Flash::success('User saved successfully.');
+        Flash::success(__('translation.user saved'));
 
         if ($url == 'users.store') {
             return redirect(route('getClients'));
@@ -153,7 +153,7 @@ class UserController extends AppBaseController
         $user = $this->userRepository->find($id);
 
         if (empty($user)) {
-            Flash::error('User not found');
+            Flash::success(__('translation.user saved'));
 
             return redirect(route('users.index'));
         }
@@ -195,7 +195,7 @@ class UserController extends AppBaseController
         ]);
 
         if (empty($user)) {
-            Flash::error('User not found');
+            Flash::success(__('translation.user saved'));
 
             return redirect(route('users.index'));
         }
@@ -226,7 +226,7 @@ class UserController extends AppBaseController
         $user = $this->userRepository->find($id);
 
         if (empty($user)) {
-            Flash::error('User not found');
+            Flash::success(__('translation.user saved'));
 
             return redirect(route('users.index'));
         }
@@ -236,11 +236,11 @@ class UserController extends AppBaseController
         //atribuir lead user a vendedor
         if($request->vendor_id){
 
-            $user->vendor()->attach($request->vendor_id);
+            $user->vendor()->sync($request->vendor_id);
 
         }
 
-        Flash::success('User updated successfully.');
+        Flash::success(__('translation.user updated'));
 
         $url = Route::currentRouteName();
 
@@ -265,14 +265,14 @@ class UserController extends AppBaseController
         $user = $this->userRepository->find($id);
 
         if (empty($user)) {
-            Flash::error('User not found');
+            Flash::success(__('translation.user saved'));
 
             return redirect(route('users.index'));
         }
 
         $this->userRepository->delete($id);
 
-        Flash::success('User deleted successfully.');
+        Flash::success(__('translation.user deleted'));
 
         $url = Route::currentRouteName();
 
@@ -323,7 +323,7 @@ class UserController extends AppBaseController
 
         Mail::send(new ValidateRGPD($user));
 
-        Flash::success('E-mail enviado com sucesso!');
+        Flash::success(__('translation.email success'));
 
         return redirect(route('getClients'));
     }

@@ -51,7 +51,8 @@ class CampaignsProposals extends Model
      * @var array
      */
     public static $rules = [
-        
+        'campaign_id' => 'required',
+        'proposal_id' => 'required'
     ];
 
     /**

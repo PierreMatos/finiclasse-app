@@ -17,7 +17,7 @@
 
         <div class="card">
 
-            {!! Form::open(['route' => 'campaignsProposals.store']) !!}
+            {!! Form::open(['route' => 'campaignProposals.store']) !!}
 
             <div class="card-body">
 
@@ -29,7 +29,7 @@
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('campaignsProposals.index') }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route('campaignProposals.index') }}" class="btn btn-default">Cancel</a>
             </div>
 
             {!! Form::close() !!}

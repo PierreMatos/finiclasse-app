@@ -2,7 +2,7 @@
     <table class="table" id="carCategories-table">
         <thead>
             <tr>
-                <th>Name</th>
+        <th>Name</th>
         <th>Order</th>
         <th>Color</th>
         <th>Visible</th>
@@ -12,7 +12,7 @@
         <tbody>
         @foreach($carCategories as $carCategory)
             <tr>
-                <td>{{ $carCategory->name }}</td>
+            <td>{{ $carCategory->name }}</td>
             <td>{{ $carCategory->order }}</td>
             <td>{{ $carCategory->color }}</td>
             <td>{{ $carCategory->visible }}</td>

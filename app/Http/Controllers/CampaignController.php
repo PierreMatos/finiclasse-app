@@ -71,7 +71,7 @@ class CampaignController extends AppBaseController
             $campaign->addMedia($document)->toMediaCollection('campaigns');
         }
 
-        Flash::success('Campaign saved successfully.');
+        Flash::success(__('translation.campaign saved'));
 
         return redirect(route('campaigns.index'));
     }
@@ -88,7 +88,7 @@ class CampaignController extends AppBaseController
         $campaign = $this->campaignRepository->find($id);
 
         if (empty($campaign)) {
-            Flash::error('Campaign not found');
+            Flash::error(__('translation.campaign not found'));
 
             return redirect(route('campaigns.index'));
         }
@@ -108,7 +108,7 @@ class CampaignController extends AppBaseController
         $campaign = $this->campaignRepository->find($id);
 
         if (empty($campaign)) {
-            Flash::error('Campaign not found');
+            Flash::error(__('translation.campaign not found'));
 
             return redirect(route('campaigns.index'));
         }
@@ -146,14 +146,14 @@ class CampaignController extends AppBaseController
         }
 
         if (empty($campaign)) {
-            Flash::error('Campaign not found');
+            Flash::error(__('translation.campaign not found'));
 
             return redirect(route('campaigns.index'));
         }
 
         $campaign = $this->campaignRepository->update($input, $id);
 
-        Flash::success('Campaign updated successfully.');
+        Flash::success(__('translation.campaign updated'));
 
         return redirect(route('campaigns.index'));
     }
@@ -172,7 +172,7 @@ class CampaignController extends AppBaseController
         $campaign = $this->campaignRepository->find($id);
 
         if (empty($campaign)) {
-            Flash::error('Campaign not found');
+            Flash::error(__('translation.campaign not found'));
 
             return redirect(route('campaigns.index'));
         }
@@ -180,7 +180,7 @@ class CampaignController extends AppBaseController
         $this->campaignRepository->delete($id);
         $campaign->clearMediaCollection('campaigns');
 
-        Flash::success('Campaign deleted successfully.');
+        Flash::success(__('translation.campaign deleted'));
 
         return redirect(route('campaigns.index'));
     }

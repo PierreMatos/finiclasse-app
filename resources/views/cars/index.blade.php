@@ -150,11 +150,7 @@
                         }
                     ]
                 });
-
             }
-            tableCondition.button(0).active(true)
-            tableCondition.button(1).active(false)
-            tableCondition.button(2).active(false)
         });
     </script>
 @endpush

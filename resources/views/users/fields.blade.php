@@ -1,6 +1,3 @@
-<img src="http://127.0.0.1:8000/storage/media/242/media-librarySBrQ7b"/>
-
-
 <!-- Name Field -->
 <div class="form-group col-sm-4">
     <label>{{ __('Name') }}</label>
@@ -99,6 +96,7 @@
 </div>
 
 <!-- Vendor lead Field -->
+@if (Route::is('users.create'))
 <div class="form-group col-md-4">
     <label>{{ __('Lead') }}</label>
     <select name="vendor_id" class="input-group form-control custom-select selectedPost">
@@ -113,6 +111,22 @@
         @endforeach
     </select>
 </div>
+@else
+<div class="form-group col-md-4">
+    <label>{{ __('Lead') }}</label>
+    <select name="vendor_id" class="input-group form-control custom-select selectedPost">
+        <option selected value="">--</option>
+        @foreach ($userData['leads'] as $lead)
+            <!--condition make selecionado anteriormente-->
+            @if ($lead->id == (isset($user->vendor->first()->id) ? $user->vendor->first()->id : ''))
+                <option selected value="{{$user->vendor->first()->id }}">{{ $user->vendor->first()->name }}</option>
+            @else
+                <option value="{{ $lead->id }}">{{ $lead->name }}</option>
+            @endif
+        @endforeach
+    </select>
+</div>
+@endif
 
 <!-- Finiclasse Employee Field -->
 <input type="hidden" name="finiclasse_employee" value="0">

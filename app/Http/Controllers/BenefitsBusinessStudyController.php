@@ -60,7 +60,7 @@ class BenefitsBusinessStudyController extends AppBaseController
 
         Flash::success('Benefits Business Study saved successfully.');
 
-        return redirect(route('benefitsBusinessStudies.index'));
+        return redirect(route('benefitBusinessStudies.index'));
     }
 
     /**
@@ -77,7 +77,7 @@ class BenefitsBusinessStudyController extends AppBaseController
         if (empty($benefitsBusinessStudy)) {
             Flash::error('Benefits Business Study not found');
 
-            return redirect(route('benefitsBusinessStudies.index'));
+            return redirect(route('benefitBusinessStudies.index'));
         }
 
         return view('benefits_business_studies.show')->with('benefitsBusinessStudy', $benefitsBusinessStudy);
@@ -97,7 +97,7 @@ class BenefitsBusinessStudyController extends AppBaseController
         if (empty($benefitsBusinessStudy)) {
             Flash::error('Benefits Business Study not found');
 
-            return redirect(route('benefitsBusinessStudies.index'));
+            return redirect(route('benefitBusinessStudies.index'));
         }
 
         return view('benefits_business_studies.edit')->with('benefitsBusinessStudy', $benefitsBusinessStudy);
@@ -118,14 +118,14 @@ class BenefitsBusinessStudyController extends AppBaseController
         if (empty($benefitsBusinessStudy)) {
             Flash::error('Benefits Business Study not found');
 
-            return redirect(route('benefitsBusinessStudies.index'));
+            return redirect(route('benefitBusinessStudies.index'));
         }
 
         $benefitsBusinessStudy = $this->benefitsBusinessStudyRepository->update($request->all(), $id);
 
         Flash::success('Benefits Business Study updated successfully.');
 
-        return redirect(route('benefitsBusinessStudies.index'));
+        return redirect(route('benefitBusinessStudies.index'));
     }
 
     /**
@@ -144,13 +144,13 @@ class BenefitsBusinessStudyController extends AppBaseController
         if (empty($benefitsBusinessStudy)) {
             Flash::error('Benefits Business Study not found');
 
-            return redirect(route('benefitsBusinessStudies.index'));
+            return redirect(route('benefitBusinessStudies.index'));
         }
 
         $this->benefitsBusinessStudyRepository->delete($id);
 
         Flash::success('Benefits Business Study deleted successfully.');
 
-        return redirect(route('benefitsBusinessStudies.index'));
+        return redirect(route('benefitBusinessStudies.index'));
     }
 }

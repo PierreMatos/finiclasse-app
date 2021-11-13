@@ -6,7 +6,7 @@
             <div class="row mb-2">
                 <div class="col-sm-12">
                     <!-- <h1>{{__('Edit proposal')}}</h1> -->
-                    <h1>{{__('Edit')}} {{ isset($proposal->vendor->name) ? $proposal->vendor->name : '' }}</h1>
+                    <h1>{{__('Edit Proposal Vendor')}} {{ isset($proposal->vendor->name) ? $proposal->vendor->name : '' }}</h1>
                 </div>
             </div>
         </div>
