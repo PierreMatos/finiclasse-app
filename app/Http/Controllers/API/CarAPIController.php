@@ -40,15 +40,16 @@ class CarAPIController extends AppBaseController
     public function index(Request $request)
     {
 
-        $cars = $this->carRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        // $cars = $this->carRepository->all(
+        //     $request->except(['skip', 'limit']),
+        //     $request->get('skip'),
+        //     $request->get('limit')
+        // );
 
-        return new CarCollection(Car::paginate());
+        return new CarCollection( $this->carRepository->all());
+        // return new CarCollection( $this->carRepository->paginate(2));
 
-        return $this->sendResponse(new CarCollection($cars::paginate()), 'Car Models retrieved successfully');
+        // return $this->sendResponse(new CarCollection($cars::paginate()), 'Car Models retrieved successfully');
 
         // if ($request->condition != null) {
 
@@ -98,10 +99,19 @@ class CarAPIController extends AppBaseController
 
         $car = $this->carRepository->create($input);
 
+        // add images
         if ($request->hasFile('image')) {
             $fileAdders = $car->addMultipleMediaFromRequest(['image'])
                 ->each(function ($fileAdder) {
                     $fileAdder->toMediaCollection('cars');
+                });
+        }
+
+        // add POS
+        if ($request->hasFile('pos')) {
+            $fileAdders = $car->addMultipleMediaFromRequest(['pos'])
+                ->each(function ($fileAdder) {
+                    $fileAdder->toMediaCollection('pos');
                 });
         }
 
@@ -137,17 +147,69 @@ class CarAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateCarAPIRequest $request)
+    public function update($id, Request $request)
     {
         $input = $request->all();
 
         /** @var Car $car */
         $car = $this->carRepository->find($id);
 
+        //Apagar imagem antiga se for mudada
+        if ($request->hasFile('image')) {
+            $car->clearMediaCollection('cars');
+        }
+    
+        //Apagar POS antiga se for mudada
+        if ($request->hasFile('pos')) {
+            $car->clearMediaCollection('pos');
+        }
+
+        //Verificar se a imagem existe
+        $file = $request->file('image');
+
+        //Verificar se a POS existe
+        $file = $request->file('pos');
+
+        //adicionar imagem
+        if ($request->hasFile('image') == null) {
+            //Passar a variable input sem colocar nova imagem
+            $input = $request->all();
+        } else {
+            //Actualizar imagem se colocar uma nova
+            $input = $request->all();
+
+            $fileAdders = $car->addMultipleMediaFromRequest(['image'])
+                ->each(function ($fileAdder) {
+                    $fileAdder->toMediaCollection('cars');
+                });
+        }
+
+        //adicionar POS
+        if ($request->hasFile('pos') == null) {
+            //Passar a variable input sem colocar novo pos
+            $input = $request->all();
+        } else {
+            //Actualizar pos se colocar um novo
+            $input = $request->all();
+
+            $fileAdders = $car->addMultipleMediaFromRequest(['pos'])
+                ->each(function ($fileAdder) {
+                    $fileAdder->toMediaCollection('pos');
+                });
+        }
+
+        if (empty($car)) {
+            Flash::error('Car not found');
+
+            return redirect(route('cars.index'));
+        }
+
+
         if (empty($car)) {
             return $this->sendError('Car not found');
         }
 
+        $car->proposal->touch();
         $car = $this->carRepository->update($input, $id);
 
         return $this->sendResponse(new CarResource($car), 'Car updated successfully');

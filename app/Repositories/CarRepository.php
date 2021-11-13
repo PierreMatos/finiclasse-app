@@ -13,6 +13,7 @@ use App\Repositories\BaseRepository;
 
 class CarRepository  extends BaseRepository 
 {
+   
     /**
      * @var array
      */
@@ -49,6 +50,7 @@ class CarRepository  extends BaseRepository
 
     }
 
+
      /**
      * Sets relations for eager loading.
      *
@@ -57,7 +59,6 @@ class CarRepository  extends BaseRepository
      */
     public function withAll($pagination = null)
     {
-
         $query = $this->with('stand', 'state');
 
         if ($pagination) {
@@ -70,10 +71,25 @@ class CarRepository  extends BaseRepository
 
     // RETURNS CAR LIST WITHAOUT 'POS' state CARS
 
-    public function all ($search = [], $skip = null, $limit = null, $columns = ['*']){
+    public function all($search = [], $skip = null, $limit = null, $columns = ['*']){
 
         $query = $this->allQuery($search, $skip, $limit);
-
+        
         return $query->get($columns);
+    }
+
+        /**
+     * Paginate records for scaffold.
+     *
+     * @param int $perPage
+     * @param array $columns
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function paginate($perPage, $columns = ['*'])
+    {
+
+        $query = $this->allQuery();
+
+        return $query->paginate($perPage, $columns);
     }
 }

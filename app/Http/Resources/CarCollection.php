@@ -3,6 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Carbon\Carbon;
+
 
 class CarCollection extends ResourceCollection
 {
@@ -43,7 +45,7 @@ class CarCollection extends ResourceCollection
                 'motorization' => $car->motorization,
                 'price' => $car->price,
                 'km' => $car->km,
-                'registration' => $car->registration,
+                'registration' => isset($car->registration) ? $car->registration->isoFormat('M/Y') : '',
                 'condition' => $car->condition->name ?? '',
                 'avatar' => $avatar,
                 'created_at' => $car->created_at,

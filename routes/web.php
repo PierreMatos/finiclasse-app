@@ -22,11 +22,13 @@ use App\Http\Controllers\ProposalController;
 
 Auth::routes();
 
+// Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
+Route::middleware(['auth','can:stands.index'])->group(function () {
+    
 Route::get('/', [
     HomeController::class, 'index'
 ])->name('home');
 
-Route::middleware(['auth'])->group(function () {
 
     Route::resource('stands', App\Http\Controllers\StandController::class);
 

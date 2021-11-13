@@ -50,7 +50,6 @@ class Proposal extends Model
     protected $dates = ['deleted_at'];
 
 
-
     public $fillable = [
         'client_id',
         'vendor_id',

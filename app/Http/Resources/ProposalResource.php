@@ -18,6 +18,10 @@ class ProposalResource extends JsonResource
     public function toArray($request)
     {
 
+        if (!empty($this->car)){
+            $pos = $this->car->getFirstMediaUrl('pos');
+        }
+
         $imagesTradein = collect();
         $images = collect();
 
@@ -51,34 +55,40 @@ class ProposalResource extends JsonResource
                 'zip_code' => $this->client->zip_code ?? '',
                 'phone' => $this->client->phone ?? '',
                 'mobile_phone' => $this->client->mobile_phone ?? '',
+                'gdpr_confirmation' => $this->client->gdpr_confirmation ?? '',
             ],
             'vendor' => $this->vendor->name ?? '',
             'price' => $this->car->price ?? '',
-            'pos_number' => $this->pos_number,
-            'prop_value' => $this->prop_value,
-            'first_contact_date' => $this->first_contact_date,
-            'last_contact_date' => $this->last_contact_date,
-            'next_contact_date' => $this->next_contact_date,
-            'contract' => $this->contract,
-            'test_drive' => $this->test_drive,
+            'pos_number' => $this->pos_number ?? '',
+            'prop_value' => $this->prop_value ?? '',
+            'first_contact_date' => $this->first_contact_date ?? '',
+            'last_contact_date' => $this->last_contact_date ?? '',
+            'next_contact_date' => $this->next_contact_date ?? '',
+            'contract' => $this->contract ?? '',
+            'test_drive' => $this->test_drive ?? '',
             'state' => $this->state->name ?? '',
             'car_id' => $this->car_id,
             'car' => [
-                'name' => $this->car->model->make->name ?? '',
+                'make' => $this->car->model->make->name ?? '',
                 'model' => $this->car->model->name ?? '',
                 'price' => $this->car->price ?? '',
+                'motorization' => $this->car->motorization ?? '',
+                'condition' => $this->car->condition->name ?? '',
+                'state' => $this->car->state->name ?? '',
+                'registration' => isset($this->car->registration) ? $this->car->registration->isoFormat('M/Y') : '',
+                'km' => $this->car->km ?? '',
                 'avatar' => $carAvatar ?? '',
                 'images' => $images ?? '',
-                'komm' => $this->komm,
-                'price_base' => $this->price_base,
-                'extras_total' => $this->extras_total,
-                'sub_total' => $this->sub_total,
-                'ptl' => $this->ptl,
-                'isv' => $this->isv,
-                'iva' => $this->iva,
-                'total'
-
-
+                'pos' => $pos ?? '',
+                'komm' => $this->car->komm ?? '',
+                'price_base' => $this->car->price_base ?? '',
+                'extras_total' => $this->car->extras_total ?? '',
+                'sub_total' => $this->car->sub_total ?? '',
+                'ptl' => $this->car->ptl ?? '',
+                'isv' => $this->car->isv ?? '',
+                'iva' => $this->car->iva ?? '',
+                'sigpu' => $this->car->sigpu ?? '',
+                'total' => $this->car->total ?? '',
             ],
             'tradein_id' => $this->tradein_id,
             'tradein' => [
@@ -101,17 +111,17 @@ class ProposalResource extends JsonResource
                 'avatar' => $tradeinAvatar ?? '',
                 'images' => $imagesTradein ?? '',
             ],
-            'total_diff_amount' => $this->total_diff_amount,
-            'total_discount_amount' => $this->total_discount_amount,
-            'total_discount_perc' => $this->total_discount_perc,
-            'comment' => $this->comment,
+            'total_diff_amount' => $this->total_diff_amount ?? '',
+            'total_discount_amount' => $this->total_discount_amount ?? '',
+            'total_discount_perc' => $this->total_discount_perc ?? '',
+            'comment' => $this->comment ?? '',
             'benefits' => BenefitsProposalsResource::collection($this->benefits),
             // 'benefits' => $this->benefits,
             'campaigns' => CampaignsProposalsResource::collection($this->campaigns),
             // 'campaigns' => $this->campaigns,
             'financings' => $this->financings,
             // 'authorization' => $this->authorization
-            'created_at' => $this->created_at,
+            'created_at' => $this->created_at->isoFormat('D/M/Y'),
             'created_at_diff' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->isoFormat('D/M/Y'),
             'updated_at_diff' => $this->updated_at->diffForHumans()

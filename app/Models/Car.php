@@ -89,7 +89,7 @@ class Car extends Model implements HasMedia
     
 
     protected $dates = ['deleted_at'];
-
+    protected $touches = ['proposal'];
 
     public $fillable = [
         'model_id',
@@ -298,6 +298,15 @@ class Car extends Model implements HasMedia
     public function class()
     {
         return $this->belongsTo(\App\Models\CarClass::class, 'class_id', 'id');
+    }
+
+    /**
+     * Get the proposal that the car belongs to.
+     */
+    public function proposal()
+    {
+        // dd('hey');
+        return $this->belongsTo(\App\Models\Proposal::class, 'id', 'car_id');
     }
 
     // CREATE THUMBNAIL

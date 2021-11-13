@@ -19,8 +19,10 @@ class CarResource extends JsonResource
         $items = $this->getMedia('cars');
         foreach($items as $item){
             $images->push($item->getUrl());
-            // $images->push($item->getUrl('thumb'));
+            // $images->push($item->getUrl('thumb')); 
         }
+        $pos = $this->getFirstMediaUrl('pos');
+
 
         return [
             'id' => $this->id,
@@ -30,7 +32,7 @@ class CarResource extends JsonResource
             'motorization' => $this->motorization,
             'category' => $this->category->name ?? '',
             'category_id' => $this->category_id ?? '',
-            'registration' => $this->registration,
+            'registration' => isset($this->registration) ? $this->registration->isoFormat('M/Y') : '',
             'condition' => $this->condition->name ?? '',
             'state' => $this->state->name ?? '',
             'komm' => $this->komm,
@@ -61,6 +63,17 @@ class CarResource extends JsonResource
             'autonomy' => $this->autonomy,
             'emissions' => $this->emissions,
             'iuc' => $this->iuc,
+            'extras_total' => $this->extras_total,
+            'sub_total' => $this->sub_total,
+            'buying_price' => $this->buying_price,
+            'selling_price' => $this->selling_price,
+            'iva' => $this->iva,
+            'isv' => $this->isv,
+            'ptl' => $this->ptl,
+            'sigpu' => $this->sigpu,
+            'equipment' => $this->equipment,
+            'observations' => $this->observations,
+            'est' => $this->est,
             'registration_count' => $this->registration_count,
             'order_date' => $this->order_date,
             'arrival_date' => $this->arrival_date,
@@ -70,10 +83,9 @@ class CarResource extends JsonResource
             'inspection_expiration_date' => $this->inspection_expiration_date,
             'tradein_observations' => $this->tradein_observations,
             'consumption' => $this->consumption,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
             'avatar' => $this->getFirstMediaUrl('cars','thumb'),
             'images' => $images,
+            'pos' => $pos,
             'created_at' => $this->created_at,
             'created_at_diff' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->isoFormat('D/M/Y'),
