@@ -335,6 +335,7 @@ class CarController extends AppBaseController
 
         return  json_encode(Car::all('id','variant'));
 
+        
         ## Read value
         $draw = $request->get('draw');
         $start = $request->get("start");
