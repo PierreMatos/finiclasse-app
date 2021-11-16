@@ -99,6 +99,8 @@ class ProposalCollection extends ResourceCollection
             'benefits' => $proposal->benefits,
             'campaigns' => $proposal->campaigns,
             'financings' => $proposal->financings,
+            'initial_business_study' => $proposal->initial_business_study_id,
+            'final_business_study' => $proposal->final_business_study_id,
             // 'authorization' => $proposal->authorization
             'created_at' => $proposal->created_at,
             'created_at_diff' => $proposal->created_at->diffForHumans(),
