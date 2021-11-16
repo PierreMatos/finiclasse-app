@@ -120,6 +120,8 @@ class ProposalResource extends JsonResource
             'campaigns' => CampaignsProposalsResource::collection($this->campaigns),
             // 'campaigns' => $this->campaigns,
             'financings' => $this->financings,
+            'initial_business_study' => $this->initial_business_study_id,
+            'final_business_study' => $this->final_business_study_id,
             // 'authorization' => $this->authorization
             'created_at' => $this->created_at->isoFormat('D/M/Y'),
             'created_at_diff' => $this->created_at->diffForHumans(),
