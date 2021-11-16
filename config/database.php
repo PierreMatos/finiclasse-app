@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Str;
 
-if (getenv("CLEARDB_DATABASE_URL")){
+if (getenv("JAWSDB_URL")){
 
     $url = parse_url(getenv("JAWSDB_URL"));
     $host = $url["host"] ?? null;

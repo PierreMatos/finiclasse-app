@@ -8,6 +8,7 @@ use App\Models\Proposal;
 use App\Models\Car;
 use App\Models\BusinessStudy;
 use App\Repositories\ProposalRepository;
+use App\Repositories\BusinessStudyRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\ProposalResource;
@@ -27,10 +28,12 @@ class ProposalAPIController extends AppBaseController
 {
     /** @var  ProposalRepository */
     private $proposalRepository;
+    private $businessStudyRepository;
 
-    public function __construct(ProposalRepository $proposalRepo)
+    public function __construct(ProposalRepository $proposalRepo, BusinessStudyRepository $businessStudyRepo)
     {
         $this->proposalRepository = $proposalRepo;
+        $this->businessStudyRepository = $businessStudyRepo;
     }
 
     /**
@@ -181,6 +184,39 @@ class ProposalAPIController extends AppBaseController
 
         }
 
+        //business study
+        //TODO falta o SIGPU
+        
+        if((!empty($proposal->car)) && ($proposal->state->name == 'Aberto')){
+
+
+            $businessStudyCalculated = $this->businessStudy($proposal->id);
+
+            // if (empty($businessStudy->extras_total)){
+            //     $extras_total = $proposal->car->extras_total;
+            // }else {
+            //     $extras_total = $businessStudy->extras_total;
+            // }
+    
+
+            $businessStudyInput = [
+                'pre_extras_total' => $businessStudyCalculated['Pre_Total_Extras'],
+                'total_extras' => $businessStudyCalculated['Total_Extras'],
+                'isv' => $businessStudyCalculated['ISV'],
+                'iva' => $businessStudyCalculated['iva'],
+                'sigpu' => $businessStudyCalculated['SIGPU'],
+                'ptl' => $businessStudyCalculated['PTL'],
+                'base_price' => $businessStudyCalculated['Base_Price'],
+                'total_transf' => $businessStudyCalculated['Total_Trans'],
+            ];
+    
+            $businessStudy = $this->businessStudyRepository->update($businessStudyInput, $proposal->initial_business_study_id);
+
+        }
+
+
+        // dd($proposal->state->name == 'Aberto');
+
         return $this->sendResponse(new ProposalResource($proposal), 'Proposal updated successfully');
     }
 
@@ -231,12 +267,12 @@ class ProposalAPIController extends AppBaseController
 
     }
 
-    public function businessStudy(Request $request) {
+    public function businessStudy($id) {
 
         //TODO pegar modelo de business study
 
         // estudo de negocio inicial e final
-        $proposal = Proposal::find($request->id);
+        $proposal = Proposal::find($id);
         
         $taxas = ['iva' => 23];
         
@@ -344,13 +380,13 @@ class ProposalAPIController extends AppBaseController
         
         
         $results = [
-            'Preço Base' => $basePrice,
-            'Total Extras' => $preTotalExtras,
+            'Base_Price' => $basePrice,
+            'Pre_Total_Extras' => $preTotalExtras,
             'PTL' => $ptl,
             'SIGPU' => $sigpu,
-            'Total Trans' => $totalTransf,
+            'Total_Trans' => $totalTransf,
             'Total Apoios' => $totalBenefits,
-            'Total Extras' => $totalExtras,
+            'Total_Extras' => $totalExtras,
             'Sub Total'  => $subTotal,
             'ISV' => $isv,
             'IVA Taxa' => $ivaTX,
@@ -369,7 +405,7 @@ class ProposalAPIController extends AppBaseController
             'tradein' => $proposal->tradein,
         ];
 
-        return $results;
+        return ($results);
         return 'dif é: '.$dif.'desc é: '.$desc.'A margem é de: '.$profit;
         
     }
