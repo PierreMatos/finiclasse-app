@@ -222,6 +222,7 @@ class ProposalAPIController extends AppBaseController
                 'expenses' => $businessStudyCalculated['expenses'],
                 'taxes' => $businessStudyCalculated['taxes'],
                 'warranty' => $businessStudyCalculated['warranty'],
+                'business_study_authorization_id' => $businessStudyCalculated['business_study_authorization_id'],
             ];
     
                 if(($proposal->state->name == 'Aberto')){
@@ -405,13 +406,16 @@ class ProposalAPIController extends AppBaseController
 
             }else {$profit=0;}
 
-        }else {
+            //atribuir athirização
+
+            if($profit < $min){
+                //nao precisa
+            }
+
+        } else {
 
             return 'car not found';
         }
-
-
-        
         
         $results = [
             'base_price' => $basePrice,
