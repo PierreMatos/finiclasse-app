@@ -164,8 +164,8 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
     });
     
     Route::get('/mailable', function () {
-        $proposal = App\Models\Proposal::find(600);
-    
+        $proposal = App\Models\Proposal::find(608);
+        
         return new App\Mail\ProposalOrder($proposal);
     });
 });
