@@ -200,14 +200,28 @@ class ProposalAPIController extends AppBaseController
     
 
             $businessStudyInput = [
-                'pre_extras_total' => $businessStudyCalculated['Pre_Total_Extras'],
-                'total_extras' => $businessStudyCalculated['Total_Extras'],
-                'isv' => $businessStudyCalculated['ISV'],
+                'pre_extras_total' => $businessStudyCalculated['total_extras2'],
+                'total_extras' => $businessStudyCalculated['total_extras'],
+                'sub_total' => $businessStudyCalculated['sub_total'],
+                'total_benefits' => $businessStudyCalculated['total_benefits'],
+                'selling_price' => $businessStudyCalculated['selling_price'],
+                'tradein_diff' => $businessStudyCalculated['tradein_diff'],
+                'settle_amount' => $businessStudyCalculated['settle_amount'],
+                'total_diff_amount' => $businessStudyCalculated['total_diff_amount'],
+                'total_discount_amount' => $businessStudyCalculated['total_diff_amount'],
+                'total_discount_perc' => $businessStudyCalculated['total_diff_perc'],
+                'isv' => $businessStudyCalculated['isv'],
                 'iva' => $businessStudyCalculated['iva'],
-                'sigpu' => $businessStudyCalculated['SIGPU'],
-                'ptl' => $businessStudyCalculated['PTL'],
-                'base_price' => $businessStudyCalculated['Base_Price'],
-                'total_transf' => $businessStudyCalculated['Total_Trans'],
+                'sigpu' => $businessStudyCalculated['sigpu'],
+                'ptl' => $businessStudyCalculated['ptl'],
+                'base_price' => $businessStudyCalculated['base_price'],
+                'total_transf' => $businessStudyCalculated['total_transf'],
+                'total' => $businessStudyCalculated['total'],
+                'sale' => $businessStudyCalculated['sale'],
+                'purchase_price' => $businessStudyCalculated['purchase_price'],
+                'expenses' => $businessStudyCalculated['expenses'],
+                'taxes' => $businessStudyCalculated['taxes'],
+                'warranty' => $businessStudyCalculated['warranty'],
             ];
     
             $businessStudy = $this->businessStudyRepository->update($businessStudyInput, $proposal->initial_business_study_id);
@@ -295,6 +309,7 @@ class ProposalAPIController extends AppBaseController
             $sell = 43000;
             $diffTradein = 0;
             $settleValue = 0;
+            //TODO Tabela com taxas e valores fixos
             $ivaTX = 0.23;
             $totalCampaigns = 0;
             $totalBenefits = 0;
@@ -369,6 +384,7 @@ class ProposalAPIController extends AppBaseController
                     $desc = $dif;
                  }
             //%
+            //TODO Division by zero
             $profit = $desc / ( $totalBenefits + $isv ) - ( $ptl + $sigpu + $totalTransf );
 
         }else {
@@ -380,21 +396,21 @@ class ProposalAPIController extends AppBaseController
         
         
         $results = [
-            'Base_Price' => $basePrice,
-            'Pre_Total_Extras' => $preTotalExtras,
-            'PTL' => $ptl,
-            'SIGPU' => $sigpu,
-            'Total_Trans' => $totalTransf,
-            'Total Apoios' => $totalBenefits,
-            'Total_Extras' => $totalExtras,
-            'Sub Total'  => $subTotal,
-            'ISV' => $isv,
+            'base_price' => $basePrice,
+            'total_extras2' => $preTotalExtras,
+            'ptl' => $ptl,
+            'sigpu' => $sigpu,
+            'total_transf' => $totalTransf,
+            'total_benefits' => $totalBenefits,
+            'total_extras' => $totalExtras,
+            'sub_total'  => $subTotal,
+            'isv' => $isv,
             'IVA Taxa' => $ivaTX,
             'iva' => $iva,
-            'Total' => $total,
-            'Venda (static)' => $sell,
-            'Valor de compra' => $sellingPrice,
-            'Valor de venda' => $purchasePrice,
+            'total' => $total,
+            'sell' => $sell,
+            'selling_price' => $sellingPrice,
+            'purchase_price' => $purchasePrice,
             'Dif de retoma' => $diffTradein,
             'valor a liquidar' => $settleValue,
             'desc' => $desc,
