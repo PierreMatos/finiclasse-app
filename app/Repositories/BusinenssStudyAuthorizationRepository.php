@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\BusinenssStudyAuthorization;
+use App\Models\BusinessStudyAuthorization;
 use App\Repositories\BaseRepository;
 
 /**
- * Class BusinenssStudyAuthorizationRepository
+ * Class BusinessStudyAuthorizationRepository
  * @package App\Repositories
  * @version May 26, 2021, 9:11 pm UTC
 */
 
-class BusinenssStudyAuthorizationRepository extends BaseRepository
+class BusinessStudyAuthorizationRepository extends BaseRepository
 {
     /**
      * @var array
@@ -35,6 +35,6 @@ class BusinenssStudyAuthorizationRepository extends BaseRepository
      **/
     public function model()
     {
-        return BusinenssStudyAuthorization::class;
+        return BusinessStudyAuthorization::class;
     }
 }

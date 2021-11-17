@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table" id="businenssStudyAuthorizations-table">
+    <table class="table" id="BusinessStudyAuthorizations-table">
         <thead>
             <tr>
                 <th>Name</th>
@@ -11,20 +11,20 @@
             </tr>
         </thead>
         <tbody>
-        @foreach($businenssStudyAuthorizations as $businenssStudyAuthorization)
+        @foreach($BusinessStudyAuthorizations as $BusinessStudyAuthorization)
             <tr>
-                <td>{{ $businenssStudyAuthorization->name }}</td>
-            <td>{{ $businenssStudyAuthorization->min }}</td>
-            <td>{{ $businenssStudyAuthorization->max }}</td>
-            <td>{{ $businenssStudyAuthorization->responsible_id }}</td>
-            <td>{{ $businenssStudyAuthorization->color }}</td>
+                <td>{{ $BusinessStudyAuthorization->name }}</td>
+            <td>{{ $BusinessStudyAuthorization->min }}</td>
+            <td>{{ $BusinessStudyAuthorization->max }}</td>
+            <td>{{ $BusinessStudyAuthorization->responsible_id }}</td>
+            <td>{{ $BusinessStudyAuthorization->color }}</td>
                 <td width="120">
-                    {!! Form::open(['route' => ['businenssStudyAuthorizations.destroy', $businenssStudyAuthorization->id], 'method' => 'delete']) !!}
+                    {!! Form::open(['route' => ['BusinessStudyAuthorizations.destroy', $BusinessStudyAuthorization->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('businenssStudyAuthorizations.show', [$businenssStudyAuthorization->id]) }}" class='btn btn-default btn-xs'>
+                        <a href="{{ route('BusinessStudyAuthorizations.show', [$BusinessStudyAuthorization->id]) }}" class='btn btn-default btn-xs'>
                             <i class="far fa-eye"></i>
                         </a>
-                        <a href="{{ route('businenssStudyAuthorizations.edit', [$businenssStudyAuthorization->id]) }}" class='btn btn-default btn-xs'>
+                        <a href="{{ route('BusinessStudyAuthorizations.edit', [$BusinessStudyAuthorization->id]) }}" class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>
                         {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}

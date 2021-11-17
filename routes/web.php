@@ -53,7 +53,7 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
 
     Route::resource('benefits', App\Http\Controllers\BenefitController::class);
 
-    Route::resource('businenssStudyAuthorizations', App\Http\Controllers\BusinenssStudyAuthorizationController::class);
+    Route::resource('BusinessStudyAuthorizations', App\Http\Controllers\BusinessStudyAuthorizationController::class);
 
     Route::resource('businessStudies', App\Http\Controllers\BusinessStudyController::class);
 
@@ -165,7 +165,7 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
     
     Route::get('/mailable', function () {
         $proposal = App\Models\Proposal::find(608);
-        
+
         return new App\Mail\ProposalOrder($proposal);
     });
 });

@@ -2,26 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateBusinenssStudyAuthorizationRequest;
-use App\Http\Requests\UpdateBusinenssStudyAuthorizationRequest;
-use App\Repositories\BusinenssStudyAuthorizationRepository;
+use App\Http\Requests\CreateBusinessStudyAuthorizationRequest;
+use App\Http\Requests\UpdateBusinessStudyAuthorizationRequest;
+use App\Repositories\BusinessStudyAuthorizationRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
 
-class BusinenssStudyAuthorizationController extends AppBaseController
+class BusinessStudyAuthorizationController extends AppBaseController
 {
-    /** @var  BusinenssStudyAuthorizationRepository */
-    private $businenssStudyAuthorizationRepository;
+    /** @var  BusinessStudyAuthorizationRepository */
+    private $BusinessStudyAuthorizationRepository;
 
-    public function __construct(BusinenssStudyAuthorizationRepository $businenssStudyAuthorizationRepo)
+    public function __construct(BusinessStudyAuthorizationRepository $BusinessStudyAuthorizationRepo)
     {
-        $this->businenssStudyAuthorizationRepository = $businenssStudyAuthorizationRepo;
+        $this->BusinessStudyAuthorizationRepository = $BusinessStudyAuthorizationRepo;
     }
 
     /**
-     * Display a listing of the BusinenssStudyAuthorization.
+     * Display a listing of the BusinessStudyAuthorization.
      *
      * @param Request $request
      *
@@ -29,14 +29,14 @@ class BusinenssStudyAuthorizationController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $businenssStudyAuthorizations = $this->businenssStudyAuthorizationRepository->all();
+        $BusinessStudyAuthorizations = $this->BusinessStudyAuthorizationRepository->all();
 
         return view('businenss_study_authorizations.index')
-            ->with('businenssStudyAuthorizations', $businenssStudyAuthorizations);
+            ->with('BusinessStudyAuthorizations', $BusinessStudyAuthorizations);
     }
 
     /**
-     * Show the form for creating a new BusinenssStudyAuthorization.
+     * Show the form for creating a new BusinessStudyAuthorization.
      *
      * @return Response
      */
@@ -46,25 +46,25 @@ class BusinenssStudyAuthorizationController extends AppBaseController
     }
 
     /**
-     * Store a newly created BusinenssStudyAuthorization in storage.
+     * Store a newly created BusinessStudyAuthorization in storage.
      *
-     * @param CreateBusinenssStudyAuthorizationRequest $request
+     * @param CreateBusinessStudyAuthorizationRequest $request
      *
      * @return Response
      */
-    public function store(CreateBusinenssStudyAuthorizationRequest $request)
+    public function store(CreateBusinessStudyAuthorizationRequest $request)
     {
         $input = $request->all();
 
-        $businenssStudyAuthorization = $this->businenssStudyAuthorizationRepository->create($input);
+        $BusinessStudyAuthorization = $this->BusinessStudyAuthorizationRepository->create($input);
 
         Flash::success('Businenss Study Authorization saved successfully.');
 
-        return redirect(route('businenssStudyAuthorizations.index'));
+        return redirect(route('BusinessStudyAuthorizations.index'));
     }
 
     /**
-     * Display the specified BusinenssStudyAuthorization.
+     * Display the specified BusinessStudyAuthorization.
      *
      * @param int $id
      *
@@ -72,19 +72,19 @@ class BusinenssStudyAuthorizationController extends AppBaseController
      */
     public function show($id)
     {
-        $businenssStudyAuthorization = $this->businenssStudyAuthorizationRepository->find($id);
+        $BusinessStudyAuthorization = $this->BusinessStudyAuthorizationRepository->find($id);
 
-        if (empty($businenssStudyAuthorization)) {
+        if (empty($BusinessStudyAuthorization)) {
             Flash::error('Businenss Study Authorization not found');
 
-            return redirect(route('businenssStudyAuthorizations.index'));
+            return redirect(route('BusinessStudyAuthorizations.index'));
         }
 
-        return view('businenss_study_authorizations.show')->with('businenssStudyAuthorization', $businenssStudyAuthorization);
+        return view('businenss_study_authorizations.show')->with('BusinessStudyAuthorization', $BusinessStudyAuthorization);
     }
 
     /**
-     * Show the form for editing the specified BusinenssStudyAuthorization.
+     * Show the form for editing the specified BusinessStudyAuthorization.
      *
      * @param int $id
      *
@@ -92,44 +92,44 @@ class BusinenssStudyAuthorizationController extends AppBaseController
      */
     public function edit($id)
     {
-        $businenssStudyAuthorization = $this->businenssStudyAuthorizationRepository->find($id);
+        $BusinessStudyAuthorization = $this->BusinessStudyAuthorizationRepository->find($id);
 
-        if (empty($businenssStudyAuthorization)) {
+        if (empty($BusinessStudyAuthorization)) {
             Flash::error('Businenss Study Authorization not found');
 
-            return redirect(route('businenssStudyAuthorizations.index'));
+            return redirect(route('BusinessStudyAuthorizations.index'));
         }
 
-        return view('businenss_study_authorizations.edit')->with('businenssStudyAuthorization', $businenssStudyAuthorization);
+        return view('businenss_study_authorizations.edit')->with('BusinessStudyAuthorization', $BusinessStudyAuthorization);
     }
 
     /**
-     * Update the specified BusinenssStudyAuthorization in storage.
+     * Update the specified BusinessStudyAuthorization in storage.
      *
      * @param int $id
-     * @param UpdateBusinenssStudyAuthorizationRequest $request
+     * @param UpdateBusinessStudyAuthorizationRequest $request
      *
      * @return Response
      */
-    public function update($id, UpdateBusinenssStudyAuthorizationRequest $request)
+    public function update($id, UpdateBusinessStudyAuthorizationRequest $request)
     {
-        $businenssStudyAuthorization = $this->businenssStudyAuthorizationRepository->find($id);
+        $BusinessStudyAuthorization = $this->BusinessStudyAuthorizationRepository->find($id);
 
-        if (empty($businenssStudyAuthorization)) {
+        if (empty($BusinessStudyAuthorization)) {
             Flash::error('Businenss Study Authorization not found');
 
-            return redirect(route('businenssStudyAuthorizations.index'));
+            return redirect(route('BusinessStudyAuthorizations.index'));
         }
 
-        $businenssStudyAuthorization = $this->businenssStudyAuthorizationRepository->update($request->all(), $id);
+        $BusinessStudyAuthorization = $this->BusinessStudyAuthorizationRepository->update($request->all(), $id);
 
         Flash::success('Businenss Study Authorization updated successfully.');
 
-        return redirect(route('businenssStudyAuthorizations.index'));
+        return redirect(route('BusinessStudyAuthorizations.index'));
     }
 
     /**
-     * Remove the specified BusinenssStudyAuthorization from storage.
+     * Remove the specified BusinessStudyAuthorization from storage.
      *
      * @param int $id
      *
@@ -139,18 +139,18 @@ class BusinenssStudyAuthorizationController extends AppBaseController
      */
     public function destroy($id)
     {
-        $businenssStudyAuthorization = $this->businenssStudyAuthorizationRepository->find($id);
+        $BusinessStudyAuthorization = $this->BusinessStudyAuthorizationRepository->find($id);
 
-        if (empty($businenssStudyAuthorization)) {
+        if (empty($BusinessStudyAuthorization)) {
             Flash::error('Businenss Study Authorization not found');
 
-            return redirect(route('businenssStudyAuthorizations.index'));
+            return redirect(route('BusinessStudyAuthorizations.index'));
         }
 
-        $this->businenssStudyAuthorizationRepository->delete($id);
+        $this->BusinessStudyAuthorizationRepository->delete($id);
 
         Flash::success('Businenss Study Authorization deleted successfully.');
 
-        return redirect(route('businenssStudyAuthorizations.index'));
+        return redirect(route('BusinessStudyAuthorizations.index'));
     }
 }

@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\BusinenssStudyAuthorization;
+use App\Models\BusinessStudyAuthorization;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class BusinenssStudyAuthorizationFactory extends Factory
+class BusinessStudyAuthorizationFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = BusinenssStudyAuthorization::class;
+    protected $model = BusinessStudyAuthorization::class;
 
     /**
      * Define the model's default state.

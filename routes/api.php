@@ -79,7 +79,7 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('benefits', BenefitAPIController::class);
     // Route::get('benefits', [App\Http\Controllers\API\BenefitAPIController::class,'index']);
 
-    Route::resource('businenss_study_authorizations', BusinenssStudyAuthorizationAPIController::class);
+    Route::resource('businenss_study_authorizations', BusinessStudyAuthorizationAPIController::class);
 
     Route::resource('business_studies', BusinessStudyAPIController::class);
 

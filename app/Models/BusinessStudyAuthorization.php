@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * Class BusinenssStudyAuthorization
+ * Class BusinessStudyAuthorization
  * @package App\Models
  * @version May 26, 2021, 9:11 pm UTC
  *
@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property integer $responsible_id
  * @property string $color
  */
-class BusinenssStudyAuthorization extends Model
+class BusinessStudyAuthorization extends Model
 {
     use SoftDeletes;
 
