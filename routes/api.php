@@ -53,7 +53,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('clients', [App\Http\Controllers\API\UserAPIController::class, 'getClients']);
     //business study
-    Route::get('businessstudy', [App\Http\Controllers\API\ProposalAPIController::class, 'businessStudy'])->name('businessstudy');
+    Route::get('businessstudy/{id}', [App\Http\Controllers\API\ProposalAPIController::class, 'businessStudy'])->name('businessstudy');
 
 
     Route::post('addImage', [CarAPIController::class,'addImage']);

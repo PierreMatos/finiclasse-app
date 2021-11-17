@@ -32,8 +32,6 @@ class AddNewFieldsToCarsTable extends Migration
             
             $table->string('observations')->nullable();
             $table->integer('est')->nullable();
-
-
             
         });
     }
