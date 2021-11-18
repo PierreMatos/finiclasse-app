@@ -63,7 +63,7 @@
 
         @can('cars.index')
             <li class="treeview">
-                <a href="{{ route('newCars') }}" class="nav-link {{ Request::is('new*') ? 'active' : '' }}">
+                <a href="{{ route('new-car') }}" class="nav-link {{ Request::is('new*') ? 'active' : '' }}">
                     <i class="fas fa-plus-square"></i>
                     <p>Novos</p>
                 </a>

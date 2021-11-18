@@ -26,7 +26,8 @@
         "spatie/laravel-medialibrary": "9.0.0",
         "spatie/laravel-permission": "^4.0",
         "tymon/jwt-auth": "^1.0",
-        "wemersonjanuario/wkhtmltopdf-windows": "0.12.2.3"
+        "wemersonjanuario/wkhtmltopdf-windows": "0.12.2.3",
+        "yajra/laravel-datatables-oracle": "^9.18"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

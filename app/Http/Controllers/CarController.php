@@ -317,80 +317,8 @@ class CarController extends AppBaseController
 
         Flash::success(__('translation.car deleted'));
 
-        $url = url()->previous();
-        $route = app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
-
-        if ($route == 'cars.index') {
-            return redirect(route('cars.index'));
-        } elseif ($route == 'newCars') {
-            return redirect(route('newCars'));
-        }
-    }
-
-
-
-    // Fetch records
-    public function getCars(Request $request)
-    {
-
-        return  json_encode(Car::all('id','variant'));
-
-        
-        ## Read value
-        $draw = $request->get('draw');
-        $start = $request->get("start");
-        $rowperpage = $request->get("length"); // Rows display per page
-
-        $columnIndex_arr = $request->get('order');
-        $columnName_arr = $request->get('columns');
-        $order_arr = $request->get('order');
-        $search_arr = $request->get('search');
-
-        $columnIndex = $columnIndex_arr[0]['column']; // Column index
-        $columnName = $columnName_arr[$columnIndex]['data']; // Column name
-        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
-        $searchValue = $search_arr['value']; // Search value
-
-        // Total records
-        $totalRecords = Car::select('count(*) as allcount')->count();
-        $totalRecordswithFilter = Car::select('count(*) as allcount')->where('model_id', 'like', '%' . $searchValue . '%')->count();
-
-
-        // Fetch records
-        $records = Car::orderBy($columnName, $columnSortOrder)
-            //    ->where('car.model.name', 'like', '%' .$searchValue . '%')
-            //   ->select('cars.*')
-            ->skip($start)
-            ->take($rowperpage)
-            ->get();
-
-        $data_arr = array();
-
-        // $records =  $this->carRepository->all();
-        foreach ($records as $record) {
-
-            $data_arr[] = array(
-                "id" => $record->id,
-                "model" => $record->model->name,
-                "variant" => $record->variant,
-                "state" => $record->state,
-                //    "condition" => $record->condition,
-                //    "komm" => $record->komm,
-                "plate" => $record->plate,
-                "stand" => $record->stand->name ?? '',
-                "price" => $record->price,
-                "action" => "nada"
-            );
-        }
-
-        $response = array(
-            "draw" => intval($draw),
-            "iTotalRecords" => $totalRecords,
-            "iTotalDisplayRecords" => $totalRecordswithFilter,
-            "aaData" => $data_arr
-        );
-
-        return response()->json($response);
+        return redirect(route('cars.index'));
+       
     }
 
     public function carState(Request $request)
@@ -423,9 +351,34 @@ class CarController extends AppBaseController
         }
     }
 
-    public function newCars()
+    public function indexNewCars()
     {
-        $newCars = Car::where('condition_id', '=', 1)->get();
+        if (request()->ajax()) {
+            return datatables()->of(Car::where('condition_id', '=', 1))
+                ->addColumn('action', 'cars.car-action')
+                ->addColumn('makes', function (Car $car) {
+                    return $car->model->make->name;
+                })
+                ->addColumn('models', function (Car $car) {
+                    return $car->model->name;
+                })
+                ->addColumn('models', function (Car $car) {
+                    return $car->model->name;
+                })
+                ->addColumn('stands', function (Car $car) {
+                    return $car->stand->name;
+                })
+                ->addColumn('states', function (Car $car) {
+                    return $car->state->name;
+                })
+                ->addColumn('order_date', function (Car $car) {
+                    return $car->order_date ? $car->order_date->format('M/Y') : '';
+                })
+                ->rawColumns(['action'])
+                ->addIndexColumn()
+                ->make(true);
+        }
+
         $makes = $this->makeRepository->all();
         $models = $this->modelRepository->all();
         $states = $this->carStateRepository->all();
@@ -438,15 +391,18 @@ class CarController extends AppBaseController
             'stands' => $stands
         ]);
 
-        return view('cars.newCars')
-            ->with('newCars', $newCars)
-            ->with('carData', $carData);
+        return view('cars.cars-ajax')->with('carData', $carData);
     }
 
-    public function newCarsPost(CreateCarRequest $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeNewCars(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'make_id' => 'required',
             'model_id' => 'required',
             'komm' => 'required',
             'color_exterior' => 'required',
@@ -458,31 +414,60 @@ class CarController extends AppBaseController
 
         if ($validator->passes()) {
 
-            $input = $request->all();
+            $carId = $request->id;
 
-            $car = $this->carRepository->create($input);
+            $car = Car::updateOrCreate(
+                [
+                    'id' => $carId
+                ],
+                [
+                    'make_id' => $request->make_id,
+                    'model_id' => $request->model_id,
+                    'color_exterior' => $request->color_exterior,
+                    'est' => $request->est,
+                    'komm' => $request->komm,
+                    'stand_id' => $request->stand_id,
+                    'state_id' => $request->state_id,
+                    'order_date' => $request->order_date,
+                    'observations' => $request->observations,
+                     // Hidden
+                    'category_id' => 1,
+                    'condition_id' => 1,
+                ]
+            );
 
-            return response()->json($car);
+            return Response()->json($car);
         }
 
         return response()->json(['error' => $validator->errors()]);
     }
 
-    public function newCarsUpdate($id, UpdateCarRequest $request)
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\car  $car
+     * @return \Illuminate\Http\Response
+     */
+    public function editNewCars(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-           
-        ]);
+        $where = array('id' => $request->id);
+        $car = Car::where($where)->with('model.make')->first();
+        
+        return Response()->json($car);
+    }
 
-        if ($validator->passes()) {
 
-            $car = $this->carRepository->find($id);
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\car  $car
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyNewCar(Request $request)
+    {
+        $car = Car::where('id', $request->id)->delete();
 
-            $car = $this->carRepository->update($request->all(), $id);
-
-            return response()->json($car);
-        }
-
-        return response()->json(['error' => $validator->errors()]);
+        return Response()->json($car);
     }
 }
