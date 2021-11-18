@@ -408,9 +408,9 @@ class ProposalAPIController extends AppBaseController
 
             //atribuir athirização
 
-            if($profit < $min){
-                //nao precisa
-            }
+            // if($profit < $min){
+            //     //nao precisa
+            // }
 
         } else {
 
