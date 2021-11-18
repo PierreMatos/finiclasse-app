@@ -404,12 +404,6 @@ class CarController extends AppBaseController
     {
         $validator = Validator::make($request->all(), [
             'model_id' => 'required',
-            'komm' => 'required',
-            'color_exterior' => 'required',
-            'est' => 'required',
-            'state_id' => 'required',
-            'order_date' => 'required',
-            'observations' => 'required',
         ]);
 
         if ($validator->passes()) {
