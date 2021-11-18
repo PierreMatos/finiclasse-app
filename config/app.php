@@ -164,6 +164,7 @@ return [
         \InfyOm\GeneratorBuilder\GeneratorBuilderServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
 
 
 
@@ -236,6 +237,7 @@ return [
         'Flash' => Laracasts\Flash\Flash::class,
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
 
     ],
 

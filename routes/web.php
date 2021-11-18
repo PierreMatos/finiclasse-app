@@ -9,6 +9,7 @@ use App\Http\Controllers\BenefitController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\FinancingController;
+use App\Http\Controllers\DataTableAjaxCRUDController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,9 +69,6 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
     Route::resource('carFuels', App\Http\Controllers\CarFuelController::class);
 
     Route::resource('cars', App\Http\Controllers\CarController::class);
-    Route::get('new', [CarController::class, 'newCars'])->name('newCars');
-    Route::post('new', [CarController::class, 'newCarsPost'])->name('newCarsPost');
-    Route::post('new/update/{id}', [CarController::class, 'newCarsUpdate'])->name('newCarsUpdate');
     // Route::get( ['carController', 'getCars'])->name('getCars');
     Route::get('/getcars', [CarController::class, 'getCars'])->name('getcars');
     // Route::get('/carstate/{car_id}/{state_id}/{price}', [CarController::class, 'carState'])->name('carstate');
@@ -168,6 +166,12 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
     
         return new App\Mail\ProposalOrder($proposal);
     });
+
+    // Datatable Car
+    Route::get('new-car', [CarController::class, 'indexNewCars'])->name('new-car');
+    Route::post('store-car', [CarController::class, 'storeNewCars']);
+    Route::post('edit-car', [CarController::class, 'editNewCars']);
+    Route::post('delete-car', [CarController::class, 'destroyNewCars']);
 });
 
 // Validate Store RGPD with Email
