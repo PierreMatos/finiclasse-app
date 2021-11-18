@@ -222,7 +222,7 @@ class ProposalAPIController extends AppBaseController
                 'expenses' => $businessStudyCalculated['expenses'],
                 'taxes' => $businessStudyCalculated['taxes'],
                 'warranty' => $businessStudyCalculated['warranty'],
-                'business_study_authorization_id' => $businessStudyCalculated['business_study_authorization_id'],
+                // 'business_study_authorization_id' => $businessStudyCalculated['business_study_authorization_id'],
             ];
     
                 if(($proposal->state->name == 'Aberto')){
@@ -409,7 +409,7 @@ class ProposalAPIController extends AppBaseController
             //atribuir athirização
 
             // if($profit < $min){
-            //     //nao precisa
+                //nao precisa
             // }
 
         } else {
