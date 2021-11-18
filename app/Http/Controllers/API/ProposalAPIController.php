@@ -8,6 +8,7 @@ use App\Models\Proposal;
 use App\Models\Car;
 use App\Models\BusinessStudy;
 use App\Repositories\ProposalRepository;
+use App\Repositories\BusinessStudyRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\ProposalResource;
@@ -27,10 +28,12 @@ class ProposalAPIController extends AppBaseController
 {
     /** @var  ProposalRepository */
     private $proposalRepository;
+    private $businessStudyRepository;
 
-    public function __construct(ProposalRepository $proposalRepo)
+    public function __construct(ProposalRepository $proposalRepo, BusinessStudyRepository $businessStudyRepo)
     {
         $this->proposalRepository = $proposalRepo;
+        $this->businessStudyRepository = $businessStudyRepo;
     }
 
     /**
@@ -181,6 +184,62 @@ class ProposalAPIController extends AppBaseController
 
         }
 
+        //business study
+        //TODO falta o SIGPU
+        
+        if((!empty($proposal->car)) ){
+
+
+            $businessStudyCalculated = $this->calculateBusinessStudy($proposal->id);
+
+            // if (empty($businessStudy->extras_total)){
+            //     $extras_total = $proposal->car->extras_total;
+            // }else {
+            //     $extras_total = $businessStudy->extras_total;
+            // }
+    
+
+            $businessStudyInput = [
+                'pre_extras_total' => $businessStudyCalculated['total_extras2'],
+                'extras_total' => $businessStudyCalculated['total_extras'],
+                'sub_total' => $businessStudyCalculated['sub_total'],
+                'total_benefits' => $businessStudyCalculated['total_benefits'],
+                'selling_price' => $businessStudyCalculated['selling_price'],
+                'tradein_diff' => $businessStudyCalculated['tradein_diff'],
+                'settle_amount' => $businessStudyCalculated['settle_amount'],
+                'total_diff_amount' => $businessStudyCalculated['total_diff_amount'],
+                'total_discount_amount' => $businessStudyCalculated['total_diff_amount'],
+                'total_discount_perc' => $businessStudyCalculated['total_diff_perc'],
+                'isv' => $businessStudyCalculated['isv'],
+                'iva' => $businessStudyCalculated['iva'],
+                'sigpu' => $businessStudyCalculated['sigpu'],
+                'ptl' => $businessStudyCalculated['ptl'],
+                'base_price' => $businessStudyCalculated['base_price'],
+                'total_transf' => $businessStudyCalculated['total_transf'],
+                'total' => $businessStudyCalculated['total'],
+                'sale' => $businessStudyCalculated['sale'],
+                'purchase_price' => $businessStudyCalculated['purchase_price'],
+                'expenses' => $businessStudyCalculated['expenses'],
+                'taxes' => $businessStudyCalculated['taxes'],
+                'warranty' => $businessStudyCalculated['warranty'],
+                'business_study_authorization_id' => $businessStudyCalculated['business_study_authorization_id'],
+            ];
+    
+                if(($proposal->state->name == 'Aberto')){
+
+                    $businessStudy = $this->businessStudyRepository->update($businessStudyInput, $proposal->initial_business_study_id);
+
+                }elseif(($proposal->state->name == 'Fechado')){
+                    
+                    $businessStudy = $this->businessStudyRepository->update($businessStudyInput, $proposal->final_business_study_id);
+
+                }
+
+        }
+
+
+        // dd($proposal->state->name == 'Aberto');
+
         return $this->sendResponse(new ProposalResource($proposal), 'Proposal updated successfully');
     }
 
@@ -231,20 +290,20 @@ class ProposalAPIController extends AppBaseController
 
     }
 
-    public function businessStudy(Request $request) {
+    public function calculateBusinessStudy($id) {
 
         //TODO pegar modelo de business study
 
         // estudo de negocio inicial e final
-        $proposal = Proposal::find($request->id);
+        $proposal = Proposal::find($id);
         
         $taxas = ['iva' => 23];
         
+
         // if this.proposal->business study exists then initial.proposal => proposal->businessStudy
 
         //no metodo
         
-       
 
         if (!empty($proposal->car)) {
             
@@ -254,18 +313,22 @@ class ProposalAPIController extends AppBaseController
             $sigpu = $proposal->car->sigpu;
             $isv =  $proposal->car->isv;
             $isv =  $proposal->car->isv;
+            $taxes =  $proposal->car->taxes;
+            $expenses =  $proposal->car->expenses;
+            $warranty =  $proposal->car->warranty;
+
             $totalTransf = 0;
             $isentIva = null;
-            $sell = 43000;
+            $sell = 43000; // valor gravado no estudo de negocio
             $diffTradein = 0;
             $settleValue = 0;
+            //TODO Tabela com taxas e valores fixos
             $ivaTX = 0.23;
             $totalCampaigns = 0;
             $totalBenefits = 0;
             $subTotal = 0.0;
             $sellingPrice = 0;
             $purchasePrice = 0;
-
 
             // total campaigns
             foreach($proposal->campaigns as $campaign){
@@ -320,7 +383,8 @@ class ProposalAPIController extends AppBaseController
             if (!empty($proposal->tradein)){ 
                 $purchasePrice = $proposal->tradein->tradein_purchase; 
                 $sellingPrice = $proposal->tradein->tradein_sale; 
-                $diffTradein = 0;
+                
+                $diffTradein = $sellingPrice + $taxes + $expenses;
                 $settleValue = $sell - $purchasePrice;
             }
             
@@ -333,44 +397,57 @@ class ProposalAPIController extends AppBaseController
                     $desc = $dif;
                  }
             //%
-            $profit = $desc / ( $totalBenefits + $isv ) - ( $ptl + $sigpu + $totalTransf );
+            //TODO Division by zero
+            // dd(if( ($totalBenefits + $isv) != 0 ));
 
-        }else {
+            if( ($totalBenefits + $isv) != 0 && ($ptl + $sigpu + $totalTransf)!=0) {
+
+                $profit = $desc / ( $totalBenefits + $isv ) - ( $ptl + $sigpu + $totalTransf );
+
+            }else {$profit=0;}
+
+            //atribuir athirização
+
+            // if($profit < $min){
+            //     //nao precisa
+            // }
+
+        } else {
 
             return 'car not found';
         }
-
-
-        
         
         $results = [
-            'Preço Base' => $basePrice,
-            'Total Extras' => $preTotalExtras,
-            'PTL' => $ptl,
-            'SIGPU' => $sigpu,
-            'Total Trans' => $totalTransf,
-            'Total Apoios' => $totalBenefits,
-            'Total Extras' => $totalExtras,
-            'Sub Total'  => $subTotal,
-            'ISV' => $isv,
+            'base_price' => $basePrice,
+            'total_extras2' => $preTotalExtras,
+            'ptl' => $ptl,
+            'sigpu' => $sigpu,
+            'total_transf' => $totalTransf,
+            'total_benefits' => $totalBenefits,
+            'total_extras' => $totalExtras,
+            'sub_total'  => $subTotal,
+            'isv' => $isv,
             'IVA Taxa' => $ivaTX,
             'iva' => $iva,
-            'Total' => $total,
-            'Venda (static)' => $sell,
-            'Valor de compra' => $sellingPrice,
-            'Valor de venda' => $purchasePrice,
-            'Dif de retoma' => $diffTradein,
-            'valor a liquidar' => $settleValue,
+            'total' => $total,
+            'sale' => $sell,
+            'selling_price' => $sellingPrice,
+            'purchase_price' => $purchasePrice,
+            'tradein_diff' => $diffTradein,
+            'settle_amount' => $settleValue,
             'desc' => $desc,
-            'dif' => $dif,
+            'total_diff_amount' => $dif,
+            'total_diff_perc' => $dif,
             'profit' => $profit,
             'benefits' => $proposal->benefits,
             'campaigns' => $proposal->campaigns,
             'tradein' => $proposal->tradein,
+            'expenses' => $expenses,
+            'taxes' => $taxes,
+            'warranty' => $warranty
         ];
 
-        return $results;
-        return 'dif é: '.$dif.'desc é: '.$desc.'A margem é de: '.$profit;
+        return ($results);
         
     }
 }

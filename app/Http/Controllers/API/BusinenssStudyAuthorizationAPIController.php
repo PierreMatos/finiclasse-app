@@ -2,68 +2,68 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\CreateBusinenssStudyAuthorizationAPIRequest;
-use App\Http\Requests\API\UpdateBusinenssStudyAuthorizationAPIRequest;
-use App\Models\BusinenssStudyAuthorization;
-use App\Repositories\BusinenssStudyAuthorizationRepository;
+use App\Http\Requests\API\CreateBusinessStudyAuthorizationAPIRequest;
+use App\Http\Requests\API\UpdateBusinessStudyAuthorizationAPIRequest;
+use App\Models\BusinessStudyAuthorization;
+use App\Repositories\BusinessStudyAuthorizationRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
-use App\Http\Resources\BusinenssStudyAuthorizationResource;
+use App\Http\Resources\BusinessStudyAuthorizationResource;
 use Response;
 
 /**
- * Class BusinenssStudyAuthorizationController
+ * Class BusinessStudyAuthorizationController
  * @package App\Http\Controllers\API
  */
 
-class BusinenssStudyAuthorizationAPIController extends AppBaseController
+class BusinessStudyAuthorizationAPIController extends AppBaseController
 {
-    /** @var  BusinenssStudyAuthorizationRepository */
-    private $businenssStudyAuthorizationRepository;
+    /** @var  BusinessStudyAuthorizationRepository */
+    private $BusinessStudyAuthorizationRepository;
 
-    public function __construct(BusinenssStudyAuthorizationRepository $businenssStudyAuthorizationRepo)
+    public function __construct(BusinessStudyAuthorizationRepository $BusinessStudyAuthorizationRepo)
     {
-        $this->businenssStudyAuthorizationRepository = $businenssStudyAuthorizationRepo;
+        $this->BusinessStudyAuthorizationRepository = $BusinessStudyAuthorizationRepo;
     }
 
     /**
-     * Display a listing of the BusinenssStudyAuthorization.
-     * GET|HEAD /businenssStudyAuthorizations
+     * Display a listing of the BusinessStudyAuthorization.
+     * GET|HEAD /BusinessStudyAuthorizations
      *
      * @param Request $request
      * @return Response
      */
     public function index(Request $request)
     {
-        $businenssStudyAuthorizations = $this->businenssStudyAuthorizationRepository->all(
+        $BusinessStudyAuthorizations = $this->BusinessStudyAuthorizationRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
             $request->get('limit')
         );
 
-        return $this->sendResponse(BusinenssStudyAuthorizationResource::collection($businenssStudyAuthorizations), 'Businenss Study Authorizations retrieved successfully');
+        return $this->sendResponse(BusinessStudyAuthorizationResource::collection($BusinessStudyAuthorizations), 'Businenss Study Authorizations retrieved successfully');
     }
 
     /**
-     * Store a newly created BusinenssStudyAuthorization in storage.
-     * POST /businenssStudyAuthorizations
+     * Store a newly created BusinessStudyAuthorization in storage.
+     * POST /BusinessStudyAuthorizations
      *
-     * @param CreateBusinenssStudyAuthorizationAPIRequest $request
+     * @param CreateBusinessStudyAuthorizationAPIRequest $request
      *
      * @return Response
      */
-    public function store(CreateBusinenssStudyAuthorizationAPIRequest $request)
+    public function store(CreateBusinessStudyAuthorizationAPIRequest $request)
     {
         $input = $request->all();
 
-        $businenssStudyAuthorization = $this->businenssStudyAuthorizationRepository->create($input);
+        $BusinessStudyAuthorization = $this->BusinessStudyAuthorizationRepository->create($input);
 
-        return $this->sendResponse(new BusinenssStudyAuthorizationResource($businenssStudyAuthorization), 'Businenss Study Authorization saved successfully');
+        return $this->sendResponse(new BusinessStudyAuthorizationResource($BusinessStudyAuthorization), 'Businenss Study Authorization saved successfully');
     }
 
     /**
-     * Display the specified BusinenssStudyAuthorization.
-     * GET|HEAD /businenssStudyAuthorizations/{id}
+     * Display the specified BusinessStudyAuthorization.
+     * GET|HEAD /BusinessStudyAuthorizations/{id}
      *
      * @param int $id
      *
@@ -71,44 +71,44 @@ class BusinenssStudyAuthorizationAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var BusinenssStudyAuthorization $businenssStudyAuthorization */
-        $businenssStudyAuthorization = $this->businenssStudyAuthorizationRepository->find($id);
+        /** @var BusinessStudyAuthorization $BusinessStudyAuthorization */
+        $BusinessStudyAuthorization = $this->BusinessStudyAuthorizationRepository->find($id);
 
-        if (empty($businenssStudyAuthorization)) {
+        if (empty($BusinessStudyAuthorization)) {
             return $this->sendError('Businenss Study Authorization not found');
         }
 
-        return $this->sendResponse(new BusinenssStudyAuthorizationResource($businenssStudyAuthorization), 'Businenss Study Authorization retrieved successfully');
+        return $this->sendResponse(new BusinessStudyAuthorizationResource($BusinessStudyAuthorization), 'Businenss Study Authorization retrieved successfully');
     }
 
     /**
-     * Update the specified BusinenssStudyAuthorization in storage.
-     * PUT/PATCH /businenssStudyAuthorizations/{id}
+     * Update the specified BusinessStudyAuthorization in storage.
+     * PUT/PATCH /BusinessStudyAuthorizations/{id}
      *
      * @param int $id
-     * @param UpdateBusinenssStudyAuthorizationAPIRequest $request
+     * @param UpdateBusinessStudyAuthorizationAPIRequest $request
      *
      * @return Response
      */
-    public function update($id, UpdateBusinenssStudyAuthorizationAPIRequest $request)
+    public function update($id, UpdateBusinessStudyAuthorizationAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var BusinenssStudyAuthorization $businenssStudyAuthorization */
-        $businenssStudyAuthorization = $this->businenssStudyAuthorizationRepository->find($id);
+        /** @var BusinessStudyAuthorization $BusinessStudyAuthorization */
+        $BusinessStudyAuthorization = $this->BusinessStudyAuthorizationRepository->find($id);
 
-        if (empty($businenssStudyAuthorization)) {
+        if (empty($BusinessStudyAuthorization)) {
             return $this->sendError('Businenss Study Authorization not found');
         }
 
-        $businenssStudyAuthorization = $this->businenssStudyAuthorizationRepository->update($input, $id);
+        $BusinessStudyAuthorization = $this->BusinessStudyAuthorizationRepository->update($input, $id);
 
-        return $this->sendResponse(new BusinenssStudyAuthorizationResource($businenssStudyAuthorization), 'BusinenssStudyAuthorization updated successfully');
+        return $this->sendResponse(new BusinessStudyAuthorizationResource($BusinessStudyAuthorization), 'BusinessStudyAuthorization updated successfully');
     }
 
     /**
-     * Remove the specified BusinenssStudyAuthorization from storage.
-     * DELETE /businenssStudyAuthorizations/{id}
+     * Remove the specified BusinessStudyAuthorization from storage.
+     * DELETE /BusinessStudyAuthorizations/{id}
      *
      * @param int $id
      *
@@ -118,14 +118,14 @@ class BusinenssStudyAuthorizationAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var BusinenssStudyAuthorization $businenssStudyAuthorization */
-        $businenssStudyAuthorization = $this->businenssStudyAuthorizationRepository->find($id);
+        /** @var BusinessStudyAuthorization $BusinessStudyAuthorization */
+        $BusinessStudyAuthorization = $this->BusinessStudyAuthorizationRepository->find($id);
 
-        if (empty($businenssStudyAuthorization)) {
+        if (empty($BusinessStudyAuthorization)) {
             return $this->sendError('Businenss Study Authorization not found');
         }
 
-        $businenssStudyAuthorization->delete();
+        $BusinessStudyAuthorization->delete();
 
         return $this->sendSuccess('Businenss Study Authorization deleted successfully');
     }

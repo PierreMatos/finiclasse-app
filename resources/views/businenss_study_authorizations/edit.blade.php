@@ -17,7 +17,7 @@
 
         <div class="card">
 
-            {!! Form::model($businenssStudyAuthorization, ['route' => ['businenssStudyAuthorizations.update', $businenssStudyAuthorization->id], 'method' => 'patch']) !!}
+            {!! Form::model($BusinessStudyAuthorization, ['route' => ['BusinessStudyAuthorizations.update', $BusinessStudyAuthorization->id], 'method' => 'patch']) !!}
 
             <div class="card-body">
                 <div class="row">
@@ -27,7 +27,7 @@
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('businenssStudyAuthorizations.index') }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route('BusinessStudyAuthorizations.index') }}" class="btn btn-default">Cancel</a>
             </div>
 
            {!! Form::close() !!}

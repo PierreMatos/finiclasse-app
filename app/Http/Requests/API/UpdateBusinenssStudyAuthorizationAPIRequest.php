@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\API;
 
-use App\Models\BusinenssStudyAuthorization;
+use App\Models\BusinessStudyAuthorization;
 use InfyOm\Generator\Request\APIRequest;
 
-class UpdateBusinenssStudyAuthorizationAPIRequest extends APIRequest
+class UpdateBusinessStudyAuthorizationAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class UpdateBusinenssStudyAuthorizationAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $rules = BusinenssStudyAuthorization::$rules;
+        $rules = BusinessStudyAuthorization::$rules;
         
         return $rules;
     }

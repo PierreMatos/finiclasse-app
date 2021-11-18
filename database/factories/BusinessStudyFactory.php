@@ -6,7 +6,7 @@ use App\Models\BusinessStudy;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Car;
 use App\Models\User;
-use App\Models\BusinenssStudyAuthorization;
+use App\Models\BusinessStudyAuthorization;
 
 
 class BusinessStudyFactory extends Factory
@@ -40,7 +40,7 @@ class BusinessStudyFactory extends Factory
         'total_discount_perc' => $this->faker->randomDigitNotNull,  
         'iva' => $this->faker->randomDigitNotNull,
         'isv' => $this->faker->randomDigitNotNull,
-        'business_study_authorization_id' => BusinenssStudyAuthorization::all()->random()->id,
+        'business_study_authorization_id' => BusinessStudyAuthorization::all()->random()->id,
         'tradein_id' => null,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s'),

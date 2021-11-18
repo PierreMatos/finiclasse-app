@@ -4,9 +4,9 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\ApiTestTrait;
-use App\Models\BusinenssStudyAuthorization;
+use App\Models\BusinessStudyAuthorization;
 
-class BusinenssStudyAuthorizationApiTest extends TestCase
+class BusinessStudyAuthorizationApiTest extends TestCase
 {
     use ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
 
@@ -15,14 +15,14 @@ class BusinenssStudyAuthorizationApiTest extends TestCase
      */
     public function test_create_businenss_study_authorization()
     {
-        $businenssStudyAuthorization = BusinenssStudyAuthorization::factory()->make()->toArray();
+        $BusinessStudyAuthorization = BusinessStudyAuthorization::factory()->make()->toArray();
 
         $this->response = $this->json(
             'POST',
-            '/api/businenss_study_authorizations', $businenssStudyAuthorization
+            '/api/businenss_study_authorizations', $BusinessStudyAuthorization
         );
 
-        $this->assertApiResponse($businenssStudyAuthorization);
+        $this->assertApiResponse($BusinessStudyAuthorization);
     }
 
     /**
@@ -30,14 +30,14 @@ class BusinenssStudyAuthorizationApiTest extends TestCase
      */
     public function test_read_businenss_study_authorization()
     {
-        $businenssStudyAuthorization = BusinenssStudyAuthorization::factory()->create();
+        $BusinessStudyAuthorization = BusinessStudyAuthorization::factory()->create();
 
         $this->response = $this->json(
             'GET',
-            '/api/businenss_study_authorizations/'.$businenssStudyAuthorization->id
+            '/api/businenss_study_authorizations/'.$BusinessStudyAuthorization->id
         );
 
-        $this->assertApiResponse($businenssStudyAuthorization->toArray());
+        $this->assertApiResponse($BusinessStudyAuthorization->toArray());
     }
 
     /**
@@ -45,16 +45,16 @@ class BusinenssStudyAuthorizationApiTest extends TestCase
      */
     public function test_update_businenss_study_authorization()
     {
-        $businenssStudyAuthorization = BusinenssStudyAuthorization::factory()->create();
-        $editedBusinenssStudyAuthorization = BusinenssStudyAuthorization::factory()->make()->toArray();
+        $BusinessStudyAuthorization = BusinessStudyAuthorization::factory()->create();
+        $editedBusinessStudyAuthorization = BusinessStudyAuthorization::factory()->make()->toArray();
 
         $this->response = $this->json(
             'PUT',
-            '/api/businenss_study_authorizations/'.$businenssStudyAuthorization->id,
-            $editedBusinenssStudyAuthorization
+            '/api/businenss_study_authorizations/'.$BusinessStudyAuthorization->id,
+            $editedBusinessStudyAuthorization
         );
 
-        $this->assertApiResponse($editedBusinenssStudyAuthorization);
+        $this->assertApiResponse($editedBusinessStudyAuthorization);
     }
 
     /**
@@ -62,17 +62,17 @@ class BusinenssStudyAuthorizationApiTest extends TestCase
      */
     public function test_delete_businenss_study_authorization()
     {
-        $businenssStudyAuthorization = BusinenssStudyAuthorization::factory()->create();
+        $BusinessStudyAuthorization = BusinessStudyAuthorization::factory()->create();
 
         $this->response = $this->json(
             'DELETE',
-             '/api/businenss_study_authorizations/'.$businenssStudyAuthorization->id
+             '/api/businenss_study_authorizations/'.$BusinessStudyAuthorization->id
          );
 
         $this->assertApiSuccess();
         $this->response = $this->json(
             'GET',
-            '/api/businenss_study_authorizations/'.$businenssStudyAuthorization->id
+            '/api/businenss_study_authorizations/'.$BusinessStudyAuthorization->id
         );
 
         $this->response->assertStatus(404);

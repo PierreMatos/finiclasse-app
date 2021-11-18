@@ -1,24 +1,24 @@
 <?php namespace Tests\Repositories;
 
-use App\Models\BusinenssStudyAuthorization;
-use App\Repositories\BusinenssStudyAuthorizationRepository;
+use App\Models\BusinessStudyAuthorization;
+use App\Repositories\BusinessStudyAuthorizationRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\ApiTestTrait;
 
-class BusinenssStudyAuthorizationRepositoryTest extends TestCase
+class BusinessStudyAuthorizationRepositoryTest extends TestCase
 {
     use ApiTestTrait, DatabaseTransactions;
 
     /**
-     * @var BusinenssStudyAuthorizationRepository
+     * @var BusinessStudyAuthorizationRepository
      */
-    protected $businenssStudyAuthorizationRepo;
+    protected $BusinessStudyAuthorizationRepo;
 
     public function setUp() : void
     {
         parent::setUp();
-        $this->businenssStudyAuthorizationRepo = \App::make(BusinenssStudyAuthorizationRepository::class);
+        $this->BusinessStudyAuthorizationRepo = \App::make(BusinessStudyAuthorizationRepository::class);
     }
 
     /**
@@ -26,15 +26,15 @@ class BusinenssStudyAuthorizationRepositoryTest extends TestCase
      */
     public function test_create_businenss_study_authorization()
     {
-        $businenssStudyAuthorization = BusinenssStudyAuthorization::factory()->make()->toArray();
+        $BusinessStudyAuthorization = BusinessStudyAuthorization::factory()->make()->toArray();
 
-        $createdBusinenssStudyAuthorization = $this->businenssStudyAuthorizationRepo->create($businenssStudyAuthorization);
+        $createdBusinessStudyAuthorization = $this->BusinessStudyAuthorizationRepo->create($BusinessStudyAuthorization);
 
-        $createdBusinenssStudyAuthorization = $createdBusinenssStudyAuthorization->toArray();
-        $this->assertArrayHasKey('id', $createdBusinenssStudyAuthorization);
-        $this->assertNotNull($createdBusinenssStudyAuthorization['id'], 'Created BusinenssStudyAuthorization must have id specified');
-        $this->assertNotNull(BusinenssStudyAuthorization::find($createdBusinenssStudyAuthorization['id']), 'BusinenssStudyAuthorization with given id must be in DB');
-        $this->assertModelData($businenssStudyAuthorization, $createdBusinenssStudyAuthorization);
+        $createdBusinessStudyAuthorization = $createdBusinessStudyAuthorization->toArray();
+        $this->assertArrayHasKey('id', $createdBusinessStudyAuthorization);
+        $this->assertNotNull($createdBusinessStudyAuthorization['id'], 'Created BusinessStudyAuthorization must have id specified');
+        $this->assertNotNull(BusinessStudyAuthorization::find($createdBusinessStudyAuthorization['id']), 'BusinessStudyAuthorization with given id must be in DB');
+        $this->assertModelData($BusinessStudyAuthorization, $createdBusinessStudyAuthorization);
     }
 
     /**
@@ -42,12 +42,12 @@ class BusinenssStudyAuthorizationRepositoryTest extends TestCase
      */
     public function test_read_businenss_study_authorization()
     {
-        $businenssStudyAuthorization = BusinenssStudyAuthorization::factory()->create();
+        $BusinessStudyAuthorization = BusinessStudyAuthorization::factory()->create();
 
-        $dbBusinenssStudyAuthorization = $this->businenssStudyAuthorizationRepo->find($businenssStudyAuthorization->id);
+        $dbBusinessStudyAuthorization = $this->BusinessStudyAuthorizationRepo->find($BusinessStudyAuthorization->id);
 
-        $dbBusinenssStudyAuthorization = $dbBusinenssStudyAuthorization->toArray();
-        $this->assertModelData($businenssStudyAuthorization->toArray(), $dbBusinenssStudyAuthorization);
+        $dbBusinessStudyAuthorization = $dbBusinessStudyAuthorization->toArray();
+        $this->assertModelData($BusinessStudyAuthorization->toArray(), $dbBusinessStudyAuthorization);
     }
 
     /**
@@ -55,14 +55,14 @@ class BusinenssStudyAuthorizationRepositoryTest extends TestCase
      */
     public function test_update_businenss_study_authorization()
     {
-        $businenssStudyAuthorization = BusinenssStudyAuthorization::factory()->create();
-        $fakeBusinenssStudyAuthorization = BusinenssStudyAuthorization::factory()->make()->toArray();
+        $BusinessStudyAuthorization = BusinessStudyAuthorization::factory()->create();
+        $fakeBusinessStudyAuthorization = BusinessStudyAuthorization::factory()->make()->toArray();
 
-        $updatedBusinenssStudyAuthorization = $this->businenssStudyAuthorizationRepo->update($fakeBusinenssStudyAuthorization, $businenssStudyAuthorization->id);
+        $updatedBusinessStudyAuthorization = $this->BusinessStudyAuthorizationRepo->update($fakeBusinessStudyAuthorization, $BusinessStudyAuthorization->id);
 
-        $this->assertModelData($fakeBusinenssStudyAuthorization, $updatedBusinenssStudyAuthorization->toArray());
-        $dbBusinenssStudyAuthorization = $this->businenssStudyAuthorizationRepo->find($businenssStudyAuthorization->id);
-        $this->assertModelData($fakeBusinenssStudyAuthorization, $dbBusinenssStudyAuthorization->toArray());
+        $this->assertModelData($fakeBusinessStudyAuthorization, $updatedBusinessStudyAuthorization->toArray());
+        $dbBusinessStudyAuthorization = $this->BusinessStudyAuthorizationRepo->find($BusinessStudyAuthorization->id);
+        $this->assertModelData($fakeBusinessStudyAuthorization, $dbBusinessStudyAuthorization->toArray());
     }
 
     /**
@@ -70,11 +70,11 @@ class BusinenssStudyAuthorizationRepositoryTest extends TestCase
      */
     public function test_delete_businenss_study_authorization()
     {
-        $businenssStudyAuthorization = BusinenssStudyAuthorization::factory()->create();
+        $BusinessStudyAuthorization = BusinessStudyAuthorization::factory()->create();
 
-        $resp = $this->businenssStudyAuthorizationRepo->delete($businenssStudyAuthorization->id);
+        $resp = $this->BusinessStudyAuthorizationRepo->delete($BusinessStudyAuthorization->id);
 
         $this->assertTrue($resp);
-        $this->assertNull(BusinenssStudyAuthorization::find($businenssStudyAuthorization->id), 'BusinenssStudyAuthorization should not exist in DB');
+        $this->assertNull(BusinessStudyAuthorization::find($BusinessStudyAuthorization->id), 'BusinessStudyAuthorization should not exist in DB');
     }
 }

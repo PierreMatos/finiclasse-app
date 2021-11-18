@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\BusinenssStudyAuthorization;
+use App\Models\BusinessStudyAuthorization;
 
-class UpdateBusinenssStudyAuthorizationRequest extends FormRequest
+class UpdateBusinessStudyAuthorizationRequest extends FormRequest
 {
 
     /**
@@ -25,7 +25,7 @@ class UpdateBusinenssStudyAuthorizationRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = BusinenssStudyAuthorization::$rules;
+        $rules = BusinessStudyAuthorization::$rules;
         
         return $rules;
     }

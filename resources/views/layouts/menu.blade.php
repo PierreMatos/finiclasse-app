@@ -260,10 +260,10 @@
                 </li>
             @endcan
 
-            @can('businenssStudyAuthorizations.index')
+            @can('BusinessStudyAuthorizations.index')
                 <li class="treeview">
-                    <a href="{{ route('businenssStudyAuthorizations.index') }}"
-                        class="nav-link {{ Request::is('businenssStudyAuthorizations*') ? 'active' : '' }}">
+                    <a href="{{ route('BusinessStudyAuthorizations.index') }}"
+                        class="nav-link {{ Request::is('BusinessStudyAuthorizations*') ? 'active' : '' }}">
                         <i class="fas fa-eye"></i>
                         <p>Estudos Aut.</p>
                     </a>
