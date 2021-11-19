@@ -68,7 +68,7 @@ class BenefitController extends AppBaseController
             //Actualizar imagem se colocar uma nova
             $input = $request->all();
             $benefit = $this->benefitRepository->create($input);
-            $benefit->addMedia($document)->toMediaCollection('benefits');
+            $benefit->addMedia($document)->toMediaCollection('benefits','s3');
         }
 
         Flash::success(__('translation.benefit saved'));
