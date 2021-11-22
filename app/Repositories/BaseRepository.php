@@ -105,8 +105,8 @@ abstract class BaseRepository
 
         //eliminar viaturas POS da listagem
 
+        // dd($this->model->table);
         if ($this->model->table == 'cars'){
-            
             $query = $query->where('state_id', '!=', 5);
         }
 
@@ -125,6 +125,7 @@ abstract class BaseRepository
      */
     public function all($search = [], $skip = null, $limit = null, $columns = ['*'])
     {
+
 
         // $search = ['proposal_id' => 22];
 

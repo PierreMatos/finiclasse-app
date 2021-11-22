@@ -354,7 +354,7 @@ class CarController extends AppBaseController
     public function indexNewCars()
     {
         if (request()->ajax()) {
-            return datatables()->of(Car::where('condition_id', '=', 1))
+            return datatables()->of($this->carRepository->carByCondition(1))
                 ->addColumn('action', 'cars.car-action')
                 ->addColumn('makes', function (Car $car) {
                     return $car->model->make->name;
@@ -375,6 +375,7 @@ class CarController extends AppBaseController
                 ->addIndexColumn()
                 ->make(true);
         }
+
 
         $makes = $this->makeRepository->all();
         $models = $this->modelRepository->all();

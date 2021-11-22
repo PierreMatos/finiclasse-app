@@ -45,16 +45,13 @@ class CarRepository  extends BaseRepository
         return Car::class;
     }
 
-    public function carByState($condition){
+    public function carByCondition($condition){
 
-        // $query = $this->model->newQuery();
         $query = $this->all();
 
         $query = $query->where('condition_id','==',$condition);
 
         return $query;
-
-        // return Car::where('condition_id','==',$condition);
 
     }
 
@@ -90,13 +87,10 @@ class CarRepository  extends BaseRepository
 
         }elseif($user->hasRole(['Chefe de vendas', 'Vendedor'])){ 
 
-            // $query = $this->where('stand_id','=', $user->stand_id);
             $query = $query->where('stand_id','=', $user->stand_id);
-// dd($query->get());
 
         }
 
-        // $query = $this->allQuery($search, $skip, $limit);
         return $query->get($columns);
     }
 
