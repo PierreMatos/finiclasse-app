@@ -85,10 +85,10 @@
                                 <td><img src="{{ $car->getFirstMediaUrl('cars', 'thumb') }}"
                                         style="max-width: 100px;" /></td>
                             @endif
-                            <td>{{ $car->model->make->name }}</td>
-                            <td>{{ $car->model->name }}</td>
-                            <td>{{ $car->plate }}</td>
-                            <td>{{ $car->price . ' €' }}</td>
+                            <td>{{ isset($car->model->make->name) ? $car->model->make->name : '' }}</td>
+                            <td>{{ isset($car->model->name) ? $car->model->name : '' }}</td>
+                            <td>{{ isset($car->plate) ? $car->plate : '' }}</td>
+                            <td> {{ isset($car->price) ? $car->price : '' }}  . ' €'</td>
                             <td width="120">
                                 {!! Form::open(['route' => ['cars.destroy', $car->id], 'method' => 'delete']) !!}
                                 <div class='btn-group'>
