@@ -13,7 +13,7 @@
         </thead>
         <tbody>
         @foreach($proposals->sortByDesc('created_at') as $proposal)
-            <tr style="background-color:{{$proposal->state->color}}">
+            <tr {{ isset($proposal->state->color) ? $proposal->state->color : '' }}>
                 <td>{{ isset($proposal->state->name) ? $proposal->state->name : '' }}</td>
                 <td>{{ isset($proposal->client->name) ? $proposal->client->name : '' }}</td>
                 <td>{{ isset($proposal->vendor->name) ? $proposal->vendor->name : '' }}</td>

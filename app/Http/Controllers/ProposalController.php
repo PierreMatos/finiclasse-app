@@ -9,6 +9,9 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class ProposalController extends AppBaseController
 {
@@ -29,7 +32,10 @@ class ProposalController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $proposals = $this->proposalRepository->all();
+        $proposals = $this->proposalRepository->getProposalsByRole(Auth::user());
+
+
+        // $proposals = $this->proposalRepository->all();
 
         return view('proposals.index')
             ->with('proposals', $proposals);

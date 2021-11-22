@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\Models\Proposal;
 use App\Repositories\BaseRepository;
+use App\Models\User;
+
 
 /**
  * Class ProposalRepository
@@ -38,11 +40,28 @@ class ProposalRepository extends BaseRepository
         return Proposal::class;
     }
 
-    public function getProposals($user){
+    public function getProposalsByVendor($user){
 
         $proposals = Proposal::where('vendor_id', '=', $user)->orderBy('created_at', 'desc')->get();
 
         return $proposals;
+
+    }
+
+    public function getProposalsByRole($user){
+
+        if ($user->hasRole(['admin', 'Administrador', 'Diretor comercial'])){
+        
+            $proposals = Proposal::orderBy('created_at', 'desc')->get();
+
+            return $proposals;
+
+        }elseif($user->hasRole(['Chefe de vendas'])){
+
+            $proposals = Proposal::where('stand_id','=', $user->stand_id)->orderBy('created_at', 'desc')->get();
+
+            return $proposals;
+        }
 
     }
 }

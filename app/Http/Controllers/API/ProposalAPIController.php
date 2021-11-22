@@ -62,7 +62,7 @@ class ProposalAPIController extends AppBaseController
         
         
 
-        $proposals = $this->proposalRepository->getProposals(Auth::id());
+        $proposals = $this->proposalRepository->getProposalsByVendor(Auth::id());
 
         // this is working
         // return new ProposalCollection(Proposal::paginate());

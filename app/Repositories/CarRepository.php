@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Car;
 use App\Repositories\BaseRepository;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class CarRepository
@@ -46,7 +47,14 @@ class CarRepository  extends BaseRepository
 
     public function carByState($condition){
 
-        return Car::where('condition_id','==',$condition);
+        // $query = $this->model->newQuery();
+        $query = $this->all();
+
+        $query = $query->where('condition_id','==',$condition);
+
+        return $query;
+
+        // return Car::where('condition_id','==',$condition);
 
     }
 
@@ -73,8 +81,22 @@ class CarRepository  extends BaseRepository
 
     public function all($search = [], $skip = null, $limit = null, $columns = ['*']){
 
-        $query = $this->allQuery($search, $skip, $limit);
-        
+        $user = Auth::user();
+        $query = $this->model->newQuery();
+
+        if ($user->hasRole(['admin', 'Administrador', 'Diretor comercial'])){
+    
+            $query = $this->allQuery($search, $skip, $limit);
+
+        }elseif($user->hasRole(['Chefe de vendas', 'Vendedor'])){ 
+
+            // $query = $this->where('stand_id','=', $user->stand_id);
+            $query = $query->where('stand_id','=', $user->stand_id);
+// dd($query->get());
+
+        }
+
+        // $query = $this->allQuery($search, $skip, $limit);
         return $query->get($columns);
     }
 
