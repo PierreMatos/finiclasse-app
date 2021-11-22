@@ -6,7 +6,7 @@
     @foreach ($carConditions as $carCondition)
 
         <li class="nav-item">
-            <a class="nav-link tab_button" id="{{ $carCondition->name }}" data-toggle="tab"
+            <a class="nav-link tab_button" id="" data-toggle="tab"
                 href="#menu1">{{ $carCondition->name }}</a>
         </li>
 
