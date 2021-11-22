@@ -92,9 +92,10 @@ class CarController extends AppBaseController
         // $cars = Car::with('stand')->paginate(10);
         $newCars = $this->carRepository->carByCondition(1);
         $usedCars = $this->carRepository->carByCondition(2);
-        $carConditions = $this->carConditionRepository->all()->where('condition_id', '!=', 1);
+        $carConditions = $this->carConditionRepository->all()->where('id', '!=', 1);
         $carData = [];
 
+        // dd($carConditions);
         // dd($carConditions->name);
         return view('cars.index')
             ->with('cars', $cars)
