@@ -362,11 +362,8 @@ class CarController extends AppBaseController
                 ->addColumn('models', function (Car $car) {
                     return $car->model->name;
                 })
-                ->addColumn('models', function (Car $car) {
-                    return $car->model->name;
-                })
                 ->addColumn('stands', function (Car $car) {
-                    return $car->stand->name;
+                    return $car->stand ? $car->stand->name : '';
                 })
                 ->addColumn('states', function (Car $car) {
                     return $car->state->name;
