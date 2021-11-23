@@ -84,23 +84,39 @@
    
     $(".trade").click(function(e){
   
-        e.preventDefault();
+        // e.preventDefault();
    
         var price = $("input[name=tradein_purchase]").val();
         // var password = $("input[name=password]").val();
         // var email = $("input[name=email]").val();
-   
+        
         $.ajax({
-            type: "post",
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'), '_method': 'patch'},
-           url:"{{ route('carstate') }}",
-           data:{car:this.id, state:this.value, price:price},
-           success:function(data){
-              alert(data.success);
-           }
+            url: "{{ route('carstate') }}",
+            type: "POST",
+            data: {
+                car: this.id,
+                state: this.value,
+                price: price
+            },
+            dataType: 'json',
+            success: function(result) {
+                alert(result);
+            }
         });
+        
+        console.log(price);
+        // $.ajax({
+        //     type: "post",
+        //     headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'), '_method': 'post'},
+        //    url:"{{ url('carstate') }}",
+        //    data:{car:this.id, state:this.value, price:price },
+        //    success:function(data){
+        //       alert(price);
+        //    }
+        // });
   
     });
+
     </script>
 
 @endpush

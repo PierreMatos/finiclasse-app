@@ -327,6 +327,7 @@ class CarController extends AppBaseController
     public function carState(Request $request)
     {
         $car = $this->carRepository->find($request->car);
+      
 
         if (empty($request->car)) {
             Flash::error(__('translation.car not found'));
@@ -343,6 +344,7 @@ class CarController extends AppBaseController
             Flash::success(__('translation.car deleted'));
 
             return redirect(route('proposals.index'));
+            
         } else {
 
             //update $car with $state
@@ -352,6 +354,7 @@ class CarController extends AppBaseController
 
             return redirect(route('proposals.index'));
         }
+
     }
 
     public function indexNewCars()
