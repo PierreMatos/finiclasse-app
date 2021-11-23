@@ -169,7 +169,10 @@ class CarController extends AppBaseController
         if ($request->hasFile('image')) {
             $fileAdders = $car->addMultipleMediaFromRequest(['image'])
                 ->each(function ($fileAdder) {
-                    $fileAdder->toMediaCollection('cars');
+                    // $fileAdder->toMediaCollection('cars');
+                    $fileAdder->toMediaCollection('cars','s3');
+                    // $benefit->addMedia($document)->toMediaCollection('benefits','s3');
+
                 });
         }
 
@@ -265,7 +268,8 @@ class CarController extends AppBaseController
 
         //Apagar imagem antiga se for mudada
         if ($request->hasFile('image')) {
-            $car->clearMediaCollection('cars');
+            // $car->clearMediaCollection('cars');
+            $car->clearMediaCollection('cars','s3');
         }
 
         //Verificar se a imagem existe
@@ -281,6 +285,7 @@ class CarController extends AppBaseController
             $fileAdders = $car->addMultipleMediaFromRequest(['image'])
                 ->each(function ($fileAdder) {
                     $fileAdder->toMediaCollection('cars');
+                    $fileAdder->toMediaCollection('cars','s3');
                 });
         }
 
