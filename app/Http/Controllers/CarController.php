@@ -284,7 +284,7 @@ class CarController extends AppBaseController
 
             $fileAdders = $car->addMultipleMediaFromRequest(['image'])
                 ->each(function ($fileAdder) {
-                    $fileAdder->toMediaCollection('cars');
+                    // $fileAdder->toMediaCollection('cars');
                     $fileAdder->toMediaCollection('cars','s3');
                 });
         }
