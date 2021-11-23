@@ -344,7 +344,7 @@ class CarController extends AppBaseController
             Flash::success(__('translation.car deleted'));
 
             return redirect(route('proposals.index'));
-            
+
         } else {
 
             //update $car with $state

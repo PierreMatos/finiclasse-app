@@ -100,7 +100,7 @@
             },
             dataType: 'json',
             success: function(result) {
-                alert(result);
+                alert('Retoma editada com sucesso');
             }
         });
         
