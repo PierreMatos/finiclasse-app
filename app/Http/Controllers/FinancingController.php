@@ -145,7 +145,7 @@ class FinancingController extends AppBaseController
             //Actualizar imagem se colocar uma nova
             $input = $request->all();
             // $financing->addMedia($document)->toMediaCollection('financings');
-            $financing->addMedia($document)->toMediaCollection('financings'),'s3';
+            $financing->addMedia($document)->toMediaCollection('financings','s3');
         }
 
         if (empty($financing)) {
