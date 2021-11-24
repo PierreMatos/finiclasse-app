@@ -115,7 +115,7 @@
                     <!-- State Id Field -->
                     <div class="form-group"></div>
                     {!! Form::label('state_id', 'Estado') !!}
-                    {!! Form::text('state_id', isset($proposal->car->state->name) ? $proposal->car->state->name : '', ['class' => 'form-control', 'disabled']) !!}
+                    {!! Form::text('state_id', isset($proposal->car->state) ? $proposal->car->state->name : '', ['class' => 'form-control', 'disabled']) !!}
                 </div>
 
                 <!-- Color Exterior Field -->
@@ -301,6 +301,10 @@
                 </div>
             </div>
 
+
+            <!-- TODO ESTUDO DE NEGOCIO -->
+
+            
         </div>
     </div>
 </div>

@@ -93,7 +93,7 @@ class CarStatesSeeder extends Seeder
             array (
                 'id' => 7,
                 'name' => 'Proposta',
-                'description' => 'Esta viatura provém de uma retoma que pende  aceitação',
+                'description' => 'Esta viatura provém de uma retoma que pende aceitação',
                 'order' => 1,
                 'color' => '#FFEEBB',
                 'visible' => 0,
