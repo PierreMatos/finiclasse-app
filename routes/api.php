@@ -112,3 +112,6 @@ Route::middleware('auth:api')->group(function () {
 
 
 
+
+
+Route::resource('business_study_states', App\Http\Controllers\API\BusinessStudyStatesAPIController::class);

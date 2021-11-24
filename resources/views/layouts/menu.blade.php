@@ -306,4 +306,11 @@
             }
         });
     </script>
-@endpush
+@endpush<li class="nav-item">
+    <a href="{{ route('businessStudyStates.index') }}"
+       class="nav-link {{ Request::is('businessStudyStates*') ? 'active' : '' }}">
+        <p>Business Study States</p>
+    </a>
+</li>
+
+

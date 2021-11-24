@@ -175,3 +175,5 @@ Route::get('storeValidateRGPD/{id}', [UserController::class, 'storeValidateRGPD'
 Route::get('thankyou', function () {
     return view('thankyou');
 });
+
+Route::resource('businessStudyStates', App\Http\Controllers\BusinessStudyStatesController::class);
