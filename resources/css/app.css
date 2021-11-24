@@ -163,3 +163,13 @@ div.dataTables_wrapper div.dataTables_filter input {
 .menuDropActive {
     background-color: #007bff1f;
 }
+
+.tableCaption{
+    float: left;
+    height: 20px;
+    width: 20px;
+    margin-bottom: 15px;
+    border: 1px solid black;
+    clear: both;
+    /* background-color: red; */
+}

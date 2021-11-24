@@ -36,3 +36,7 @@
         </tbody>
     </table>
 </div>
+<div class="d-flex">
+    <div class="tableCaption notValidated"></div>GDPR not validated 
+    <div class="tableCaption validated ml-5"></div> GDPR validated
+</div>

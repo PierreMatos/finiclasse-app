@@ -68,7 +68,8 @@ class FinancingController extends AppBaseController
             //Actualizar imagem se colocar uma nova
             $input = $request->all();
             $financing = $this->financingRepository->create($input);
-            $financing->addMedia($document)->toMediaCollection('financings');
+            // $financing->addMedia($document)->toMediaCollection('financings');
+            $financing->addMedia($document)->toMediaCollection('financings', 's3');
         }
 
         Flash::success(__('translation.financing saved'));
@@ -130,7 +131,8 @@ class FinancingController extends AppBaseController
 
         //Apagar imagem antiga se for mudada  
         if ($request->hasFile('document')) {
-            $financing->clearMediaCollection('financings');
+            // $financing->clearMediaCollection('financings');
+            $financing->clearMediaCollection('financings','s3');
         }
 
         //Verificar se o file existe
@@ -142,7 +144,8 @@ class FinancingController extends AppBaseController
         } else {
             //Actualizar imagem se colocar uma nova
             $input = $request->all();
-            $financing->addMedia($document)->toMediaCollection('financings');
+            // $financing->addMedia($document)->toMediaCollection('financings');
+            $financing->addMedia($document)->toMediaCollection('financings'),'s3';
         }
 
         if (empty($financing)) {
@@ -178,7 +181,8 @@ class FinancingController extends AppBaseController
         }
 
         $this->financingRepository->delete($id);
-        $financing->clearMediaCollection('financings');
+        // $financing->clearMediaCollection('financings');
+        $financing->clearMediaCollection('financings','s3');
 
         Flash::success(__('translation.financing deleted'));
 

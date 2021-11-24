@@ -11,7 +11,7 @@
     <li class="treeview">
         <a href="{{ route('proposals.index') }}" class="nav-link {{ Request::is('proposals*') ? 'active' : '' }}">
             <i class="fas fa-file-contract"></i>
-            <p>Negócios</p>
+            <p>Propostas</p>
         </a>
     </li>
 @endcan

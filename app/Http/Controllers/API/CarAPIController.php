@@ -46,7 +46,9 @@ class CarAPIController extends AppBaseController
         //     $request->get('limit')
         // );
 
+        //TODO NAO mostrar carros reservados
         return new CarCollection( $this->carRepository->all());
+
         // return new CarCollection( $this->carRepository->paginate(2));
 
         // return $this->sendResponse(new CarCollection($cars::paginate()), 'Car Models retrieved successfully');

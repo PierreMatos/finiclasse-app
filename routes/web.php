@@ -68,12 +68,6 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
 
     Route::resource('carFuels', App\Http\Controllers\CarFuelController::class);
 
-    Route::resource('cars', App\Http\Controllers\CarController::class);
-    // Route::get( ['carController', 'getCars'])->name('getCars');
-    Route::get('/getcars', [CarController::class, 'getCars'])->name('getcars');
-    // Route::get('/carstate/{car_id}/{state_id}/{price}', [CarController::class, 'carState'])->name('carstate');
-    Route::post('/carstate', [CarController::class, 'carState'])->name('carstate');
-
     Route::get('clients-list', [UserController::class, 'getClients'])->name('getClients');
     Route::get('sellers-list', [UserController::class, 'getSellers'])->name('getSellers');
     Route::resource('users', App\Http\Controllers\UserController::class);
