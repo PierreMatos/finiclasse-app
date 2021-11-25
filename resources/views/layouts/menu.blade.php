@@ -279,6 +279,17 @@
                     </a>
                 </li>
             @endcan
+
+            @can('businessStudies.index')
+            <li class="treeview">
+                <a href="{{ route('businessStudyStates.index') }}"
+                class="nav-link {{ Request::is('businessStudyStates*') ? 'active' : '' }}">
+                <i class="fas fa-eye"></i>
+                <p>Business Study States</p>
+                </a>
+            </li>
+            @endcan
+
         </ul>
     </li>
 @endif
@@ -306,11 +317,6 @@
             }
         });
     </script>
-@endpush<li class="nav-item">
-    <a href="{{ route('businessStudyStates.index') }}"
-       class="nav-link {{ Request::is('businessStudyStates*') ? 'active' : '' }}">
-        <p>Business Study States</p>
-    </a>
-</li>
+@endpush
 
 

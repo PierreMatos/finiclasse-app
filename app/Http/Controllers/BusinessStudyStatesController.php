@@ -10,6 +10,8 @@ use App\Repositories\BusinessStudyStatesRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
+use Illuminate\Http\Request;
+
 
 class BusinessStudyStatesController extends AppBaseController
 {
@@ -27,9 +29,13 @@ class BusinessStudyStatesController extends AppBaseController
      * @param BusinessStudyStatesDataTable $businessStudyStatesDataTable
      * @return Response
      */
-    public function index(BusinessStudyStatesDataTable $businessStudyStatesDataTable)
+    public function index(Request $request)
     {
-        return $businessStudyStatesDataTable->render('business_study_states.index');
+        $businessStudyStates = $this->businessStudyStatesRepository->all();
+
+        return view('business_study_states.index')
+            ->with('businessStudyStatesRepo', $businessStudyStates);
+        // return $businessStudyStatesDataTable->render('business_study_states.index');
     }
 
     /**
