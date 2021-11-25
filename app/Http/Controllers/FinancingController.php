@@ -65,7 +65,6 @@ class FinancingController extends AppBaseController
             $input = $request->all();
             $financing = $this->financingRepository->create($input);
         } else {
-            //Actualizar imagem se colocar uma nova
             $input = $request->all();
             $financing = $this->financingRepository->create($input);
             // $financing->addMedia($document)->toMediaCollection('financings');

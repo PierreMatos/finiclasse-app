@@ -80,6 +80,19 @@ class UserAPIController extends AppBaseController
             return $validator->errors()->toJson();
         }
 
+        if ($request->hasFile('profile_picture') == null) {
+            //Passar a variable input sem colocar nova imagem
+            $input = $request->all();
+            $user = $this->userRepository->create($input);
+        } else {
+            $input = $request->all();
+            $user = $this->userRepository->create($input);
+            // $financing->addMedia($document)->toMediaCollection('financings');
+            $profile_picture = $request->file('profile_picture');
+
+            $user->addMedia($profile_picture)->toMediaCollection('profile_picture', 's3');
+        }
+
         $user = $this->userRepository->create($input);
 
         $user->vendor()->attach($request->vendor_id);
@@ -120,6 +133,22 @@ class UserAPIController extends AppBaseController
     {
         $input = $request->all();
 
+        //Apagar imagem antiga se for mudada  
+        if ($request->hasFile('document')) {
+            $user->clearMediaCollection('profile_picture','s3');
+        }
+
+        if ($request->hasFile('document') == null) {
+            //Passar a variable input sem colocar nova imagem
+            $input = $request->all();
+        } else {
+    
+            $profile_picture = $request->file('profile_picture');
+            //Actualizar imagem se colocar uma nova
+            $input = $request->all();
+            $user->addMedia($profile_picture)->toMediaCollection('profile_picture','s3');
+        }
+
         /** @var User $user */
         $user = $this->userRepository->find($id);
 
@@ -128,7 +157,7 @@ class UserAPIController extends AppBaseController
         }
 
         if ($request->signature) {
-           ($user->addMediaFromBase64($request->signature)->toMediaCollection('signatures'));
+           ($user->addMediaFromBase64($request->signature)->toMediaCollection('signatures','s3'));
         }
 
         $user = $this->userRepository->update($input, $id);
@@ -156,6 +185,8 @@ class UserAPIController extends AppBaseController
         }
 
         $user->delete();
+        
+        $user->clearMediaCollection('profile_picture','s3');
 
         return $this->sendSuccess('User deleted successfully');
     }

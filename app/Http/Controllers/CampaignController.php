@@ -68,7 +68,7 @@ class CampaignController extends AppBaseController
             //Actualizar imagem se colocar uma nova
             $input = $request->all();
             $campaign = $this->campaignRepository->create($input);
-            $campaign->addMedia($document)->toMediaCollection('campaigns');
+            $campaign->addMedia($document)->toMediaCollection('campaigns','s3');
         }
 
         Flash::success(__('translation.campaign saved'));
@@ -130,7 +130,7 @@ class CampaignController extends AppBaseController
 
         //Apagar imagem antiga se for mudada  
         if ($request->hasFile('document')) {
-            $campaign->clearMediaCollection('campaigns');
+            $campaign->clearMediaCollection('campaigns','s3');
         }
 
         //Verificar se o file existe
@@ -142,7 +142,7 @@ class CampaignController extends AppBaseController
         } else {
             //Actualizar imagem se colocar uma nova
             $input = $request->all();
-            $campaign->addMedia($document)->toMediaCollection('campaigns');
+            $campaign->addMedia($document)->toMediaCollection('campaigns','s3');
         }
 
         if (empty($campaign)) {
@@ -178,7 +178,7 @@ class CampaignController extends AppBaseController
         }
 
         $this->campaignRepository->delete($id);
-        $campaign->clearMediaCollection('campaigns');
+        $campaign->clearMediaCollection('campaigns','s3');
 
         Flash::success(__('translation.campaign deleted'));
 
