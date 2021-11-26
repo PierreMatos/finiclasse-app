@@ -27,10 +27,20 @@
                 
                     aria-selected="false">{{__('Car')}}</a>
 
-            </li>
-            <li class="nav-item" role="presentation">
+            </li> 
+            <li class="nav-item" role="presentation"> 
+
+                @if (isset($proposal->tradein) && $proposal->tradein->state_id == 7)
+
+                    <a class="nav-link badge-warning" id="tradein-tab" data-toggle="tab" href="#tradeins" role="tab"
+                    aria-controls="tradein" aria-selected="false">{{__('Tradein')}}</a>
+                
+                @else 
+
                 <a class="nav-link" id="tradein-tab" data-toggle="tab" href="#tradeins" role="tab"
                     aria-controls="tradein" aria-selected="false">{{__('Tradein')}}</a>
+
+                @endif
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="financings-tab" data-toggle="tab" href="#financings" role="tab"
@@ -67,20 +77,11 @@
 
     <script>
 
-        // $('.trade').on('click', function() {
-        //     let price = document.getElementById("tradein_purchase").value;
-        //     var url = "{{route('carstate', ['','',''])}}"+"/"+this.id+"/"+this.value+"/"+price;
-        //     console.log(url);
-        //     window.location.href=url;
-        // });
+
         
 
    
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+ 
    
     $(".trade").click(function(e){
   
@@ -89,9 +90,13 @@
         var price = $("input[name=tradein_purchase]").val();
         // var password = $("input[name=password]").val();
         // var email = $("input[name=email]").val();
-        
+        $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
         $.ajax({
-            url: "{{ route('carstate') }}",
+            url: "{{ route('tradeinaction') }}",
             type: "POST",
             data: {
                 car: this.id,
@@ -100,20 +105,19 @@
             },
             dataType: 'json',
             success: function(result) {
-                alert('Retoma editada com sucesso');
-            }
+                // alert('Retoma editada com sucesso');
+                alert(result.success);
+                location.reload(true);
+            },
+            error: function(error) {
+                alert('Ação sobre a retoma falhou');
+
+                console.log(error);
+        }
         });
         
-        console.log(price);
-        // $.ajax({
-        //     type: "post",
-        //     headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'), '_method': 'post'},
-        //    url:"{{ url('carstate') }}",
-        //    data:{car:this.id, state:this.value, price:price },
-        //    success:function(data){
-        //       alert(price);
-        //    }
-        // });
+        console.log(this.value);
+
   
     });
 

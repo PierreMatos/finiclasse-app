@@ -92,7 +92,7 @@ class CarStatesSeeder extends Seeder
             6 => 
             array (
                 'id' => 7,
-                'name' => 'Proposta',
+                'name' => 'Retoma proposta',
                 'description' => 'Esta viatura provém de uma retoma que pende aceitação',
                 'order' => 1,
                 'color' => '#FFEEBB',
@@ -100,6 +100,18 @@ class CarStatesSeeder extends Seeder
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',
             ),  
+
+            7 => 
+            array (
+                'id' => 8,
+                'name' => 'Retoma aceite',
+                'description' => 'Esta viatura provém de uma retoma já aceite pela direção',
+                'order' => 3,
+                'visible' => 1,
+                'color' => '#fffff',
+                'created_at' => '2019-10-22 15:50:48',
+                'updated_at' => '2019-10-22 15:50:48',
+            ),
 
         ));
 

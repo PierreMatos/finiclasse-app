@@ -207,8 +207,8 @@
 
         <div style="float: right;">
 
-        <button type="button" id="{{isset($proposal->tradein->id) ? $proposal->tradein->id : '' }}" value="3" class="trade btn btn-info" > Aceitar</button>
-        <button type="button" id="{{isset($proposal->tradein->id) ? $proposal->tradein->id : ''}}" value="0" class="trade btn btn-info" > Rejeitar</button>
+        <button type="button" id="{{isset($proposal->tradein->id) ? $proposal->tradein->id : '' }}" value="8" class="trade btn btn-info" > Aceitar</button>
+        <button type="button" id="{{isset($proposal->tradein->id) ? $proposal->tradein->id : ''}}" value="7" class="trade btn btn-info" > Rejeitar</button>
 
             @if ($proposal->tradein_id != '')
                 <a href="{{ route('cars.show', [$proposal->tradein->id]) }}">Ver tudo</a>
@@ -247,28 +247,246 @@
     </div>
 
     <div class="tab-pane" id="proposals" role="tabpanel" aria-labelledby="proposals-tab">
-        <div class="row">
+        <div class="row mb-5">
 
             <!-- Proposal Value Field -->
             <div class="form-group col-sm-4">
-                <p>Valor do negócio</p>
-                <h2>@money($proposal->prop_value)</h2>
+                <p>Diferença</p>
+                <h2>@money($proposal->initialBusinessStudy->total_diff_amount)</h2>
             </div>
 
             <!-- Financial Value Field -->
             <div class="form-group col-sm-4">
-                <p>Valor do financiamento</p>
-                <h2>@money($proposal->prop_value)</h2>
+                <p>Desconto</p>
+                <h2>@money($proposal->finalBusinessStudy->total_discount_amount)</h2>
             </div>
 
             <!-- Tradein Value Field -->
             <div class="form-group col-sm-4">
-                <p>Valor da retoma</p>
-                <h2>@money($proposal->prop_value)</h2>
+                <p>%</p>
+                <h2>@money($proposal->finalBusinessStudy->total_discount_perc)</h2>
+            </div>
+ 
+        </div>
+
+
+        <div class="row">
+
+        <div class="col-12 mb-5">
+            <h1>Estudo de negócio</h1>
+        </div>
+            <!-- TODO ESTUDO DE NEGOCIO -->
+
+            <!-- INICIAL -->
+            <div class="form-group col-sm-6">
+                <!-- <p>Valor do negócio</p> -->
+                <h2>Inicial</h2>
             </div>
 
-            <!-- Proposal Number Field -->
-            <div class="form-group col-sm-4">
+            <!-- FINAL -->
+            <div class="form-group col-sm-6">
+                <!-- <p>Valor do financiamento</p> -->
+                <h2>Final</h2>
+            </div>
+
+            <!-- INICIAL -->
+            <div class="form-group col-sm-6">
+                <h5>Preço base</h5>
+                <p>@money($proposal->initialBusinessStudy->base_price)</p>
+            </div>
+
+            <!-- FINAL -->
+            <div class="form-group col-sm-6">
+                <h5>Preço base</h5>
+                <p>@money($proposal->finalBusinessStudy->base_price)</p>
+            </div>
+
+            <!-- INICIAL -->
+            <div class="form-group col-sm-6">
+                <h5>Total Extras</h5>
+                <p>@money($proposal->initialBusinessStudy->extras_total)</p>
+            </div>
+
+            <!-- FINAL -->
+            <div class="form-group col-sm-6">
+                <h5>Total Extras</h5>
+                <p>@money($proposal->finalBusinessStudy->extras_total)</p>
+            </div>
+
+            <!-- INICIAL -->
+            <div class="form-group col-sm-6">
+                <h5>PTL</h5>
+                <p>@money($proposal->initialBusinessStudy->ptl)</p>
+            </div>
+
+            <!-- FINAL -->
+            <div class="form-group col-sm-6">
+                <h5>PTL</h5>
+                <p>@money($proposal->finalBusinessStudy->ptl)</p>
+            </div>
+
+            <!-- INICIAL -->
+            <div class="form-group col-sm-6">
+                <h5>SIGPU</h5>
+                <p>@money($proposal->initialBusinessStudy->sigpu)</p>
+            </div>
+
+            <!-- FINAL -->
+            <div class="form-group col-sm-6">
+                <h5>SIGPU</h5>
+                <p>@money($proposal->finalBusinessStudy->sigpu)</p>
+            </div>
+
+            <!-- INICIAL -->
+            <div class="form-group col-sm-6">
+                <h5>Total Transformação</h5>
+                <p>@money($proposal->initialBusinessStudy->total_transf)</p>
+            </div>
+
+            <!-- FINAL -->
+            <div class="form-group col-sm-6">
+                <h5>Total Transformação</h5>
+                <p>@money($proposal->finalBusinessStudy->total_transf)</p>
+            </div>
+
+            <!-- INICIAL -->
+            <div class="form-group col-sm-6">
+                <h5>Total Apoios</h5>
+                <p>@money($proposal->initialBusinessStudy->total_benefits)</p>
+            </div>
+
+            <!-- FINAL -->
+            <div class="form-group col-sm-6">
+                <h5>Total Apoios</h5>
+                <p>@money($proposal->finalBusinessStudy->total_benefits)</p>
+            </div>
+
+            <!-- INICIAL -->
+            <div class="form-group col-sm-6">
+                <h5>Total Extras</h5>
+                <p>@money($proposal->initialBusinessStudy->extras_total2)</p>
+            </div>
+
+            <!-- FINAL -->
+            <div class="form-group col-sm-6">
+                <h5>Total Extras</h5>
+                <p>@money($proposal->finalBusinessStudy->extras_total2)</p>
+            </div>
+
+            <!-- INICIAL -->
+            <div class="form-group col-sm-6">
+                <h5>Sub Total</h5>
+                <p>@money($proposal->initialBusinessStudy->extras_total2)</p>
+            </div>
+
+            <!-- FINAL -->
+            <div class="form-group col-sm-6">
+                <h5>Sub Total</h5>
+                <p>@money($proposal->finalBusinessStudy->extras_total2)</p>
+            </div>
+
+            <!-- INICIAL -->
+            <div class="form-group col-sm-6">
+                <h5>ISV</h5>
+                <p>@money($proposal->initialBusinessStudy->isv)</p>
+            </div>
+
+            <!-- FINAL -->
+            <div class="form-group col-sm-6">
+                <h5>ISV</h5>
+                <p>@money($proposal->finalBusinessStudy->isv)</p>
+            </div>
+
+            <!-- INICIAL -->
+            <div class="form-group col-sm-6">
+                <h5>IVA</h5>
+                <p>@money($proposal->initialBusinessStudy->iva)</p>
+            </div>
+
+            <!-- FINAL -->
+            <div class="form-group col-sm-6">
+                <h5>IVA</h5>
+                <p>@money($proposal->finalBusinessStudy->iva)</p>
+            </div>
+
+            <!-- INICIAL -->
+            <div class="form-group col-sm-6">
+                <h5>Total</h5>
+                <p>@money($proposal->initialBusinessStudy->total)</p>
+            </div>
+
+            <!-- FINAL -->
+            <div class="form-group col-sm-6">
+                <h5>Total</h5>
+                <p>@money($proposal->finalBusinessStudy->total)</p>
+            </div>
+
+            <!-- INICIAL -->
+            <div class="form-group col-sm-6">
+                <h5>Venda</h5>
+                <p>@money($proposal->initialBusinessStudy->sell)</p>
+            </div>
+
+            <!-- FINAL -->
+            <div class="form-group col-sm-6">
+                <h5>Venda</h5>
+                <p>@money($proposal->finalBusinessStudy->sell)</p>
+            </div>
+
+            <!-- INICIAL -->
+            <div class="form-group col-sm-6">
+                <h5>Valor de compra</h5>
+                <p>@money($proposal->initialBusinessStudy->purchase_price)</p>
+            </div>
+
+            <!-- FINAL -->
+            <div class="form-group col-sm-6">
+                <h5>Valor de compra</h5>
+                <p>@money($proposal->finalBusinessStudy->purchase_price)</p>
+            </div>
+
+            <!-- INICIAL -->
+            <div class="form-group col-sm-6">
+                <h5>Valor de venda</h5>
+                <p>@money($proposal->initialBusinessStudy->selling_price)</p>
+            </div>
+
+            <!-- FINAL -->
+            <div class="form-group col-sm-6">
+                <h5>Valor de Venda</h5>
+                <p>@money($proposal->finalBusinessStudy->selling_price)</p>
+            </div>
+
+            <!-- INICIAL -->
+            <div class="form-group col-sm-6">
+                <h5>Diferença de retoma</h5>
+                <p>@money($proposal->initialBusinessStudy->total_diff_amount)</p>
+            </div>
+
+            <!-- FINAL -->
+            <div class="form-group col-sm-6">
+                <h5>Diferença da retoma</h5>
+                <p>@money($proposal->finalBusinessStudy->total_diff_amount)</p>
+            </div>
+
+            <!-- INICIAL -->
+            <div class="form-group col-sm-6">
+                <h5>Valor a liquidar</h5>
+                <p>@money($proposal->initialBusinessStudy->settle_amount)</p>
+            </div>
+
+            <!-- FINAL -->
+            <div class="form-group col-sm-6">
+                <h5>Valor a liquidar</h5>
+                <p>@money($proposal->finalBusinessStudy->settle_amount)</p>
+            </div>
+
+
+
+
+
+              <!-- Proposal Number Field -->
+              <div class="form-group col-sm-4">
                 {!! Form::label('pos_number', 'Nº da proposta') !!}
                 {!! Form::text('pos_number', isset($proposal->pos_number) ? $proposal->pos_number : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
@@ -285,8 +503,8 @@
                 {!! Form::text('last_contact_date', isset($proposal->last_contact_date) ? $proposal->last_contact_date : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
 
-            <!-- Next Contact Date Field -->
-            <div class="form-group col-sm-4">
+              <!-- Next Contact Date Field -->
+              <div class="form-group col-sm-4">
                 {!! Form::label('next_contact_date', 'Próximo contato') !!}
                 {!! Form::text('next_contact_date', isset($proposal->next_contact_date) ? $proposal->next_contact_date : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
@@ -302,9 +520,7 @@
             </div>
 
 
-            <!-- TODO ESTUDO DE NEGOCIO -->
 
-            
         </div>
     </div>
 </div>

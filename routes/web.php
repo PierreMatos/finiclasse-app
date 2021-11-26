@@ -88,7 +88,6 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
     // Route::get( ['carController', 'getCars'])->name('getCars');
     Route::get('/getcars', [CarController::class, 'getCars'])->name('getcars');
     // Route::get('/carstate/{car_id}/{state_id}/{price}', [CarController::class, 'carState'])->name('carstate');
-    Route::POST('/carstate', [CarController::class, 'carState'])->name('carstate');
 
     // Download
     Route::get('/download-financing{id}', [FinancingController::class, 'download']);
@@ -177,3 +176,4 @@ Route::get('thankyou', function () {
 });
 
 Route::resource('businessStudyStates', App\Http\Controllers\BusinessStudyStatesController::class);
+Route::POST('/tradeinaction', [CarController::class, 'carState'])->name('tradeinaction');

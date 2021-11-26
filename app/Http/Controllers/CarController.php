@@ -331,6 +331,10 @@ class CarController extends AppBaseController
 
     public function carState(Request $request)
     {
+        // dd($request->state);
+        // return ($request->state);
+        // return response()->json(['success'=>'Ajax request submitted successfully']);
+
         $car = $this->carRepository->find($request->car);
       
 
@@ -340,25 +344,27 @@ class CarController extends AppBaseController
             return redirect(route('proposals.index'));
         }
 
-        if ($request->state = 0) {
+        // if ($request->state = 0) {
 
-            //delete car
+        //     //delete car
 
-            $this->carRepository->delete($request->car);
+        //     $this->carRepository->delete($request->car);
 
-            Flash::success(__('translation.car deleted'));
+        //     Flash::success(__('translation.car deleted'));
 
-            return redirect(route('proposals.index'));
+        //     return redirect(route('proposals.index'));
 
-        } else {
+        // } else {
 
             //update $car with $state
             $car = $this->carRepository->update(['state_id' => $request->state, 'tradein_purchase' => $request->price], $request->car);
+            
+            return response()->json(['success'=> $request->state]);
 
-            Flash::success(__('translation.retoma accepted'));
+            // Flash::success(__('translation.retoma accepted'));
 
             return redirect(route('proposals.index'));
-        }
+        // }
 
     }
 

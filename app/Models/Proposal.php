@@ -146,9 +146,17 @@ class Proposal extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
 
-     public function businessStudy()
+     public function initialBusinessStudy()
     {
-        return $this->belongsTo(\App\Models\BusinessStudy::class, 'business_study_id', 'id');
+        return $this->belongsTo(\App\Models\BusinessStudy::class, 'initial_business_study_id', 'id');
+    }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+
+     public function finalBusinessStudy()
+    {
+        return $this->belongsTo(\App\Models\BusinessStudy::class, 'final_business_study_id', 'id');
     }
 
     /**
