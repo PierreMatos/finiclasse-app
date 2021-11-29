@@ -19,7 +19,7 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'email_verified_at' => $this->email_verified_at,
-            'password' => $this->password,
+            // 'password' => $this->password,
             'city' => $this->city,
             'adress' => $this->adress,
             'zip_code' => $this->zip_code,
@@ -31,7 +31,11 @@ class UserResource extends JsonResource
             'gdpr_type' => $this->gdpr_type,
             'finiclasse_employee' => $this->finiclasse_employee,
             'stand' => $this->stand->name ?? '',
-            'service_car_plate' => $this->serviceCar->plate ?? '',
+            'service_car' => [
+                'plate' => $this->serviceCar->plate ?? '',
+                'model' => $this->serviceCar->model->name ?? '',
+                'make' => $this->serviceCar->model->make->name ?? '',
+            ],
             'client_type' => $this->clientType->name ?? '',
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at

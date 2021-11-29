@@ -359,7 +359,7 @@ class CarController extends AppBaseController
             //update $car with $state
             $car = $this->carRepository->update(['state_id' => $request->state, 'tradein_purchase' => $request->price], $request->car);
             
-            return response()->json(['success'=> $request->state]);
+            return response()->json(['success'=> 'Viatura editada com sucesso']);
 
             // Flash::success(__('translation.retoma accepted'));
 
