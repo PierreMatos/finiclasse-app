@@ -56,7 +56,19 @@ class FinancingAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        $financing = $this->financingRepository->create($input);
+        // $document = $request->file('document');
+
+        if ($request->hasFile('document') == null) {
+            //Passar a variable input sem colocar nova imagem
+            $input = $request->all();
+            $financing = $this->financingRepository->create($input);
+        } else {
+            $input = $request->all();
+            $financing = $this->financingRepository->create($input);
+            $financing->addMedia($document)->toMediaCollection('financings', 's3');
+        }
+
+        // $financing = $this->financingRepository->create($input);
 
         return $this->sendResponse(new FinancingResource($financing), 'Financing saved successfully');
     }
