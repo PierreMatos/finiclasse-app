@@ -102,7 +102,7 @@ class ProposalResource extends JsonResource
                 'category_id' => $this->tradein->category->id ?? '',
                 'km' => $this->tradein->km ?? '',
                 'motorization' => $this->tradein->motorization ?? '',
-                'registration' => isset($this->tradein->registration) ? $this->car->registration->isoFormat('M/Y') : '',
+                'registration' => isset($this->tradein->registration) ? $this->tradein->registration->isoFormat('M/Y') : '',
                 'tradein_sale' => $this->tradein->tradein_sale ?? '',
                 'price' => $this->tradein->price ?? '',
                 'tradein_observations' => $this->tradein->tradein_observations ?? '',
@@ -127,7 +127,7 @@ class ProposalResource extends JsonResource
             // 'authorization' => $this->authorization
             'created_at' => $this->created_at->isoFormat('D/M/Y'),
             'created_at_diff' => $this->created_at->diffForHumans(),
-            'updated_at' => $this->updated_at->isoFormat('D/M/Y'),
+            'updated_at' => $this->updated_at->isoFormat('D/M/Y') ?? '',
             'updated_at_diff' => $this->updated_at->diffForHumans()
 
         ];
