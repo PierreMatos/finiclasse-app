@@ -105,7 +105,7 @@ class CarAPIController extends AppBaseController
         if ($request->hasFile('image')) {
             $fileAdders = $car->addMultipleMediaFromRequest(['image'])
                 ->each(function ($fileAdder) {
-                    $fileAdder->toMediaCollection('cars');
+                    $fileAdder->toMediaCollection('cars','s3');
                 });
         }
 
@@ -113,7 +113,7 @@ class CarAPIController extends AppBaseController
         if ($request->hasFile('pos')) {
             $fileAdders = $car->addMultipleMediaFromRequest(['pos'])
                 ->each(function ($fileAdder) {
-                    $fileAdder->toMediaCollection('pos');
+                    $fileAdder->toMediaCollection('pos','s3');
                 });
         }
 
@@ -182,7 +182,7 @@ class CarAPIController extends AppBaseController
 
             $fileAdders = $car->addMultipleMediaFromRequest(['image'])
                 ->each(function ($fileAdder) {
-                    $fileAdder->toMediaCollection('cars');
+                    $fileAdder->toMediaCollection('cars','s3');
                 });
         }
 
@@ -196,7 +196,7 @@ class CarAPIController extends AppBaseController
 
             $fileAdders = $car->addMultipleMediaFromRequest(['pos'])
                 ->each(function ($fileAdder) {
-                    $fileAdder->toMediaCollection('pos');
+                    $fileAdder->toMediaCollection('pos','s3');
                 });
         }
 
