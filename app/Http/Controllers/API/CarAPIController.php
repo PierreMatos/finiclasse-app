@@ -167,13 +167,13 @@ class CarAPIController extends AppBaseController
         }
 
         //Verificar se a imagem existe
-        $file = $request->file('image');
+        // $file = $request->file('image');
 
         //Verificar se a POS existe
-        $file = $request->file('pos');
+        // $file = $request->file('pos');
 
         //adicionar imagem
-        if ($request->hasFile('image') == null) {
+        if (empty($request->hasFile('image'))) {
             //Passar a variable input sem colocar nova imagem
             $input = $request->all();
         } else {
@@ -187,7 +187,7 @@ class CarAPIController extends AppBaseController
         }
 
         //adicionar POS
-        if ($request->hasFile('pos') == null) {
+        if (empty($request->hasFile('pos'))) {
             //Passar a variable input sem colocar novo pos
             $input = $request->all();
         } else {
@@ -211,7 +211,9 @@ class CarAPIController extends AppBaseController
             return $this->sendError('Car not found');
         }
 
-        $car->proposal->touch();
+        
+        
+        // $car->proposal->touch();
         $car = $this->carRepository->update($input, $id);
 
         return $this->sendResponse(new CarResource($car), 'Car updated successfully');
