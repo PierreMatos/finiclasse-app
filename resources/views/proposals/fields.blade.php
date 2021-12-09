@@ -152,7 +152,7 @@
 
             <!-- Name Field & Image Field -->
             <div class="form-group col-sm-4" style="display: grid; text-align: center; justify-content: center;">
-                @if ($proposal->tradein_id != '')
+                @if (!empty($proposal->tradein_id))
                     {!! Form::label('make_id', isset($proposal->tradein->model->make->name) ? $proposal->tradein->model->make->name : '') !!}
                     <img src="{{ $proposal->tradein->getFirstMediaUrl('cars', 'thumb') }}"
                         style="max-width: 250px;" />
