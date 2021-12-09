@@ -278,11 +278,8 @@ class UserAPIController extends AppBaseController
     public function getClients(Request $request)
     {
 
-        $clients = Auth::user()->leads;
-        // return response()->json($clients, 200); 
+        $clients = Auth::user()->leads->sortBy('name');
 
-        // User::where(('vendor_id', Auth::user()->id));
-        // dd($clients);
         return $this->sendResponse(ClientResource::collection($clients), 'Clients retrieved successfully');
 
     }
