@@ -63,6 +63,7 @@ class FinancingProposalAPIController extends AppBaseController
 
         $items = collect();
 
+        dd($inputs);
 
         foreach ($inputs as $input){
 
