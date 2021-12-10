@@ -57,15 +57,27 @@ class FinancingProposalAPIController extends AppBaseController
 
         $inputs = $request->all();
 
+        // dd($inputs[0]);
         // DELTE RECORDS BEFORE INSERTING NEW
         $deletedRows = FinancingProposal::where('proposal_id', $inputs[0]['proposal_id'])->delete();
 
         $items = collect();
 
+
         foreach ($inputs as $input){
+
 
             // ADD NEW FINANCINGS TO PROPOSAL
             $newFinancingProposal = $this->financingProposalRepository->create($input);
+
+            if (collect($input)->has('document')) {
+                // add Document
+                $fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['document'])
+                ->each(function ($fileAdder) {
+                $fileAdder->toMediaCollection('financingproposal','s3');
+            });
+
+       }
 
             $items->push($newFinancingProposal);
 

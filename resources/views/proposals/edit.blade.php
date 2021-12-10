@@ -54,7 +54,7 @@
 
         <div class="card">
 
-            {!! Form::model($proposal, ['route' => ['proposals.update', $proposal->id], 'method' => 'patch', 'files' => true]) !!}
+            <!-- {!! Form::model($proposal, ['route' => ['proposals.update', $proposal->id], 'method' => 'patch', 'files' => true]) !!} -->
 
             <div class="card-body">
                 <div class="row">
@@ -67,7 +67,7 @@
                 <a href="{{ route('proposals.index') }}" class="btn btn-default">{{ __('Cancel') }}</a>
             </div> -->
 
-            {!! Form::close() !!}
+            <!-- {!! Form::close() !!} -->
 
         </div>
     </div>

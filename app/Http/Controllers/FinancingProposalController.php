@@ -52,15 +52,33 @@ class FinancingProposalController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateFinancingProposalRequest $request)
+    public function store(Request $request)
     {
         $input = $request->all();
 
+        dd($input);
+
+        $proposal = $this->ProposalRepository->find($input->proposal_id);
+
+        $proposal->financings()->detach();
+
+        $proposal->financings()->sync($financings);
+
         $financingProposal = $this->financingProposalRepository->create($input);
+
+        if (collect($input)->has('document')) {
+                
+                // add Document
+                $fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['document'])
+                ->each(function ($fileAdder) {
+                $fileAdder->toMediaCollection('financingproposal','s3');
+            });
+
+        }
 
         Flash::success('Financing Proposal saved successfully.');
 
-        return redirect(route('financingProposals.index'));
+        return redirect(route('proposals.index'));
     }
 
     /**
@@ -125,7 +143,7 @@ class FinancingProposalController extends AppBaseController
 
         Flash::success('Financing Proposal updated successfully.');
 
-        return redirect(route('financingProposals.index'));
+        return redirect(route('proposals.index'));
     }
 
     /**

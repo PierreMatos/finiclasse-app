@@ -59,5 +59,12 @@ class Financing extends Model implements HasMedia
         'document' => 'nullable|mimes:pdf'
     ];
 
+    /**
+        * The users that belong to the role.
+        */
+       public function proposals()
+       {
+           return $this->belongsToMany(Proposal::class);
+       }
     
 }

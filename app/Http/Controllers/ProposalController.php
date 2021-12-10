@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateProposalRequest;
 use App\Http\Requests\UpdateProposalRequest;
 use App\Repositories\ProposalRepository;
+use App\Repositories\FinancingRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -17,10 +18,12 @@ class ProposalController extends AppBaseController
 {
     /** @var  ProposalRepository */
     private $proposalRepository;
+    private $financingRepository;
 
-    public function __construct(ProposalRepository $proposalRepo)
+    public function __construct(ProposalRepository $proposalRepo, FinancingRepository $financingRepo)
     {
         $this->proposalRepository = $proposalRepo;
+        $this->financingRepository = $financingRepo;
     }
 
     /**
@@ -99,6 +102,8 @@ class ProposalController extends AppBaseController
     public function edit($id)
     {
         $proposal = $this->proposalRepository->find($id);
+        $financings = $this->financingRepository->all();
+        $financingproposal = $this->financingRepository->all();
 
         if (empty($proposal)) {
             Flash::error('Proposal not found');
@@ -107,7 +112,8 @@ class ProposalController extends AppBaseController
         }
 
         return view('proposals.edit')
-            ->with('proposal', $proposal);
+            ->with('proposal', $proposal)
+            ->with('financings', $financings);
     }
 
     /**
