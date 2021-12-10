@@ -71,6 +71,7 @@ class FinancingProposalAPIController extends AppBaseController
             $newFinancingProposal = $this->financingProposalRepository->create($input);
 
             // add POS
+            dd($input);
         // if ($input->hasFile('document')) {
             $fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['document'])
                 ->each(function ($fileAdder) {
