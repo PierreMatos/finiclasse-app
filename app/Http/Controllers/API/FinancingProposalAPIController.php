@@ -63,9 +63,9 @@ class FinancingProposalAPIController extends AppBaseController
 
         $items = collect();
 
-        dd($inputs);
-
+        
         foreach ($inputs as $input){
+            dd($input['proposal_id']);
 
 
             // ADD NEW FINANCINGS TO PROPOSAL
