@@ -119,7 +119,7 @@ return [
     'starts_with'          => 'Este campo deve começar com um dos seguintes valores: :values.',
     'string'               => 'Este campo deve ser uma cadeia de texto.',
     'timezone'             => 'Esta deve ser uma zona válida.',
-    'unique'               => 'Isso já foi utilizado.',
+    'unique'               => 'O :attribute já foi utilizado.',
     'uploaded'             => 'Falhou ao carregar.',
     'url'                  => 'Este formato é inválido.',
     'uuid'                 => 'Este deve ser um UUID válido.',
