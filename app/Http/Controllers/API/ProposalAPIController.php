@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\MessageBag;
 use \Illuminate\Support\Facades\Validator;
 USE App\Mail\ProposalOrder;
+use Illuminate\Support\Facades\Mail;
+
 
 /**
  * Class ProposalController
@@ -455,6 +457,7 @@ class ProposalAPIController extends AppBaseController
 
         $proposal = Proposal::find($id);
 
+        return (Mail::send(new ProposalOrder($proposal)));
         // DD(!empty($proposal->tradein));
         return new ProposalOrder($proposal);
 

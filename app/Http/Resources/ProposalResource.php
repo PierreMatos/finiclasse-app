@@ -58,7 +58,7 @@ class ProposalResource extends JsonResource
                 'gdpr_confirmation' => $this->client->gdpr_confirmation ?? '',
             ],
             'vendor' => $this->vendor->name ?? '',
-            'price' => $this->car->price ?? '',
+            'price' => $this->price ?? '',
             'pos_number' => $this->pos_number ?? '',
             'prop_value' => $this->prop_value ?? '',
             'first_contact_date' => $this->first_contact_date ?? '',
