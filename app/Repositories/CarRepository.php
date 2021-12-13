@@ -91,6 +91,11 @@ class CarRepository  extends BaseRepository
 
         }
 
+        // Nao listar viaturas POS e de retoma pendente
+        // if ($this->model->table == 'cars'){
+            $query = $query->where('state_id', '!=', 5)->where('state_id', '!=', 7);
+        // }
+
         return $query->get($columns);
     }
 
