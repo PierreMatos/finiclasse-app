@@ -18,10 +18,10 @@ class Authenticate extends Middleware
     {      
         if (! $request->expectsJson()) {
         
-        return    Route::get('/', [
-            HomeController::class, 'index'
-        ])->name('home');
-            // return route('login');
+        // return    Route::get('/', [
+        //     HomeController::class, 'index'
+        // ])->name('home');
+            return route('login');
         }
     }
 }
