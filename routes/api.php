@@ -107,6 +107,9 @@ Route::middleware('auth:api')->group(function () {
 
     // Validate RGPD with Email or SMS
     Route::POST('notify_rgpd', [App\Http\Controllers\API\UserAPIController::class, 'createValidateRGPD'])->name('notify_rgpd');
+
+    Route::get('/send_proposal/{id}', [App\Http\Controllers\API\ProposalAPIController::class, 'sendProposal'])->name('send_proposal');
+
 });
 
 

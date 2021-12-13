@@ -103,11 +103,10 @@ abstract class BaseRepository
             $query->limit($limit);
         }
 
-        //eliminar viaturas POS da listagem
+        //eliminar viaturas POS e retomas propostas da listagem
 
-        // dd($this->model->table);
         if ($this->model->table == 'cars'){
-            $query = $query->where('state_id', '!=', 5);
+            $query = $query->where('state_id', '!=', 5)->where('state_id', '!=', 7);
         }
 
         return $query;

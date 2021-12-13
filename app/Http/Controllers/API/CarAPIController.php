@@ -152,7 +152,7 @@ class CarAPIController extends AppBaseController
     public function update($id, Request $request)
     {
         $input = $request->all();
-
+dd($input);
         /** @var Car $car */
         $car = $this->carRepository->find($id);
 
@@ -211,7 +211,6 @@ class CarAPIController extends AppBaseController
             return $this->sendError('Car not found');
         }
 
-        
         
         // $car->proposal->touch();
         $car = $this->carRepository->update($input, $id);

@@ -174,6 +174,42 @@
                 {!! Form::number('price_campaign', isset($car->price_campaign) ? $car->price_campaign : '', ['class' => 'form-control','step' => 'any']) !!}
             </div>
 
+            <!-- IVA -->
+            <div class="form-group col-md-3">
+                {!! Form::label('iva', 'IVA') !!}
+                {!! Form::number('iva', isset($car->iva) ? $car->iva : '', ['class' => 'form-control','step' => 'any']) !!}
+            </div>
+
+            <!-- ISV -->
+            <div class="form-group col-md-3">
+                {!! Form::label('isv', 'ISV') !!}
+                {!! Form::number('isv', isset($car->isv) ? $car->isv : '', ['class' => 'form-control','step' => 'any']) !!}
+            </div>
+
+            <!-- Total extras -->
+            <div class="form-group col-md-3">
+                {!! Form::label('extras_total', 'Total Extras') !!}
+                {!! Form::number('extras_total', isset($car->extras_total) ? $car->extras_total : '', ['class' => 'form-control','step' => 'any']) !!}
+            </div>
+
+            <!-- Sub Total -->
+            <div class="form-group col-md-3">
+                {!! Form::label('sub_total', 'Sub total') !!}
+                {!! Form::number('sub_total', isset($car->sub_total) ? $car->sub_total : '', ['class' => 'form-control','step' => 'any']) !!}
+            </div>
+
+            <!-- PTL -->
+            <div class="form-group col-md-3">
+                {!! Form::label('ptl', 'PTL') !!}
+                {!! Form::number('ptl', isset($car->ptl) ? $car->ptl : '', ['class' => 'form-control','step' => 'any']) !!}
+            </div>
+
+            <!-- SIGPU -->
+            <div class="form-group col-md-3">
+                {!! Form::label('sigpu', 'SIGPU') !!}
+                {!! Form::number('sigpu', isset($car->sigpu) ? $car->sigpu : '', ['class' => 'form-control','step' => 'any']) !!}
+            </div>
+
             <!-- Order Date Field -->
             <div class="form-group col-md-3">
                 {!! Form::label('order_date', 'Data de encomenda') !!}
