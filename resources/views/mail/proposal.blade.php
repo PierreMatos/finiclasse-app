@@ -19,7 +19,7 @@
 <br>
 
 <div>
-    <p>Queremos felicitá-lo pela escolha da viatura de marca <strong>{{ $proposal->car->model->make->name }}</strong> com o modelo <strong>{{ $proposal->car->model->name }}</strong>.</p>
+    <p>Queremos felicitá-lo pela escolha da viatura de marca <strong>{{ $proposal->car->model->make->name }}</strong> com o modelo <strong>{{ $proposal->car->model->name }}</strong>!</p>
 </div>
 
 <div style="">
