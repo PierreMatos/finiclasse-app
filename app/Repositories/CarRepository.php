@@ -87,7 +87,7 @@ class CarRepository  extends BaseRepository
 
         }elseif($user->hasRole(['Chefe de vendas', 'Vendedor'])){ 
 
-            $query = $query->where('stand_id','=', $user->stand_id);
+            // $query = $query->where('stand_id','=', $user->stand_id);
 
         }
 
