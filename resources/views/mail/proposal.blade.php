@@ -23,7 +23,7 @@
 </div>
 
 <div style="">
-
+{{$proposal->initialBusinessStudy->sub_total}}
     @if (!empty($proposal->finalBusinessStudy->sub_total))
     
         Sub total {{$proposal->finalBusinessStudy->sub_total}}
