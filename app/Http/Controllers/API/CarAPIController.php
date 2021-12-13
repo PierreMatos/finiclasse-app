@@ -152,7 +152,8 @@ class CarAPIController extends AppBaseController
     public function update($id, Request $request)
     {
         $input = $request->all();
-return json_encode($input);
+// return json_encode($input);
+return $this->sendResponse($input,$input);
         /** @var Car $car */
         $car = $this->carRepository->find($id);
 
