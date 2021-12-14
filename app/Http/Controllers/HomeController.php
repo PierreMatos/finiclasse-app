@@ -40,7 +40,7 @@ class HomeController extends Controller
         $proposalClosePer = ($proposalClose / $proposals) * 100;
 
         // Ultimas propostas
-        $latestProposals = Proposal::latest()->take(5)->get();
+        $latestProposals = Proposal::latest()->where('car_id', '!=', null)->take(5)->get();
 
         return view('home')
             ->with('carsCount', $carsCount)
