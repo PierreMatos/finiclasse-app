@@ -132,6 +132,7 @@ class UserAPIController extends AppBaseController
      */
     public function update($id, Request $request)
     {
+        $request->request->add(['gdpr_confirmation' => Carbon::now()]);
         $input = $request->all();
 
         //Apagar imagem antiga se for mudada  
@@ -157,9 +158,11 @@ class UserAPIController extends AppBaseController
             return $this->sendError('User not found');
         }
 
+        
         if ($request->signature) {
            ($user->addMediaFromBase64($request->signature)->toMediaCollection('signatures','s3'));
-           $input->gdpr_confirmation = Carbon::now();
+           $request->request->add(['gdpr_confirmation' => Carbon::now()]);
+           $input = $request->all();
         }
 
         $user = $this->userRepository->update($input, $id);
