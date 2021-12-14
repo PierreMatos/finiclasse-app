@@ -20,6 +20,7 @@ use App\Http\Requests\API\CreateUserAPIRequest;
 use App\Http\Requests\API\UpdateUserAPIRequest;
 
 
+
 /**
  * Class UserController
  * @package App\Http\Controllers\API
@@ -158,6 +159,7 @@ class UserAPIController extends AppBaseController
 
         if ($request->signature) {
            ($user->addMediaFromBase64($request->signature)->toMediaCollection('signatures','s3'));
+           $input->gdpr_confirmation = Carbon::now();
         }
 
         $user = $this->userRepository->update($input, $id);

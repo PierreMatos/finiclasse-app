@@ -249,7 +249,7 @@
 
             @foreach ( $financings as $financing )
 
-            <input type="text" name="financing_id[]" value="{{$financing->id}}" />
+            <input type="hidden" name="financing_id[]" value="{{$financing->id}}" />
 
             <!-- {{ Form::hidden('financing_id', $financing->id, array('id' => $financing->id)) }} -->
 
@@ -269,7 +269,7 @@
             <!-- Financial Type Field -->
             <div class="form-group col-sm-7">
                 {!! Form::label('name', 'Tipo de financiamento') !!}
-                {!! Form::text('name', isset($financing->name) ? $financing->id : '', ['class' => 'form-control',
+                {!! Form::text('name', isset($financing->name) ? $financing->name : '', ['class' => 'form-control',
                 'disabled']) !!}
             </div>
 
