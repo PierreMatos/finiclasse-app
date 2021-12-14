@@ -62,6 +62,12 @@ class BusinessStudy extends Model
         'isv',
         'sigpu',
         'ptl',
+        'sale',
+        'total',
+        'expenses',
+        'taxes',
+        'warranty',
+        'purchase_price',
         'business_study_authorization_id',
         'tradein_id'
     ];
@@ -89,6 +95,12 @@ class BusinessStudy extends Model
         'isv' => 'integer',
         'sigpu' => 'integer',
         'ptl' => 'integer',
+        'sale' => 'integer',
+        'total' => 'integer',
+        'expenses' => 'integer',
+        'taxes' => 'integer',
+        'warranty' => 'integer',
+        'purchase_price' => 'integer',
         'business_study_authorization_id' => 'integer',
         'tradein_id' => 'integer'
     ];
