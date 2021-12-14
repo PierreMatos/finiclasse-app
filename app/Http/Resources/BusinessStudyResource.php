@@ -31,6 +31,8 @@ class BusinessStudyResource extends JsonResource
             'total_discount_perc' => $this->total_discount_perc,
             'iva' => $this->iva,
             'isv' => $this->isv,
+            'sigpu' => $this->sigpu,
+            'ptl' => $this->ptl,
             'business_study_authorization_id' => $this->business_study_authorization_id,
             'business_study_authorization' => [
                 'id' => $this->businessStudyAuthorization->id ?? '',
