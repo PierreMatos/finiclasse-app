@@ -51,6 +51,7 @@ class BusinessStudy extends Model
         'sub_total',
         'total_benefits',
         'selling_price',
+        'base_price',
         'tradein_id',
         'tradein_diff',
         'settle_amount',
@@ -59,6 +60,8 @@ class BusinessStudy extends Model
         'total_discount_perc',
         'iva',
         'isv',
+        'sigpu',
+        'ptl',
         'business_study_authorization_id',
         'tradein_id'
     ];
@@ -76,6 +79,7 @@ class BusinessStudy extends Model
         'sub_total' => 'integer',
         'total_benefits' => 'integer',
         'selling_price' => 'integer',
+        'base_price' => 'integer',
         'tradein_diff' => 'integer',
         'settle_amount' => 'integer',
         'total_diff_amount' => 'integer',
@@ -83,6 +87,8 @@ class BusinessStudy extends Model
         'total_discount_perc' => 'integer',
         'iva' => 'integer',
         'isv' => 'integer',
+        'sigpu' => 'integer',
+        'ptl' => 'integer',
         'business_study_authorization_id' => 'integer',
         'tradein_id' => 'integer'
     ];
