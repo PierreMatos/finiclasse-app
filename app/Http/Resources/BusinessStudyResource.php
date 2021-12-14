@@ -19,6 +19,7 @@ class BusinessStudyResource extends JsonResource
             'client_id' => $this->client_id,
             'car_id' => $this->car_id,
             'extras_total' => $this->extras_total,
+            'extras_total2' => $this->extras_total2,
             'sub_total' => $this->sub_total,
             'total_benefits' => $this->total_benefits,
             'selling_price' => $this->selling_price,
