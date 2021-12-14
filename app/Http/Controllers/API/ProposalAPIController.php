@@ -189,10 +189,9 @@ class ProposalAPIController extends AppBaseController
 
         //business study
         //TODO falta o SIGPU
-        
         if((!empty($proposal->car)) ){
 
-
+            
             $businessStudyCalculated = $this->calculateBusinessStudy($proposal->id);
 
             // if (empty($businessStudy->extras_total)){
@@ -414,12 +413,11 @@ class ProposalAPIController extends AppBaseController
             // if($profit < $min){
                 //nao precisa
             // }
-
+            $totalBenefits += ($totalBenefits + $totalCampaigns);
         } else {
 
             return 'car not found';
         }
-        
         $results = [
             'base_price' => $basePrice,
             'total_extras2' => $preTotalExtras,
@@ -457,6 +455,7 @@ class ProposalAPIController extends AppBaseController
 
         $proposal = Proposal::find($id);
 
+        return new ProposalOrder($proposal);
         Mail::send(new ProposalOrder($proposal));
         return $this->sendSuccess('E-mail enviado com sucesso!');
 
