@@ -22,6 +22,7 @@ class BusinessStudyResource extends JsonResource
             'sub_total' => $this->sub_total,
             'total_benefits' => $this->total_benefits,
             'selling_price' => $this->selling_price,
+            'base_price' => $this->base_price,
             'tradein_id' => $this->tradein_id,
             'tradein_diff' => $this->tradein_diff,
             'settle_amount' => $this->settle_amount,
