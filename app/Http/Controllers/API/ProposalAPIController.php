@@ -202,7 +202,7 @@ class ProposalAPIController extends AppBaseController
     
 
             $businessStudyInput = [
-                'pre_extras_total' => $businessStudyCalculated['total_extras2'],
+                'extras_total2' => $businessStudyCalculated['total_extras2'],
                 'extras_total' => $businessStudyCalculated['total_extras'],
                 'sub_total' => $businessStudyCalculated['sub_total'],
                 'total_benefits' => $businessStudyCalculated['total_benefits'],
@@ -386,7 +386,7 @@ class ProposalAPIController extends AppBaseController
                 $purchasePrice = $proposal->tradein->tradein_purchase; 
                 $sellingPrice = $proposal->tradein->tradein_sale; 
                 
-                $diffTradein = $sellingPrice + $taxes + $expenses;
+                $diffTradein = $sellingPrice - ($taxes + $expenses + $purchasePrice);
                 $settleValue = $sell - $purchasePrice;
             }
             
@@ -398,9 +398,12 @@ class ProposalAPIController extends AppBaseController
                 } else{ 
                     $desc = $dif;
                  }
+
+            $difPerc = ($desc / (($totalBenefits + $subTotal) - ($ptl + $sigpu + $totalTransf))) * 100;
             //%
             //TODO Division by zero
             // dd(if( ($totalBenefits + $isv) != 0 ));
+            $totalBenefits += ($totalBenefits + $totalCampaigns);
 
             if( ($totalBenefits + $isv) != 0 && ($ptl + $sigpu + $totalTransf)!=0) {
 
@@ -413,14 +416,13 @@ class ProposalAPIController extends AppBaseController
             // if($profit < $min){
                 //nao precisa
             // }
-            $totalBenefits += ($totalBenefits + $totalCampaigns);
         } else {
 
             return 'car not found';
         }
         $results = [
             'base_price' => $basePrice,
-            'total_extras2' => $preTotalExtras,
+            'total_extras2' =>  $proposal->car->extras_total,
             'ptl' => $ptl,
             'sigpu' => $sigpu,
             'total_transf' => $totalTransf,
@@ -438,7 +440,7 @@ class ProposalAPIController extends AppBaseController
             'settle_amount' => $settleValue,
             'desc' => $desc,
             'total_diff_amount' => $dif,
-            'total_diff_perc' => $dif,
+            'total_diff_perc' => $difPerc,
             'profit' => $profit,
             'benefits' => $proposal->benefits,
             'campaigns' => $proposal->campaigns,

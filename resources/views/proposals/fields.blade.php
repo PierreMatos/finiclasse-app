@@ -333,13 +333,13 @@
             <!-- Financial Value Field -->
             <div class="form-group col-sm-4">
                 <p>Desconto</p>
-                <h2>@money($proposal->finalBusinessStudy->total_discount_amount)</h2>
+                <h2>@money($proposal->initialBusinessStudy->total_discount_amount)</h2>
             </div>
 
             <!-- Tradein Value Field -->
             <div class="form-group col-sm-4">
                 <p>%</p>
-                <h2>@money($proposal->finalBusinessStudy->total_discount_perc)</h2>
+                <h2>@money($proposal->initialBusinessStudy->total_discount_perc)</h2>
             </div>
 
         </div>
