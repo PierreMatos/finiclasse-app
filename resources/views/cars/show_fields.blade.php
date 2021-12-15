@@ -99,10 +99,46 @@
                 {!! Form::number('order_date', isset($car->price_campaign) ? number_format($car->price_campaign,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
 
+            <!-- IVA -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('iva', 'IVA') !!}
+                {!! Form::number('iva', isset($car->iva) ? number_format($car->iva,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
+
+            <!-- ISV -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('isv', 'ISV') !!}
+                {!! Form::number('isv', isset($car->isv) ? number_format($car->isv,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
+
+            <!-- Total Extras -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('total_extras', 'Total extras') !!}
+                {!! Form::number('total_extras', isset($car->total_extras) ? number_format($car->total_extras,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
+
+            <!-- Sub total -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('sub_total', 'Sub total') !!}
+                {!! Form::number('sub_total', isset($car->sub_total) ? number_format($car->sub_total,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
+
             <!-- Order Date Field -->
             <div class="form-group col-sm-3">
                 {!! Form::label('order_date', 'Data de encomenda') !!}
                 {!! Form::text('order_date', isset($car->order_date) ? $car->order_date : '', ['class' => 'form-control', 'id' => 'order_date', 'disabled']) !!}
+            </div>
+
+            <!-- PTL -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('ptl', 'PTL') !!}
+                {!! Form::text('ptl', isset($car->ptl) ? $car->ptl : '', ['class' => 'form-control', 'id' => 'ptl', 'disabled']) !!}
+            </div>
+
+            <!-- SIGPU -->
+            <div class="form-group col-sm-3">
+                {!! Form::label('sigpu', 'SIGPU') !!}
+                {!! Form::text('sigpu', isset($car->sigpu) ? $car->sigpu : '', ['class' => 'form-control', 'id' => 'sigpu   ', 'disabled']) !!}
             </div>
 
             <!-- Arrival Date Field -->
