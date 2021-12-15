@@ -48,6 +48,11 @@
     @yield('third_party_stylesheets')
 
     @stack('page_css')
+
+<p class="alert alert-danger text-center" role="alert">
+  Sistema em versão de teste
+</p>
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
