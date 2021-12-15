@@ -33,7 +33,7 @@ class ProposalOrder extends Mailable
     public function build()
     {
 
-        return $this->from('info@remotepartner.co', 'Finiclasse')
+        return $this->from('info@myfiniclasse.pt', 'Finiclasse')
             ->to($this->proposal->client->email)
             ->subject('Proposal Order')
             ->markdown('mail.proposal');
