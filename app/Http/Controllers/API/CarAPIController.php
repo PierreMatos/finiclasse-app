@@ -46,6 +46,8 @@ class CarAPIController extends AppBaseController
         //     $request->get('limit')
         // );
 
+        // dd($this->carRepository->all());
+
         //TODO NAO mostrar carros reservados
         return new CarCollection( $this->carRepository->all());
 
@@ -153,7 +155,8 @@ class CarAPIController extends AppBaseController
     {
         $input = $request->all();
 // return json_encode($input);
-return $this->sendResponse($input,$input);
+// return $this->sendResponse($input,$input);
+// return($this->carRepository->update($input, $id));
         /** @var Car $car */
         $car = $this->carRepository->find($id);
 
