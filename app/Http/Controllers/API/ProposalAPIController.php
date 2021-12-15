@@ -399,7 +399,8 @@ class ProposalAPIController extends AppBaseController
                     $desc = $dif;
                  }
 
-            $difPerc = ($desc / (($totalBenefits + $subTotal) - ($ptl + $sigpu + $totalTransf))) * 100;
+            $difPerc = 100;
+            // $difPerc = ($desc / (($totalBenefits + $subTotal) - ($ptl + $sigpu + $totalTransf))) * 100;
             //%
             //TODO Division by zero
             // dd(if( ($totalBenefits + $isv) != 0 ));
@@ -457,7 +458,7 @@ class ProposalAPIController extends AppBaseController
 
         $proposal = Proposal::find($id);
 
-        return (Mail::send(new ProposalOrder($proposal)));
+        Mail::send(new ProposalOrder($proposal));
         
         return $this->sendSuccess('E-mail enviado com sucesso!');
 
