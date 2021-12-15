@@ -457,7 +457,7 @@ class ProposalAPIController extends AppBaseController
 
         $proposal = Proposal::find($id);
 
-        Mail::send(new ProposalOrder($proposal));
+        return (Mail::send(new ProposalOrder($proposal)));
         
         return $this->sendSuccess('E-mail enviado com sucesso!');
 
