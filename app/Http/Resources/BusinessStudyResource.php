@@ -40,6 +40,9 @@ class BusinessStudyResource extends JsonResource
             'taxes' => $this->taxes,
             'warranty' => $this->warranty,
             'purchase_price' => $this->purchase_price,
+            'ivatx' => $this->ivatx,
+            'external_costs' => $this->external_costs,
+            'internal_costs' => $this->internal_costs,
             'business_study_authorization_id' => $this->business_study_authorization_id,
             'business_study_authorization' => [
                 'id' => $this->businessStudyAuthorization->id ?? '',
