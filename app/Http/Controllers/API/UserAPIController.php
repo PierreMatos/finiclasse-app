@@ -158,7 +158,6 @@ class UserAPIController extends AppBaseController
             return $this->sendError('User not found');
         }
 
-        
         if ($request->signature) {
            ($user->addMediaFromBase64($request->signature)->toMediaCollection('signatures','s3'));
            $request->request->add(['gdpr_confirmation' => Carbon::now()]);

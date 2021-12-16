@@ -321,11 +321,21 @@ class ProposalAPIController extends AppBaseController
 
             $totalTransf = 0;
             $isentIva = null;
-            $sell = 43000; // valor gravado no estudo de negocio
+
+            if ($proposal->state->name == 'Aberto'){
+                $sell = $proposal->initialBusinessStudy->sale;
+            }elseif($proposal->state->name == 'Fechado'){
+                $sell = $proposal->finalBusinessStudy->sale;
+            }
+
+            //$sell = 43000; // valor gravado no estudo de negocio
             $diffTradein = 0;
             $settleValue = 0;
+            
             //TODO Tabela com taxas e valores fixos
             $ivaTX = 0.23;
+            //$ivaTX = $proposal->iva;
+            
             $totalCampaigns = 0;
             $totalBenefits = 0;
             $subTotal = 0.0;
@@ -368,13 +378,23 @@ class ProposalAPIController extends AppBaseController
             $subTotal = $basePrice + $totalExtras - ($totalBenefits + $totalCampaigns);
 
             // IVA
-            if (is_null($isentIva)) {
+            // $iva = $ivaTX * $price;
+            if ($proposal->car->condition_id == 1) {
                 $iva =  $ivaTX * ($subTotal + $isv); 
             } else { 
-                $iva = 0; 
+                $iva = $ivaTX * $basePrice; 
             }
 
-            $total = $subTotal + $isv + $iva;
+            // TOTAL
+            if ($proposal->car->condition_id == 1) {
+
+                $total = $subTotal + $isv + $iva;
+
+            }elseif($proposal->car->condition_id != 1){
+                
+                $total = $basePrice + $iva;
+
+            }
             
             // DISCONT
             if (is_null($isentIva)) { ($total - $sell) / (1 + $iva) + $totalBenefits; } else { $total - $sell + $totalBenefits;}
@@ -387,11 +407,21 @@ class ProposalAPIController extends AppBaseController
                 $sellingPrice = $proposal->tradein->tradein_sale; 
                 
                 $diffTradein = $sellingPrice - ($taxes + $expenses + $purchasePrice);
-                $settleValue = $sell - $purchasePrice;
             }
             
+            $settleValue = $sell - $purchasePrice;
+
             //diff
-            $dif = ($total - $sell) - $diffTradein;
+            if ($proposal->car->condition_id == 1) {
+
+                $dif = ($total - $sell) - $diffTradein;
+ 
+            } else {
+
+                $dif = (($sell - $total) - $diffTradein - $totalExtras) - $totalTransf - $totalBenefits;
+ 
+            }
+
             //desc
             if (is_null($isentIva)) { 
                  $desc = $dif / (1 + $ivaTX ); 
@@ -399,11 +429,21 @@ class ProposalAPIController extends AppBaseController
                     $desc = $dif;
                  }
 
-            $difPerc = 100;
-            // $difPerc = ($desc / (($totalBenefits + $subTotal) - ($ptl + $sigpu + $totalTransf))) * 100;
+            // $difPerc = 100;
+            if($totalBenefits != 0 || $subTotal != 0 || $ptl != 0 || $sigpu != 0 || $totalTransf != 0){
+
+                $difPerc = ($desc / (($totalBenefits + $subTotal) - ($ptl + $sigpu + $totalTransf))) * 100;
+            
+            }else {
+                
+                $difPerc=0;
+            }
+
+            // dd($difPerc);
             //%
             //TODO Division by zero
             // dd(if( ($totalBenefits + $isv) != 0 ));
+
             $totalBenefits += ($totalBenefits + $totalCampaigns);
 
             if( ($totalBenefits + $isv) != 0 && ($ptl + $sigpu + $totalTransf)!=0) {

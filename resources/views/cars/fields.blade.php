@@ -156,23 +156,23 @@
                 </select>
             </div>
 
-            <!-- Price Field -->
-            <div class="form-group col-md-3">
-                {!! Form::label('price', 'Preço') !!}
-                {!! Form::number('price', isset($car->price) ? $car->price : '', ['class' => 'form-control','step' => 'any']) !!}
-            </div>
-
             <!-- Price Base Field -->
             <div class="form-group col-md-3">
                 {!! Form::label('price_base', 'Preço base') !!}
                 {!! Form::number('price_base', isset($car->price_base) ? $car->price_base : '', ['class' => 'form-control' ,'step' => 'any']) !!}
             </div>
 
-            <!-- Price Campaign Field -->
+            <!-- Price Field -->
             <div class="form-group col-md-3">
+                {!! Form::label('price', 'Preço') !!}
+                {!! Form::number('price', isset($car->price) ? $car->price : '', ['class' => 'form-control','step' => 'any']) !!}
+            </div>
+
+            <!-- Price Campaign Field -->
+            <!-- <div class="form-group col-md-3">
                 {!! Form::label('price_campaign', 'Preço de campanha') !!}
                 {!! Form::number('price_campaign', isset($car->price_campaign) ? $car->price_campaign : '', ['class' => 'form-control','step' => 'any']) !!}
-            </div>
+            </div> -->
 
             <!-- IVA -->
             <div class="form-group col-md-3">

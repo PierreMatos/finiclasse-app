@@ -113,10 +113,10 @@ class BusinessStudy extends Model
      * @var array
      */
     public static $rules = [
-        'client_id' => 'required',
-        'car_id' => 'required',
-        'business_study_authorization_id' => 'required',
-        'tradein_id' => 'required'
+        // 'client_id' => 'required',
+        // 'car_id' => 'required',
+        // 'business_study_authorization_id' => 'required',
+        // 'tradein_id' => 'required'
     ];
 
     /**
