@@ -17,6 +17,7 @@ class AddMoreFieldsToCars extends Migration
             $table->decimal('expenses', 13, 2)->nullable();
             $table->decimal('warranty',13,2)->nullable();
             $table->decimal('taxes',13,2)->nullable();
+            $table->boolean('potencial_buyer')->nullable();
             
         });
     }

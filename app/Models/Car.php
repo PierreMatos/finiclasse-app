@@ -146,7 +146,8 @@ class Car extends Model implements HasMedia
         'isv',
         'equipment',
         'observations',
-        'est'
+        'est',
+        'potencial_buyer'
     ];
 
     /**
@@ -210,7 +211,8 @@ class Car extends Model implements HasMedia
         'sigpu' => 'decimal:2',
         'equipment' => 'string',
         'observations' => 'string',
-        'est' => 'integer'
+        'est' => 'integer',
+        'potencial_buyer' => 'boolean'
     ];
 
     /**
