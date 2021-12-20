@@ -154,6 +154,8 @@ class CarAPIController extends AppBaseController
     public function update($id, Request $request)
     {
         $input = $request->all();
+
+        
 // return json_encode($input);
 // return $this->sendResponse($input,$input);
 // return($this->carRepository->update($input, $id));
@@ -215,6 +217,10 @@ class CarAPIController extends AppBaseController
             return $this->sendError('Car not found');
         }
 
+        if (isset($input['potencial_buyer'])){
+
+            $input['potencial_buyer'] = json_decode($input['potencial_buyer']);
+        }
 
         // $car->proposal->touch();
         $car = $this->carRepository->update($input, $id);
