@@ -215,7 +215,7 @@ class CarAPIController extends AppBaseController
             return $this->sendError('Car not found');
         }
 
-        
+        dd($input);
         // $car->proposal->touch();
         $car = $this->carRepository->update($input, $id);
 
