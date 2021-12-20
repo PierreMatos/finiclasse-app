@@ -175,7 +175,7 @@ class Car extends Model implements HasMedia
         'price_campaign' => 'decimal:2',
         'tradein' => 'boolean',
         'tradein_purchase' => 'integer',
-        'tradein_sale' => 'integer',
+        'tradein_sale' => 'decimal:2',
         'felxible' => 'boolean',
         'deductible' => 'boolean',
         'power' => 'integer',

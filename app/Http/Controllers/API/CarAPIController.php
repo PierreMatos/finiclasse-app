@@ -101,6 +101,13 @@ class CarAPIController extends AppBaseController
 
         $input = $request->all();
 
+        //convert react string into bool 
+        if (isset($input['potencial_buyer'])){
+
+            $input['potencial_buyer'] = json_decode($input['potencial_buyer']);
+            
+        }
+
         $car = $this->carRepository->create($input);
 
         // add images
