@@ -29,7 +29,7 @@ class BusinessStudyResource extends JsonResource
             'settle_amount' => $this->settle_amount,
             'total_diff_amount' => $this->total_diff_amount,
             'total_discount_amount' => $this->total_discount_amount,
-            'total_discount_perc' => $this->total_discount_perc,
+            'total_discount_perc' => round($this->total_discount_perc,2),
             'iva' => $this->iva,
             'isv' => $this->isv,
             'sigpu' => $this->sigpu,

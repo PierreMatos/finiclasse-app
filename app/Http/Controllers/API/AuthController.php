@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Tymon\JWTAuth\Facades\JWTFactory;
 use Tymon\JWTAuth\Facades\JWTAuth;
-
+use App\Http\Controllers\Response;
 
 class AuthController extends Controller
 {
@@ -47,7 +47,7 @@ class AuthController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Invalid Email or Password',
-            ], Response::HTTP_UNAUTHORIZED);
+            ], 200);
         }
   
         return response()->json([

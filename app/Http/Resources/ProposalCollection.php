@@ -94,7 +94,7 @@ class ProposalCollection extends ResourceCollection
             ],
             'total_diff_amount' => $proposal->total_diff_amount,
             'total_discount_amount' => $proposal->total_discount_amount,
-            'total_discount_perc' => $proposal->total_discount_perc,
+            'total_discount_perc' => round($proposal->total_discount_perc,2),
             'comment' => $proposal->comment,
             'benefits' => $proposal->benefits,
             'campaigns' => $proposal->campaigns,
