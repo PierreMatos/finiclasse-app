@@ -85,8 +85,8 @@
                     </div>
                 </form>
 
-                <!-- <p class="mb-1">
                 <a href="{{ route('password.request') }}">I forgot my password</a>
+                <!-- <p class="mb-1">
             </p>
             <p class="mb-0">
                 <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
@@ -96,7 +96,7 @@
         </div>
 
     </div>
-    <!-- /.login-box -->  
+    <!-- /.login-box -->
 </body>
 
 </html>
