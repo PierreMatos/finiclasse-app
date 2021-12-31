@@ -78,6 +78,8 @@ class UserAPIController extends AppBaseController
 
         if($validator->fails()){
 
+            return response()->json($validator->errors(), 200);
+
             return $validator->errors()->toJson();
         }
 
@@ -98,7 +100,7 @@ class UserAPIController extends AppBaseController
 
         $user->vendor()->attach($request->vendor_id);
 
-        return $this->sendResponse(new UserResource($user), 'User saved successfully');
+        return $this->sendResponse(new UserResource($user), 'User saved successfully')->setStatusCode(201);
     }
 
     /**
