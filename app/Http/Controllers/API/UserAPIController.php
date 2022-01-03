@@ -72,7 +72,7 @@ class UserAPIController extends AppBaseController
 
         $validator = Validator::make($request->all(), [
             'vendor_id' => 'required',
-            'email' => 'unique:users',
+            'email' => 'exclude_if:email,null|unique:users',
             'nif' => 'sometimes|nullable|unique:users',
         ]);
 
