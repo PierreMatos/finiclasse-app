@@ -97,8 +97,8 @@
 
                 <div class="nav-item dropdown user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                        <img src="https://www.finiclasse.pt/img/logo.png" class="logoImg brand-image elevation-2"
-                            alt="User Image">
+                        <img src="{{ asset('storage/logo.png') }}" class="logoImg brand-image elevation-2" alt="Finiclasse Logo">
+                        <!-- <img src="https://www.finiclasse.pt/img/logo.png" class="logoImg brand-image elevation-2" alt="Finiclasse Logo"> -->
                         <span class="d-none d-md-inline">{{ isset(Auth::user()->name) ? Auth::user()->name : '' }}</span>
                     </a>
                 </div>
