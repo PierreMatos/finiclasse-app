@@ -74,7 +74,8 @@
             "@php artisan key:generate --ansi"
         ],
         "post-install-cmd": [ 
-            "ln -sr storage/app/public public/storage"
+            "ln -sr storage/app/public public/storage",
+            "npm run prod"
         ]
     }
 }
