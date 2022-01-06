@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="295.721" height="221.57" viewBox="0 0 295.721 221.57">
+  <defs>
+    <filter id="Retângulo_22" x="0" y="0" width="295.721" height="220.157" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Grupo_21" data-name="Grupo 21" transform="translate(-1355.279 -723.483)">
+    <g transform="matrix(1, 0, 0, 1, 1355.28, 723.48)" filter="url(#Retângulo_22)">
+      <rect id="Retângulo_22-2" data-name="Retângulo 22" width="277.721" height="202.157" rx="20" transform="translate(9 6)" fill="#fff"/>
+    </g>
+    <path id="Caminho_1" data-name="Caminho 1" d="M195,0" transform="translate(1416.692 945.053)" fill="none" stroke="#707070" stroke-width="2"/>
+    <text id="Vendedores" transform="translate(1434.9 876.643)" font-size="23" font-family="SegoeUI-Semibold, Segoe UI" font-weight="600"><tspan x="0" y="0">Vendedores</tspan></text>
+    <path id="user-tie-solid" d="M18.146,20.738A10.369,10.369,0,1,0,7.777,10.369,10.368,10.368,0,0,0,18.146,20.738Zm7.761,2.641-3.872,15.5L19.442,27.867l2.592-4.536H14.257l2.592,4.536L14.257,38.884l-3.872-15.5A10.868,10.868,0,0,0,0,34.218v3.37a3.889,3.889,0,0,0,3.888,3.888H32.4a3.889,3.889,0,0,0,3.888-3.888v-3.37A10.868,10.868,0,0,0,25.906,23.379Z" transform="translate(1478.449 781.328)"/>
+  </g>
+</svg>

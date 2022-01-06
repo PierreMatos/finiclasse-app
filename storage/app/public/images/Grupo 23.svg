@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="295.721" height="220.157" viewBox="0 0 295.721 220.157">
+  <defs>
+    <filter id="Retângulo_17" x="0" y="0" width="295.721" height="220.157" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Grupo_23" data-name="Grupo 23" transform="translate(-631.117 -723.483)">
+    <g transform="matrix(1, 0, 0, 1, 631.12, 723.48)" filter="url(#Retângulo_17)">
+      <rect id="Retângulo_17-2" data-name="Retângulo 17" width="277.721" height="202.157" rx="20" transform="translate(9 6)" fill="#fff"/>
+    </g>
+    <text id="Viaturas" transform="translate(730.845 876.643)" font-size="23" font-family="SegoeUI-Semibold, Segoe UI" font-weight="600"><tspan x="0" y="0">Viaturas</tspan></text>
+    <path id="car-solid" d="M51.307,75.492H45.164l-1.707-4.269A11.434,11.434,0,0,0,32.787,64H19.756a11.437,11.437,0,0,0-10.67,7.224L7.378,75.492H1.236a1.231,1.231,0,0,0-1.194,1.53l.616,2.463a1.231,1.231,0,0,0,1.194.933H3.911a6.521,6.521,0,0,0-2.266,4.925v4.925a6.514,6.514,0,0,0,1.642,4.3v5.548A3.284,3.284,0,0,0,6.57,103.4H9.854a3.284,3.284,0,0,0,3.284-3.284V96.835H39.405v3.284a3.284,3.284,0,0,0,3.284,3.284h3.284a3.284,3.284,0,0,0,3.284-3.284V94.571a6.51,6.51,0,0,0,1.642-4.3V85.343a6.524,6.524,0,0,0-2.265-4.925h2.059a1.231,1.231,0,0,0,1.194-.933l.616-2.463a1.232,1.232,0,0,0-1.2-1.53Zm-36.125-1.83a4.926,4.926,0,0,1,4.573-3.1H32.787a4.926,4.926,0,0,1,4.573,3.1l2.045,5.113H13.137ZM9.854,90.248a3.273,3.273,0,1,1,0-6.547c1.97,0,4.925,2.946,4.925,4.91S11.824,90.248,9.854,90.248Zm32.835,0c-1.97,0-4.925.327-4.925-1.637s2.955-4.91,4.925-4.91a3.273,3.273,0,1,1,0,6.547Z" transform="translate(748.469 718.365)"/>
+  </g>
+</svg>

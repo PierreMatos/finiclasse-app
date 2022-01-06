@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="295.721" height="221.57" viewBox="0 0 295.721 221.57">
+  <defs>
+    <filter id="Retângulo_15" x="0" y="0" width="295.721" height="220.157" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Grupo_19" data-name="Grupo 19" transform="translate(-994.215 -457)">
+    <g transform="matrix(1, 0, 0, 1, 994.22, 457)" filter="url(#Retângulo_15)">
+      <rect id="Retângulo_15-2" data-name="Retângulo 15" width="277.721" height="202.157" rx="20" transform="translate(9 6)" fill="#fff"/>
+    </g>
+    <path id="Caminho_2" data-name="Caminho 2" d="M195,0" transform="translate(1062.61 678.57)" fill="none" stroke="#707070" stroke-width="2"/>
+    <text id="Financiamento" transform="translate(1066.801 610.16)" font-size="23" font-family="SegoeUI-Semibold, Segoe UI" font-weight="600"><tspan x="0" y="0">Financiamento</tspan></text>
+    <path id="credit-card-solid" d="M0,68.106a4.334,4.334,0,0,0,4.333,4.333H47.66a4.334,4.334,0,0,0,4.333-4.333V52.22H0Zm17.331-6.138a1.086,1.086,0,0,1,1.083-1.083H30.69a1.086,1.086,0,0,1,1.083,1.083v3.611a1.086,1.086,0,0,1-1.083,1.083H18.414a1.086,1.086,0,0,1-1.083-1.083Zm-11.554,0A1.086,1.086,0,0,1,6.86,60.885h6.5a1.086,1.086,0,0,1,1.083,1.083v3.611a1.086,1.086,0,0,1-1.083,1.083H6.86a1.086,1.086,0,0,1-1.083-1.083ZM51.993,36.333v4.333H0V36.333A4.334,4.334,0,0,1,4.333,32H47.66A4.334,4.334,0,0,1,51.993,36.333Z" transform="translate(1115.535 484.919)"/>
+  </g>
+</svg>

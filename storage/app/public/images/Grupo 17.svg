@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="295.721" height="221.57" viewBox="0 0 295.721 221.57">
+  <defs>
+    <filter id="Retângulo_7" x="0" y="0" width="295.721" height="220.157" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Grupo_17" data-name="Grupo 17" transform="translate(-269 -457)">
+    <g transform="matrix(1, 0, 0, 1, 269, 457)" filter="url(#Retângulo_7)">
+      <rect id="Retângulo_7-2" data-name="Retângulo 7" width="277.721" height="202.157" rx="20" transform="translate(9 6)" fill="#fff"/>
+    </g>
+    <path id="Caminho_1" data-name="Caminho 1" d="M195,0" transform="translate(330.413 678.57)" fill="none" stroke="#707070" stroke-width="2"/>
+    <text id="Home_" data-name="Home  " transform="translate(374.82 610.16)" font-size="23" font-family="SegoeUI-Semibold, Segoe UI" font-weight="600"><tspan x="0" y="0" xml:space="preserve">Home  </tspan></text>
+    <path id="home-solid" d="M25.3,42.541,8.653,56.249v14.8A1.444,1.444,0,0,0,10.1,72.489l10.116-.026a1.444,1.444,0,0,0,1.437-1.444v-8.64a1.444,1.444,0,0,1,1.444-1.444h5.778a1.444,1.444,0,0,1,1.444,1.444v8.634a1.444,1.444,0,0,0,1.444,1.449l10.113.028a1.444,1.444,0,0,0,1.444-1.444V56.239l-16.641-13.7a1.1,1.1,0,0,0-1.381,0Zm26.291,9.317-7.547-6.221v-12.5a1.083,1.083,0,0,0-1.083-1.083H37.9a1.083,1.083,0,0,0-1.083,1.083v6.555l-8.082-6.65a4.333,4.333,0,0,0-5.507,0L.378,51.858a1.083,1.083,0,0,0-.144,1.526l2.3,2.8a1.083,1.083,0,0,0,1.527.147L25.3,38.84a1.1,1.1,0,0,1,1.381,0L47.914,56.33a1.083,1.083,0,0,0,1.526-.144l2.3-2.8a1.083,1.083,0,0,0-.153-1.528Z" transform="translate(385.495 484.869)"/>
+  </g>
+</svg>

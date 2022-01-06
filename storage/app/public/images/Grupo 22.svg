@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="295.721" height="221.57" viewBox="0 0 295.721 221.57">
+  <defs>
+    <filter id="Retângulo_18" x="0" y="0" width="295.721" height="220.157" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Grupo_22" data-name="Grupo 22" transform="translate(-994.215 -723.483)">
+    <g transform="matrix(1, 0, 0, 1, 994.22, 723.48)" filter="url(#Retângulo_18)">
+      <rect id="Retângulo_18-2" data-name="Retângulo 18" width="277.721" height="202.157" rx="20" transform="translate(9 6)" fill="#fff"/>
+    </g>
+    <path id="Caminho_2" data-name="Caminho 2" d="M195,0" transform="translate(1062.61 945.053)" fill="none" stroke="#707070" stroke-width="2"/>
+    <text id="Clientes_" data-name="Clientes " transform="translate(1095.834 876.643)" font-size="23" font-family="SegoeUI-Semibold, Segoe UI" font-weight="600"><tspan x="0" y="0">Clientes </tspan></text>
+    <path id="users-solid" d="M8.888,49.775A5.925,5.925,0,1,0,2.963,43.85,5.931,5.931,0,0,0,8.888,49.775Zm41.476,0a5.925,5.925,0,1,0-5.925-5.925A5.931,5.931,0,0,0,50.364,49.775Zm2.963,2.963H47.4a5.908,5.908,0,0,0-4.175,1.722,13.542,13.542,0,0,1,6.953,10.128h6.11a2.959,2.959,0,0,0,2.963-2.963V58.663A5.931,5.931,0,0,0,53.326,52.738Zm-23.7,0A10.369,10.369,0,1,0,19.257,42.369,10.364,10.364,0,0,0,29.626,52.738Zm7.11,2.963h-.768a14.316,14.316,0,0,1-12.683,0h-.768A10.668,10.668,0,0,0,11.85,66.366v2.666a4.445,4.445,0,0,0,4.444,4.444H42.957A4.445,4.445,0,0,0,47.4,69.032V66.366A10.668,10.668,0,0,0,36.736,55.7ZM16.026,54.46a5.908,5.908,0,0,0-4.175-1.722H5.925A5.931,5.931,0,0,0,0,58.663v2.963a2.959,2.959,0,0,0,2.963,2.963h6.1A13.576,13.576,0,0,1,16.026,54.46Z" transform="translate(1112.424 749.328)"/>
+  </g>
+</svg>

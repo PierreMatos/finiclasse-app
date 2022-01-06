@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="295.721" height="221.57" viewBox="0 0 295.721 221.57">
+  <defs>
+    <filter id="Retângulo_16" x="0" y="0" width="295.721" height="220.157" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Grupo_24" data-name="Grupo 24" transform="translate(-269 -723.483)">
+    <g transform="matrix(1, 0, 0, 1, 269, 723.48)" filter="url(#Retângulo_16)">
+      <rect id="Retângulo_16-2" data-name="Retângulo 16" width="277.721" height="202.157" rx="20" transform="translate(9 6)" fill="#fff"/>
+    </g>
+    <path id="Caminho_1" data-name="Caminho 1" d="M195,0" transform="translate(330.413 945.053)" fill="none" stroke="#707070" stroke-width="2"/>
+    <text id="Benefícios_" data-name="Benefícios " transform="translate(352.377 876.643)" font-size="23" font-family="SegoeUI-Semibold, Segoe UI" font-weight="600"><tspan x="0" y="0">Benefícios </tspan></text>
+    <path id="euro-sign-solid" d="M29.968,68.821a1.156,1.156,0,0,0-1.391-.9,20.263,20.263,0,0,1-4.381.522A12.417,12.417,0,0,1,12.48,60.2H23.445a1.157,1.157,0,0,0,1.129-.9l.615-2.735a1.157,1.157,0,0,0-1.129-1.411H11.113a20.821,20.821,0,0,1,.013-4.075H25.265a1.157,1.157,0,0,0,1.131-.91l.628-2.87a1.157,1.157,0,0,0-1.131-1.4H12.556A12.113,12.113,0,0,1,23.9,38.652a18.892,18.892,0,0,1,3.651.4,1.158,1.158,0,0,0,1.35-.832l1.157-4.279a1.156,1.156,0,0,0-.9-1.439,28.088,28.088,0,0,0-5.082-.5A20.612,20.612,0,0,0,4.347,45.889H1.157A1.157,1.157,0,0,0,0,47.046v2.87a1.157,1.157,0,0,0,1.157,1.157h2.08a28.632,28.632,0,0,0-.017,4.075H1.157A1.157,1.157,0,0,0,0,56.305v2.735A1.157,1.157,0,0,0,1.157,60.2h2.9A20.2,20.2,0,0,0,24.077,75.209a24.057,24.057,0,0,0,5.893-.751,1.158,1.158,0,0,0,.848-1.346Z" transform="translate(393.853 749.328)"/>
+  </g>
+</svg>
