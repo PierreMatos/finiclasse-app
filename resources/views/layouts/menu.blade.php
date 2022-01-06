@@ -91,6 +91,15 @@
     </li>
 @endcan
 
+
+    <li class="treeview">
+        <a href="https://www.myfiniclasse.pt/help-backoffice" target="_blank" class="nav-link {{ Request::is('help-backoffice*') ? 'active' : '' }}">
+        <i class="fas fa-question-circle"></i>
+            <p>Ajuda</p>
+        </a>
+    </li>
+
+
 @if (Auth::user()->hasRole(['admin', 'Administrador', 'Diretor comercial']))
     <li class="treeview nav-item {{ !Request::is('/*', 'proposals*', 'financings*', 'campaigns*', 'benefits*', 'cars*', 'new*', 'clients-list*', 'sellers-list*') ? 'menu-open' : '' }} has-treeview">
         <a href="#" class="nav-link {{ !Request::is('/*', 'proposals*', 'financings*', 'campaigns*', 'benefits*', 'cars*', 'new*', 'clients-list*', 'sellers-list*') ? 'menuDropActive' : '' }}" id="viaturas"" id="definicoes">

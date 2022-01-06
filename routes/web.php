@@ -166,13 +166,13 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
     Route::post('edit-car', [CarController::class, 'editNewCars']);
     Route::post('delete-car', [CarController::class, 'destroyNewCars']);
 
-    //support
-    Route::get('help-backoffice', function () {
-        return view('help.backoffice');
-    });
-
 });
 
+
+//support
+Route::get('help-backoffice', function () {
+    return view('help.backoffice');
+});
 
 //support
 Route::get('help-app', function () {
