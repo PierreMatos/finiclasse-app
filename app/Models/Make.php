@@ -26,10 +26,10 @@ class Make extends Model
     protected $dates = ['deleted_at'];
 
 
-
     public $fillable = [
         'name',
-        'logo'
+        'logo',
+        'visible'
     ];
 
     /**
@@ -40,7 +40,9 @@ class Make extends Model
     protected $casts = [
         'id' => 'integer',
         'name' => 'string',
-        'logo' => 'string'
+        'logo' => 'string',
+        'visible' => 'boolean'
+        
     ];
 
     /**

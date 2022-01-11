@@ -17,7 +17,8 @@ class MakeRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'name'
+        'name',
+        'visible'
     ];
 
     /**
