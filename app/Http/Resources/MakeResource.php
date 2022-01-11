@@ -18,6 +18,9 @@ class MakeResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'logo' => $this->logo,
+            'order' => $this->order,
+            'color' => $this->color,
+            'visible' => $this->visible,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];
