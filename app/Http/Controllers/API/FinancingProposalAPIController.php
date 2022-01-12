@@ -58,7 +58,7 @@ class FinancingProposalAPIController extends AppBaseController
         $inputs = $request->all();
 
         // return($inputs);
-        return($inputs['Financings']);
+        // return($inputs['Financings']);
         // DELTE RECORDS BEFORE INSERTING NEW
         // if($inputs){
         //     $deletedRows = FinancingProposal::where('proposal_id', $inputs[0]['proposal_id'])->delete();
@@ -67,7 +67,7 @@ class FinancingProposalAPIController extends AppBaseController
 
     //     $items = collect();
 
-        foreach ($inputs as $input){
+        foreach ($inputs['Financings'] as $input){
 
             // ADD NEW FINANCINGS TO PROPOSAL
             $newFinancingProposal = $this->financingProposalRepository->create($input);
