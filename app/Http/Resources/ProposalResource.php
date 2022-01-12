@@ -104,6 +104,7 @@ class ProposalResource extends JsonResource
                 'motorization' => $this->tradein->motorization ?? '',
                 'registration' => isset($this->tradein->registration) ? $this->tradein->registration : '',
                 // 'registration' => isset($this->tradein->registration) ? $this->tradein->registration->isoFormat('M/Y') : '',
+                'tradein_purchase' => $this->tradein->tradein_purchase ?? '',
                 'tradein_sale' => $this->tradein->tradein_sale ?? '',
                 'price' => $this->tradein->price ?? '',
                 'tradein_observations' => $this->tradein->tradein_observations ?? '',
