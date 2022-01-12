@@ -63,7 +63,8 @@ class FinancingProposalAPIController extends AppBaseController
         // if($inputs){
         //     $deletedRows = FinancingProposal::where('proposal_id', $inputs[0]['proposal_id'])->delete();
         // }
-        // $newFinancingProposal = $this->financingProposalRepository->create($inputs);
+        $newFinancingProposal = $this->financingProposalRepository->create($inputs['Financings']);
+        return($inputs);
 
     //     $items = collect();
 
