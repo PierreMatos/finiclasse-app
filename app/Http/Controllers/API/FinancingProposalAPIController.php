@@ -57,7 +57,7 @@ class FinancingProposalAPIController extends AppBaseController
 
         $inputs = $request->all();
 
-        return($inputs);
+        // return($inputs);
         return($inputs['Financings']);
         // DELTE RECORDS BEFORE INSERTING NEW
         // if($inputs){
