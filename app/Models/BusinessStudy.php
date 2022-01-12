@@ -70,7 +70,8 @@ class BusinessStudy extends Model
         'warranty',
         'purchase_price',
         'business_study_authorization_id',
-        'tradein_id'
+        'tradein_id',
+        'total_transf'
     ];
 
     /**
