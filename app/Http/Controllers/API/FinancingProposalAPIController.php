@@ -59,11 +59,12 @@ class FinancingProposalAPIController extends AppBaseController
 
         // return($request->all());
         // DELTE RECORDS BEFORE INSERTING NEW
-        $deletedRows = FinancingProposal::where('proposal_id', $inputs[0]['proposal_id'])->delete();
+        if($inputs){
+            $deletedRows = FinancingProposal::where('proposal_id', $inputs[0]['proposal_id'])->delete();
+        }
 
         $items = collect();
 
-        
         foreach ($inputs as $input){
 
             // ADD NEW FINANCINGS TO PROPOSAL
@@ -71,14 +72,13 @@ class FinancingProposalAPIController extends AppBaseController
 
             // add POS
             // dd($input); 
-        // if ($input->hasFile('document')) {
-        //     $fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['document'])
-        //         ->each(function ($fileAdder) {
-        //             $fileAdder->toMediaCollection('financingproposal','s3');
-        //         });
-        // }
+        if ($input->hasFile('document')) {
+            $fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['document'])
+                ->each(function ($fileAdder) {
+                    $fileAdder->toMediaCollection('financingproposal','s3');
+                });
+        }
 
-      
             $items->push($newFinancingProposal);
 
        }
