@@ -16,9 +16,9 @@ class FinancingProposalResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'description' => $this->description,
-            'value' => $this->value,
+            // 'name' => $this->name,
+            // 'description' => $this->description,
+            // 'value' => $this->value,
             'document' => $this->document,
             'financing_id' => $this->financing_id,
             'proposal_id' => $this->proposal_id,

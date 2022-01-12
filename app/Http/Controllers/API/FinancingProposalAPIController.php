@@ -84,9 +84,9 @@ class FinancingProposalAPIController extends AppBaseController
     //         $items->push($newFinancingProposal);
 
     //    }
-    // return($inputs);
+    // return($newFinancingProposal);
 
-        return $this->sendResponse(FinancingProposalResource::collection($inputs), 'Financing Proposal saved successfully');
+        return $this->sendResponse(new FinancingProposalResource($newFinancingProposal), 'Financing Proposal saved successfully');
     }
 
     /**
