@@ -57,7 +57,6 @@ class FinancingProposalAPIController extends AppBaseController
 
         $inputs = $request->all();
 
-        return($request->all());
         // DELTE RECORDS BEFORE INSERTING NEW
         // if($inputs){
         //     $deletedRows = FinancingProposal::where('proposal_id', $inputs[0]['proposal_id'])->delete();
@@ -83,6 +82,7 @@ class FinancingProposalAPIController extends AppBaseController
     //         $items->push($newFinancingProposal);
 
     //    }
+    return($inputs);
 
         return $this->sendResponse(FinancingProposalResource::collection($newFinancingProposal), 'Financing Proposal saved successfully');
     }
