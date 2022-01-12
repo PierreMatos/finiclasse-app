@@ -358,6 +358,7 @@ class ProposalAPIController extends AppBaseController
             }
 
             // total benefits
+            
             foreach($proposal->benefits as $benefit){
                 
                 if ($benefit->pivot->type == '%'){
@@ -424,8 +425,9 @@ class ProposalAPIController extends AppBaseController
 
             //desc
             if (is_null($isentIva)) { 
-                $x = ($dif*($ivaTX*100))/100;
-                $desc = $dif - $x;
+                // $x = ($dif*($ivaTX*100))/100;
+                // $desc = $dif - $x;
+                $desc = $dif / (1+($ivaTX));
                 } else{ 
                     $desc = $dif;
                  }
@@ -445,7 +447,9 @@ class ProposalAPIController extends AppBaseController
             //TODO Division by zero
             // dd(if( ($totalBenefits + $isv) != 0 ));
 
-            $totalBenefits += ($totalBenefits + $totalCampaigns);
+            if($totalCampaigns){
+                $totalBenefits += $totalCampaigns;
+            }
 
             if( ($totalBenefits + $isv) != 0 && ($ptl + $sigpu + $totalTransf)!=0) {
 
