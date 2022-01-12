@@ -211,7 +211,7 @@ class ProposalAPIController extends AppBaseController
                 'settle_amount' => $businessStudyCalculated['settle_amount'],
                 'total_diff_amount' => $businessStudyCalculated['total_diff_amount'],
                 'total_discount_amount' => $businessStudyCalculated['total_discount_amount'],
-                'total_discount_perc' => $businessStudyCalculated['total_diff_perc'],
+                'total_discount_perc' => $businessStudyCalculated['total_discount_perc'],
                 'isv' => $businessStudyCalculated['isv'],
                 'iva' => $businessStudyCalculated['iva'],
                 'sigpu' => $businessStudyCalculated['sigpu'],
