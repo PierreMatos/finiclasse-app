@@ -57,7 +57,7 @@ class FinancingProposalAPIController extends AppBaseController
 
         $inputs = $request->all();
 
-        dd($inputs);
+        return($inputs);
         // DELTE RECORDS BEFORE INSERTING NEW
         $deletedRows = FinancingProposal::where('proposal_id', $inputs[0]['proposal_id'])->delete();
 
