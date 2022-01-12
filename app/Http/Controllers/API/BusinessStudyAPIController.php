@@ -7,9 +7,12 @@ use App\Http\Requests\API\UpdateBusinessStudyAPIRequest;
 use App\Models\BusinessStudy;
 use App\Models\Proposal;
 use App\Repositories\BusinessStudyRepository;
+use App\Repositories\ProposalRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\BusinessStudyResource;
+use App\Http\Controllers\API\ProposalAPIController;
+
 use Response;
 
 /**
@@ -21,10 +24,14 @@ class BusinessStudyAPIController extends AppBaseController
 {
     /** @var  BusinessStudyRepository */
     private $businessStudyRepository;
+    private $proposalRepository;
 
-    public function __construct(BusinessStudyRepository $businessStudyRepo)
+
+    public function __construct(BusinessStudyRepository $businessStudyRepo,ProposalRepository $proposalRepo)
     {
         $this->businessStudyRepository = $businessStudyRepo;
+        $this->proposalRepository = $proposalRepo;
+
     }
 
     /**
@@ -106,8 +113,10 @@ class BusinessStudyAPIController extends AppBaseController
         // com os novos valores, volta a re-calcular a margem e guarda os novos valores
         // dd($businessStudy->initialProposal);
         // dd($this->calculate($businessStudy->initialProposal));
-        $this->calculate($businessStudy->initialProposal);
+        // $this->calculate($businessStudy->initialProposal);
 
+        $proposals_controller = new ProposalAPIController($proposalRepository,  $businessStudyRepo);
+        $proposals_controller->calculateBusinessStudy($businessStudy->initialProposal);
 
         $businessStudy = $this->businessStudyRepository->update($input, $id);
 
