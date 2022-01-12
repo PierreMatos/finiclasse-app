@@ -56,7 +56,6 @@ class FinancingProposalAPIController extends AppBaseController
     {
 
         $inputs = $request->all();
-        return($inputs);
         // return($inputs['Financings']);
         // DELTE RECORDS BEFORE INSERTING NEW
         // if($inputs){
@@ -66,11 +65,12 @@ class FinancingProposalAPIController extends AppBaseController
         // return($inputs);
 
     //     $items = collect();
+            $newFinancingProposal = $this->financingProposalRepository->create($inputs);
 
-        foreach ($inputs as $input){
+        // foreach ($inputs as $input){
 
             // ADD NEW FINANCINGS TO PROPOSAL
-            $newFinancingProposal = $this->financingProposalRepository->create($input);
+            // $newFinancingProposal = $this->financingProposalRepository->create($input);
 
             // add POS
             // dd($input); 
@@ -79,7 +79,7 @@ class FinancingProposalAPIController extends AppBaseController
         //         ->each(function ($fileAdder) {
         //             $fileAdder->toMediaCollection('financingproposal','s3');
         //         });
-        }
+        // }
 
     //         $items->push($newFinancingProposal);
 
