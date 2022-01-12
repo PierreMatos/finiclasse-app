@@ -210,7 +210,7 @@ class ProposalAPIController extends AppBaseController
                 'tradein_diff' => $businessStudyCalculated['tradein_diff'],
                 'settle_amount' => $businessStudyCalculated['settle_amount'],
                 'total_diff_amount' => $businessStudyCalculated['total_diff_amount'],
-                'total_discount_amount' => $businessStudyCalculated['total_diff_amount'],
+                'total_discount_amount' => $businessStudyCalculated['total_discount_amount'],
                 'total_discount_perc' => $businessStudyCalculated['total_diff_perc'],
                 'isv' => $businessStudyCalculated['isv'],
                 'iva' => $businessStudyCalculated['iva'],
@@ -407,9 +407,9 @@ class ProposalAPIController extends AppBaseController
                 $sellingPrice = $proposal->tradein->tradein_sale; 
                 
                 $diffTradein = $sellingPrice - ($taxes + $expenses + $purchasePrice);
+                $settleValue = $sellingPrice - $purchasePrice;
             }
             
-            $settleValue = $sell - $purchasePrice;
 
             //diff
             if ($proposal->car->condition_id == 1) {
@@ -424,22 +424,23 @@ class ProposalAPIController extends AppBaseController
 
             //desc
             if (is_null($isentIva)) { 
-                 $desc = $dif / (1 + $ivaTX ); 
+                $x = ($dif*($ivaTX*100))/100;
+                $desc = $dif - $x;
                 } else{ 
                     $desc = $dif;
                  }
 
-            // $difPerc = 100;
+            // $discPerc = 100;
             if($totalBenefits != 0 || $subTotal != 0 || $ptl != 0 || $sigpu != 0 || $totalTransf != 0){
 
-                $difPerc = ($desc / (($totalBenefits + $subTotal) - ($ptl + $sigpu + $totalTransf))) * 100;
+                $discPerc = ($desc / (($totalBenefits + $subTotal) - ($ptl + $sigpu + $totalTransf))) * 100;
             
             }else {
                 
-                $difPerc=0;
+                $discPerc=0;
             }
 
-            // dd($difPerc);
+            // dd($discPerc);
             //%
             //TODO Division by zero
             // dd(if( ($totalBenefits + $isv) != 0 ));
@@ -463,12 +464,12 @@ class ProposalAPIController extends AppBaseController
         }
         $results = [
             'base_price' => $basePrice,
-            'total_extras2' =>  $proposal->car->extras_total,
+            'total_extras' =>  $proposal->car->extras_total,
             'ptl' => $ptl,
             'sigpu' => $sigpu,
             'total_transf' => $totalTransf,
             'total_benefits' => $totalBenefits,
-            'total_extras' => $totalExtras,
+            'total_extras2' => $totalExtras,
             'sub_total'  => $subTotal,
             'isv' => $isv,
             'IVA Taxa' => $ivaTX,
@@ -479,9 +480,9 @@ class ProposalAPIController extends AppBaseController
             'purchase_price' => $purchasePrice,
             'tradein_diff' => $diffTradein,
             'settle_amount' => $settleValue,
-            'desc' => $desc,
             'total_diff_amount' => $dif,
-            'total_diff_perc' => $difPerc,
+            'total_discount_amount' => $desc,
+            'total_discount_perc' => $discPerc,
             'profit' => $profit,
             'benefits' => $proposal->benefits,
             'campaigns' => $proposal->campaigns,
