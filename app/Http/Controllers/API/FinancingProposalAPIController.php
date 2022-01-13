@@ -76,13 +76,12 @@ class FinancingProposalAPIController extends AppBaseController
         if($inputs['checked'] === 'true'){
             $result=$inputs['checked'];
             // $proposal->financings()->syncWithoutDetaching($inputs['financing_id']);
-            
             $newFinancingProposal = $this->financingProposalRepository->create($inputs);
 
         }
         if($inputs['checked'] === 'false'){
             $result=$inputs['checked'];
-            $deletedRows = FinancingProposal::where('proposal_id', $inputs['proposal_id'])->delete();
+            $deletedRows = FinancingProposal::where('proposal_id', $inputs['proposal_id'])->forceDelete();
         }
         // $newFinancingProposal = $this->financingProposalRepository->create($inputs['financing_id']);
 
