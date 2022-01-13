@@ -70,8 +70,14 @@ class FinancingProposalAPIController extends AppBaseController
         // }
 
         // $proposal->financings()->detach();
-        $proposal->financings()->sync($inputs['financing_id']);
-        // $proposal->financings()->syncWithoutDetaching($inputs['financing_id']);
+        // $proposal->financings()->sync($inputs['financing_id']);
+        // dd($inputs['checked']);
+        if($inputs['checked'] === 'true'){
+            $proposal->financings()->syncWithoutDetaching($inputs['financing_id']);
+        }
+        if($inputs['checked'] === 'false'){
+            $deletedRows = FinancingProposal::where('proposal_id', $inputs['proposal_id'])->delete();
+        }
         // $newFinancingProposal = $this->financingProposalRepository->create($inputs['financing_id']);
 
             // add POS
