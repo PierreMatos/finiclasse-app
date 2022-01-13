@@ -81,7 +81,8 @@ class FinancingProposalAPIController extends AppBaseController
         }
         if($inputs['checked'] === 'false'){
             $result=$inputs['checked'];
-            $deletedRows = FinancingProposal::where('proposal_id', $inputs['proposal_id'])->forceDelete();
+            $deletedRows = FinancingProposal::where('proposal_id', $inputs['proposal_id'])
+            ->where('financing_id', $inputs['financing_id'])->forceDelete();
         }
         // $newFinancingProposal = $this->financingProposalRepository->create($inputs['financing_id']);
 
