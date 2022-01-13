@@ -14,14 +14,16 @@ class FinancingProposalResource extends JsonResource
      */
     public function toArray($request)
     {
+        $document = $this->getFirstMediaUrl('financingproposal');
+
         return [
             'id' => $this->id,
             // 'name' => $this->name,
             // 'description' => $this->description,
             // 'value' => $this->value,
-            'document' => $this->document,
-            'financing_id' => $this->financing_id,
-            'proposal_id' => $this->proposal_id,
+            'document' => $document,
+            // 'financing_id' => $this->financing_id,
+            // 'proposal_id' => $this->proposal_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

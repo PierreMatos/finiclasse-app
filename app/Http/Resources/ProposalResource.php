@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\BenefitsProposalsResource;
 use App\Http\Resources\CampaignsProposalsResource;
+use App\Http\Resources\FinancingProposalResource;
 use Carbon\Carbon;
 
 class ProposalResource extends JsonResource
@@ -124,7 +125,7 @@ class ProposalResource extends JsonResource
             // 'benefits' => $this->benefits,
             'campaigns' => CampaignsProposalsResource::collection($this->campaigns),
             // 'campaigns' => $this->campaigns,
-            'financings' => $this->financings,
+            'financings' => FinancingProposalResource::collection($this->financings),
             'initial_business_study' => $this->initial_business_study_id,
             'final_business_study' => $this->final_business_study_id,
             // 'authorization' => $this->authorization
