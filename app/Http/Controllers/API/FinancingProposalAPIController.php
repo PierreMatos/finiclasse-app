@@ -6,9 +6,11 @@ use App\Http\Requests\API\CreateFinancingProposalAPIRequest;
 use App\Http\Requests\API\UpdateFinancingProposalAPIRequest;
 use App\Models\FinancingProposal;
 use App\Repositories\FinancingProposalRepository;
+use App\Repositories\ProposalRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\FinancingProposalResource;
+use App\Http\Resources\ProposalResource;
 use Response;
 
 /**
@@ -20,10 +22,12 @@ class FinancingProposalAPIController extends AppBaseController
 {
     /** @var  FinancingProposalRepository */
     private $financingProposalRepository;
+    private $proposalRepository;
 
-    public function __construct(FinancingProposalRepository $financingProposalRepo)
+    public function __construct(FinancingProposalRepository $financingProposalRepo, ProposalRepository $proposalRepo)
     {
         $this->financingProposalRepository = $financingProposalRepo;
+        $this->proposalRepository = $proposalRepo;
     }
 
     /**
@@ -56,24 +60,21 @@ class FinancingProposalAPIController extends AppBaseController
     {
 
         $inputs = $request->all();
-        // return($inputs['Financings']);
+
+        $proposal = $this->proposalRepository->find($inputs['proposal_id']);
+
+        // $proposal->financings()->delete();
         // DELTE RECORDS BEFORE INSERTING NEW
-        if($inputs){
-            $deletedRows = FinancingProposal::where('proposal_id', $inputs['proposal_id'])->delete();
-        }
-        // $newFinancingProposal = $this->financingProposalRepository->create($inputs['Financings']);
-        // return($inputs);
+        // if($inputs){
+        //     $deletedRows = FinancingProposal::where('proposal_id', $inputs['proposal_id'])->delete();
+        // }
 
-    //     $items = collect();
-            $newFinancingProposal = $this->financingProposalRepository->create($inputs);
-
-        // foreach ($inputs as $input){
-
-            // ADD NEW FINANCINGS TO PROPOSAL
-            // $newFinancingProposal = $this->financingProposalRepository->create($input);
+        // $proposal->financings()->detach();
+        $proposal->financings()->sync($inputs['financing_id']);
+        // $proposal->financings()->syncWithoutDetaching($inputs['financing_id']);
+        // $newFinancingProposal = $this->financingProposalRepository->create($inputs['financing_id']);
 
             // add POS
-            // dd($input); 
         if ($request->hasFile('document')) {
             $fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['document'])
                 ->each(function ($fileAdder) {
@@ -86,7 +87,7 @@ class FinancingProposalAPIController extends AppBaseController
     //    }
     // return($newFinancingProposal);
 
-        return $this->sendResponse(new FinancingProposalResource($newFinancingProposal), 'Financing Proposal saved successfully');
+        return $this->sendResponse(new ProposalResource($proposal), 'Financing Proposal saved successfully');
     }
 
     /**
