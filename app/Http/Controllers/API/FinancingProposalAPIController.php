@@ -72,7 +72,7 @@ class FinancingProposalAPIController extends AppBaseController
         // $proposal->financings()->detach();
         // $proposal->financings()->sync($inputs['financing_id']);
         // dd($inputs['checked']);
-        $result = ""
+        $result = "";
         if($inputs['checked'] === 'true'){
             $result=$inputs['checked'];
             $proposal->financings()->syncWithoutDetaching($inputs['financing_id']);
