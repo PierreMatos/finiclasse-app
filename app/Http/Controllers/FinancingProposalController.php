@@ -111,9 +111,9 @@ class FinancingProposalController extends AppBaseController
 
         }
 
+        dd('proposal');
         Flash::success('Financing Proposal saved successfully.');
 
-        dd('proposal');
         return redirect(route('proposals.index'));
     }
 
