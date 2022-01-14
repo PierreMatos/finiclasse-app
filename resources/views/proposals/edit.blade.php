@@ -65,9 +65,9 @@
             <!-- <div class="card-footer">
                 {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
                 <a href="{{ route('proposals.index') }}" class="btn btn-default">{{ __('Cancel') }}</a>
-            </div> -->
+            </div> 
 
-            <!-- {!! Form::close() !!} -->
+             {!! Form::close() !!} -->
 
         </div>
     </div>

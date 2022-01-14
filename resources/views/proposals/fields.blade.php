@@ -268,7 +268,7 @@
     </div>
 
     <div class="tab-pane" id="financings" role="tabpanel" aria-labelledby="financings-tab">
-        {!! Form::model($financings, ['route' => 'financingProposals.store', 'files' => true, 'enctype'=>'multipart/form-data']) !!}
+        {!! Form::model($financings, ['route' => 'financingProposals.store', 'method' => 'post', 'files' => true, 'enctype'=>'multipart/form-data']) !!}
 
         <div class="row">
 
@@ -345,7 +345,7 @@
 
             <div class="card-footer">
                 {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('financings.index') }}" class="btn btn-default">{{ __('Cancel') }}</a>
+                <a href="{{ route('proposals.index') }}" class="btn btn-default">{{ __('Cancel') }}</a>
             </div>
         </div>
 
