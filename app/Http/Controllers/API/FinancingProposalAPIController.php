@@ -72,22 +72,22 @@ class FinancingProposalAPIController extends AppBaseController
         // $proposal->financings()->detach();
         // $proposal->financings()->sync($inputs['financing_id']);
         // dd($inputs['checked']);
-        $result = "";
-        if($inputs['checked'] === 'true'){
-            $result=$inputs['checked'];
+
+        //
+        // dd (FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', $inputs['financing_id'])->exists());
+        if(($inputs['checked'] === 'true') && (FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', $inputs['financing_id'])->exists() === false)){
             // $proposal->financings()->syncWithoutDetaching($inputs['financing_id']);
             $newFinancingProposal = $this->financingProposalRepository->create($inputs);
 
         }
         if($inputs['checked'] === 'false'){
-            $result=$inputs['checked'];
             $deletedRows = FinancingProposal::where('proposal_id', $inputs['proposal_id'])
             ->where('financing_id', $inputs['financing_id'])->forceDelete();
         }
         // $newFinancingProposal = $this->financingProposalRepository->create($inputs['financing_id']);
 
             // add POS
-        if ($request->hasFile('document')) {
+        if ($request->hasFile('document') && !isset($newFinancingProposal)) {
             $fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['document'])
                 ->each(function ($fileAdder) {
                     $fileAdder->toMediaCollection('financingproposal','s3');
@@ -99,7 +99,6 @@ class FinancingProposalAPIController extends AppBaseController
     //    }
     // return($newFinancingProposal);
 
-    return($result);
         return $this->sendResponse(new ProposalResource($proposal), 'Financing Proposal saved successfully');
     }
 
