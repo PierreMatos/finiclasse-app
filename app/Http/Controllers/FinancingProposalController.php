@@ -99,6 +99,7 @@ class FinancingProposalController extends AppBaseController
 
         // dd($inputs['proposal_id']);
         // $newFinancingProposal = $this->financingProposalRepository->find($inputs['financing_id']);
+        dd('proposal');
         
         if ($request->hasFile('document')  ) {
             // add Document
@@ -111,7 +112,6 @@ class FinancingProposalController extends AppBaseController
 
         }
 
-        dd('proposal');
         Flash::success('Financing Proposal saved successfully.');
 
         return redirect(route('proposals.index'));
