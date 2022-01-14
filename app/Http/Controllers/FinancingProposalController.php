@@ -61,6 +61,7 @@ class FinancingProposalController extends AppBaseController
     public function store(Request $request)
     {
         // $input = $request->all();
+        dd('proposal');
 
         $inputs = $request->collect();
 
@@ -99,7 +100,6 @@ class FinancingProposalController extends AppBaseController
 
         // dd($inputs['proposal_id']);
         // $newFinancingProposal = $this->financingProposalRepository->find($inputs['financing_id']);
-        dd('proposal');
         
         if ($request->hasFile('document')  ) {
             // add Document
