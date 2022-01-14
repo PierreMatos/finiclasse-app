@@ -72,7 +72,7 @@ class FinancingProposalController extends AppBaseController
         //     $deletedRows = FinancingProposal::where('proposal_id', $input['proposal_id'])->delete();
         // }
 
-        $proposal->financings()->detach();
+        // $proposal->financings()->detach();
 
         dd('proposal');
     
