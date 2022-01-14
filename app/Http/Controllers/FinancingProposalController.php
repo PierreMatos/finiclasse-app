@@ -66,7 +66,6 @@ class FinancingProposalController extends AppBaseController
         
         $proposal = $this->proposalRepository->find($inputs['proposal_id']);
         
-        dd('proposal');
      
 
         // if($input){
@@ -75,10 +74,10 @@ class FinancingProposalController extends AppBaseController
 
         $proposal->financings()->detach();
 
-        $proposalID = $inputs['proposal_id'];
+        dd('proposal');
     
 
-        if(((FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', $inputs['financing_id'])->exists() === false))){
+        // if(((FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', $inputs['financing_id'])->exists() === false))){
             // $proposal->financings()->syncWithoutDetaching($inputs['financing_id']);
             // $newFinancingProposal = $this->financingProposalRepository->create($inputs);
             // $request->collect('financing_id')->each(function ($proposalID) {
@@ -86,7 +85,7 @@ class FinancingProposalController extends AppBaseController
                 // $newFinancingProposal = $this->financingProposalRepository->create(['financing_id'=>$financings],['proposal_id',$proposal]);
     
             // });
-        }
+        // }
 
         
 
