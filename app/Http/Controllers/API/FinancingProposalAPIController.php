@@ -87,7 +87,7 @@ class FinancingProposalAPIController extends AppBaseController
         // $newFinancingProposal = $this->financingProposalRepository->create($inputs['financing_id']);
 
             // add POS
-        if ($request->hasFile('document') && !isset($newFinancingProposal)) {
+        if ($request->hasFile('document') && isset($newFinancingProposal)) {
             $fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['document'])
                 ->each(function ($fileAdder) {
                     $fileAdder->toMediaCollection('financingproposal','s3');
