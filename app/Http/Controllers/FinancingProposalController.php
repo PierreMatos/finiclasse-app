@@ -61,7 +61,6 @@ class FinancingProposalController extends AppBaseController
     public function store(Request $request)
     {
         // $input = $request->all();
-        dd('proposal');
 
         $inputs = $request->collect();
 
