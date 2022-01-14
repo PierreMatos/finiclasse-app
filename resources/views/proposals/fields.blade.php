@@ -116,9 +116,16 @@
                 @if ($proposal->car_id != '')
                 {!! Form::label('make_id', isset($proposal->car->model->make->name) ? $proposal->car->model->make->name
                 : '') !!}
-                <img src="{{ $proposal->car->getFirstMediaUrl('cars', 'thumb') }}" style="max-width: 250px;" />
+                @if (!$proposal->car->getFirstMediaUrl('cars', 'thumb'))
+                    <img src="/storage/images/noPhoto.jpg" style="max-width: 250px;" class="imgCar" />
+                @else
+                    <img src="{{ $proposal->car->getFirstMediaUrl('cars', 'thumb') }}" style="max-width: 250px;" class="imgCar" />
+                @endif
+                <!-- <img src="{{ $proposal->car->getFirstMediaUrl('cars', 'thumb') }}" style="max-width: 250px;" /> -->
                 @endif
             </div>
+
+           
 
             <div class="form-group col-sm-8" style="display: flex;">
                 <!-- Fuel Field -->
@@ -186,7 +193,12 @@
                 @if (!empty($proposal->tradein_id))
                 {!! Form::label('make_id', isset($proposal->tradein->model->make->name) ?
                 $proposal->tradein->model->make->name : '') !!}
-                <img src="{{ $proposal->tradein->getFirstMediaUrl('cars', 'thumb') }}" style="max-width: 250px;" />
+                @if (!$proposal->tradein->getFirstMediaUrl('cars', 'thumb'))
+                <img src="/storage/images/noPhoto.jpg" style="max-width: 250px;" class="imgCar" />
+                @else
+                    <img src="{{ $proposal->tradein->getFirstMediaUrl('cars', 'thumb') }}" style="max-width: 250px;" class="imgCar" />
+                @endif
+                <!-- <img src="{{ $proposal->tradein->getFirstMediaUrl('cars', 'thumb') }}" style="max-width: 250px;" /> -->
                 @endif
             </div>
 
@@ -260,6 +272,9 @@
 
         <div class="row">
 
+            <input type="hidden" name="proposal_id" value="{{$proposal->id}}" />
+
+
             @foreach ( $financings as $financing )
 
             <input type="hidden" name="financing_id[]" value="{{$financing->id}}" />
@@ -270,9 +285,9 @@
             <div class="form-group col-sm-1">
                 
                 @if ($proposal->financings->contains('id', $financing->id))
-                <input checked="checked" class="mt-5" name="admin" type="checkbox" value="yes">
+                <input checked="checked" class="mt-5" name="checked[]" type="checkbox" value="{{$financing->id}}">
                 @else
-                <input name="admin" class="mt-5" type="checkbox" value="no">
+                <input name="checked[]" class="mt-5" type="checkbox" value="{{$financing->id}}">
                 @endif
 
             </div>
@@ -299,25 +314,29 @@
 
                 @foreach ($proposal->financings as $proposalFinancing )
 
-                <input type="text" name="proposal_id" value="{{$proposal->id}}" />
+                <!-- <input type="text" name="proposal_id" value="{{$proposal->id}}" /> -->
 
                         @if ($proposalFinancing->id == $financing->id)
 
-                            {{$proposalFinancing->getFirstMediaUrl('financing')}}
+                            {{$proposalFinancing->getFirstMediaUrl('financingproposal')}}
 
                         @endif
 
                 @endforeach
 
-                @if (!($proposal->financings->contains('id', $financing->id)))
+                <!-- @if (isset($proposalFinancing)) -->
                 <div class="input-group">
                     <div class="custom-file">
+                        <input type="file" id="document[]" name="document[]" multiple class="custom-file-input"/>
+                        <label for="document[]" class="custom-file-label">Adicione o documento</label>
+                    </div>
+                    <!-- <div class="custom-file">
                         {!! Form::file('document', ['class' => 'custom-file-input']) !!}
                         {!! Form::label('document', 'Choose file', ['class' => 'custom-file-label']) !!}
-                    </div>
+                    </div> -->
                 </div>
 
-                @endif
+                <!-- @endif -->
             </div>
 
             <div class="clearfix"></div>

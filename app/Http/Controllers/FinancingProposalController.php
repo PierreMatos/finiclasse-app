@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateFinancingProposalRequest;
 use App\Http\Requests\UpdateFinancingProposalRequest;
 use App\Repositories\FinancingProposalRepository;
+use App\Repositories\FinancingRepository;
+use App\Repositories\ProposalRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
+use App\Models\FinancingProposal;
 use Flash;
 use Response;
 
@@ -14,10 +17,13 @@ class FinancingProposalController extends AppBaseController
 {
     /** @var  FinancingProposalRepository */
     private $financingProposalRepository;
+    private $proposalRepository;
 
-    public function __construct(FinancingProposalRepository $financingProposalRepo)
+    public function __construct(FinancingProposalRepository $financingProposalRepo, ProposalRepository $proposalRepo, FinancingRepository $financingRepo)
     {
         $this->financingProposalRepository = $financingProposalRepo;
+        $this->financingRepository = $financingRepo;
+        $this->proposalRepository = $proposalRepo;
     }
 
     /**
@@ -54,20 +60,32 @@ class FinancingProposalController extends AppBaseController
      */
     public function store(Request $request)
     {
-        $input = $request->all();
+        // $input = $request->all();
 
-        dd($input);
+        $input = $request->collect();
 
-        $proposal = $this->ProposalRepository->find($input->proposal_id);
+        $proposal = $this->proposalRepository->find($input['proposal_id']);
 
-        $proposal->financings()->detach();
+        // $request->collect('financing_id')->each(function ($financings, $proposal) {
+        //     $financing = $this->financingRepository->find($financings);
+        // });
 
-        $proposal->financings()->sync($financings);
+        if($input){
+            $deletedRows = FinancingProposal::where('proposal_id', $input['proposal_id'])->delete();
+        }
 
-        $financingProposal = $this->financingProposalRepository->create($input);
+        // $proposal->financings()->detach();
 
-        if (collect($input)->has('document')) {
-                
+        // dd($request->all());
+        $proposal->financings()->syncWithoutDetaching($input['checked']);
+
+
+        // $proposal->financings()->sync($financings);
+
+        // $financingProposal = $this->financingProposalRepository->create($input);
+
+        // dd($request->hasFile('document'));
+        if ($request->hasFile('document')) {
                 // add Document
                 $fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['document'])
                 ->each(function ($fileAdder) {

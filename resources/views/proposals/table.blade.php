@@ -19,7 +19,7 @@
                 <td>{{ isset($proposal->vendor->name) ? $proposal->vendor->name : '' }}</td>
                 <td>{{ isset($proposal->car->model->make->name) ? $proposal->car->model->make->name : ''}}</td>
                 <td>{{ isset($proposal->first_contact_date) ? $proposal->first_contact_date : ''}}</td>
-                <td>{{ isset($proposal->price) ? $proposal->price : '' }}</td>
+                <td>{{ isset($proposal->initialBusinessStudy->sale) ? $proposal->initialBusinessStudy->sale : '' }}</td>
                 
                 <td width="120">
                     {!! Form::open(['route' => ['proposals.destroy', $proposal->id], 'method' => 'delete']) !!}
