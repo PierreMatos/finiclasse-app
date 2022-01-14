@@ -61,6 +61,7 @@ class FinancingProposalController extends AppBaseController
     public function store(Request $request)
     {
         // $input = $request->all();
+        dd($input);
         
         $inputs = $request->collect();
         
@@ -74,7 +75,6 @@ class FinancingProposalController extends AppBaseController
 
         // $proposal->financings()->detach();
 
-        dd('proposal');
     
 
         // if(((FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', $inputs['financing_id'])->exists() === false))){
