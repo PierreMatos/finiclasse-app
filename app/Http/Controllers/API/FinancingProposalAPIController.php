@@ -79,7 +79,10 @@ class FinancingProposalAPIController extends AppBaseController
             // $proposal->financings()->syncWithoutDetaching($inputs['financing_id']);
             $newFinancingProposal = $this->financingProposalRepository->create($inputs);
         }elseif(($inputs['checked'] === 'true') && (FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', $inputs['financing_id'])->exists() === true)){
-            $newFinancingProposal = FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', $inputs['financing_id'])->first();
+           
+            if ($request->hasFile('document')){
+                FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', $inputs['financing_id'])->delete();
+            }
         }
 
         if($inputs['checked'] === 'false'){

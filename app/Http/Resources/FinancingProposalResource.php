@@ -14,6 +14,7 @@ class FinancingProposalResource extends JsonResource
      */
     public function toArray($request)
     {
+        $this->getMedia('avatar')->count();
         $document = $this->getFirstMediaUrl('financingproposal');
 
         return [
