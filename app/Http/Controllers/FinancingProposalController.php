@@ -104,11 +104,15 @@ class FinancingProposalController extends AppBaseController
 
 
 
+            // dd($inputs['proposal_id']);
             // abc = 6 input 6, 24
             $abc=(FinancingProposal::where('proposal_id', $inputs['proposal_id'])->get());
-            $dels = $abc->diff(FinancingProposal::whereIn('financing_id', [$inputs['checked']])->get());
-            $dels = $abc->except('financing_id',$inputs['checked']);
-            dd($dels);
+            $def= FinancingProposal::where('proposal_id', $inputs['proposal_id'])->whereIn('financing_id', $inputs['checked'])->get();
+            // dd($def); 
+            // $dels = $abc->diff(FinancingProposal::whereIn('financing_id', [$inputs['checked']])->get());
+            // $dels = $abc->except([$def]);
+            $dels = $abc->diff(FinancingProposal::whereIn('financing_id', $inputs['checked'])->get());
+            // dd($dels);
             foreach($dels as $del){
                 // dd($del->id);
                 $deletedRows = $this->financingProposalRepository->find($del->id)->delete();
