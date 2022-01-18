@@ -65,19 +65,20 @@ class FinancingProposalController extends AppBaseController
         $proposal = $this->proposalRepository->find($inputs['proposal_id']);
         $document = $request->file('document');
 
-        // dd($input['checked']);
         // if($input){
             //     $deletedRows = FinancingProposal::where('proposal_id', $input['proposal_id'])->delete();
             // }
             foreach ($input['checked'] as $checked) {
                 
+            // dd($request->hasFile('checked'));
             $financingProposal = FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', key($input['checked']));
 
             // dd(key($input['checked']));
             //Delete previous if exists
                 if ($financingProposal->exists()){
-                    if ($request->hasFile('document')){
-                        dd($financingProposal->first()->getFirstMediaUrl('financingproposal'));
+                    $oldDoc = $financingProposal->first()->getFirstMediaUrl('financingproposal');
+                    if ($request->hasFile('checked') && $oldDoc != $request->hasFile('checked') ){
+                        // dd($financingProposal->first()->getFirstMediaUrl('financingproposal'));
                         $newFinancingProposal = $financingProposal->first();
                         $newFinancingProposal->delete();
                         $newFinancingProposal->clearMediaCollection('financingproposal','s3');
@@ -91,8 +92,8 @@ class FinancingProposalController extends AppBaseController
                 }
         
                 //if has file, upload file
-                if ($request->hasFile('document') && isset($newFinancingProposal)) {
-                    $fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['document'])
+                if ($request->hasFile('checked') && isset($newFinancingProposal)) {
+                    $fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['checked'])
                         ->each(function ($fileAdder) {
                             $fileAdder->toMediaCollection('financingproposal','s3');
                         });
