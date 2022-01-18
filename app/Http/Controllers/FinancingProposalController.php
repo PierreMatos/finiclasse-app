@@ -94,12 +94,15 @@ class FinancingProposalController extends AppBaseController
                 // dd($request['checked']);
                 //if has file, upload file
                 if ($request->hasFile('checked') && isset($newFinancingProposal)) {
+                    // dd($request['checked'][$key]);
                     // dd($newFinancingProposal);
                     // dd($newFinancingProposal);
-                    $fileAdders = $newFinancingProposal->syncFromMediaLibraryRequest(['checked'])
-                        ->each(function ($fileAdder) {
-                            $fileAdder->toMediaCollection('financingproposal','s3');
-                        });
+                    // dd($fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['checked']));
+                    $newFinancingProposal->addMediaFromRequest($request['checked'][$key]);
+                    // $fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['checked'])
+                    //     ->each(function ($fileAdder) {
+                    //         $fileAdder->toMediaCollection('financingproposal','s3');
+                    //     });
                 }
         
             }
