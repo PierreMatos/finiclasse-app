@@ -80,8 +80,8 @@ class FinancingProposalController extends AppBaseController
                         $newFinancingProposal->clearMediaCollection('financingproposal','s3');
                     }
                 }
-        
-                if((!($financingProposal->exists()))){
+                // ((!($financingProposal->exists()))) elseif
+                else{
         
                     $newFinancingProposal = $this->financingProposalRepository->create(['proposal_id'=>$inputs['proposal_id'], 'financing_id'=>$checked]);
         
