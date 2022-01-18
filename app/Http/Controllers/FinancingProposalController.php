@@ -68,10 +68,9 @@ class FinancingProposalController extends AppBaseController
         // if($input){
             //     $deletedRows = FinancingProposal::where('proposal_id', $input['proposal_id'])->delete();
             // }
-            foreach ($input['checked'] as $checked) {
-                
+            foreach ($input['checked'] as $key=>$checked) {
             // dd($request->hasFile('checked'));
-            $financingProposal = FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', key($input['checked']));
+            $financingProposal = FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', $key);
 
             // dd(key($input['checked']));
             //Delete previous if exists
@@ -88,7 +87,7 @@ class FinancingProposalController extends AppBaseController
                 // else{
         
                     // dd('cria');
-                    $newFinancingProposal = $this->financingProposalRepository->create(['proposal_id'=>$inputs['proposal_id'], 'financing_id'=>key($input['checked'])]);
+                    $newFinancingProposal = $this->financingProposalRepository->create(['proposal_id'=>$inputs['proposal_id'], 'financing_id'=>$key]);
         
                 // }
         
