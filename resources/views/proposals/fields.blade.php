@@ -315,17 +315,14 @@
                 @foreach ($financingsproposal as $financingproposal )
 
                 <!-- <input type="text" name="proposal_id" value="{{$proposal->id}}" /> -->
-{{$financingproposal->financing_id}}
-<div class="input-group">
-    <div class="custom-file">
-        <input type="file" id="{{$financingproposal->financing_id}}" name="checked[{{$financing->id}}]" multiple class="custom-file-input"/>
-        <label for="checked[{{$financing->id}}]" class="custom-file-label">Adicione o documento</label>
-    </div>
-</div>
-                        @if ($financingproposal->financing_id == $financing->id)
-a
+<!-- {{$financingproposal->financing_id}} -->
+
+
+                @if ($financingproposal->financing_id == $financing->id)
+
+
                         @if (!($financingproposal->getFirstMediaUrl('financingproposal')))
-                        b
+                        
                        
                         @endif
 
@@ -338,17 +335,23 @@ a
 
                 @endforeach
 
-                <!-- @if (isset($proposalFinancing)) -->
                 <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" id="{{$financingproposal->financing_id}}" name="checked[{{$financing->id}}]" multiple class="custom-file-input"/>
+                        <label for="checked[{{$financing->id}}]" class="custom-file-label">Adicione o documento</label>
+                    </div>
+                </div>
+                <!-- @if (isset($proposalFinancing)) -->
+                <!-- <div class="input-group">
                     <div class="custom-file">
                         <input type="file" id="document[]" name="document[]" multiple class="custom-file-input"/>
                         <label for="document[]" class="custom-file-label">Adicione o documento</label>
-                    </div>
+                    </div> -->
                     <!-- <div class="custom-file">
                         {!! Form::file('document', ['class' => 'custom-file-input']) !!}
                         {!! Form::label('document', 'Choose file', ['class' => 'custom-file-label']) !!}
                     </div> -->
-                </div>
+                <!-- </div> -->
 
                 <!-- @endif -->
             </div>
