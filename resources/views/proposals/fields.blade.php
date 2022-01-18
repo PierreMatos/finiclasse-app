@@ -318,7 +318,7 @@
 <!-- {{$financingproposal->financing_id}} -->
 
 
-                @if ($financingproposal->financing_id == $financing->id)
+            @if ($financingproposal->financing_id == $financing->id)
 
 
                         @if (!($financingproposal->getFirstMediaUrl('financingproposal')))
