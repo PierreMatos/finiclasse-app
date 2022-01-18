@@ -60,22 +60,24 @@ class FinancingProposalController extends AppBaseController
      */
     public function store(Request $request)
     {
-        // $input = $request->all();
+        $input = $request->all();
         $inputs = $request->collect();
         $proposal = $this->proposalRepository->find($inputs['proposal_id']);
         $document = $request->file('document');
 
-        // dd($request->all());
+        // dd($input['checked']);
         // if($input){
             //     $deletedRows = FinancingProposal::where('proposal_id', $input['proposal_id'])->delete();
             // }
-            foreach ($inputs['checked'] as $checked) {
+            foreach ($input['checked'] as $checked) {
                 
-            $financingProposal = FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', $checked);
+            $financingProposal = FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', key($input['checked']));
 
+            // dd(key($input['checked']));
             //Delete previous if exists
                 if ($financingProposal->exists()){
                     if ($request->hasFile('document')){
+                        dd($financingProposal->first()->getFirstMediaUrl('financingproposal'));
                         $newFinancingProposal = $financingProposal->first();
                         $newFinancingProposal->delete();
                         $newFinancingProposal->clearMediaCollection('financingproposal','s3');
