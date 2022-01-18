@@ -65,7 +65,6 @@ class FinancingProposalController extends AppBaseController
         $inputs = $request->collect();
         $proposal = $this->proposalRepository->find($inputs['proposal_id']);
         
-        
         // if($input){
             //     $deletedRows = FinancingProposal::where('proposal_id', $input['proposal_id'])->delete();
             // }
@@ -88,10 +87,7 @@ class FinancingProposalController extends AppBaseController
                 }
         
                 if ($request->hasFile('document') && isset($newFinancingProposal)) {
-                    $fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['document'])
-                        ->each(function ($fileAdder) {
-                            $fileAdder->toMediaCollection('financingproposal','s3');
-                        });
+                    $fileAdders = $newFinancingProposal->addMediaFromRequest(['document'])->toMediaCollection('financingproposal','s3');
                 }
 
 
