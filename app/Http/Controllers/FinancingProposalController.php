@@ -98,7 +98,7 @@ class FinancingProposalController extends AppBaseController
                     // dd($newFinancingProposal);
                     // dd($newFinancingProposal);
                     // dd($fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['checked']));
-                    $newFinancingProposal->addMediaFromRequest($request['checked'][$key]);
+                    $newFinancingProposal->addMediaFromRequest($request['checked']);
                     // $fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['checked'])
                     //     ->each(function ($fileAdder) {
                     //         $fileAdder->toMediaCollection('financingproposal','s3');
