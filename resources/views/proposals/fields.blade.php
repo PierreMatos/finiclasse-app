@@ -315,7 +315,7 @@
                 @foreach ($financingsproposal as $financingproposal )
 
                 <!-- <input type="text" name="proposal_id" value="{{$proposal->id}}" /> -->
-
+{{$financingproposal->financing_id}}
                         @if ($financingproposal->financing_id == $financing->id)
 a
                         @if (!($financingproposal->getFirstMediaUrl('financingproposal')))

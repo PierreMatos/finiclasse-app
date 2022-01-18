@@ -99,13 +99,29 @@ class FinancingProposalController extends AppBaseController
                             $fileAdder->toMediaCollection('financingproposal','s3');
                         });
                 }
-        }
+        
+        
+        
+            }
 
 
-        if($inputs['checked'] === 'false'){
-            $deletedRows = FinancingProposal::where('proposal_id', $inputs['proposal_id'])
-            ->where('financing_id', $inputs['financing_id'])->forceDelete();
-        }
+
+            // abc = 6 input 6, 24
+            $abc=($financingProposal->get());
+            $dels = $abc->diff(FinancingProposal::whereIn('id', [$inputs['checked']])->get());
+            foreach($dels as $del){
+                // dd($del->id);
+                $deletedRows = $this->financingProposalRepository->find($del->id)->delete();
+            //     $deletedRows = FinancingProposal::where('proposal_id', $inputs['proposal_id'])
+            // ->where('financing_id', $inputs['financing_id'])->forceDelete();
+            }
+
+        //     dd($abc);
+        //     // dd($users->contains($inputs['checked']));
+        // if(!($inputs['checked']->contains($financingProposal))){
+        //     $deletedRows = FinancingProposal::where('proposal_id', $inputs['proposal_id'])
+        //     ->where('financing_id', $inputs['financing_id'])->forceDelete();
+        // }
 
         
 
