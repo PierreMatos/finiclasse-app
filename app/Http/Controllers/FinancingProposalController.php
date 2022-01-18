@@ -66,15 +66,37 @@ class FinancingProposalController extends AppBaseController
         
         $proposal = $this->proposalRepository->find($inputs['proposal_id']);
         
-     
+        $financingProposal = FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', $inputs['financing_id']);
 
         // if($input){
         //     $deletedRows = FinancingProposal::where('proposal_id', $input['proposal_id'])->delete();
         // }
 
-        $proposal->financings()->detach();
+        if ($inputs['checked'] && $financingProposal->exists() === true){
+            if ($request->hasFile('document')){
+                $newFinancingProposal = $financingProposal->first();
+                $newFinancingProposal->delete();
+                $newFinancingProposal->clearMediaCollection('financingproposal','s3');
+            }
+        }
 
+        if($inputs['checked'] === 'false'){
+            $deletedRows = FinancingProposal::where('proposal_id', $inputs['proposal_id'])
+            ->where('financing_id', $inputs['financing_id'])->forceDelete();
+        }
     
+        if(($inputs['checked'] === 'true' && !($financingProposal->exists()))){
+
+            $newFinancingProposal = $this->financingProposalRepository->create($inputs);
+
+        }
+
+        if ($request->hasFile('document') && isset($newFinancingProposal)) {
+            $fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['document'])
+                ->each(function ($fileAdder) {
+                    $fileAdder->toMediaCollection('financingproposal','s3');
+                });
+        }
 
         // if(((FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', $inputs['financing_id'])->exists() === false))){
             // $proposal->financings()->syncWithoutDetaching($inputs['financing_id']);
@@ -89,7 +111,7 @@ class FinancingProposalController extends AppBaseController
         
 
         // dd($request->all());
-        $proposal->financings()->sync($inputs['financing_id']);
+        // $proposal->financings()->sync($inputs['financing_id']);
 
 
         // $proposal->financings()->sync($financings);
@@ -99,16 +121,16 @@ class FinancingProposalController extends AppBaseController
         // dd($inputs['proposal_id']);
         // $newFinancingProposal = $this->financingProposalRepository->find($inputs['financing_id']);
         
-        if ($request->hasFile('document')  ) {
-            // add Document
-            $newFinancingProposal = FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id',$inputs['financing_id'])->first();
-            // dd($newFinancingProposal);    
-            $fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['document'])
-                ->each(function ($fileAdder) {
-                $fileAdder->toMediaCollection('financingproposal','s3');
-            });
+        // if ($request->hasFile('document')  ) {
+        //     // add Document
+        //     $newFinancingProposal = FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id',$inputs['financing_id'])->first();
+        //     // dd($newFinancingProposal);    
+        //     $fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['document'])
+        //         ->each(function ($fileAdder) {
+        //         $fileAdder->toMediaCollection('financingproposal','s3');
+        //     });
 
-        }
+        // }
 
         Flash::success('Financing Proposal saved successfully.');
 

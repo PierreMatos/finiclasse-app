@@ -78,9 +78,9 @@ class FinancingProposalAPIController extends AppBaseController
         if(($inputs['checked'] === 'true') && (FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', $inputs['financing_id'])->exists() === true)){
             if ($request->hasFile('document')){
                 $newFinancingProposal = FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', $inputs['financing_id'])->first();
+                $newFinancingProposal->delete();
                 $newFinancingProposal->clearMediaCollection('financingproposal','s3');
             }
-        
         }
 
         if($inputs['checked'] === 'false'){
