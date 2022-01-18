@@ -317,9 +317,9 @@
                 <!-- <input type="text" name="proposal_id" value="{{$proposal->id}}" /> -->
 
                         @if ($financingproposal->financing_id == $financing->id)
-
-                        @if (!$financingproposal->getFirstMediaUrl('financingproposal'))
-                        
+a
+                        @if (!($financingproposal->getFirstMediaUrl('financingproposal')))
+                        b
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" id="{{$financingproposal->financing_id}}" name="checked[{{$financing->id}}]" multiple class="custom-file-input"/>

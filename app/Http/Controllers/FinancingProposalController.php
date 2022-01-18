@@ -87,12 +87,13 @@ class FinancingProposalController extends AppBaseController
                 // if doesen't exists, create new
                 else{
         
-                    $newFinancingProposal = $this->financingProposalRepository->create(['proposal_id'=>$inputs['proposal_id'], 'financing_id'=>$checked]);
+                    $newFinancingProposal = $this->financingProposalRepository->create(['proposal_id'=>$inputs['proposal_id'], 'financing_id'=>key($input['checked'])]);
         
                 }
         
                 //if has file, upload file
                 if ($request->hasFile('checked') && isset($newFinancingProposal)) {
+                    dd('upload');
                     $fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['checked'])
                         ->each(function ($fileAdder) {
                             $fileAdder->toMediaCollection('financingproposal','s3');
