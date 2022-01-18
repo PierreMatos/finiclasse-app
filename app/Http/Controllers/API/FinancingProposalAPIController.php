@@ -80,17 +80,19 @@ class FinancingProposalAPIController extends AppBaseController
                 $newFinancingProposal = FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', $inputs['financing_id'])->first();
                 $newFinancingProposal->clearMediaCollection('financingproposal','s3');
             }
-            
-        if(($inputs['checked'] === 'true') && (FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', $inputs['financing_id'])->exists() === false)){
-                // $proposal->financings()->syncWithoutDetaching($inputs['financing_id']);
-                $newFinancingProposal = $this->financingProposalRepository->create($inputs);
-            }
+        
         }
 
         if($inputs['checked'] === 'false'){
             $deletedRows = FinancingProposal::where('proposal_id', $inputs['proposal_id'])
             ->where('financing_id', $inputs['financing_id'])->forceDelete();
         }
+
+        if(($inputs['checked'] === 'true' && !(FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', $inputs['financing_id'])->exists()))){
+
+                // $proposal->financings()->syncWithoutDetaching($inputs['financing_id']);
+                $newFinancingProposal = $this->financingProposalRepository->create($inputs);
+            }
         // $newFinancingProposal = $this->financingProposalRepository->create($inputs['financing_id']);
 
             // add POS
