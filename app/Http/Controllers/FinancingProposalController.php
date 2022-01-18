@@ -61,10 +61,11 @@ class FinancingProposalController extends AppBaseController
     public function store(Request $request)
     {
         // $input = $request->all();
-        
         $inputs = $request->collect();
         $proposal = $this->proposalRepository->find($inputs['proposal_id']);
-        
+        $document = $request->file('document');
+
+        // dd($request->all());
         // if($input){
             //     $deletedRows = FinancingProposal::where('proposal_id', $input['proposal_id'])->delete();
             // }
@@ -72,6 +73,7 @@ class FinancingProposalController extends AppBaseController
                 
             $financingProposal = FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', $checked);
 
+            //Delete previous if exists
                 if ($financingProposal->exists()){
                     if ($request->hasFile('document')){
                         $newFinancingProposal = $financingProposal->first();
@@ -79,22 +81,22 @@ class FinancingProposalController extends AppBaseController
                         $newFinancingProposal->clearMediaCollection('financingproposal','s3');
                     }
                 }
-                // ((!($financingProposal->exists()))) elseif
+                // if doesen't exists, create new
                 else{
         
                     $newFinancingProposal = $this->financingProposalRepository->create(['proposal_id'=>$inputs['proposal_id'], 'financing_id'=>$checked]);
         
                 }
         
+                //if has file, upload file
                 if ($request->hasFile('document') && isset($newFinancingProposal)) {
                     $fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['document'])
                         ->each(function ($fileAdder) {
                             $fileAdder->toMediaCollection('financingproposal','s3');
                         });
                 }
-
-
         }
+
 
         if($inputs['checked'] === 'false'){
             $deletedRows = FinancingProposal::where('proposal_id', $inputs['proposal_id'])

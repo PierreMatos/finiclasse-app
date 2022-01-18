@@ -285,9 +285,9 @@
             <div class="form-group col-sm-1">
                 
                 @if ($proposal->financings->contains('id', $financing->id))
-                <input checked="checked" class="mt-5" name="checked[]" type="checkbox" value="{{$financing->id}}">
+                <input checked="checked" class="mt-5" name="checked[{{$financing->id}}]" type="checkbox" value="{{$financing->id}}">
                 @else
-                <input name="checked[]" class="mt-5" type="checkbox" value="{{$financing->id}}">
+                <input name="checked[{{$financing->id}}]" class="mt-5" type="checkbox" value="{{$financing->id}}">
                 @endif
 
             </div>
@@ -322,8 +322,8 @@
                         
                         <div class="input-group">
                             <div class="custom-file">
-                                <input type="file" id="document[]" name="document[]" multiple class="custom-file-input"/>
-                                <label for="document[]" class="custom-file-label">Adicione o documento</label>
+                                <input type="file" id="{{$financingproposal->financing_id}}" name="checked[{{$financing->id}}]" multiple class="custom-file-input"/>
+                                <label for="checked[{{$financing->id}}]" class="custom-file-label">Adicione o documento</label>
                             </div>
                            
                         </div>
