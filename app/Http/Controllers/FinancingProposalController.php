@@ -79,7 +79,7 @@ class FinancingProposalController extends AppBaseController
                     if ($request->hasFile('checked') && $oldDoc != $request->hasFile('checked') ){
                         // dd($financingProposal->first()->getFirstMediaUrl('financingproposal'));
                         $newFinancingProposal = $financingProposal->first();
-                        $newFinancingProposal->delete();
+                        // $newFinancingProposal->delete();
                         $newFinancingProposal->clearMediaCollection('financingproposal','s3');
                     }
                 }
