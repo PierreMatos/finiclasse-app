@@ -87,7 +87,7 @@ class FinancingProposalController extends AppBaseController
                 }
         
                 if ($request->hasFile('document') && isset($newFinancingProposal)) {
-                    $fileAdders = $newFinancingProposal->addMediaFromRequest(['document'])
+                    $fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['document'])
                         ->each(function ($fileAdder) {
                             $fileAdder->toMediaCollection('financingproposal','s3');
                         });
