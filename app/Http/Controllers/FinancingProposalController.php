@@ -84,12 +84,12 @@ class FinancingProposalController extends AppBaseController
                     }
                 }
                 // if doesen't exists, create new
-                // else{
+                else{
         
                     // dd('cria');
                     $newFinancingProposal = $this->financingProposalRepository->create(['proposal_id'=>$inputs['proposal_id'], 'financing_id'=>$key]);
         
-                // }
+                }
         
                 //if has file, upload file
                 if ($request->hasFile('checked') && isset($newFinancingProposal)) {
@@ -107,6 +107,7 @@ class FinancingProposalController extends AppBaseController
             // abc = 6 input 6, 24
             $abc=(FinancingProposal::where('proposal_id', $inputs['proposal_id'])->get());
             $dels = $abc->diff(FinancingProposal::whereIn('financing_id', [$inputs['checked']])->get());
+            $dels = $abc->except($inputs['checked']);
             foreach($dels as $del){
                 // dd($del->id);
                 $deletedRows = $this->financingProposalRepository->find($del->id)->delete();
