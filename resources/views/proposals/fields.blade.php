@@ -312,13 +312,25 @@
             <div class="form-group col-sm-4">
                 {!! Form::label('contract', 'Contrato') !!}
 
-                @foreach ($proposal->financings as $proposalFinancing )
+                @foreach ($financingsproposal as $financingproposal )
 
                 <!-- <input type="text" name="proposal_id" value="{{$proposal->id}}" /> -->
 
-                        @if ($proposalFinancing->id == $financing->id)
+                        @if ($financingproposal->financing_id == $financing->id)
 
-                            {{$proposalFinancing->getFirstMediaUrl('financingproposal')}}
+                        @if (!$financingproposal->getFirstMediaUrl('financingproposal'))
+                        
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" id="document[]" name="document[]" multiple class="custom-file-input"/>
+                                <label for="document[]" class="custom-file-label">Adicione o documento</label>
+                            </div>
+                           
+                        </div>
+                        @else
+                            <a href="{{ $financingproposal->getFirstMediaUrl('financingproposal') }}" target="_blank" class="btn btn-default">{{ __('Open') }}</a>
+
+                        @endif
 
                         @endif
 
