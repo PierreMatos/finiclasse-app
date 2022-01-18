@@ -283,7 +283,7 @@
 
             <!-- Financing -->
             <div class="form-group col-sm-1">
-                
+            {{$financing->id}}
                 @if ($proposal->financings->contains('id', $financing->id))
                 <input checked="checked" class="mt-5" name="checked[{{$financing->id}}]" type="checkbox" value="{{$financing->id}}">
                 @else
@@ -316,18 +316,20 @@
 
                 <!-- <input type="text" name="proposal_id" value="{{$proposal->id}}" /> -->
 {{$financingproposal->financing_id}}
+<div class="input-group">
+    <div class="custom-file">
+        <input type="file" id="{{$financingproposal->financing_id}}" name="checked[{{$financing->id}}]" multiple class="custom-file-input"/>
+        <label for="checked[{{$financing->id}}]" class="custom-file-label">Adicione o documento</label>
+    </div>
+</div>
                         @if ($financingproposal->financing_id == $financing->id)
 a
                         @if (!($financingproposal->getFirstMediaUrl('financingproposal')))
                         b
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" id="{{$financingproposal->financing_id}}" name="checked[{{$financing->id}}]" multiple class="custom-file-input"/>
-                                <label for="checked[{{$financing->id}}]" class="custom-file-label">Adicione o documento</label>
-                            </div>
-                           
-                        </div>
-                        @else
+                       
+                        @endif
+
+                        @if ($financingproposal->getFirstMediaUrl('financingproposal') !== "")
                             <a href="{{ $financingproposal->getFirstMediaUrl('financingproposal') }}" target="_blank" class="btn btn-default">{{ __('Open') }}</a>
 
                         @endif
