@@ -104,7 +104,7 @@ class FinancingProposalController extends AppBaseController
 
                     if(!(is_null($checked))){
                         $fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['checked'])
-                            ->each(function ($fileAdder) {
+                            ->first(function ($fileAdder) {
                                 $fileAdder->toMediaCollection('financingproposal','s3');
                             });
                     }
