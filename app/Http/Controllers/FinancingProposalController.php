@@ -85,11 +85,12 @@ class FinancingProposalController extends AppBaseController
                     }
                 }
                 // if doesen't exists, create new
-                else{
+                // else{
         
+                    // dd('cria');
                     $newFinancingProposal = $this->financingProposalRepository->create(['proposal_id'=>$inputs['proposal_id'], 'financing_id'=>key($input['checked'])]);
         
-                }
+                // }
         
                 //if has file, upload file
                 if ($request->hasFile('checked') && isset($newFinancingProposal)) {
