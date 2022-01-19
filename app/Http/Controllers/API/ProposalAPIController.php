@@ -319,13 +319,18 @@ class ProposalAPIController extends AppBaseController
             $expenses =  $proposal->car->expenses;
             $warranty =  $proposal->car->warranty;
 
-            $totalTransf = 0;
             $isentIva = null;
 
             if ($proposal->state->name == 'Aberto'){
                 $sell = $proposal->initialBusinessStudy->sale;
+                $totalTransf = $proposal->initialBusinessStudy->total_transf ?? 0;
+                $ivaTX = $proposal->initialBusinessStudy->ivatx ?? 0.23;
+                
+
             }elseif($proposal->state->name == 'Fechado'){
                 $sell = $proposal->finalBusinessStudy->sale;
+                $totalTransf = $proposal->finalBusinessStudy->total_transf ?? 0;
+                $ivaTX = $proposal->finalBusinessStudy->ivatx ?? 0.23;
             }
 
             //$sell = 43000; // valor gravado no estudo de negocio
@@ -333,7 +338,7 @@ class ProposalAPIController extends AppBaseController
             $settleValue = 0;
             
             //TODO Tabela com taxas e valores fixos
-            $ivaTX = 0.23;
+            // $ivaTX = 0.23;
             //$ivaTX = $proposal->iva;
             
             $totalCampaigns = 0;
@@ -416,9 +421,8 @@ class ProposalAPIController extends AppBaseController
             if ($proposal->car->condition_id == 1) {
 
                 $dif = ($total - $sell) - $diffTradein;
- 
+                
             } else {
-
                 $dif = (($sell - $total) - $diffTradein - $totalExtras) - $totalTransf - $totalBenefits;
  
             }
@@ -432,11 +436,16 @@ class ProposalAPIController extends AppBaseController
                     $desc = $dif;
                  }
 
+            //TOTAL BENEFITS
+            if($totalCampaigns){
+                $totalBenefits += $totalCampaigns;
+            }
+
             // $discPerc = 100;
             if($totalBenefits != 0 || $subTotal != 0 || $ptl != 0 || $sigpu != 0 || $totalTransf != 0){
 
-                $discPerc = ($desc / (($totalBenefits + $subTotal) - ($ptl + $sigpu + $totalTransf))) * 100;
-            
+                $discPerc = ($desc / ($totalBenefits + $subTotal - ($ptl + $sigpu + $totalTransf))) * 100;
+                
             }else {
                 
                 $discPerc=0;
@@ -447,9 +456,7 @@ class ProposalAPIController extends AppBaseController
             //TODO Division by zero
             // dd(if( ($totalBenefits + $isv) != 0 ));
 
-            if($totalCampaigns){
-                $totalBenefits += $totalCampaigns;
-            }
+           
 
             if( ($totalBenefits + $isv) != 0 && ($ptl + $sigpu + $totalTransf)!=0) {
 
