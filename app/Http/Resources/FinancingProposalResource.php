@@ -14,7 +14,7 @@ class FinancingProposalResource extends JsonResource
      */
     public function toArray($request)
     {
-        $this->getMedia('avatar')->count();
+        // $this->getMedia('avatar')->count();
         $document = $this->getFirstMediaUrl('financingproposal');
 
         return [
@@ -23,6 +23,7 @@ class FinancingProposalResource extends JsonResource
             // 'description' => $this->description,
             // 'value' => $this->value,
             'document' => $document,
+            'name' => $this->financings->name,
             'financing_id' => $this->financing_id,
             'proposal_id' => $this->proposal_id,
             'created_at' => $this->created_at,
