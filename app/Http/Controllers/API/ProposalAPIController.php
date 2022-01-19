@@ -224,6 +224,8 @@ class ProposalAPIController extends AppBaseController
                 'expenses' => $businessStudyCalculated['expenses'],
                 'taxes' => $businessStudyCalculated['taxes'],
                 'warranty' => $businessStudyCalculated['warranty'],
+                'internal_costs' => $businessStudyCalculated['internal_costs'],
+                'external_costs' => $businessStudyCalculated['external_costs'],
                 // 'business_study_authorization_id' => $businessStudyCalculated['business_study_authorization_id'],
             ];
     
@@ -325,7 +327,6 @@ class ProposalAPIController extends AppBaseController
 
             if ($proposal->state->name == 'Aberto'){
                 $sell = $proposal->initialBusinessStudy->sale;
-                $internal_cost = $proposal->initialBusinessStudy->internal_cost;
                 $totalTransf = $proposal->initialBusinessStudy->total_transf ?? 0;
                 $ivaTX = $proposal->initialBusinessStudy->ivatx ?? 0.23;
                 
@@ -426,7 +427,7 @@ class ProposalAPIController extends AppBaseController
                 $dif = ($total - $sell) - $diffTradein;
                 
             } else {
-                $dif = (($sell - $total) - $diffTradein - $totalExtras) - $totalTransf - $totalBenefits;
+                $dif = (($sell - $total) - $diffTradein - $totalExtras) - $totalTransf - $totalBenefits - $internal_costs - $external_costs;
  
             }
 
@@ -503,7 +504,8 @@ class ProposalAPIController extends AppBaseController
             'expenses' => $expenses,
             'taxes' => $taxes,
             'warranty' => $warranty,
-            'internal_cost' => $internal_cost
+            'internal_costs' => $internal_costs,
+            'external_costs' => $external_costs,
         ];
 
         return ($results);
