@@ -100,6 +100,7 @@ class FinancingProposalController extends AppBaseController
                     // dd($input);
                     if (!(empty($key)) && !(is_null($checked)) ){
 
+                        dd(empty($key));
                         $newFinancingProposal->addMedia($document[$key])->toMediaCollection('financingproposal', 's3');
 
                         // dd($key); 24,25
