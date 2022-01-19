@@ -65,9 +65,9 @@ class FinancingProposalController extends AppBaseController
         $proposal = $this->proposalRepository->find($inputs['proposal_id']);
         $document = $request->file('document');
 
-        // if($input){
-            //     $deletedRows = FinancingProposal::where('proposal_id', $input['proposal_id'])->delete();
-            // }
+
+        if (array_key_exists('checked', $input)){
+
             foreach ($input['checked'] as $key=>$checked) {
             // dd($request->hasFile('checked'));
             $financingProposal = FinancingProposal::where('proposal_id', $inputs['proposal_id'])->where('financing_id', $key);
@@ -103,37 +103,17 @@ class FinancingProposalController extends AppBaseController
 
                         $newFinancingProposal->addMedia($document[$key])->toMediaCollection('financingproposal', 's3');
 
-                        // dd($key); 24,25
                     }
-                    // dd($document); 
-                    // dd($newFinancingProposal);
-                    // dd($newFinancingProposal);
-                    // dd($fileAdders = $newFinancingProposal->addMultipleMediaFromRequest(['checked']));
-                    // $newFinancingProposal->addMultipleMediaFromRequest($request['checked']);
-
-                    // if(!(is_null($checked))){
-                    //     $newFinancingProposal->addMedia($document[$key])->toMediaCollection('financingproposal', 's3');
-
-                        // $fileAdders = $newFinancingProposal->addMediaFromRequest($checked)->toMediaCollection('financingproposal','s3');
-                            // ->first(function ($fileAdder) {
-                            //     $fileAdder->toMediaCollection('financingproposal','s3');
-                            // });
-                    // }
-
                     
                 }
         
             }
 
+        }
 
-
-            // dd($inputs['proposal_id']);
-            // abc = 6 input 6, 24
             $abc=(FinancingProposal::where('proposal_id', $inputs['proposal_id'])->get());
             $def= FinancingProposal::where('proposal_id', $inputs['proposal_id'])->whereIn('financing_id', $inputs['checked'])->get();
-            // dd($def); 
-            // $dels = $abc->diff(FinancingProposal::whereIn('financing_id', [$inputs['checked']])->get());
-            // $dels = $abc->except([$def]);
+
             $dels = $abc->diff(FinancingProposal::whereIn('financing_id', $inputs['checked'])->get());
             // dd($dels);
             foreach($dels as $del){
