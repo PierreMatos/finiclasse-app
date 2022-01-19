@@ -102,7 +102,7 @@ class FinancingProposalController extends AppBaseController
 
                         $newFinancingProposal->addMedia($document[$key])->toMediaCollection('financingproposal', 's3');
 
-                        dd($key);
+                        // dd($key); 24,25
                     }
                     // dd($document); 
                     // dd($newFinancingProposal);
