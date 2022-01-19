@@ -57,7 +57,7 @@ class ProposalCollection extends ResourceCollection
                 'mobile_phone' => $proposal->client->mobile_phone ?? '',
             ],
             'vendor' => $proposal->vendor->name ?? '',
-            'price' => $proposal->car->price ?? '',
+            'price' => $proposal->car->price_base ?? '',
             'pos_number' => $proposal->pos_number,
             'prop_value' => $proposal->prop_value,
             'first_contact_date' => $proposal->first_contact_date,
@@ -70,7 +70,7 @@ class ProposalCollection extends ResourceCollection
             'car' => [
                 'name' => $proposal->car->model->make->name ?? '',
                 'model' => $proposal->car->model->name ?? '',
-                'price' => $proposal->car->price ?? '',
+                'price' => $proposal->car->price_base ?? '',
                 'avatar' => $avatar ?? '',
             ],
             'tradein_id' => $proposal->tradein_id,
