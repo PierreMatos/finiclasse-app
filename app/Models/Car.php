@@ -213,6 +213,7 @@ class Car extends Model implements HasMedia
         'observations' => 'string',
         'est' => 'integer',
         'potencial_buyer' => 'boolean'
+
     ];
 
     /**

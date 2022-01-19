@@ -318,11 +318,14 @@ class ProposalAPIController extends AppBaseController
             $taxes =  $proposal->car->taxes;
             $expenses =  $proposal->car->expenses;
             $warranty =  $proposal->car->warranty;
+            $internal_costs = $proposal->initialBusinessStudy->internal_costs;
+            $external_costs = $proposal->initialBusinessStudy->external_costs;
 
             $isentIva = null;
 
             if ($proposal->state->name == 'Aberto'){
                 $sell = $proposal->initialBusinessStudy->sale;
+                $internal_cost = $proposal->initialBusinessStudy->internal_cost;
                 $totalTransf = $proposal->initialBusinessStudy->total_transf ?? 0;
                 $ivaTX = $proposal->initialBusinessStudy->ivatx ?? 0.23;
                 
@@ -456,7 +459,6 @@ class ProposalAPIController extends AppBaseController
             //TODO Division by zero
             // dd(if( ($totalBenefits + $isv) != 0 ));
 
-           
 
             if( ($totalBenefits + $isv) != 0 && ($ptl + $sigpu + $totalTransf)!=0) {
 
@@ -500,7 +502,8 @@ class ProposalAPIController extends AppBaseController
             'tradein' => $proposal->tradein,
             'expenses' => $expenses,
             'taxes' => $taxes,
-            'warranty' => $warranty
+            'warranty' => $warranty,
+            'internal_cost' => $internal_cost
         ];
 
         return ($results);

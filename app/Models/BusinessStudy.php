@@ -72,7 +72,9 @@ class BusinessStudy extends Model
         'purchase_price',
         'business_study_authorization_id',
         'tradein_id',
-        'total_transf'
+        'total_transf',
+        'internal_costs',
+        'external_costs'
     ];
 
     /**
@@ -107,7 +109,10 @@ class BusinessStudy extends Model
         'warranty' => 'decimal:2',
         'purchase_price' => 'decimal:2',
         'business_study_authorization_id' => 'integer',
-        'tradein_id' => 'integer'
+        'tradein_id' => 'integer',
+        'internal_costs' => 'decimal:2',
+        'external_costs' => 'decimal:2',
+
     ];
 
     /**
@@ -144,6 +149,14 @@ class BusinessStudy extends Model
     public function initialProposal()
     {
         return $this->hasOne(\App\Models\Proposal::class, 'initial_business_study_id' , 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function car()
+    {
+        return $this->hasOne(\App\Models\Car::class, 'initial_business_study_id' , 'id');
     }
 
 }
