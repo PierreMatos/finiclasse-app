@@ -78,7 +78,7 @@ class ProposalResource extends JsonResource
                 'motorization' => $this->car->motorization ?? '',
                 'condition' => $this->car->condition->name ?? '',
                 'state' => $this->car->state->name ?? '',
-                'registration' => $this->car->registration,
+                'registration' => isset($this->car->registration) ? $this->car->registration : '',
                 'registration_formatted' => isset($this->car->registration) ? $this->car->registration->isoFormat('M/Y') : '',
                 'km' => $this->car->km ?? '',
                 'avatar' => $carAvatar ?? '',
