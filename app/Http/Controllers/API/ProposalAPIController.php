@@ -322,6 +322,7 @@ class ProposalAPIController extends AppBaseController
             $warranty =  $proposal->car->warranty;
             $internal_costs = $proposal->initialBusinessStudy->internal_costs;
             $external_costs = $proposal->initialBusinessStudy->external_costs;
+            $sale = $proposal->initialBusinessStudy->internal_costs;
 
             $isentIva = null;
 
