@@ -339,7 +339,7 @@ class ProposalAPIController extends AppBaseController
 
             //$sell = 43000; // valor gravado no estudo de negocio
             $diffTradein = 0;
-            $settleValue = 0;
+            $settleValue =  $proposal->initialBusinessStudy->sale;
             
             //TODO Tabela com taxas e valores fixos
             // $ivaTX = 0.23;
@@ -417,7 +417,8 @@ class ProposalAPIController extends AppBaseController
                 $sellingPrice = $proposal->tradein->tradein_sale; 
                 
                 $diffTradein = $sellingPrice - ($taxes + $expenses + $purchasePrice);
-                $settleValue = $sellingPrice - $purchasePrice;
+                // $settleValue = $sellingPrice - $purchasePrice;
+                $settleValue = $sale - $purchasePrice;
             }
             
 
@@ -476,6 +477,7 @@ class ProposalAPIController extends AppBaseController
 
             return 'car not found';
         }
+
         $results = [
             'base_price' => $basePrice,
             'total_extras' =>  $proposal->car->extras_total,

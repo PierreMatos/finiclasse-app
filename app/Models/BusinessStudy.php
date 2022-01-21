@@ -106,6 +106,7 @@ class BusinessStudy extends Model
         'total' => 'decimal:2',
         'expenses' => 'decimal:2',
         'taxes' => 'decimal:2',
+        'total_transf' => 'decimal:2',
         'warranty' => 'decimal:2',
         'purchase_price' => 'decimal:2',
         'business_study_authorization_id' => 'integer',
