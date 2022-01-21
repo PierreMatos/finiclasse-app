@@ -237,7 +237,7 @@
                     <p>Preço de compra</p>
                     @if ($proposal->tradein_id != '')
                     <h2>@money($proposal->tradein->tradein_purchase)</h2>
-                    <div class="form-group col-sm-4">
+                    <div class="form-group col-sm-6">
                         {!! Form::text('tradein_purchase', isset( $proposal->tradein->tradein_purchase) ?
                         $proposal->tradein->tradein_purchase : '', ['class' => 'form-control',
                         'id'=>'tradein_purchase']) !!}
@@ -337,7 +337,7 @@
 
                 <div class="input-group">
                     <div class="custom-file">
-                        <input type="file" id="{{$financingproposal->financing_id}}" name="checked[{{$financing->id}}]" multiple class="custom-file-input"/>
+                        <input type="file" id="{{$financing->id}}" name="checked[{{$financing->id}}]" multiple class="custom-file-input"/>
                         <label for="checked[{{$financing->id}}]" class="custom-file-label">Adicione o documento</label>
                     </div>
                 </div>
