@@ -74,7 +74,9 @@ class BusinessStudy extends Model
         'tradein_id',
         'total_transf',
         'internal_costs',
-        'external_costs'
+        'external_costs',
+        'margin',
+        'marginIVA'
     ];
 
     /**
@@ -113,6 +115,8 @@ class BusinessStudy extends Model
         'tradein_id' => 'integer',
         'internal_costs' => 'decimal:2',
         'external_costs' => 'decimal:2',
+        'margin' => 'decimal:2',
+        'marginIVA' => 'decimal:2',
 
     ];
 

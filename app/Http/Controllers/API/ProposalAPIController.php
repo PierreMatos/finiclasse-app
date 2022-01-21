@@ -226,6 +226,8 @@ class ProposalAPIController extends AppBaseController
                 'warranty' => $businessStudyCalculated['warranty'],
                 'internal_costs' => $businessStudyCalculated['internal_costs'],
                 'external_costs' => $businessStudyCalculated['external_costs'],
+                'marginIVA' => $businessStudyCalculated['marginIVA'],
+                'margin' => $businessStudyCalculated['margin'],
                 // 'business_study_authorization_id' => $businessStudyCalculated['business_study_authorization_id'],
             ];
     
@@ -322,7 +324,7 @@ class ProposalAPIController extends AppBaseController
             $warranty =  $proposal->car->warranty;
             $internal_costs = $proposal->initialBusinessStudy->internal_costs;
             $external_costs = $proposal->initialBusinessStudy->external_costs;
-            $sale = $proposal->initialBusinessStudy->internal_costs;
+            $sale = $proposal->initialBusinessStudy->sale;
 
             $isentIva = null;
 
@@ -462,13 +464,21 @@ class ProposalAPIController extends AppBaseController
             //TODO Division by zero
             // dd(if( ($totalBenefits + $isv) != 0 ));
 
-
             if( ($totalBenefits + $isv) != 0 && ($ptl + $sigpu + $totalTransf)!=0) {
 
                 $profit = $desc / ( $totalBenefits + $isv ) - ( $ptl + $sigpu + $totalTransf );
 
             }else {$profit=0;}
 
+
+            if ($proposal->car->condition_id !== 1){
+
+                //margem com  iva, confirmar diff tradein
+                $marginIVA = (($sale - $total) - $diffTradein) - ($internal_costs + $external_costs + $warranty) - $totalTransf + $totalBenefits ;
+            
+                //margem sem IVA
+                $margin = $marginIVA / (1+$ivaTX);  
+            }
             //atribuir athirização
 
             // if($profit < $min){
@@ -509,6 +519,8 @@ class ProposalAPIController extends AppBaseController
             'warranty' => $warranty,
             'internal_costs' => $internal_costs,
             'external_costs' => $external_costs,
+            'marginIVA' => $marginIVA,
+            'margin' => $margin
         ];
 
         return ($results);
