@@ -354,6 +354,7 @@ class ProposalAPIController extends AppBaseController
             $sellingPrice = 0;
             $purchasePrice = 0;
             $marginIVA = 0;
+            $margin = 0;
 
             // total campaigns
             foreach($proposal->campaigns as $campaign){
