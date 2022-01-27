@@ -125,7 +125,7 @@ class BusinessStudyController extends AppBaseController
 
         Flash::success('Business Study updated successfully.');
 
-        return redirect(route('businessStudies.index'));
+        return redirect(route('proposals.index'));
     }
 
     /**

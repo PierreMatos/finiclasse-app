@@ -228,7 +228,23 @@
                     {!! Form::text('registration', isset($proposal->tradein->registration) ?
                     $proposal->tradein->registration : '', ['class' => 'form-control', 'disabled']) !!}
                 </div>
+            <!-- </div> -->
+
+        <!-- <div class="form-group col-sm-8" style="display: flex;"> -->
+            <!-- Color Exterior Field -->
+            <div class="form-group col-sm-6">
+                {!! Form::label('km', 'Km') !!}
+                {!! Form::text('km', isset($proposal->tradein->km) ?
+                $proposal->tradein->km : '', ['class' => 'form-control', 'disabled']) !!}
+
+                <!-- Ano Id Field -->
+                <div class="form-group"></div>
+                {!! Form::label('observations', 'Observações') !!}
+                {!! Form::text('observations', isset($proposal->tradein->observations) ?
+                $proposal->tradein->observations : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
+        </div>
+
 
             <div class="form-group col-sm-4"></div>
             <div class="form-group col-sm-8" style="display: flex;">
@@ -283,7 +299,6 @@
 
             <!-- Financing -->
             <div class="form-group col-sm-1">
-            {{$financing->id}}
                 @if ($proposal->financings->contains('id', $financing->id))
                 <input checked="checked" class="mt-5" name="checked[{{$financing->id}}]" type="checkbox" value="{{$financing->id}}">
                 @else
@@ -372,25 +387,56 @@
     <div class="tab-pane" id="proposals" role="tabpanel" aria-labelledby="proposals-tab">
         <div class="row mb-5">
 
-            <!-- Proposal Value Field -->
-            <div class="form-group col-sm-4">
+            <!-- INICIAL -->
+
+            <div class="form-group col-sm-2">
+                {!! Form::label('inicial', 'Inicial') !!}
+            </div>
+
+            <div class="form-group col-sm-3">
                 <p>Diferença</p>
                 <h2>@money($proposal->initialBusinessStudy->total_diff_amount)</h2>
             </div>
 
             <!-- Financial Value Field -->
-            <div class="form-group col-sm-4">
+            <div class="form-group col-sm-3">
                 <p>Desconto</p>
                 <h2>@money($proposal->initialBusinessStudy->total_discount_amount)</h2>
             </div>
 
             <!-- Tradein Value Field -->
-            <div class="form-group col-sm-4">
+            <div class="form-group col-sm-3">
                 <p>%</p>
                 <h2>@money($proposal->initialBusinessStudy->total_discount_perc)</h2>
             </div>
-
         </div>
+
+        <div class="row mb-5">
+
+            <!-- FINAL -->
+
+            <div class="form-group col-sm-2">
+                {!! Form::label('final', 'Final') !!}
+            </div>
+
+            <div class="form-group col-sm-3">
+                <p>Diferença</p>
+                <h2>@money($proposal->finalBusinessStudy->total_diff_amount)</h2>
+            </div>
+
+            <!-- Financial Value Field -->
+            <div class="form-group col-sm-3">
+                <p>Desconto</p>
+                <h2>@money($proposal->finalBusinessStudy->total_discount_amount)</h2>
+            </div>
+
+            <!-- Tradein Value Field -->
+            <div class="form-group col-sm-3">
+                <p>%</p>
+                <h2>@money($proposal->finalBusinessStudy->total_discount_perc)</h2>
+            </div>
+        </div>
+
 
         {!! Form::model($proposal, ['route' => ['businessStudies.update', $proposal->finalBusinessStudy->id], 'method' => 'patch', 'files' => true]) !!}
 

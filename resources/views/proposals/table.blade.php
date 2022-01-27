@@ -18,7 +18,7 @@
                 <td>{{ isset($proposal->client->name) ? $proposal->client->name : '' }}</td>
                 <td>{{ isset($proposal->vendor->name) ? $proposal->vendor->name : '' }}</td>
                 <td>{{ isset($proposal->car->model->make->name) ? $proposal->car->model->make->name : ''}}</td>
-                <td>{{ isset($proposal->first_contact_date) ? $proposal->first_contact_date : ''}}</td>
+                <td>{{ isset($proposal->created_at) ? $proposal->created_at : ''}}</td>
                 <td>{{ isset($proposal->initialBusinessStudy->sale) ? $proposal->initialBusinessStudy->sale : '' }}</td>
                 
                 <td width="120">

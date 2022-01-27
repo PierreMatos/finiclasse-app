@@ -37,7 +37,7 @@
                 
                 @else 
 
-                <a class="nav-link" id="tradein-tab" data-toggle="tab" disabled href="#tradeins" role="tab"
+                <a class="nav-link disabled" id="tradein-tab" data-toggle="tab" href="#tradeins" role="tab"
                     aria-controls="tradein" aria-selected="false">{{__('Tradein')}}</a>
 
                 @endif
