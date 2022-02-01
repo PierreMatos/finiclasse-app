@@ -232,6 +232,7 @@ class ProposalAPIController extends AppBaseController
                 'external_costs' => $businessStudyCalculated['external_costs'],
                 'marginIVA' => $businessStudyCalculated['marginIVA'],
                 'margin' => $businessStudyCalculated['margin'],
+                'business_study_authorization_id' => $businessStudyCalculated['business_study_authorization_id']
                 // 'business_study_authorization_id' => $businessStudyCalculated['business_study_authorization_id'],
             ];
     
@@ -520,16 +521,15 @@ class ProposalAPIController extends AppBaseController
             // dd($businessStudy);
             // $authorizations = $businessStudyAuthorizationRepository->all();
             
-            $diff = $proposal->initialBusinessStudy->total_discount_perc;
     
             foreach ($authorizations as $authorization) {
     
                 $min = $authorization->min;
                 $max = $authorization->max;
+                $business_study_authorization_id = 1;
+
+                if($discPerc > $min && $discPerc < $max) {
     
-                if($diff > $min && $diff < $max) {
-    
-                    //se bater
                     if ($authorization->id != 1){
     
                         $proposal->state_id = 3;
@@ -537,14 +537,11 @@ class ProposalAPIController extends AppBaseController
     
                     }
     
-                    $businessStudy->business_study_authorization_id = $authorization->id;
-                    $businessStudy->save();
-    
-                
+                    $business_study_authorization_id = $authorization->id;
+
                 }
     
             }
-
 
 
         } else {
@@ -583,7 +580,8 @@ class ProposalAPIController extends AppBaseController
             'internal_costs' => $internal_costs,
             'external_costs' => $external_costs,
             'marginIVA' => $marginIVA,
-            'margin' => $margin
+            'margin' => $margin,
+            'business_study_authorization_id' => $business_study_authorization_id,
         ];
 
         return ($results);
