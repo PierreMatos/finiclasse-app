@@ -7,8 +7,10 @@ use App\Http\Requests\API\UpdateProposalAPIRequest;
 use App\Models\Proposal;
 use App\Models\Car;
 use App\Models\BusinessStudy;
+use App\Models\BusinessStudyAuthorization;
 use App\Repositories\ProposalRepository;
 use App\Repositories\BusinessStudyRepository;
+use App\Repositories\BusinessStudyAuthorizationRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\ProposalResource;
@@ -32,11 +34,13 @@ class ProposalAPIController extends AppBaseController
     /** @var  ProposalRepository */
     private $proposalRepository;
     private $businessStudyRepository;
+    // private $businessStudyAuthorizationRepository;
 
     public function __construct(ProposalRepository $proposalRepo, BusinessStudyRepository $businessStudyRepo)
     {
         $this->proposalRepository = $proposalRepo;
         $this->businessStudyRepository = $businessStudyRepo;
+        // $this->businessStudyAuthorizationRepository = $businessStudyAuthorizationRepo;
     }
 
     /**
@@ -243,8 +247,9 @@ class ProposalAPIController extends AppBaseController
 
         }
 
-
         // dd($proposal->state->name == 'Aberto');
+        $proposal = $this->proposalRepository->find($id);
+
 
         return $this->sendResponse(new ProposalResource($proposal), 'Proposal updated successfully');
     }
@@ -276,8 +281,16 @@ class ProposalAPIController extends AppBaseController
     public function authorization($id){
 
         $proposal = Proposal::find($id);
+
+        $authorizations = BusinessStudyAuthorization::all();
+
+        $businessStudy = BusinessStudy::find($proposal->initialBusinessStudy->id);
+        $businessStudy->business_study_authorization_id = 2;
+
+        // dd($businessStudy);
+        // $authorizations = $businessStudyAuthorizationRepository->all();
         
-        $diff = $proposal->total_discount_perc;
+        $diff = $proposal->initialBusinessStudy->total_discount_perc;
 
         foreach ($authorizations as $authorization) {
 
@@ -286,7 +299,13 @@ class ProposalAPIController extends AppBaseController
 
             if($diff > $min && $diff < $max) {
 
-                $proposal->authorization_id = $authorization->id;
+                //se bater
+                $proposal->state_id = 3;
+                $proposal->save();
+
+                $businessStudy->business_study_authorization_id = $authorization->id;
+                $businessStudy->save();
+
             
             }
 
@@ -313,6 +332,17 @@ class ProposalAPIController extends AppBaseController
 
         if (!empty($proposal->car)) {
             
+            $totalCampaigns = 0;
+            $totalBenefits = 0;
+            $subTotal = 0.0;
+            $sellingPrice = 0;
+            $purchasePrice = 0;
+            $marginIVA = 0;
+            $margin = 0;
+            $sell = 0;
+            $totalTransf = 0;
+            $ivaTX = 0;
+
             $preTotalExtras = $proposal->car->extras_total;
             $basePrice = $proposal->car->price_base;
             $ptl = $proposal->car->ptl;
@@ -348,13 +378,7 @@ class ProposalAPIController extends AppBaseController
             // $ivaTX = 0.23;
             //$ivaTX = $proposal->iva;
             
-            $totalCampaigns = 0;
-            $totalBenefits = 0;
-            $subTotal = 0.0;
-            $sellingPrice = 0;
-            $purchasePrice = 0;
-            $marginIVA = 0;
-            $margin = 0;
+           
 
             // total campaigns
             foreach($proposal->campaigns as $campaign){
@@ -481,11 +505,11 @@ class ProposalAPIController extends AppBaseController
                 //margem sem IVA
                 $margin = $marginIVA / (1+$ivaTX);  
             }
-            //atribuir athirização
 
-            // if($profit < $min){
-                //nao precisa
-            // }
+
+            //atribuir athirização
+            $this->authorization($id);
+
         } else {
 
             return 'car not found';
