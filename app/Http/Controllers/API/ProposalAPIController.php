@@ -545,7 +545,7 @@ class ProposalAPIController extends AppBaseController
 
                 }elseif ($proposal->car->condition_id == 2 || $proposal->car->condition_id == 3 ) {
 
-                    if($margin < 0) {
+                    if($margin <= 0) {
     
                         if ($authorization->id != 1){
         
