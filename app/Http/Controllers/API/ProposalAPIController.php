@@ -528,18 +528,38 @@ class ProposalAPIController extends AppBaseController
                 $max = $authorization->max;
                 $business_study_authorization_id = 1;
 
-                if($discPerc > $min && $discPerc < $max) {
+                if ($proposal->car->condition_id == 1){
+                    
+                    if($discPerc > $min && $discPerc < $max) {
     
-                    if ($authorization->id != 1){
-    
-                        $proposal->state_id = 3;
-                        $proposal->save();
+                        if ($authorization->id != 1){
+        
+                            $proposal->state_id = 3;
+                            $proposal->save();
+        
+                        }
+        
+                        $business_study_authorization_id = $authorization->id;
     
                     }
+
+                }elseif ($proposal->car->condition_id == 2 || $proposal->car->condition_id == 3 ) {
+
+                    if($margin < 0) {
     
-                    $business_study_authorization_id = $authorization->id;
+                        if ($authorization->id != 1){
+        
+                            $proposal->state_id = 3;
+                            $proposal->save();
+        
+                        }
+        
+                        $business_study_authorization_id = $authorization->id;
+    
+                    }
 
                 }
+                
     
             }
 
