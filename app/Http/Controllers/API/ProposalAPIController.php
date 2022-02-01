@@ -359,13 +359,13 @@ class ProposalAPIController extends AppBaseController
             $isentIva = null;
 
             if ($proposal->state->name == 'Aberto'){
-                $sell = $proposal->initialBusinessStudy->sale;
+                $sale = $proposal->initialBusinessStudy->sale;
                 $totalTransf = $proposal->initialBusinessStudy->total_transf ?? 0;
                 $ivaTX = $proposal->initialBusinessStudy->ivatx ?? 0.23;
                 
 
             }elseif($proposal->state->name == 'Fechado'){
-                $sell = $proposal->finalBusinessStudy->sale;
+                $sale = $proposal->finalBusinessStudy->sale;
                 $totalTransf = $proposal->finalBusinessStudy->total_transf ?? 0;
                 $ivaTX = $proposal->finalBusinessStudy->ivatx ?? 0.23;
             }
@@ -436,7 +436,7 @@ class ProposalAPIController extends AppBaseController
             }
             
             // DISCONT
-            if (is_null($isentIva)) { ($total - $sell) / (1 + $iva) + $totalBenefits; } else { $total - $sell + $totalBenefits;}
+            // if (is_null($isentIva)) { ($total - $sell) / (1 + $iva) + $totalBenefits; } else { $total - $sell + $totalBenefits;}
             $txblBase = $subTotal + $isv;
             $totalValue = $txblBase + $iva;
 
@@ -454,10 +454,10 @@ class ProposalAPIController extends AppBaseController
             //diff
             if ($proposal->car->condition_id == 1) {
 
-                $dif = ($total - $sell) - $diffTradein;
+                $dif = ($total - $sale) - $diffTradein;
                 
             } else {
-                $dif = (($sell - $total) - $diffTradein - $totalExtras) - $totalTransf - $totalBenefits - $internal_costs - $external_costs;
+                $dif = (($sale - $total) - $diffTradein - $totalExtras) - $totalTransf - $totalBenefits - $internal_costs - $external_costs;
  
             }
 
@@ -528,7 +528,7 @@ class ProposalAPIController extends AppBaseController
             'IVA Taxa' => $ivaTX,
             'iva' => $iva,
             'total' => $total,
-            'sale' => $sell,
+            'sale' => $sale,
             'selling_price' => $sellingPrice,
             'purchase_price' => $purchasePrice,
             'tradein_diff' => $diffTradein,
