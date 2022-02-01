@@ -285,7 +285,7 @@ class ProposalAPIController extends AppBaseController
         $authorizations = BusinessStudyAuthorization::all();
 
         $businessStudy = BusinessStudy::find($proposal->initialBusinessStudy->id);
-        $businessStudy->business_study_authorization_id = 2;
+        // $businessStudy->business_study_authorization_id = 2;
 
         // dd($businessStudy);
         // $authorizations = $businessStudyAuthorizationRepository->all();
@@ -300,8 +300,12 @@ class ProposalAPIController extends AppBaseController
             if($diff > $min && $diff < $max) {
 
                 //se bater
-                $proposal->state_id = 3;
-                $proposal->save();
+                if ($authorization->id != 1){
+
+                    $proposal->state_id = 3;
+                    $proposal->save();
+
+                }
 
                 $businessStudy->business_study_authorization_id = $authorization->id;
                 $businessStudy->save();
