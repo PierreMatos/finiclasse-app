@@ -358,7 +358,7 @@ class ProposalAPIController extends AppBaseController
 
             $isentIva = null;
 
-            if ($proposal->state->name == 'Aberto'){
+            if ($proposal->state->name == 'Aberto' || $proposal->state->name == 'Pendente'){
                 $sale = $proposal->initialBusinessStudy->sale;
                 $totalTransf = $proposal->initialBusinessStudy->total_transf ?? 0;
                 $ivaTX = $proposal->initialBusinessStudy->ivatx ?? 0.23;
@@ -463,8 +463,6 @@ class ProposalAPIController extends AppBaseController
 
             //desc
             if (is_null($isentIva)) { 
-                // $x = ($dif*($ivaTX*100))/100;
-                // $desc = $dif - $x;
                 $desc = $dif / (1+($ivaTX));
                 } else{ 
                     $desc = $dif;
