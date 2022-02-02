@@ -78,18 +78,9 @@
     <script>
 
 
-        
-
-   
- 
-   
     $(".trade").click(function(e){
   
-        // e.preventDefault();
-   
         var price = $("input[name=tradein_purchase]").val();
-        // var password = $("input[name=password]").val();
-        // var email = $("input[name=email]").val();
         $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -111,13 +102,38 @@
             },
             error: function(error) {
                 alert('Ação sobre a retoma falhou');
-
-                console.log(error);
         }
         });
-        
-        console.log(this.value);
+  
+    });
 
+
+    $(".businessAuth").click(function(e){
+  
+        var auth = $(this).val();
+        $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+        $.ajax({
+            url: "{{url('/')}}/businessAuthaction/" + 560,
+            type: "PATCH",
+            data: {
+                value: auth,
+                id:560
+            },
+            dataType: 'json',
+            success: function(result) {
+                // alert('Retoma editada com sucesso');
+                alert(result.success);
+                location.reload(true);
+            },
+            error: function(error) {
+                console.log( "{{url('/')}}/businessStudies/" + 560);
+                alert('Ação sobre a retoma falhou');
+        }
+        });
   
     });
 

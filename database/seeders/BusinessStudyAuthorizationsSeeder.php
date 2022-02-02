@@ -19,36 +19,59 @@ class BusinessStudyAuthorizationsSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
-                'name' => 'Aceite > 2%',
-                'min' => 1,
-                'max' => 2,
-                'responsible_id' => 1,
-                'color' => 'verde',
+                'name' => 'Aceite > 7%',
+                'min' => 7,
+                'max' => 100,
+                'responsible_id' => null,
+                'color' => 'green',
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',
             ),
             1 => 
             array (
                 'id' => 2,
-                'name' => 'Pendente <2%',
-                'min' => 2,
-                'max' => 3,
+                'name' => 'Pendente < 7%',
+                'min' => 6.9,
+                'max' => 4,
                 'responsible_id' => 2,
-                'color' => 'amarelo',
+                'color' => 'yellow',
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',
             ),
             2 => 
             array (
                 'id' => 3,
-                'name' => 'Pendente <3%',
-                'min' => 3,
-                'max' => 4,
+                'name' => 'Pendente < 4%',
+                'min' => 3.9,
+                'max' => 0,
                 'responsible_id' => 3,
-                'color' => 'vermelho',
+                'color' => 'red',
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',
             ),
+            3 => 
+            array (
+                'id' => 4,
+                'name' => 'Aceite pelo responsavél',
+                'min' => null,
+                'max' => null,
+                'responsible_id' => null,
+                'color' => 'green',
+                'created_at' => '2019-10-22 15:50:48',
+                'updated_at' => '2019-10-22 15:50:48',
+            ),
+            4 => 
+            array (
+                'id' => 5,
+                'name' => 'Rejeitado pelo responsavél',
+                'min' => null,
+                'max' => null,
+                'responsible_id' => null,
+                'color' => 'red',
+                'created_at' => '2019-10-22 15:50:48',
+                'updated_at' => '2019-10-22 15:50:48',
+            )
+           
         ));
     }
 }

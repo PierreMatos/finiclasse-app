@@ -56,7 +56,7 @@ class BusinessStudyResource extends JsonResource
                 'color' => $this->businessStudyAuthorization->color ?? '',
             ],
             'tradein_id' => $this->tradein_id,
-            'car_condition' => $this->initialProposal->car->condition->id,
+            'car_condition' => $this->initialProposal->car->condition->id ?? '',
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'deleted_at' => $this->deleted_at

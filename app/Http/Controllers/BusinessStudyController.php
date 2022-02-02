@@ -153,4 +153,10 @@ class BusinessStudyController extends AppBaseController
 
         return redirect(route('businessStudies.index'));
     }
+
+    public function businessAuth($id, Request $request){
+
+        // update BS with business_study_authorization_id = $value e save()
+        dd($request->value);
+    }
 }

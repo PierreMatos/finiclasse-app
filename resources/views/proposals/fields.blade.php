@@ -435,10 +435,25 @@
                 <p>%</p>
                 <h2>@money($proposal->finalBusinessStudy->total_discount_perc)</h2>
             </div>
+
+            {!! Form::model($proposal, ['route' => ['businessStudies.update', $proposal->finalBusinessStudy->id], 'method' => 'patch', 'files' => true]) !!}
+
+            
+            <div class="form-group col-sm-2">
+                <button type="button" id="business_study_authorization_id" value="4"
+                    class="businessAuth btn btn-info"> Aceitar</button>
+                </div>
+                <div class="form-group col-sm-2">
+                <button type="button" id="business_study_authorization_id" value="5"
+                    class="businessAuth btn btn-info"> Rejeitar</button>
+                </div>
+
+
         </div>
 
 
-        {!! Form::model($proposal, ['route' => ['businessStudies.update', $proposal->finalBusinessStudy->id], 'method' => 'patch', 'files' => true]) !!}
+
+
 
         <div class="row">
 
@@ -447,6 +462,8 @@
             </div>
             <!-- TODO ESTUDO DE NEGOCIO -->
 
+
+           
 
             <!-- INICIAL -->
             <div class="form-group col-sm-6">
@@ -669,7 +686,6 @@
             </div>
 
         
-
 
 
 
