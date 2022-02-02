@@ -181,7 +181,7 @@ class Proposal extends Model
     public function benefits()
     {
         // return $this->belongsToMany(Benefit::class);
-        return $this->belongsToMany(Benefit::class, 'benefits_proposals')->withPivot('type', 'value', 'name');
+        return $this->belongsToMany(Benefit::class, 'benefits_proposals')->withPivot('id', 'type', 'value', 'name');
     }
 
     /**
