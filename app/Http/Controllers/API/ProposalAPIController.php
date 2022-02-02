@@ -543,24 +543,23 @@ class ProposalAPIController extends AppBaseController
     
                     }
 
-                }elseif ($proposal->car->condition_id == 2 || $proposal->car->condition_id == 3 ) {
+                }               
+    
+            }
 
-                    if($margin <= 0) {
+            if ($proposal->car->condition_id == 2 || $proposal->car->condition_id == 3 ) {
+
+                $max = $authorizations->find(5);
+
+                if($margin <= $max->max ) {
     
-                        if ($authorization->id != 1){
-        
-                            $proposal->state_id = 3;
-                            $proposal->save();
-        
-                        }
-        
-                        $business_study_authorization_id = $authorization->id;
+                        $proposal->state_id = 3;
+                        $proposal->save();
     
-                    }
+                    $business_study_authorization_id = $authorization->id;
 
                 }
-                
-    
+
             }
 
 

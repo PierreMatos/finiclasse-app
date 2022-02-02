@@ -70,6 +70,17 @@ class BusinessStudyAuthorizationsSeeder extends Seeder
                 'color' => 'red',
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',
+            ),
+            4 => 
+            array (
+                'id' => 5,
+                'name' => 'Pendente margem em €',
+                'min' => 0,
+                'max' => 100,
+                'responsible_id' => 3,
+                'color' => 'red',
+                'created_at' => '2019-10-22 15:50:48',
+                'updated_at' => '2019-10-22 15:50:48',
             )
            
         ));
