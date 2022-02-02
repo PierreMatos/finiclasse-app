@@ -30,6 +30,7 @@ class CampaignsProposals extends Model
 
 
     public $fillable = [
+        'id',
         'campaign_id',
         'proposal_id'
     ];

@@ -17,6 +17,7 @@ class CampaignsProposalsRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
+        'id',
         'campaign_id',
         'proposal_id'
     ];
