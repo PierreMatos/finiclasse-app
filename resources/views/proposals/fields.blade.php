@@ -56,8 +56,8 @@
             <!-- Client Mobile Phone -->
             <div class="form-group col-sm-4">
                 {!! Form::label('client_mobile_phone', 'Telemóvel') !!}
-                {!! Form::text('client_mobile_phone', isset($proposal->client->mobile_phone) ?
-                $proposal->client->mobile_mobile_phone : '', ['class' => 'form-control', 'disabled']) !!}
+                {!! Form::text('client_mobile_phone', isset($proposal->client->mobile_phone) ? $proposal->client->mobile_phone : '',
+                ['class' => 'form-control', 'disabled']) !!}
             </div>
 
             <!-- NIF Field -->
