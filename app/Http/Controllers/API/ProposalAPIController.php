@@ -631,6 +631,8 @@ class ProposalAPIController extends AppBaseController
         $proposal = Proposal::find($id);
         $authID = $proposal->initialBusinessStudy->businessStudyAuthorization->id;
 
+        // $x = $proposal->initialBusinessStudy->businessStudyAuthorization->responsible->email;
+        // dd($x);
         
         if ($authID == 2 || $authID == 3 || $authID == 6) {
 
