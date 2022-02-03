@@ -440,11 +440,11 @@
 
             
             <div class="form-group col-sm-2">
-                <button type="button" id="business_study_authorization_id" value="4"
+                <button type="button" id="{{isset($proposal->initialBusinessStudy->id) ? $proposal->initialBusinessStudy->id : ''}}" value="4"
                     class="businessAuth btn btn-info"> Aceitar</button>
                 </div>
                 <div class="form-group col-sm-2">
-                <button type="button" id="business_study_authorization_id" value="5"
+                <button type="button" id="{{isset($proposal->initialBusinessStudy->id) ? $proposal->initialBusinessStudy->id : ''}}" value="5"
                     class="businessAuth btn btn-info"> Rejeitar</button>
                 </div>
 

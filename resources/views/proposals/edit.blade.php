@@ -41,15 +41,36 @@
                     aria-controls="tradein" aria-selected="false">{{__('Tradein')}}</a>
 
                 @endif
+
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="financings-tab" data-toggle="tab" href="#financings" role="tab"
                     aria-controls="financings" aria-selected="false">{{__('Financing')}}</a>
             </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link" id="proposals-tab" data-toggle="tab" href="#proposals" role="tab"
-                    aria-controls="proposals" aria-selected="false">{{__('Proposal')}}</a>
-            </li>
+
+            @if (isset($proposal->initialBusinessStudy->business_study_authorization_id) && ($proposal->initialBusinessStudy->business_study_authorization_id == 2 || $proposal->initialBusinessStudy->business_study_authorization_id == 3) )
+
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link badge-warning" id="proposals-tab" data-toggle="tab" href="#proposals" role="tab"
+                        aria-controls="proposals" aria-selected="false">{{__('Proposal')}}</a>
+                </li>
+
+            @elseif (isset($proposal->initialBusinessStudy->business_study_authorization_id) && ($proposal->initialBusinessStudy->business_study_authorization_id == 5) )
+
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link badge-danger" id="proposals-tab" data-toggle="tab" href="#proposals" role="tab"
+                        aria-controls="proposals" aria-selected="false">{{__('Proposal')}}</a>
+                </li>
+
+            @else
+
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="proposals-tab" data-toggle="tab" href="#proposals" role="tab"
+                        aria-controls="proposals" aria-selected="false">{{__('Proposal')}}</a>
+                </li>
+
+            @endif
+
         </ul>
 
         <div class="card">
@@ -117,11 +138,10 @@
         }
     });
         $.ajax({
-            url: "{{url('/')}}/businessAuthaction/" + 560,
+            url: "{{url('/')}}/businessAuthaction/" + this.id,
             type: "PATCH",
             data: {
                 value: auth,
-                id:560
             },
             dataType: 'json',
             success: function(result) {
@@ -130,7 +150,7 @@
                 location.reload(true);
             },
             error: function(error) {
-                console.log( "{{url('/')}}/businessStudies/" + 560);
+                console.log( "{{url('/')}}/businessStudies/" + this.id);
                 alert('Ação sobre a retoma falhou');
         }
         });

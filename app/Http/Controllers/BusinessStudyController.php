@@ -156,7 +156,16 @@ class BusinessStudyController extends AppBaseController
 
     public function businessAuth($id, Request $request){
 
-        // update BS with business_study_authorization_id = $value e save()
-        dd($request->value);
+        if ($id && $request->value){
+            
+            $businessStudy = $this->businessStudyRepository->find($id);
+            
+            $businessStudy->business_study_authorization_id = $request->value;
+            
+            $businessStudy->save();
+        }
+
+        return response()->json(['success'=> 'Viatura editada com sucesso']);
+
     }
 }
