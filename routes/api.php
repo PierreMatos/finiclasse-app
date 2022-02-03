@@ -53,7 +53,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('clients', [App\Http\Controllers\API\UserAPIController::class, 'getClients']);
     //business study
-    Route::get('businessstudy/{id}', [App\Http\Controllers\API\ProposalAPIController::class, 'businessStudy'])->name('businessstudy');
+    Route::get('businessstudy/{id}', [App\Http\Controllers\API\ProposalAPIController::class, 'calculateBusinessStudy'])->name('businessstudy');
 
 
     Route::post('addImage', [CarAPIController::class,'addImage']);
@@ -109,12 +109,11 @@ Route::middleware('auth:api')->group(function () {
     Route::POST('notify_rgpd', [App\Http\Controllers\API\UserAPIController::class, 'createValidateRGPD'])->name('notify_rgpd');
 
     Route::POST('/send_proposal/{id}', [App\Http\Controllers\API\ProposalAPIController::class, 'sendProposal'])->name('send_proposal');
+    
+    //Notify proposal for approval
+    Route::POST('/proposal_approval/{id}', [App\Http\Controllers\API\ProposalAPIController::class, 'proposalApproval'])->name('proposal_approval');
+
 
 });
-
-
-
-
-
 
 Route::resource('business_study_states', App\Http\Controllers\API\BusinessStudyStatesAPIController::class);

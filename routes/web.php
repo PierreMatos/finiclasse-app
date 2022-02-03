@@ -9,6 +9,7 @@ use App\Http\Controllers\BenefitController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\FinancingController;
+use App\Http\Controllers\BusinessStudyAuthorizationController;
 use App\Http\Controllers\DataTableAjaxCRUDController;
 
 /*
@@ -165,6 +166,9 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
     Route::post('store-car', [CarController::class, 'storeNewCars']);
     Route::post('edit-car', [CarController::class, 'editNewCars']);
     Route::post('delete-car', [CarController::class, 'destroyNewCars']);
+
+    
+    Route::PATCH('/businessAuthaction/{id}', [App\Http\Controllers\BusinessStudyController::class, 'businessAuth'])->name('businessAuthaction');
 
 });
 
