@@ -15,7 +15,7 @@ class ProposalApproval extends Mailable
     public $proposal;
 
     /**
-     * Create a new message instance.
+     * Create a new message instance..
      *
      * @return void
      */
