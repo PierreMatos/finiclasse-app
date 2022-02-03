@@ -20,14 +20,15 @@ class CarStatesSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
-                'name' => 'Encomendado',
-                'description' => 'Viatura encontra-se inserida numa proposta e foi feita a encomendada ao fornecedor',
+                'name' => 'Disponivel',
+                'description' => 'Viatura encontra-se disponível para venda',
                 'order' => 1,
                 'color' => '#fffff',
-                'visible' => 0,
+                'visible' => 1,
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',
-            ),  
+            ), 
+            
             
             1 => 
             array (
@@ -41,14 +42,15 @@ class CarStatesSeeder extends Seeder
                 'updated_at' => '2019-10-22 15:50:48',
             ),  
 
+             
             2 => 
             array (
                 'id' => 3,
-                'name' => 'Disponivel',
-                'description' => 'Viatura encontra-se disponível para venda',
+                'name' => 'Encomendado',
+                'description' => 'Viatura encontra-se inserida numa proposta e foi feita a encomendada ao fornecedor',
                 'order' => 1,
                 'color' => '#fffff',
-                'visible' => 1,
+                'visible' => 0,
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',
             ),  

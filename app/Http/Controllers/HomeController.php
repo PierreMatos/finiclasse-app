@@ -6,17 +6,26 @@ use Illuminate\Http\Request;
 use App\Models\Proposal;
 use App\Models\Car;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use App\Repositories\UserRepository;
+
+
 
 
 class HomeController extends Controller
 {
+     /** @var  UserRepository */
+     private $userRepository;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UserRepository $userRepo)
     {
+        $this->userRepository = $userRepo;
+
         $this->middleware('auth');
     }
 
@@ -29,7 +38,9 @@ class HomeController extends Controller
     {
 
         $carsCount = Car::count();
-        $clientsCount = User::where('finiclasse_employee', '==', '0')->count();
+        // $clientsCount = User::where('finiclasse_employee', '==', '0')->count();
+        $user = Auth::user();
+        $clientsCount =  $this->userRepository->getClients($user)->count();
         $proposalClosePer=null;
 
         // Propostas abertas
@@ -41,7 +52,7 @@ class HomeController extends Controller
         if ($proposalClose) {
             $proposalClosePer = ($proposalClose / $proposals) * 100;
         }
-        
+
         // Ultimas propostas
         $latestProposals = Proposal::latest()->where('car_id', '!=', null)->take(5)->get();
 
