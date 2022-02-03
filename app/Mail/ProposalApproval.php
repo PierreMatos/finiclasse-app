@@ -36,6 +36,6 @@ class ProposalApproval extends Mailable
         return $this->from('info@remotepartner.co', 'Finiclasse')
             ->to('pierrematos@remotepartner.co')
             ->subject('Pedido de aprovação de proposta comercial Finiclasse')
-            ->markdown('mail.proposal');
+            ->markdown('mail.proposalApproval');
     }
 }
