@@ -6,10 +6,10 @@
 
 @if (!empty($proposal->finalBusinessStudy->sub_total))
     
-        Sub total {{$proposal->finalBusinessStudy->sub_total}}
+        <!-- Sub total {{$proposal->finalBusinessStudy->sub_total}}
         Extras Total: @money($proposal->finalBusinessStudy->extras_total)
         IVA: @money($proposal->finalBusinessStudy->iva)
-        ISV: @money($proposal->finalBusinessStudy->isv)
+        ISV: @money($proposal->finalBusinessStudy->isv) -->
 
         @if ($proposal->car->condition_id == 1)
 
@@ -56,8 +56,6 @@
 
 <div>
     <h2 style="text-align: center;">Viatura:</h2>
-    <p><strong>{{ $proposal->car->model->make->name }} {{ $proposal->car->model->name }}</strong></p>
-
     <img src="{{ asset($proposal->car->getFirstMediaUrl('cars'))}}" style="display: block; margin: 0 auto;" />
 </div>
 

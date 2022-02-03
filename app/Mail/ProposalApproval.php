@@ -32,7 +32,7 @@ class ProposalApproval extends Mailable
      */
     public function build()
     {
-//chefedevendasviseu@demo.com
+
         return $this->from('info@remotepartner.co', 'Finiclasse')
             ->to($this->proposal->initialBusinessStudy->businessStudyAuthorization->responsible->email)
             ->subject('Pedido de aprovação de proposta comercial Finiclasse')
