@@ -30,6 +30,7 @@ class HomeController extends Controller
 
         $carsCount = Car::count();
         $clientsCount = User::where('finiclasse_employee', '==', '0')->count();
+        $proposalClosePer=null;
 
         // Propostas abertas
         $proposalOpen = Proposal::query()->with('state')->where('state_id', '=', 1)->count();
@@ -37,8 +38,10 @@ class HomeController extends Controller
         // Percentagem de propostas fechadas 
         $proposals = Proposal::count();
         $proposalClose = Proposal::query()->with('state')->where('state_id', '=', 2)->count();
-        $proposalClosePer = ($proposalClose / $proposals) * 100;
-
+        if ($proposalClose) {
+            $proposalClosePer = ($proposalClose / $proposals) * 100;
+        }
+        
         // Ultimas propostas
         $latestProposals = Proposal::latest()->where('car_id', '!=', null)->take(5)->get();
 
