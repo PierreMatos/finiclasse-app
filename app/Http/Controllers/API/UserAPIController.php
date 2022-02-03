@@ -83,18 +83,18 @@ class UserAPIController extends AppBaseController
             return $validator->errors()->toJson();
         }
 
-        if ($request->hasFile('profile_picture') == null) {
-            //Passar a variable input sem colocar nova imagem
-            $input = $request->all();
-            $user = $this->userRepository->create($input);
-        } else {
-            $input = $request->all();
-            $user = $this->userRepository->create($input);
-            // $financing->addMedia($document)->toMediaCollection('financings');
-            $profile_picture = $request->file('profile_picture');
+        // if ($request->hasFile('profile_picture') == null) {
+        //     //Passar a variable input sem colocar nova imagem
+        //     $input = $request->all();
+        //     $user = $this->userRepository->create($input);
+        // } else {
+        //     $input = $request->all();
+        //     $user = $this->userRepository->create($input);
+        //     // $financing->addMedia($document)->toMediaCollection('financings');
+        //     $profile_picture = $request->file('profile_picture');
 
-            $user->addMedia($profile_picture)->toMediaCollection('profile_picture', 's3');
-        }
+        //     $user->addMedia($profile_picture)->toMediaCollection('profile_picture', 's3');
+        // }
 
         $user = $this->userRepository->create($input);
 

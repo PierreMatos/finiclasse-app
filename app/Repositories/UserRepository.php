@@ -50,6 +50,15 @@ class UserRepository extends BaseRepository
 
         }elseif($user->hasRole(['Chefe de vendas'])){
 
+
+            // colocar so com o attach e nao com o stand_id da tabela users
+            // $clients = User::whereHas('vendor', function($q){
+
+            //     $q->where('vendor_id', '=', $user->stand_id);
+            
+            // })->where('finiclasse_employee', '=', 0)
+            // ->get();
+
             $clients = User::where('finiclasse_employee', '=', 0)
 
                 ->where('stand_id','=', $user->stand_id)->orderBy('created_at', 'desc')->get();
