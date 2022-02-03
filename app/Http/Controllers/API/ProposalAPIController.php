@@ -608,10 +608,15 @@ class ProposalAPIController extends AppBaseController
     }
     public function sendProposal($id) {
 
+
+        //TODO mudar estado da proposta
+
         $proposal = Proposal::find($id);
 
         Mail::send(new ProposalOrder($proposal));
         
+        $proposal->state_id = 5;
+        $proposal->save();
         return $this->sendSuccess('E-mail enviado com sucesso!');
 
         // DD(!empty($proposal->tradein));
