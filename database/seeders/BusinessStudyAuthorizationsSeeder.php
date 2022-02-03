@@ -71,9 +71,9 @@ class BusinessStudyAuthorizationsSeeder extends Seeder
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',
             ),
-            4 => 
+            5 => 
             array (
-                'id' => 5,
+                'id' => 6,
                 'name' => 'Pendente margem em €',
                 'min' => 0,
                 'max' => 100,

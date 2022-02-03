@@ -625,4 +625,25 @@ class ProposalAPIController extends AppBaseController
 
     }
 
+    public function proposalApproval($id) {
+
+        $proposal = Proposal::find($id);
+        $authID = $proposal->initialBusinessStudy->businessStudyAuthorization->id;
+
+        
+        if ($authID == 2 || $authID == 3 || $authID == 6) {
+
+            $x = $proposal->initialBusinessStudy->businessStudyAuthorization->responsible_id;
+        
+            
+            Mail::send(new proposalApproval($proposal));
+        }
+
+
+        return $this->sendSuccess('E-mail enviado com sucesso!');
+
+
+    }
+    
+
 }
