@@ -68,6 +68,7 @@ class ProposalResource extends JsonResource
             'contract' => $this->contract ?? '',
             'test_drive' => $this->test_drive ?? '',
             'state' => $this->state->name ?? '',
+            'state_id' => $this->state->id ?? '',
             'car_id' => $this->car_id,
             'car' => [
                 'make_id' => $this->car->model->make->id ?? '',

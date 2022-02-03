@@ -35,7 +35,7 @@ class ProposalOrder extends Mailable
 
         return $this->from('info@remotepartner.co', 'Finiclasse')
             ->to($this->proposal->client->email)
-            ->subject('Proposal Order')
+            ->subject('Proposta Comercial Finiclasse')
             ->markdown('mail.proposal');
     }
 }

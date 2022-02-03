@@ -66,6 +66,7 @@ class ProposalCollection extends ResourceCollection
             'contract' => $proposal->contract,
             'test_drive' => $proposal->test_drive,
             'state' => $proposal->state->name ?? '',
+            'state_id' => $proposal->state->id ?? '',
             'car_id' => $proposal->car_id,
             'car' => [
                 'name' => $proposal->car->model->make->name ?? '',
