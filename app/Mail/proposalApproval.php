@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Proposal;
 
-class proposalApproval extends Mailable
+class ProposalApproval extends Mailable
 {
     use Queueable, SerializesModels;
 

@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\MessageBag;
 use \Illuminate\Support\Facades\Validator;
 USE App\Mail\ProposalOrder;
+USE App\Mail\ProposalApproval;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -636,7 +637,7 @@ class ProposalAPIController extends AppBaseController
             $x = $proposal->initialBusinessStudy->businessStudyAuthorization->responsible_id;
         
             
-            Mail::send(new proposalApproval($proposal));
+            Mail::send(new ProposalApproval($proposal));
         }
 
 
