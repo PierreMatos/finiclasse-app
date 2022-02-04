@@ -1,15 +1,12 @@
 @component('mail::message')
-<h1 style="text-align: center;">Pedido de aprovação</h1>
+<h1 style="text-align: center;">Pedido de aprovação pendente</h1>
 
-
+ <!-- INSERIR LINK PARA PROPOSTA -->
 <div>
 
 @if (!empty($proposal->finalBusinessStudy->sub_total))
     
-        <!-- Sub total {{$proposal->finalBusinessStudy->sub_total}}
-        Extras Total: @money($proposal->finalBusinessStudy->extras_total)
-        IVA: @money($proposal->finalBusinessStudy->iva)
-        ISV: @money($proposal->finalBusinessStudy->isv) -->
+       
 
         @if ($proposal->car->condition_id == 1)
 

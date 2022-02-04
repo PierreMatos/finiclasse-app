@@ -14,6 +14,8 @@ use App\Http\Resources\CarCollection;
 use Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+USE App\Mail\TradeInApproval;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * Class CarController
@@ -97,6 +99,9 @@ class CarAPIController extends AppBaseController
      */
     public function store(Request $request)
     {
+      
+
+
         $validator = Validator::make($request->all(), Car::$rules);
 
         $input = $request->all();
@@ -124,6 +129,15 @@ class CarAPIController extends AppBaseController
                 ->each(function ($fileAdder) {
                     $fileAdder->toMediaCollection('pos','s3');
                 });
+        }
+
+          //remover
+          Mail::send(new TradeInApproval($car));
+        // Pedido de validaçao de retoma
+        if ($request->state_id == 7) {
+
+            Mail::send(new ProposalApproval($proposal));
+
         }
 
         return $this->sendResponse(new CarResource($car), 'Car saved successfully');
