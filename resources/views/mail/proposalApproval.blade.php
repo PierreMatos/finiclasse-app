@@ -1,12 +1,10 @@
 @component('mail::message')
-<h1 style="text-align: center;">Pedido de aprovação pendente</h1>
+<h1 style="text-align: center;">Pedido de aprovação de retoma</h1>
 
  <!-- INSERIR LINK PARA PROPOSTA -->
 <div>
-
+{{echo url('/');}}
 @if (!empty($proposal->finalBusinessStudy->sub_total))
-    
-       
 
         @if ($proposal->car->condition_id == 1)
 
