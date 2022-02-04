@@ -131,15 +131,6 @@ class CarAPIController extends AppBaseController
                 });
         }
 
-          //remover
-          Mail::send(new TradeInApproval($car));
-        // Pedido de validaçao de retoma
-        if ($request->state_id == 7) {
-
-            Mail::send(new ProposalApproval($proposal));
-
-        }
-
         return $this->sendResponse(new CarResource($car), 'Car saved successfully');
     }
 

@@ -22,6 +22,7 @@ use Illuminate\Support\MessageBag;
 use \Illuminate\Support\Facades\Validator;
 USE App\Mail\ProposalOrder;
 USE App\Mail\ProposalApproval;
+USE App\Mail\TradeInApproval;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -633,7 +634,7 @@ class ProposalAPIController extends AppBaseController
 
         // $x = $proposal->initialBusinessStudy->businessStudyAuthorization->responsible->email;
         // dd($x);
-        
+
         if ($authID == 2 || $authID == 3 || $authID == 6) {
 
             $x = $proposal->initialBusinessStudy->businessStudyAuthorization->responsible_id;
@@ -645,6 +646,20 @@ class ProposalAPIController extends AppBaseController
 
         return $this->sendSuccess('E-mail enviado com sucesso!');
 
+
+    }
+
+    public function tradeInApproval($id){
+
+        $proposal = Proposal::find($id);
+
+        Mail::send(new TradeInApproval($proposal));
+        // Pedido de validaçao de retoma
+        if ($request->state_id == 7) {
+
+            Mail::send(new ProposalApproval($proposal));
+
+        }
 
     }
     

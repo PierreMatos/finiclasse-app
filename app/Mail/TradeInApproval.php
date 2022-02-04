@@ -6,7 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Car;
+use App\Models\Proposal;
+use App\Models\User;
 
 class TradeInApproval extends Mailable
 {
@@ -19,10 +20,10 @@ class TradeInApproval extends Mailable
      *
      * @return void
      */
-    public function __construct(Car $car)
+    public function __construct(Proposal $proposal)
     {
 
-        $this->car = $car;
+        $this->proposal = $proposal;
     }
 
     /**
@@ -33,19 +34,22 @@ class TradeInApproval extends Mailable
     public function build()
     {
 
-        dd($this->car->proposal);
+
             //enviar a chefe de vendas e diretor comercial do respetivo stand
+
 
             $chefedevendas = User::whereHas(
                 'roles', function($q){
-                  $q->where('name', 'Chefe de vendas');
-                }
-              )->get();
 
-            dd ($chefedevendas);
-            
+                $standID = $this->proposal->vendor->stand_id;
+
+                  $q->where('name', 'Chefe de vendas')
+                  ->where ('stand_id', $standID);
+                }
+              )->get('email');
+
             return $this->from('info@remotepartner.co', 'Finiclasse')
-            ->to($this->proposal->initialBusinessStudy->businessStudyAuthorization->responsible->email)
+            ->to($chefedevendas)
             ->subject('Pedido de aprovação de proposta comercial Finiclasse')
             ->markdown('mail.proposalApproval');
     }
