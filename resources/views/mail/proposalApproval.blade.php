@@ -4,7 +4,7 @@
  <!-- INSERIR LINK PARA PROPOSTA -->
 <div>
 
-{{url('/').'/proposals/'{{$proposal->->id}}.'/edit';}}
+{{url('/').'/proposals/'.{{$proposal->->id}}.'/edit';}}
 
 @if (!empty($proposal->finalBusinessStudy->sub_total))
 
