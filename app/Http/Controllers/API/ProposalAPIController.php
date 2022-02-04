@@ -655,11 +655,11 @@ class ProposalAPIController extends AppBaseController
 
         Mail::send(new TradeInApproval($proposal));
         // Pedido de validaçao de retoma
-        if ($request->state_id == 7) {
+        // if ($request->state_id == 7) {
 
-            Mail::send(new ProposalApproval($proposal));
+        //     Mail::send(new ProposalApproval($proposal));
 
-        }
+        // }
 
     }
     
