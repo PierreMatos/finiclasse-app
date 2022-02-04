@@ -3,7 +3,7 @@
 
  <!-- INSERIR LINK PARA PROPOSTA -->
 <div>
-{{url('/');}}
+{{url('/')'proposal/'{{$proposal->->id}}.'/edit';}}
 @if (!empty($proposal->finalBusinessStudy->sub_total))
 
         @if ($proposal->car->condition_id == 1)
