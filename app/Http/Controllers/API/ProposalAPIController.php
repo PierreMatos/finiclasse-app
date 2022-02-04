@@ -660,6 +660,8 @@ class ProposalAPIController extends AppBaseController
         //     Mail::send(new ProposalApproval($proposal));
 
         // }
+        return $this->sendSuccess('E-mail enviado com sucesso!');
+ 
 
     }
     

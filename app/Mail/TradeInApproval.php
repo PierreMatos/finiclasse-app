@@ -38,6 +38,7 @@ class TradeInApproval extends Mailable
             //enviar a chefe de vendas e diretor comercial do respetivo stand
 
 
+           
             $chefedevendas = User::whereHas(
                 'roles', function($q){
 
@@ -48,9 +49,13 @@ class TradeInApproval extends Mailable
                 }
               )->get('email');
 
-            return $this->from('info@remotepartner.co', 'Finiclasse')
-            ->to($chefedevendas)
-            ->subject('Pedido de aprovação de proposta comercial Finiclasse')
-            ->markdown('mail.proposalApproval');
+              $chefedevendas->each(function ($item, $key) {
+                return $this->from('info@remotepartner.co', 'Finiclasse')
+                ->to($item->email)
+                ->subject('Pedido de aprovação de proposta comercial Finiclasse')
+                ->markdown('mail.proposalApproval');
+            });
+            
+            
     }
 }
