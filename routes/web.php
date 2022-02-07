@@ -55,6 +55,8 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
 
     Route::resource('benefits', App\Http\Controllers\BenefitController::class);
 
+    Route::resource('businessStudyStates', App\Http\Controllers\BusinessStudyStatesController::class);
+
     Route::resource('BusinessStudyAuthorizations', App\Http\Controllers\BusinessStudyAuthorizationController::class);
 
     Route::resource('businessStudies', App\Http\Controllers\BusinessStudyController::class);
@@ -191,5 +193,4 @@ Route::get('thankyou', function () {
     return view('thankyou');
 });
 
-Route::resource('businessStudyStates', App\Http\Controllers\BusinessStudyStatesController::class);
 Route::POST('/tradeinaction', [CarController::class, 'carState'])->name('tradeinaction');
