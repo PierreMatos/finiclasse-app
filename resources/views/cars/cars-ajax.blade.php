@@ -7,7 +7,7 @@
                     <h1>{{ __('Cars') }} - {{ __('NewCar') }}</h1>
                 </div>
                 <div class="col-sm-6">
-                    <a class="btn btn-primary float-right" href="{{ route('cars.create') }}">
+                    <a class="btn btn-primary adicionarBtn" href="{{ route('cars.create') }}">
                         {{ __('Add New') }}
                     </a>
                 </div>
@@ -19,7 +19,7 @@
         <div class="container mt-2">
             <div class="row">
                 <div class="col-lg-12 margin-tb">
-                    <div class="mb-2" style="margin-left: 15px; padding-top: 50px;">
+                    <div class="mb-2 novoBtn">
                         <a class="btn btn-success" onClick="add()" href="javascript:void(0)">Novo Carro</a>
                     </div>
                 </div>
@@ -108,9 +108,7 @@
                                         @foreach ($carData['stands'] as $stand)
                                             @if (!Auth::user()->hasRole('Chefe de vendas'))
                                                 <option value="{{ $stand->id }}">{{ $stand->name }}</option>
-                                            @elseif((Auth::user()->hasRole('Chefe de vendas')) &&
-                                                (Auth::user()->stand_id ==
-                                                $stand->id))
+                                            @elseif(Auth::user()->hasRole('Chefe de vendas') && Auth::user()->stand_id == $stand->id)
                                                 <option value="{{ $stand->id }}">{{ $stand->name }}</option>
                                             @endif
                                         @endforeach
@@ -218,7 +216,7 @@
                 order: [
                     [0, 'desc']
                 ],
-                "dom": '<"top" <"float-left w-200"f><"float-right"B>>rt<"bottom mt-4"<"float-left"p><"float-right"l>><"clear">',
+                "dom": '<"top" <"float-left w-200"f><"searchNames"B>>rt<"bottom mt-4"<"float-left"p><"float-right"l>><"clear">',
 
                 buttons: [{
                         text: 'Todos',
@@ -359,3 +357,52 @@
 @endpush
 
 </html>
+
+<style>
+    @media screen and (max-width: 1200px) {
+        div.dataTables_wrapper div.dataTables_filter input {
+            width: 100% !important;
+        }
+    }
+
+    @media screen and (max-width: 800px) {
+        .searchNames {
+            float: left !important;
+        }
+
+        div.dataTables_wrapper div.dataTables_length label {
+            margin-right: -25px !important;
+            margin-top: 6px !important;
+            padding-bottom: 0px !important;
+        }
+
+        .novoBtn {
+            padding-top: 20px !important;
+        }
+
+        .adicionarBtn {
+            float: left !important;
+            margin-top: 30px !important;
+        }
+    }
+
+    @media screen and (min-width: 800px) {
+        .searchNames {
+            float: right !important;
+        }
+    }
+
+    #ajax-crud-datatable {
+        width: auto !important;
+    }
+
+    .novoBtn {
+        margin-left: 15px;
+        padding-top: 50px;
+    }
+
+    .adicionarBtn {
+        float: right;
+    }
+
+</style>

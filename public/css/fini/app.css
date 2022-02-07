@@ -2,7 +2,6 @@ div.dataTables_wrapper div.dataTables_filter {
     text-align: left !important;
 }
 
-
 /* DATATABLES COSTUME */
 
 .top {
@@ -16,13 +15,13 @@ div.dataTables_wrapper div.dataTables_filter {
     margin-top: 50px;
 }
 
-.table.dataTable>thead .sorting,
-table.dataTable>thead .sorting_asc {
-    background-color: #F5F6FA;
+.table.dataTable > thead .sorting,
+table.dataTable > thead .sorting_asc {
+    background-color: #f5f6fa;
 }
 
 .dt-buttons {
-    text-align: right!important;
+    text-align: right !important;
 }
 
 div.dataTables_wrapper div.dataTables_filter input {
@@ -32,37 +31,37 @@ div.dataTables_wrapper div.dataTables_filter input {
 .btn-secondary {
     background-color: #fff;
     color: #131523;
-    border: 1px solid #D7DBEC
+    border: 1px solid #d7dbec;
 }
 
 .btn-secondary:not(:disabled):not(.disabled).active {
-    background-color: #0058FF;
+    background-color: #0058ff;
     color: #fff;
 }
 
 .btn-secondary:hover {
-    background-color: #0058FF;
+    background-color: #0058ff;
     color: #fff;
 }
 
 .btn-approved:not(:disabled):not(.disabled).active {
-    background-color: #C4E7CC;
+    background-color: #c4e7cc;
     color: #000;
 }
 
 .btn-approved:hover {
-    background-color: #C4E7CC;
+    background-color: #c4e7cc;
     color: #000;
-    border: 1px solid #D7DBEC
+    border: 1px solid #d7dbec;
 }
 
 .btn-pending:not(:disabled):not(.disabled).active {
-    background-color: #FFEEBB;
+    background-color: #ffeebb;
     color: #000;
 }
 
 .btn-pending:hover {
-    background-color: #FFEEBB;
+    background-color: #ffeebb;
     color: #000;
 }
 
@@ -77,12 +76,12 @@ div.dataTables_wrapper div.dataTables_filter input {
 }
 
 .btn-close:not(:disabled):not(.disabled).active {
-    background-color: #F6C8CC;
+    background-color: #f6c8cc;
     color: #000;
 }
 
 .btn-close:hover {
-    background-color: #F6C8CC;
+    background-color: #f6c8cc;
     color: #000;
 }
 
@@ -95,11 +94,11 @@ div.dataTables_wrapper div.dataTables_filter input {
 }
 
 .treeview i {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
 }
 
 .treeview {
-    font-family: 'Poppins';
+    font-family: "Poppins";
 }
 
 .logoImg {
@@ -108,11 +107,11 @@ div.dataTables_wrapper div.dataTables_filter input {
 }
 
 .notValidated {
-    background-color: #F6C8CC;
+    background-color: #f6c8cc;
 }
 
 .validated {
-    background-color: #C4E7CC;
+    background-color: #c4e7cc;
 }
 
 .imgCar {
@@ -164,7 +163,7 @@ div.dataTables_wrapper div.dataTables_filter input {
     background-color: #007bff1f;
 }
 
-.tableCaption{
+.tableCaption {
     float: left;
     height: 20px;
     width: 20px;
