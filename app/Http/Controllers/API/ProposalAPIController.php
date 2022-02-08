@@ -256,7 +256,7 @@ class ProposalAPIController extends AppBaseController
         }
 
         // dd($proposal->state->name == 'Aberto');
-        $proposal = $this->proposalRepository->find($id);
+        // $proposal = $this->proposalRepository->find($id);
 
 
         return $this->sendResponse(new ProposalResource($proposal), 'Proposal updated successfully');
@@ -550,8 +550,8 @@ class ProposalAPIController extends AppBaseController
         
                         $business_study_authorization_id = $authorization->id;
                         // return $business_study_authorization_id;
-                        // $proposal->initialBusinessStudy->business_study_authorization_id =  $authorization->id;
-                        // $proposal->save();
+                        $proposal->initialBusinessStudy->business_study_authorization_id =  $authorization->id;
+                        $proposal->save();
                         
                     }
                     
