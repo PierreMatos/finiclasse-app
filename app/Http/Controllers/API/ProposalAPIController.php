@@ -550,7 +550,7 @@ class ProposalAPIController extends AppBaseController
                             $proposal->state_id = 3;
                             // $proposal->save();
         
-                        }elseif ($authorization->id == 1) {
+                        }elseif ($authorization->id == 1 && $proposal->state->id !== 2 && $proposal->state->id !== 4) {
                             $proposal->state_id = 1;
                         }
                        
@@ -574,16 +574,23 @@ class ProposalAPIController extends AppBaseController
 
                 if($margin <= $max->max ) {
     
+                    if ($authorization->id !== 1){
                         $proposal->state_id = 3;
-                        $proposal->save();
+                        // $proposal->save();
+    
+                    }elseif ($authorization->id == 1 && $proposal->state->id !== 2 && $proposal->state->id !== 4) {
+                        $proposal->state_id = 1;
+                    }
                         $business_study_authorization_id = $authorization->id;
                         $proposal->initialBusinessStudy->business_study_authorization_id =  $authorization->id;
                         $proposal->save();
 
-                }else{
-                    $proposal->state_id = 1;
-                    $proposal->save();
+
                 }
+                // else{
+                //     $proposal->state_id = 1;
+                //     $proposal->save();
+                // }
 
             }
 
