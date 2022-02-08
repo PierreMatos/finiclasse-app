@@ -518,6 +518,8 @@ class ProposalAPIController extends AppBaseController
 
 
             //atribuir AUTORIZAÇÃO
+            //check final business study
+            
             // $this->authorization($id);
 
             $authorizations = BusinessStudyAuthorization::all();
@@ -546,7 +548,10 @@ class ProposalAPIController extends AppBaseController
         
                         }
         
-                        $business_study_authorization_id = $authorization->id;
+                        // $business_study_authorization_id = $authorization->id;
+                        $proposal->initialBusinessStudy->business_study_authorization_id =  $authorization->id;
+                        $proposal->save();
+
     
                     }
 
@@ -561,9 +566,11 @@ class ProposalAPIController extends AppBaseController
                 if($margin <= $max->max ) {
     
                         $proposal->state_id = 3;
-                        $proposal->save();
+                        // $proposal->save();
     
-                    $business_study_authorization_id = $authorization->id;
+                    // $business_study_authorization_id = $authorization->id;
+                        $proposal->initialBusinessStudy->business_study_authorization_id =  $authorization->id;
+                        $proposal->save();
 
                 }
 
