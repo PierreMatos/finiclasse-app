@@ -531,11 +531,11 @@ class ProposalAPIController extends AppBaseController
             // $authorizations = $businessStudyAuthorizationRepository->all();
             
     
+            $business_study_authorization_id = 1;
             foreach ($authorizations as $authorization) {
                 
                 $min = $authorization->min;
                 $max = $authorization->max;
-                $business_study_authorization_id = 1;
                 
                 if ($proposal->car->condition_id == 1){
                     
@@ -549,14 +549,14 @@ class ProposalAPIController extends AppBaseController
                         }
         
                         $business_study_authorization_id = $authorization->id;
-                        // dd($authorization->id);
-                        $proposal->initialBusinessStudy->business_study_authorization_id =  $authorization->id;
-                        $proposal->save();
-
+                        // return $business_study_authorization_id;
+                        // $proposal->initialBusinessStudy->business_study_authorization_id =  $authorization->id;
+                        // $proposal->save();
+                        
                     }
-
+                    
                 }               
-    
+                
             }
 
 
@@ -568,7 +568,6 @@ class ProposalAPIController extends AppBaseController
     
                         $proposal->state_id = 3;
                         // $proposal->save();
-    
                         $business_study_authorization_id = $authorization->id;
                         $proposal->initialBusinessStudy->business_study_authorization_id =  $authorization->id;
                         $proposal->save();
@@ -582,7 +581,7 @@ class ProposalAPIController extends AppBaseController
 
             return 'car not found';
         }
-        
+
         $results = [
             'base_price' => $basePrice,
             'total_extras' =>  $proposal->car->extras_total,

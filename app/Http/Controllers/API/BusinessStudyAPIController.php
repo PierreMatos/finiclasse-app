@@ -124,7 +124,6 @@ class BusinessStudyAPIController extends AppBaseController
 
         $businessStudy = $this->businessStudyRepository->update($businessStudyCalculated, $id);
 
-
         return $this->sendResponse(new BusinessStudyResource($businessStudy), 'BusinessStudy updated successfully');
     }
 
