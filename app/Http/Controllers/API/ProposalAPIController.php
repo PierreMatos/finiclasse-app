@@ -10,6 +10,7 @@ use App\Models\BusinessStudy;
 use App\Models\BusinessStudyAuthorization;
 use App\Repositories\ProposalRepository;
 use App\Repositories\BusinessStudyRepository;
+use App\Repositories\CarRepository;
 use App\Repositories\BusinessStudyAuthorizationRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
@@ -36,12 +37,14 @@ class ProposalAPIController extends AppBaseController
     /** @var  ProposalRepository */
     private $proposalRepository;
     private $businessStudyRepository;
+    private $carRepository;
     // private $businessStudyAuthorizationRepository;
 
-    public function __construct(ProposalRepository $proposalRepo, BusinessStudyRepository $businessStudyRepo)
+    public function __construct(ProposalRepository $proposalRepo, BusinessStudyRepository $businessStudyRepo, CarRepository $carRepo)
     {
         $this->proposalRepository = $proposalRepo;
         $this->businessStudyRepository = $businessStudyRepo;
+        $this->carRepository = $carRepo;
         // $this->businessStudyAuthorizationRepository = $businessStudyAuthorizationRepo;
     }
 
@@ -169,6 +172,15 @@ class ProposalAPIController extends AppBaseController
 
         /** @var Proposal $proposal */
         $proposal = $this->proposalRepository->find($id);
+        $car = $this->carRepository->find($proposal->car->id);
+
+        if ($input['state_id'] == 2){
+
+            $car->state_id = 6;
+            $car->save();
+
+
+        }
 
         if (empty($proposal)) {
             return $this->sendError('Proposal not found');
