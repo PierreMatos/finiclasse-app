@@ -1,66 +1,134 @@
 @component('mail::message')
-<h1 style="text-align: center;">Proposal Order</h1>
+<h1 style="text-align: center; font-size: 20px; font-weight: bold; text-decoration: underline;">Proposta Comercial</h1>
 
-<div style="background-color: #EDF2F7; padding: 10px;">
-    <h2>Cliente:</h2>
-
-    Nome: {{ $proposal->client->name }}
-
-    E-mail: {{ $proposal->client->email }}
+<br><br>
+<div>
+    <p style="line-height: 0em;">Obrigado pela sua preferência!</p>
+    <p>O vendedor X envia a sua proposta.</p>
 </div>
 
-<br>
+@component('mail::table')
+  <table style="border-collapse: collapse;">
+    <tr style="border-bottom: 1px solid #C2C2C2;">
+      <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Dados Cliente</th>
+    </tr>
+    <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
+      <td style="padding: 10px;">Nome: <b>João F. Carvalho</b></td>
+    </tr>
+    <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
+        <td style="padding: 10px;">E-mail: <b>franciscocarvalho88@gmail.com</b></td>
+    </tr>
+    <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
+        <td style="padding: 10px;">Telefone: <b>111 111 111</b></td>
+    <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
+        <td style="padding: 10px;">NIF: <b>111 111 111</b></td>
+    </tr>
+  </table>
+@endcomponent
+
+@component('mail::table')
+    <table style="border-collapse: collapse;">
+        <tr style="border-bottom: 1px solid #C2C2C2;">
+            <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Viatura</th>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
+            <td style="padding: 0px;"><img src="{{ asset($proposal->car->getFirstMediaUrl('cars'))}}" /></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
+            <td style="padding: 10px;">Tipo: <b>NOVO</b></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+            <td style="padding: 10px;">Marca: <b>Mercedez-Benz</b></td>
+            <td style="padding: 10px;">Modelo: <b>GLB 300d</b></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
+            <td style="padding: 10px;">Valor: <b>52.899.99 €</b></td>
+        </tr>
+    </table>
+@endcomponent
+
+@component('mail::table')
+    <table style="border-collapse: collapse;">
+        <tr style="border-bottom: 1px solid #C2C2C2;">
+            <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Retoma</th>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
+            <td style="padding: 0px;"><img src="{{ asset($proposal->car->getFirstMediaUrl('cars'))}}" /></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+            <td style="padding: 10px;">Marca: <b>SEAT</b></td>
+            <td style="padding: 10px;">Modelo: <b>Ibiza</b></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+            <td style="padding: 10px;">Km: <b>100.000</b></td>
+            <td style="padding: 10px;">Ano/mês: <b>12/2002</b></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
+            <td style="padding: 10px;">Valor: <b>12.000.00 €</b></td>
+        </tr>
+    </table>
+@endcomponent
+
+@component('mail::table')
+    <table style="border-collapse: collapse;">
+        <tr style="border-bottom: 1px solid #C2C2C2;">
+            <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Apoio</th>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+            <td style="padding: 10px;">Tipo: <b>Apoio frotista</b></td>
+            <td style="padding: 10px;"><b>8 %</b></td>
+        </tr>
+    </table>
+@endcomponent
+
+@component('mail::table')
+    <table style="border-collapse: collapse;">
+        <tr style="border-bottom: 1px solid #C2C2C2;">
+            <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Financiamento</th>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+            <td style="padding: 10px;">Tipo: <b>Externo</b></td>
+            <td style="padding: 10px;"><b>Aguardar envio de avaliação</b></td>
+        </tr>
+    </table>
+@endcomponent
+
+@component('mail::table')
+    <table style="border-collapse: collapse;">
+        <tr style="border-bottom: 1px solid #C2C2C2;">
+            <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Proposta Nº 890</th>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+            <td style="padding: 10px;">Valor de negócio:</td>
+            <td style="padding: 10px;"><b>52.899.99 €</b></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+            <td style="padding: 10px;">Valor da retoma:</td>
+            <td style="padding: 10px;"><b>12.000.00 €</b></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+            <td style="padding: 10px;">Apoio:</td>
+            <td style="padding: 10px;"><b>800.00 €</b></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+            <td style="padding: 10px;"><b>Valor a pagar:</b></td>
+            <td style="padding: 10px;"><b>42.000.00 €</b></td>
+        </tr>
+    </table>
+@endcomponent
 
 <div>
-    <h2 style="text-align: center;">Viatura:</h2>
-    <img src="{{ asset($proposal->car->getFirstMediaUrl('cars'))}}" style="display: block; margin: 0 auto;" />
+    <p style="text-align: center;">Caso tenha alguma dúvida não hesite em contactar-nos!</p>
 </div>
 
 <br>
 
-<div>
-    <p>Queremos felicitá-lo pela escolha da viatura de marca <strong>{{ $proposal->car->model->make->name }}</strong> com o modelo <strong>{{ $proposal->car->model->name }}</strong>!</p>
-</div>
-
-<div style="">
-
-@if (!empty($proposal->finalBusinessStudy->sub_total))
-    
-        Sub total {{$proposal->finalBusinessStudy->sub_total}}
-        Extras Total: @money($proposal->finalBusinessStudy->extras_total)
-        IVA: @money($proposal->finalBusinessStudy->iva)
-        ISV: @money($proposal->finalBusinessStudy->isv)
-    
-    @elseif (!empty($proposal->initialBusinessStudy->sub_total))
-    
-        Sub total: @money($proposal->initialBusinessStudy->sub_total) 
-        Extras Total: @money($proposal->initialBusinessStudy->extras_total)
-        IVA: @money($proposal->initialBusinessStudy->iva)
-        ISV: @money($proposal->initialBusinessStudy->isv)
-    
-    @endif
-    
-    @if($proposal->tradein)
-
-        Valor da retoma a abater: @money($proposal->initialBusinessStudy->settle_amount)
-
-    @endif
-    
-</div>
-<br>
-
-<div style="font-weight: bold;">
-    Obrigado por nos escolher,
-
-    {{ $proposal->vendor->name }}
+<div style="font-weight: bold; text-align: center;">
+    {{ $proposal->vendor->name }},
 
     {{ $proposal->vendor->email }}
-
     {{ $proposal->vendor->mobile_phone }}
 </div>
 
-<br>
-
-Cumprimentos,<br>
-{{ $proposal->vendor->stand->name }}
+<h2 style="text-align: center;">FINICLASSE</h2>
 @endcomponent
