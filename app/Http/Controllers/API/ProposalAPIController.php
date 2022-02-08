@@ -548,6 +548,9 @@ class ProposalAPIController extends AppBaseController
                             $proposal->state_id = 3;
                             $proposal->save();
         
+                        }else{
+                            $proposal->state_id = 1;
+                            $proposal->save();
                         }
         
                         $business_study_authorization_id = $authorization->id;
@@ -574,6 +577,9 @@ class ProposalAPIController extends AppBaseController
                         $proposal->initialBusinessStudy->business_study_authorization_id =  $authorization->id;
                         $proposal->save();
 
+                }else{
+                    $proposal->state_id = 1;
+                    $proposal->save();
                 }
 
             }
