@@ -85,7 +85,9 @@
                     </div>
                 </form>
 
-                <a href="{{ route('password.request') }}">I forgot my password</a>
+                <div class="forgot">
+                    <a href="{{ route('password.request') }}">Esqueceu-se da password?</a>
+                </div>
                 <!-- <p class="mb-1">
             </p>
             <p class="mb-0">
@@ -159,6 +161,11 @@
 
     .login-box {
         padding-bottom: 100px;
+    }
+
+    .forgot {
+        margin-top: 10px;
+        text-align: center;
     }
 
 </style>
