@@ -170,7 +170,7 @@ class CarController extends AppBaseController
             $fileAdders = $car->addMultipleMediaFromRequest(['image'])
                 ->each(function ($fileAdder) {
                     // $fileAdder->toMediaCollection('cars');
-                    $fileAdder->toMediaCollection('cars','s3');
+                    $fileAdder->toMediaCollection('cars', 's3');
                     // $benefit->addMedia($document)->toMediaCollection('benefits','s3');
 
                 });
@@ -269,7 +269,7 @@ class CarController extends AppBaseController
         //Apagar imagem antiga se for mudada
         if ($request->hasFile('image')) {
             // $car->clearMediaCollection('cars');
-            $car->clearMediaCollection('cars','s3');
+            $car->clearMediaCollection('cars', 's3');
         }
 
         //Verificar se a imagem existe
@@ -285,7 +285,7 @@ class CarController extends AppBaseController
             $fileAdders = $car->addMultipleMediaFromRequest(['image'])
                 ->each(function ($fileAdder) {
                     // $fileAdder->toMediaCollection('cars');
-                    $fileAdder->toMediaCollection('cars','s3');
+                    $fileAdder->toMediaCollection('cars', 's3');
                 });
         }
 
@@ -326,7 +326,6 @@ class CarController extends AppBaseController
         Flash::success(__('translation.car deleted'));
 
         return redirect(route('cars.index'));
-       
     }
 
     public function carState(Request $request)
@@ -336,7 +335,7 @@ class CarController extends AppBaseController
         // return response()->json(['success'=>'Ajax request submitted successfully']);
 
         $car = $this->carRepository->find($request->car);
-      
+
 
         if (empty($request->car)) {
             Flash::error(__('translation.car not found'));
@@ -356,16 +355,15 @@ class CarController extends AppBaseController
 
         // } else {
 
-            //update $car with $state
-            $car = $this->carRepository->update(['state_id' => $request->state, 'tradein_purchase' => $request->price], $request->car);
-            
-            return response()->json(['success'=> 'Viatura editada com sucesso']);
+        //update $car with $state
+        $car = $this->carRepository->update(['state_id' => $request->state, 'tradein_purchase' => $request->price], $request->car);
 
-            // Flash::success(__('translation.retoma accepted'));
+        // return response()->json(['success'=> 'Retoma editada com sucesso']);
 
-            return redirect(route('proposals.index'));
+        return response()->json(['success' => Flash::success(__('translation.retoma accepted'))]);
+
+        return redirect(route('proposals.index'));
         // }
-
     }
 
     public function indexNewCars()
@@ -439,7 +437,7 @@ class CarController extends AppBaseController
                     'state_id' => $request->state_id,
                     'order_date' => $request->order_date,
                     'observations' => $request->observations,
-                     // Hidden
+                    // Hidden
                     'category_id' => 1,
                     'condition_id' => 1,
                 ]
@@ -462,7 +460,7 @@ class CarController extends AppBaseController
     {
         $where = array('id' => $request->id);
         $car = Car::where($where)->with('model.make')->first();
-        
+
         return Response()->json($car);
     }
 

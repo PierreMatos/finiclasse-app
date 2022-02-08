@@ -156,12 +156,12 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
         $exitCode = Artisan::call('config:cache');
         return '<h1>Clear Config cleared</h1>';
     });
-    
+
     Route::get('/mailable', function () {
-        $proposal = App\Models\Proposal::find(608);
+        $proposal = App\Models\Proposal::find(890);
 
         return new App\Mail\ProposalOrder($proposal);
-    });
+    });;
 
     // Datatable Car
     Route::get('new-car', [CarController::class, 'indexNewCars'])->name('new-car');
@@ -169,9 +169,8 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
     Route::post('edit-car', [CarController::class, 'editNewCars']);
     Route::post('delete-car', [CarController::class, 'destroyNewCars']);
 
-    
-    Route::PATCH('/businessAuthaction/{id}', [App\Http\Controllers\BusinessStudyController::class, 'businessAuth'])->name('businessAuthaction');
 
+    Route::PATCH('/businessAuthaction/{id}', [App\Http\Controllers\BusinessStudyController::class, 'businessAuth'])->name('businessAuthaction');
 });
 
 

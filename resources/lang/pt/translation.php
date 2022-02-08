@@ -8,6 +8,7 @@ return [
     'car updated' => 'Carro atualizado com sucesso',
     'car not found' => 'Carro não encontrado',
     'retoma accepted' => 'Retoma aceite com sucesso',
+    'retoma rejected' => 'Retoma rejeitada com sucesso',
     'financing saved' => 'Financiamento guardado com sucesso',
     'financing deleted' => 'Financiamento apagado com sucesso',
     'financing updated' => 'Financiamento atualizado com sucesso',
