@@ -70,9 +70,14 @@ class ProposalAPIController extends AppBaseController
         // }
         
         
+        // $proposals = $this->proposalRepository->all(
+        //     $request->except(['skip', 'limit'])
+        // );
 
         $proposals = $this->proposalRepository->getProposalsByVendor(Auth::id());
 
+
+        return(new ProposalCollection($proposals));
         // this is working
         // return new ProposalCollection(Proposal::paginate());
 
@@ -663,6 +668,13 @@ class ProposalAPIController extends AppBaseController
         return $this->sendSuccess('E-mail enviado com sucesso!');
  
 
+    }
+
+    public function proposalHistory($client)
+    {
+        $proposals = $this->proposalRepository->proposalHistory(Auth::id(), $client);
+
+        return $this->sendResponse(new ProposalCollection($proposals), 'Proposals retrieved successfully');
     }
     
 

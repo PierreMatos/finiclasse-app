@@ -113,6 +113,8 @@ Route::middleware('auth:api')->group(function () {
     //Notify proposal for approval
     Route::POST('/proposal_approval/{id}', [App\Http\Controllers\API\ProposalAPIController::class, 'proposalApproval'])->name('proposal_approval');
     Route::POST('/tradein_approval/{id}', [App\Http\Controllers\API\ProposalAPIController::class, 'tradeInApproval'])->name('tradein_approval');
+    
+    Route::GET('/proposal_history/{client_id}', [App\Http\Controllers\API\ProposalAPIController::class, 'proposalHistory'])->name('proposal_history');
 
 
 });
