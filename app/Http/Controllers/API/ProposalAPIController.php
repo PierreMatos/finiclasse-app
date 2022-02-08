@@ -490,6 +490,9 @@ class ProposalAPIController extends AppBaseController
             if($totalBenefits != 0 || $subTotal != 0 || $ptl != 0 || $sigpu != 0 || $totalTransf != 0){
 
                 $discPerc = ($desc / ($totalBenefits + $subTotal - ($ptl + $sigpu + $totalTransf))) * 100;
+                if ($discPerc < 0){
+                    $discPerc=0;
+                }
                 
             }else {
                 
@@ -540,18 +543,18 @@ class ProposalAPIController extends AppBaseController
                 
                 // dd($discPerc);
                 if ($proposal->car->condition_id == 1){
-                    
-                    if($discPerc > $min && $discPerc < $max) {
     
+                    if($discPerc >= $min && $discPerc < $max && $authorization->id !== 6) {
+                        
                         if ($authorization->id !== 1){
-        
                             $proposal->state_id = 3;
-                            $proposal->save();
+                            // $proposal->save();
         
-                        }else{
+                        }elseif ($authorization->id == 1) {
                             $proposal->state_id = 1;
-                            $proposal->save();
                         }
+                       
+                        $proposal->save();
         
                         $business_study_authorization_id = $authorization->id;
                         // return $business_study_authorization_id;
