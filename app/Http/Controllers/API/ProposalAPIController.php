@@ -300,28 +300,28 @@ class ProposalAPIController extends AppBaseController
         
         $diff = $proposal->initialBusinessStudy->total_discount_perc;
 
-        foreach ($authorizations as $authorization) {
+        // foreach ($authorizations as $authorization) {
 
-            $min = $authorization->min;
-            $max = $authorization->max;
+        //     $min = $authorization->min;
+        //     $max = $authorization->max;
 
-            if($diff > $min && $diff < $max) {
+        //     if($diff > $min && $diff < $max) {
 
-                //se bater
-                if ($authorization->id != 1){
+        //         //se bater
+        //         if ($authorization->id != 1){
 
-                    $proposal->state_id = 3;
-                    $proposal->save();
+        //             // $proposal->state_id = 3;
+        //             $proposal->save();
 
-                }
+        //         }
 
-                $businessStudy->business_study_authorization_id = $authorization->id;
-                $businessStudy->save();
+        //         $businessStudy->business_study_authorization_id = $authorization->id;
+        //         $businessStudy->save();
 
             
-            }
+        //     }
 
-        }
+        // }
 
         return $proposal;
 
@@ -370,17 +370,18 @@ class ProposalAPIController extends AppBaseController
 
             $isentIva = null;
 
-            if ($proposal->state->name == 'Aberto' || $proposal->state->name == 'Pendente'){
+            // if ($proposal->state->name == 'Aberto' || $proposal->state->name == 'Pendente'){
                 $sale = $proposal->initialBusinessStudy->sale;
                 $totalTransf = $proposal->initialBusinessStudy->total_transf ?? 0;
                 $ivaTX = $proposal->initialBusinessStudy->ivatx ?? 0.23;
                 
 
-            }elseif($proposal->state->name == 'Fechado'){
-                $sale = $proposal->finalBusinessStudy->sale;
-                $totalTransf = $proposal->finalBusinessStudy->total_transf ?? 0;
-                $ivaTX = $proposal->finalBusinessStudy->ivatx ?? 0.23;
-            }
+            // }
+            // elseif($proposal->state->name == 'Fechado'){
+            //     $sale = $proposal->finalBusinessStudy->sale;
+            //     $totalTransf = $proposal->finalBusinessStudy->total_transf ?? 0;
+            //     $ivaTX = $proposal->finalBusinessStudy->ivatx ?? 0.23;
+            // }
 
             //$sell = 43000; // valor gravado no estudo de negocio
             $diffTradein = 0;
@@ -537,11 +538,12 @@ class ProposalAPIController extends AppBaseController
                 $min = $authorization->min;
                 $max = $authorization->max;
                 
+                // dd($discPerc);
                 if ($proposal->car->condition_id == 1){
                     
                     if($discPerc > $min && $discPerc < $max) {
     
-                        if ($authorization->id != 1){
+                        if ($authorization->id !== 1){
         
                             $proposal->state_id = 3;
                             $proposal->save();
@@ -567,7 +569,7 @@ class ProposalAPIController extends AppBaseController
                 if($margin <= $max->max ) {
     
                         $proposal->state_id = 3;
-                        // $proposal->save();
+                        $proposal->save();
                         $business_study_authorization_id = $authorization->id;
                         $proposal->initialBusinessStudy->business_study_authorization_id =  $authorization->id;
                         $proposal->save();
