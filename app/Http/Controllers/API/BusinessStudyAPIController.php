@@ -122,7 +122,6 @@ class BusinessStudyAPIController extends AppBaseController
 
         $businessStudyCalculated = (new ProposalAPIController($this->proposalRepository,  $this->businessStudyRepository))->calculateBusinessStudy($businessStudy->initialProposal->id);
 
-
         $businessStudy = $this->businessStudyRepository->update($businessStudyCalculated, $id);
 
 

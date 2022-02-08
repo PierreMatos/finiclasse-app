@@ -519,7 +519,7 @@ class ProposalAPIController extends AppBaseController
 
             //atribuir AUTORIZAÇÃO
             //check final business study
-            
+
             // $this->authorization($id);
 
             $authorizations = BusinessStudyAuthorization::all();
@@ -532,11 +532,11 @@ class ProposalAPIController extends AppBaseController
             
     
             foreach ($authorizations as $authorization) {
-    
+                
                 $min = $authorization->min;
                 $max = $authorization->max;
                 $business_study_authorization_id = 1;
-
+                
                 if ($proposal->car->condition_id == 1){
                     
                     if($discPerc > $min && $discPerc < $max) {
@@ -548,16 +548,17 @@ class ProposalAPIController extends AppBaseController
         
                         }
         
-                        // $business_study_authorization_id = $authorization->id;
+                        $business_study_authorization_id = $authorization->id;
+                        // dd($authorization->id);
                         $proposal->initialBusinessStudy->business_study_authorization_id =  $authorization->id;
                         $proposal->save();
 
-    
                     }
 
                 }               
     
             }
+
 
             if ($proposal->car->condition_id == 2 || $proposal->car->condition_id == 3 ) {
 
@@ -568,7 +569,7 @@ class ProposalAPIController extends AppBaseController
                         $proposal->state_id = 3;
                         // $proposal->save();
     
-                    // $business_study_authorization_id = $authorization->id;
+                        $business_study_authorization_id = $authorization->id;
                         $proposal->initialBusinessStudy->business_study_authorization_id =  $authorization->id;
                         $proposal->save();
 
@@ -581,7 +582,7 @@ class ProposalAPIController extends AppBaseController
 
             return 'car not found';
         }
-
+        
         $results = [
             'base_price' => $basePrice,
             'total_extras' =>  $proposal->car->extras_total,
