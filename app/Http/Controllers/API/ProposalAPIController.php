@@ -70,9 +70,14 @@ class ProposalAPIController extends AppBaseController
         // }
         
         
+        // $proposals = $this->proposalRepository->all(
+        //     $request->except(['skip', 'limit'])
+        // );
 
         $proposals = $this->proposalRepository->getProposalsByVendor(Auth::id());
 
+
+        return(new ProposalCollection($proposals));
         // this is working
         // return new ProposalCollection(Proposal::paginate());
 
@@ -251,7 +256,7 @@ class ProposalAPIController extends AppBaseController
         }
 
         // dd($proposal->state->name == 'Aberto');
-        $proposal = $this->proposalRepository->find($id);
+        // $proposal = $this->proposalRepository->find($id);
 
 
         return $this->sendResponse(new ProposalResource($proposal), 'Proposal updated successfully');
@@ -295,28 +300,28 @@ class ProposalAPIController extends AppBaseController
         
         $diff = $proposal->initialBusinessStudy->total_discount_perc;
 
-        foreach ($authorizations as $authorization) {
+        // foreach ($authorizations as $authorization) {
 
-            $min = $authorization->min;
-            $max = $authorization->max;
+        //     $min = $authorization->min;
+        //     $max = $authorization->max;
 
-            if($diff > $min && $diff < $max) {
+        //     if($diff > $min && $diff < $max) {
 
-                //se bater
-                if ($authorization->id != 1){
+        //         //se bater
+        //         if ($authorization->id != 1){
 
-                    $proposal->state_id = 3;
-                    $proposal->save();
+        //             // $proposal->state_id = 3;
+        //             $proposal->save();
 
-                }
+        //         }
 
-                $businessStudy->business_study_authorization_id = $authorization->id;
-                $businessStudy->save();
+        //         $businessStudy->business_study_authorization_id = $authorization->id;
+        //         $businessStudy->save();
 
             
-            }
+        //     }
 
-        }
+        // }
 
         return $proposal;
 
@@ -365,17 +370,18 @@ class ProposalAPIController extends AppBaseController
 
             $isentIva = null;
 
-            if ($proposal->state->name == 'Aberto' || $proposal->state->name == 'Pendente'){
+            // if ($proposal->state->name == 'Aberto' || $proposal->state->name == 'Pendente'){
                 $sale = $proposal->initialBusinessStudy->sale;
                 $totalTransf = $proposal->initialBusinessStudy->total_transf ?? 0;
                 $ivaTX = $proposal->initialBusinessStudy->ivatx ?? 0.23;
                 
 
-            }elseif($proposal->state->name == 'Fechado'){
-                $sale = $proposal->finalBusinessStudy->sale;
-                $totalTransf = $proposal->finalBusinessStudy->total_transf ?? 0;
-                $ivaTX = $proposal->finalBusinessStudy->ivatx ?? 0.23;
-            }
+            // }
+            // elseif($proposal->state->name == 'Fechado'){
+            //     $sale = $proposal->finalBusinessStudy->sale;
+            //     $totalTransf = $proposal->finalBusinessStudy->total_transf ?? 0;
+            //     $ivaTX = $proposal->finalBusinessStudy->ivatx ?? 0.23;
+            // }
 
             //$sell = 43000; // valor gravado no estudo de negocio
             $diffTradein = 0;
@@ -513,6 +519,8 @@ class ProposalAPIController extends AppBaseController
 
 
             //atribuir AUTORIZAÇÃO
+            //check final business study
+
             // $this->authorization($id);
 
             $authorizations = BusinessStudyAuthorization::all();
@@ -524,30 +532,38 @@ class ProposalAPIController extends AppBaseController
             // $authorizations = $businessStudyAuthorizationRepository->all();
             
     
+            $business_study_authorization_id = 1;
             foreach ($authorizations as $authorization) {
-    
+                
                 $min = $authorization->min;
                 $max = $authorization->max;
-                $business_study_authorization_id = 1;
-
+                
+                // dd($discPerc);
                 if ($proposal->car->condition_id == 1){
                     
                     if($discPerc > $min && $discPerc < $max) {
     
-                        if ($authorization->id != 1){
+                        if ($authorization->id !== 1){
         
                             $proposal->state_id = 3;
                             $proposal->save();
         
+                        }else{
+                            $proposal->state_id = 1;
+                            $proposal->save();
                         }
         
                         $business_study_authorization_id = $authorization->id;
-    
+                        // return $business_study_authorization_id;
+                        $proposal->initialBusinessStudy->business_study_authorization_id =  $authorization->id;
+                        $proposal->save();
+                        
                     }
-
+                    
                 }               
-    
+                
             }
+
 
             if ($proposal->car->condition_id == 2 || $proposal->car->condition_id == 3 ) {
 
@@ -557,9 +573,13 @@ class ProposalAPIController extends AppBaseController
     
                         $proposal->state_id = 3;
                         $proposal->save();
-    
-                    $business_study_authorization_id = $authorization->id;
+                        $business_study_authorization_id = $authorization->id;
+                        $proposal->initialBusinessStudy->business_study_authorization_id =  $authorization->id;
+                        $proposal->save();
 
+                }else{
+                    $proposal->state_id = 1;
+                    $proposal->save();
                 }
 
             }
@@ -663,6 +683,13 @@ class ProposalAPIController extends AppBaseController
         return $this->sendSuccess('E-mail enviado com sucesso!');
  
 
+    }
+
+    public function proposalHistory($client)
+    {
+        $proposals = $this->proposalRepository->proposalHistory(Auth::id(), $client);
+
+        return $this->sendResponse(new ProposalCollection($proposals), 'Proposals retrieved successfully');
     }
     
 

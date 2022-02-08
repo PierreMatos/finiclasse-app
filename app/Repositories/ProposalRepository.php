@@ -21,6 +21,8 @@ class ProposalRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
+        'client_id',
+        'vendor_id'
         
     ];
 
@@ -73,5 +75,18 @@ class ProposalRepository extends BaseRepository
             return $proposals;
         }
 
+    }
+
+    public function proposalHistory($vendor,$client){
+
+        $proposals = Proposal::where('vendor_id', '=', $vendor)
+            ->where('client_id', '=', $client)
+            // ->where(function($query) {
+            //     $query->where('state_id', '2')
+            //           ->orWhere('state_id', '>', 4);
+            // })
+            ->orderBy('created_at', 'desc')->get();
+
+        return $proposals;
     }
 }
