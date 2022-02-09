@@ -219,9 +219,8 @@ class ProposalAPIController extends AppBaseController
         }
 
         //BUSINESS STUDY CALCULATION
-        //Except when proposal is closed
-
-        if((!empty($proposal->car) && $proposal->state_id !== 2) ){
+        //Except when proposal is closed or lost
+        if((!empty($proposal->car) && $proposal->state_id !== 2 && $proposal->state_id !== 4) ){
             
             $businessStudyCalculated = $this->calculateBusinessStudy($proposal->id);
 
