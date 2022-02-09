@@ -10,6 +10,7 @@ use App\Models\BusinessStudy;
 use App\Models\BusinessStudyAuthorization;
 use App\Repositories\ProposalRepository;
 use App\Repositories\BusinessStudyRepository;
+use App\Repositories\CarRepository;
 use App\Repositories\BusinessStudyAuthorizationRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
@@ -36,12 +37,14 @@ class ProposalAPIController extends AppBaseController
     /** @var  ProposalRepository */
     private $proposalRepository;
     private $businessStudyRepository;
+    private $carRepository;
     // private $businessStudyAuthorizationRepository;
 
-    public function __construct(ProposalRepository $proposalRepo, BusinessStudyRepository $businessStudyRepo)
+    public function __construct(ProposalRepository $proposalRepo, BusinessStudyRepository $businessStudyRepo, CarRepository $carRepo)
     {
         $this->proposalRepository = $proposalRepo;
         $this->businessStudyRepository = $businessStudyRepo;
+        $this->carRepository = $carRepo;
         // $this->businessStudyAuthorizationRepository = $businessStudyAuthorizationRepo;
     }
 
@@ -169,6 +172,23 @@ class ProposalAPIController extends AppBaseController
 
         /** @var Proposal $proposal */
         $proposal = $this->proposalRepository->find($id);
+       
+        //SET CAR AS 'SOLD' WHEN PROPOSAL IS CLOSED
+        if ($proposal->car){
+
+            if(isset($input['state_id'])){
+
+                if ($input['state_id'] == 2){
+                    
+                    $car = $this->carRepository->find($proposal->car->id);
+                    $car->state_id = 6;
+                    $car->save();
+        
+                }
+            }
+                
+        }
+       
 
         if (empty($proposal)) {
             return $this->sendError('Proposal not found');
@@ -198,10 +218,9 @@ class ProposalAPIController extends AppBaseController
 
         }
 
-        //business study
-        //TODO falta o SIGPU
-        if((!empty($proposal->car)) ){
-
+        //BUSINESS STUDY CALCULATION
+        //Except when proposal is closed or lost
+        if((!empty($proposal->car) && $proposal->state_id !== 2 && $proposal->state_id !== 4) ){
             
             $businessStudyCalculated = $this->calculateBusinessStudy($proposal->id);
 
@@ -490,6 +509,9 @@ class ProposalAPIController extends AppBaseController
             if($totalBenefits != 0 || $subTotal != 0 || $ptl != 0 || $sigpu != 0 || $totalTransf != 0){
 
                 $discPerc = ($desc / ($totalBenefits + $subTotal - ($ptl + $sigpu + $totalTransf))) * 100;
+                if ($discPerc < 0){
+                    $discPerc=0;
+                }
                 
             }else {
                 
@@ -540,18 +562,18 @@ class ProposalAPIController extends AppBaseController
                 
                 // dd($discPerc);
                 if ($proposal->car->condition_id == 1){
-                    
-                    if($discPerc > $min && $discPerc < $max) {
     
+                    if($discPerc >= $min && $discPerc < $max && $authorization->id !== 6) {
+                        
                         if ($authorization->id !== 1){
-        
                             $proposal->state_id = 3;
-                            $proposal->save();
+                            // $proposal->save();
         
-                        }else{
+                        }elseif ($authorization->id == 1 && $proposal->state->id !== 2 && $proposal->state->id !== 4) {
                             $proposal->state_id = 1;
-                            $proposal->save();
                         }
+                       
+                        $proposal->save();
         
                         $business_study_authorization_id = $authorization->id;
                         // return $business_study_authorization_id;
@@ -565,22 +587,36 @@ class ProposalAPIController extends AppBaseController
             }
 
 
-            if ($proposal->car->condition_id == 2 || $proposal->car->condition_id == 3 ) {
+            if ($proposal->car->condition_id == 2 || $proposal->car->condition_id == 4 ) {
 
-                $max = $authorizations->find(5);
+                // $auth = $authorizations->find(6);
 
-                if($margin <= $max->max ) {
+                if($margin < 0 ) {
     
+                    // if ($authorization->id !== 1){
+                    //     $proposal->state_id = 3;
+                    //     // $proposal->save();
+    
+                    // }elseif ($authorization->id == 1 && $proposal->state->id !== 2 && $proposal->state->id !== 4) {
+                    //     $proposal->state_id = 1;
+                    // }
+                    
+                        $business_study_authorization_id = 6;
+                        $proposal->initialBusinessStudy->business_study_authorization_id =  6;
                         $proposal->state_id = 3;
                         $proposal->save();
-                        $business_study_authorization_id = $authorization->id;
-                        $proposal->initialBusinessStudy->business_study_authorization_id =  $authorization->id;
-                        $proposal->save();
 
-                }else{
-                    $proposal->state_id = 1;
-                    $proposal->save();
+
+                }elseif($margin > 0){
+                        $business_study_authorization_id = 7;
+                        $proposal->initialBusinessStudy->business_study_authorization_id =  7;
+                        $proposal->state_id = 1;
+                        $proposal->save();
                 }
+                // else{
+                //     $proposal->state_id = 1;
+                //     $proposal->save();
+                // }
 
             }
 

@@ -8,6 +8,7 @@ use App\Models\BusinessStudy;
 use App\Models\Proposal;
 use App\Repositories\BusinessStudyRepository;
 use App\Repositories\ProposalRepository;
+use App\Repositories\CarRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Resources\BusinessStudyResource;
@@ -25,12 +26,14 @@ class BusinessStudyAPIController extends AppBaseController
     /** @var  BusinessStudyRepository */
     private $businessStudyRepository;
     private $proposalRepository;
+    private $carRepository;
 
 
-    public function __construct(BusinessStudyRepository $businessStudyRepo,ProposalRepository $proposalRepo)
+    public function __construct(BusinessStudyRepository $businessStudyRepo,ProposalRepository $proposalRepo, CarRepository $carRepo)
     {
         $this->businessStudyRepository = $businessStudyRepo;
         $this->proposalRepository = $proposalRepo;
+        $this->carRepository = $carRepo;
 
     }
 
@@ -120,7 +123,7 @@ class BusinessStudyAPIController extends AppBaseController
 
         $businessStudy = $this->businessStudyRepository->update($input, $id);
 
-        $businessStudyCalculated = (new ProposalAPIController($this->proposalRepository,  $this->businessStudyRepository))->calculateBusinessStudy($businessStudy->initialProposal->id);
+        $businessStudyCalculated = (new ProposalAPIController($this->proposalRepository,  $this->businessStudyRepository, $this->carRepository))->calculateBusinessStudy($businessStudy->initialProposal->id);
 
         $businessStudy = $this->businessStudyRepository->update($businessStudyCalculated, $id);
 
