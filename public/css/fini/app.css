@@ -85,6 +85,16 @@ div.dataTables_wrapper div.dataTables_filter input {
     color: #000;
 }
 
+.btn-shared:not(:disabled):not(.disabled).active {
+    background-color: #fff;
+    color: #000;
+}
+
+.btn-shared:hover {
+    background-color: #fff;
+    color: #000;
+}
+
 .bg-nav {
     background-color: #f4f6f9;
 }

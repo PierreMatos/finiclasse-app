@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateProposalRequest;
 use App\Repositories\ProposalRepository;
 use App\Repositories\FinancingRepository;
 use App\Repositories\FinancingProposalRepository;
+use App\Repositories\ProposalStateRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use App\Models\FinancingProposal;
@@ -22,12 +23,14 @@ class ProposalController extends AppBaseController
     /** @var  ProposalRepository */
     private $proposalRepository;
     private $financingRepository;
+    private $proposalStateRepository;
 
-    public function __construct(ProposalRepository $proposalRepo, FinancingRepository $financingRepo, FinancingProposalRepository $financingProposalRepo)
+    public function __construct(ProposalRepository $proposalRepo, FinancingRepository $financingRepo, FinancingProposalRepository $financingProposalRepo, ProposalStateRepository $proposalStateRepo)
     {
         $this->proposalRepository = $proposalRepo;
         $this->financingRepository = $financingRepo;
         $this->financingProposalRepository = $financingProposalRepo;
+        $this->proposalStateRepository = $proposalStateRepo;
     }
 
     /**
@@ -41,11 +44,13 @@ class ProposalController extends AppBaseController
     {
         $proposals = $this->proposalRepository->getProposalsByRole(Auth::user());
 
+        $states = $this->proposalStateRepository->all();
 
         // $proposals = $this->proposalRepository->all();
 
         return view('proposals.index')
-            ->with('proposals', $proposals);
+            ->with('proposals', $proposals)
+            ->with('states', $states);
     }
 
     /**
