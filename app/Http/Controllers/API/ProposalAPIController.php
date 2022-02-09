@@ -609,6 +609,11 @@ class ProposalAPIController extends AppBaseController
                         $proposal->save();
 
 
+                }elseif($margin > 0){
+                        $business_study_authorization_id = 7;
+                        $proposal->initialBusinessStudy->business_study_authorization_id =  7;
+                        $proposal->state_id = 1;
+                        $proposal->save();
                 }
                 // else{
                 //     $proposal->state_id = 1;
