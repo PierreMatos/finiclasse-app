@@ -89,7 +89,7 @@ class BusinessStudyAuthorizationsSeeder extends Seeder
                 'min' => null,
                 'max' => null,
                 'responsible_id' => null,
-                'color' => 'red',
+                'color' => 'green',
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',
             )

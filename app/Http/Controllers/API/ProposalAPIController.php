@@ -179,8 +179,8 @@ class ProposalAPIController extends AppBaseController
 
                 if ($input['state_id'] == 2){
                     
-                    $car->state_id = 6;
                     $car = $this->carRepository->find($proposal->car->id);
+                    $car->state_id = 6;
                     $car->save();
         
                 }
