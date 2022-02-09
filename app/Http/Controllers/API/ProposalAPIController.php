@@ -534,7 +534,6 @@ class ProposalAPIController extends AppBaseController
 
             if ($proposal->car->condition_id !== 1){
 
-                dd($sale);
                 //margem com  iva, confirmar diff tradein
                 $marginIVA = (($sale - $total) - $diffTradein) - ($internal_costs + $external_costs + $warranty) - $totalTransf + $totalBenefits ;
             
@@ -594,17 +593,19 @@ class ProposalAPIController extends AppBaseController
 
                 // $auth = $authorizations->find(6);
 
-                if($margin > 0 ) {
+                if($margin < 0 ) {
     
-                    if ($authorization->id !== 1){
+                    // if ($authorization->id !== 1){
+                    //     $proposal->state_id = 3;
+                    //     // $proposal->save();
+    
+                    // }elseif ($authorization->id == 1 && $proposal->state->id !== 2 && $proposal->state->id !== 4) {
+                    //     $proposal->state_id = 1;
+                    // }
+                    
+                        $business_study_authorization_id = 6;
+                        $proposal->initialBusinessStudy->business_study_authorization_id =  6;
                         $proposal->state_id = 3;
-                        // $proposal->save();
-    
-                    }elseif ($authorization->id == 1 && $proposal->state->id !== 2 && $proposal->state->id !== 4) {
-                        $proposal->state_id = 1;
-                    }
-                        $business_study_authorization_id = $authorization->id;
-                        $proposal->initialBusinessStudy->business_study_authorization_id =  $authorization->id;
                         $proposal->save();
 
 
