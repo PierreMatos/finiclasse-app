@@ -172,15 +172,20 @@ class ProposalAPIController extends AppBaseController
 
         /** @var Proposal $proposal */
         $proposal = $this->proposalRepository->find($id);
-        $car = $this->carRepository->find($proposal->car->id);
+       
+        if ($proposal->car){
 
-        if ($input['state_id'] == 2){
+            $car = $this->carRepository->find($proposal->car->id);
 
-            $car->state_id = 6;
-            $car->save();
-
-
+            if ($input['state_id'] == 2){
+    
+                $car->state_id = 6;
+                $car->save();
+    
+    
+            }
         }
+       
 
         if (empty($proposal)) {
             return $this->sendError('Proposal not found');
