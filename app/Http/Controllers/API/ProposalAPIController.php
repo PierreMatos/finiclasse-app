@@ -173,6 +173,7 @@ class ProposalAPIController extends AppBaseController
         /** @var Proposal $proposal */
         $proposal = $this->proposalRepository->find($id);
        
+        //SET CAR AS 'SOLD' WHEN PROPOSAL IS CLOSED
         if ($proposal->car){
 
             if(isset($input['state_id'])){
@@ -185,8 +186,6 @@ class ProposalAPIController extends AppBaseController
         
                 }
             }
-
-
                 
         }
        
@@ -219,10 +218,10 @@ class ProposalAPIController extends AppBaseController
 
         }
 
-        //business study
-        //TODO falta o SIGPU
-        if((!empty($proposal->car)) ){
+        //BUSINESS STUDY CALCULATION
+        //Except when proposal is closed
 
+        if((!empty($proposal->car) && $proposal->state_id !== 2) ){
             
             $businessStudyCalculated = $this->calculateBusinessStudy($proposal->id);
 
