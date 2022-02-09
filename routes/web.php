@@ -157,11 +157,35 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
         return '<h1>Clear Config cleared</h1>';
     });
 
+    //Mails Exemplos:
+
+    //Proposta Comercial
     Route::get('/mailable', function () {
         $proposal = App\Models\Proposal::find(890);
 
         return new App\Mail\ProposalOrder($proposal);
     });;
+
+    //RGPD
+    Route::get('/mailable2', function () {
+        $user = App\Models\User::find(10);
+
+        return new App\Mail\ValidateRGPD($user);
+    });;
+
+    //Notificação negócio para validação
+    Route::get('/mailable3', function () {
+        $proposal = App\Models\Proposal::find(890);
+
+        return new App\Mail\ProposalApproval($proposal);
+    });
+
+     //Notificação retoma para validação
+     Route::get('/mailable4', function () {
+        $proposal = App\Models\Proposal::find(890);
+
+        return new App\Mail\TradeInApproval($proposal);
+    });
 
     // Datatable Car
     Route::get('new-car', [CarController::class, 'indexNewCars'])->name('new-car');
