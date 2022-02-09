@@ -175,13 +175,19 @@ class ProposalAPIController extends AppBaseController
        
         if ($proposal->car){
 
-            if ($input['state_id'] == 2){
-                
-                $car->state_id = 6;
-                $car = $this->carRepository->find($proposal->car->id);
-                $car->save();
-    
+            if(isset($input['state_id'])){
+
+                if ($input['state_id'] == 2){
+                    
+                    $car->state_id = 6;
+                    $car = $this->carRepository->find($proposal->car->id);
+                    $car->save();
+        
+                }
             }
+
+
+                
         }
        
 
@@ -528,6 +534,7 @@ class ProposalAPIController extends AppBaseController
 
             if ($proposal->car->condition_id !== 1){
 
+                dd($sale);
                 //margem com  iva, confirmar diff tradein
                 $marginIVA = (($sale - $total) - $diffTradein) - ($internal_costs + $external_costs + $warranty) - $totalTransf + $totalBenefits ;
             
@@ -583,11 +590,11 @@ class ProposalAPIController extends AppBaseController
             }
 
 
-            if ($proposal->car->condition_id == 2 || $proposal->car->condition_id == 3 ) {
+            if ($proposal->car->condition_id == 2 || $proposal->car->condition_id == 4 ) {
 
-                $max = $authorizations->find(5);
+                // $auth = $authorizations->find(6);
 
-                if($margin <= $max->max ) {
+                if($margin > 0 ) {
     
                     if ($authorization->id !== 1){
                         $proposal->state_id = 3;
