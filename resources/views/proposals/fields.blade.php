@@ -270,11 +270,11 @@
                 <!-- Financing -->
                 <div class="form-group col-sm-1">
                     @if ($proposal->financings->contains('id', $financing->id))
-                        <input checked="checked" class="mt-5" name="checked[{{ $financing->id }}]"
-                            type="checkbox" value="{{ $financing->id }}">
+                        <input id="checkbox{{ $financing->id }}" checked="checked" class="mt-5 checked"
+                            name="checked" type="checkbox" value="{{ $financing->id }}">
                     @else
-                        <input name="checked[{{ $financing->id }}]" class="mt-5" type="checkbox"
-                            value="{{ $financing->id }}">
+                        <input id="checkbox{{ $financing->id }}" name="checked" class="mt-5 checked"
+                            type="checkbox" value="{{ $financing->id }}">
                     @endif
                 </div>
 
@@ -293,9 +293,10 @@
                 <div class="form-group col-sm-4" style="margin-top: 32px;">
                     <div class="input-group">
                         <div class="custom-file">
-                            <input type="file" id="{{ $financing->id }}" name="checked[{{ $financing->id }}]"
-                                multiple class="custom-file-input" />
-                            <label for="checked[{{ $financing->id }}]" class="custom-file-label">Adicione o
+                            <input type="file" id="doc{{ $financing->id }}" name="checked" multiple
+                                class="custom-file-input" disabled />
+                            <label id="docLabel{{ $financing->id }}" for="checked" class="custom-file-label">Adicione
+                                o
                                 documento</label>
                         </div>
 
@@ -319,7 +320,7 @@
                 <div class="clearfix"></div>
 
                 <!-- Contract Field -->
-                <div class="form-group col-sm-2" style="margin-top: 32px;">
+                <div id="contract" class="form-group col-sm-2" style="margin-top: 32px;">
                     {!! Form::label('contract', 'Contrato') !!}
 
                     @foreach ($financingsproposal as $financingproposal)
@@ -666,3 +667,16 @@
         </div>
     </div>
 </div>
+
+@push('page_scripts')
+    <script>
+        $(".checked").click(function(e) {
+            var id = $(this).val();
+            if ($('#checkbox' + id).is(':checked')) {
+                $('#doc' + id).removeAttr("disabled");
+            } else {
+                $('#doc' + id).attr("disabled", true);
+            }
+        });
+    </script>
+@endpush
