@@ -182,3 +182,24 @@ div.dataTables_wrapper div.dataTables_filter input {
     clear: both;
     /* background-color: red; */
 }
+
+.borderBtn {
+    border-bottom: 1px solid #ced4da;
+    width: 80%;
+    font-size: 1.4rem;
+}
+
+.borderContainer {
+    border-right: 1px solid #ced4da;
+    border-bottom: 1px solid #ced4da;
+    border-left: 1px solid #ced4da;
+    border-radius: 10px;
+}
+
+.studyBR {
+    border-radius: 10px;
+}
+
+.fr {
+    float: right;
+}

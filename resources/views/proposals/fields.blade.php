@@ -112,8 +112,6 @@
                 @endif
             </div>
 
-
-
             <div class="form-group col-sm-8" style="display: flex;">
                 <!-- Fuel Field -->
                 <div class="form-group col-sm-6">
@@ -136,23 +134,21 @@
                     {!! Form::label('registration', 'Ano') !!}
                     {!! Form::text('registration', isset($proposal->car->registration) ? $proposal->car->registration : '', ['class' => 'form-control', 'disabled']) !!}
                 </div>
+            </div>
 
-                <!-- Test Drive Field -->
-                <div class="form-group col-sm-4">
-                    <div style="margin-top: 37px;">
-                        {!! Form::label('test_drive', 'Teste drive') !!}
-                        <!-- <label>Teste drive</label> -->
-                        <input type="hidden" name="test_drive" value="0" disabled>
-                        <input type="checkbox" name="test_drive" value="1"
-                            {{ isset($proposal->test_drive) == '1' ? ' checked' : '' }} disabled>
-                    </div>
-                </div>
-
+            <div class="form-group col-sm-4"></div>
+            <!-- Test Drive Field -->
+            <div class="form-group col-sm-8" style="margin-top: -30px; padding-left: 16px;">
+                {!! Form::label('test_drive', 'Teste drive') !!}
+                <!-- <label>Teste drive</label> -->
+                <input type="hidden" name="test_drive" value="0" disabled>
+                <input type="checkbox" name="test_drive" value="1"
+                    {{ isset($proposal->test_drive) == '1' ? ' checked' : '' }} disabled>
             </div>
 
             <div class="form-group col-sm-4"></div>
             <!-- Price Field -->
-            <div class="form-group col-sm-8">
+            <div class="form-group col-sm-8" style="margin-top: 30px;">
                 <p>Preço Final (incl. IVA)</p>
                 @if ($proposal->car_id != '')
                     <h2>@money($proposal->car->price)</h2>
@@ -266,9 +262,7 @@
 
             <input type="hidden" name="proposal_id" value="{{ $proposal->id }}" />
 
-
             @foreach ($financings as $financing)
-
                 <input type="hidden" name="financing_id[]" value="{{ $financing->id }}" />
 
                 <!-- {{ Form::hidden('financing_id', $financing->id, ['id' => $financing->id]) }} -->
@@ -282,12 +276,10 @@
                         <input name="checked[{{ $financing->id }}]" class="mt-5" type="checkbox"
                             value="{{ $financing->id }}">
                     @endif
-
                 </div>
 
-
                 <!-- Financial Type Field -->
-                <div class="form-group col-sm-7">
+                <div class="form-group col-sm-5">
                     {!! Form::label('name', 'Tipo de financiamento') !!}
                     {!! Form::text('name', isset($financing->name) ? $financing->name : '', ['class' => 'form-control', 'disabled']) !!}
                 </div>
@@ -296,38 +288,9 @@
                 <!-- <div class="form-group col-sm-4">
                 {!! Form::label('description', 'Descrição') !!}
                 {!! Form::text('description', isset($financing->description) ? $financing->description : '', ['class' => 'form-control', 'disabled']) !!}
-            </div> -->
+                </div> -->
 
-
-                <!-- Contract Field -->
-
-                <div class="form-group col-sm-4">
-                    {!! Form::label('contract', 'Contrato') !!}
-
-                    @foreach ($financingsproposal as $financingproposal)
-
-                        <!-- <input type="text" name="proposal_id" value="{{ $proposal->id }}" /> -->
-                        <!-- {{ $financingproposal->financing_id }} -->
-
-
-                        @if ($financingproposal->financing_id == $financing->id)
-
-
-                            @if (!$financingproposal->getFirstMediaUrl('financingproposal'))
-
-
-                            @endif
-
-                            @if ($financingproposal->getFirstMediaUrl('financingproposal') !== '')
-                                <a href="{{ $financingproposal->getFirstMediaUrl('financingproposal') }}"
-                                    target="_blank" class="btn btn-default">{{ __('Open') }}</a>
-
-                            @endif
-
-                        @endif
-
-                    @endforeach
-
+                <div class="form-group col-sm-4" style="margin-top: 32px;">
                     <div class="input-group">
                         <div class="custom-file">
                             <input type="file" id="{{ $financing->id }}" name="checked[{{ $financing->id }}]"
@@ -335,23 +298,48 @@
                             <label for="checked[{{ $financing->id }}]" class="custom-file-label">Adicione o
                                 documento</label>
                         </div>
-                    </div>
-                    <!-- @if (isset($proposalFinancing)) -->
-                    <!-- <div class="input-group">
+
+                        <!-- @if (isset($proposalFinancing))
+-->
+                        <!-- <div class="input-group">
                     <div class="custom-file">
                         <input type="file" id="document[]" name="document[]" multiple class="custom-file-input"/>
                         <label for="document[]" class="custom-file-label">Adicione o documento</label>
                     </div> -->
-                    <!-- <div class="custom-file">
+                        <!-- <div class="custom-file">
                         {!! Form::file('document', ['class' => 'custom-file-input']) !!}
                         {!! Form::label('document', 'Choose file', ['class' => 'custom-file-label']) !!}
                     </div> -->
-                    <!-- </div> -->
+                        <!-- </div> -->
 
-                    <!-- @endif -->
+                        <!--
+@endif -->
+                    </div>
                 </div>
-
                 <div class="clearfix"></div>
+
+                <!-- Contract Field -->
+                <div class="form-group col-sm-2" style="margin-top: 32px;">
+                    {!! Form::label('contract', 'Contrato') !!}
+
+                    @foreach ($financingsproposal as $financingproposal)
+                        <!-- <input type="text" name="proposal_id" value="{{ $proposal->id }}" /> -->
+                        <!-- {{ $financingproposal->financing_id }} -->
+
+                        @if ($financingproposal->financing_id == $financing->id)
+
+                            @if (!$financingproposal->getFirstMediaUrl('financingproposal'))
+                            @endif
+
+                            @if ($financingproposal->getFirstMediaUrl('financingproposal') !== '')
+                                <a href="{{ $financingproposal->getFirstMediaUrl('financingproposal') }}"
+                                    target="_blank" class="btn btn-default">{{ __('Ver') }}</a>
+                            @endif
+
+                        @endif
+
+                    @endforeach
+                </div>
 
             @endforeach
 
@@ -365,304 +353,316 @@
     </div>
 
     <div class="tab-pane" id="proposals" role="tabpanel" aria-labelledby="proposals-tab">
-        <div class="row mb-5">
 
-            <!-- INICIAL -->
+        <h4 class="mt-5 mb-5" style="text-align: center;">Estudo de negócio</h4>
 
-            <div class="form-group col-sm-2">
-                {!! Form::label('inicial', 'Inicial') !!}
+        <div class="container borderContainer">
+            <div class="row justify-content-center">
+                <div class="col-md-1"></div>
+                <div class="col-sm-12 col-md-4">
+                    <h6 class="form-group mt-3">
+                        {!! Form::label('inicial', 'Inicial') !!}
+                    </h6>
+
+                    <div class="form-group">
+                        <p>Diferença (€)</p>
+                        <h2 class="borderBtn">@money($proposal->initialBusinessStudy->total_diff_amount)</h2>
+                    </div>
+
+                    <!-- Financial Value Field -->
+                    <div class="form-group">
+                        <p>Desconto (€)</p>
+                        <h2 class="borderBtn">@money($proposal->initialBusinessStudy->total_discount_amount)</h2>
+                    </div>
+
+                    <!-- Tradein Value Field -->
+                    <div class="form-group">
+                        <p>%</p>
+                        <h2 class="borderBtn">@money($proposal->initialBusinessStudy->total_discount_perc)</h2>
+                    </div>
+                </div>
+
+                <div class="col-md-1"></div>
+
+                <div class="col-sm-12 col-md-4">
+                    <h6 class="form-group mt-3">
+                        {!! Form::label('final', 'Final') !!}
+                    </h6>
+
+                    <div class="form-group">
+                        <p>Diferença (€)</p>
+                        <h2 class="borderBtn">@money($proposal->finalBusinessStudy->total_diff_amount)</h2>
+                    </div>
+
+                    <!-- Financial Value Field -->
+                    <div class="form-group">
+                        <p>Desconto (€)</p>
+                        <h2 class="borderBtn">@money($proposal->finalBusinessStudy->total_discount_amount)</h2>
+                    </div>
+
+                    <!-- Tradein Value Field -->
+                    <div class="form-group">
+                        <p>%</p>
+                        <h2 class="borderBtn">@money($proposal->finalBusinessStudy->total_discount_perc)</h2>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group col-sm-3">
-                <p>Diferença</p>
-                <h2>@money($proposal->initialBusinessStudy->total_diff_amount)</h2>
-            </div>
-
-            <!-- Financial Value Field -->
-            <div class="form-group col-sm-3">
-                <p>Desconto</p>
-                <h2>@money($proposal->initialBusinessStudy->total_discount_amount)</h2>
-            </div>
-
-            <!-- Tradein Value Field -->
-            <div class="form-group col-sm-3">
-                <p>%</p>
-                <h2>@money($proposal->initialBusinessStudy->total_discount_perc)</h2>
+            <div class="row mt-5 mb-5 justify-content-center">
+                {!! Form::model($proposal, ['route' => ['businessStudies.update', $proposal->finalBusinessStudy->id], 'method' => 'patch', 'files' => true]) !!}
+                <div class="form-group row" role="group" aria-label="Basic example">
+                    <div class="col-6">
+                        <button type="button"
+                            id="{{ isset($proposal->initialBusinessStudy->id) ? $proposal->initialBusinessStudy->id : '' }}"
+                            value="4" class="btn btn-success"> Aceitar</button>
+                    </div>
+                    <div class="col-6">
+                        <button type="button"
+                            id="{{ isset($proposal->initialBusinessStudy->id) ? $proposal->initialBusinessStudy->id : '' }}"
+                            value="5" class="btn btn-danger"> Rejeitar</button>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="row mb-5">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <!-- INICIAL -->
+                    <div class="form-group col-sm-8">
+                        <!-- <p>Valor do negócio</p> -->
+                        <h4 class="mt-3 mb-5">Valor Inicial</h4>
+                    </div>
 
-            <!-- FINAL -->
+                    <!-- INICIAL -->
+                    <div class="form-group col-sm-8">
+                        <h6 style="font-weight: 700; line-height: 1.5;">Preço base</h6>
+                        <p class="form-control studyBR" readonly>@money($proposal->initialBusinessStudy->base_price)
+                        </p>
+                    </div>
 
-            <div class="form-group col-sm-2">
-                {!! Form::label('final', 'Final') !!}
+                    <!-- INICIAL -->
+                    <div class="form-group col-sm-8">
+                        <h6 style="font-weight: 700; line-height: 1.5;">Total Extras</h6>
+                        <p class="form-control studyBR" readonly>@money($proposal->initialBusinessStudy->extras_total)
+                        </p>
+                    </div>
+
+                    <!-- INICIAL -->
+                    <div class="form-group col-sm-8">
+                        <h6 style="font-weight: 700; line-height: 1.5;">PTL</h6>
+                        <p class="form-control studyBR" readonly>@money($proposal->initialBusinessStudy->ptl)</p>
+                    </div>
+
+                    <!-- INICIAL -->
+                    <div class="form-group col-sm-8">
+                        <h6 style="font-weight: 700; line-height: 1.5;">SIGPU</h6>
+                        <p class="form-control studyBR" readonly>@money($proposal->initialBusinessStudy->sigpu)</p>
+                    </div>
+
+                    <!-- INICIAL -->
+                    <div class="form-group col-sm-8">
+                        <h6 style="font-weight: 700; line-height: 1.5;">Total Transformação</h6>
+                        <p class="form-control studyBR" readonly>@money($proposal->initialBusinessStudy->total_transf)
+                        </p>
+                    </div>
+
+                    <!-- INICIAL -->
+                    <div class="form-group col-sm-8">
+                        <h6 style="font-weight: 700; line-height: 1.5;">Total Apoios</h6>
+                        <p class="form-control studyBR" readonly>
+                            @money($proposal->initialBusinessStudy->total_benefits)</p>
+                    </div>
+
+                    <!-- INICIAL -->
+                    <div class="form-group col-sm-8">
+                        <h6 style="font-weight: 700; line-height: 1.5;">Total Extras 2</h6>
+                        <p class="form-control studyBR" readonly>@money($proposal->initialBusinessStudy->extras_total2)
+                        </p>
+                    </div>
+
+                    <!-- INICIAL -->
+                    <div class="form-group col-sm-8">
+                        <h6 style="font-weight: 700; line-height: 1.5;">Sub Total</h6>
+                        <p class="form-control studyBR" readonly>@money($proposal->initialBusinessStudy->sub_total)</p>
+                    </div>
+
+                    <!-- INICIAL -->
+                    <div class="form-group col-sm-8">
+                        <h6 style="font-weight: 700; line-height: 1.5;">ISV</h6>
+                        <p class="form-control studyBR" readonly>@money($proposal->initialBusinessStudy->isv)</p>
+                    </div>
+
+                    <!-- INICIAL -->
+                    <div class="form-group col-sm-8">
+                        <h6 style="font-weight: 700; line-height: 1.5;">IVA</h6>
+                        <p class="form-control studyBR" readonly>@money($proposal->initialBusinessStudy->iva)</p>
+                    </div>
+
+                    <!-- INICIAL -->
+                    <div class="form-group col-sm-8">
+                        <h6 style="font-weight: 700; line-height: 1.5;">Total</h6>
+                        <p class="form-control studyBR" readonly>@money($proposal->initialBusinessStudy->total)</p>
+                    </div>
+
+                    <!-- INICIAL -->
+                    <div class="form-group col-sm-8">
+                        <h6 style="font-weight: 700; line-height: 1.5;">Venda</h6>
+                        <p class="form-control studyBR" readonly>@money($proposal->initialBusinessStudy->sell)</p>
+                    </div>
+
+                    <!-- INICIAL -->
+                    <div class="form-group col-sm-8">
+                        <h6 style="font-weight: 700; line-height: 1.5;">Valor de compra</h6>
+                        <p class="form-control studyBR" readonly>
+                            @money($proposal->initialBusinessStudy->purchase_price)</p>
+                    </div>
+
+                    <!-- INICIAL -->
+                    <div class="form-group col-sm-8">
+                        <h6 style="font-weight: 700; line-height: 1.5;">Valor de venda</h6>
+                        <p class="form-control studyBR" readonly>@money($proposal->initialBusinessStudy->selling_price)
+                        </p>
+                    </div>
+
+                    <!-- INICIAL -->
+                    <div class="form-group col-sm-8">
+                        <h6 style="font-weight: 700; line-height: 1.5;">Diferença de retoma</h6>
+                        <p class="form-control studyBR" readonly>
+                            @money($proposal->initialBusinessStudy->total_diff_amount)
+                        </p>
+                    </div>
+
+                    <!-- INICIAL -->
+                    <div class="form-group col-sm-8">
+                        <h6 style="font-weight: 700; line-height: 1.5;">Valor a liquidar</h6>
+                        <p class="form-control studyBR" readonly>@money($proposal->initialBusinessStudy->settle_amount)
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-12 col-md-6">
+                    <!-- FINAL -->
+                    <div class="form-group col-sm-8 fr">
+                        <!-- <p>Valor do financiamento</p> -->
+                        <h4 class="mt-3 mb-5">Valor Final</h4>
+                    </div>
+
+                    <!-- FINAL -->
+                    <div class="form-group col-sm-8 fr">
+                        {!! Form::label('base_price', 'Preço base') !!}
+                        {!! Form::text('base_price', isset($proposal->finalBusinessStudy->base_price) ? $proposal->finalBusinessStudy->base_price : '', ['class' => 'form-control studyBR']) !!}
+                    </div>
+
+                    <!-- FINAL -->
+                    <div class="form-group col-sm-8 fr">
+                        {!! Form::label('extras_total', 'Total Extras') !!}
+                        {!! Form::text('extras_total', isset($proposal->finalBusinessStudy->extras_total) ? $proposal->finalBusinessStudy->extras_total : '', ['class' => 'form-control studyBR']) !!}
+                    </div>
+
+                    <!-- FINAL -->
+                    <div class="form-group col-sm-8 fr">
+                        {!! Form::label('ptl', 'PTL') !!}
+                        {!! Form::text('ptl', isset($proposal->finalBusinessStudy->ptl) ? $proposal->finalBusinessStudy->ptl : '', ['class' => 'form-control studyBR']) !!}
+                    </div>
+
+                    <!-- FINAL -->
+                    <div class="form-group col-sm-8 fr">
+                        {!! Form::label('sigpu', 'SIGPU') !!}
+                        {!! Form::text('sigpu', isset($proposal->finalBusinessStudy->sigpu) ? $proposal->finalBusinessStudy->sigpu : '', ['class' => 'form-control studyBR']) !!}
+                    </div>
+
+                    <!-- FINAL -->
+                    <div class="form-group col-sm-8 fr">
+                        {!! Form::label('total_transf', 'Total Transformação') !!}
+                        {!! Form::text('total_transf', isset($proposal->finalBusinessStudy->total_transf) ? $proposal->finalBusinessStudy->total_transf : '', ['class' => 'form-control studyBR']) !!}
+                    </div>
+
+                    <!-- FINAL -->
+                    <div class="form-group col-sm-8 fr">
+                        {!! Form::label('total_benefits', 'Total Apoios') !!}
+                        {!! Form::text('total_benefits', isset($proposal->finalBusinessStudy->total_benefits) ? $proposal->finalBusinessStudy->total_benefits : '', ['class' => 'form-control studyBR']) !!}
+                    </div>
+
+                    <!-- FINAL -->
+                    <div class="form-group col-sm-8 fr">
+                        {!! Form::label('extras_total2', 'Total Extras 2') !!}
+                        {!! Form::text('extras_total2', isset($proposal->finalBusinessStudy->extras_total2) ? $proposal->finalBusinessStudy->extras_total2 : '', ['class' => 'form-control studyBR']) !!}
+                    </div>
+
+                    <!-- FINAL -->
+                    <div class="form-group col-sm-8 fr">
+                        {!! Form::label('sub_total', 'Sub Total') !!}
+                        {!! Form::text('sub_total', isset($proposal->finalBusinessStudy->sub_total) ? $proposal->finalBusinessStudy->esub_totalxtras_total2 : '', ['class' => 'form-control studyBR']) !!}
+                    </div>
+
+                    <!-- FINAL -->
+                    <div class="form-group col-sm-8 fr">
+                        {!! Form::label('isv', 'ISV') !!}
+                        {!! Form::text('isv', isset($proposal->finalBusinessStudy->isv) ? $proposal->finalBusinessStudy->isv : '', ['class' => 'form-control studyBR']) !!}
+                    </div>
+
+                    <!-- FINAL -->
+                    <div class="form-group col-sm-8 fr">
+                        {!! Form::label('iva', 'IVA') !!}
+                        {!! Form::text('iva', isset($proposal->finalBusinessStudy->iva) ? $proposal->finalBusinessStudy->iva : '', ['class' => 'form-control studyBR']) !!}
+                    </div>
+
+                    <!-- FINAL -->
+                    <div class="form-group col-sm-8 fr">
+                        {!! Form::label('total', 'Total') !!}
+                        {!! Form::text('total', isset($proposal->finalBusinessStudy->total) ? $proposal->finalBusinessStudy->total : '', ['class' => 'form-control studyBR']) !!}
+                    </div>
+
+                    <!-- FINAL -->
+                    <div class="form-group col-sm-8 fr">
+                        {!! Form::label('sale', 'Venda') !!}
+                        {!! Form::text('sale', isset($proposal->finalBusinessStudy->sale) ? $proposal->finalBusinessStudy->sale : '', ['class' => 'form-control studyBR']) !!}
+                    </div>
+
+                    <!-- FINAL -->
+                    <div class="form-group col-sm-8 fr">
+                        {!! Form::label('purchase_price', 'Valor de compra') !!}
+                        {!! Form::text('purchase_price', isset($proposal->finalBusinessStudy->purchase_price) ? $proposal->finalBusinessStudy->purchase_price : '', ['class' => 'form-control studyBR']) !!}
+                    </div>
+
+                    <!-- FINAL -->
+                    <!-- MUDAR PARA VALORES DE VENDA -->
+                    <div class="form-group col-sm-8 fr">
+                        {!! Form::label('purchase_price', 'Valor de venda') !!}
+                        {!! Form::text('purchase_price', isset($proposal->finalBusinessStudy->purchase_price) ? $proposal->finalBusinessStudy->purchase_price : '', ['class' => 'form-control studyBR']) !!}
+                    </div>
+
+                    <!-- FINAL -->
+                    <div class="form-group col-sm-8 fr">
+                        {!! Form::label('total_diff_amount', 'Diferença da retoma') !!}
+                        {!! Form::text('total_diff_amount', isset($proposal->finalBusinessStudy->total_diff_amount) ? $proposal->finalBusinessStudy->total_diff_amount : '', ['class' => 'form-control studyBR']) !!}
+                    </div>
+
+                    <!-- FINAL -->
+                    <div class="form-group col-sm-8 fr">
+                        {!! Form::label('settle_amount', 'Valor a liquidar') !!}
+                        {!! Form::text('settle_amount', isset($proposal->finalBusinessStudy->settle_amount) ? $proposal->finalBusinessStudy->settle_amount : '', ['class' => 'form-control studyBR']) !!}
+                    </div>
+
+                    {{-- <!-- Proposal Number Field -->
+                    <!-- <div class="form-group col-sm-4">
+                    {!! Form::label('pos_number', 'Nº da proposta') !!}
+                    {!! Form::text('pos_number', isset($proposal->pos_number) ? $proposal->pos_number : '', ['class' => 'form-control', 'disabled']) !!}--> --}}
+                </div>
+            </div>
+            <div class="card-footer"
+                style="padding: 0.75rem 0.75rem 0.75rem 0; display: flex; justify-content: center">
+                <div class="mr-2">
+                    {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+                </div>
+                <div class="ml-2">
+                    <a href="{{ route('proposals.index') }}" class="btn btn-default">{{ __('Cancel') }}</a>
+                </div>
             </div>
 
-            <div class="form-group col-sm-3">
-                <p>Diferença</p>
-                <h2>@money($proposal->finalBusinessStudy->total_diff_amount)</h2>
-            </div>
-
-            <!-- Financial Value Field -->
-            <div class="form-group col-sm-3">
-                <p>Desconto</p>
-                <h2>@money($proposal->finalBusinessStudy->total_discount_amount)</h2>
-            </div>
-
-            <!-- Tradein Value Field -->
-            <div class="form-group col-sm-3">
-                <p>%</p>
-                <h2>@money($proposal->finalBusinessStudy->total_discount_perc)</h2>
-            </div>
-
-            {!! Form::model($proposal, ['route' => ['businessStudies.update', $proposal->finalBusinessStudy->id], 'method' => 'patch', 'files' => true]) !!}
-
-
-            <div class="form-group col-sm-2">
-                <button type="button"
-                    id="{{ isset($proposal->initialBusinessStudy->id) ? $proposal->initialBusinessStudy->id : '' }}"
-                    value="4" class="businessAuth btn btn-info"> Aceitar</button>
-            </div>
-            <div class="form-group col-sm-2">
-                <button type="button"
-                    id="{{ isset($proposal->initialBusinessStudy->id) ? $proposal->initialBusinessStudy->id : '' }}"
-                    value="5" class="businessAuth btn btn-info"> Rejeitar</button>
-            </div>
-
-
+            {!! Form::close() !!}
         </div>
-
-
-
-
-
-        <div class="row">
-
-            <div class="col-12 mb-5">
-                <h1>Estudo de negócio</h1>
-            </div>
-            <!-- TODO ESTUDO DE NEGOCIO -->
-
-
-
-
-            <!-- INICIAL -->
-            <div class="form-group col-sm-6">
-                <!-- <p>Valor do negócio</p> -->
-                <h2>Inicial</h2>
-            </div>
-
-            <!-- FINAL -->
-            <div class="form-group col-sm-6">
-                <!-- <p>Valor do financiamento</p> -->
-                <h2>Final</h2>
-            </div>
-
-            <!-- INICIAL -->
-            <div class="form-group col-sm-6">
-                <h5>Preço base</h5>
-                <p>@money($proposal->initialBusinessStudy->base_price)</p>
-            </div>
-
-            <!-- FINAL -->
-            <div class="form-group col-sm-4">
-                {!! Form::label('base_price', 'Preço base') !!}
-                {!! Form::text('base_price', isset($proposal->finalBusinessStudy->base_price) ? $proposal->finalBusinessStudy->base_price : '', ['class' => 'form-control']) !!}
-            </div>
-
-            <!-- INICIAL -->
-            <div class="form-group col-sm-6">
-                <h5>Total Extras</h5>
-                <p>@money($proposal->initialBusinessStudy->extras_total)</p>
-            </div>
-
-            <!-- FINAL -->
-            <div class="form-group col-sm-6">
-                {!! Form::label('extras_total', 'Total Extras') !!}
-                {!! Form::text('extras_total', isset($proposal->finalBusinessStudy->extras_total) ? $proposal->finalBusinessStudy->extras_total : '', ['class' => 'form-control']) !!}
-            </div>
-
-            <!-- INICIAL -->
-            <div class="form-group col-sm-6">
-                <h5>PTL</h5>
-                <p>@money($proposal->initialBusinessStudy->ptl)</p>
-            </div>
-
-            <!-- FINAL -->
-            <div class="form-group col-sm-6">
-                {!! Form::label('ptl', 'PTL') !!}
-                {!! Form::text('ptl', isset($proposal->finalBusinessStudy->ptl) ? $proposal->finalBusinessStudy->ptl : '', ['class' => 'form-control']) !!}
-            </div>
-
-            <!-- INICIAL -->
-            <div class="form-group col-sm-6">
-                <h5>SIGPU</h5>
-                <p>@money($proposal->initialBusinessStudy->sigpu)</p>
-            </div>
-
-            <!-- FINAL -->
-            <div class="form-group col-sm-6">
-                {!! Form::label('sigpu', 'SIGPU') !!}
-                {!! Form::text('sigpu', isset($proposal->finalBusinessStudy->sigpu) ? $proposal->finalBusinessStudy->sigpu : '', ['class' => 'form-control']) !!}
-            </div>
-
-            <!-- INICIAL -->
-            <div class="form-group col-sm-6">
-                <h5>Total Transformação</h5>
-                <p>@money($proposal->initialBusinessStudy->total_transf)</p>
-            </div>
-
-            <!-- FINAL -->
-            <div class="form-group col-sm-6">
-                {!! Form::label('total_transf', 'Total Transformação') !!}
-                {!! Form::text('total_transf', isset($proposal->finalBusinessStudy->total_transf) ? $proposal->finalBusinessStudy->total_transf : '', ['class' => 'form-control']) !!}
-            </div>
-
-            <!-- INICIAL -->
-            <div class="form-group col-sm-6">
-                <h5>Total Apoios</h5>
-                <p>@money($proposal->initialBusinessStudy->total_benefits)</p>
-            </div>
-
-            <!-- FINAL -->
-            <div class="form-group col-sm-6">
-                {!! Form::label('total_benefits', 'Total Apoios') !!}
-                {!! Form::text('total_benefits', isset($proposal->finalBusinessStudy->total_benefits) ? $proposal->finalBusinessStudy->total_benefits : '', ['class' => 'form-control']) !!}
-            </div>
-
-            <!-- INICIAL -->
-            <div class="form-group col-sm-6">
-                <h5>Total Extras</h5>
-                <p>@money($proposal->initialBusinessStudy->extras_total2)</p>
-            </div>
-
-            <!-- FINAL -->
-            <div class="form-group col-sm-6">
-                {!! Form::label('extras_total2', 'Total Extras') !!}
-                {!! Form::text('extras_total2', isset($proposal->finalBusinessStudy->extras_total2) ? $proposal->finalBusinessStudy->extras_total2 : '', ['class' => 'form-control']) !!}
-            </div>
-
-            <!-- INICIAL -->
-            <div class="form-group col-sm-6">
-                <h5>Sub Total</h5>
-                <p>@money($proposal->initialBusinessStudy->sub_total)</p>
-            </div>
-
-            <!-- FINAL -->
-            <div class="form-group col-sm-6">
-                {!! Form::label('sub_total', 'Sub Total') !!}
-                {!! Form::text('sub_total', isset($proposal->finalBusinessStudy->sub_total) ? $proposal->finalBusinessStudy->esub_totalxtras_total2 : '', ['class' => 'form-control']) !!}
-            </div>
-
-            <!-- INICIAL -->
-            <div class="form-group col-sm-6">
-                <h5>ISV</h5>
-                <p>@money($proposal->initialBusinessStudy->isv)</p>
-            </div>
-
-            <!-- FINAL -->
-            <div class="form-group col-sm-6">
-                {!! Form::label('isv', 'ISV') !!}
-                {!! Form::text('isv', isset($proposal->finalBusinessStudy->isv) ? $proposal->finalBusinessStudy->isv : '', ['class' => 'form-control']) !!}
-            </div>
-
-            <!-- INICIAL -->
-            <div class="form-group col-sm-6">
-                <h5>IVA</h5>
-                <p>@money($proposal->initialBusinessStudy->iva)</p>
-            </div>
-
-            <!-- FINAL -->
-            <div class="form-group col-sm-6">
-                {!! Form::label('iva', 'IVA') !!}
-                {!! Form::text('iva', isset($proposal->finalBusinessStudy->iva) ? $proposal->finalBusinessStudy->iva : '', ['class' => 'form-control']) !!}
-            </div>
-
-            <!-- INICIAL -->
-            <div class="form-group col-sm-6">
-                <h5>Total</h5>
-                <p>@money($proposal->initialBusinessStudy->total)</p>
-            </div>
-
-            <!-- FINAL -->
-            <div class="form-group col-sm-6">
-                {!! Form::label('total', 'Total') !!}
-                {!! Form::text('total', isset($proposal->finalBusinessStudy->total) ? $proposal->finalBusinessStudy->total : '', ['class' => 'form-control']) !!}
-            </div>
-
-            <!-- INICIAL -->
-            <div class="form-group col-sm-6">
-                <h5>Venda</h5>
-                <p>@money($proposal->initialBusinessStudy->sell)</p>
-            </div>
-
-            <!-- FINAL -->
-            <div class="form-group col-sm-6">
-                {!! Form::label('sale', 'Venda') !!}
-                {!! Form::text('sale', isset($proposal->finalBusinessStudy->sale) ? $proposal->finalBusinessStudy->sale : '', ['class' => 'form-control']) !!}
-            </div>
-
-            <!-- INICIAL -->
-            <div class="form-group col-sm-6">
-                <h5>Valor de compra</h5>
-                <p>@money($proposal->initialBusinessStudy->purchase_price)</p>
-            </div>
-
-            <!-- FINAL -->
-            <div class="form-group col-sm-6">
-                {!! Form::label('purchase_price', 'Valor de compra') !!}
-                {!! Form::text('purchase_price', isset($proposal->finalBusinessStudy->purchase_price) ? $proposal->finalBusinessStudy->purchase_price : '', ['class' => 'form-control']) !!}
-            </div>
-
-            <!-- INICIAL -->
-            <div class="form-group col-sm-6">
-                <h5>Valor de venda</h5>
-                <p>@money($proposal->initialBusinessStudy->selling_price)</p>
-            </div>
-
-            <!-- FINAL -->
-            <div class="form-group col-sm-6">
-                {!! Form::label('purchase_price', 'Valor de compra') !!}
-                {!! Form::text('purchase_price', isset($proposal->finalBusinessStudy->purchase_price) ? $proposal->finalBusinessStudy->purchase_price : '', ['class' => 'form-control']) !!}
-            </div>
-
-            <!-- INICIAL -->
-            <div class="form-group col-sm-6">
-                <h5>Diferença de retoma</h5>
-                <p>@money($proposal->initialBusinessStudy->total_diff_amount)</p>
-            </div>
-
-            <!-- FINAL -->
-            <div class="form-group col-sm-6">
-                {!! Form::label('total_diff_amount', 'Diferença da retoma') !!}
-                {!! Form::text('total_diff_amount', isset($proposal->finalBusinessStudy->total_diff_amount) ? $proposal->finalBusinessStudy->total_diff_amount : '', ['class' => 'form-control']) !!}
-            </div>
-
-            <!-- INICIAL -->
-            <div class="form-group col-sm-6">
-                <h5>Valor a liquidar</h5>
-                <p>@money($proposal->initialBusinessStudy->settle_amount)</p>
-            </div>
-
-            <!-- FINAL -->
-            <div class="form-group col-sm-6">
-                {!! Form::label('settle_amount', 'Valor a liquidar') !!}
-                {!! Form::text('settle_amount', isset($proposal->finalBusinessStudy->settle_amount) ? $proposal->finalBusinessStudy->settle_amount : '', ['class' => 'form-control']) !!}
-            </div>
-
-            <!-- Proposal Number Field -->
-            <!-- <div class="form-group col-sm-4">
-                {!! Form::label('pos_number', 'Nº da proposta') !!}
-                {!! Form::text('pos_number', isset($proposal->pos_number) ? $proposal->pos_number : '', ['class' => 'form-control', 'disabled']) !!}
-            </div> -->
-
-        </div>
-        <div class="card-footer">
-            {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
-            <a href="{{ route('proposals.index') }}" class="btn btn-default">{{ __('Cancel') }}</a>
-        </div>
-
-        {!! Form::close() !!}
     </div>
 </div>
