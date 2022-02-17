@@ -9,8 +9,9 @@ use App\Http\Controllers\BenefitController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\FinancingController;
-use App\Http\Controllers\BusinessStudyAuthorizationController;
+use App\Http\Controllers\WebNotificationController;
 use App\Http\Controllers\DataTableAjaxCRUDController;
+use App\Http\Controllers\BusinessStudyAuthorizationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -180,8 +181,8 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
         return new App\Mail\ProposalApproval($proposal);
     });
 
-     //Notificação retoma para validação
-     Route::get('/mailable4', function () {
+    //Notificação retoma para validação
+    Route::get('/mailable4', function () {
         $proposal = App\Models\Proposal::find(890);
 
         return new App\Mail\TradeInApproval($proposal);
@@ -193,8 +194,15 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
     Route::post('edit-car', [CarController::class, 'editNewCars']);
     Route::post('delete-car', [CarController::class, 'destroyNewCars']);
 
-
     Route::PATCH('/businessAuthaction/{id}', [App\Http\Controllers\BusinessStudyController::class, 'businessAuth'])->name('businessAuthaction');
+
+    //Push Web Notifications
+    Route::get('/push-notification', [WebNotificationController::class, 'index'])->name('push-notification');
+    Route::get('/allow', function () {
+        return view('notifications.allow');
+    });
+    Route::post('/store-token', [WebNotificationController::class, 'storeToken'])->name('store.token');
+    Route::post('/send-web-notification', [WebNotificationController::class, 'sendWebNotification'])->name('send.web-notification');
 });
 
 

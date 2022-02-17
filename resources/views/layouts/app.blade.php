@@ -9,7 +9,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
 
-     <!-- Fonts -->
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
 
     <!-- Font Awesome -->
@@ -51,9 +51,9 @@
 
     @stack('page_css')
 
-<p class="alert alert-danger text-center" role="alert">
-  Sistema em versão de teste
-</p>
+    <p class="alert alert-danger text-center" role="alert">
+        Sistema em versão de teste
+    </p>
 
 </head>
 
@@ -68,10 +68,6 @@
                             class="fas fa-bars"></i></a>
                 </li>
             </ul>
-
-
-
-
 
             <ul class="navbar-nav ml-auto">
 
@@ -97,7 +93,8 @@
 
                 <div class="nav-item dropdown user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                        <img src="{{ asset('storage/logo.png') }}" class="logoImg brand-image elevation-2" alt="Finiclasse Logo">
+                        <img src="{{ asset('storage/logo.png') }}" class="logoImg brand-image elevation-2"
+                            alt="Finiclasse Logo">
 
                     </a>
                 </div>
@@ -120,7 +117,7 @@
                 <b>Version</b> 1.0
             </div>
             <strong>Copyright &copy; 2021
-                 <!-- <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved. -->
+                <!-- <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved. -->
         </footer>
     </div>
 
@@ -170,6 +167,9 @@
     </script>
 
     <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-messaging.js"></script>
+    <script src="{{ URL::asset('js/main.js') }}"></script>
     <!-- <script src="{{ mix('js/app.js') }}" defer></script> -->
 
     <script>
