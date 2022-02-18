@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Repositories\StandRepository;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Auth\Events\Registered;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\ClientTypeRepository;
@@ -102,10 +103,8 @@ class UserController extends AppBaseController
         $input = $request->all();
 
         if($validator->fails()) {
-
             Flash::error($validator->errors());
             return redirect(route('users.index'));
-  
         }
 
         $url = Route::currentRouteName();
@@ -115,16 +114,14 @@ class UserController extends AppBaseController
         } elseif ($url == 'sellers.store') {
             $user = $this->userRepository->create($input)->assignRole('Vendedor');
         }
+
+        //Event for Notification
+        event(new Registered($user));
         
         //atribuir lead user a vendedor
         if($request->vendor_id){
-
             $user->vendor()->attach($request->vendor_id);
-        
          }
-
-
-        // $user = $this->userRepository->create($input);
 
         if ($user->gdpr_type == "email") {
             Mail::send(new ValidateRGPD($user));

@@ -70,24 +70,31 @@
             </ul>
 
             <ul class="navbar-nav ml-auto">
-
-                <!-- <i class="fas fa-bell"></i> -->
                 <!-- Notifications: style can be found in dropdown.less -->
+
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge">1</span>
+                        <span
+                            class="badge badge-warning navbar-badge">{{ Auth::user()->unreadNotifications()->count() }}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">1 Notificação</span>
+                        @role('admin')
+                            @forelse($notifications as $notification)
+                                <div class="dropdown-divider"></div>
+                                <a href="{{ route('users.show', $notification->data['id']) }}" class="dropdown-item dropNotification">
+                                    <i class="fas fa-users mr-2"></i> {{ $notification->data['name'] }}
+                                    <span class="float-right text-muted text-sm">{{ $notification->created_at }}</span>
+                                </a>
+                            @empty
+                                <div class="dropdown-divider"></div>
+                                <div class="dropdown-item" style="text-align: center;">
+                                    <p>Sem novas notificações</p>
+                                </div>
+                            @endforelse
+                        @endrole
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-car mr-2"></i> 1 Retoma
-                            <span class="float-right text-muted text-sm">3 mins</span>
-                        </a>
-
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                        <a href="#" class="dropdown-item dropdown-footer">Ver todas as notificações</a>
                     </div>
                 </li>
 
@@ -95,7 +102,6 @@
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         <img src="{{ asset('storage/logo.png') }}" class="logoImg brand-image elevation-2"
                             alt="Finiclasse Logo">
-
                     </a>
                 </div>
             </ul>

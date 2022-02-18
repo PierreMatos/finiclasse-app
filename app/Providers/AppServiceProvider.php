@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Providers;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -38,6 +39,14 @@ class AppServiceProvider extends ServiceProvider
         // Blade money directive
         Blade::directive('money', function ($amount) {
             return "<?php echo number_format($amount, 2).' €'; ?>";
+        });
+
+        View::composer('*', function ($view) {
+            if(auth()->user()) {
+                $view->with('notifications', auth()->user()->unreadNotifications);
+            } else {
+                
+            }
         });
     }
 }

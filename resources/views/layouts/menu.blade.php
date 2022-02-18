@@ -75,7 +75,7 @@
 <!-- TODO criar role para ver clientes e vendedores -->
 @can('users.index')
     <li class="treeview">
-        <a href="{{ route('getClients') }}" class="nav-link {{ Request::is('clients-list*') ? 'active' : '' }}">
+        <a href="{{ route('getClients') }}" class="nav-link {{ Request::is('clients-list*', 'users*') ? 'active' : '' }}">
             <i class="fas fa-users"></i>
             <p>Clientes</p>
         </a>
@@ -84,7 +84,7 @@
 
 @can('users.index')
     <li class="treeview">
-        <a href="{{ route('getSellers') }}" class="nav-link {{ Request::is('sellers-list*') ? 'active' : '' }}">
+        <a href="{{ route('getSellers') }}" class="nav-link {{ Request::is('sellers-list*', 'sellers*') ? 'active' : '' }}">
             <i class="fas fa-user-tie"></i>
             <p>Vendedores</p>
         </a>
@@ -111,9 +111,9 @@
 
 @if (Auth::user()->hasRole(['admin', 'Administrador', 'Diretor comercial']))
     <li
-        class="treeview nav-item {{ !Request::is('/*','proposals*','financings*','campaigns*','benefits*','cars*','new*','clients-list*','sellers-list*','push-notification*')? 'menu-open': '' }} has-treeview">
+        class="treeview nav-item {{ !Request::is('/*','proposals*','financings*','campaigns*','benefits*','cars*','new*','clients-list*','sellers-list*','push-notification*','users*','sellers*')? 'menu-open': '' }} has-treeview">
         <a href="#"
-            class="nav-link {{ !Request::is('/*','proposals*','financings*','campaigns*','benefits*','cars*','new*','clients-list*','sellers-list*','push-notification*')? 'menuDropActive': '' }}"
+            class="nav-link {{ !Request::is('/*','proposals*','financings*','campaigns*','benefits*','cars*','new*','clients-list*','sellers-list*','push-notification','users*','sellers*')? 'menuDropActive': '' }}"
             id="definicoes">
             <i class="fa fa-cog"></i>
             <p>

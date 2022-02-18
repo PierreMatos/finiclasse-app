@@ -207,3 +207,16 @@ div.dataTables_wrapper div.dataTables_filter input {
 .bg-inputFile {
     background-color: #E9ECEF !important;
 }
+
+.dropNotification {
+    cursor: pointer;
+}
+
+.dropNotification:active {
+    color: inherit;
+    background-color: inherit;
+}
+
+.dropdown-menu-lg {
+    min-width: 400px;
+}
