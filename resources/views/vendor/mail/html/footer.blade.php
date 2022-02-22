@@ -30,11 +30,6 @@
                 <td>F. 271 093 032</td>
             </tr>
             <tr>
-                <td>Centro comercial Moctezuma</td>
-                <td>Francisco Chang</td>
-                <td>Mexico</td>
-            </tr>
-            <tr>
                 <td>viseu@finiclasse.pt</td>
                 <td>guarda@finiclasse.pt</td>
                 <td>seat@finiclasse.pt</td>
