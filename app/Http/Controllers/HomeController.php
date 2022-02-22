@@ -8,6 +8,7 @@ use App\Models\Car;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\UserRepository;
+use App\Repositories\ProposalRepository;
 
 
 
@@ -16,15 +17,17 @@ class HomeController extends Controller
 {
      /** @var  UserRepository */
      private $userRepository;
+     private $proposalRepository;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(UserRepository $userRepo)
+    public function __construct(UserRepository $userRepo, ProposalRepository $proposalRepo)
     {
         $this->userRepository = $userRepo;
+        $this->proposalRepository = $proposalRepo;
 
         $this->middleware('auth');
     }
@@ -54,7 +57,8 @@ class HomeController extends Controller
         }
 
         // Ultimas propostas
-        $latestProposals = Proposal::latest()->where('car_id', '!=', null)->take(5)->get();
+        // $latestProposals = Proposal::latest()->where('car_id', '!=', null)->take(5)->get();
+        $latestProposals = $this->proposalRepository->getProposalsByRole(Auth::user())->where('car_id', '!=', null)->take(5);
 
         return view('home')
             ->with('carsCount', $carsCount)
