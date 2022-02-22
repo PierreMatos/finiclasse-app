@@ -84,25 +84,25 @@
             <!-- Price Field -->
             <div class="form-group col-sm-3">
                 {!! Form::label('price', 'Preço') !!}
-                {!! Form::number('price', isset($car->price) ? number_format($car->price,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
+                {!! Form::number('price', isset($car->price) ? $car->price : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
 
             <!-- Price Base Field -->
             <div class="form-group col-sm-3">
                 {!! Form::label('price_base', 'Preço base') !!}
-                {!! Form::number('price_base', isset($car->price_base) ? number_format($car->price_base,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
+                {!! Form::number('price_base', isset($car->price_base) ? $car->price_base : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
 
             <!-- Price Campaign Field -->
             <div class="form-group col-sm-3">
                 {!! Form::label('order_date', 'Preço de campanha') !!}
-                {!! Form::number('order_date', isset($car->price_campaign) ? number_format($car->price_campaign,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
+                {!! Form::number('order_date', isset($car->price_campaign) ? $car->price_campaign : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
 
             <!-- IVA -->
             <div class="form-group col-sm-3">
                 {!! Form::label('iva', 'IVA') !!}
-                {!! Form::number('iva', isset($car->iva) ? number_format($car->iva,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
+                {!! Form::number('iva', isset($car->iva) ? $car->iva : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
 
             <!-- ISV -->
@@ -114,13 +114,13 @@
             <!-- Total Extras -->
             <div class="form-group col-sm-3">
                 {!! Form::label('total_extras', 'Total extras') !!}
-                {!! Form::number('total_extras', isset($car->total_extras) ? number_format($car->total_extras,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
+                {!! Form::number('total_extras', isset($car->total_extras) ? $car->total_extras : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
 
             <!-- Sub total -->
             <div class="form-group col-sm-3">
                 {!! Form::label('sub_total', 'Sub total') !!}
-                {!! Form::number('sub_total', isset($car->sub_total) ? number_format($car->sub_total,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
+                {!! Form::number('sub_total', isset($car->sub_total) ? $car->sub_total : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
 
             <!-- Order Date Field -->
@@ -156,19 +156,19 @@
             <!-- Tradein Purchase Field -->
             <div class="form-group col-sm-3">
                 {!! Form::label('tradein_purchase', 'Preço compra de retoma') !!}
-                {!! Form::number('tradein_purchase', isset($car->tradein_purchase) ? number_format($car->tradein_purchase,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
+                {!! Form::number('tradein_purchase', isset($car->tradein_purchase) ? $car->tradein_purchase : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
 
             <!-- Tradein Sale Field -->
             <div class="form-group col-md-3">
                 {!! Form::label('tradein_sale', 'Preço venda de retoma') !!}
-                {!! Form::number('tradein_sale', isset($car->tradein_sale) ? number_format($car->tradein_sale,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
+                {!! Form::number('tradein_sale', isset($car->tradein_sale) ? $car->tradein_sale : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
 
             <!-- Price New Field -->
             <div class="form-group col-md-3">
                 {!! Form::label('price_new', 'Preço em novo') !!}
-                {!! Form::number('price_new', isset($car->price_new) ? number_format($car->price_new,2).' €' : '', ['class' => 'form-control', 'disabled']) !!}
+                {!! Form::number('price_new', isset($car->price_new) ? $car->price_new : '', ['class' => 'form-control', 'disabled']) !!}
             </div>
 
             <div class="col-md-3">

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddMoreFieldsToCars extends Migration
+class AddDocumentToFinancingProposals extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,7 @@ class AddMoreFieldsToCars extends Migration
      */
     public function up()
     {
-        Schema::table('cars', function (Blueprint $table) {
-            $table->decimal('expenses', 13, 2)->nullable();
-            $table->decimal('warranty',13,2)->nullable();
-            $table->decimal('taxes',13,2)->nullable();
-            $table->boolean('potencial_buyer')->nullable();
+        Schema::table('financing_proposals', function (Blueprint $table) {
             
         });
     }
@@ -29,7 +25,7 @@ class AddMoreFieldsToCars extends Migration
      */
     public function down()
     {
-        Schema::table('cars', function (Blueprint $table) {
+        Schema::table('financing_proposals', function (Blueprint $table) {
             //
         });
     }

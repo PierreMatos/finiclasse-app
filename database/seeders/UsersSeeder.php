@@ -205,6 +205,18 @@ class UsersSeeder extends Seeder
                 'finiclasse_employee' => 1,
                 'created_at' => '2018-08-14 17:06:28',
                 'updated_at' => '2019-09-25 22:09:35',
+            ),
+            18 => 
+            array (
+                'id' => 19,
+                'name' => 'Pedro Liberato',
+                'email' => 'liberato.p@finiclasse.pt',
+                'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
+                'remember_token' => '5nysjzVKI4LU92bjRqMUSYdOaIo1EcPC3pIMb6Tcj2KXSUMriGrIQ1iwRdd0',
+                'stand_id' => 2,
+                'finiclasse_employee' => 1,
+                'created_at' => '2018-08-14 17:06:28',
+                'updated_at' => '2019-09-25 22:09:35',
             )
 
         ));
