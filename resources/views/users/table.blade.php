@@ -36,7 +36,7 @@
         </tbody>
     </table>
 </div>
-<div class="d-flex">
-    <div class="tableCaption notValidated"></div>GDPR not validated 
-    <div class="tableCaption validated ml-5"></div> GDPR validated
+<div class="d-flex" style="padding: 30px 0px 0px 0px; justify-content: center;">
+    <div class="tableCaption notValidated"></div><div class="ml-2">GDPR não validado</div>
+    <div class="tableCaption validated ml-5"></div><div class="ml-2">GDPR validado</div>
 </div>

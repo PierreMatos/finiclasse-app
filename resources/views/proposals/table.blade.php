@@ -40,3 +40,8 @@
         </tbody>
     </table>
 </div>
+<div class="d-flex" style="padding: 30px 0px 0px 0px; justify-content: center;">
+   @foreach($states as $state) 
+    <div class="tableCaption ml-5" style="background-color: {{ $state->color }}"></div><div class="ml-2">{{ $state->name }}</div>
+   @endforeach
+</div>

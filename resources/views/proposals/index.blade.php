@@ -74,6 +74,7 @@
                             table.button(2).active(false);
                             table.button(3).active(false);
                             table.button(4).active(false);
+                            table.button(5).active(false);
                             this.active(true);
                         }
                     },
@@ -86,6 +87,7 @@
                             table.button(2).active(false);
                             table.button(3).active(false);
                             table.button(4).active(false);
+                            table.button(5).active(false);
                             this.active(true);
                         }
                     },
@@ -98,6 +100,7 @@
                             table.button(1).active(false);
                             table.button(3).active(false);
                             table.button(4).active(false);
+                            table.button(5).active(false);
                             this.active(true);
                         }
                     },
@@ -110,6 +113,7 @@
                             table.button(1).active(false);
                             table.button(2).active(false);
                             table.button(4).active(false);
+                            table.button(5).active(false);
                             this.active(true);
                         }
                     },
@@ -122,6 +126,20 @@
                             table.button(1).active(false);
                             table.button(2).active(false);
                             table.button(3).active(false);
+                            table.button(5).active(false);
+                            this.active(true);
+                        }
+                    },
+                    {
+                        text: 'Partilhado',
+                        className: 'btn-shared',
+                        action: function() {
+                            table.search('Partilhado').draw();
+                            table.button(0).active(false);
+                            table.button(1).active(false);
+                            table.button(2).active(false);
+                            table.button(3).active(false);
+                            table.button(4).active(false);
                             this.active(true);
                         }
                     }
