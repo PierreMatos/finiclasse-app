@@ -9,6 +9,7 @@ use App\Http\Controllers\BenefitController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\FinancingController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\WebNotificationController;
 use App\Http\Controllers\DataTableAjaxCRUDController;
 use App\Http\Controllers\BusinessStudyAuthorizationController;
@@ -69,6 +70,7 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
     Route::resource('financings', App\Http\Controllers\FinancingController::class);
 
     Route::resource('financingProposals', App\Http\Controllers\FinancingProposalController::class);
+    Route::post('/financing-remove', [App\Http\Controllers\FinancingProposalController::class, 'remove'])->name('financing.remove');
 
     Route::resource('carFuels', App\Http\Controllers\CarFuelController::class);
 
@@ -203,6 +205,9 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
     });
     Route::post('/store-token', [WebNotificationController::class, 'storeToken'])->name('store.token');
     Route::post('/send-web-notification', [WebNotificationController::class, 'sendWebNotification'])->name('send.web-notification');
+
+    // Notifications
+    Route::post('/mark-as-read', [NotificationController::class, 'markNotification'])->name('markNotification');
 });
 
 

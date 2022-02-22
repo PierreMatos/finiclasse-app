@@ -108,17 +108,17 @@ class FinancingProposalController extends AppBaseController
             }
         }
 
-            $abc=(FinancingProposal::where('proposal_id', $inputs['proposal_id'])->get());
-            $def= FinancingProposal::where('proposal_id', $inputs['proposal_id'])->whereIn('financing_id', $inputs['checked'])->get();
+            // $abc=(FinancingProposal::where('proposal_id', $inputs['proposal_id'])->get());
+            // $def= FinancingProposal::where('proposal_id', $inputs['proposal_id'])->whereIn('financing_id', $inputs['checked'])->get();
 
-            $dels = $abc->diff(FinancingProposal::whereIn('financing_id', $inputs['checked'])->get());
-            // dd($dels);
-            foreach($dels as $del){
-                // dd($del->id);
-                $deletedRows = $this->financingProposalRepository->find($del->id)->forceDelete();
-            //     $deletedRows = FinancingProposal::where('proposal_id', $inputs['proposal_id'])
-            // ->where('financing_id', $inputs['financing_id'])->forceDelete();
-            }
+            // $dels = $abc->diff(FinancingProposal::whereIn('financing_id', $inputs['checked'])->get());
+            // // dd($dels);
+            // foreach($dels as $del){
+            //     // dd($del->id);
+            //     $deletedRows = $this->financingProposalRepository->find($del->id)->forceDelete();
+            // //     $deletedRows = FinancingProposal::where('proposal_id', $inputs['proposal_id'])
+            // // ->where('financing_id', $inputs['financing_id'])->forceDelete();
+            // }
         // }
 
         Flash::success('Financing Proposal saved successfully.');
@@ -200,18 +200,13 @@ class FinancingProposalController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($id)
+
+    public function remove(Request $request)
     {
-        $financingProposal = $this->financingProposalRepository->find($id);
+        $id = $request->input('id');
 
-        if (empty($financingProposal)) {
-            Flash::error('Financing Proposal not found');
-
-            return redirect(route('financingProposals.index'));
-        }
-
-        // $this->financingProposalRepository->delete($id);
-
+        $financingProposal = FinancingProposal::findOrFail($id);
+        $financingProposal->delete();
         $financingProposal->clearMediaCollection('financingproposal','s3');
 
         Flash::success('Financing Proposal deleted successfully.');

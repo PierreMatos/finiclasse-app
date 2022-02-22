@@ -3,11 +3,9 @@
 namespace App\Models;
 
 use Eloquent as Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * Class FinancingProposal
@@ -25,16 +23,10 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 class FinancingProposal extends Model implements HasMedia
 {
-    use SoftDeletes;
     use InteractsWithMedia;
     use HasFactory;
 
     public $table = 'financing_proposals';
-    
-
-    protected $dates = ['deleted_at'];
-
-
 
     public $fillable = [
         'financing_id',
