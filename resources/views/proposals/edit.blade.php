@@ -32,15 +32,18 @@
             </li>
             <li class="nav-item" role="presentation">
 
-                @if (isset($proposal->tradein) && $proposal->tradein->state_id == 7)
+            @if (isset($proposal->tradein))
 
-                    <a class="nav-link badge-warning" id="tradein-tab" data-toggle="tab" href="#tradeins" role="tab"
-                        aria-controls="tradein" aria-selected="false">{{ __('Tradein') }}</a>
+                <a class="nav-link" id="tradein-tab" data-toggle="tab" href="#tradeins" role="tab" aria-controls="tradein" aria-selected="false">{{ __('Tradein') }}</a>
 
-                @else
+                    @if ($proposal->tradein->state_id == 7)
+                    
+                    <a class="nav-link badge-warning" id="tradein-tab" data-toggle="tab" href="#tradeins" role="tab" aria-controls="tradein" aria-selected="false">{{ __('Tradein') }}</a>
 
-                    <a class="nav-link disabled" id="tradein-tab" data-toggle="tab" href="#tradeins" role="tab"
-                        aria-controls="tradein" aria-selected="false">{{ __('Tradein') }}</a>
+                    @endif
+
+            @else
+                    <a class="nav-link disabled" id="tradein-tab" data-toggle="tab" href="#tradeins" role="tab" aria-controls="tradein" aria-selected="false">{{ __('Tradein') }}</a>
 
                 @endif
 
