@@ -6,12 +6,11 @@ use Flash;
 use Response;
 use App\Models\Car;
 use App\Models\CarModel;
+use App\Providers\NewCar;
 use Illuminate\Http\Request;
 use App\Repositories\CarRepository;
-use Illuminate\Support\Facades\Log;
 use App\Repositories\MakeRepository;
 use App\Repositories\StandRepository;
-use Illuminate\Support\Facades\Route;
 use App\Http\Requests\CreateCarRequest;
 use App\Http\Requests\UpdateCarRequest;
 use App\Repositories\CarFuelRepository;
@@ -175,6 +174,9 @@ class CarController extends AppBaseController
 
                 });
         }
+
+        //Event notification
+        event(new NewCar($car)); 
 
         Flash::success(__('translation.car saved'));
 
@@ -442,6 +444,9 @@ class CarController extends AppBaseController
                     'condition_id' => 1,
                 ]
             );
+
+            //Event notification
+            event(new NewCar($car)); 
 
             return Response()->json($car);
         }

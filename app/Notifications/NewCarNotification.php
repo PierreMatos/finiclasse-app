@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewUserNotification extends Notification
+class NewCarNotification extends Notification
 {
     use Queueable;
 
@@ -16,9 +16,9 @@ class NewUserNotification extends Notification
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($car)
     {
-        $this->user = $user;
+        $this->car = $car;
     }
 
     /**
@@ -55,10 +55,10 @@ class NewUserNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' => $this->user->id,
-            'link' => 'users.show',
-            'icon' => 'fas fa-users mr-2', 
-            'text' => $this->user->name,
+            'id' => $this->car->id,
+            'link' => 'cars.show',
+            'icon' => 'fas fa-car mr-2', 
+            'text' => 'Adicionado ' . $this->car->model->make->name . ' ' . $this->car->model->name,
         ];
     }
 }
