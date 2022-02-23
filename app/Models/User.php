@@ -162,7 +162,7 @@ class User extends Authenticatable implements JWTSubject, HasMedia
      */
     public function vendor()
     {
-        return $this->belongsToMany(User::class, 'leads_users', 'client_id', 'vendor_id');
+        return $this->belongsToMany(User::class, 'leads_users', 'client_id', 'vendor_id', 'id');
     }
 
     /**

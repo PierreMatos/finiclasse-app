@@ -4,11 +4,11 @@ namespace App\Listeners;
 
 use App\Models\User;
 use Illuminate\Queue\InteractsWithQueue;
-use App\Notifications\NewUserNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Notification;
+use App\Notifications\NewClosedProposalNotification;
 
-class SendNewUserNotification
+class SendClosedProposalNotification
 {
     /**
      * Create the event listener.
@@ -32,8 +32,8 @@ class SendNewUserNotification
             $query->where('id', 85)->orWhere('id', 86);
         })->orWhereHas('roles', function ($query) {
             $query->where('id', 87);
-        })->where('stand_id', $event->user->stand_id)->get();
+        })->where('stand_id', $event->proposal->vendor->stand_id)->get();
 
-        Notification::send($adminsAndDirectorsAndChefeByStand, new NewUserNotification($event->user));
+        Notification::send($adminsAndDirectorsAndChefeByStand, new NewClosedProposalNotification($event->proposal));
     }
 }

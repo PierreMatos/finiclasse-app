@@ -6,7 +6,7 @@
             <i class="far fa-bell"></i>
             <span class="badge badge-warning navbar-badge">{{ Auth::user()->unreadNotifications()->count() }}</span>
         </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right notificationMenu">
             @forelse($notifications as $notification)
                 <div class="dropdown-divider"></div>
                 <a href="{{ route($notification->data['link'], $notification->data['id']) }}"

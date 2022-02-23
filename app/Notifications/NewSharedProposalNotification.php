@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewUserNotification extends Notification
+class NewSharedProposalNotification extends Notification
 {
     use Queueable;
 
@@ -16,9 +16,9 @@ class NewUserNotification extends Notification
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($proposal)
     {
-        $this->user = $user;
+        $this->proposal = $proposal;
     }
 
     /**
@@ -55,10 +55,10 @@ class NewUserNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' => $this->user->id,
-            'link' => 'users.show',
-            'icon' => 'fas fa-users mr-2',
-            'text' => 'Novo cliente por ' . $this->user->vendor->first()->name,
+            'id' => $this->proposal->id,
+            'link' => 'proposals.edit',
+            'icon' => 'fas fa-file-contract mr-2', 
+            'text' => 'Nova proposta de ' . $this->proposal->vendor->name,
         ];
     }
 }

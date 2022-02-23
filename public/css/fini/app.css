@@ -217,6 +217,11 @@ div.dataTables_wrapper div.dataTables_filter input {
     background-color: inherit;
 }
 
-.dropdown-menu-lg {
-    min-width: 400px;
+.notificationMenu {
+    min-width: 450px;
+}
+
+.logoutMenu {
+    transform: translate3d(0px, 56px, 0px) !important;
+    min-width: 250px !important;
 }

@@ -86,10 +86,10 @@ class UserAPIController extends AppBaseController
 
         $user = $this->userRepository->create($input);
 
+        $user->vendor()->attach($request->vendor_id);
+
         //Event for Notification
         event(new Registered($user));
-
-        $user->vendor()->attach($request->vendor_id);
 
         return $this->sendResponse(new UserResource($user), 'User saved successfully')->setStatusCode(201);
     }

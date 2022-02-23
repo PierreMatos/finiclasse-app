@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Repositories\StandRepository;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Auth\Events\Registered;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\ClientTypeRepository;
@@ -114,9 +113,6 @@ class UserController extends AppBaseController
         } elseif ($url == 'sellers.store') {
             $user = $this->userRepository->create($input)->assignRole('Vendedor');
         }
-
-        //Event for Notification
-        event(new Registered($user));
         
         //atribuir lead user a vendedor
         if($request->vendor_id){
