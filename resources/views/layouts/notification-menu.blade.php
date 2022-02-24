@@ -21,8 +21,8 @@
                     <p>Sem novas notificações</p>
                 </div>
             @endforelse
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item dropdown-footer">Ver todas as notificações</a>
+            {{-- <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item dropdown-footer">Ver todas as notificações</a> --}}
         </div>
     </li>
 

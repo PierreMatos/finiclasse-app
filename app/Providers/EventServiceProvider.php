@@ -3,10 +3,12 @@
 namespace App\Providers;
 
 use App\Providers\NewCar;
+use App\Providers\NewLead;
 use App\Providers\ClosedProposal;
 use App\Providers\SharedProposal;
 use Illuminate\Auth\Events\Registered;
 use App\Listeners\SendNewCarNotification;
+use App\Listeners\SendNewLeadNotification;
 use App\Listeners\SendNewUserNotification;
 use App\Listeners\SendClosedProposalNotification;
 use App\Listeners\SendSharedProposalNotification;
@@ -33,6 +35,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ClosedProposal::class => [
             SendClosedProposalNotification::class
+        ],
+        NewLead::class => [
+            SendNewLeadNotification::class
         ],
     ];
 
