@@ -13,15 +13,18 @@
             <td style="padding: 0px;"><img src="{{ asset($proposal->car->getFirstMediaUrl('cars'))}}" /></td>
         </tr>
         <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
-            <td style="padding: 10px;">Marca: <b>SEAT</b></td>
-            <td style="padding: 10px;">Modelo: <b>Ibiza</b></td>
+            <td style="padding: 10px;">Marca: <b>{{ $proposal->tradein->model->make->name }}</b></td>
+            <td style="padding: 10px;">Modelo: <b>{{ $proposal->tradein->model->name }}</b></td>
         </tr>
         <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
-            <td style="padding: 10px;">Km: <b>100.000</b></td>
-            <td style="padding: 10px;">Ano/mês: <b>12/2002</b></td>
+            <td style="padding: 10px;">Km: <b>{{ $proposal->tradein->km }}</b></td>
+            <td style="padding: 10px;">Ano/mês: <b>{{ $proposal->tradein->registration->isoFormat('M/Y') }}</b></td>
         </tr>
         <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
-            <td style="padding: 10px;">Valor: <b>12.000.00 €</b></td>
+            <td style="padding: 10px;"> Valor de compra: <b>@money($proposal->tradein->tradein_purchase)</b></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
+            <td style="padding: 10px;">Valor de venda: <b>@money($proposal->tradein->tradein_sale)</b></td>
         </tr>
     </table>
 @endcomponent

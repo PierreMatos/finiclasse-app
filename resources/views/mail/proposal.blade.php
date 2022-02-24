@@ -62,7 +62,7 @@
             </tr>
             <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
                 <td style="padding: 10px;">Km: <b>{{$proposal->tradein->km}}</b></td>
-                <td style="padding: 10px;">Ano/mês: <b>{{$proposal->tradein->registration}}</b></td>
+                <td style="padding: 10px;">Ano/mês: <b>{{$proposal->tradein->registration->isoFormat('M/Y')}}</b></td>
             </tr>
             <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
                 <td style="padding: 10px;">Valor: <b>{{$proposal->tradein->tradein_purchase}}</b></td>
