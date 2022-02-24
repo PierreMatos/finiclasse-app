@@ -14,7 +14,7 @@
         <i class="brand-image mt-2 elevation-2 fas fa-user-circle"></i>
         <span class="brand-text d-none d-md-inline">{{ isset(Auth::user()->name) ? Auth::user()->name : '' }}</span>
     </a>
-    <ul class="dropdown-menu dropdown-menu-lg">
+    <ul class="dropdown-menu dropdown-menu-lg logoutMenu">
         <!-- Menu Footer-->
         <li class="user-footer" style="text-align: center; display: grid;">
             <!-- <a href="#" class="btn btn-default btn-flat">Perfil</a> -->

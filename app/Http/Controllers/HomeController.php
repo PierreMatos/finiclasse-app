@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Repositories\UserRepository;
 use App\Repositories\ProposalRepository;
 
-
-
-
 class HomeController extends Controller
 {
      /** @var  UserRepository */
@@ -39,7 +36,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         $carsCount = Car::count();
         // $clientsCount = User::where('finiclasse_employee', '==', '0')->count();
         $user = Auth::user();

@@ -75,7 +75,7 @@
 <!-- TODO criar role para ver clientes e vendedores -->
 @can('users.index')
     <li class="treeview">
-        <a href="{{ route('getClients') }}" class="nav-link {{ Request::is('clients-list*') ? 'active' : '' }}">
+        <a href="{{ route('getClients') }}" class="nav-link {{ Request::is('clients-list*', 'users*') ? 'active' : '' }}">
             <i class="fas fa-users"></i>
             <p>Clientes</p>
         </a>
@@ -84,25 +84,37 @@
 
 @can('users.index')
     <li class="treeview">
-        <a href="{{ route('getSellers') }}" class="nav-link {{ Request::is('sellers-list*') ? 'active' : '' }}">
+        <a href="{{ route('getSellers') }}" class="nav-link {{ Request::is('sellers-list*', 'sellers*') ? 'active' : '' }}">
             <i class="fas fa-user-tie"></i>
             <p>Vendedores</p>
         </a>
     </li>
 @endcan
 
-
+@if (Auth::user()->hasRole(['admin', 'Administrador', 'Diretor comercial']))
     <li class="treeview">
-        <a href="https://www.myfiniclasse.pt/help-backoffice" target="_blank" class="nav-link {{ Request::is('help-backoffice*') ? 'active' : '' }}">
-        <i class="fas fa-question-circle"></i>
-            <p>Ajuda</p>
+        <a href="{{ route('push-notification') }}" class="nav-link {{ Request::is('push-notification*') ? 'active' : '' }}">
+            <i class="fas fa-bell"></i>
+            <p>Notificações</p>
         </a>
     </li>
+@endif
 
+
+<li class="treeview">
+    <a href="https://www.myfiniclasse.pt/help-backoffice" target="_blank"
+        class="nav-link {{ Request::is('help-backoffice*') ? 'active' : '' }}">
+        <i class="fas fa-question-circle"></i>
+        <p>Ajuda</p>
+    </a>
+</li>
 
 @if (Auth::user()->hasRole(['admin', 'Administrador', 'Diretor comercial']))
-    <li class="treeview nav-item {{ !Request::is('/*', 'proposals*', 'financings*', 'campaigns*', 'benefits*', 'cars*', 'new*', 'clients-list*', 'sellers-list*') ? 'menu-open' : '' }} has-treeview">
-        <a href="#" class="nav-link {{ !Request::is('/*', 'proposals*', 'financings*', 'campaigns*', 'benefits*', 'cars*', 'new*', 'clients-list*', 'sellers-list*') ? 'menuDropActive' : '' }}" id="viaturas"" id="definicoes">
+    <li
+        class="treeview nav-item {{ !Request::is('/*','proposals*','financings*','campaigns*','benefits*','cars*','new*','clients-list*','sellers-list*','push-notification*','users*','sellers*')? 'menu-open': '' }} has-treeview">
+        <a href="#"
+            class="nav-link {{ !Request::is('/*','proposals*','financings*','campaigns*','benefits*','cars*','new*','clients-list*','sellers-list*','push-notification','users*','sellers*')? 'menuDropActive': '' }}"
+            id="definicoes">
             <i class="fa fa-cog"></i>
             <p>
                 Definições
@@ -290,13 +302,13 @@
             @endcan
 
             @can('businessStudies.index')
-            <li class="treeview">
-                <a href="{{ route('businessStudyStates.index') }}"
-                class="nav-link {{ Request::is('businessStudyStates*') ? 'active' : '' }}">
-                <i class="fas fa-eye"></i>
-                <p>Business Study States</p>
-                </a>
-            </li>
+                <li class="treeview">
+                    <a href="{{ route('businessStudyStates.index') }}"
+                        class="nav-link {{ Request::is('businessStudyStates*') ? 'active' : '' }}">
+                        <i class="fas fa-eye"></i>
+                        <p>Business Study States</p>
+                    </a>
+                </li>
             @endcan
 
         </ul>
@@ -327,5 +339,3 @@
         });
     </script>
 @endpush
-
-

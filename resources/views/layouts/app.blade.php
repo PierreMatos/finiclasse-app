@@ -4,12 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ config('app.name') }}</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
-
-     <!-- Fonts -->
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
 
     <!-- Font Awesome -->
@@ -51,9 +50,9 @@
 
     @stack('page_css')
 
-<p class="alert alert-danger text-center" role="alert">
-  Sistema em versão de teste
-</p>
+    <p class="alert alert-danger text-center" role="alert">
+        Sistema em versão de teste
+    </p>
 
 </head>
 
@@ -69,39 +68,8 @@
                 </li>
             </ul>
 
-
-
-
-
-            <ul class="navbar-nav ml-auto">
-
-                <!-- <i class="fas fa-bell"></i> -->
-                <!-- Notifications: style can be found in dropdown.less -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge">1</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">1 Notificação</span>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-car mr-2"></i> 1 Retoma
-                            <span class="float-right text-muted text-sm">3 mins</span>
-                        </a>
-
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                    </div>
-                </li>
-
-                <div class="nav-item dropdown user-menu">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                        <img src="{{ asset('storage/logo.png') }}" class="logoImg brand-image elevation-2" alt="Finiclasse Logo">
-
-                    </a>
-                </div>
-            </ul>
+            <!-- Notification Menu -->
+            @include('layouts.notification-menu')
         </nav>
 
         <!-- Left side column. contains the logo and sidebar -->
@@ -120,7 +88,7 @@
                 <b>Version</b> 1.0
             </div>
             <strong>Copyright &copy; 2021
-                 <!-- <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved. -->
+                <!-- <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved. -->
         </footer>
     </div>
 
@@ -170,6 +138,9 @@
     </script>
 
     <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-messaging.js"></script>
+    <script src="{{ URL::asset('js/main.js') }}"></script>
     <!-- <script src="{{ mix('js/app.js') }}" defer></script> -->
 
     <script>

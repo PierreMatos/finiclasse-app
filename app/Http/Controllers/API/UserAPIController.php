@@ -14,6 +14,7 @@ use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\ClientResource;
+use Illuminate\Auth\Events\Registered;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\API\CreateUserAPIRequest;
@@ -83,22 +84,12 @@ class UserAPIController extends AppBaseController
             return $validator->errors()->toJson();
         }
 
-        // if ($request->hasFile('profile_picture') == null) {
-        //     //Passar a variable input sem colocar nova imagem
-        //     $input = $request->all();
-        //     $user = $this->userRepository->create($input);
-        // } else {
-        //     $input = $request->all();
-        //     $user = $this->userRepository->create($input);
-        //     // $financing->addMedia($document)->toMediaCollection('financings');
-        //     $profile_picture = $request->file('profile_picture');
-
-        //     $user->addMedia($profile_picture)->toMediaCollection('profile_picture', 's3');
-        // }
-
         $user = $this->userRepository->create($input);
 
         $user->vendor()->attach($request->vendor_id);
+
+        //Event for Notification
+        event(new Registered($user));
 
         return $this->sendResponse(new UserResource($user), 'User saved successfully')->setStatusCode(201);
     }

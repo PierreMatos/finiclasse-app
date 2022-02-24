@@ -2,29 +2,31 @@
 
 namespace App\Http\Controllers\API;
 
+use Response;
+use App\Models\Car;
+use App\Models\Proposal;
+use App\Mail\ProposalOrder;
+use Illuminate\Http\Request;
+use App\Mail\TradeInApproval;
+use App\Models\BusinessStudy;
+use App\Mail\ProposalApproval;
+use App\Providers\ClosedProposal;
+use App\Providers\SharedProposal;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\MessageBag;
+use App\Repositories\CarRepository;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Resources\ProposalResource;
+use App\Repositories\ProposalRepository;
+use \Illuminate\Support\Facades\Validator;
+use App\Http\Resources\ProposalCollection;
+use App\Models\BusinessStudyAuthorization;
+use App\Http\Controllers\AppBaseController;
+use App\Repositories\BusinessStudyRepository;
 use App\Http\Requests\API\CreateProposalAPIRequest;
 use App\Http\Requests\API\UpdateProposalAPIRequest;
-use App\Models\Proposal;
-use App\Models\Car;
-use App\Models\BusinessStudy;
-use App\Models\BusinessStudyAuthorization;
-use App\Repositories\ProposalRepository;
-use App\Repositories\BusinessStudyRepository;
-use App\Repositories\CarRepository;
 use App\Repositories\BusinessStudyAuthorizationRepository;
-use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use App\Http\Resources\ProposalResource;
-use App\Http\Resources\ProposalCollection;
-use Response;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\MessageBag;
-use \Illuminate\Support\Facades\Validator;
-USE App\Mail\ProposalOrder;
-USE App\Mail\ProposalApproval;
-USE App\Mail\TradeInApproval;
-use Illuminate\Support\Facades\Mail;
 
 
 /**
@@ -71,8 +73,8 @@ class ProposalAPIController extends AppBaseController
         //     $proposals = Proposal::simplePaginate($pages);
 
         // }
-        
-        
+
+
         // $proposals = $this->proposalRepository->all(
         //     $request->except(['skip', 'limit'])
         // );
@@ -80,7 +82,7 @@ class ProposalAPIController extends AppBaseController
         $proposals = $this->proposalRepository->getProposalsByVendor(Auth::id());
 
 
-        return(new ProposalCollection($proposals));
+        return (new ProposalCollection($proposals));
         // this is working
         // return new ProposalCollection(Proposal::paginate());
 
@@ -107,19 +109,19 @@ class ProposalAPIController extends AppBaseController
     public function store(Request $request)
     {
 
-        
+
         $validator = Validator::make($request->all(), [
             'vendor_id' => 'required',
         ]);
-        
-        if($validator->fails()){
-            
+
+        if ($validator->fails()) {
+
             return $validator->errors()->toJson();
         }
 
         // if (proposta completa) {
-            // authorization($input->id);
-            // }
+        // authorization($input->id);
+        // }
 
         $initialBusinessStudy = new BusinessStudy();
         $initialBusinessStudy->save();
@@ -172,23 +174,21 @@ class ProposalAPIController extends AppBaseController
 
         /** @var Proposal $proposal */
         $proposal = $this->proposalRepository->find($id);
-       
+
         //SET CAR AS 'SOLD' WHEN PROPOSAL IS CLOSED
-        if ($proposal->car){
+        if ($proposal->car) {
 
-            if(isset($input['state_id'])){
+            if (isset($input['state_id'])) {
 
-                if ($input['state_id'] == 2){
-                    
+                if ($input['state_id'] == 2) {
+
                     $car = $this->carRepository->find($proposal->car->id);
                     $car->state_id = 6;
                     $car->save();
-        
                 }
             }
-                
         }
-       
+
 
         if (empty($proposal)) {
             return $this->sendError('Proposal not found');
@@ -197,31 +197,29 @@ class ProposalAPIController extends AppBaseController
         $proposal = $this->proposalRepository->update($input, $id);
 
         //camaigns
-        if (!empty($request->campaigns)){
-                
+        if (!empty($request->campaigns)) {
+
             $campaigns = $request->campaigns;
 
             $proposal->campaigns()->detach();
 
             $proposal->campaigns()->sync($campaigns);
-
         }
 
         //benefits
-        if (!empty($request->benefits)){
-                
+        if (!empty($request->benefits)) {
+
             $benefits = $request->benefits;
 
             $proposal->benefits()->detach();
 
-            $proposal->benefits()->sync($benefits); 
-
+            $proposal->benefits()->sync($benefits);
         }
 
         //BUSINESS STUDY CALCULATION
         //Except when proposal is closed or lost
-        if((!empty($proposal->car) && $proposal->state_id !== 2 && $proposal->state_id !== 4) ){
-            
+        if ((!empty($proposal->car) && $proposal->state_id !== 2 && $proposal->state_id !== 4)) {
+
             $businessStudyCalculated = $this->calculateBusinessStudy($proposal->id);
 
             // if (empty($businessStudy->extras_total)){
@@ -229,7 +227,7 @@ class ProposalAPIController extends AppBaseController
             // }else {
             //     $extras_total = $businessStudy->extras_total;
             // }
-    
+
 
             $businessStudyInput = [
                 'extras_total2' => $businessStudyCalculated['total_extras2'],
@@ -261,21 +259,28 @@ class ProposalAPIController extends AppBaseController
                 'business_study_authorization_id' => $businessStudyCalculated['business_study_authorization_id']
                 // 'business_study_authorization_id' => $businessStudyCalculated['business_study_authorization_id'],
             ];
-    
-                if(($proposal->state->name == 'Aberto')){
 
-                    $businessStudy = $this->businessStudyRepository->update($businessStudyInput, $proposal->initial_business_study_id);
+            if (($proposal->state->name == 'Aberto')) {
 
-                }elseif(($proposal->state->name == 'Fechado')){
-                    
-                    $businessStudy = $this->businessStudyRepository->update($businessStudyInput, $proposal->final_business_study_id);
+                $businessStudy = $this->businessStudyRepository->update($businessStudyInput, $proposal->initial_business_study_id);
+            } elseif (($proposal->state->name == 'Fechado')) {
 
-                }
-
+                $businessStudy = $this->businessStudyRepository->update($businessStudyInput, $proposal->final_business_study_id);
+            }
         }
 
         // dd($proposal->state->name == 'Aberto');
         // $proposal = $this->proposalRepository->find($id);
+
+        if ($proposal->state->name == 'Partilhado') {
+            //Event notification
+            event(new SharedProposal($proposal));
+        }
+
+        if ($proposal->state->name == 'Fechado') {
+            //Event notification
+            event(new ClosedProposal($proposal));
+        }
 
 
         return $this->sendResponse(new ProposalResource($proposal), 'Proposal updated successfully');
@@ -305,7 +310,8 @@ class ProposalAPIController extends AppBaseController
         return $this->sendSuccess('Proposal deleted successfully');
     }
 
-    public function authorization($id){
+    public function authorization($id)
+    {
 
         $proposal = Proposal::find($id);
 
@@ -316,7 +322,7 @@ class ProposalAPIController extends AppBaseController
 
         // dd($businessStudy);
         // $authorizations = $businessStudyAuthorizationRepository->all();
-        
+
         $diff = $proposal->initialBusinessStudy->total_discount_perc;
 
         // foreach ($authorizations as $authorization) {
@@ -337,32 +343,32 @@ class ProposalAPIController extends AppBaseController
         //         $businessStudy->business_study_authorization_id = $authorization->id;
         //         $businessStudy->save();
 
-            
+
         //     }
 
         // }
 
         return $proposal;
-
     }
 
-    public function calculateBusinessStudy($id) {
+    public function calculateBusinessStudy($id)
+    {
 
         //TODO pegar modelo de business study
 
         // estudo de negocio inicial e final
         $proposal = Proposal::find($id);
-        
+
         $taxas = ['iva' => 23];
-        
+
 
         // if this.proposal->business study exists then initial.proposal => proposal->businessStudy
 
         //no metodo
-        
+
 
         if (!empty($proposal->car)) {
-            
+
             $totalCampaigns = 0;
             $totalBenefits = 0;
             $subTotal = 0.0;
@@ -390,10 +396,10 @@ class ProposalAPIController extends AppBaseController
             $isentIva = null;
 
             // if ($proposal->state->name == 'Aberto' || $proposal->state->name == 'Pendente'){
-                $sale = $proposal->initialBusinessStudy->sale;
-                $totalTransf = $proposal->initialBusinessStudy->total_transf ?? 0;
-                $ivaTX = $proposal->initialBusinessStudy->ivatx ?? 0.23;
-                
+            $sale = $proposal->initialBusinessStudy->sale;
+            $totalTransf = $proposal->initialBusinessStudy->total_transf ?? 0;
+            $ivaTX = $proposal->initialBusinessStudy->ivatx ?? 0.23;
+
 
             // }
             // elseif($proposal->state->name == 'Fechado'){
@@ -405,117 +411,106 @@ class ProposalAPIController extends AppBaseController
             //$sell = 43000; // valor gravado no estudo de negocio
             $diffTradein = 0;
             $settleValue =  $proposal->initialBusinessStudy->sale;
-            
+
             //TODO Tabela com taxas e valores fixos
             // $ivaTX = 0.23;
             //$ivaTX = $proposal->iva;
-            
-           
+
+
 
             // total campaigns
-            foreach($proposal->campaigns as $campaign){
+            foreach ($proposal->campaigns as $campaign) {
 
-                if($campaign->pivot->type == '%'){
-    
-                    $totalCampaigns += ($campaign->pivot->value/100) * ($basePrice + $preTotalExtras);
-    
-                }elseif($campaign->pivot->type == '€'){
+                if ($campaign->pivot->type == '%') {
+
+                    $totalCampaigns += ($campaign->pivot->value / 100) * ($basePrice + $preTotalExtras);
+                } elseif ($campaign->pivot->type == '€') {
 
                     $totalCampaigns += $campaign->pivot->value - ($basePrice + $preTotalExtras);
-
                 }
-    
             }
 
             // total benefits
-            
-            foreach($proposal->benefits as $benefit){
-                
-                if ($benefit->pivot->type == '%'){
 
-                    $totalBenefits += ($benefit->pivot->value/100) * ($basePrice + $preTotalExtras);
+            foreach ($proposal->benefits as $benefit) {
 
-                }elseif($benefit->pivot->type == '€'){
+                if ($benefit->pivot->type == '%') {
+
+                    $totalBenefits += ($benefit->pivot->value / 100) * ($basePrice + $preTotalExtras);
+                } elseif ($benefit->pivot->type == '€') {
 
                     $totalBenefits += $benefit->pivot->value;
-
                 }
-
             }
 
             // $totalBenefits = [$BenefitN * ($basePrice + $Extras)];
-            
+
             $totalExtras = $preTotalExtras + $ptl + $sigpu + $totalTransf;
             $subTotal = $basePrice + $totalExtras - ($totalBenefits + $totalCampaigns);
 
             // IVA
             // $iva = $ivaTX * $price;
             if ($proposal->car->condition_id == 1) {
-                $iva =  $ivaTX * ($subTotal + $isv); 
-            } else { 
-                $iva = $ivaTX * $basePrice; 
+                $iva =  $ivaTX * ($subTotal + $isv);
+            } else {
+                $iva = $ivaTX * $basePrice;
             }
 
             // TOTAL
             if ($proposal->car->condition_id == 1) {
 
                 $total = $subTotal + $isv + $iva;
+            } elseif ($proposal->car->condition_id != 1) {
 
-            }elseif($proposal->car->condition_id != 1){
-                
                 $total = $basePrice + $iva;
-
             }
-            
+
             // DISCONT
             // if (is_null($isentIva)) { ($total - $sell) / (1 + $iva) + $totalBenefits; } else { $total - $sell + $totalBenefits;}
             $txblBase = $subTotal + $isv;
             $totalValue = $txblBase + $iva;
 
             // TRADE in
-            if (!empty($proposal->tradein)){ 
-                $purchasePrice = $proposal->tradein->tradein_purchase; 
-                $sellingPrice = $proposal->tradein->tradein_sale; 
-                
+            if (!empty($proposal->tradein)) {
+                $purchasePrice = $proposal->tradein->tradein_purchase;
+                $sellingPrice = $proposal->tradein->tradein_sale;
+
                 $diffTradein = $sellingPrice - ($taxes + $expenses + $purchasePrice);
                 // $settleValue = $sellingPrice - $purchasePrice;
                 $settleValue = $sale - $purchasePrice;
             }
-            
+
 
             //diff
             if ($proposal->car->condition_id == 1) {
 
                 $dif = ($total - $sale) - $diffTradein;
-                
             } else {
                 $dif = (($sale - $total) - $diffTradein - $totalExtras) - $totalTransf - $totalBenefits - $internal_costs - $external_costs;
- 
             }
 
             //desc
-            if (is_null($isentIva)) { 
-                $desc = $dif / (1+($ivaTX));
-                } else{ 
-                    $desc = $dif;
-                 }
+            if (is_null($isentIva)) {
+                $desc = $dif / (1 + ($ivaTX));
+            } else {
+                $desc = $dif;
+            }
 
             //TOTAL BENEFITS
-            if($totalCampaigns){
+            if ($totalCampaigns) {
                 $totalBenefits += $totalCampaigns;
             }
 
             // $discPerc = 100;
-            if($totalBenefits != 0 || $subTotal != 0 || $ptl != 0 || $sigpu != 0 || $totalTransf != 0){
+            if ($totalBenefits != 0 || $subTotal != 0 || $ptl != 0 || $sigpu != 0 || $totalTransf != 0) {
 
                 $discPerc = ($desc / ($totalBenefits + $subTotal - ($ptl + $sigpu + $totalTransf))) * 100;
-                if ($discPerc < 0){
-                    $discPerc=0;
+                if ($discPerc < 0) {
+                    $discPerc = 0;
                 }
-                
-            }else {
-                
-                $discPerc=0;
+            } else {
+
+                $discPerc = 0;
             }
 
             // dd($discPerc);
@@ -523,20 +518,21 @@ class ProposalAPIController extends AppBaseController
             //TODO Division by zero
             // dd(if( ($totalBenefits + $isv) != 0 ));
 
-            if( ($totalBenefits + $isv) != 0 && ($ptl + $sigpu + $totalTransf)!=0) {
+            if (($totalBenefits + $isv) != 0 && ($ptl + $sigpu + $totalTransf) != 0) {
 
-                $profit = $desc / ( $totalBenefits + $isv ) - ( $ptl + $sigpu + $totalTransf );
+                $profit = $desc / ($totalBenefits + $isv) - ($ptl + $sigpu + $totalTransf);
+            } else {
+                $profit = 0;
+            }
 
-            }else {$profit=0;}
 
-
-            if ($proposal->car->condition_id !== 1){
+            if ($proposal->car->condition_id !== 1) {
 
                 //margem com  iva, confirmar diff tradein
-                $marginIVA = (($sale - $total) - $diffTradein) - ($internal_costs + $external_costs + $warranty) - $totalTransf + $totalBenefits ;
-            
+                $marginIVA = (($sale - $total) - $diffTradein) - ($internal_costs + $external_costs + $warranty) - $totalTransf + $totalBenefits;
+
                 //margem sem IVA
-                $margin = $marginIVA / (1+$ivaTX);  
+                $margin = $marginIVA / (1 + $ivaTX);
             }
 
 
@@ -549,69 +545,64 @@ class ProposalAPIController extends AppBaseController
 
             $businessStudy = BusinessStudy::find($proposal->initialBusinessStudy->id);
             // $businessStudy->business_study_authorization_id = 2;
-    
+
             // dd($businessStudy);
             // $authorizations = $businessStudyAuthorizationRepository->all();
-            
-    
+
+
             $business_study_authorization_id = 1;
             foreach ($authorizations as $authorization) {
-                
+
                 $min = $authorization->min;
                 $max = $authorization->max;
-                
+
                 // dd($discPerc);
-                if ($proposal->car->condition_id == 1){
-    
-                    if($discPerc >= $min && $discPerc < $max && $authorization->id !== 6) {
-                        
-                        if ($authorization->id !== 1){
+                if ($proposal->car->condition_id == 1) {
+
+                    if ($discPerc >= $min && $discPerc < $max && $authorization->id !== 6) {
+
+                        if ($authorization->id !== 1) {
                             $proposal->state_id = 3;
                             // $proposal->save();
-        
-                        }elseif ($authorization->id == 1 && $proposal->state->id !== 2 && $proposal->state->id !== 4) {
+
+                        } elseif ($authorization->id == 1 && $proposal->state->id !== 2 && $proposal->state->id !== 4) {
                             $proposal->state_id = 1;
                         }
-                       
+
                         $proposal->save();
-        
+
                         $business_study_authorization_id = $authorization->id;
                         // return $business_study_authorization_id;
                         $proposal->initialBusinessStudy->business_study_authorization_id =  $authorization->id;
                         $proposal->save();
-                        
                     }
-                    
-                }               
-                
+                }
             }
 
 
-            if ($proposal->car->condition_id == 2 || $proposal->car->condition_id == 4 ) {
+            if ($proposal->car->condition_id == 2 || $proposal->car->condition_id == 4) {
 
                 // $auth = $authorizations->find(6);
 
-                if($margin < 0 ) {
-    
+                if ($margin < 0) {
+
                     // if ($authorization->id !== 1){
                     //     $proposal->state_id = 3;
                     //     // $proposal->save();
-    
+
                     // }elseif ($authorization->id == 1 && $proposal->state->id !== 2 && $proposal->state->id !== 4) {
                     //     $proposal->state_id = 1;
                     // }
-                    
-                        $business_study_authorization_id = 6;
-                        $proposal->initialBusinessStudy->business_study_authorization_id =  6;
-                        $proposal->state_id = 3;
-                        $proposal->save();
 
-
-                }elseif($margin > 0){
-                        $business_study_authorization_id = 7;
-                        $proposal->initialBusinessStudy->business_study_authorization_id =  7;
-                        $proposal->state_id = 1;
-                        $proposal->save();
+                    $business_study_authorization_id = 6;
+                    $proposal->initialBusinessStudy->business_study_authorization_id =  6;
+                    $proposal->state_id = 3;
+                    $proposal->save();
+                } elseif ($margin > 0) {
+                    $business_study_authorization_id = 7;
+                    $proposal->initialBusinessStudy->business_study_authorization_id =  7;
+                    $proposal->state_id = 1;
+                    $proposal->save();
                 }
                 // else{
                 //     $proposal->state_id = 1;
@@ -619,8 +610,6 @@ class ProposalAPIController extends AppBaseController
                 // }
 
             }
-
-
         } else {
 
             return 'car not found';
@@ -662,9 +651,9 @@ class ProposalAPIController extends AppBaseController
         ];
 
         return ($results);
-        
     }
-    public function sendProposal($id) {
+    public function sendProposal($id)
+    {
 
 
         //TODO mudar estado da proposta
@@ -672,18 +661,17 @@ class ProposalAPIController extends AppBaseController
         $proposal = Proposal::find($id);
 
         Mail::send(new ProposalOrder($proposal));
-        
+
         $proposal->state_id = 5;
         $proposal->save();
         return $this->sendSuccess('E-mail enviado com sucesso!');
 
         // DD(!empty($proposal->tradein));
         return new ProposalOrder($proposal);
-
-
     }
 
-    public function proposalApproval($id) {
+    public function proposalApproval($id)
+    {
 
         $proposal = Proposal::find($id);
         $authID = $proposal->initialBusinessStudy->businessStudyAuthorization->id;
@@ -694,18 +682,17 @@ class ProposalAPIController extends AppBaseController
         if ($authID == 2 || $authID == 3 || $authID == 6) {
 
             $x = $proposal->initialBusinessStudy->businessStudyAuthorization->responsible_id;
-        
-            
+
+
             Mail::send(new ProposalApproval($proposal));
         }
 
 
         return $this->sendSuccess('E-mail enviado com sucesso!');
-
-
     }
 
-    public function tradeInApproval($id){
+    public function tradeInApproval($id)
+    {
 
         $proposal = Proposal::find($id);
 
@@ -717,8 +704,6 @@ class ProposalAPIController extends AppBaseController
 
         // }
         return $this->sendSuccess('E-mail enviado com sucesso!');
- 
-
     }
 
     public function proposalHistory($client)
@@ -727,6 +712,4 @@ class ProposalAPIController extends AppBaseController
 
         return $this->sendResponse(new ProposalCollection($proposals), 'Proposals retrieved successfully');
     }
-    
-
 }

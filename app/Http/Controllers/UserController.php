@@ -10,6 +10,7 @@ use App\Models\Car;
 use App\Models\User;
 use App\Models\LeadUser;
 use App\Mail\ValidateRGPD;
+use App\Providers\NewLead;
 use Illuminate\Http\Request;
 use App\Repositories\CarRepository;
 use App\Repositories\UserRepository;
@@ -102,10 +103,8 @@ class UserController extends AppBaseController
         $input = $request->all();
 
         if($validator->fails()) {
-
             Flash::error($validator->errors());
             return redirect(route('users.index'));
-  
         }
 
         $url = Route::currentRouteName();
@@ -118,13 +117,11 @@ class UserController extends AppBaseController
         
         //atribuir lead user a vendedor
         if($request->vendor_id){
-
             $user->vendor()->attach($request->vendor_id);
-        
-         }
 
-
-        // $user = $this->userRepository->create($input);
+            //Event for Notification
+            event(new NewLead($user));
+        }
 
         if ($user->gdpr_type == "email") {
             Mail::send(new ValidateRGPD($user));
@@ -235,9 +232,10 @@ class UserController extends AppBaseController
 
         //atribuir lead user a vendedor
         if($request->vendor_id){
-
             $user->vendor()->sync($request->vendor_id);
 
+            //Event for Notification
+            event(new NewLead($user));
         }
 
         Flash::success(__('translation.user updated'));

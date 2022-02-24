@@ -43,14 +43,10 @@ class User extends Authenticatable implements JWTSubject, HasMedia
     use HasRoles;
     use InteractsWithMedia;
 
-
     public $table = 'users';
-    
 
     protected $dates = ['deleted_at'];
 
-
-    
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -71,7 +67,6 @@ class User extends Authenticatable implements JWTSubject, HasMedia
         return [];
     }
 
-
     public $fillable = [
         'name',
         'email',
@@ -88,7 +83,8 @@ class User extends Authenticatable implements JWTSubject, HasMedia
         'finiclasse_employee',
         'stand_id',
         'client_type_id',
-        'service_car_id'
+        'service_car_id',
+        'device_key'
     ];
 
     /**
@@ -166,7 +162,7 @@ class User extends Authenticatable implements JWTSubject, HasMedia
      */
     public function vendor()
     {
-        return $this->belongsToMany(User::class, 'leads_users', 'client_id', 'vendor_id');
+        return $this->belongsToMany(User::class, 'leads_users', 'client_id', 'vendor_id', 'id');
     }
 
     /**

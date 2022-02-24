@@ -112,6 +112,8 @@
                 @endif
             </div>
 
+
+
             <div class="form-group col-sm-8" style="display: flex;">
                 <!-- Fuel Field -->
                 <div class="form-group col-sm-6">
@@ -134,21 +136,23 @@
                     {!! Form::label('registration', 'Ano') !!}
                     {!! Form::text('registration', isset($proposal->car->registration) ? $proposal->car->registration : '', ['class' => 'form-control', 'disabled']) !!}
                 </div>
-            </div>
 
-            <div class="form-group col-sm-4"></div>
-            <!-- Test Drive Field -->
-            <div class="form-group col-sm-8" style="margin-top: -30px; padding-left: 16px;">
-                {!! Form::label('test_drive', 'Teste drive') !!}
-                <!-- <label>Teste drive</label> -->
-                <input type="hidden" name="test_drive" value="0" disabled>
-                <input type="checkbox" name="test_drive" value="1"
-                    {{ isset($proposal->test_drive) == '1' ? ' checked' : '' }} disabled>
+                <!-- Test Drive Field -->
+                <div class="form-group col-sm-4">
+                    <div style="margin-top: 37px;">
+                        {!! Form::label('test_drive', 'Teste drive') !!}
+                        <!-- <label>Teste drive</label> -->
+                        <input type="hidden" name="test_drive" value="0" disabled>
+                        <input type="checkbox" name="test_drive" value="1"
+                            {{ isset($proposal->test_drive) == '1' ? ' checked' : '' }} disabled>
+                    </div>
+                </div>
+
             </div>
 
             <div class="form-group col-sm-4"></div>
             <!-- Price Field -->
-            <div class="form-group col-sm-8" style="margin-top: 30px;">
+            <div class="form-group col-sm-8">
                 <p>Preço Final (incl. IVA)</p>
                 @if ($proposal->car_id != '')
                     <h2>@money($proposal->car->price)</h2>
@@ -271,7 +275,7 @@
                 <div class="form-group col-sm-1">
                     @if ($proposal->financings->contains('id', $financing->id))
                         <input id="checkbox{{ $financing->id }}" checked="checked" class="mt-5 checked"
-                            name="checked" type="checkbox" value="{{ $financing->id }}">
+                            name="checked" type="checkbox" value="{{ $financing->id }}" disabled>
                     @else
                         <input id="checkbox{{ $financing->id }}" name="checked" class="mt-5 checked"
                             type="checkbox" value="{{ $financing->id }}">
@@ -279,7 +283,7 @@
                 </div>
 
                 <!-- Financial Type Field -->
-                <div class="form-group col-sm-5">
+                <div class="form-group col-sm-7">
                     {!! Form::label('name', 'Tipo de financiamento') !!}
                     {!! Form::text('name', isset($financing->name) ? $financing->name : '', ['class' => 'form-control', 'disabled']) !!}
                 </div>
@@ -290,58 +294,41 @@
                 {!! Form::text('description', isset($financing->description) ? $financing->description : '', ['class' => 'form-control', 'disabled']) !!}
                 </div> -->
 
-                <div class="form-group col-sm-4" style="margin-top: 32px;">
-                    <div class="input-group">
-                        <div class="custom-file">
-                            <input type="file" id="doc{{ $financing->id }}" name="checked" multiple
-                                class="custom-file-input" disabled />
-                            <label id="docLabel{{ $financing->id }}" for="checked" class="custom-file-label">Adicione
-                                o
-                                documento</label>
+                <!-- Contract Field -->
+                <div class="form-group col-sm-4">
+                    {!! Form::label('contract', 'Contrato') !!}
+                    <div style="display: flex;">
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" id="doc{{ $financing->id }}"
+                                    name="checked[{{ $financing->id }}]" multiple class="custom-file-input"
+                                    disabled />
+                                <label for="checked[{{ $financing->id }}]" class="custom-file-label">Adicione o
+                                    documento</label>
+                            </div>
                         </div>
 
-                        <!-- @if (isset($proposalFinancing))
--->
-                        <!-- <div class="input-group">
-                    <div class="custom-file">
-                        <input type="file" id="document[]" name="document[]" multiple class="custom-file-input"/>
-                        <label for="document[]" class="custom-file-label">Adicione o documento</label>
-                    </div> -->
-                        <!-- <div class="custom-file">
-                        {!! Form::file('document', ['class' => 'custom-file-input']) !!}
-                        {!! Form::label('document', 'Choose file', ['class' => 'custom-file-label']) !!}
-                    </div> -->
-                        <!-- </div> -->
+                        @foreach ($financingsproposal as $financingproposal)
+                            @if ($financingproposal->financing_id == $financing->id)
+                                @if (!$financingproposal->getFirstMediaUrl('financingproposal'))
+                                @endif
 
-                        <!--
-@endif -->
+                                @if ($financingproposal->getFirstMediaUrl('financingproposal') !== '')
+                                    <a href="{{ $financingproposal->getFirstMediaUrl('financingproposal') }}"
+                                        target="_blank" class="btn btn-default"
+                                        style="margin-left: 10px;">{{ __('Ver') }}</a>
+
+                                    <div style="margin-left: 10px; margin-top: 5px;">
+                                        <button onclick="removeFinancing({{ $financingproposal->id }})" type="submit"
+                                            class="btn btn-danger btn-xs"><i class="far fa-trash-alt"></i></button>
+                                    </div>
+                                @endif
+                            @endif
+                        @endforeach
                     </div>
                 </div>
+
                 <div class="clearfix"></div>
-
-                <!-- Contract Field -->
-                <div id="contract" class="form-group col-sm-2" style="margin-top: 32px;">
-                    {!! Form::label('contract', 'Contrato') !!}
-
-                    @foreach ($financingsproposal as $financingproposal)
-                        <!-- <input type="text" name="proposal_id" value="{{ $proposal->id }}" /> -->
-                        <!-- {{ $financingproposal->financing_id }} -->
-
-                        @if ($financingproposal->financing_id == $financing->id)
-
-                            @if (!$financingproposal->getFirstMediaUrl('financingproposal'))
-                            @endif
-
-                            @if ($financingproposal->getFirstMediaUrl('financingproposal') !== '')
-                                <a href="{{ $financingproposal->getFirstMediaUrl('financingproposal') }}"
-                                    target="_blank" class="btn btn-default">{{ __('Ver') }}</a>
-                            @endif
-
-                        @endif
-
-                    @endforeach
-                </div>
-
             @endforeach
 
             <div class="card-footer">
@@ -678,5 +665,31 @@
                 $('#doc' + id).attr("disabled", true);
             }
         });
+
+        function removeFinancing(id) {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                method: 'post',
+                url: '/financing-remove', // This is the url we gave in the route
+                dataType: 'json',
+                data: {
+                    id: id,
+                },
+                success: function(response) { // What to do if we succeed
+                    alert('Tem a certeza?');
+                },
+                error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+        }
     </script>
 @endpush
