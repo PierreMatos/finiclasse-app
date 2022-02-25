@@ -22,10 +22,6 @@ class FinancingProposalFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word,
-        'description' => $this->faker->word,
-        'value' => $this->faker->randomDigitNotNull,
-        'document' => $this->faker->word,
         'financing_id' => $this->faker->randomDigitNotNull,
         'proposal_id' => $this->faker->randomDigitNotNull,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),

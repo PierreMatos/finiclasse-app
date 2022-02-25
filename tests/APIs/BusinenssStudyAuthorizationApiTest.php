@@ -19,7 +19,7 @@ class BusinessStudyAuthorizationApiTest extends TestCase
 
         $this->response = $this->json(
             'POST',
-            '/api/businenss_study_authorizations', $BusinessStudyAuthorization
+            '/api/business_studies_authorizations', $BusinessStudyAuthorization
         );
 
         $this->assertApiResponse($BusinessStudyAuthorization);
@@ -34,7 +34,7 @@ class BusinessStudyAuthorizationApiTest extends TestCase
 
         $this->response = $this->json(
             'GET',
-            '/api/businenss_study_authorizations/'.$BusinessStudyAuthorization->id
+            '/api/business_studies_authorizations/'.$BusinessStudyAuthorization->id
         );
 
         $this->assertApiResponse($BusinessStudyAuthorization->toArray());
@@ -50,7 +50,7 @@ class BusinessStudyAuthorizationApiTest extends TestCase
 
         $this->response = $this->json(
             'PUT',
-            '/api/businenss_study_authorizations/'.$BusinessStudyAuthorization->id,
+            '/api/business_studies_authorizations/'.$BusinessStudyAuthorization->id,
             $editedBusinessStudyAuthorization
         );
 
@@ -66,13 +66,13 @@ class BusinessStudyAuthorizationApiTest extends TestCase
 
         $this->response = $this->json(
             'DELETE',
-             '/api/businenss_study_authorizations/'.$BusinessStudyAuthorization->id
+             '/api/business_studies_authorizations/'.$BusinessStudyAuthorization->id
          );
 
         $this->assertApiSuccess();
         $this->response = $this->json(
             'GET',
-            '/api/businenss_study_authorizations/'.$BusinessStudyAuthorization->id
+            '/api/business_studies_authorizations/'.$BusinessStudyAuthorization->id
         );
 
         $this->response->assertStatus(404);

@@ -22,7 +22,7 @@ class FinancingFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word,
+        'name' => $this->faker->word,
         'description' => $this->faker->word,
         'document' => $this->faker->word,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),

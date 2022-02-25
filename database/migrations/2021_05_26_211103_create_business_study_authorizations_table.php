@@ -14,7 +14,7 @@ class CreateBusinessStudyAuthorizationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('business_studies_authorization', function (Blueprint $table) {
+        Schema::create('business_studies_authorizations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->integer('min');
@@ -34,6 +34,6 @@ class CreateBusinessStudyAuthorizationsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('business_studies_authorization');
+        Schema::drop('business_studies_authorizations');
     }
 }

@@ -22,7 +22,7 @@
             <div class="card-body">
 
                 <div class="row">
-                    @include('businenss_study_authorizations.fields')
+                    @include('business_studies_authorizations.fields')
                 </div>
 
             </div>

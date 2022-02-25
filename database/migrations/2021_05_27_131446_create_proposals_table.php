@@ -27,14 +27,12 @@ class CreateProposalsTable extends Migration
             $table->string('contract')->nullable();
             $table->boolean('test_drive')->nullable();
             $table->integer('state_id')->unsigned()->nullable();
-            $table->integer('business_study_id')->unsigned()->nullable();
             $table->text('comment')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('client_id')->references('id')->on('users');
             $table->foreign('vendor_id')->references('id')->on('users');
             $table->foreign('state_id')->references('id')->on('proposal_states');
-            $table->foreign('business_study_id')->references('id')->on('business_studies');
         });
     }
 

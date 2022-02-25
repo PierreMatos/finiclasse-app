@@ -22,7 +22,7 @@ class BusinessStudyAuthorizationFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word,
+        'name' => $this->faker->word,
         'min' => $this->faker->randomDigitNotNull,
         'max' => $this->faker->randomDigitNotNull,
         'responsible_id' => $this->faker->randomDigitNotNull,

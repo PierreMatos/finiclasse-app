@@ -59,11 +59,15 @@ class CreateCarsTable extends Migration
             $table->dateTime('iuc_expiration_date')->nullable();
             $table->dateTime('inspection_expiration_date')->nullable();
             $table->string('tradein_observations')->nullable();
-            $table->integer('consumption')->nullable();
+            $table->float('consumption')->nullable();
             $table->longText('equipment')->nullable();
+            $table->decimal('expenses')->nullable();
+            $table->decimal('warranty')->nullable();
+            $table->decimal('taxes')->nullable();
+            $table->tinyInteger('potencial_buyer')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('model_id')->references('id')->on('models');
+            $table->foreign('model_id')->references('id')->on('car_models');
             $table->foreign('category_id')->references('id')->on('car_categories');
             $table->foreign('condition_id')->references('id')->on('car_conditions');
             $table->foreign('state_id')->references('id')->on('car_states');

@@ -26,8 +26,6 @@ class BusinessStudyFactory extends Factory
     public function definition()
     {
         return [
-        'client_id' => User::all()->random()->id,
-        'car_id' => Car::all()->random()->id,
         'extras_total' => $this->faker->randomDigitNotNull,
         'sub_total' => $this->faker->randomDigitNotNull,
         'total_benefits' => $this->faker->randomDigitNotNull,

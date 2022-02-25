@@ -13,7 +13,7 @@ class ChangeFieldsToBusinessStudiesAuthorization extends Migration
      */
     public function up()
     {
-        Schema::table('businenss_study_authorizations', function (Blueprint $table) {
+        Schema::table('business_studies_authorizations', function (Blueprint $table) {
 
             $table->float('min')->nullable()->change();
             $table->float('max')->nullable()->change();
@@ -29,7 +29,7 @@ class ChangeFieldsToBusinessStudiesAuthorization extends Migration
      */
     public function down()
     {
-        Schema::table('businenss_study_authorizations', function (Blueprint $table) {
+        Schema::table('business_studies_authorizations', function (Blueprint $table) {
             //
         });
     }

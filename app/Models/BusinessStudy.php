@@ -135,7 +135,7 @@ class BusinessStudy extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function businessStudyAuthorization()
+    public function BusinessStudyAuthorization()
     {
         return $this->belongsTo(\App\Models\BusinessStudyAuthorization::class, 'business_study_authorization_id', 'id');
     }

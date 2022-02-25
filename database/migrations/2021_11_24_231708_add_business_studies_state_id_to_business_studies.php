@@ -15,7 +15,7 @@ class AddBusinessStudiesStateIdToBusinessStudies extends Migration
     {
         Schema::table('business_studies', function (Blueprint $table) {
             $table->integer('state_id')->unsigned()->nullable();
-            $table->foreign('state_id')->references('id')->on('business_studies_states');
+            $table->foreign('state_id')->references('id')->on('business_study_states');
             
         });
     }

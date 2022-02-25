@@ -13,9 +13,9 @@ class BusinessStudyAuthorizationsSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('businenss_study_authorizations')->delete();
+        \DB::table('business_studies_authorizations')->delete();
 
-        \DB::table('businenss_study_authorizations')->insert(array (
+        \DB::table('business_studies_authorizations')->insert(array (
             0 => 
             array (
                 'id' => 1,
