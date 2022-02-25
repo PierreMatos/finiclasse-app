@@ -14,7 +14,7 @@ class CreateLeadsUsersTable extends Migration
     public function up()
     {
         Schema::create('leads_users', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->integer('client_id')->unsigned()->nullable();
             $table->integer('vendor_id')->unsigned()->nullable();
             $table->timestamps();

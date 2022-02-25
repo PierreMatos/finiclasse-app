@@ -15,7 +15,6 @@ class AddBusinessStudiesToProposalsTable extends Migration
     {
         Schema::table('proposals', function (Blueprint $table) {
 
-            $table->dropColumn('business_study_id');
             $table->integer('initial_business_study_id')->unsigned()->nullable();
             $table->integer('final_business_study_id')->unsigned()->nullable();
             $table->foreign('initial_business_study_id')->references('id')->on('business_studies');

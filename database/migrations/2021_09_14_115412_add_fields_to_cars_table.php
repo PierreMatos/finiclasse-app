@@ -23,7 +23,6 @@ class AddFieldsToCarsTable extends Migration
             $table->integer('isv')->nullable();
             $table->integer('ptl')->nullable();
             $table->integer('sigpu')->nullable();
-            $table->longtext('equipment')->nullable();
  
 
         });

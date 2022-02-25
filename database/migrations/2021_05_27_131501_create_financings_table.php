@@ -18,7 +18,7 @@ class CreateFinancingsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('description');
-            $table->string('document');
+            $table->string('document')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

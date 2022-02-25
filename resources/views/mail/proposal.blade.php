@@ -30,9 +30,12 @@
         <tr style="border-bottom: 1px solid #C2C2C2;">
             <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Viatura</th>
         </tr>
-        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
-            <td style="padding: 0px;"> <img src="{{ asset($proposal->car->getFirstMediaUrl('cars'))}}" /> </td>
-        </tr>
+        @if (!$proposal->car->getFirstMediaUrl('cars'))
+        @else
+            <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
+                <td style="padding: 0px;"> <img src="{{ asset($proposal->car->getFirstMediaUrl('cars'))}}" /> </td>
+            </tr>
+        @endif
         <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
             <td style="padding: 10px;">Tipo: <b>{{$proposal->car->state->name}}</b></td>
         </tr>
@@ -71,41 +74,41 @@
     @endcomponent
 @endif
 
+@component('mail::table')
 @if ($proposal->benefits->isNotEmpty())
-<table style="border-collapse: collapse;">
-    @component('mail::table')
-        <tr style="border-bottom: 1px solid #C2C2C2;">
-            <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Apoio</th>
-        </tr>
-            @foreach ( $proposal->benefits as $benefit)
-                    <td style="padding: 10px;">Tipo: <b>{{$benefit->name}}</b></td>
-                    <td style="padding: 10px;"><b>{{$benefit->pivot->value}} {{$benefit->pivot->type}}</b></td>
-                    @endforeach
-                    @endcomponent
-                </table>
-@endif
-
-@if ($proposal->financings->isNotEmpty())
-<table style="border-collapse: collapse;">
-    @component('mail::table')
+    <table style="border-collapse: collapse;">
             <tr style="border-bottom: 1px solid #C2C2C2;">
-                <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Financiamento</th>
+                <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Apoio</th>
             </tr>
-            @foreach ( $proposal->financings as $financing)
-                <td style="padding: 10px;">Tipo: <b>{{$financing->name}}</b></td>
-            @endforeach
-            @endcomponent
-        </table>
+                @foreach ( $proposal->benefits as $benefit)
+                <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+                        <td style="padding: 10px;">Tipo: <b>{{$benefit->name}}</b></td>
+                        <td style="padding: 10px;"><b>{{$benefit->pivot->value}} {{$benefit->pivot->type}}</b></td>
+                        @endforeach
+                </tr>
+    </table>
 @endif
+@endcomponent
+
+@component('mail::table')
+@if ($proposal->financings->isNotEmpty())
+    <table style="border-collapse: collapse;">
+                <tr style="border-bottom: 1px solid #C2C2C2;">
+                    <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Financiamento</th>
+                </tr>
+                @foreach ( $proposal->financings as $financing)
+                <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+                    <td style="padding: 10px;">Tipo: <b>{{$financing->name}}</b></td>
+                </tr>
+                @endforeach
+    </table>
+@endif
+@endcomponent
 
 @component('mail::table')
     <table style="border-collapse: collapse;">
         <tr style="border-bottom: 1px solid #C2C2C2;">
             <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Proposta Nº {{$proposal->id}}</th>
-        </tr>
-        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
-            <td style="padding: 10px;">Valor de negócio:</td>
-            <td style="padding: 10px;"><b>{{$proposal->finalBusinessStudy->total ?? $proposal->initialBusinessStudy->total}} €</b></td>
         </tr>
         <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
             <td style="padding: 10px;">Valor da retoma:</td>

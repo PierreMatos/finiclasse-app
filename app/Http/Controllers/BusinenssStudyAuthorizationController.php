@@ -31,7 +31,7 @@ class BusinessStudyAuthorizationController extends AppBaseController
     {
         $BusinessStudyAuthorizations = $this->BusinessStudyAuthorizationRepository->all();
 
-        return view('businenss_study_authorizations.index')
+        return view('business_studies_authorizations.index')
             ->with('BusinessStudyAuthorizations', $BusinessStudyAuthorizations);
     }
 
@@ -42,7 +42,7 @@ class BusinessStudyAuthorizationController extends AppBaseController
      */
     public function create()
     {
-        return view('businenss_study_authorizations.create');
+        return view('business_studies_authorizations.create');
     }
 
     /**
@@ -80,7 +80,7 @@ class BusinessStudyAuthorizationController extends AppBaseController
             return redirect(route('BusinessStudyAuthorizations.index'));
         }
 
-        return view('businenss_study_authorizations.show')->with('BusinessStudyAuthorization', $BusinessStudyAuthorization);
+        return view('business_studies_authorizations.show')->with('BusinessStudyAuthorization', $BusinessStudyAuthorization);
     }
 
     /**
@@ -100,7 +100,7 @@ class BusinessStudyAuthorizationController extends AppBaseController
             return redirect(route('BusinessStudyAuthorizations.index'));
         }
 
-        return view('businenss_study_authorizations.edit')->with('BusinessStudyAuthorization', $BusinessStudyAuthorization);
+        return view('business_studies_authorizations.edit')->with('BusinessStudyAuthorization', $BusinessStudyAuthorization);
     }
 
     /**

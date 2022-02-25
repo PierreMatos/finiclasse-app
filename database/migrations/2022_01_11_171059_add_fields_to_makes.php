@@ -14,9 +14,9 @@ class AddFieldsToMakes extends Migration
     public function up()
     {
         Schema::table('makes', function (Blueprint $table) {
-            $table->integer('order');
-            $table->string('color');
-            $table->boolean('visible');
+            $table->integer('order')->nullable();
+            $table->string('color')->nullable();
+            $table->boolean('visible')->nullable();
         });
     }
 

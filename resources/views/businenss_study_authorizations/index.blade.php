@@ -25,7 +25,7 @@
 
         <div class="card">
             <div class="card-body p-0">
-                @include('businenss_study_authorizations.table')
+                @include('business_studies_authorizations.table')
 
                 <div class="card-footer clearfix float-right">
                     <div class="float-right">

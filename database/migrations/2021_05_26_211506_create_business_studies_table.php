@@ -29,11 +29,14 @@ class CreateBusinessStudiesTable extends Migration
             $table->integer('total_discount_perc')->nullable();
             $table->integer('iva')->nullable();
             $table->integer('isv')->nullable();
+            $table->double('ivatx')->nullable();
+            $table->double('internal_costs')->nullable();
+            $table->double('external_costs')->nullable();
             $table->integer('business_study_authorization_id')->unsigned()->nullable();
             $table->integer('tradein_id')->unsigned()->nullable()->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('business_study_authorization_id')->references('id')->on('business_study_authorizations');
+            $table->foreign('business_study_authorization_id')->references('id')->on('business_studies_authorizations');
             $table->foreign('tradein_id')->references('id')->on('cars');
         });
     }

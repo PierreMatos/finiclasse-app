@@ -6,7 +6,7 @@
         <h2 style="color: #fff; line-height: 0px;">Representante oficial</h2>
         <h2 style="color: #fff;">Mercedes-Benz, Smart e SEAT</h2>
     </div>
-    <div style="width: 70%; display: inline-grid;">
+    <div style="width: 70%; display: inline-grid; color: #fff;">
         <table>
             <tbody style="text-align: left;">
             <tr>
@@ -43,11 +43,11 @@
 <div style="padding: 20px; display: flex; justify-content: space-between;">
     {{ Illuminate\Mail\Markdown::parse($slot) }}
     <div>
-        <a href="/" target="_blank">Livro de Reclamações</a> |
-        <a href="/" target="_blank">Política de Privacidade</a> |
-        <a href="/" target="_blank">Política de Qualidade</a> |
-        <a href="/" target="_blank">Condições Gerais de Utilização</a> |
-        <a href="/" target="_blank">Resolução Alternativa de Litígios</a>
+        <a href="/" target="_blank" style="color: #fff;">Livro de Reclamações</a> |
+        <a href="/" target="_blank" style="color: #fff;">Política de Privacidade</a> |
+        <a href="/" target="_blank" style="color: #fff;">Política de Qualidade</a> |
+        <a href="/" target="_blank" style="color: #fff;">Condições Gerais de Utilização</a> |
+        <a href="/" target="_blank" style="color: #fff;">Resolução Alternativa de Litígios</a>
     </div>
 </div>
 </td>

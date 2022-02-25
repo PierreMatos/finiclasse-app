@@ -24,7 +24,7 @@ class BusinessStudyAuthorization extends Model
 
     use HasFactory;
 
-    public $table = 'businenss_study_authorizations';
+    public $table = 'business_studies_authorizations';
     
 
     protected $dates = ['deleted_at'];

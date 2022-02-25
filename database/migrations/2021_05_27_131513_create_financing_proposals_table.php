@@ -16,10 +16,6 @@ class CreateFinancingProposalsTable extends Migration
     {
         Schema::create('financing_proposals', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('description');
-            $table->integer('value');
-            $table->string('document');
             $table->integer('financing_id')->unsigned();
             $table->integer('proposal_id')->unsigned();
             $table->timestamps();

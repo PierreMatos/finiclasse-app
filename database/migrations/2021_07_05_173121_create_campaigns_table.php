@@ -27,7 +27,7 @@ class CreateCampaignsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('make_id')->references('id')->on('makes');
-            $table->foreign('model_id')->references('id')->on('models');
+            $table->foreign('model_id')->references('id')->on('car_models');
         });
     }
 
