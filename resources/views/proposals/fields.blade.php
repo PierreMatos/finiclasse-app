@@ -397,12 +397,11 @@
             </div>
 
             <div class="row mt-5 mb-5 justify-content-center">
-                {!! Form::model($proposal, ['route' => ['businessStudies.update', $proposal->finalBusinessStudy->id], 'method' => 'patch', 'files' => true]) !!}
                 <div class="form-group row" role="group" aria-label="Basic example">
                     <div class="col-6">
                         <button type="button"
-                            id="{{ isset($proposal->initialBusinessStudy->id) ? $proposal->initialBusinessStudy->id : '' }}"
-                            value="4" class="btn btn-success"> Aceitar</button>
+                        id="{{ isset($proposal->initialBusinessStudy->id) ? $proposal->initialBusinessStudy->id : '' }}"
+                            value="4" class="btn btn-success businessAuth"> Aceitar</button>
                     </div>
                     <div class="col-6">
                         <button type="button"

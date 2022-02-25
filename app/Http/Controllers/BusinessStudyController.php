@@ -165,7 +165,7 @@ class BusinessStudyController extends AppBaseController
             $businessStudy->save();
         }
 
-        return response()->json(['success'=> 'Viatura editada com sucesso']);
+        return response()->json(['success'=> 'Negócio aceite com sucesso']);
 
     }
 }

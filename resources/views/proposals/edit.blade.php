@@ -133,6 +133,7 @@
 
         $(".businessAuth").click(function(e) {
 
+            console.log(this.id);
             var auth = $(this).val();
             $.ajaxSetup({
                 headers: {
