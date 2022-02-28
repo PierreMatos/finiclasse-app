@@ -22,6 +22,7 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\ClientTypeRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Providers\PushNewUser;
 
 class UserController extends AppBaseController
 {
@@ -128,6 +129,9 @@ class UserController extends AppBaseController
         } elseif ($user->gdpr_type == "sms") {
             // Something
         }
+
+        //Event for Notification
+        event(new PushNewUser($user));
 
         Flash::success(__('translation.user saved'));
 
