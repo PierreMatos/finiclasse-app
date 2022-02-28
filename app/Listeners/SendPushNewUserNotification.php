@@ -43,7 +43,7 @@ class SendPushNewUserNotification
                     ->where('id', 85)
                     ->orWhere('id', 86)
                     ->orWhere('id', 87);
-            })->get();
+            })->pluck('device_key')->all();
 
         $serverKey = 'AAAAvNLu5aI:APA91bFzxmRimj21AEFYUTRoKPmnWjcMle_kniqhi0kpM2uB6AbHI3JSo7ZI-_hFd-Uosju8xwDEmJ9JXBr_u5l8zB1HukpsWaedDB9We7GGq1m6QA5FeJbb07SwKc23fvTGMQ4dWlsI';
 
