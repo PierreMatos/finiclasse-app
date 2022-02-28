@@ -29,27 +29,41 @@ class SendPushNewUserNotification
     {
         $url = 'https://fcm.googleapis.com/fcm/send';
 
-        $adminsAndDirectorsAndChefeByStand = User::whereNotNull('device_key')->pluck('device_key')->all();
-          
+        // $adminsAndDirectorsAndChefeByStand = User::whereNotNull('device_key')
+        // ->whereHas('roles', function ($query) {
+        //     $query->where('id', 85)->orWhere('id', 86);
+        // })
+        // ->whereHas('roles', function ($query) {
+        //     $query->where('id', 87);
+        // })->where('stand_id', $event->user->stand_id)->get();
+
+        $adminsAndDirectorsAndChefeByStand = User::where([['device_key', '!=', null]])
+            ->whereHas('roles', function ($q) {
+                $q
+                    ->where('id', 85)
+                    ->orWhere('id', 86)
+                    ->orWhere('id', 87);
+            })->get();
+
         $serverKey = 'AAAAvNLu5aI:APA91bFzxmRimj21AEFYUTRoKPmnWjcMle_kniqhi0kpM2uB6AbHI3JSo7ZI-_hFd-Uosju8xwDEmJ9JXBr_u5l8zB1HukpsWaedDB9We7GGq1m6QA5FeJbb07SwKc23fvTGMQ4dWlsI';
-  
+
         $data = [
             "registration_ids" => $adminsAndDirectorsAndChefeByStand,
             "notification" => [
                 "title" => 'Novo cliente adicionado',
-                "body" => $event->user->name,  
+                "body" => $event->user->name,
             ]
         ];
-        
+
         $encodedData = json_encode($data);
-    
+
         $headers = [
             'Authorization:key=' . $serverKey,
             'Content-Type: application/json',
         ];
-    
+
         $ch = curl_init();
-      
+
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -57,13 +71,13 @@ class SendPushNewUserNotification
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
         // Disabling SSL Certificate support temporarly
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);        
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $encodedData);
         // Execute post
         $result = curl_exec($ch);
         if ($result === FALSE) {
             die('Curl failed: ' . curl_error($ch));
-        }        
+        }
         // Close connection
         curl_close($ch);
         // // FCM response
