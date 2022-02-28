@@ -217,10 +217,13 @@ class UsersSeeder extends Seeder
         ));
 
         // atribuir roles a users
+        $this->userRepository->find(2)->assignRole('Administrador');
         $this->userRepository->find(13)->assignRole('Administrador');
         $this->userRepository->find(16)->assignRole('Administrador');
         $this->userRepository->find(17)->assignRole('Administrador');
         $this->userRepository->find(18)->assignRole('Diretor comercial');
+        $this->userRepository->find(3)->assignRole('Chefe de vendas');
+        $this->userRepository->find(4)->assignRole('Chefe de vendas');
         $this->userRepository->find(11)->assignRole('Chefe de vendas');
         $this->userRepository->find(15)->assignRole('Chefe de vendas');
         $this->userRepository->find(10)->assignRole('Vendedor');
