@@ -60,7 +60,7 @@ class WebNotificationController extends Controller
         }        
         // Close connection
         curl_close($ch);
-        // FCM response
-        dd($result);        
+        // // FCM response
+        // dd($result);        
     }
 }

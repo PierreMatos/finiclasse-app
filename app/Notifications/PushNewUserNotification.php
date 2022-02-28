@@ -32,6 +32,15 @@ class PushNewUserNotification extends Notification
         return ['database'];
     }
 
+    public function toDatabase()
+    {
+        $data =  [
+                    'message'=> 'New Posts added : '.$this->post->title,
+        ];
+        return $data;
+
+    }
+
     /**
      * Get the mail representation of the notification.
      *
