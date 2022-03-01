@@ -15,6 +15,7 @@ use Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 USE App\Mail\TradeInApproval;
+use App\Providers\PushAddTradeIn;
 use Illuminate\Support\Facades\Mail;
 
 /**
@@ -99,9 +100,6 @@ class CarAPIController extends AppBaseController
      */
     public function store(Request $request)
     {
-      
-
-
         $validator = Validator::make($request->all(), Car::$rules);
 
         $input = $request->all();
@@ -129,6 +127,11 @@ class CarAPIController extends AppBaseController
                 ->each(function ($fileAdder) {
                     $fileAdder->toMediaCollection('pos','s3');
                 });
+        }
+
+        //Push Notification TradeIn
+        if ($car->state_id == 7) {
+            event(new PushAddTradeIn($car)); 
         }
 
         return $this->sendResponse(new CarResource($car), 'Car saved successfully');

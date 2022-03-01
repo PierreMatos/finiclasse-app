@@ -20,7 +20,7 @@ class CreateCarsTable extends Migration
             $table->string('variant')->nullable();
             $table->integer('motorization')->nullable();
             $table->integer('category_id')->unsigned();
-            $table->integer('registration')->nullable();
+            $table->string('registration')->nullable();
             $table->integer('condition_id')->unsigned();
             $table->integer('state_id')->unsigned();
             $table->integer('komm')->nullable();
