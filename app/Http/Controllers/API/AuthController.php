@@ -30,6 +30,7 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string|min:6',
@@ -48,8 +49,6 @@ class AuthController extends Controller
                 'message' => 'Invalid Email or Password',
             ], 200);
         }
-
-        Auth::logoutOtherDevices($request->password);
   
         return response()->json([
             'success' => true,
