@@ -86,7 +86,7 @@ class Car extends Model implements HasMedia
     use HasFactory;
 
     public $table = 'cars';
-    
+
 
     protected $dates = ['deleted_at'];
     protected $touches = ['proposal'];
@@ -228,8 +228,7 @@ class Car extends Model implements HasMedia
         'condition_id' => 'required',
         'state_id' => 'required',
         'model_id' => 'required',
-        */
-    ];
+        */];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -312,13 +311,17 @@ class Car extends Model implements HasMedia
         return $this->belongsTo(\App\Models\Proposal::class, 'id', 'car_id');
     }
 
+    public function proposalTradeIn()
+    {
+        return $this->belongsTo(\App\Models\Proposal::class, 'id', 'tradein_id');
+    }
+
     // CREATE THUMBNAIL
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-              ->width(368)
-              ->height(232)
-              ->sharpen(10);
+            ->width(368)
+            ->height(232)
+            ->sharpen(10);
     }
-
 }
