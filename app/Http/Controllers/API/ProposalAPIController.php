@@ -27,6 +27,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Repositories\BusinessStudyRepository;
 use App\Http\Requests\API\CreateProposalAPIRequest;
 use App\Http\Requests\API\UpdateProposalAPIRequest;
+use App\Providers\PushProposalSubmitted;
 use App\Repositories\BusinessStudyAuthorizationRepository;
 
 
@@ -274,6 +275,11 @@ class ProposalAPIController extends AppBaseController
         if ($proposal->state->name == 'Fechado') {
             //Event notification
             event(new ClosedProposal($proposal));
+        }
+
+        //Push Notification Proposal Submitted
+        if ($proposal->state->name == 'Pendente') {
+            event(new PushProposalSubmitted($proposal));
         }
 
         //Push Notification TradeIn

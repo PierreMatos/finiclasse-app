@@ -44,7 +44,7 @@ class SendPushProposalSubmittedNotification
             "registration_ids" => $adminsAndDirectorsAndChefeByStand,
             "notification" => [
                 "title" => 'Nova proposta para validação',
-                "body" => 'Proposta nº  ' . $event->proposal->id . ' necessita da sua validação',
+                "body" => 'Proposta nº ' . $event->proposal->id . ' necessita da sua validação',
             ]
         ];
 
