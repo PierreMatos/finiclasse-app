@@ -3,11 +3,11 @@
 namespace App\Listeners;
 
 use App\Models\User;
-use App\Providers\PushNewUser;
+use App\Providers\PushProposalSubmitted;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendPushNewUserNotification
+class SendPushProposalSubmittedNotification
 {
     /**
      * Create the event listener.
@@ -25,7 +25,7 @@ class SendPushNewUserNotification
      * @param  object  $event
      * @return void
      */
-    public function handle(PushNewUser $event)
+    public function handle(PushProposalSubmitted $event)
     {
         $url = 'https://fcm.googleapis.com/fcm/send';
 
@@ -36,15 +36,15 @@ class SendPushNewUserNotification
                     ->orWhere('id', 86);
             })->orwhere([['device_key', '!=', null]])->WhereHas('roles', function ($query) {
                 $query->where('id', 87);
-            })->where('stand_id', $event->user->stand_id)->pluck('device_key')->all();
+            })->where('stand_id', $event->proposal->vendor->stand_id)->pluck('device_key')->all();
 
         $serverKey = env('FIREBASE_KEY');
 
         $data = [
             "registration_ids" => $adminsAndDirectorsAndChefeByStand,
             "notification" => [
-                "title" => 'Novo cliente adicionado',
-                "body" => $event->user->name,
+                "title" => 'Nova proposta para validação',
+                "body" => 'Proposta nº  ' . $event->proposal->id . ' necessita da sua validação',
             ]
         ];
 
