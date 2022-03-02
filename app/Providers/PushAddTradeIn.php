@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Car;
+use App\Models\Proposal;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -20,9 +20,9 @@ class PushAddTradeIn
      *
      * @return void
      */
-    public function __construct(Car $car)
+    public function __construct(Proposal $proposal)
     {
-        $this->car = $car;
+        $this->proposal = $proposal;
     }
 
     /**

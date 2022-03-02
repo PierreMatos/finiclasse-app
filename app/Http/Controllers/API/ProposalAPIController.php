@@ -108,8 +108,6 @@ class ProposalAPIController extends AppBaseController
      */
     public function store(Request $request)
     {
-
-
         $validator = Validator::make($request->all(), [
             'vendor_id' => 'required',
         ]);
@@ -118,10 +116,6 @@ class ProposalAPIController extends AppBaseController
 
             return $validator->errors()->toJson();
         }
-
-        // if (proposta completa) {
-        // authorization($input->id);
-        // }
 
         $initialBusinessStudy = new BusinessStudy();
         $initialBusinessStudy->save();
@@ -134,6 +128,10 @@ class ProposalAPIController extends AppBaseController
 
         $proposal = $this->proposalRepository->create($input);
 
+        //Push Notification TradeIn
+        if ($proposal->tradein !== null) {
+            event(new PushAddTradeIn($proposal)); 
+        }
 
         return $this->sendResponse(new ProposalResource($proposal), 'Proposal saved successfully');
     }
