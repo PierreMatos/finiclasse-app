@@ -130,8 +130,8 @@ class UserController extends AppBaseController
             // Something
         }
 
-        //Event for Notification
-        event(new PushNewUser($user));
+        // //Event for Notification
+        // event(new PushNewUser($user));
 
         Flash::success(__('translation.user saved'));
 
