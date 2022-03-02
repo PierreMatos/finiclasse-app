@@ -277,8 +277,10 @@ class ProposalAPIController extends AppBaseController
         }
 
         //Push Notification TradeIn
-        if ($proposal->tradein->state_id == 7) {
-            event(new PushAddTradeIn($proposal)); 
+        if ($proposal->tradein !== null) {
+            if ($proposal->tradein->state_id == 7) {
+                event(new PushAddTradeIn($proposal));
+            }
         }
 
         return $this->sendResponse(new ProposalResource($proposal), 'Proposal updated successfully');
