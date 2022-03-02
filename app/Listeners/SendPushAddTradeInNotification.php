@@ -45,8 +45,7 @@ class SendPushAddTradeInNotification
             "registration_ids" => $adminsAndDirectorsAndChefeByStand,
             "notification" => [
                 "title" => 'Nova retoma para validação',
-                "body" => 'teste',
-                // "body" => $event->car->proposalTradeIn->vendor->name,
+                "body" => 'Vendedor XXX solicitou a validação de retoma na proposta nº ' . $event->car->proposal->id,
             ]
         ];
 

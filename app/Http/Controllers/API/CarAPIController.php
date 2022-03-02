@@ -131,8 +131,7 @@ class CarAPIController extends AppBaseController
 
         //Push Notification TradeIn
         if ($car->state_id == 7) {
-            dd(event(new PushAddTradeIn($car)));
-            // event(new PushAddTradeIn($car));
+            event(new PushAddTradeIn($car)); 
         }
 
         return $this->sendResponse(new CarResource($car), 'Car saved successfully');
