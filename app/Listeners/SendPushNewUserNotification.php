@@ -32,7 +32,7 @@ class SendPushNewUserNotification
         $adminsAndDirectorsAndChefeByStand = User::where([['device_key', '!=', null]])
             ->whereHas('roles', function ($q) {
                 $q
-                    ->where('id', 85)
+                    ->where('id', 84)
                     ->orWhere('id', 86);
             })->orwhere([['device_key', '!=', null]])->WhereHas('roles', function ($query) {
                 $query->where('id', 87);
