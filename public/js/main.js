@@ -1,6 +1,6 @@
 //Firebase Push Notifications
 var firebaseConfig = {
-    apiKey: "AIzaSyAajBHYzX-TOLw1qIzrF8JqW-m6KjX_kIw",
+    apiKey: "{{ env('FIREBASE_ApiKey') }}",
     authDomain: "laravel-cronjob.firebaseapp.com",
     projectId: "laravel-cronjob",
     storageBucket: "laravel-cronjob.appspot.com",
