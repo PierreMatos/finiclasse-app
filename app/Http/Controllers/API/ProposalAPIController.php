@@ -108,6 +108,8 @@ class ProposalAPIController extends AppBaseController
      */
     public function store(Request $request)
     {
+
+
         $validator = Validator::make($request->all(), [
             'vendor_id' => 'required',
         ]);
@@ -131,6 +133,7 @@ class ProposalAPIController extends AppBaseController
         $input = $request->all();
 
         $proposal = $this->proposalRepository->create($input);
+
 
         return $this->sendResponse(new ProposalResource($proposal), 'Proposal saved successfully');
     }
@@ -279,10 +282,6 @@ class ProposalAPIController extends AppBaseController
             event(new ClosedProposal($proposal));
         }
 
-         //Push Notification TradeIn
-         if ($proposal->car->state_id == 7) {
-            event(new PushAddTradeIn($proposal)); 
-        }
 
         return $this->sendResponse(new ProposalResource($proposal), 'Proposal updated successfully');
     }
