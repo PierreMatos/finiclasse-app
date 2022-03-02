@@ -128,11 +128,6 @@ class ProposalAPIController extends AppBaseController
 
         $proposal = $this->proposalRepository->create($input);
 
-        //Push Notification TradeIn
-        if ($proposal->tradein !== null) {
-            event(new PushAddTradeIn($proposal)); 
-        }
-
         return $this->sendResponse(new ProposalResource($proposal), 'Proposal saved successfully');
     }
 
@@ -280,6 +275,10 @@ class ProposalAPIController extends AppBaseController
             event(new ClosedProposal($proposal));
         }
 
+         //Push Notification TradeIn
+         if ($proposal->tradein !== null) {
+            event(new PushAddTradeIn($proposal)); 
+        }
 
         return $this->sendResponse(new ProposalResource($proposal), 'Proposal updated successfully');
     }
