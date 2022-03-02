@@ -11,6 +11,7 @@ use App\Mail\TradeInApproval;
 use App\Models\BusinessStudy;
 use App\Mail\ProposalApproval;
 use App\Providers\ClosedProposal;
+use App\Providers\PushAddTradeIn;
 use App\Providers\SharedProposal;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\MessageBag;
@@ -275,8 +276,8 @@ class ProposalAPIController extends AppBaseController
             event(new ClosedProposal($proposal));
         }
 
-         //Push Notification TradeIn
-         if ($proposal->tradein !== null) {
+        //Push Notification TradeIn
+        if ($proposal->tradein !== null) {
             event(new PushAddTradeIn($proposal)); 
         }
 
