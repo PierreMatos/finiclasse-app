@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Models\User;
+use App\Models\Proposal;
 use App\Providers\PushAddTradeIn;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -14,9 +15,9 @@ class SendPushAddTradeInNotification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Proposal $proposal)
     {
-        //
+        $this->proposal = $proposal;
     }
 
     /**
@@ -45,7 +46,7 @@ class SendPushAddTradeInNotification
             "registration_ids" => $adminsAndDirectorsAndChefeByStand,
             "notification" => [
                 "title" => 'Nova retoma para validação',
-                "body" => 'Vendedor XXX solicitou a validação de retoma na proposta nº ' . $event->car->proposal->id,
+                "body" => 'Vendedor XXX solicitou a validação de retoma na proposta nº ' . $event->proposal->id,
             ]
         ];
 
