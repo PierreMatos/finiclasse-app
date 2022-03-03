@@ -30,10 +30,9 @@ class SendPushAddTradeInNotification
         $url = 'https://fcm.googleapis.com/fcm/send';
 
         $adminsAndDirectorsAndChefeByStand = User::where([['device_key', '!=', null]])
-            ->whereHas('roles', function ($q) {
-                $q
-                    ->whereIn('roles.name', ['Administrador', 'Diretor comercial'])
-                    ->orWhere('id', 86);
+            ->whereHas('roles', function ($query) {
+                $query
+                    ->whereIn('roles.name', ['Administrador', 'Diretor comercial']);
             })->orwhere([['device_key', '!=', null]])->WhereHas('roles', function ($query) {
                 $query->where('roles.name', 'Chefe de vendas');
             })->where('stand_id', $event->proposal->vendor->stand_id)->pluck('device_key')->all();

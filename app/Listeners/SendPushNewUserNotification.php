@@ -30,12 +30,11 @@ class SendPushNewUserNotification
         $url = 'https://fcm.googleapis.com/fcm/send';
 
         $adminsAndDirectorsAndChefeByStand = User::where([['device_key', '!=', null]])
-            ->whereHas('roles', function ($q) {
-                $q
-                    ->where('id', 85)
-                    ->orWhere('id', 86);
+            ->whereHas('roles', function ($query) {
+                $query
+                    ->whereIn('roles.name', ['Administrador', 'Diretor comercial']);
             })->orwhere([['device_key', '!=', null]])->WhereHas('roles', function ($query) {
-                $query->where('id', 87);
+                $query->where('roles.name', 'Chefe de vendas');
             })->where('stand_id', $event->user->stand_id)->pluck('device_key')->all();
 
         $serverKey = env('FIREBASE_KEY');

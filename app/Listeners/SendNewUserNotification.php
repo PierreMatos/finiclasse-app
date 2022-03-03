@@ -29,9 +29,9 @@ class SendNewUserNotification
     public function handle($event)
     {
         $adminsAndDirectorsAndChefeByStand = User::whereHas('roles', function ($query) {
-            $query->where('id', 85)->orWhere('id', 86);
+            $query->whereIn('roles.name', ['Administrador', 'Diretor comercial']);
         })->orWhereHas('roles', function ($query) {
-            $query->where('id', 87);
+            $query->where('roles.name', 'Chefe de vendas');
         })->where('stand_id', $event->user->stand_id)->get();
 
         Notification::send($adminsAndDirectorsAndChefeByStand, new NewUserNotification($event->user));
