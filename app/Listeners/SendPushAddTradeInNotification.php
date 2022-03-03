@@ -32,10 +32,10 @@ class SendPushAddTradeInNotification
         $adminsAndDirectorsAndChefeByStand = User::where([['device_key', '!=', null]])
             ->whereHas('roles', function ($q) {
                 $q
-                    ->where('id', 85)
+                    ->whereIn('roles.name', ['Administrador', 'Diretor comercial'])
                     ->orWhere('id', 86);
             })->orwhere([['device_key', '!=', null]])->WhereHas('roles', function ($query) {
-                $query->where('id', 87);
+                $query->where('roles.name', 'Chefe de vendas');
             })->where('stand_id', $event->proposal->vendor->stand_id)->pluck('device_key')->all();
 
         $serverKey = env('FIREBASE_KEY');
