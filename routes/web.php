@@ -164,7 +164,7 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
 
     //Proposta Comercial
     Route::get('/mailable', function () {
-        $proposal = App\Models\Proposal::find(924);
+        $proposal = App\Models\Proposal::find(1);
 
         return new App\Mail\ProposalOrder($proposal);
     });;
@@ -178,14 +178,14 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
 
     //Notificação negócio para validação
     Route::get('/mailable3', function () {
-        $proposal = App\Models\Proposal::find(924);
+        $proposal = App\Models\Proposal::find(1);
 
         return new App\Mail\ProposalApproval($proposal);
     });
 
     //Notificação retoma para validação
     Route::get('/mailable4', function () {
-        $proposal = App\Models\Proposal::find(924);
+        $proposal = App\Models\Proposal::find(1);
 
         return new App\Mail\TradeInApproval($proposal);
     });
