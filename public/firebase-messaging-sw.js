@@ -7,7 +7,7 @@ importScripts("https://www.gstatic.com/firebasejs/8.3.2/firebase-messaging.js");
 Initialize the Firebase app in the service worker by passing in the messagingSenderId.
 */
 firebase.initializeApp({
-    apiKey: "AIzaSyAajBHYzX-TOLw1qIzrF8JqW-m6KjX_kIw",
+    apiKey: "{{ env('FIREBASE_API') }}",
     authDomain: "laravel-cronjob.firebaseapp.com",
     projectId: "laravel-cronjob",
     storageBucket: "laravel-cronjob.appspot.com",
