@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class ResumeDaily extends Mailable
+class ResumeWeekly extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -46,7 +46,7 @@ class ResumeDaily extends Mailable
             return $this->from('info@remotepartner.co', 'Finiclasse')
                 ->to($item->email)
                 ->subject('Resumo Finiclasse')
-                ->markdown('mail.resumeDaily');
+                ->markdown('mail.resumeWeekly');
         });
     }
 }

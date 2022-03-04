@@ -14,6 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\DailyQuote::class,
+        Commands\WeeklyQuote::class,
+        Commands\MonthlyQuote::class,
     ];
 
     /**
@@ -24,9 +26,14 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
         $schedule->command('quote:daily')
-            ->everyMinute();
+            ->dailyAt('18:00')->weekdays();
+
+        $schedule->command('quote:weekly')
+            ->weeklyOn(1, '9:00');
+
+        $schedule->command('quote:monthly')
+            ->monthly('9:00');
     }
 
     /**
