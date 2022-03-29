@@ -166,7 +166,7 @@ class BusinessStudyController extends AppBaseController
             $proposal->save();
         }
 
-        return response()->json(['success'=> 'Negócio aceite com sucesso!!!']);
+        return response()->json(['success'=> 'Negócio aceite com sucesso']);
 
     }
 }
