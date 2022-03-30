@@ -396,20 +396,27 @@
                 </div>
             </div>
 
-            <div class="row mt-5 mb-5 justify-content-center">
-                <div class="form-group row" role="group" aria-label="Basic example">
-                    <div class="col-6">
-                        <button type="button"
-                        id="{{ isset($proposal->initialBusinessStudy->id) ? $proposal->initialBusinessStudy->id : '' }}"
-                            value="4" class="btn btn-success businessAuth"> Aceitar</button>
-                    </div>
-                    <div class="col-6">
-                        <button type="button"
+            @if (isset($proposal->initialBusinessStudy->id))
+                @if($proposal->state_id == 3)
+
+                <div class="row mt-5 mb-5 justify-content-center">
+                    <div class="form-group row" role="group" aria-label="Basic example">
+                        <div class="col-6">
+                            <button type="button"
                             id="{{ isset($proposal->initialBusinessStudy->id) ? $proposal->initialBusinessStudy->id : '' }}"
-                            value="5" class="btn btn-danger"> Rejeitar</button>
+                                value="4" class="btn btn-success businessAuth"> Aceitar</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button"
+                                id="{{ isset($proposal->initialBusinessStudy->id) ? $proposal->initialBusinessStudy->id : '' }}"
+                                value="5" class="btn btn-danger"> Rejeitar</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+
+                @endif
+            @endif
+            
         </div>
 
         <div class="container mt-5">

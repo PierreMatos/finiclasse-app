@@ -157,12 +157,13 @@ class BusinessStudyController extends AppBaseController
     public function businessAuth($id, Request $request){
 
         if ($id && $request->value){
-            
             $businessStudy = $this->businessStudyRepository->find($id);
-            
             $businessStudy->business_study_authorization_id = $request->value;
+            $proposal = $businessStudy->initialProposal;
+            $proposal->state_id = 1;
             
             $businessStudy->save();
+            $proposal->save();
         }
 
         return response()->json(['success'=> 'Negócio aceite com sucesso']);
