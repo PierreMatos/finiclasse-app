@@ -561,7 +561,7 @@ class ProposalAPIController extends AppBaseController
                 // dd($discPerc);
                 if ($proposal->car->condition_id == 1) {
 
-                    if ($discPerc >= $min && $discPerc <= $max && ($authorization->id !== 1 || $authorization->id !== 2 ||$authorization->id !== 3 )) {
+                    if ($discPerc >= $min && $discPerc <= $max && ($authorization->id == 1 || $authorization->id == 2 ||$authorization->id == 3 )) {
                         
                         if ($authorization->id !== 1) {
                             $proposal->state_id = 3;
@@ -573,6 +573,7 @@ class ProposalAPIController extends AppBaseController
 
 
                         }
+
 
                         // $proposal->save();
 
