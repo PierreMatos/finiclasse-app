@@ -622,6 +622,15 @@ class ProposalAPIController extends AppBaseController
         }
         // dd($discPerc);
 
+
+            // CASO A RETOMA ESTEJA POR VALIDAR VOLTA A COLOCAR O ESTADO DA PROPOSTA COMO PENDENTE
+            //TODO COLOCAR ALTERAÇÃO DE ESTADOS DA PROPOSTA COMO EVENTO 
+        if ($proposal->tradein->state_id == 7){
+            $proposal->state_id = 3;
+            $proposal->save();
+            // dd($proposal->tradein->state_id);
+        }
+
         $results = [
             'base_price' => $basePrice,
             'total_extras' =>  $proposal->car->extras_total,
