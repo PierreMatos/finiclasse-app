@@ -31,23 +31,31 @@
 
             </li>
             <li class="nav-item" role="presentation">
-
                 @if (isset($proposal->tradein))
                     @if ($proposal->tradein->state_id == 7)
                         <a class="nav-link badge-warning" id="tradein-tab" data-toggle="tab" href="#tradeins" role="tab"
+                            aria-controls="tradein" aria-selected="false">{{ __('Tradein') }}</a>
+                    @elseif($proposal->tradein->state_id == 8)
+                        <a class="nav-link badge-success" id="tradein-tab" data-toggle="tab" href="#tradeins" role="tab"
                             aria-controls="tradein" aria-selected="false">{{ __('Tradein') }}</a>
                     @endif
                 @else
                     <a class="nav-link disabled" id="tradein-tab" data-toggle="tab" href="#tradeins" role="tab"
                         aria-controls="tradein" aria-selected="false">{{ __('Tradein') }}</a>
                 @endif
-
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="campaigns-tab" data-toggle="tab" href="#campaigns" role="tab"
+                    aria-controls="campaigns" aria-selected="false">{{ __('Campaigns') }}</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="benefits-tab" data-toggle="tab" href="#benefits" role="tab"
+                    aria-controls="benefits" aria-selected="false">{{ __('Benefits') }}</a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="financings-tab" data-toggle="tab" href="#financings" role="tab"
                     aria-controls="financings" aria-selected="false">{{ __('Financing') }}</a>
             </li>
-
             @if (isset($proposal->initialBusinessStudy->business_study_authorization_id) && ($proposal->initialBusinessStudy->business_study_authorization_id == 2 || $proposal->initialBusinessStudy->business_study_authorization_id == 3))
                 <li class="nav-item" role="presentation">
                     <a class="nav-link badge-warning" id="proposals-tab" data-toggle="tab" href="#proposals" role="tab"
@@ -64,7 +72,6 @@
                         aria-controls="proposals" aria-selected="false">{{ __('Proposal') }}</a>
                 </li>
             @endif
-
         </ul>
 
         <div class="card">

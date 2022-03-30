@@ -164,7 +164,7 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
 
     //Proposta Comercial
     Route::get('/mailable', function () {
-        $proposal = App\Models\Proposal::find(1);
+        $proposal = App\Models\Proposal::find(57);
 
         return new App\Mail\ProposalOrder($proposal);
     });;
@@ -178,14 +178,14 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
 
     //Notificação negócio para validação
     Route::get('/mailable3', function () {
-        $proposal = App\Models\Proposal::find(1);
+        $proposal = App\Models\Proposal::find(57);
 
         return new App\Mail\ProposalApproval($proposal);
     });
 
     //Notificação retoma para validação
     Route::get('/mailable4', function () {
-        $proposal = App\Models\Proposal::find(1);
+        $proposal = App\Models\Proposal::find(57);
 
         return new App\Mail\TradeInApproval($proposal);
     });
@@ -230,3 +230,6 @@ Route::get('thankyou', function () {
 });
 
 Route::POST('/tradeinaction', [CarController::class, 'carState'])->name('tradeinaction');
+
+//Apagar depois dos testes
+Route::get('/send_proposal/{id}', [App\Http\Controllers\API\ProposalAPIController::class, 'sendProposal'])->name('send_proposal');

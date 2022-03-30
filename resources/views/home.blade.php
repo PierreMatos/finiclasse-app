@@ -12,7 +12,6 @@
         </div>
     </section>
 
-
     <!-- <div class="container"> -->
     <div class="row">
 
@@ -30,8 +29,6 @@
                 <a href="/cars" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-
-
 
         <div class="col-lg-3 col-6">
             <!-- small box -->
@@ -77,7 +74,6 @@
                 <a href="/proposals" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-
     </div>
 
     <div class="col-lg-12">
@@ -93,32 +89,30 @@
                             <th>Carro</th>
                             <th>Cliente</th>
                             <th>Vendedor</th>
+                            <th>Criada</th>
+                            <th>Atualizada</th>
                             <th>Ver mais</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($latestProposal as $proposal)
-                            <tr>
-
-                                
+                            <tr> 
                                 @if (!$proposal->car->getFirstMediaUrl('cars', 'thumb'))
                                     <td><img src="storage/images/noPhoto.jpg" class="imgCar" /></td>
                                 @else
                                     <td><img src="{{ $proposal->car->getFirstMediaUrl('cars', 'thumb') }}" style="max-width: 100px;" class="imgCar" /></td>
                                 @endif
-
-                                 
                                 <td>{{ isset($proposal->car->model->make->name) ? $proposal->car->model->make->name : '' }}
                                 </td>
                                 <td>{{ isset($proposal->client->name) ? $proposal->client->name : '' }}</td>
                                 <td>{{ isset($proposal->vendor->name) ? $proposal->vendor->name : '' }}</td>
-
+                                <td>{{ isset($proposal->created_at) ? $proposal->created_at : '' }}</td>
+                                <td>{{ isset($proposal->updated_at) ? $proposal->updated_at : '' }}</td>
                                 <td class="">
                                     <a href="/proposals/{{ $proposal->id }}/edit" class="text-muted">
                                         <i class="fas fa-search"></i>
                                     </a>
                                 </td>
-
                             </tr>
                         @endforeach
 

@@ -1,10 +1,8 @@
 @component('mail::message')
 <h1 style="text-align: center; font-size: 20px; font-weight: bold; text-decoration: underline;">Proposta Comercial</h1>
 
-<br><br>
-<div>
-    <p style="line-height: 0em;">Obrigado pela sua preferência!</p>
-</div>
+<br>
+<p style="text-align: center;">Obrigado pela sua preferência!</p>
 
 @component('mail::table')
   <table style="border-collapse: collapse;">
@@ -31,6 +29,9 @@
             <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Viatura</th>
         </tr>
         @if (!$proposal->car->getFirstMediaUrl('cars'))
+            <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
+                <td style="padding: 0px;"><img src="{{ asset('storage/images/finiclasse.png') }}" /></td>
+            </tr>
         @else
             <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
                 <td style="padding: 0px;"> <img src="{{ asset($proposal->car->getFirstMediaUrl('cars'))}}" /> </td>
@@ -50,15 +51,21 @@
     </table>
 @endcomponent
 
-@if(isset($proposal->tradein_id))
-    @component('mail::table')
+@component('mail::table')
+    @if(isset($proposal->tradein_id))
         <table style="border-collapse: collapse;">
             <tr style="border-bottom: 1px solid #C2C2C2;">
                 <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Retoma</th>
             </tr>
+            @if (!$proposal->tradein->getFirstMediaUrl('cars'))
+                <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
+                    <td style="padding: 0px;"><img src="storage/images/finiclasse.png" /></td>
+                </tr>
+            @else
             <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
-                <td style="padding: 0px;"><img src="{{ asset($proposal->car->getFirstMediaUrl('cars'))}}" /></td>
+                <td style="padding: 0px;"><img src="{{ asset($proposal->tradein->getFirstMediaUrl('cars'))}}" /></td>
             </tr>
+            @endif
             <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
                 <td style="padding: 10px;">Marca: <b>{{$proposal->tradein->model->make->name}}</b></td>
                 <td style="padding: 10px;">Modelo: <b>{{$proposal->tradein->model->name}}</b></td>
@@ -71,8 +78,24 @@
                 <td style="padding: 10px;">Valor: <b>{{$proposal->tradein->tradein_purchase}}</b></td>
             </tr>
         </table>
-    @endcomponent
+    @endif
+@endcomponent
+
+@component('mail::table')
+@if ($proposal->campaigns->isNotEmpty())
+    <table style="border-collapse: collapse;">
+            <tr style="border-bottom: 1px solid #C2C2C2;">
+                <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Campanha</th>
+            </tr>
+                @foreach ($proposal->campaigns as $campaign)
+                    <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+                        <td style="padding: 10px;">Tipo: <b>{{$campaign->pivot->name}}</b></td>
+                        <td style="padding: 10px;"><b>{{$campaign->pivot->value}} {{$campaign->pivot->type}}</b></td>
+                    </tr>
+                @endforeach
+    </table>
 @endif
+@endcomponent
 
 @component('mail::table')
 @if ($proposal->benefits->isNotEmpty())
@@ -80,12 +103,12 @@
             <tr style="border-bottom: 1px solid #C2C2C2;">
                 <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Apoio</th>
             </tr>
-                @foreach ( $proposal->benefits as $benefit)
-                <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
-                        <td style="padding: 10px;">Tipo: <b>{{$benefit->name}}</b></td>
+                @foreach ($proposal->benefits as $benefit)
+                    <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+                        <td style="padding: 10px;">Tipo: <b>{{$benefit->pivot->name}}</b></td>
                         <td style="padding: 10px;"><b>{{$benefit->pivot->value}} {{$benefit->pivot->type}}</b></td>
-                        @endforeach
-                </tr>
+                    </tr>
+                @endforeach
     </table>
 @endif
 @endcomponent
@@ -93,19 +116,20 @@
 @component('mail::table')
 @if ($proposal->financings->isNotEmpty())
     <table style="border-collapse: collapse;">
-                <tr style="border-bottom: 1px solid #C2C2C2;">
-                    <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Financiamento</th>
-                </tr>
-                @foreach ( $proposal->financings as $financing)
+        <tr style="border-bottom: 1px solid #C2C2C2;">
+            <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Financiamento</th>
+        </tr>
+            @foreach ($proposal->financings as $financing)
                 <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
                     <td style="padding: 10px;">Tipo: <b>{{$financing->name}}</b></td>
                 </tr>
-                @endforeach
+            @endforeach
     </table>
 @endif
 @endcomponent
 
 @component('mail::table')
+@if ($proposal->tradein_id)
     <table style="border-collapse: collapse;">
         <tr style="border-bottom: 1px solid #C2C2C2;">
             <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Proposta Nº {{$proposal->id}}</th>
@@ -123,8 +147,18 @@
             <td style="padding: 10px;"><b>{{$proposal->finalBusinessStudy->sale ?? $proposal->initialBusinessStudy->sale}} €</b></td>
         </tr>
     </table>
+@endif
 @endcomponent
+@if ($proposal->comment)
+<div style="font-weight: bold; text-align: center;">Nota do vendedor</div>
+<br>
+<div style="padding-bottom: 10px;">
+    <p style="text-align: center;"> {{ $proposal->comment }}</p>
+</div>
+<hr style="text-align: center; width: 50%;">
+@endif
 
+<br>
 <div>
     <p style="text-align: center;">Caso tenha alguma dúvida não hesite em contactar-nos!</p>
 </div>
@@ -133,7 +167,7 @@
 
 <div style="font-weight: bold; text-align: center;">
     {{ $proposal->vendor->name }},
-
+    
     {{ $proposal->vendor->email }}
     {{ $proposal->vendor->mobile_phone }}
 </div>

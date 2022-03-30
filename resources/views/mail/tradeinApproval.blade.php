@@ -9,9 +9,15 @@
         <tr style="border-bottom: 1px solid #C2C2C2;">
             <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Retoma</th>
         </tr>
-        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
-            <td style="padding: 0px;"><img src="{{ asset($proposal->car->getFirstMediaUrl('cars'))}}" /></td>
-        </tr>
+        @if (!$proposal->tradein->getFirstMediaUrl('cars'))
+            <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
+                <td style="padding: 0px;"><img src="{{ asset('storage/images/finiclasse.png') }}" /></td>
+            </tr>
+        @else
+            <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
+                <td style="padding: 0px;"><img src="{{ asset($proposal->tradein->getFirstMediaUrl('cars'))}}" /></td>
+            </tr>
+        @endif
         <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
             <td style="padding: 10px;">Marca: <b>{{ $proposal->tradein->model->make->name }}</b></td>
             <td style="padding: 10px;">Modelo: <b>{{ $proposal->tradein->model->name }}</b></td>
