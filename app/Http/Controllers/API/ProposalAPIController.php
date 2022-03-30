@@ -507,7 +507,7 @@ class ProposalAPIController extends AppBaseController
                 $discPerc = ($desc / ($totalBenefits + $subTotal - ($ptl + $sigpu + $totalTransf))) * 100;
                 if ($discPerc < 0) {
                     $discPerc = 0;
-                }elseif($discPerc > 100){
+                }if($discPerc > 100){
                     $discPerc = 100;
                 }
             } else {
