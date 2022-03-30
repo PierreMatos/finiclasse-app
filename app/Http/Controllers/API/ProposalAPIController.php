@@ -561,17 +561,20 @@ class ProposalAPIController extends AppBaseController
                 // dd($discPerc);
                 if ($proposal->car->condition_id == 1) {
 
-                    if ($discPerc >= $min && $discPerc <= $max && $authorization->id !== 6) {
+                    if ($discPerc >= $min && $discPerc <= $max && ($authorization->id !== 1 || $authorization->id !== 2 ||$authorization->id !== 3 )) {
                         
                         if ($authorization->id !== 1) {
                             $proposal->state_id = 3;
-                            // $proposal->save();
+                            $proposal->save();
 
                         } elseif ($authorization->id == 1 && $proposal->state->id !== 2 && $proposal->state->id !== 4) {
                             $proposal->state_id = 1;
+                            $proposal->save();
+
+
                         }
 
-                        $proposal->save();
+                        // $proposal->save();
 
                         $business_study_authorization_id = $authorization->id;
                         // return $business_study_authorization_id;
@@ -580,12 +583,10 @@ class ProposalAPIController extends AppBaseController
                     }
                 }
             }
-
             
             if ($proposal->car->condition_id == 2 || $proposal->car->condition_id == 4) {
 
                 // $auth = $authorizations->find(6);
-
                 if ($margin < 0) {
 
                     // if ($authorization->id !== 1){
@@ -618,6 +619,7 @@ class ProposalAPIController extends AppBaseController
 
             return 'car not found';
         }
+        // dd($discPerc);
 
         $results = [
             'base_price' => $basePrice,
