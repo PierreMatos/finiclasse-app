@@ -37,7 +37,7 @@ class SendPushAddTradeInNotification
                 $query->where('roles.name', 'Chefe de vendas');
             })->where('stand_id', $event->proposal->vendor->stand_id)->pluck('device_key')->all();
 
-        $serverKey = env('FIREBASE_KEY');
+        $serverKey = 'AAAAvNLu5aI:APA91bFzxmRimj21AEFYUTRoKPmnWjcMle_kniqhi0kpM2uB6AbHI3JSo7ZI-_hFd-Uosju8xwDEmJ9JXBr_u5l8zB1HukpsWaedDB9We7GGq1m6QA5FeJbb07SwKc23fvTGMQ4dWlsI';
 
         $data = [
             "registration_ids" => $adminsAndDirectorsAndChefeByStand,
