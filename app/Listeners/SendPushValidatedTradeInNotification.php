@@ -37,7 +37,7 @@ class SendPushValidatedTradeInNotification
             "registration_ids" => $vendors,
             "notification" => [
                 "title" => 'Retoma validada',
-                "body" => 'Proposta ' . $event->car->proposal->id,
+                "body" => 'Proposta ' . $event->car->proposal->first()->id,
             ]
         ];
 

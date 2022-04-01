@@ -229,7 +229,7 @@ Route::get('thankyou', function () {
     return view('thankyou');
 });
 
-Route::POST('/tradeinaction', [CarController::class, 'carState'])->name('tradeinaction');
+Route::post('/tradeinaction', [CarController::class, 'carState'])->name('tradeinaction');
 
 //Apagar depois dos testes
 Route::get('/send_proposal/{id}', [App\Http\Controllers\API\ProposalAPIController::class, 'sendProposal'])->name('send_proposal');
