@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Providers\NewCar;
 use App\Providers\NewLead;
+use App\Providers\PushNewLead;
 use App\Providers\PushNewUser;
 use App\Providers\ClosedProposal;
 use App\Providers\PushAddTradeIn;
@@ -13,6 +14,7 @@ use App\Providers\PushProposalSubmitted;
 use App\Listeners\SendNewCarNotification;
 use App\Listeners\SendNewLeadNotification;
 use App\Listeners\SendNewUserNotification;
+use App\Listeners\SendPushNewLeadNotification;
 use App\Listeners\SendPushNewUserNotification;
 use App\Listeners\SendClosedProposalNotification;
 use App\Listeners\SendPushAddTradeInNotification;
@@ -53,6 +55,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         PushProposalSubmitted::class => [
             SendPushProposalSubmittedNotification::class
+        ],
+        PushNewLead::class => [
+            SendPushNewLeadNotification::class
         ],
     ];
 
