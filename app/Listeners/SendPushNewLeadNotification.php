@@ -37,7 +37,7 @@ class SendPushNewLeadNotification
             "registration_ids" => $vendors,
             "notification" => [
                 "title" => 'Nova lead atribuída',
-                "body" => 'Cliente ' . $event->user->leads->client_id,
+                "body" => 'Cliente ' . $event->user->name,
             ]
         ];
 
