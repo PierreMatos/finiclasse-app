@@ -20,6 +20,7 @@ use App\Repositories\CarModelRepository;
 use App\Repositories\CarStateRepository;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\AppBaseController;
+use App\Providers\PushValidatedTradeIn;
 use App\Repositories\CarCategoryRepository;
 use App\Repositories\CarConditionRepository;
 use App\Repositories\CarTransmissionRepository;
@@ -359,6 +360,11 @@ class CarController extends AppBaseController
 
         //update $car with $state
         $car = $this->carRepository->update(['state_id' => $request->state, 'tradein_purchase' => $request->price], $request->car);
+
+        //Push Validated TradeIn
+         if ($car->state_id == 8) {
+            event(new PushValidatedTradeIn($car));
+        }
 
         // return response()->json(['success'=> 'Retoma editada com sucesso']);
 

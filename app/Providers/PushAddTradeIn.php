@@ -15,6 +15,8 @@ class PushAddTradeIn
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $proposal;
+
     /**
      * Create a new event instance.
      *

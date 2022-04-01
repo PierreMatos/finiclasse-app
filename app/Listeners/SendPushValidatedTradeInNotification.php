@@ -3,11 +3,11 @@
 namespace App\Listeners;
 
 use App\Models\User;
-use App\Providers\PushNewLead;
+use App\Providers\PushValidatedTradeIn;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendPushNewLeadNotification
+class SendPushValidatedTradeInNotification
 {
     /**
      * Create the event listener.
@@ -25,7 +25,7 @@ class SendPushNewLeadNotification
      * @param  object  $event
      * @return void
      */
-    public function handle(PushNewLead $event)
+    public function handle(PushValidatedTradeIn $event)
     {
         $url = 'https://fcm.googleapis.com/fcm/send';
 
@@ -36,8 +36,8 @@ class SendPushNewLeadNotification
         $data = [
             "registration_ids" => $vendors,
             "notification" => [
-                "title" => 'Nova lead atribuída',
-                "body" => 'Cliente ' . $event->user->name,
+                "title" => 'Retoma validada',
+                "body" => 'Proposta ' . $event->car->proposal->id,
             ]
         ];
 
