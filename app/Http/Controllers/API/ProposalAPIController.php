@@ -286,7 +286,7 @@ class ProposalAPIController extends AppBaseController
         if ($proposal->tradein->state_id == 7) {
             event(new PushAddTradeIn($proposal));
         }
-
+        
         return $this->sendResponse(new ProposalResource($proposal), 'Proposal updated successfully');
     }
 
