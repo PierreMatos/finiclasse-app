@@ -31,7 +31,7 @@ class SendPushNewLeadNotification
 
         $vendors = User::where([['device_key', '!=', null]])->pluck('device_key')->all();
 
-        $serverKey = env('FIREBASE_SERVER_KEY');
+        $serverKey = env('FIREBASE_SERVER_KEY', true);
 
         $data = [
             "registration_ids" => $vendors,
