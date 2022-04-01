@@ -24,10 +24,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css"
         integrity="sha512-8vq2g5nHE062j3xor4XxPeZiPjmRDh6wlufQlfC6pdQ/9urJkU07NM0tEREeymP++NczacJ/Q59ul+/K2eYvcg=="
         crossorigin="anonymous" />
-
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 
 <body class="hold-transition login-page">
@@ -57,8 +53,61 @@
     <!-- Scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-messaging.js"></script>
-    <script src="{{ URL::asset('js/main.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 </body>
 
 </html>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script>
+    var firebaseConfig = {
+        apiKey: "AIzaSyAajBHYzX-TOLw1qIzrF8JqW-m6KjX_kIw",
+        authDomain: "laravel-cronjob.firebaseapp.com",
+        projectId: "laravel-cronjob",
+        storageBucket: "laravel-cronjob.appspot.com",
+        messagingSenderId: "810992723362",
+        appId: "1:810992723362:web:a6ebea1ecba4ab245a3efb"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const messaging = firebase.messaging();
+
+    function startFCM() {
+        messaging
+            .requestPermission()
+            .then(function() {
+                return messaging.getToken()
+            })
+            .then(function(response) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: '/store-token',
+                    type: 'POST',
+                    data: {
+                        token: response
+                    },
+                    dataType: 'JSON',
+                    success: function(response) {
+                        alert('Token Guardado.');
+                    },
+                    error: function(error) {
+                        alert(error);
+                    },
+                });
+            }).catch(function(error) {
+                alert(error);
+            });
+    }
+    messaging.onMessage(function(payload) {
+        const title = payload.notification.title;
+        const options = {
+            body: payload.notification.body,
+            icon: payload.notification.icon,
+        };
+        new Notification(title, options);
+    });
+</script>
