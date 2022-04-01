@@ -358,13 +358,13 @@ class CarController extends AppBaseController
 
         // } else {
 
-        //Push Validated TradeIn
-        if ($request->state == 8) {
-            event(new PushValidatedTradeIn($car));
-        }
-
         //update $car with $state
         $car = $this->carRepository->update(['state_id' => $request->state, 'tradein_purchase' => $request->price], $request->car);
+
+        // //Push Validated TradeIn
+        // if ($request->state == 8) {
+        //     event(new PushValidatedTradeIn($car));
+        // }
 
         // return response()->json(['success'=> 'Retoma editada com sucesso']);
 
