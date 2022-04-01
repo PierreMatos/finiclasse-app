@@ -29,21 +29,15 @@ class SendPushNewLeadNotification
     {
         $url = 'https://fcm.googleapis.com/fcm/send';
 
-        $adminsAndDirectorsAndChefeByStand = User::where([['device_key', '!=', null]])
-            ->whereHas('roles', function ($query) {
-                $query
-                    ->whereIn('roles.name', ['Administrador', 'Diretor comercial']);
-            })->orwhere([['device_key', '!=', null]])->WhereHas('roles', function ($query) {
-                $query->where('roles.name', 'Chefe de vendas');
-            })->where('stand_id', $event->user->stand_id)->pluck('device_key')->all();
+        $vendors = User::where([['device_key', '!=', null]])->pluck('device_key')->all();
 
         $serverKey = 'AAAAvNLu5aI:APA91bFzxmRimj21AEFYUTRoKPmnWjcMle_kniqhi0kpM2uB6AbHI3JSo7ZI-_hFd-Uosju8xwDEmJ9JXBr_u5l8zB1HukpsWaedDB9We7GGq1m6QA5FeJbb07SwKc23fvTGMQ4dWlsI';
 
         $data = [
-            "registration_ids" => $adminsAndDirectorsAndChefeByStand,
+            "registration_ids" => $vendors,
             "notification" => [
-                "title" => 'Novo cliente adicionado',
-                "body" => $event->user->name,
+                "title" => 'Nova lead atribuída',
+                "body" => 'Cliente ' . $event->user->leads->client_id,
             ]
         ];
 

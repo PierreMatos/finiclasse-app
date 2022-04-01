@@ -22,6 +22,7 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\ClientTypeRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Providers\PushNewLead;
 use App\Providers\PushNewUser;
 
 class UserController extends AppBaseController
@@ -122,6 +123,9 @@ class UserController extends AppBaseController
 
             //Event for Notification
             event(new NewLead($user));
+
+            //Event Push Notification
+            event(new PushNewLead($user));
         }
 
         if ($user->gdpr_type == "email") {
@@ -240,6 +244,9 @@ class UserController extends AppBaseController
 
             //Event for Notification
             event(new NewLead($user));
+
+            //Event Push Notification
+            event(new PushNewLead($user));
         }
 
         Flash::success(__('translation.user updated'));
