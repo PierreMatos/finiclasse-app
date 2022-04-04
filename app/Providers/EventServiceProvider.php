@@ -13,6 +13,7 @@ use App\Providers\SharedProposal;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\PushValidatedTradeIn;
 use App\Providers\PushProposalSubmitted;
+use App\Providers\PushValidatedProposal;
 use App\Listeners\SendNewCarNotification;
 use App\Listeners\SendNewLeadNotification;
 use App\Listeners\SendNewUserNotification;
@@ -24,6 +25,7 @@ use App\Listeners\SendPushAddTradeInNotification;
 use App\Listeners\SendSharedProposalNotification;
 use App\Listeners\SendPushValidatedTradeInNotification;
 use App\Listeners\SendPushProposalSubmittedNotification;
+use App\Listeners\SendPushValidatedProposalNotification;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -68,6 +70,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         PushRGPD::class => [
             SendPushRGPDNotification::class
+        ],
+        PushValidatedProposal::class => [
+            SendPushValidatedProposalNotification::class
         ],
     ];
 

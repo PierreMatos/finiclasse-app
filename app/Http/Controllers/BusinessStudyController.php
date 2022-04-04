@@ -6,6 +6,7 @@ use App\Http\Requests\CreateBusinessStudyRequest;
 use App\Http\Requests\UpdateBusinessStudyRequest;
 use App\Repositories\BusinessStudyRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Providers\PushValidatedProposal;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
@@ -164,6 +165,11 @@ class BusinessStudyController extends AppBaseController
             
             $businessStudy->save();
             $proposal->save();
+        }
+
+        //Push Validated Proposal Notification
+        if ($businessStudy->business_study_authorization_id === 4) {
+            event(new PushValidatedProposal($proposal)); 
         }
 
         return response()->json(['success'=> 'Negócio aceite com sucesso']);
