@@ -54,6 +54,7 @@ class AuthController extends Controller
             'success' => true,
             'token' => $jwt_token,
             'user' => auth()->user(),
+            auth()->user()->unreadNotifications
         ]);
 
     }
