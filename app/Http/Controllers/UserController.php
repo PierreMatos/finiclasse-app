@@ -239,7 +239,7 @@ class UserController extends AppBaseController
         $user = $this->userRepository->update($request->all(), $id);
 
         //atribuir lead user a vendedor
-        if($request->vendor_id){
+        if($request->vendor_id != $user->vendor_id){
             $user->vendor()->sync($request->vendor_id);
 
             //Event for Notification
