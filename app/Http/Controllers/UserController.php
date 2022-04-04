@@ -237,17 +237,21 @@ class UserController extends AppBaseController
         }
 
         //atribuir lead user a vendedor
-        if($request->vendor_id != $user->vendor[0]->id){
-            $user->vendor()->sync($request->vendor_id);
+        if($request->vendor_id != '') {
+            if($request->vendor_id != $user->vendor[0]->id){
+                $user->vendor()->sync($request->vendor_id);
 
-            //Event for Notification
-            event(new NewLead($user));
+                $user = $this->userRepository->update($request->all(), $id);
 
-            //Event Push & Notification for New Vendor Lead
-            event(new PushNewLead($user));
+                //Event for Notification
+                event(new NewLead($user));
+
+                //Event Push & Notification for New Vendor Lead
+                event(new PushNewLead($user));
+            } else {
+                $user = $this->userRepository->update($request->all(), $id);
+            }
         }
-
-        $user = $this->userRepository->update($request->all(), $id);
 
         Flash::success(__('translation.user updated'));
 
