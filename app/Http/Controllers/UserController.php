@@ -346,7 +346,7 @@ class UserController extends AppBaseController
 
         $user = $this->userRepository->update(['gdpr_confirmation' => $timestamp, 'gdpr_type' => "email"], $id);
 
-        //Push RGDP notification
+        //Push & Nofication RGDP
         event(new PushRGPD($user));
 
         return view('thankyou');
