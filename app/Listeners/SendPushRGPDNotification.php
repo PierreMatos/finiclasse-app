@@ -31,8 +31,11 @@ class SendPushRGPDNotification
     {
         $url = 'https://fcm.googleapis.com/fcm/send';
 
-        $vendors = User::where([['device_key', '!=', null]])->pluck('device_key')->all();
-
+        $vendors = User::where([['device_key', '!=', null]])
+            ->whereHas('roles', function ($query) {
+                $query
+                    ->whereIn('roles.name', ['Vendedor']);
+            })->pluck('device_key')->all();
         $serverKey = env('FIREBASE_KEY');
 
         $data = [
@@ -73,7 +76,7 @@ class SendPushRGPDNotification
 
         //Notification
         $vendorsNotification = User::whereHas('roles', function ($query) {
-            $query->whereIn('roles.name', ['Administrador']);
+            $query->whereIn('roles.name', ['Vendedor']);
         })->get();
 
         Notification::send($vendorsNotification, new NewRGPDNotification($event->user));
