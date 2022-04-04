@@ -73,8 +73,7 @@ class EventServiceProvider extends ServiceProvider
             SendPushRGPDNotification::class
         ],
         PushValidatedProposal::class => [
-            SendPushValidatedProposalNotification::class,
-            NewValidatedProposalNotification::class
+            SendPushValidatedProposalNotification::class
         ],
     ];
 
