@@ -71,10 +71,10 @@ class SendPushNewLeadNotification
         // // FCM response
         // dd($result);
 
-        //Notification
-        $vendorsNotification = User::where('id', '==', $event->user->vendor[0]->id)->first();
+        // //Notification
+        // $vendorsNotification = User::where('id', '==', $event->user->vendor[0]->id)->first();
 
-        Notification::send($vendorsNotification, new NewVendorLeadNotification($event->user));
-        //
+        // Notification::send($vendorsNotification, new NewVendorLeadNotification($event->user));
+        // //
     }
 }
