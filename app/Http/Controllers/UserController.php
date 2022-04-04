@@ -236,8 +236,6 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        $user = $this->userRepository->update($request->all(), $id);
-
         //atribuir lead user a vendedor
         if($request->vendor_id !== $user->vendor_id){
             $user->vendor()->sync($request->vendor_id);
@@ -248,6 +246,8 @@ class UserController extends AppBaseController
             //Event Push & Notification for New Vendor Lead
             event(new PushNewLead($user));
         }
+
+        $user = $this->userRepository->update($request->all(), $id);
 
         Flash::success(__('translation.user updated'));
 
