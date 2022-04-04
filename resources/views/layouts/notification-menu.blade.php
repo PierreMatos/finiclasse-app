@@ -9,7 +9,7 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right notificationMenu">
             @forelse($notifications as $notification)
                 <div class="dropdown-divider"></div>
-                <a href="{{ route($notification->data['link'], $notification->data['id']) }}"
+                <a href=""
                     class="dropdown-item dropNotification mark-as-read" data-id="{{ $notification->id }}">
                     <i class="{{ $notification->data['icon'] }}"></i> {{ $notification->data['text'] }}
                     <span
