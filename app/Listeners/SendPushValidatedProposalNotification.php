@@ -31,11 +31,7 @@ class SendPushValidatedProposalNotification
     {
         $url = 'https://fcm.googleapis.com/fcm/send';
 
-        $vendors = User::where([['device_key', '!=', null]])
-            ->whereHas('roles', function ($query) {
-                $query
-                    ->whereIn('roles.name', ['Vendedor']);
-            })->pluck('device_key')->all();
+        $vendors = User::where([['device_key', '!=', null]])->where('id', '=', $event->user->vendor[0]->id)->pluck('device_key')->all();
 
         $serverKey = env('FIREBASE_KEY');
 
@@ -76,9 +72,7 @@ class SendPushValidatedProposalNotification
         // dd($result);
 
         //Notification
-        $vendorsNotification = User::whereHas('roles', function ($query) {
-            $query->whereIn('roles.name', ['Vendedor']);
-        })->get();
+        $vendorsNotification = User::where('id', '=', $event->user->vendor[0]->id)->get();
 
         Notification::send($vendorsNotification, new NewValidatedProposalNotification($event->proposal));
         //
