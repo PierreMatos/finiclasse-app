@@ -23,7 +23,6 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\ClientTypeRepository;
 use App\Http\Controllers\AppBaseController;
 use App\Providers\PushNewLead;
-use App\Providers\PushNewUser;
 use App\Providers\PushRGPD;
 
 class UserController extends AppBaseController
@@ -125,7 +124,7 @@ class UserController extends AppBaseController
             //Event for Notification
             event(new NewLead($user));
 
-            //Event Push Notification
+            //Event Push & Notification for New Vendor Lead
             event(new PushNewLead($user));
         }
 
@@ -246,7 +245,7 @@ class UserController extends AppBaseController
             //Event for Notification
             event(new NewLead($user));
 
-            //Event Push Notification
+            //Event Push & Notification for New Vendor Lead
             event(new PushNewLead($user));
         }
 
