@@ -33,7 +33,7 @@ class SendPushAddTradeInNotification
             ->whereHas('roles', function ($query) {
                 $query
                     ->whereIn('roles.name', ['Administrador', 'Diretor comercial']);
-            })->orwhere([['device_key', '!=', null]])->WhereHas('roles', function ($query) {
+            })->orwhere([['device_key', '!=', null]])->whereHas('roles', function ($query) {
                 $query->where('roles.name', 'Chefe de vendas');
             })->where('stand_id', $event->proposal->vendor->stand_id)->pluck('device_key')->all();
 
