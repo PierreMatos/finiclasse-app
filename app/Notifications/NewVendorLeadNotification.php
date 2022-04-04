@@ -58,7 +58,7 @@ class NewVendorLeadNotification extends Notification
             'id' => $this->user->id,
             'link' => '',
             'icon' => 'fas fa-user-tie mr-2',
-            'text' => 'Atribuída a lead para o/a cliente ' . $this->user->name,
+            'text' => 'Lead atribuída para o/a cliente ' . $this->user->name,
         ];
     }
 }
