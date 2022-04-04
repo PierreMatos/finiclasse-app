@@ -167,7 +167,7 @@ class BusinessStudyController extends AppBaseController
             $proposal->save();
         }
 
-        //Push Validated Proposal Notification
+        //Push & Notification Validated Proposal
         if ($businessStudy->business_study_authorization_id === 4) {
             event(new PushValidatedProposal($proposal)); 
         }
