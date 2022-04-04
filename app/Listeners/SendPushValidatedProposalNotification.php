@@ -3,10 +3,11 @@
 namespace App\Listeners;
 
 use App\Models\User;
-use App\Notifications\NewValidatedProposalNotification;
 use App\Providers\PushValidatedProposal;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\NewValidatedProposalNotification;
 
 class SendPushValidatedProposalNotification
 {
