@@ -71,6 +71,11 @@ class SendPushValidatedProposalNotification
         // dd($result);
 
         //Notification
-        Notification::send($vendors, new NewValidatedProposalNotification($event->proposal));
+        $vendorsNotification = User::whereHas('roles', function ($query) {
+            $query->whereIn('roles.name', ['Administrador']);
+        })->get();
+
+        Notification::send($vendorsNotification, new NewValidatedProposalNotification($event->proposal));
+        //
     }
 }
