@@ -37,7 +37,7 @@ class SendPushValidatedProposalNotification
             "registration_ids" => $vendors,
             "notification" => [
                 "title" => 'Proposta validada',
-                "body" => 'A proposa nº ' . $event->proposal->id . ' pode ser partilhada',
+                "body" => 'A proposta nº ' . $event->proposal->id . ' pode ser partilhada',
             ]
         ];
 
