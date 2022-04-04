@@ -26,6 +26,7 @@ use App\Listeners\SendSharedProposalNotification;
 use App\Listeners\SendPushValidatedTradeInNotification;
 use App\Listeners\SendPushProposalSubmittedNotification;
 use App\Listeners\SendPushValidatedProposalNotification;
+use App\Notifications\NewValidatedProposalNotification;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -72,7 +73,8 @@ class EventServiceProvider extends ServiceProvider
             SendPushRGPDNotification::class
         ],
         PushValidatedProposal::class => [
-            SendPushValidatedProposalNotification::class
+            SendPushValidatedProposalNotification::class,
+            NewValidatedProposalNotification::class
         ],
     ];
 

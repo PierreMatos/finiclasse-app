@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Models\User;
+use App\Notifications\NewValidatedProposalNotification;
 use App\Providers\PushValidatedProposal;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -68,5 +69,8 @@ class SendPushValidatedProposalNotification
         curl_close($ch);
         // // FCM response
         // dd($result);
+
+        //Notification
+        Notification::send($vendors, new NewValidatedProposalNotification($event->proposal));
     }
 }
