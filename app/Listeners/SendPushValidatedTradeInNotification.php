@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Providers\PushValidatedTradeIn;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\NewValidatedTradeInNotification;
 
 class SendPushValidatedTradeInNotification
 {
@@ -68,5 +70,13 @@ class SendPushValidatedTradeInNotification
         curl_close($ch);
         // // FCM response
         // dd($result);
+
+        //Notification
+         $vendorsNotification = User::whereHas('roles', function ($query) {
+            $query->whereIn('roles.name', ['Administrador']);
+        })->get();
+
+        Notification::send($vendorsNotification, new NewValidatedTradeInNotification($event->car));
+        //
     }
 }
