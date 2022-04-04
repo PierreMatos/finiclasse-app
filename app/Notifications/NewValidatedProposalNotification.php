@@ -56,7 +56,7 @@ class NewValidatedProposalNotification extends Notification
     {
         return [
             'id' => $this->proposal->id,
-            'link' => 'proposal/' . $this->proposal->id,
+            'link' => '',
             'icon' => 'fas fa-file-contract mr-2', 
             'text' => 'A proposta nº ' . $this->proposal->id . ' foi validada',
         ];
