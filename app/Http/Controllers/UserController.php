@@ -24,6 +24,7 @@ use App\Repositories\ClientTypeRepository;
 use App\Http\Controllers\AppBaseController;
 use App\Providers\PushNewLead;
 use App\Providers\PushNewUser;
+use App\Providers\PushRGPD;
 
 class UserController extends AppBaseController
 {
@@ -344,6 +345,9 @@ class UserController extends AppBaseController
         $timestamp = Carbon::now();
 
         $user = $this->userRepository->update(['gdpr_confirmation' => $timestamp, 'gdpr_type' => "email"], $id);
+
+        //Push RGDP notification
+        event(new PushRGPD($user));
 
         return view('thankyou');
     }

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Providers\NewCar;
 use App\Providers\NewLead;
+use App\Providers\PushRGPD;
 use App\Providers\PushNewLead;
 use App\Providers\PushNewUser;
 use App\Providers\ClosedProposal;
@@ -15,6 +16,7 @@ use App\Providers\PushProposalSubmitted;
 use App\Listeners\SendNewCarNotification;
 use App\Listeners\SendNewLeadNotification;
 use App\Listeners\SendNewUserNotification;
+use App\Listeners\SendPushRGPDNotification;
 use App\Listeners\SendPushNewLeadNotification;
 use App\Listeners\SendPushNewUserNotification;
 use App\Listeners\SendClosedProposalNotification;
@@ -63,6 +65,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         PushValidatedTradeIn::class => [
             SendPushValidatedTradeInNotification::class
+        ],
+        PushRGPD::class => [
+            SendPushRGPDNotification::class
         ],
     ];
 
