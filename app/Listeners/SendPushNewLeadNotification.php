@@ -31,7 +31,7 @@ class SendPushNewLeadNotification
     {
         $url = 'https://fcm.googleapis.com/fcm/send';
 
-        $vendors = User::where([['device_key', '!=', null]])->where('id', '==', $event->user->vendor[0]->id)->pluck('device_key')->get();
+        $vendors = User::where('id', '==', $event->user->vendor[0]->id)->where([['device_key', '!=', null]])->pluck('device_key')->first();
 
         $serverKey = env('FIREBASE_KEY');
 
@@ -72,7 +72,7 @@ class SendPushNewLeadNotification
         // dd($result);
 
         //Notification
-        $vendorsNotification = User::where('id', '==', $event->user->vendor[0]->id)->get();
+        $vendorsNotification = User::where('id', '==', $event->user->vendor[0]->id)->first();
 
         Notification::send($vendorsNotification, new NewVendorLeadNotification($event->user));
         //
