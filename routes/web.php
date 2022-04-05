@@ -204,7 +204,7 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
         return view('notifications.allow');
     });
     Route::post('/store-token', [WebNotificationController::class, 'storeToken'])->name('store.token');
-    // Route::post('/send-web-notification', [WebNotificationController::class, 'sendWebNotification'])->name('send.web-notification');
+    Route::post('/send-web-notification', [WebNotificationController::class, 'sendWebNotification'])->name('send.web-notification');
 
     // Notifications
     Route::post('/mark-as-read', [NotificationController::class, 'markNotification'])->name('markNotification');
