@@ -130,12 +130,12 @@
 @push('page_scripts')
 <script>
     var firebaseConfig = {
-        apiKey: "{{ config('services.firebase.apiKey') }}",
-        authDomain: "{{ config('services.firebase.authDomain') }}",
-        projectId: "{{ config('services.firebase.projectId') }}",
-        storageBucket: "{{ config('services.firebase.storageBucket') }}",
-        messagingSenderId: "{{ config('services.firebase.messagingSenderId') }}",
-        appId: "{{ config('services.firebase.appId') }}"
+        apiKey: "AIzaSyAajBHYzX-TOLw1qIzrF8JqW-m6KjX_kIw",
+        authDomain: "laravel-cronjob.firebaseapp.com",
+        projectId: "laravel-cronjob",
+        storageBucket: "laravel-cronjob.appspot.com",
+        messagingSenderId: "810992723362",
+        appId: "1:810992723362:web:a4cccf87b59710e95a3efb"
     };
     firebase.initializeApp(firebaseConfig);
     const messaging = firebase.messaging();
