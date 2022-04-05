@@ -7,12 +7,12 @@ importScripts("https://www.gstatic.com/firebasejs/8.3.2/firebase-messaging.js");
 Initialize the Firebase app in the service worker by passing in the messagingSenderId.
 */
 firebase.initializeApp({
-    apiKey: "AIzaSyAajBHYzX-TOLw1qIzrF8JqW-m6KjX_kIw",
-    authDomain: "laravel-cronjob.firebaseapp.com",
-    projectId: "laravel-cronjob",
-    storageBucket: "laravel-cronjob.appspot.com",
-    messagingSenderId: "810992723362",
-    appId: "1:810992723362:web:a4cccf87b59710e95a3efb"
+    apiKey: "{{ config('services.firebase.apiKey') }}",
+    authDomain: "{{ config('services.firebase.authDomain') }}",
+    projectId: "{{ config('services.firebase.projectId') }}",
+    storageBucket: "{{ config('services.firebase.storageBucket') }}",
+    messagingSenderId: "{{ config('services.firebase.messagingSenderId') }}",
+    appId: "{{ config('services.firebase.appId') }}"
 });
 
 // Retrieve an instance of Firebase Messaging so that it can handle background
