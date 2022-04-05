@@ -199,12 +199,12 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
     Route::PATCH('/businessAuthaction/{id}', [App\Http\Controllers\BusinessStudyController::class, 'businessAuth'])->name('businessAuthaction');
 
     //Push Web Notifications
-    Route::get('/push-notification', [WebNotificationController::class, 'index'])->name('push-notification');
-    Route::get('/allow', function () {
-        return view('notifications.allow');
-    });
+    // Route::get('/push-notification', [WebNotificationController::class, 'index'])->name('push-notification');
+    // Route::get('/allow', function () {
+    //     return view('notifications.allow');
+    // });
     Route::post('/store-token', [WebNotificationController::class, 'storeToken'])->name('store.token');
-    Route::post('/send-web-notification', [WebNotificationController::class, 'sendWebNotification'])->name('send.web-notification');
+    // Route::post('/send-web-notification', [WebNotificationController::class, 'sendWebNotification'])->name('send.web-notification');
 
     // Notifications
     Route::post('/mark-as-read', [NotificationController::class, 'markNotification'])->name('markNotification');
