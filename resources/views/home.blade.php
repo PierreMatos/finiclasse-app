@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <body onload="startFCM()"></body>
 
     <section class="content-header">
         <div class="container-fluid">
@@ -96,11 +97,12 @@
                     </thead>
                     <tbody>
                         @foreach ($latestProposal as $proposal)
-                            <tr> 
+                            <tr>
                                 @if (!$proposal->car->getFirstMediaUrl('cars', 'thumb'))
                                     <td><img src="storage/images/noPhoto.jpg" class="imgCar" /></td>
                                 @else
-                                    <td><img src="{{ $proposal->car->getFirstMediaUrl('cars', 'thumb') }}" style="max-width: 100px;" class="imgCar" /></td>
+                                    <td><img src="{{ $proposal->car->getFirstMediaUrl('cars', 'thumb') }}"
+                                            style="max-width: 100px;" class="imgCar" /></td>
                                 @endif
                                 <td>{{ isset($proposal->car->model->make->name) ? $proposal->car->model->make->name : '' }}
                                 </td>
@@ -122,5 +124,60 @@
         </div>
         <!-- /.card -->
     </div>
-    </div>
 @endsection
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+@push('page_scripts')
+<script>
+    var firebaseConfig = {
+        apiKey: "AIzaSyAajBHYzX-TOLw1qIzrF8JqW-m6KjX_kIw",
+        authDomain: "laravel-cronjob.firebaseapp.com",
+        projectId: "laravel-cronjob",
+        storageBucket: "laravel-cronjob.appspot.com",
+        messagingSenderId: "810992723362",
+        appId: "1:810992723362:web:a6ebea1ecba4ab245a3efb"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const messaging = firebase.messaging();
+
+    function startFCM() {
+        messaging
+            .requestPermission()
+            .then(function() {
+                return messaging.getToken()
+            })
+            .then(function(response) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: '/store-token',
+                    type: 'POST',
+                    data: {
+                        token: response
+                    },
+                    dataType: 'JSON',
+                    success: function(response) {
+                        // alert('Token Guardado.');
+                        console.log('Token Guardado.');
+                    },
+                    error: function(error) {
+                        alert(error);
+                    },
+                });
+            }).catch(function(error) {
+                alert(error);
+            });
+    }
+    messaging.onMessage(function(payload) {
+        const title = payload.notification.title;
+        const options = {
+            body: payload.notification.body,
+            icon: payload.notification.icon,
+        };
+        new Notification(title, options);
+    });
+</script>
+@endpush
