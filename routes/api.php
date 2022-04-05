@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\AuthController;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\WebNotificationAPIController;
 // use App\Http\Controllers\API\UserAPIController;
 // use App\Http\Controllers\API\ProposalAPIController;
 // use App\Http\Controllers\API\UserAPIController;
@@ -116,7 +117,8 @@ Route::middleware('auth:api')->group(function () {
     
     Route::GET('/proposal_history/{client_id}', [App\Http\Controllers\API\ProposalAPIController::class, 'proposalHistory'])->name('proposal_history');
 
-
+    //Notifications Push
+    Route::post('/store-token', [WebNotificationAPIController::class, 'storeToken'])->name('store.token');
 });
 
 Route::resource('business_study_states', App\Http\Controllers\API\BusinessStudyStatesAPIController::class);
