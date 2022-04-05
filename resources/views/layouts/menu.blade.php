@@ -93,7 +93,7 @@
     </li>
 @endcan
 
-@if (Auth::user()->hasRole(['admin', 'Administrador', 'Diretor comercial']))
+{{-- @if (Auth::user()->hasRole(['admin', 'Administrador', 'Diretor comercial']))
     <li class="treeview">
         <a href="{{ route('push-notification') }}"
             class="nav-link {{ Request::is('push-notification*') ? 'active' : '' }}">
@@ -101,7 +101,7 @@
             <p>Notificações</p>
         </a>
     </li>
-@endif
+@endif --}}
 
 <li class="treeview">
     <a href="https://www.myfiniclasse.pt/help-backoffice" target="_blank"
