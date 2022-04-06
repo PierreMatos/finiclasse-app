@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         Commands\DailyQuote::class,
         Commands\WeeklyQuote::class,
         Commands\MonthlyQuote::class,
+        Commands\ProposalQuote::class,
     ];
 
     /**
@@ -34,6 +35,9 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('quote:monthly')
             ->monthly('9:00');
+
+        $schedule->command('quote:proposal')
+            ->everyMinute();
     }
 
     /**

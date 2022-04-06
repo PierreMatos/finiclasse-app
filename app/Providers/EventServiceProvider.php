@@ -10,6 +10,7 @@ use App\Providers\PushNewUser;
 use App\Providers\ClosedProposal;
 use App\Providers\PushAddTradeIn;
 use App\Providers\SharedProposal;
+use App\Providers\PushCheckProposal;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\PushValidatedTradeIn;
 use App\Providers\PushProposalSubmitted;
@@ -23,10 +24,10 @@ use App\Listeners\SendPushNewUserNotification;
 use App\Listeners\SendClosedProposalNotification;
 use App\Listeners\SendPushAddTradeInNotification;
 use App\Listeners\SendSharedProposalNotification;
+use App\Listeners\SendPushCheckProposalNotification;
 use App\Listeners\SendPushValidatedTradeInNotification;
 use App\Listeners\SendPushProposalSubmittedNotification;
 use App\Listeners\SendPushValidatedProposalNotification;
-use App\Notifications\NewValidatedProposalNotification;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -74,6 +75,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         PushValidatedProposal::class => [
             SendPushValidatedProposalNotification::class
+        ],
+        PushCheckProposal::class => [
+            SendPushCheckProposalNotification::class
         ],
     ];
 
