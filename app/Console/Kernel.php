@@ -37,7 +37,7 @@ class Kernel extends ConsoleKernel
             ->monthly('9:00');
 
         $schedule->command('quote:proposal')
-            ->everyMinute();
+            ->weeklyOn(1, '9:00');
     }
 
     /**
