@@ -1,7 +1,11 @@
 <?php
-namespace App\Http\Controllers;
+
+namespace App\Http\Controllers\API;
+
 use Illuminate\Http\Request;
-class WebNotificationAPIController extends Controller
+use App\Http\Controllers\AppBaseController;
+
+class WebNotificationAPIController extends AppBaseController
 {
     public function __construct()
     {
