@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use Carbon\Carbon;
-use App\Models\User;
 use App\Models\Proposal;
 use Illuminate\Console\Command;
 use App\Providers\PushCheckProposal;
