@@ -277,11 +277,6 @@ class ProposalAPIController extends AppBaseController
             event(new ClosedProposal($proposal));
         }
 
-        //Push Notification Proposal Submitted
-        if ($proposal->state->name == 'Pendente') {
-            event(new PushProposalSubmitted($proposal));
-        }
-
         //Push Notification TradeIn
         if ($proposal->tradein->state_id == 7) {
             event(new PushAddTradeIn($proposal));
@@ -691,6 +686,10 @@ class ProposalAPIController extends AppBaseController
 
             $x = $proposal->initialBusinessStudy->businessStudyAuthorization->responsible_id;
 
+            //Push Notification Proposal Submitted
+            if ($proposal->state->name == 'Pendente') {
+                event(new PushProposalSubmitted($proposal));
+            }
 
             Mail::send(new ProposalApproval($proposal));
         }
