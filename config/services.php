@@ -37,6 +37,7 @@ return [
         'storageBucket' => env('FIREBASE_storageBucket'),
         'messagingSenderId' => env('FIREBASE_messagingSenderId'),
         'appId' => env('FIREBASE_appId'),
+        'measurementId' => env('FIREBASE_measurementId'),
     ],
 
 ];
