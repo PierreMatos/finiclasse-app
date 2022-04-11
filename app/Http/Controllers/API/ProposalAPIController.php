@@ -267,6 +267,11 @@ class ProposalAPIController extends AppBaseController
         // dd($proposal->state->name == 'Aberto');
         // $proposal = $this->proposalRepository->find($id);
 
+        if ($proposal->state->name == 'Partilhado') {
+            //Event notification
+            event(new SharedProposal($proposal));
+        }
+
         if ($proposal->state->name == 'Fechado') {
             //Event notification
             event(new ClosedProposal($proposal));
@@ -278,12 +283,8 @@ class ProposalAPIController extends AppBaseController
         }
 
         //Push Notification TradeIn
-        if (!IS_NULL($proposal->tradein)){
-
-            if ($proposal->tradein->state_id == 7) {
-                event(new PushAddTradeIn($proposal));
-            }
-            
+        if ($proposal->tradein->state_id == 7) {
+            event(new PushAddTradeIn($proposal));
         }
         
         return $this->sendResponse(new ProposalResource($proposal), 'Proposal updated successfully');
@@ -661,20 +662,16 @@ class ProposalAPIController extends AppBaseController
     }
     public function sendProposal($id)
     {
+
+
         //TODO mudar estado da proposta
 
         $proposal = Proposal::find($id);
 
-        $proposal->state_id = 5;
-        $proposal->save();
-
-        if ($proposal->state->name == 'Partilhado') {
-            //Event notification
-            event(new SharedProposal($proposal));
-        }
-
         Mail::send(new ProposalOrder($proposal));
 
+        $proposal->state_id = 5;
+        $proposal->save();
         return $this->sendSuccess('E-mail enviado com sucesso!');
 
         // DD(!empty($proposal->tradein));
