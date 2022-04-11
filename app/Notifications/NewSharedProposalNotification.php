@@ -58,7 +58,7 @@ class NewSharedProposalNotification extends Notification
             'id' => $this->proposal->id,
             'link' => 'proposals.edit',
             'icon' => 'fas fa-file-contract mr-2', 
-            'text' => 'Nova proposta de ' . $this->proposal->vendor->name,
+            'text' => 'Nova proposta partilhada de ' . $this->proposal->vendor->name,
         ];
     }
 }
