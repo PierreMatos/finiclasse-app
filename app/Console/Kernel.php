@@ -28,16 +28,16 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('quote:daily')
-            ->dailyAt('12:35')->weekdays();
+            ->dailyAt('12:43')->weekdays()->timezone('Europe/Lisbon');
 
         $schedule->command('quote:weekly')
-            ->weeklyOn(1, '9:00');
+            ->weeklyOn(1, '9:00')->timezone('Europe/Lisbon');
 
         $schedule->command('quote:monthly')
-            ->monthly('9:00');
+            ->monthly('9:00')->timezone('Europe/Lisbon');
 
         $schedule->command('quote:proposal')
-            ->weeklyOn(1, '9:00');
+            ->weeklyOn(1, '9:00')->timezone('Europe/Lisbon');
     }
 
     /**
