@@ -278,10 +278,12 @@ class ProposalAPIController extends AppBaseController
         }
 
         //Push Notification TradeIn
-        if ($proposal->tradein->state_id == 7) {
-            event(new PushAddTradeIn($proposal));
+        if (!is_null($proposal->tradein)) {
+            if ($proposal->tradein->state_id == 7) {
+                event(new PushAddTradeIn($proposal));
+            }
         }
-        
+
         return $this->sendResponse(new ProposalResource($proposal), 'Proposal updated successfully');
     }
 
@@ -506,7 +508,7 @@ class ProposalAPIController extends AppBaseController
                 $discPerc = ($desc / ($totalBenefits + $subTotal - ($ptl + $sigpu + $totalTransf))) * 100;
                 if ($discPerc < 0) {
                     $discPerc = 0;
-                }elseif($discPerc > 100){
+                } elseif ($discPerc > 100) {
                     $discPerc = 100;
                 }
             } else {
@@ -561,7 +563,7 @@ class ProposalAPIController extends AppBaseController
                 if ($proposal->car->condition_id == 1) {
 
                     if ($discPerc >= $min && $discPerc <= $max && $authorization->id !== 6) {
-                        
+
                         if ($authorization->id !== 1) {
                             $proposal->state_id = 3;
                             // $proposal->save();
@@ -580,7 +582,7 @@ class ProposalAPIController extends AppBaseController
                 }
             }
 
-            
+
             if ($proposal->car->condition_id == 2 || $proposal->car->condition_id == 4) {
 
                 // $auth = $authorizations->find(6);
@@ -599,7 +601,6 @@ class ProposalAPIController extends AppBaseController
                     $proposal->initialBusinessStudy->business_study_authorization_id =  6;
                     $proposal->state_id = 3;
                     $proposal->save();
-
                 } elseif ($margin > 0) {
 
                     $business_study_authorization_id = 7;
