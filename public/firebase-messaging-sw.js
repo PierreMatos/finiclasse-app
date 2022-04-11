@@ -12,7 +12,8 @@ firebase.initializeApp({
     projectId: "{{ config('services.firebase.projectId') }}",
     storageBucket: "{{ config('services.firebase.storageBucket') }}",
     messagingSenderId: "{{ config('services.firebase.messagingSenderId') }}",
-    appId: "{{ config('services.firebase.appId') }}"
+    appId: "{{ config('services.firebase.appId') }}",
+    measurementId: "{{ config('services.firebase.measurementId') }}"
 });
 
 // Retrieve an instance of Firebase Messaging so that it can handle background
