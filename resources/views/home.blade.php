@@ -136,7 +136,8 @@
             projectId: "{{ config('services.firebase.projectId') }}",
             storageBucket: "{{ config('services.firebase.storageBucket') }}",
             messagingSenderId: "{{ config('services.firebase.messagingSenderId') }}",
-            appId: "{{ config('services.firebase.appId') }}"
+            appId: "{{ config('services.firebase.appId') }}",
+            measurementId: "{{ config('services.firebase.measurementId') }}"
         };
         firebase.initializeApp(firebaseConfig);
         const messaging = firebase.messaging();
