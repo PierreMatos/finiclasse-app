@@ -37,7 +37,7 @@ class Kernel extends ConsoleKernel
             ->monthly('9:00')->timezone('Europe/Lisbon');
 
         $schedule->command('quote:proposal')
-            ->weekly()->mondays()->at('15:10')->timezone('Europe/Lisbon');
+            ->weeklyOn(1, '9:00')->timezone('Europe/Lisbon');
     }
 
     /**
