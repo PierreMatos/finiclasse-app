@@ -63,12 +63,13 @@
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script>
     var firebaseConfig = {
-        apiKey: "AIzaSyAajBHYzX-TOLw1qIzrF8JqW-m6KjX_kIw",
-        authDomain: "laravel-cronjob.firebaseapp.com",
-        projectId: "laravel-cronjob",
-        storageBucket: "laravel-cronjob.appspot.com",
-        messagingSenderId: "810992723362",
-        appId: "1:810992723362:web:a6ebea1ecba4ab245a3efb"
+        apiKey: "{{ config('services.firebase.apiKey') }}",
+        authDomain: "{{ config('services.firebase.authDomain') }}",
+        projectId: "{{ config('services.firebase.projectId') }}",
+        storageBucket: "{{ config('services.firebase.storageBucket') }}",
+        messagingSenderId: "{{ config('services.firebase.messagingSenderId') }}",
+        appId: "{{ config('services.firebase.appId') }}",
+        measurementId: "{{ config('services.firebase.measurementId') }}"
     };
     firebase.initializeApp(firebaseConfig);
     const messaging = firebase.messaging();
