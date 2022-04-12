@@ -52,8 +52,7 @@ class AuthController extends Controller
         return response()->json([
             'success' => true,
             'token' => $jwt_token,
-            'user' => auth()->user(),
-            auth()->user()->unreadNotifications
+            'user' => auth()->user()
         ]);
 
     }
@@ -106,8 +105,10 @@ class AuthController extends Controller
      */
     public function me(Request $request)
     {
-        return response()->json(auth()->user());
-
+        return response()->json([
+            auth()->user(),
+            auth()->user()->unreadNotifications
+        ]);
     }
 
     /**
