@@ -59,6 +59,7 @@ class NewRGPDNotification extends Notification
             'link' => '',
             'icon' => 'fas fa-user-tie mr-2',
             'text' => 'O cliente ' . $this->user->name . ' validou o RGPD',
+            'reactIcon' => 'cliente',
         ];
     }
 }

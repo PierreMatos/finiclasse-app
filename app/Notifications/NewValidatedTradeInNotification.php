@@ -59,6 +59,7 @@ class NewValidatedTradeInNotification extends Notification
             'link' => '',
             'icon' => 'fas fa-file-contract mr-2', 
             'text' => 'Retoma validada na proposta nº ' . $this->car->proposalTradeIn->id,
+            'reactIcon' => 'proposta',
         ];
     }
 }

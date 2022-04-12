@@ -59,6 +59,7 @@ class NewLeadNotification extends Notification
             'link' => 'sellers.show',
             'icon' => 'fas fa-user-tie mr-2',
             'text' => 'Lead atribuída a ' . $this->user->vendor[0]->name,
+            'reactIcon' => 'cliente',
         ];
     }
 }
