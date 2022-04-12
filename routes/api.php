@@ -119,6 +119,8 @@ Route::middleware('auth:api')->group(function () {
 
     //Notifications Push
     Route::post('/store-token', [App\Http\Controllers\API\WebNotificationAPIController::class, 'storeToken'])->name('store.token');
+    // Mark notification as read
+    Route::patch('/mark_notification', [App\Http\Controllers\API\NotificationAPIController::class, 'markNotification'])->name('mark_notification');
 });
 
 Route::resource('business_study_states', App\Http\Controllers\API\BusinessStudyStatesAPIController::class);
