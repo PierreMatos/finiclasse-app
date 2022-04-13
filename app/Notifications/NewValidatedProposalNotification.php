@@ -60,6 +60,7 @@ class NewValidatedProposalNotification extends Notification
             'icon' => 'fas fa-file-contract mr-2', 
             'text' => 'A proposta nº ' . $this->proposal->id . ' foi validada',
             'reactIcon' => 'proposta',
+            'reactLink' => 'proposal/' . $this->proposal->id
         ];
     }
 }

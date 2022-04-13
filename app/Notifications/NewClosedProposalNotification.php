@@ -60,6 +60,7 @@ class NewClosedProposalNotification extends Notification
             'icon' => 'fas fa-file-contract mr-2', 
             'text' => 'Proposta fechada por ' . $this->proposal->vendor->name,
             'reactIcon' => 'proposta',
+            'reactLink' => 'proposal/' . $this->proposal->id
         ];
     }
 }

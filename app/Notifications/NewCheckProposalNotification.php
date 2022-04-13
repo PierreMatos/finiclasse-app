@@ -62,6 +62,7 @@ class NewCheckProposalNotification extends Notification
             'icon' => 'fas fa-file-contract mr-2', 
             'text' => 'A proposta nº ' . $this->proposal->id . ' está aberta há mais de 8 dias',
             'reactIcon' => 'proposta',
+            'reactLink' => 'proposal/' . $this->proposal->id
         ];
     }
 }
