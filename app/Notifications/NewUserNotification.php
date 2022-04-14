@@ -60,7 +60,7 @@ class NewUserNotification extends Notification
             'icon' => 'fas fa-users mr-2',
             'text' => 'Novo cliente por ' . $this->user->vendor->first()->name,
             'reactIcon' => 'cliente',
-            'reactLink' => 'users/' . $this->user->id
+            'reactLink' => 'client/' . $this->user->id
         ];
     }
 }
