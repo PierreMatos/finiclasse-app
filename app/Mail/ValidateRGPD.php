@@ -31,7 +31,7 @@ class ValidateRGPD extends Mailable
      */
     public function build()
     {
-        return $this->from('info@remotepartner.co', 'Finiclasse')
+        return $this->from(env('MAIL_FROM_ADDRESS'), 'Finiclasse')
             ->to($this->user->email)
             ->subject('Validação RGPD')
             ->markdown('mail.validateRGPD');

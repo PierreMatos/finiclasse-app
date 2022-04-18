@@ -45,7 +45,7 @@ class TradeInApproval extends Mailable
     )->get('email');
 
     $chefedevendas->each(function ($item, $key) {
-      return $this->from('info@remotepartner.co', 'Finiclasse')
+      return $this->from(env('MAIL_FROM_ADDRESS'), 'Finiclasse')
         ->to($item->email)
         ->subject('Pedido de aprovação de proposta comercial Finiclasse')
         ->markdown('mail.tradeinApproval');

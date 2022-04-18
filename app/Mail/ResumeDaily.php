@@ -37,13 +37,17 @@ class ResumeDaily extends Mailable
      */
     public function build()
     {
-        $adminsAndDirectorsAndChefe = User::whereHas('roles', function ($query) {
-            $query
-                ->whereIn('roles.name', ['Administrador', 'Diretor comercial', 'Chefe de vendas']);
-        })->get('email');
+        // $adminsAndDirectorsAndChefe = User::whereHas('roles', function ($query) {
+        //     $query
+        //         ->whereIn('roles.name', ['Administrador', 'Diretor comercial', 'Chefe de vendas']);
+        // })->get('email');
+
+        // $adminsAndDirectorsAndChefe = User::whereIn('id', [17, 96 , 104, 109])->get();
+
+        $adminsAndDirectorsAndChefe = User::whereIn('id', [17])->get();
 
         $adminsAndDirectorsAndChefe->each(function ($item) {
-            return $this->from('info@remotepartner.co', 'Finiclasse')
+            return $this->from(env('MAIL_FROM_ADDRESS'), 'Finiclasse')
                 ->to($item->email)
                 ->subject('Resumo Finiclasse')
                 ->markdown('mail.resumeDaily');
