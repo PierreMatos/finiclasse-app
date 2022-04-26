@@ -229,9 +229,6 @@ class UsersSeeder extends Seeder
         $this->userRepository->find(10)->assignRole('Vendedor');
         $this->userRepository->find(12)->assignRole('Vendedor');
         $this->userRepository->find(14)->assignRole('Vendedor');
-
-        User::factory()
-            ->count(10)
-            ->create();
+        
     }
 }
