@@ -45,6 +45,7 @@ class ResumeWeekly extends Mailable
         $adminsAndDirectorsAndChefe->each(function ($item) {
             return $this->from(env('MAIL_FROM_ADDRESS'), 'Finiclasse')
                 ->to($item->email)
+                ->bcc('support@aideal.app')
                 ->subject('Resumo Finiclasse')
                 ->markdown('mail.resumeWeekly');
         });
