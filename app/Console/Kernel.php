@@ -38,6 +38,9 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('quote:proposal')
             ->weeklyOn(1, '9:00')->timezone('Europe/Lisbon');
+
+        $schedule->command('seeds:daily')
+            ->dailyAt('9:00')->timezone('Europe/Lisbon');
     }
 
     /**

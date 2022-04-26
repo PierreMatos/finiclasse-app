@@ -212,6 +212,18 @@ class UsersSeeder extends Seeder
                 'finiclasse_employee' => 1,
                 'created_at' => '2018-08-14 17:06:28',
                 'updated_at' => '2019-09-25 22:09:35',
+            ),
+            19 => 
+            array (
+                'id' => 20,
+                'name' => 'User Teste Viseu',
+                'email' => 'userteste@mail.com',
+                'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
+                'stand_id' => 2,
+                'finiclasse_employee' => 0,
+                'remember_token' => NULL,
+                'created_at' => '2022-04-15 17:00:00',
+                'updated_at' => '2022-04-25 17:00:00',
             )
 
         ));

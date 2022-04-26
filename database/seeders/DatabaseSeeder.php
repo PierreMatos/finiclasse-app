@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ClientTypeSeeder::class);
         $this->call(RolesAndPermissionsSeeder::class);
         $this->call(UsersSeeder::class);
+        $this->call(LeadsSeeder::class);
         $this->call(PermissionsSeeder::class);
-        
         $this->call(ProposalStatesSeeder::class);
         $this->call(MakesStatesSeeder::class);
         $this->call(CarConditionsSeeder::class);
