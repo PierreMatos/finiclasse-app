@@ -564,15 +564,21 @@ class ProposalAPIController extends AppBaseController
 
                     if ($discPerc >= $min && $discPerc <= $max && $authorization->id !== 6) {
 
+                     {
+                        
                         if ($authorization->id !== 1) {
                             $proposal->state_id = 3;
-                            // $proposal->save();
+                            $proposal->save();
 
                         } elseif ($authorization->id == 1 && $proposal->state->id !== 2 && $proposal->state->id !== 4) {
                             $proposal->state_id = 1;
+                            $proposal->save();
+
+
                         }
 
-                        $proposal->save();
+
+                        // $proposal->save();
 
                         $business_study_authorization_id = $authorization->id;
                         // return $business_study_authorization_id;
@@ -582,11 +588,9 @@ class ProposalAPIController extends AppBaseController
                 }
             }
 
-
             if ($proposal->car->condition_id == 2 || $proposal->car->condition_id == 4) {
 
                 // $auth = $authorizations->find(6);
-
                 if ($margin < 0) {
 
                     // if ($authorization->id !== 1){
@@ -617,6 +621,16 @@ class ProposalAPIController extends AppBaseController
         } else {
 
             return 'car not found';
+        }
+        // dd($discPerc);
+
+
+            // CASO A RETOMA ESTEJA POR VALIDAR VOLTA A COLOCAR O ESTADO DA PROPOSTA COMO PENDENTE
+            //TODO COLOCAR ALTERAÇÃO DE ESTADOS DA PROPOSTA COMO EVENTO 
+        if ($proposal->tradein->state_id == 7){
+            $proposal->state_id = 3;
+            $proposal->save();
+            // dd($proposal->tradein->state_id);
         }
 
         $results = [

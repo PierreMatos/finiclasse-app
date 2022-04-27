@@ -36,7 +36,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $carsCount = Car::count();
+        // $carsCount = Car::count();
+
+        //all cars except POS
+        $carsCount = Car::where('state_id', '!=', 5)->count();
         // $clientsCount = User::where('finiclasse_employee', '==', '0')->count();
         $user = Auth::user();
         $clientsCount =  $this->userRepository->getClients($user)->count();
@@ -47,6 +50,31 @@ class HomeController extends Controller
 
         // Percentagem de propostas fechadas 
         $proposals = Proposal::count();
+        // $proposals = Proposal::where($proposal->car->condition_id, '=', '1');
+        $proposalsOpenNew = Proposal::join('cars', 'proposals.car_id', '=', 'cars.id')
+        ->where('cars.state_id', '=', 1)
+        ->where('proposals.state_id', '=', 1)
+        ->count();
+
+        $proposalsCloseNew = Proposal::join('cars', 'proposals.car_id', '=', 'cars.id')
+        ->where('cars.state_id', '=', 1)
+        ->where('proposals.state_id', '=', 2)
+        ->count();
+
+        $proposalsOpenUsed = Proposal::join('cars', 'proposals.car_id', '=', 'cars.id')
+        ->where('cars.state_id', '=', 2)
+        ->orWhere('cars.state_id', '=', 4)
+        ->where('proposals.state_id', '=', 1)
+        ->count();
+
+        $proposalsClosedUsed = Proposal::join('cars', 'proposals.car_id', '=', 'cars.id')
+        ->where('cars.state_id', '=', 2)
+        ->orWhere('cars.state_id', '=', 4)
+        ->where('proposals.state_id', '=', 2)
+        ->count();
+
+        // dd($proposalsNew);
+
         $proposalClose = Proposal::query()->with('state')->where('state_id', '=', 2)->count();
         if ($proposalClose) {
             $proposalClosePer = ($proposalClose / $proposals) * 100;
@@ -60,6 +88,10 @@ class HomeController extends Controller
             ->with('carsCount', $carsCount)
             ->with('clientsCount', $clientsCount)
             ->with('proposalOpen', $proposalOpen)
+            ->with('proposalsOpenNew', $proposalsOpenNew)
+            ->with('proposalsCloseNew', $proposalsCloseNew)
+            ->with('proposalsOpenUsed', $proposalsOpenUsed)
+            ->with('proposalsClosedUsed', $proposalsClosedUsed)
             ->with('proposalClosePer', $proposalClosePer)
             ->with('latestProposal', $latestProposals);
     }

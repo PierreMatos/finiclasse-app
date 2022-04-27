@@ -51,9 +51,41 @@
             <!-- small box -->
             <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>{{ $proposalOpen }}</h3>
+                    <h3>{{ $proposalsOpenNew }}</h3>
 
-                    <p>Propostas Abertas</p>
+                    <p>Propostas Abertas de viaturas novas</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <a href="/proposals" class="small-box-footer">ver mais <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3>{{ intval(round($proposalsCloseNew)) }}<sup style="font-size: 20px">%</sup></h3>
+
+                    <p>Propostas Fechadas de viaturas novas</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <a href="/proposals" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>{{ $proposalsOpenUsed }}</h3>
+
+                    <p>Propostas Abertas de viaturas usadas</p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-chart-line"></i>
@@ -66,9 +98,9 @@
             <!-- small box -->
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3>{{ intval(round($proposalClosePer)) }}<sup style="font-size: 20px">%</sup></h3>
+                    <h3>{{ intval(round($proposalsClosedUsed)) }}<sup style="font-size: 20px"></sup></h3>
 
-                    <p>Propostas Fechadas</p>
+                    <p>Propostas Fechadas de viaturas usadas</p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-chart-pie"></i>
