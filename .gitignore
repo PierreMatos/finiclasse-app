@@ -1,7 +1,6 @@
 /node_modules
 /public/hot
 /public/storage
-/public
 /storage/*.key
 /vendor
 /.idea
@@ -18,4 +17,3 @@ yarn-error.log
 .env.backup
 .phpunit.result.cache
 fields_sample.json
-finiclasse-app/

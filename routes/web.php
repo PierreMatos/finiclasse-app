@@ -164,7 +164,7 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
 
     //Proposta Comercial
     Route::get('/mailable', function () {
-        $proposal = App\Models\Proposal::find(924);
+        $proposal = App\Models\Proposal::find(57);
 
         return new App\Mail\ProposalOrder($proposal);
     });;
@@ -178,14 +178,14 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
 
     //Notificação negócio para validação
     Route::get('/mailable3', function () {
-        $proposal = App\Models\Proposal::find(924);
+        $proposal = App\Models\Proposal::find(57);
 
         return new App\Mail\ProposalApproval($proposal);
     });
 
     //Notificação retoma para validação
     Route::get('/mailable4', function () {
-        $proposal = App\Models\Proposal::find(924);
+        $proposal = App\Models\Proposal::find(57);
 
         return new App\Mail\TradeInApproval($proposal);
     });
@@ -199,17 +199,16 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
     Route::PATCH('/businessAuthaction/{id}', [App\Http\Controllers\BusinessStudyController::class, 'businessAuth'])->name('businessAuthaction');
 
     //Push Web Notifications
-    Route::get('/push-notification', [WebNotificationController::class, 'index'])->name('push-notification');
-    Route::get('/allow', function () {
-        return view('notifications.allow');
-    });
+    // Route::get('/push-notification', [WebNotificationController::class, 'index'])->name('push-notification');
+    // Route::get('/allow', function () {
+    //     return view('notifications.allow');
+    // });
     Route::post('/store-token', [WebNotificationController::class, 'storeToken'])->name('store.token');
-    Route::post('/send-web-notification', [WebNotificationController::class, 'sendWebNotification'])->name('send.web-notification');
+    // Route::post('/send-web-notification', [WebNotificationController::class, 'sendWebNotification'])->name('send.web-notification');
 
     // Notifications
     Route::post('/mark-as-read', [NotificationController::class, 'markNotification'])->name('markNotification');
 });
-
 
 //support
 Route::get('help-backoffice', function () {
@@ -229,4 +228,7 @@ Route::get('thankyou', function () {
     return view('thankyou');
 });
 
-Route::POST('/tradeinaction', [CarController::class, 'carState'])->name('tradeinaction');
+Route::post('/tradeinaction', [CarController::class, 'carState'])->name('tradeinaction');
+
+//Apagar depois dos testes
+Route::get('/send_proposal/{id}', [App\Http\Controllers\API\ProposalAPIController::class, 'sendProposal'])->name('send_proposal');

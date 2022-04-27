@@ -231,9 +231,15 @@
                     <p>Preço de compra</p>
                     @if ($proposal->tradein_id != '')
                         <h2>@money($proposal->tradein->tradein_purchase)</h2>
+                        @if($proposal->tradein->state_id == 7)
                         <div class="form-group col-sm-6">
                             {!! Form::text('tradein_purchase', isset($proposal->tradein->tradein_purchase) ? $proposal->tradein->tradein_purchase : '', ['class' => 'form-control', 'id' => 'tradein_purchase']) !!}
                         </div>
+                        @elseif($proposal->tradein->state_id == 8) 
+                        <div class="form-group col-sm-6">
+                            {!! Form::text('tradein_purchase', isset($proposal->tradein->tradein_purchase) ? $proposal->tradein->tradein_purchase : '', ['class' => 'form-control', 'id' => 'tradein_purchase', 'disabled']) !!}
+                        </div>
+                        @endif
                     @endif
 
                     <!-- Tradein sale Field -->
@@ -248,15 +254,88 @@
 
         <div style="float: right;">
 
-            <button type="button" id="{{ isset($proposal->tradein->id) ? $proposal->tradein->id : '' }}" value="8"
-                class="trade btn btn-info"> Aceitar</button>
-            <button type="button" id="{{ isset($proposal->tradein->id) ? $proposal->tradein->id : '' }}" value="7"
-                class="tradeReject btn btn-info"> Rejeitar</button>
+            @if ($proposal->tradein_id != '')
+                @if($proposal->tradein->state_id == 7)
+                    <button type="button" id="{{ isset($proposal->tradein->id) ? $proposal->tradein->id : '' }}" value="8"
+                        class="trade btn btn-info"> Aceitar</button>
+                    <button type="button" id="{{ isset($proposal->tradein->id) ? $proposal->tradein->id : '' }}" value="7"
+                        class="tradeReject btn btn-info"> Rejeitar</button>
+                @elseif($proposal->tradein->state_id == 8) 
+                    <button type="button" id="{{ isset($proposal->tradein->id) ? $proposal->tradein->id : '' }}" value="8"
+                        class="trade btn btn-success" disabled> Aceitar</button>
+                    <button type="button" id="{{ isset($proposal->tradein->id) ? $proposal->tradein->id : '' }}" value="7"
+                        class="tradeReject btn btn-info" disabled> Rejeitar</button>
+                @endif
+            @endif
 
             @if ($proposal->tradein_id != '')
                 <a href="{{ route('cars.show', [$proposal->tradein->id]) }}">Ver tudo</a>
             @endif
         </div>
+    </div>
+
+    <div class="tab-pane" id="campaigns" role="tabpanel" aria-labelledby="campaigns-tab">
+
+        @foreach($proposal->campaigns as $campaign) 
+
+        @if ($loop->first)
+            <h4 class="mb-4">{{ $campaign->name }}</h4>
+        @endif
+
+        <div class="row">
+
+            <!-- Name Field -->
+            <div class="form-group col-sm-4">
+                {!! Form::label('Descrição') !!}
+                {!! Form::text('name', isset($campaign->pivot->name) ? $campaign->pivot->name : '', ['class' => 'form-control', 'readonly']) !!}
+            </div>
+
+            <div class="form-group col-sm-4">
+                {!! Form::label('Valor') !!}
+                {!! Form::text('value', isset($campaign->pivot->value) ? $campaign->pivot->value : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
+
+            <!-- Client Type Field -->
+            <div class="form-group col-sm-4">
+                {!! Form::label('Tipo') !!}
+                {!! Form::text('type', isset($campaign->pivot->type) ? $campaign->pivot->type : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
+        </div>
+
+        @endforeach
+
+    </div>
+
+    <div class="tab-pane" id="benefits" role="tabpanel" aria-labelledby="benefits-tab">
+
+        @foreach($proposal->benefits as $benefit) 
+
+        @if ($loop->first)
+            <h4 class="mb-4">{{ $benefit->name }}</h4>
+        @endif
+
+        <div class="row">
+
+            <!-- Name Field -->
+            <div class="form-group col-sm-4">
+                {!! Form::label('Descrição') !!}
+                {!! Form::text('name', isset($benefit->pivot->name) ? $benefit->pivot->name : '', ['class' => 'form-control', 'readonly']) !!}
+            </div>
+
+            <div class="form-group col-sm-4">
+                {!! Form::label('Valor') !!}
+                {!! Form::text('value', isset($benefit->pivot->value) ? $benefit->pivot->value : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
+
+            <!-- Client Type Field -->
+            <div class="form-group col-sm-4">
+                {!! Form::label('Tipo') !!}
+                {!! Form::text('type', isset($benefit->pivot->type) ? $benefit->pivot->type : '', ['class' => 'form-control', 'disabled']) !!}
+            </div>
+        </div>
+
+        @endforeach
+        
     </div>
 
     <div class="tab-pane" id="financings" role="tabpanel" aria-labelledby="financings-tab">

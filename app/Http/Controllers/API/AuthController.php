@@ -30,7 +30,6 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string|min:6',
@@ -53,8 +52,7 @@ class AuthController extends Controller
            return response()->json([
             'success' => true,
             'token' => $jwt_token,
-            'user' => auth()->user(),
-            auth()->user()->unreadNotifications
+            'user' => auth()->user()
         ]);
         
     }
@@ -107,8 +105,7 @@ class AuthController extends Controller
      */
     public function me(Request $request)
     {
-        return response()->json(auth()->user());
-
+        return response()->json(auth()->user()->unreadNotifications);
     }
 
     /**
@@ -170,5 +167,4 @@ class AuthController extends Controller
             'user' => auth()->user()
         ]);
     }
-
 }

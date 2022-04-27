@@ -69,6 +69,6 @@ class CampaignsProposals extends Model
      **/
     public function proposal()
     {
-        return $this->belongsTo(\App\Models\Proposals::class, 'proposal_id', 'id');
+        return $this->belongsTo(\App\Models\Proposal::class, 'proposal_id', 'id');
     }
 }

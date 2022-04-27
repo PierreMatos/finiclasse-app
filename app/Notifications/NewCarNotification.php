@@ -59,6 +59,8 @@ class NewCarNotification extends Notification
             'link' => 'cars.show',
             'icon' => 'fas fa-car mr-2', 
             'text' => 'Adicionado ' . $this->car->model->make->name . ' ' . $this->car->model->name,
+            'reactIcon' => 'viatura',
+            'reactLink' => 'vehicle/' . $this->car->id
         ];
     }
 }

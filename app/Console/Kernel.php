@@ -13,7 +13,10 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\DailyQuote::class,
+        Commands\WeeklyQuote::class,
+        Commands\MonthlyQuote::class,
+        Commands\ProposalQuote::class,
     ];
 
     /**
@@ -24,7 +27,20 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('quote:daily')
+            ->dailyAt('19:00')->weekdays()->timezone('Europe/Lisbon');
+
+        $schedule->command('quote:weekly')
+            ->weeklyOn(1, '9:00')->timezone('Europe/Lisbon');
+
+        $schedule->command('quote:monthly')
+            ->monthly('9:00')->timezone('Europe/Lisbon');
+
+        $schedule->command('quote:proposal')
+            ->weeklyOn(1, '9:00')->timezone('Europe/Lisbon');
+
+        $schedule->command('seeds:daily')
+            ->dailyAt('9:00')->timezone('Europe/Lisbon');
     }
 
     /**
@@ -34,7 +50,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

@@ -2,6 +2,8 @@
 
 @section('content')
 
+    <body onload="startFCM()"></body>
+
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -11,7 +13,6 @@
             </div>
         </div>
     </section>
-
 
     <!-- <div class="container"> -->
     <div class="row">
@@ -30,8 +31,6 @@
                 <a href="/cars" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-
-
 
         <div class="col-lg-3 col-6">
             <!-- small box -->
@@ -109,7 +108,6 @@
                 <a href="/proposals" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-
     </div>
 
     <div class="col-lg-12">
@@ -125,32 +123,31 @@
                             <th>Carro</th>
                             <th>Cliente</th>
                             <th>Vendedor</th>
+                            <th>Criada</th>
+                            <th>Atualizada</th>
                             <th>Ver mais</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($latestProposal as $proposal)
                             <tr>
-
-                                
                                 @if (!$proposal->car->getFirstMediaUrl('cars', 'thumb'))
                                     <td><img src="storage/images/noPhoto.jpg" class="imgCar" /></td>
                                 @else
-                                    <td><img src="{{ $proposal->car->getFirstMediaUrl('cars', 'thumb') }}" style="max-width: 100px;" class="imgCar" /></td>
+                                    <td><img src="{{ $proposal->car->getFirstMediaUrl('cars', 'thumb') }}"
+                                            style="max-width: 100px;" class="imgCar" /></td>
                                 @endif
-
-                                 
                                 <td>{{ isset($proposal->car->model->make->name) ? $proposal->car->model->make->name : '' }}
                                 </td>
                                 <td>{{ isset($proposal->client->name) ? $proposal->client->name : '' }}</td>
                                 <td>{{ isset($proposal->vendor->name) ? $proposal->vendor->name : '' }}</td>
-
+                                <td>{{ isset($proposal->created_at) ? $proposal->created_at : '' }}</td>
+                                <td>{{ isset($proposal->updated_at) ? $proposal->updated_at : '' }}</td>
                                 <td class="">
                                     <a href="/proposals/{{ $proposal->id }}/edit" class="text-muted">
                                         <i class="fas fa-search"></i>
                                     </a>
                                 </td>
-
                             </tr>
                         @endforeach
 
@@ -160,5 +157,61 @@
         </div>
         <!-- /.card -->
     </div>
-    </div>
 @endsection
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+@push('page_scripts')
+    <script>
+        var firebaseConfig = {
+            apiKey: "{{ config('services.firebase.apiKey') }}",
+            authDomain: "{{ config('services.firebase.authDomain') }}",
+            projectId: "{{ config('services.firebase.projectId') }}",
+            storageBucket: "{{ config('services.firebase.storageBucket') }}",
+            messagingSenderId: "{{ config('services.firebase.messagingSenderId') }}",
+            appId: "{{ config('services.firebase.appId') }}",
+            measurementId: "{{ config('services.firebase.measurementId') }}"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const messaging = firebase.messaging();
+
+        function startFCM() {
+            messaging
+                .requestPermission()
+                .then(function() {
+                    return messaging.getToken()
+                })
+                .then(function(response) {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        url: '/store-token',
+                        type: 'POST',
+                        data: {
+                            token: response
+                        },
+                        dataType: 'JSON',
+                        success: function(response) {
+                            // alert('Token Guardado.');
+                            console.log('Token Guardado.');
+                        },
+                        error: function(error) {
+                            alert(error);
+                        },
+                    });
+                }).catch(function(error) {
+                    alert(error);
+                });
+        }
+        messaging.onMessage(function(payload) {
+            const title = payload.notification.title;
+            const options = {
+                body: payload.notification.body,
+                icon: payload.notification.icon,
+            };
+            new Notification(title, options);
+        });
+    </script>
+@endpush

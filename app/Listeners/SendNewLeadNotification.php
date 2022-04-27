@@ -29,7 +29,7 @@ class SendNewLeadNotification
     public function handle($event)
     {
         $adminsAndDirectors = User::whereHas('roles', function ($query) {
-            $query->where('id', 85)->orWhere('id', 86);
+            $query->whereIn('roles.name', ['Administrador', 'Diretor comercial']);
         })->get();
 
         Notification::send($adminsAndDirectors, new NewLeadNotification($event->user));

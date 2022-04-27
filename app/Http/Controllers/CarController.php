@@ -6,6 +6,7 @@ use Flash;
 use Response;
 use App\Models\Car;
 use App\Models\CarModel;
+use App\Models\Proposal;
 use App\Providers\NewCar;
 use Illuminate\Http\Request;
 use App\Repositories\CarRepository;
@@ -13,6 +14,7 @@ use App\Repositories\MakeRepository;
 use App\Repositories\StandRepository;
 use App\Http\Requests\CreateCarRequest;
 use App\Http\Requests\UpdateCarRequest;
+use App\Providers\PushValidatedTradeIn;
 use App\Repositories\CarFuelRepository;
 use App\Repositories\CarClassRepository;
 use App\Repositories\CarDriveRepository;
@@ -336,8 +338,7 @@ class CarController extends AppBaseController
         // return ($request->state);
         // return response()->json(['success'=>'Ajax request submitted successfully']);
 
-        $car = $this->carRepository->find($request->car);
-
+        $car = Car::query()->with('proposalTradeIn')->find($request->car);
 
         if (empty($request->car)) {
             Flash::error(__('translation.car not found'));
@@ -359,6 +360,11 @@ class CarController extends AppBaseController
 
         //update $car with $state
         $car = $this->carRepository->update(['state_id' => $request->state, 'tradein_purchase' => $request->price], $request->car);
+
+        //Push & Notification Validated TradeIn
+        if ($request->state == 8) {
+            event(new PushValidatedTradeIn($car));
+        }
 
         // return response()->json(['success'=> 'Retoma editada com sucesso']);
 

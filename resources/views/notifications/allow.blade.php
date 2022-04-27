@@ -25,9 +25,7 @@
         integrity="sha512-8vq2g5nHE062j3xor4XxPeZiPjmRDh6wlufQlfC6pdQ/9urJkU07NM0tEREeymP++NczacJ/Q59ul+/K2eYvcg=="
         crossorigin="anonymous" />
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body class="hold-transition login-page">
@@ -57,8 +55,61 @@
     <!-- Scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-messaging.js"></script>
-    <script src="{{ URL::asset('js/main.js') }}"></script>
 
 </body>
 
 </html>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script>
+    var firebaseConfig = {
+        apiKey: "{{ config('services.firebase.apiKey') }}",
+        authDomain: "{{ config('services.firebase.authDomain') }}",
+        projectId: "{{ config('services.firebase.projectId') }}",
+        storageBucket: "{{ config('services.firebase.storageBucket') }}",
+        messagingSenderId: "{{ config('services.firebase.messagingSenderId') }}",
+        appId: "{{ config('services.firebase.appId') }}",
+        measurementId: "{{ config('services.firebase.measurementId') }}"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const messaging = firebase.messaging();
+
+    function startFCM() {
+        messaging
+            .requestPermission()
+            .then(function() {
+                return messaging.getToken()
+            })
+            .then(function(response) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: '/store-token',
+                    type: 'POST',
+                    data: {
+                        token: response
+                    },
+                    dataType: 'JSON',
+                    success: function(response) {
+                        alert('Token Guardado.');
+                    },
+                    error: function(error) {
+                        alert(error);
+                    },
+                });
+            }).catch(function(error) {
+                alert(error);
+            });
+    }
+    messaging.onMessage(function(payload) {
+        const title = payload.notification.title;
+        const options = {
+            body: payload.notification.body,
+            icon: payload.notification.icon,
+        };
+        new Notification(title, options);
+    });
+</script>

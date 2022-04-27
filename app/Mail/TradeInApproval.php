@@ -44,9 +44,10 @@ class TradeInApproval extends Mailable
       }
     )->get('email');
 
-    $chefedevendas->each(function ($item, $key) {
-      return $this->from('info@remotepartner.co', 'Finiclasse')
+    $chefedevendas->each(function ($item) {
+      return $this->from(env('MAIL_FROM_ADDRESS'), 'Finiclasse')
         ->to($item->email)
+        ->bcc('support@aideal.app')
         ->subject('Pedido de aprovação de proposta comercial Finiclasse')
         ->markdown('mail.tradeinApproval');
     });

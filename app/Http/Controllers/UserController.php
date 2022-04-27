@@ -22,6 +22,8 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\ClientTypeRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Providers\PushNewLead;
+use App\Providers\PushRGPD;
 
 class UserController extends AppBaseController
 {
@@ -121,6 +123,9 @@ class UserController extends AppBaseController
 
             //Event for Notification
             event(new NewLead($user));
+
+            //Event Push & Notification for New Vendor Lead
+            event(new PushNewLead($user));
         }
 
         if ($user->gdpr_type == "email") {
@@ -128,6 +133,9 @@ class UserController extends AppBaseController
         } elseif ($user->gdpr_type == "sms") {
             // Something
         }
+
+        // //Event for Notification
+        // event(new PushNewUser($user));
 
         Flash::success(__('translation.user saved'));
 
@@ -228,14 +236,21 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        $user = $this->userRepository->update($request->all(), $id);
-
         //atribuir lead user a vendedor
-        if($request->vendor_id){
-            $user->vendor()->sync($request->vendor_id);
+        if($request->vendor_id != '') {
+            if($request->vendor_id != $user->vendor[0]->id){
+                $user->vendor()->sync($request->vendor_id);
 
-            //Event for Notification
-            event(new NewLead($user));
+                $user = $this->userRepository->update($request->all(), $id);
+
+                //Event for Notification
+                event(new NewLead($user));
+
+                //Event Push & Notification for New Vendor Lead
+                event(new PushNewLead($user));
+            } else {
+                $user = $this->userRepository->update($request->all(), $id);
+            }
         }
 
         Flash::success(__('translation.user updated'));
@@ -333,6 +348,9 @@ class UserController extends AppBaseController
         $timestamp = Carbon::now();
 
         $user = $this->userRepository->update(['gdpr_confirmation' => $timestamp, 'gdpr_type' => "email"], $id);
+
+        //Push & Nofication RGDP
+        event(new PushRGPD($user));
 
         return view('thankyou');
     }

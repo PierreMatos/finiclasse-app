@@ -140,7 +140,6 @@
     <!-- Scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-messaging.js"></script>
-    <script src="{{ URL::asset('js/main.js') }}"></script>
     <!-- <script src="{{ mix('js/app.js') }}" defer></script> -->
 
     <script>

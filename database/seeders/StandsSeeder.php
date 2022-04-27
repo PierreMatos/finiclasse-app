@@ -43,6 +43,19 @@ class StandsSeeder extends Seeder
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',
             ),
+            2 => 
+            array (
+                'id' => 3,
+                'name' => 'Seat Guarda',
+                'localization' => 'Guarda',
+                'phone' => '271093031',
+                'email' => 'seat@finiclasse.com',
+                'order' => 3,
+                'color' => '#fffff',
+                'visible' => 1,
+                'created_at' => '2019-10-23 15:50:48',
+                'updated_at' => '2019-10-23 15:50:48',
+            ),
         ));
 
     }

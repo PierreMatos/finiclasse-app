@@ -32,6 +32,7 @@ class UsersSeeder extends Seeder
                 'id' => 1,
                 'name' => 'admin',
                 'email' => 'admin@demo.com',
+                'nif' => NULL,
                 'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
                 'remember_token' => 'T4PQhFvBcAA7k02f7ejq4I7z7QKKnvxQLV0oqGnuS6Ktz6FdWULrWrzZ3oYn',
                 'stand_id' => 1,
@@ -44,6 +45,7 @@ class UsersSeeder extends Seeder
                 'id' => 2,
                 'name' => 'Administrador',
                 'email' => 'administrador@demo.com',
+                'nif' => NULL,
                 'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
                 'remember_token' => '5nysjzVKI4LU92bjRqMUSYdOaIo1EcPC3pIMb6Tcj2KXSUMriGrIQ1iwRdd0',
                 'stand_id' => 1,
@@ -56,6 +58,7 @@ class UsersSeeder extends Seeder
                 'id' => 3,
                 'name' => 'Chefe de vendas',
                 'email' => 'chefedevendasguarda@demo.com',
+                'nif' => NULL,
                 'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
                 'remember_token' => 'V6PIUfd8JdHT2zkraTlnBcRSINZNjz5Ou7N0WtUGRyaTweoaXKpSfij6UhqC',
                 'stand_id' => 1,
@@ -69,6 +72,7 @@ class UsersSeeder extends Seeder
                 'id' => 4,
                 'name' => 'Chefe de vendas',
                 'email' => 'chefedevendasviseu@demo.com',
+                'nif' => NULL,
                 'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
                 'remember_token' => 'V6PIUfd8JdHT2zkraTlnBcRSINZNjz5Ou7N0WtUGRyaTweoaXKpSfij6UhqC',
                 'stand_id' => 2,
@@ -83,6 +87,7 @@ class UsersSeeder extends Seeder
                 'id' => 9,
                 'name' => 'Cliente',
                 'email' => 'cliente@demo.com',
+                'nif' => NULL,
                 'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
                 'stand_id' => 1,
                 'finiclasse_employee' => 0,
@@ -96,6 +101,7 @@ class UsersSeeder extends Seeder
                 'id' => 10,
                 'name' => 'José Teixeira',
                 'email' => 'jose.teixeira@finiclasse.pt',
+                'nif' => NULL,
                 'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
                 'stand_id' => 2,
                 'finiclasse_employee' => 1,
@@ -109,6 +115,7 @@ class UsersSeeder extends Seeder
                 'id' => 11,
                 'name' => 'Patrício Lopes',
                 'email' => 'patricio.lopes@finiclasse.com',
+                'nif' => NULL,
                 'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
                 'stand_id' => 1,
                 'finiclasse_employee' => 1,
@@ -122,6 +129,7 @@ class UsersSeeder extends Seeder
                 'id' => 12,
                 'name' => 'Sandro Lopes',
                 'email' => 'sandro.lopes@finiclasse.com',
+                'nif' => NULL,
                 'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
                 'stand_id' => 1,
                 'finiclasse_employee' => 1,
@@ -134,6 +142,7 @@ class UsersSeeder extends Seeder
                 'id' => 13,
                 'name' => 'Francisco Fernandes',
                 'email' => 'fffernandes@finiclasse.com',
+                'nif' => NULL,
                 'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
                 'stand_id' => 2,
                 'finiclasse_employee' => 1,
@@ -146,6 +155,7 @@ class UsersSeeder extends Seeder
                 'id' => 14,
                 'name' => 'Agostinho Barroso',
                 'email' => 'agostinho.barroso@finiclasse.com',
+                'nif' => NULL,
                 'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
                 'stand_id' => 2,
                 'finiclasse_employee' => 1,
@@ -158,6 +168,7 @@ class UsersSeeder extends Seeder
                 'id' => 15,
                 'name' => 'Hugo Coito',
                 'email' => 'hugo.coito@finiclasse.com',
+                'nif' => NULL,
                 'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
                 'stand_id' => 2,
                 'finiclasse_employee' => 1,
@@ -170,6 +181,7 @@ class UsersSeeder extends Seeder
                 'id' => 16,
                 'name' => 'Bruno Fernandes',
                 'email' => 'bruno.fernandes@finiclasse.pt',
+                'nif' => NULL,
                 'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
                 'stand_id' => 2,
                 'finiclasse_employee' => 1,
@@ -182,6 +194,7 @@ class UsersSeeder extends Seeder
                 'id' => 17,
                 'name' => 'Orlando Carvalho',
                 'email' => 'orlando.carvalho31@gmail.com',
+                'nif' => NULL,
                 'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
                 'remember_token' => '5nysjzVKI4LU92bjRqMUSYdOaIo1EcPC3pIMb6Tcj2KXSUMriGrIQ1iwRdd0',
                 'stand_id' => 1,
@@ -194,6 +207,7 @@ class UsersSeeder extends Seeder
                 'id' => 18,
                 'name' => 'Paulo Duarte',
                 'email' => 'paulo.duarte@finiclasse.pt',
+                'nif' => NULL,
                 'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
                 'remember_token' => '5nysjzVKI4LU92bjRqMUSYdOaIo1EcPC3pIMb6Tcj2KXSUMriGrIQ1iwRdd0',
                 'stand_id' => 2,
@@ -206,12 +220,26 @@ class UsersSeeder extends Seeder
                 'id' => 19,
                 'name' => 'Pedro Liberato',
                 'email' => 'liberato.p@finiclasse.pt',
+                'nif' => NULL,
                 'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
                 'remember_token' => '5nysjzVKI4LU92bjRqMUSYdOaIo1EcPC3pIMb6Tcj2KXSUMriGrIQ1iwRdd0',
                 'stand_id' => 2,
                 'finiclasse_employee' => 1,
                 'created_at' => '2018-08-14 17:06:28',
                 'updated_at' => '2019-09-25 22:09:35',
+            ),
+            19 => 
+            array (
+                'id' => 20,
+                'name' => 'User Teste Viseu',
+                'email' => 'userteste@mail.com',
+                'nif' => '315089459',
+                'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
+                'stand_id' => 2,
+                'finiclasse_employee' => 0,
+                'remember_token' => NULL,
+                'created_at' => '2022-04-15 17:00:00',
+                'updated_at' => '2022-04-25 17:00:00',
             )
 
         ));
@@ -229,9 +257,6 @@ class UsersSeeder extends Seeder
         $this->userRepository->find(10)->assignRole('Vendedor');
         $this->userRepository->find(12)->assignRole('Vendedor');
         $this->userRepository->find(14)->assignRole('Vendedor');
-
-        User::factory()
-            ->count(10)
-            ->create();
+        
     }
 }

@@ -29,7 +29,7 @@ class SendNewCarNotification
     public function handle($event)
     {
         $employees = User::whereHas('roles', function ($query) {
-            $query->where('id', 85)->orWhere('id', 86)->orWhere('id', 87)->orWhere('id', 88);
+            $query->whereIn('roles.name', ['Administrador', 'Diretor comercial', 'Chefe de vendas', 'Vendedor']);
         })->get();
 
         Notification::send($employees, new NewCarNotification($event->car));

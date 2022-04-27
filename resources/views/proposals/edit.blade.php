@@ -31,51 +31,47 @@
 
             </li>
             <li class="nav-item" role="presentation">
-
-            @if (isset($proposal->tradein))
-
-                <a class="nav-link" id="tradein-tab" data-toggle="tab" href="#tradeins" role="tab" aria-controls="tradein" aria-selected="false">{{ __('Tradein') }}</a>
-
+                @if (isset($proposal->tradein))
                     @if ($proposal->tradein->state_id == 7)
-                    
-                    <a class="nav-link badge-warning" id="tradein-tab" data-toggle="tab" href="#tradeins" role="tab" aria-controls="tradein" aria-selected="false">{{ __('Tradein') }}</a>
-
+                        <a class="nav-link badge-warning" id="tradein-tab" data-toggle="tab" href="#tradeins" role="tab"
+                            aria-controls="tradein" aria-selected="false">{{ __('Tradein') }}</a>
+                    @elseif($proposal->tradein->state_id == 8)
+                        <a class="nav-link badge-success" id="tradein-tab" data-toggle="tab" href="#tradeins" role="tab"
+                            aria-controls="tradein" aria-selected="false">{{ __('Tradein') }}</a>
                     @endif
-
-            @else
-                    <a class="nav-link disabled" id="tradein-tab" data-toggle="tab" href="#tradeins" role="tab" aria-controls="tradein" aria-selected="false">{{ __('Tradein') }}</a>
-
+                @else
+                    <a class="nav-link disabled" id="tradein-tab" data-toggle="tab" href="#tradeins" role="tab"
+                        aria-controls="tradein" aria-selected="false">{{ __('Tradein') }}</a>
                 @endif
-
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="campaigns-tab" data-toggle="tab" href="#campaigns" role="tab"
+                    aria-controls="campaigns" aria-selected="false">{{ __('Campaigns') }}</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="benefits-tab" data-toggle="tab" href="#benefits" role="tab"
+                    aria-controls="benefits" aria-selected="false">{{ __('Benefits') }}</a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="financings-tab" data-toggle="tab" href="#financings" role="tab"
                     aria-controls="financings" aria-selected="false">{{ __('Financing') }}</a>
             </li>
-
             @if (isset($proposal->initialBusinessStudy->business_study_authorization_id) && ($proposal->initialBusinessStudy->business_study_authorization_id == 2 || $proposal->initialBusinessStudy->business_study_authorization_id == 3))
-
                 <li class="nav-item" role="presentation">
                     <a class="nav-link badge-warning" id="proposals-tab" data-toggle="tab" href="#proposals" role="tab"
                         aria-controls="proposals" aria-selected="false">{{ __('Proposal') }}</a>
                 </li>
-
             @elseif (isset($proposal->initialBusinessStudy->business_study_authorization_id) && $proposal->initialBusinessStudy->business_study_authorization_id == 5)
-
                 <li class="nav-item" role="presentation">
                     <a class="nav-link badge-danger" id="proposals-tab" data-toggle="tab" href="#proposals" role="tab"
                         aria-controls="proposals" aria-selected="false">{{ __('Proposal') }}</a>
                 </li>
-
             @else
-
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" id="proposals-tab" data-toggle="tab" href="#proposals" role="tab"
                         aria-controls="proposals" aria-selected="false">{{ __('Proposal') }}</a>
                 </li>
-
             @endif
-
         </ul>
 
         <div class="card">
@@ -89,25 +85,24 @@
             </div>
 
             <!-- <div class="card-footer">
-                                {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
-                                <a href="{{ route('proposals.index') }}" class="btn btn-default">{{ __('Cancel') }}</a>
-                            </div> 
+                                        {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+                                        <a href="{{ route('proposals.index') }}" class="btn btn-default">{{ __('Cancel') }}</a>
+                                    </div>
 
-                             {!! Form::close() !!} -->
+                                     {!! Form::close() !!} -->
 
         </div>
     </div>
 @endsection
 
 @push('page_scripts')
-
     <script>
         $(".trade").click(function(e) {
 
             var price = $("input[name=tradein_purchase]").val();
             $.ajaxSetup({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 }
             });
             $.ajax({
@@ -160,5 +155,4 @@
 
         });
     </script>
-
 @endpush
