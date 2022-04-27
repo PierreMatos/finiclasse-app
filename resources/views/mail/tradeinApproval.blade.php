@@ -35,7 +35,7 @@
     </table>
 @endcomponent
 
-@component('mail::button', ['url' => env('APP_URL') . '/proposals/' . $proposal->id . "/edit"])
+@component('mail::button', ['url' => env('APP_URL') . 'proposals/' . $proposal->id . "/edit"])
 VER PROPOSTA Nº {{ $proposal->id }}
 @endcomponent
 
