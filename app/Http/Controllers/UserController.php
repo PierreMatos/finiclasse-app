@@ -239,7 +239,7 @@ class UserController extends AppBaseController
         //atribuir lead user a vendedor
         if($request->vendor_id != '')  {
   
-                if($request->vendor_id != $user->vendor->first->id){
+                if($request->vendor_id != $user->vendor->first()->id){
 
                 $user->vendor()->sync($request->vendor_id);
 
