@@ -55,10 +55,10 @@ class NewLeadNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' => $this->user->vendor[0]->id,
+            'id' => $this->user->vendor->first->id,
             'link' => 'sellers.show',
             'icon' => 'fas fa-user-tie mr-2',
-            'text' => 'Lead atribuída a ' . $this->user->vendor[0]->name,
+            'text' => 'Lead atribuída a ' . $this->user->vendor->first->name,
             'reactIcon' => 'cliente',
             'reactLink' => 'client/' . $this->user->id
         ];
