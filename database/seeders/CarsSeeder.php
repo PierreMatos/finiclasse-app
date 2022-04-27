@@ -3,8 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Car;
-
 
 class CarsSeeder extends Seeder
 {
@@ -16,8 +14,6 @@ class CarsSeeder extends Seeder
     public function run()
     {
         \DB::table('cars')->delete();
-
-  
 
         // factory(\App\Models\Car::class,15)->create();
 
@@ -112,41 +108,6 @@ class CarsSeeder extends Seeder
                 'stand_id' => '1',
                 'price' => '65000',
                 'price_new' => '70000',
-                'tradein' => '0', //Não aceita retoma
-                'deductible' => '0',
-                'power' => '194',
-                'km' => '0',
-                'transmission_id' => '1', //Automatico
-                // 'color_interior' => '',
-                'color_exterior' => 'Preto',
-                'metallic_color' => '1', //boolean
-                'drive_id' => '4', //4MATIC
-                'fuel_id' => '3', //Híbrido
-                'door' => '5',
-                'seats' => '5',
-                'class_id' => '1',
-                'iva' => '5555',
-                'consumption' => null,
-                'created_at' => '2019-10-22 15:50:48',
-                'updated_at' => '2019-10-22 15:50:48',
-            ),
-            
-            2 => 
-            array (
-                'id' => 3,
-                'model_id' => '6', //GLC
-                'variant' => '300 4MATIC',
-                'motorization' => '2000',
-                'category_id' => '2', //Ligiero
-                'registration' => '2021',
-                'condition_id' => '1', //Novo
-                'state_id' => '3', //Disponivel 
-                'warranty_stand' => '12', //meses
-                'warranty_make' => '2023/04',
-                'plate' => '',
-                'stand_id' => '1',
-                'price' => '63000',
-                'price_new' => '67000',
                 'tradein' => '0', //Não aceita retoma
                 'deductible' => '0',
                 'power' => '194',
