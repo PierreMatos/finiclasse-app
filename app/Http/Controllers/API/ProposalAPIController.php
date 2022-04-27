@@ -564,7 +564,7 @@ class ProposalAPIController extends AppBaseController
 
                     if ($discPerc >= $min && $discPerc <= $max && $authorization->id !== 6) {
 
-                     {
+                     
                         
                         if ($authorization->id !== 1) {
                             $proposal->state_id = 3;
