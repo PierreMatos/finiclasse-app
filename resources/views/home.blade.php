@@ -53,12 +53,12 @@
                 <div class="inner">
                     <h3>{{ $proposalsOpenNew }}</h3>
 
-                    <p>Propostas Abertas de viaturas novas</p>
+                    <p>Propostas abertas de viaturas novas</p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-chart-line"></i>
                 </div>
-                <a href="/proposals" class="small-box-footer">ver mais <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="/proposals" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
 
@@ -69,7 +69,7 @@
                 <div class="inner">
                     <h3>{{ intval(round($proposalsCloseNew)) }}<sup style="font-size: 20px">%</sup></h3>
 
-                    <p>Propostas Fechadas de viaturas novas</p>
+                    <p>Propostas fechadas de viaturas novas</p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-chart-pie"></i>
@@ -85,12 +85,12 @@
                 <div class="inner">
                     <h3>{{ $proposalsOpenUsed }}</h3>
 
-                    <p>Propostas Abertas de viaturas usadas</p>
+                    <p>Propostas abertas de viaturas usadas</p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-chart-line"></i>
                 </div>
-                <a href="/proposals" class="small-box-footer">ver mais <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="/proposals" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
 
@@ -100,7 +100,7 @@
                 <div class="inner">
                     <h3>{{ intval(round($proposalsClosedUsed)) }}<sup style="font-size: 20px"></sup></h3>
 
-                    <p>Propostas Fechadas de viaturas usadas</p>
+                    <p>Propostas fechadas de viaturas usadas</p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-chart-pie"></i>
