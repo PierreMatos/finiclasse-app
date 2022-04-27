@@ -39,8 +39,8 @@ class CarsSeeder extends Seeder
                 'warranty_make' => '2023/04',
                 'plate' => '87-XL-41',
                 'stand_id' => '1',
-                'price' => '1887000',
-                'price_campaign' => '13750',
+                'price' => '30000',
+                'price_campaign' => '40000',
                 'tradein' => '0', //
                 'deductible' => '0',
                 'power' => '80',
@@ -110,8 +110,8 @@ class CarsSeeder extends Seeder
                 'warranty_make' => '2023/04',
                 'plate' => '',
                 'stand_id' => '1',
-                'price' => '69386',
-                'price_new' => '69386',
+                'price' => '65000',
+                'price_new' => '70000',
                 'tradein' => '0', //Não aceita retoma
                 'deductible' => '0',
                 'power' => '194',
@@ -145,8 +145,8 @@ class CarsSeeder extends Seeder
                 'warranty_make' => '2023/04',
                 'plate' => '',
                 'stand_id' => '1',
-                'price' => '69386',
-                'price_new' => '69386',
+                'price' => '63000',
+                'price_new' => '67000',
                 'tradein' => '0', //Não aceita retoma
                 'deductible' => '0',
                 'power' => '194',

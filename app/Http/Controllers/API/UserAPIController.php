@@ -283,7 +283,6 @@ class UserAPIController extends AppBaseController
 
     public function createValidateRGPD(Request $request) 
     {   
-        
         $validator = Validator::make($request->all(), [
             'id' => 'required', 'integer',
             'type' => 'required',

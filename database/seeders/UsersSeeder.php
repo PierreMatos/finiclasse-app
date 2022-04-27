@@ -218,6 +218,7 @@ class UsersSeeder extends Seeder
                 'id' => 20,
                 'name' => 'User Teste Viseu',
                 'email' => 'userteste@mail.com',
+                'nif' => '315089459',
                 'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
                 'stand_id' => 2,
                 'finiclasse_employee' => 0,

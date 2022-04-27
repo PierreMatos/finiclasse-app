@@ -42,8 +42,6 @@ class ResumeDaily extends Mailable
                 ->whereIn('roles.name', ['Administrador', 'Diretor comercial', 'Chefe de vendas']);
         })->get('email');
 
-        $adminsAndDirectorsAndChefe = User::whereIn('id', [17, 96 , 104, 109])->get();
-
         // //For test 
         // $adminsAndDirectorsAndChefe = User::whereIn('id', [17])->get();
 
