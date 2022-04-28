@@ -22,7 +22,7 @@ class CarModelFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word,
+        'name' => $this->faker->word,
         'make_id' => $this->faker->randomDigitNotNull,
         'car_category_id' => $this->faker->randomDigitNotNull,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),

@@ -22,7 +22,7 @@ class BusinessStudyStatesFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word,
+        'name' => $this->faker->word,
         'order' => $this->faker->randomDigitNotNull,
         'color' => $this->faker->word,
         'visible' => $this->faker->word,

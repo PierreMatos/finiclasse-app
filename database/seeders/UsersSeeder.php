@@ -231,7 +231,7 @@ class UsersSeeder extends Seeder
             19 => 
             array (
                 'id' => 20,
-                'name' => 'User Teste Viseu',
+                'name' => 'User Teste',
                 'email' => 'userteste@mail.com',
                 'mobile_phone' => '915089459',
                 'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
@@ -240,6 +240,32 @@ class UsersSeeder extends Seeder
                 'remember_token' => NULL,
                 'created_at' => '2022-04-15 17:00:00',
                 'updated_at' => '2022-04-25 17:00:00',
+            ),
+            20 => 
+            array (
+                'id' => 21,
+                'name' => 'User Teste 2 ',
+                'email' => 'userteste2@mail.com',
+                'mobile_phone' => '916278648',
+                'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
+                'stand_id' => 2,
+                'finiclasse_employee' => 0,
+                'remember_token' => NULL,
+                'created_at' => '2022-04-15 17:00:01',
+                'updated_at' => '2022-04-25 17:00:01',
+            ),
+            21 => 
+            array (
+                'id' => 22,
+                'name' => 'User Teste 3',
+                'email' => 'userteste3@mail.com',
+                'mobile_phone' => '913372053',
+                'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
+                'stand_id' => 2,
+                'finiclasse_employee' => 0,
+                'remember_token' => NULL,
+                'created_at' => '2022-04-15 17:00:02',
+                'updated_at' => '2022-04-25 17:00:02',
             )
 
         ));

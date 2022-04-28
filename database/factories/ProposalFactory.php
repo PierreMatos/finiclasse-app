@@ -27,8 +27,8 @@ class ProposalFactory extends Factory
     public function definition()
     {
         return [
-        'client_id' => User::all()->random()->id,
-        'vendor_id' => User::all()->random()->id,
+        'client_id' => User::all()->randomElement(['20','21','22']),
+        'vendor_id' => User::all()->randomElement(['10','14']),
         'price' => $this->faker->randomNumber($nbDigits = 5, $strict = false),
         'pos_number' => $this->faker->randomNumber($nbDigits = 9, $strict = false),
         'prop_value' => $this->faker->randomNumber($nbDigits = 4, $strict = false),

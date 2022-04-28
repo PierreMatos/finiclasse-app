@@ -22,7 +22,7 @@ class BenefitsProposalsFactory extends Factory
     public function definition()
     {
         return [
-            'benefit_id' => $this->faker->randomDigitNotNull,
+        'benefit_id' => $this->faker->randomDigitNotNull,
         'proposal_id' => $this->faker->randomDigitNotNull,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s')

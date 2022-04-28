@@ -22,7 +22,7 @@ class StandFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word,
+        'name' => $this->faker->word,
         'localization' => $this->faker->word,
         'phone' => $this->faker->word,
         'email' => $this->faker->word,
