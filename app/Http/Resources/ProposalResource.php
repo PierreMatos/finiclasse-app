@@ -76,7 +76,7 @@ class ProposalResource extends JsonResource
                 'make' => $this->car->model->make->name ?? '',
                 'model_id' => $this->car->model->id ?? '',
                 'model' => $this->car->model->name ?? '',
-                'category_id' => $this->car->model->category_id ?? '',
+                'category_id' => $this->car->category_id ?? '',
                 'variant' => $this->car->variant ?? '',
                 'price' => $this->car->price ?? '',
                 'motorization' => $this->car->motorization ?? '',
