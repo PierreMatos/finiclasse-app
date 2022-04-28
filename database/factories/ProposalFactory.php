@@ -36,7 +36,7 @@ class ProposalFactory extends Factory
         'next_contact_date' => $this->faker->date('Y-m-d H:i:s'),
         'contract' => $this->faker->word,
         'test_drive' => $this->faker->boolean,
-        'state_id' =>  ProposalState::all()->random()->id,
+        'state_id' => ProposalState::all()->random()->id,
         'initial_business_study_id' => BusinessStudy::all()->random()->id,
         'final_business_study_id' => BusinessStudy::all()->random()->id,
         'comment' => $this->faker->sentence,
