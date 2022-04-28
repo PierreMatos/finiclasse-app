@@ -24,6 +24,7 @@ class MakeFactory extends Factory
         return [
         'name' => $this->faker->word,
         'logo' => $this->faker->word,
+        'visible' => $this->faker->word,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];
