@@ -123,7 +123,7 @@ class CarAPIController extends AppBaseController
 
         // add POS
         if ($request->hasFile('pos')) {
-            $fileAdders = $car->addMediaFromRequest('pos', 's3');
+            $car->addMedia($request)->toMediaCollection('pos','s3');
         }
 
         return $this->sendResponse(new CarResource($car), 'Car saved successfully');
@@ -200,14 +200,19 @@ class CarAPIController extends AppBaseController
         }
 
         //adicionar POS
-        if (empty($request->hasFile('pos'))) {
-            //Passar a variable input sem colocar novo pos
+        //Verificar se a imagem existe
+        if($request->hasFile('pos') == null) {
+            //Passar a variable input sem colocar nova imagem
             $input = $request->all();
         } else {
-            //Actualizar pos se colocar um novo
+            //Actualizar imagem se colocar uma nova
             $input = $request->all();
+            $car->addMedia($request)->toMediaCollection('pos','s3');
+        }
 
-            $fileAdders = $car->addMediaFromRequest('pos', 's3');
+        //Apagar imagem antiga se for mudada  
+        if($request->hasFile('pos')){
+            $car->clearMediaCollection('pos','s3');
         }
 
         if (empty($car)) {
