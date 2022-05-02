@@ -201,7 +201,7 @@ class CarAPIController extends AppBaseController
         }
 
         //Verificar se a imagem existe POS
-        if(empty($request->hasFile('image'))) {
+        if(empty($request->hasFile('pos'))) {
             //Passar a variable input sem colocar nova imagem
             $input = $request->all();
         } else {
