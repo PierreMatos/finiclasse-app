@@ -123,10 +123,7 @@ class CarAPIController extends AppBaseController
 
         // add POS
         if ($request->hasFile('pos')) {
-            $fileAdders = $car->addMultipleMediaFromRequest(['pos'])
-                ->each(function ($fileAdder) {
-                    $fileAdder->toMediaCollection('pos','s3');
-                });
+            $fileAdders = $car->addMediaFromRequest('pos', 's3');
         }
 
         return $this->sendResponse(new CarResource($car), 'Car saved successfully');
@@ -210,10 +207,7 @@ class CarAPIController extends AppBaseController
             //Actualizar pos se colocar um novo
             $input = $request->all();
 
-            $fileAdders = $car->addMultipleMediaFromRequest(['pos'])
-                ->each(function ($fileAdder) {
-                    $fileAdder->toMediaCollection('pos','s3');
-                });
+            $fileAdders = $car->addMediaFromRequest('pos', 's3');
         }
 
         if (empty($car)) {
