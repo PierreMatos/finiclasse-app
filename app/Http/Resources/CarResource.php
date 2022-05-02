@@ -23,7 +23,6 @@ class CarResource extends JsonResource
         }
         $pos = $this->getFirstMediaUrl('pos');
 
-
         return [
             'id' => $this->id,
             'make_id' => $this->model->make->id ?? '',

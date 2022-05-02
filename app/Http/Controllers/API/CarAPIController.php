@@ -163,10 +163,6 @@ class CarAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        
-// return json_encode($input);
-// return $this->sendResponse($input,$input);
-// return($this->carRepository->update($input, $id));
         /** @var Car $car */
         $car = $this->carRepository->find($id);
 
@@ -206,8 +202,8 @@ class CarAPIController extends AppBaseController
             $input = $request->all();
         } else {
             //Actualizar imagem se colocar uma nova
-            $input = $request->all();
             $file = $request->file('pos');
+            $input = $request->all();
             $car->addMedia($file)->toMediaCollection('pos','s3');
         }
 
@@ -222,16 +218,11 @@ class CarAPIController extends AppBaseController
             return redirect(route('cars.index'));
         }
 
-        if (empty($car)) {
-            return $this->sendError('Car not found');
-        }
-
         if (isset($input['potencial_buyer'])){
 
             $input['potencial_buyer'] = json_decode($input['potencial_buyer']);
         }
 
-        // $car->proposal->touch();
         $car = $this->carRepository->update($input, $id);
 
         return $this->sendResponse(new CarResource($car), 'Car updated successfully');

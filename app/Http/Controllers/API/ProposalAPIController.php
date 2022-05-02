@@ -658,8 +658,6 @@ class ProposalAPIController extends AppBaseController
     }
     public function sendProposal($id)
     {
-
-
         //TODO mudar estado da proposta
 
         $proposal = Proposal::find($id);
