@@ -122,8 +122,9 @@ class CarAPIController extends AppBaseController
         }
 
         // add POS
-        if ($request->hasFile('pos')) {
-            $car->addMedia($request)->toMediaCollection('pos','s3');
+        if ($request->file('pos')) {
+            $file = $request->file('pos');
+            $car->addMedia($file)->toMediaCollection('pos','s3');
         }
 
         return $this->sendResponse(new CarResource($car), 'Car saved successfully');
@@ -199,15 +200,15 @@ class CarAPIController extends AppBaseController
                 });
         }
 
-        //adicionar POS
-        //Verificar se a imagem existe
+        //Verificar se a imagem existe POS
         if($request->hasFile('pos') == null) {
             //Passar a variable input sem colocar nova imagem
             $input = $request->all();
         } else {
             //Actualizar imagem se colocar uma nova
             $input = $request->all();
-            $car->addMedia($request)->toMediaCollection('pos','s3');
+            $file = $request->file('pos');
+            $car->addMedia($file)->toMediaCollection('pos','s3');
         }
 
         //Apagar imagem antiga se for mudada  
@@ -220,7 +221,6 @@ class CarAPIController extends AppBaseController
 
             return redirect(route('cars.index'));
         }
-
 
         if (empty($car)) {
             return $this->sendError('Car not found');
