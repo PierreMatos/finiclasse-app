@@ -196,13 +196,14 @@ class CarAPIController extends AppBaseController
                 });
         }
 
+        $file = $request->file('pos');
+
         //Verificar se a imagem existe POS
-        if(empty($request->hasFile('pos'))) {
+        if($request->hasFile('file') == null) {
             //Passar a variable input sem colocar nova imagem
             $input = $request->all();
         } else {
             //Actualizar imagem se colocar uma nova
-            $file = $request->file('pos');
             $input = $request->all();
             $car->addMedia($file)->toMediaCollection('pos','s3');
         }
