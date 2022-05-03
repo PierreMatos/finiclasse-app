@@ -180,20 +180,28 @@
         <div class="row">
 
             <!-- Name Field & Image Field -->
-            <div class="form-group col-sm-4" style="display: grid; text-align: center; justify-content: center;">
+            <div class="form-group col-sm-12" style="text-align: center;">
                 @if (!empty($proposal->tradein_id))
                     {!! Form::label('make_id', isset($proposal->tradein->model->make->name) ? $proposal->tradein->model->make->name : '') !!}
-                    @if (!$proposal->tradein->getFirstMediaUrl('cars', 'thumb'))
-                        <img src="/storage/images/noPhoto.jpg" style="max-width: 250px;" class="imgCar" />
-                    @else
-                        <img src="{{ $proposal->tradein->getFirstMediaUrl('cars', 'thumb') }}"
-                            style="max-width: 250px;" class="imgCar" />
-                    @endif
-                    <!-- <img src="{{ $proposal->tradein->getFirstMediaUrl('cars', 'thumb') }}" style="max-width: 250px;" /> -->
+                    -
+                    {!! Form::label('model_id', isset($proposal->tradein->model->name) ? $proposal->tradein->model->name : '') !!}
+                @endif
+            </div>
+            <div class="form-group col-sm-12" style="text-align: center; margin-bottom: 30px;">
+                @if (!empty($proposal->tradein_id))
+                    <div>
+                        @if (!$proposal->tradein->getFirstMediaUrl('cars'))
+                            <img src="/storage/images/noPhoto.jpg" style="max-width: 250px;" class="imgCar" />
+                        @else
+                            @foreach ($proposal->tradein->getMedia('cars') as $media)
+                                <img src="{{ $media->getUrl() }}" style="max-width: 250px;" class="imgCar" />
+                            @endforeach
+                        @endif
+                    </div>
                 @endif
             </div>
 
-            <div class="form-group col-sm-8" style="display: flex;">
+            <div class="form-group col-sm-12" style="display: flex;">
                 <!-- Fuel Field -->
                 <div class="form-group col-sm-4">
                     {!! Form::label('fuel_id', 'Combustível') !!}
@@ -230,20 +238,19 @@
                 </div>
             </div>
 
-
-            <div class="form-group col-sm-4"></div>
-            <div class="form-group col-sm-8" style="display: flex;">
+            <div class="form-group col-sm-12" style="display: flex; text-align: center; justify-content: center;">
                 <!-- Tradein Purchase Field -->
                 <div class="form-group col-sm-6">
                     <p>Preço de compra</p>
                     @if ($proposal->tradein_id != '')
                         <h2>@money($proposal->tradein->tradein_purchase)</h2>
                         @if ($proposal->tradein->state_id == 7)
-                            <div class="form-group col-sm-6">
+                            <div class="form-group col-sm-6"
+                                style="display: inline-flex; text-align: center; margin-top: 1rem;">
                                 {!! Form::text('tradein_purchase', isset($proposal->tradein->tradein_purchase) ? $proposal->tradein->tradein_purchase : '', ['class' => 'form-control', 'id' => 'tradein_purchase']) !!}
                             </div>
                         @elseif($proposal->tradein->state_id == 8)
-                            <div class="form-group col-sm-6">
+                            <div class="form-group col-sm-6" style="inline-flex; text-align: center; margin-top: 1rem;">
                                 {!! Form::text('tradein_purchase', isset($proposal->tradein->tradein_purchase) ? $proposal->tradein->tradein_purchase : '', ['class' => 'form-control', 'id' => 'tradein_purchase', 'disabled']) !!}
                             </div>
                         @endif
@@ -259,7 +266,7 @@
             </div>
         </div>
 
-        <div style="float: right;">
+        <div class="form-group col-sm-12" style="text-align: center;">
 
             @if ($proposal->tradein_id != '')
                 @if ($proposal->tradein->state_id == 7)
@@ -274,7 +281,7 @@
                         value="7" class="tradeReject btn btn-info" disabled> Rejeitar</button>
                 @endif
             @endif
-
+            <br>
             @if ($proposal->tradein_id != '')
                 <a href="{{ route('cars.show', [$proposal->tradein->id]) }}">Ver tudo</a>
             @endif
