@@ -50,9 +50,9 @@
 
     @stack('page_css')
 
-    <p class="alert alert-danger text-center" role="alert">
+    <!-- <p class="alert alert-danger text-center" role="alert">
         Sistema em versão de teste
-    </p>
+    </p> -->
 
 </head>
 
