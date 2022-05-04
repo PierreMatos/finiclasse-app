@@ -38,7 +38,7 @@
     <li class="treeview">
         <a href="{{ route('benefits.index') }}" class="nav-link {{ Request::is('benefits*') ? 'active' : '' }}">
             <i class="fas fa-euro-sign"></i>
-            <p>Benefícios</p>
+            <p>Apoios</p>
         </a>
     </li>
 @endcan
@@ -268,7 +268,7 @@
                     <a href="{{ route('benefitProposals.index') }}"
                         class="nav-link {{ Request::is('benefitProposals*') ? 'active' : '' }}">
                         <i class="fas fa-eye"></i>
-                        <p>Benefícios Neg.</p>
+                        <p>Apoios Neg.</p>
                     </a>
                 </li>
             @endcan
@@ -278,7 +278,7 @@
                     <a href="{{ route('benefitBusinessStudies.index') }}"
                         class="nav-link {{ Request::is('benefitBusinessStudies*') ? 'active' : '' }}">
                         <i class="fas fa-eye"></i>
-                        <p>Benefícios Estudos</p>
+                        <p>Apoios Estudos</p>
                     </a>
                 </li>
             @endcan
@@ -308,7 +308,7 @@
                     <a href="{{ route('businessStudyStates.index') }}"
                         class="nav-link {{ Request::is('businessStudyStates*') ? 'active' : '' }}">
                         <i class="fas fa-eye"></i>
-                        <p>Business Study States</p>
+                        <p>Estudos Est.</p>
                     </a>
                 </li>
             @endcan

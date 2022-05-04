@@ -45,12 +45,22 @@
                 @endif
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="campaigns-tab" data-toggle="tab" href="#campaigns" role="tab"
-                    aria-controls="campaigns" aria-selected="false">{{ __('Campaigns') }}</a>
+                @if ($proposal->campaigns->isNotEmpty())
+                    <a class="nav-link" id="campaigns-tab" data-toggle="tab" href="#campaigns" role="tab"
+                        aria-controls="campaigns" aria-selected="false">{{ __('Campaigns') }}</a>
+                @else
+                    <a class="nav-link disabled" id="campaigns-tab" data-toggle="tab" href="#campaigns" role="tab"
+                        aria-controls="campaigns" aria-selected="false">{{ __('Campaigns') }}</a>
+                @endif
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="benefits-tab" data-toggle="tab" href="#benefits" role="tab"
-                    aria-controls="benefits" aria-selected="false">{{ __('Benefits') }}</a>
+                @if ($proposal->benefits->isNotEmpty())
+                    <a class="nav-link" id="benefits-tab" data-toggle="tab" href="#benefits" role="tab"
+                        aria-controls="benefits" aria-selected="false">{{ __('Supports') }}</a>
+                @else
+                    <a class="nav-link disabled" id="benefits-tab" data-toggle="tab" href="#benefits" role="tab"
+                        aria-controls="benefits" aria-selected="false">{{ __('Supports') }}</a>
+                @endif
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="financings-tab" data-toggle="tab" href="#financings" role="tab"
@@ -85,11 +95,11 @@
             </div>
 
             <!-- <div class="card-footer">
-                                        {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
-                                        <a href="{{ route('proposals.index') }}" class="btn btn-default">{{ __('Cancel') }}</a>
-                                    </div>
+                                            {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+                                            <a href="{{ route('proposals.index') }}" class="btn btn-default">{{ __('Cancel') }}</a>
+                                        </div>
 
-                                     {!! Form::close() !!} -->
+                                         {!! Form::close() !!} -->
 
         </div>
     </div>
