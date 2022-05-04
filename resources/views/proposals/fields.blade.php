@@ -99,9 +99,13 @@
         <div class="row">
 
             <!-- Name Field & Image Field -->
-            <div class="form-group col-sm-4" style="display: grid; text-align: center; justify-content: center;">
+            <div class="form-group col-sm-4">
                 @if ($proposal->car_id != '')
-                    {!! Form::label('make_id', isset($proposal->car->model->make->name) ? $proposal->car->model->make->name : '') !!}
+                    <div style="display: flex;">
+                        {!! Form::label('make_id', isset($proposal->car->model->make->name) ? $proposal->car->model->make->name : '') !!}
+                        &nbsp;-&nbsp;
+                        {!! Form::label('model_id', isset($proposal->car->model->name) ? $proposal->car->model->name : '') !!}
+                    </div>
                     @if (!$proposal->car->getFirstMediaUrl('cars', 'thumb'))
                         <img src="/storage/images/noPhoto.jpg" style="max-width: 250px;" class="imgCar" />
                     @else
@@ -112,39 +116,75 @@
                 @endif
             </div>
 
-            <div class="form-group col-sm-8" style="display: flex;">
-                <!-- Fuel Field -->
-                <div class="form-group col-sm-6">
-                    {!! Form::label('fuel_id', 'Combustível') !!}
-                    {!! Form::text('fuel_id', isset($proposal->car->fuel->name) ? $proposal->car->fuel->name : '', ['class' => 'form-control', 'disabled']) !!}
+            <div class="form-group col-sm-8">
+                <div style="display: flex;">
+                    <!-- Fuel Field -->
+                    <div class="form-group col-sm-6">
+                        {!! Form::label('fuel_id', 'Combustível') !!}
+                        {!! Form::text('fuel_id', isset($proposal->car->fuel->name) ? $proposal->car->fuel->name : '', ['class' => 'form-control', 'disabled']) !!}
+                    </div>
 
-                    <!-- State Id Field -->
-                    <div class="form-group"></div>
-                    {!! Form::label('state_id', 'Estado') !!}
-                    {!! Form::text('state_id', isset($proposal->car->state) ? $proposal->car->state->name : '', ['class' => 'form-control', 'disabled']) !!}
-                    <div>
-                        @if ($proposal->car->getFirstMediaUrl('pos'))
-                            <a href="{{ $proposal->car->getFirstMediaUrl('pos') }}" target="_blank"
-                                class="btn btn-default" style="margin-top: 10px;">Ver Ficheiro
-                            </a>
-                        @else
-                        @endif
+                    <!-- Color Exterior Field -->
+                    <div class="form-group col-sm-6">
+                        {!! Form::label('color_exterior', 'Cor exterior') !!}
+                        {!! Form::text('color_exterior', isset($proposal->car->color_exterior) ? $proposal->car->color_exterior : '', ['class' => 'form-control', 'disabled']) !!}
                     </div>
                 </div>
 
-                <!-- Color Exterior Field -->
-                <div class="form-group col-sm-6">
-                    {!! Form::label('color_exterior', 'Cor exterior') !!}
-                    {!! Form::text('color_exterior', isset($proposal->car->color_exterior) ? $proposal->car->color_exterior : '', ['class' => 'form-control', 'disabled']) !!}
+                <div style="display: flex;">
+                    @if ($proposal->car->state->id === 5)
+                        <!-- Komm Field -->
+                        <div class="form-group col-sm-6">
+                            {!! Form::label('komm', 'Komm') !!}
+                            {!! Form::text('komm', isset($proposal->car->komm) ? $proposal->car->komm : '', ['class' => 'form-control', 'disabled']) !!}
+                        </div>
+                    @else
+                        <!-- Komm Field -->
+                        <div class="form-group col-sm-6">
+                            {!! Form::label('motorization', 'Motorização') !!}
+                            {!! Form::text('motorization', isset($proposal->car->motorization) ? $proposal->car->motorization : '', ['class' => 'form-control', 'disabled']) !!}
+                        </div>
+                    @endif
 
-                    <!-- Ano Id Field -->
-                    <div class="form-group"></div>
-                    {!! Form::label('registration', 'Ano') !!}
-                    {!! Form::text('registration', isset($proposal->car->registration) ? $proposal->car->registration : '', ['class' => 'form-control', 'disabled']) !!}
+                    <!-- Variant Id Field -->
+                    <div class="form-group col-sm-6">
+                        {!! Form::label('variant', 'Variante') !!}
+                        {!! Form::text('variant', isset($proposal->car->variant) ? $proposal->car->variant : '', ['class' => 'form-control', 'disabled']) !!}
+                    </div>
+                </div>
+
+                <div style="display: flex;">
+                    <!-- State Id Field -->
+                    <div class="form-group col-sm-6">
+                        {!! Form::label('state_id', 'Estado') !!}
+                        {!! Form::text('state_id', isset($proposal->car->state) ? $proposal->car->state->name : '', ['class' => 'form-control', 'disabled']) !!}
+                    </div>
+
+                    <!-- Registration Id Field -->
+                    <div class="form-group col-sm-6">
+                        {!! Form::label('registration', 'Ano') !!}
+                        {!! Form::text('registration', $proposal->car->registration ?? false ? $proposal->car->registration->toDateString() : '', ['class' => 'form-control', 'disabled']) !!}
+                    </div>
+                </div>
+
+                {{ $patient->datebirth ?? false ? $patient->datebirth->toDateString() : '' }}
+
+                <div style="display: flex;">
+                    <!-- POS PDF Field -->
+                    <div class="form-group col-sm-6">
+                        @if ($proposal->car->state->id === 5)
+                            @if ($proposal->car->getFirstMediaUrl('pos'))
+                                <a href="{{ $proposal->car->getFirstMediaUrl('pos') }}" target="_blank"
+                                    class="btn btn-default" style="margin-top: 10px;">Ver Ficheiro
+                                </a>
+                            @else
+                            @endif
+                        @endif
+                    </div>
 
                     <!-- Test Drive Field -->
-                    <div class="form-group col-sm-4" style="float: right;">
-                        <div style="margin-top: 10px;">
+                    <div class="form-group col-sm-6">
+                        <div style="margin-top: 10px; float: right;">
                             {!! Form::label('test_drive', 'Teste drive') !!}
                             <!-- <label>Teste drive</label> -->
                             <input type="hidden" name="test_drive" value="0" disabled>
@@ -152,27 +192,34 @@
                                 {{ isset($proposal->test_drive) == '1' ? ' checked' : '' }} disabled>
                         </div>
                     </div>
+                </div>
 
+                <div style="display: flex; margin-top: 50px;">
+                    @if ($proposal->car->state->id === 5)
+                        <!-- Base Price Field -->
+                        <div class="form-group col-sm-8">
+                            <p>Preço Base (incl. IVA)</p>
+                            @if ($proposal->car_id != '')
+                                <h2>@money($proposal->car->price_base)</h2>
+                            @endif
+                        </div>
+                    @else
+                        <!-- Price Field -->
+                        <div class="form-group col-sm-8">
+                            <p>Preço Final (incl. IVA)</p>
+                            @if ($proposal->car_id != '')
+                                <h2>@money($proposal->car->price)</h2>
+                            @endif
+                        </div>
+                    @endif
                 </div>
 
             </div>
-
-            <div class="form-group col-sm-4"></div>
-            <!-- Price Field -->
-            <div class="form-group col-sm-8">
-                <p>Preço Final (incl. IVA)</p>
+            <div style="width: 100%;">
                 @if ($proposal->car_id != '')
-                    <h2>@money($proposal->car->price)</h2>
+                    <a href="{{ route('cars.show', [$proposal->car->id]) }}" style="float: right;">Ver tudo</a>
                 @endif
             </div>
-
-
-
-        </div>
-        <div style="float: right;">
-            @if ($proposal->car_id != '')
-                <a href="{{ route('cars.show', [$proposal->car->id]) }}">Ver tudo</a>
-            @endif
         </div>
     </div>
 
@@ -183,7 +230,7 @@
             <div class="form-group col-sm-12" style="text-align: center;">
                 @if (!empty($proposal->tradein_id))
                     {!! Form::label('make_id', isset($proposal->tradein->model->make->name) ? $proposal->tradein->model->make->name : '') !!}
-                    -
+                    &nbsp;-&nbsp;
                     {!! Form::label('model_id', isset($proposal->tradein->model->name) ? $proposal->tradein->model->name : '') !!}
                 @endif
             </div>
@@ -449,7 +496,8 @@
                     <!-- Financial Value Field -->
                     <div class="form-group">
                         <p>Desconto (€)</p>
-                        <h2 class="borderBtn">@money($proposal->initialBusinessStudy->total_discount_amount)</h2>
+                        <h2 class="borderBtn">@money($proposal->initialBusinessStudy->total_discount_amount)
+                        </h2>
                     </div>
 
                     <!-- Tradein Value Field -->
@@ -474,7 +522,8 @@
                     <!-- Financial Value Field -->
                     <div class="form-group">
                         <p>Desconto (€)</p>
-                        <h2 class="borderBtn">@money($proposal->finalBusinessStudy->total_discount_amount)</h2>
+                        <h2 class="borderBtn">@money($proposal->finalBusinessStudy->total_discount_amount)
+                        </h2>
                     </div>
 
                     <!-- Tradein Value Field -->
@@ -518,14 +567,16 @@
                     <!-- INICIAL -->
                     <div class="form-group col-sm-8">
                         <h6 style="font-weight: 700; line-height: 1.5;">Preço base</h6>
-                        <p class="form-control studyBR" readonly>@money($proposal->initialBusinessStudy->base_price)
+                        <p class="form-control studyBR" readonly>
+                            @money($proposal->initialBusinessStudy->base_price)
                         </p>
                     </div>
 
                     <!-- INICIAL -->
                     <div class="form-group col-sm-8">
                         <h6 style="font-weight: 700; line-height: 1.5;">Total Extras</h6>
-                        <p class="form-control studyBR" readonly>@money($proposal->initialBusinessStudy->extras_total)
+                        <p class="form-control studyBR" readonly>
+                            @money($proposal->initialBusinessStudy->extras_total)
                         </p>
                     </div>
 
@@ -544,7 +595,8 @@
                     <!-- INICIAL -->
                     <div class="form-group col-sm-8">
                         <h6 style="font-weight: 700; line-height: 1.5;">Total Transformação</h6>
-                        <p class="form-control studyBR" readonly>@money($proposal->initialBusinessStudy->total_transf)
+                        <p class="form-control studyBR" readonly>
+                            @money($proposal->initialBusinessStudy->total_transf)
                         </p>
                     </div>
 
@@ -558,14 +610,16 @@
                     <!-- INICIAL -->
                     <div class="form-group col-sm-8">
                         <h6 style="font-weight: 700; line-height: 1.5;">Total Extras 2</h6>
-                        <p class="form-control studyBR" readonly>@money($proposal->initialBusinessStudy->extras_total2)
+                        <p class="form-control studyBR" readonly>
+                            @money($proposal->initialBusinessStudy->extras_total2)
                         </p>
                     </div>
 
                     <!-- INICIAL -->
                     <div class="form-group col-sm-8">
                         <h6 style="font-weight: 700; line-height: 1.5;">Sub Total</h6>
-                        <p class="form-control studyBR" readonly>@money($proposal->initialBusinessStudy->sub_total)</p>
+                        <p class="form-control studyBR" readonly>@money($proposal->initialBusinessStudy->sub_total)
+                        </p>
                     </div>
 
                     <!-- INICIAL -->
@@ -602,7 +656,8 @@
                     <!-- INICIAL -->
                     <div class="form-group col-sm-8">
                         <h6 style="font-weight: 700; line-height: 1.5;">Valor de venda</h6>
-                        <p class="form-control studyBR" readonly>@money($proposal->initialBusinessStudy->selling_price)
+                        <p class="form-control studyBR" readonly>
+                            @money($proposal->initialBusinessStudy->selling_price)
                         </p>
                     </div>
 
@@ -617,7 +672,8 @@
                     <!-- INICIAL -->
                     <div class="form-group col-sm-8">
                         <h6 style="font-weight: 700; line-height: 1.5;">Valor a liquidar</h6>
-                        <p class="form-control studyBR" readonly>@money($proposal->initialBusinessStudy->settle_amount)
+                        <p class="form-control studyBR" readonly>
+                            @money($proposal->initialBusinessStudy->settle_amount)
                         </p>
                     </div>
 
