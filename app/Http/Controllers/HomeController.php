@@ -51,29 +51,39 @@ class HomeController extends Controller
         // Percentagem de propostas fechadas 
         $proposals = Proposal::count();
         // $proposals = Proposal::where($proposal->car->condition_id, '=', '1');
-        $proposalsOpenNew = Proposal::join('cars', 'proposals.car_id', '=', 'cars.id')
-        ->where('cars.state_id', '=', 1)
+        $proposalsOpenNew = Car::join('proposals', 'proposals.car_id', '=', 'cars.id')
+        ->where('cars.condition_id', '=', 1)
         ->where('proposals.state_id', '=', 1)
         ->count();
 
-        $proposalsCloseNew = Proposal::join('cars', 'proposals.car_id', '=', 'cars.id')
-        ->where('cars.state_id', '=', 1)
+        // $proposalsCloseNew = Proposal::join('cars', 'proposals.car_id', '=', 'cars.id')
+        // ->where('cars.state_id', '=', 1)
+        // ->where('proposals.state_id', '=', 2)
+        // ->count();
+        // ;
+        
+        $proposalsCloseNew = Car::join('proposals', 'proposals.car_id', '=', 'cars.id')
+            ->where('cars.condition_id', '=', 1)
+            ->where('proposals.state_id', '=', 2)
+            ->count();
+        
+        // $proposalsOpenUsed = Proposal::join('cars', 'proposals.car_id', '=', 'cars.id')
+        // ->where('cars.state_id', '=', 2)
+        // ->orWhere('cars.state_id', '=', 4)
+        // ->where('proposals.state_id', '=', 1)
+        // ->count();
+
+        $proposalsOpenUsed = Car::join('proposals', 'proposals.car_id', '=', 'cars.id')
+            ->where('cars.condition_id', '=', 2)
+            ->orWhere('cars.condition_id', '=', 4)
+            ->where('proposals.state_id', '=', 1)
+            ->count();
+
+        $proposalsClosedUsed = Car::join('proposals', 'proposals.car_id', '=', 'cars.id')
         ->where('proposals.state_id', '=', 2)
+        ->where('cars.condition_id', '=', 2)
+        ->orWhere('cars.condition_id', '=', 4)
         ->count();
-
-        $proposalsOpenUsed = Proposal::join('cars', 'proposals.car_id', '=', 'cars.id')
-        ->where('cars.state_id', '=', 2)
-        ->orWhere('cars.state_id', '=', 4)
-        ->where('proposals.state_id', '=', 1)
-        ->count();
-
-        $proposalsClosedUsed = Proposal::join('cars', 'proposals.car_id', '=', 'cars.id')
-        ->where('cars.state_id', '=', 2)
-        ->orWhere('cars.state_id', '=', 4)
-        ->where('proposals.state_id', '=', 2)
-        ->count();
-
-        // dd($proposalsNew);
 
         $proposalClose = Proposal::query()->with('state')->where('state_id', '=', 2)->count();
         if ($proposalClose) {

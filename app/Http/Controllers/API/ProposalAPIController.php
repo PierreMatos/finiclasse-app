@@ -490,6 +490,7 @@ class ProposalAPIController extends AppBaseController
                 $dif = (($sale - $total) - $diffTradein - $totalExtras) - $totalTransf - $totalBenefits - $internal_costs - $external_costs;
             }
 
+           
             //desc
             if (is_null($isentIva)) {
                 $desc = $dif / (1 + ($ivaTX));
@@ -506,6 +507,7 @@ class ProposalAPIController extends AppBaseController
             if ($totalBenefits != 0 || $subTotal != 0 || $ptl != 0 || $sigpu != 0 || $totalTransf != 0) {
 
                 $discPerc = ($desc / ($totalBenefits + $subTotal - ($ptl + $sigpu + $totalTransf))) * 100;
+
                 if ($discPerc < 0) {
                     $discPerc = 0;
                 } elseif ($discPerc > 100) {
@@ -552,24 +554,22 @@ class ProposalAPIController extends AppBaseController
             // dd($businessStudy);
             // $authorizations = $businessStudyAuthorizationRepository->all();
 
-
             $business_study_authorization_id = 1;
             foreach ($authorizations as $authorization) {
 
                 $min = $authorization->min;
                 $max = $authorization->max;
 
-                // dd($discPerc);
                 if ($proposal->car->condition_id == 1) {
 
-                    if ($discPerc >= $min && $discPerc <= $max && $authorization->id !== 6) {
+                    if ($discPerc >= $min && $discPerc <= $max && $authorization->id !== 6 && $authorization->id !== 7) {
 
                         if ($authorization->id !== 1) {
-                            $proposal->state_id = 3;
+                            $proposal->state_id = 1;
                             // $proposal->save();
 
                         } elseif ($authorization->id == 1 && $proposal->state->id !== 2 && $proposal->state->id !== 4) {
-                            $proposal->state_id = 1;
+                            $proposal->state_id = 3;
                         }
 
                         $proposal->save();
