@@ -37,16 +37,38 @@
                 <td style="padding: 0px;"> <img src="{{ asset($proposal->car->getFirstMediaUrl('cars'))}}" /> </td>
             </tr>
         @endif
-        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+            <td style="padding: 10px;">Condição: <b>{{$proposal->car->condition->name}}</b></td>
             <td style="padding: 10px;">Tipo: <b>{{$proposal->car->state->name}}</b></td>
         </tr>
         <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
             <td style="padding: 10px;">Marca: <b>{{$proposal->car->model->make->name}}</b></td>
-            <td style="padding: 10px;">Modelo: <b>{{$proposal->car->model->name}} {{$proposal->car->variant}}</b></td>
+            <td style="padding: 10px;">Modelo: <b>{{$proposal->car->model->name}}</b></td>
         </tr>
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+            @if ($proposal->car->state->id === 5)
+            <td style="padding: 10px;">Komm: <b>{{$proposal->car->komm}}</b></td>
+            @else
+            <td style="padding: 10px;">Motorização: <b>{{$proposal->car->motorization}}</b></td>
+            @endif
+            <td style="padding: 10px;">Variante: <b>{{$proposal->car->variant}}</b></td>
+        </tr>
+        @if ($proposal->car->state->id !== 5)
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+            <td style="padding: 10px;">Km: <b>{{$proposal->car->km}}</b></td>
+            <td style="padding: 10px;">Ano: <b>{{$proposal->car->registration->format('Y/m/d')}}</b></td>
+        </tr>
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+            <td style="padding: 10px;">Combustível: <b>{{$proposal->car->fuel->name}}</b></td>
+            <td style="padding: 10px;">Caixa: <b>{{$proposal->car->transmission->name}}</b></td>
+        </tr>
+        @endif
         <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
-            <td style="padding: 10px;">Preço Base: <b>{{$proposal->car->price_base ?? $proposal->car->price_base}} €</b></td>
-            <!-- <td style="padding: 10px;">Valor: <b>$proposal->finalBusinessStudy->sale ?? $proposal->initialBusinessStudy->sale €</b></td> -->
+            @if ($proposal->car->state->id === 5)
+            <td style="padding: 10px;">Valor a liquidar: <b>{{$proposal->initialBusinessStudy->settle_amount}} €</b></td>
+            @else
+            <td style="padding: 10px;">Preço Base: <b>{{$proposal->car->price_base}} €</b></td>
+            @endif
         </tr>
     </table>
 @endcomponent

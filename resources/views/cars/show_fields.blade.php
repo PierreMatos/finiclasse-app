@@ -36,7 +36,7 @@
             <!-- Ano Field -->
             <div class="form-group col-sm-3">
                 {!! Form::label('registration', 'Ano') !!}
-                {!! Form::text('registration', isset($car->registration) ? $car->registration : '', ['class' => 'form-control', 'id' => 'registration', 'disabled']) !!}
+                {!! Form::text('registration', $car->registration ?? false ? $car->registration->toDateString() : '', ['class' => 'form-control', 'id' => 'registration', 'disabled']) !!}
             </div>
 
             <!-- Condition Id Field -->
