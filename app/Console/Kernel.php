@@ -43,7 +43,7 @@ class Kernel extends ConsoleKernel
         //Não funciona em production    
         if (!App::environment('production')) {
             $schedule->command('seeds:daily')
-                ->dailyAt('10:35')->timezone('Europe/Lisbon');
+                ->dailyAt('09:00')->timezone('Europe/Lisbon');
         }
     }
 
