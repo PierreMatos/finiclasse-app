@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -39,8 +40,11 @@ class Kernel extends ConsoleKernel
         $schedule->command('quote:proposal')
             ->weeklyOn(1, '9:00')->timezone('Europe/Lisbon');
 
-        $schedule->command('seeds:daily')
-            ->dailyAt('9:00')->timezone('Europe/Lisbon');
+        //Não funciona em production    
+        if (!App::environment('production')) {
+            $schedule->command('seeds:daily')
+                ->dailyAt('10:35')->timezone('Europe/Lisbon');
+        }
     }
 
     /**
