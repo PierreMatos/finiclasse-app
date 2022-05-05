@@ -248,9 +248,9 @@
                 @endif
             </div>
 
-            <div class="form-group col-sm-12" style="display: flex;">
+            <div class="form-group col-sm-12 retakeFields">
                 <!-- Fuel Field -->
-                <div class="form-group col-sm-4">
+                <div class="form-group col-md-4">
                     {!! Form::label('fuel_id', 'Combustível') !!}
                     {!! Form::text('fuel_id', isset($proposal->tradein->fuel->name) ? $proposal->tradein->fuel->name : '', ['class' => 'form-control', 'disabled']) !!}
 
@@ -258,6 +258,19 @@
                     <div class="form-group"></div>
                     {!! Form::label('state_id', 'Estado') !!}
                     {!! Form::text('state_id', isset($proposal->tradein->state->name) ? $proposal->tradein->state->name : '', ['class' => 'form-control', 'disabled']) !!}
+                
+                    <!-- Potencial Buyer Field -->
+                    <div class="form-group">
+                        <div style="margin-top: 20px;">
+                            {!! Form::label('potencial_buyer', 'Potencial comprador') !!}
+                            <span>
+                            <input type="hidden" name="potencial_buyer" value="0" disabled>
+                            <input type="checkbox" name="potencial_buyer" value="1"
+                                {{ isset($proposal->tradein->potencial_buyer) == '1' ? ' checked' : '' }} disabled>
+                            </span>
+                        </div>
+                    </div>
+                    
                 </div>
 
                 <!-- Color Exterior Field -->

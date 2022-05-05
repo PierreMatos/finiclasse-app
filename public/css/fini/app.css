@@ -225,3 +225,15 @@ div.dataTables_wrapper div.dataTables_filter input {
     transform: translate3d(0px, 56px, 0px) !important;
     min-width: 250px !important;
 }
+
+@media screen and (max-width: 768px) {
+    .retakeFields {
+        display: block;
+    }     
+}
+
+@media screen and (min-width: 768px) {
+    .retakeFields {
+        display: flex;
+    }     
+}
