@@ -236,13 +236,14 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
 
+        // dd($request->vendor_id);
         //atribuir lead user a vendedor
         if($request->vendor_id != '')  {
-  
-                if($request->vendor_id != $user->vendor->first()->id){
-
+            
+            if($request->vendor_id != $user->vendor->first()->id){
+                
                 $user->vendor()->sync($request->vendor_id);
-
+                
                 $user = $this->userRepository->update($request->all(), $id);
 
                 //Event for Notification
@@ -252,11 +253,13 @@ class UserController extends AppBaseController
                 event(new PushNewLead($user));
             } else {
                 $user = $this->userRepository->update($request->all(), $id);
-            }
+            } 
+        }
+        else {
+            $user = $this->userRepository->update($request->all(), $id);
         }
 
         Flash::success(__('translation.user updated'));
-
         $url = Route::currentRouteName();
 
         if ($url == 'users.update') {
