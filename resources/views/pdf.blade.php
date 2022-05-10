@@ -44,12 +44,12 @@
                 <div class="input-group-prepend divInlineBlock">
                     <span class="input-group-text">E-mail:</span>
                 </div>
-                <input type="text" name="email" value="{{ $user->email }}" class="form-control w35" readonly>
+                <input type="text" name="email" value="{{ $user->email }}" class="form-control w30" readonly>
 
                 <div class="input-group-prepend divInlineBlock">
                     <span class="input-group-text">NIF:</span>
                 </div>
-                <input type="text" name="nif" value="{{ $user->nif }}" class="form-control w10" readonly>
+                <input type="text" name="nif" value="{{ $user->nif }}" class="form-control w23" readonly>
             </div>
         </form>
 
@@ -145,7 +145,7 @@
                         @elseif($user->gdpr_type === 'sms')
                             <p class="mbMinus">RGPD confirmado por sms</p>
                         @endif
-                        <input type="text" name="sign" value="" class="form-control w80" readonly>
+                        <input type="text" name="sign" value="" class="form-control w100" readonly>
                     </div>
             </div>
         </form>
@@ -203,7 +203,7 @@
 <style>
     body {
         font-family: serif;
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .container {
@@ -258,15 +258,15 @@
         width: 25%;
     }
 
-    .w35 {
-        width: 38.5%;
+    .w30 {
+        width: 30%;
     }
 
-    .w10 {
-        width: 13%;
+    .w23 {
+        width: 23.5%;
     }
 
-    .w80 {
+    .w100 {
         width: 100%;
     }
 
