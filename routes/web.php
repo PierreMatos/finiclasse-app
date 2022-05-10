@@ -106,7 +106,7 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
     // PDF
     Route::get('pdf/{id}', function ($id) {
         $user = App\Models\User::where('id', $id)->first();
-        $pdf = PDF::loadView('pdf', ['user' => $user]);
+        $pdf = PDF::setOption('enable-local-file-access', true)->loadView('pdf', ['user' => $user]);
         return $pdf->stream('pdf_rgpd.pdf');
     });
 
