@@ -76,7 +76,7 @@
     {!! Form::text('gdpr_type', isset($user->gdpr_type) ? $user->gdpr_type : '' , ['class' => 'form-control', 'disabled']) !!}
     @if($user->gdpr_type !== null)
         <div>
-            <a href="{{ env('APP_URL').'/pdf/' . $user->id }}"
+            <a href="{{ env('APP_URL').'pdf/' . $user->id }}"
                 target="_blank" class="btn btn-default" style="margin-top: 10px;">{{ __('Ver') }}
             </a>
         </div>
