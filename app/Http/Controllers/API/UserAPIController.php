@@ -153,7 +153,7 @@ class UserAPIController extends AppBaseController
 
         if ($request->signature) {
            ($user->addMediaFromBase64($request->signature)->toMediaCollection('signatures','s3'));
-           $request->request->add(['gdpr_confirmation' => Carbon::now()]);
+           $request->request->add(['gdpr_confirmation' => Carbon::now(), 'gdpr_type' => "pdf"]);
            $input = $request->all();
         }
 
