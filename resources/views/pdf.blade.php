@@ -34,22 +34,26 @@
             </div>
 
             <div class="input-group mb-3">
-                <div class="input-group-prepend divInlineBlock">
+                <div class="input-group-prepend divInlineBlock labelWidth">
                     <span class="input-group-text">Telefone:</span>
                 </div>
                 <input type="text" name="phone"
                     value="{{ $user->phone }} @if ($user->phone)/@endif {{ $user->mobile_phone }}"
-                    class="form-control w25" readonly>
+                    class="form-control w90" readonly>
+            </div>
 
-                <div class="input-group-prepend divInlineBlock">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend divInlineBlock labelWidth">
                     <span class="input-group-text">E-mail:</span>
                 </div>
-                <input type="text" name="email" value="{{ $user->email }}" class="form-control w30" readonly>
+                <input type="text" name="email" value="{{ $user->email }}" class="form-control w90" readonly>
+            </div>
 
-                <div class="input-group-prepend divInlineBlock">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend divInlineBlock labelWidth">
                     <span class="input-group-text">NIF:</span>
                 </div>
-                <input type="text" name="nif" value="{{ $user->nif }}" class="form-control w23" readonly>
+                <input type="text" name="nif" value="{{ $user->nif }}" class="form-control w90" readonly>
             </div>
         </form>
 
@@ -254,18 +258,6 @@
         width: 90%;
     }
 
-    .w25 {
-        width: 25%;
-    }
-
-    .w30 {
-        width: 30%;
-    }
-
-    .w23 {
-        width: 23.5%;
-    }
-
     .w100 {
         width: 100%;
     }
@@ -281,7 +273,7 @@
     }
 
     .footer {
-        font-size: 17px;
+        font-size: 15px;
     }
 
     .mbMinus {
