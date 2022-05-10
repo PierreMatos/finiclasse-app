@@ -142,12 +142,12 @@
                 </div>
                     <div>
                         @if ($user->gdpr_type === 'email') 
-                            <p class="mbMinus">RGPD confirmado por e-mail</p>
+                            <p class="mbMinus">RGPD confirmado por e-mail em {{ $user->gdpr_confirmation }}</p>
                         @elseif($user->gdpr_type === 'pdf')
                             <br><br>
                             <img src="data:image/jpeg;base64, {{ base64_encode(@file_get_contents(url($user->getFirstMediaUrl('signatures')))) }}" class="signature mbMinus" />
                         @elseif($user->gdpr_type === 'sms')
-                            <p class="mbMinus">RGPD confirmado por sms</p>
+                            <p class="mbMinus">RGPD confirmado por sms em {{ $user->gdpr_confirmation }}</p>
                         @endif
                         <input type="text" name="sign" value="" class="form-control w100" readonly>
                     </div>

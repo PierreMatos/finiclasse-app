@@ -46,22 +46,22 @@
     {!! Form::number('nif', isset($user->nif) ? $user->nif : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
-<!-- Gdpr Type Field -->
+<!-- Client Type Field -->
 <div class="form-group col-sm-4">
-    <label>{{ __('Gdpr Type') }}</label>
-    {!! Form::text('gdpr_type', isset($user->gdpr_type) ? $user->gdpr_type : '' , ['class' => 'form-control', 'disabled']) !!}
+    <label>{{ __('Client Type') }}</label>
+    {!! Form::text('client_type_id', isset($user->clientType->name) ? $user->clientType->name : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
 <!-- Stand Id Field -->
 <div class="form-group col-sm-4">
     <label>{{ __('Stand') }}</label>
     {!! Form::text('stand_id', isset($user->stand->name) ? $user->stand->name : '' , ['class' => 'form-control', 'disabled']) !!}
-</div>
-
-<!-- Client Type Field -->
-<div class="form-group col-sm-4">
-    <label>{{ __('Client Type') }}</label>
-    {!! Form::text('client_type_id', isset($user->clientType->name) ? $user->clientType->name : '' , ['class' => 'form-control', 'disabled']) !!}
+    <!-- Finiclasse Employee Field -->
+    <div style="margin-top: 10px;">
+        <input type="hidden" name="finiclasse_employee" value="0" disabled>
+        <input type="checkbox" name="finiclasse_employee" value="1" {{ ($user->finiclasse_employee == "1" ? ' checked' : '') }} disabled>
+        <label>{{ __('Finiclasse Employee') }}</label>
+    </div>
 </div>
 
 <!-- Vendor lead Field -->
@@ -70,12 +70,15 @@
     {!! Form::text('vendor_id', isset($user->vendor->first()->name) ? $user->vendor->first()->name : '' , ['class' => 'form-control', 'disabled']) !!}
 </div>
 
-<!-- Finiclasse Employee Field -->
+<!-- Gdpr Type Field -->
 <div class="form-group col-sm-4">
-    <div class="form-check" style="margin-top: 37px;">
-        <input type="hidden" name="finiclasse_employee" value="0" disabled>
-        <input type="checkbox" name="finiclasse_employee" value="1" {{ ($user->finiclasse_employee == "1" ? ' checked' : '') }} disabled>
-        <label>{{ __('Finiclasse Employee') }}</label>
-    </div>
+    <label>{{ __('Gdpr Type') }}</label>
+    {!! Form::text('gdpr_type', isset($user->gdpr_type) ? $user->gdpr_type : '' , ['class' => 'form-control', 'disabled']) !!}
+    @if($user->gdpr_type !== null)
+        <div>
+            <a href="{{ env('APP_URL').'/pdf/' . $user->id }}"
+                target="_blank" class="btn btn-default" style="margin-top: 10px;">{{ __('Ver') }}
+            </a>
+        </div>
+    @endif
 </div>
-

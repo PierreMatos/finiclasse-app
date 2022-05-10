@@ -63,22 +63,6 @@
     </div>
 @endif
 
-<!-- Stand Id Field -->
-<div class="form-group col-md-4">
-    <label>{{ __('Stand') }}</label>
-    <select name="stand_id" class="input-group form-control custom-select selectedPost">
-        <option selected value="">--</option>
-        @foreach ($userData['stands'] as $stand)
-            <!--condition make selecionado anteriormente-->
-            @if ($stand->id == (isset($user->stand->id) ? $user->stand->id : ''))
-                <option selected value="{{ $stand->id }}">{{ $stand->name }}</option>
-            @else
-                <option value="{{ $stand->id }}">{{ $stand->name }}</option>
-            @endif
-        @endforeach
-    </select>
-</div>
-
 <!-- Client Type Field -->
 <div class="form-group col-md-4">
     <label>{{ __('Client Type') }}</label>
@@ -90,6 +74,22 @@
                 <option selected value="{{ $clientType->id }}">{{ $clientType->name }}</option>
             @else
                 <option value="{{ $clientType->id }}">{{ $clientType->name }}</option>
+            @endif
+        @endforeach
+    </select>
+</div>
+
+<!-- Stand Id Field -->
+<div class="form-group col-md-4">
+    <label>{{ __('Stand') }}</label>
+    <select name="stand_id" class="input-group form-control custom-select selectedPost">
+        <option selected value="">--</option>
+        @foreach ($userData['stands'] as $stand)
+            <!--condition make selecionado anteriormente-->
+            @if ($stand->id == (isset($user->stand->id) ? $user->stand->id : ''))
+                <option selected value="{{ $stand->id }}">{{ $stand->name }}</option>
+            @else
+                <option value="{{ $stand->id }}">{{ $stand->name }}</option>
             @endif
         @endforeach
     </select>
