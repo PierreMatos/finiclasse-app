@@ -156,7 +156,7 @@
 
     </div>
 
-    <div class="container footer">
+    <div class="container footer tCenter">
         <p class="divInlineBlock">
             Finiclasse 2000 Comércio e Gestão
             <br>
@@ -278,6 +278,10 @@
 
     .mbMinus {
         margin-bottom: -4px;
+    }
+
+    .tCenter {
+        text-align: center;
     }
     
 </style>
