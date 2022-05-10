@@ -155,24 +155,28 @@ class BusinessStudyController extends AppBaseController
         return redirect(route('businessStudies.index'));
     }
 
-    public function businessAuth($id, Request $request){
+    public function businessAuth($id, Request $request)
+    {
 
-        if ($id && $request->value){
+        if ($id && $request->value) {
             $businessStudy = $this->businessStudyRepository->find($id);
             $businessStudy->business_study_authorization_id = $request->value;
             $proposal = $businessStudy->initialProposal;
             $proposal->state_id = 1;
-            
+
             $businessStudy->save();
             $proposal->save();
         }
 
         //Push & Notification Validated Proposal
         if ($businessStudy->business_study_authorization_id === 4) {
-            event(new PushValidatedProposal($proposal)); 
+            event(new PushValidatedProposal($proposal));
         }
 
-        return response()->json(['success'=> 'Negócio aceite com sucesso']);
-
+        if ($businessStudy->business_study_authorization_id === 4) {
+            return response()->json(['success' => 'Negócio aceite com sucesso']);
+        } elseif ($businessStudy->business_study_authorization_id === 5) {
+            return response()->json(['success' => 'Negócio rejeitado com sucesso']);
+        }
     }
 }

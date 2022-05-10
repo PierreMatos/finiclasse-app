@@ -202,9 +202,12 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
     Route::post('edit-car', [CarController::class, 'editNewCars']);
     Route::post('delete-car', [CarController::class, 'destroyNewCars']);
 
-    Route::PATCH('/businessAuthaction/{id}', [App\Http\Controllers\BusinessStudyController::class, 'businessAuth'])->name('businessAuthaction');
+    Route::patch('/businessAuthaction/{id}', [App\Http\Controllers\BusinessStudyController::class, 'businessAuth'])->name('businessAuthaction');
 
-    //Push Web Notifications
+    //Finalizar proposta
+    Route::patch('/closeProposal/{id}', [App\Http\Controllers\ProposalController::class, 'closeProposal'])->name('closeProposal');
+
+    //Push Web Notification
     // Route::get('/push-notification', [WebNotificationController::class, 'index'])->name('push-notification');
     // Route::get('/allow', function () {
     //     return view('notifications.allow');

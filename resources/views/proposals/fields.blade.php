@@ -559,7 +559,7 @@
                             <div class="col-6">
                                 <button type="button"
                                     id="{{ isset($proposal->initialBusinessStudy->id) ? $proposal->initialBusinessStudy->id : '' }}"
-                                    value="5" class="btn btn-danger"> Rejeitar</button>
+                                    value="5" class="btn btn-danger businessAuth"> Rejeitar</button>
                             </div>
                         </div>
                     </div>

@@ -178,4 +178,13 @@ class ProposalController extends AppBaseController
 
         return redirect(route('proposals.index'));
     }
+
+    public function closeProposal($id, Request $request)
+    {
+        $proposal = $this->proposalRepository->find($id);
+        $proposal->state_id = $request->value;
+        $proposal->save();
+
+        return response()->json(['success'=> 'Negócio finalizado com sucesso']);
+    }
 }
