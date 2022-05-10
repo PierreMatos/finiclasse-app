@@ -8,12 +8,12 @@
                     <h1>{{ __('Proposals') }}</h1>
                 </div>
                 <!--
-                                <div class="col-sm-6">
-                                    <a class="btn btn-primary float-right" href="{{ route('proposals.create') }}">
-                                        {{ __('Add New') }}
-                                    </a>
-                                </div>
-                                -->
+                                    <div class="col-sm-6">
+                                        <a class="btn btn-primary float-right" href="{{ route('proposals.create') }}">
+                                            {{ __('Add New') }}
+                                        </a>
+                                    </div>
+                                    -->
             </div>
         </div>
     </section>
@@ -73,6 +73,7 @@
                             table.button(3).active(false);
                             table.button(4).active(false);
                             table.button(5).active(false);
+                            table.button(6).active(false);
                             this.active(true);
                         }
                     },
@@ -86,6 +87,21 @@
                             table.button(3).active(false);
                             table.button(4).active(false);
                             table.button(5).active(false);
+                            table.button(6).active(false);
+                            this.active(true);
+                        }
+                    },
+                    {
+                        text: 'Pedido de fecho',
+                        className: 'btn-close',
+                        action: function() {
+                            table.search('Pedido de fecho').draw();
+                            table.button(0).active(false);
+                            table.button(1).active(false);
+                            table.button(3).active(false);
+                            table.button(4).active(false);
+                            table.button(5).active(false);
+                            table.button(6).active(false);
                             this.active(true);
                         }
                     },
@@ -96,9 +112,10 @@
                             table.search('Pendente').draw();
                             table.button(0).active(false);
                             table.button(1).active(false);
-                            table.button(3).active(false);
+                            table.button(2).active(false);
                             table.button(4).active(false);
                             table.button(5).active(false);
+                            table.button(6).active(false);
                             this.active(true);
                         }
                     },
@@ -110,21 +127,9 @@
                             table.button(0).active(false);
                             table.button(1).active(false);
                             table.button(2).active(false);
-                            table.button(4).active(false);
-                            table.button(5).active(false);
-                            this.active(true);
-                        }
-                    },
-                    {
-                        text: 'Fechado',
-                        className: 'btn-close',
-                        action: function() {
-                            table.search('Fechado').draw();
-                            table.button(0).active(false);
-                            table.button(1).active(false);
-                            table.button(2).active(false);
                             table.button(3).active(false);
                             table.button(5).active(false);
+                            table.button(6).active(false);
                             this.active(true);
                         }
                     },
@@ -138,9 +143,24 @@
                             table.button(2).active(false);
                             table.button(3).active(false);
                             table.button(4).active(false);
+                            table.button(6).active(false);
                             this.active(true);
                         }
-                    }
+                    },
+                    {
+                        text: 'Fechado',
+                        className: 'btn-closePending',
+                        action: function() {
+                            table.search('Fechado').draw();
+                            table.button(0).active(false);
+                            table.button(1).active(false);
+                            table.button(2).active(false);
+                            table.button(3).active(false);
+                            table.button(4).active(false);
+                            table.button(5).active(false);
+                            this.active(true);
+                        }
+                    },
                 ]
             });
     </script>
