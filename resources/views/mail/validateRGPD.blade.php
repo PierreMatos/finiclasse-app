@@ -7,7 +7,7 @@
     <p>Caso pretenda consultar as nossas Políticas de Privacidade e Dados, os link encontra-se em baixo.</p>
 </div>
 
-<div style="padding: 0px 100px 0px 100px;">
+<div style="padding: 0px 80px 0px 80px;">
     @component('mail::table')
     <table style="border-collapse: collapse;"> 
       <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">

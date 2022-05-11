@@ -36,23 +36,11 @@ class CarConditionsSeeder extends Seeder
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',
             ),
-
-            // RETOMA PASSA A SER UM CAR_STATE
-            // 2 => 
-            // array (
-            //     'id' => 3,
-            //     'name' => 'Retoma',
-            //     'order' => 3,
-            //     'visible' => 1,
-            //     'color' => '#fffff',
-            //     'created_at' => '2019-10-22 15:50:48',
-            //     'updated_at' => '2019-10-22 15:50:48',
-            // ),
-            3 => 
+            2 => 
             array (
-                'id' => 4,
+                'id' => 3,
                 'name' => 'Semi-novo',
-                'order' => 4,
+                'order' => 3,
                 'visible' => 1,
                 'color' => '#fffff',
                 'created_at' => '2019-10-22 15:50:48',

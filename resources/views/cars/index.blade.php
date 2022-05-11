@@ -7,9 +7,17 @@
                     <h1>{{ __('Cars') }}</h1>
                 </div>
                 <div class="col-sm-6">
-                    <a class="btn btn-primary float-right" href="{{ route('cars.create') }}">
+                    <a class="btn btn-primary float-right dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ __('Add New') }}
                     </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        @foreach ($forCarConditions as $condition)
+                            <a class="dropdown-item"
+                                href="{{ route('create', $condition->id) }}" value="{{ $condition->id }}">{{ $condition->name }}</a>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
@@ -35,7 +43,6 @@
     </div>
 @endsection
 @push('page_scripts')
-
     <script>
         // SET DEFUALT STATE OF TABLES IN THE PAGE
         $('.table-responsive').hide();

@@ -493,7 +493,7 @@
 
         <h4 class="mt-5 mb-5" style="text-align: center;">Estudo de negócio</h4>
 
-        <div class="container borderContainer">
+        <div class="container borderContainer" @if($proposal->initialBusinessStudy->id) style="padding-bottom: 30px;" @endif>
             <div class="row justify-content-center">
                 <div class="col-md-1"></div>
                 <div class="col-sm-12 col-md-4">
@@ -549,17 +549,17 @@
 
             @if (isset($proposal->initialBusinessStudy->id))
                 @if ($proposal->state_id === 3)
-                    <div class="row mt-5 mb-5 justify-content-center">
+                    <div class="row mt-5 justify-content-center">
                         <div class="form-group row" role="group" aria-label="Basic example">
                             <div class="col-6">
                                 <button type="button"
                                     id="{{ isset($proposal->initialBusinessStudy->id) ? $proposal->initialBusinessStudy->id : '' }}"
-                                    value="4" class="btn btn-success businessAuth"> Aceitar</button>
+                                    value="4" class="btn btn-success businessAuth">Aceitar</button>
                             </div>
                             <div class="col-6">
                                 <button type="button"
                                     id="{{ isset($proposal->initialBusinessStudy->id) ? $proposal->initialBusinessStudy->id : '' }}"
-                                    value="5" class="btn btn-danger businessAuth"> Rejeitar</button>
+                                    value="5" class="btn btn-danger businessAuth">Rejeitar</button>
                             </div>
                         </div>
                     </div>
@@ -568,7 +568,7 @@
 
             @if (isset($proposal->initialBusinessStudy->id))
                 @if ($proposal->state_id === 1)
-                    <div class="row mt-5 mb-5 justify-content-center">
+                    <div class="row mt-5 justify-content-center">
                         <div class="form-group row" role="group" aria-label="Basic example">
                             <div class="col-12">
                                 @if($proposal->initialBusinessStudy->business_study_authorization_id === 4)

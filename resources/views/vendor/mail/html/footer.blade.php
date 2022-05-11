@@ -5,6 +5,10 @@
         <h1 style="color: #fff; font-size: 32px;">Finiclasse</h1>
         <h2 style="color: #fff; line-height: 0px;">Representante oficial</h2>
         <h2 style="color: #fff;">Mercedes-Benz, Smart e SEAT</h2>
+        <div style="justify-content: none; float: left;">
+            <a href="https://www.instagram.com/finiclasse" target="_blank"><img src="storage/images/icon-insta.svg" /></a>
+            <a href="https://www.facebook.com/finiclasse" target="_blank"><img src="storage/images/icon-face.svg" /></a>
+        </div>
     </div>
     <div style="width: 70%; display: inline-grid; color: #fff;">
         <table>
@@ -30,9 +34,9 @@
                 <td>F. 271 093 032</td>
             </tr>
             <tr>
-                <td>viseu@finiclasse.pt</td>
-                <td>guarda@finiclasse.pt</td>
-                <td>seat@finiclasse.pt</td>
+                <td><a href="mailto:viseu@finiclasse.pt" style="color: #fff;">viseu@finiclasse.pt</a></td>
+                <td><a href="mailto:guarda@finiclasse.pt" style="color: #fff;">guarda@finiclasse.pt</a></td>
+                <td><a href="mailto:seat@finiclasse.pt" style="color: #fff;">seat@finiclasse.pt</a></td>
             </tr>
             </tbody>
         </table>
@@ -43,11 +47,11 @@
 <div style="padding: 20px; display: flex; justify-content: space-between;">
     {{ Illuminate\Mail\Markdown::parse($slot) }}
     <div>
-        <a href="/" target="_blank" style="color: #fff;">Livro de Reclamações</a> |
-        <a href="/" target="_blank" style="color: #fff;">Política de Privacidade</a> |
-        <a href="/" target="_blank" style="color: #fff;">Política de Qualidade</a> |
-        <a href="/" target="_blank" style="color: #fff;">Condições Gerais de Utilização</a> |
-        <a href="/" target="_blank" style="color: #fff;">Resolução Alternativa de Litígios</a>
+        <a href="https://www.livroreclamacoes.pt/Inicio/" target="_blank" style="color: #fff;">Livro de Reclamações</a> |
+        <a href="https://www.finiclasse.pt/politica-privacidade" target="_blank" style="color: #fff;">Política de Privacidade</a> |
+        <a href="https://www.finiclasse.pt/politica-qualidade" target="_blank" style="color: #fff;">Política de Qualidade</a> |
+        <a href="https://www.finiclasse.pt/condicoes-gerais" target="_blank" style="color: #fff;">Condições Gerais de Utilização</a> |
+        <a href="https://www.finiclasse.pt/resolucao-alternativa" target="_blank" style="color: #fff;">Resolução Alternativa de Litígios</a>
     </div>
 </div>
 </td>

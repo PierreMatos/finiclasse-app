@@ -95,6 +95,7 @@ class CarController extends AppBaseController
         $usedCars = $this->carRepository->carByCondition(2);
         $carConditions = $this->carConditionRepository->all()->where('id', '!=', 1);
         $carData = [];
+        $forCarConditions = $this->carConditionRepository->all();
 
         // dd($carConditions);
         // dd($carConditions->name);
@@ -103,7 +104,8 @@ class CarController extends AppBaseController
             ->with('newCars', $newCars)
             ->with('usedCars', $usedCars)
             ->with('carData', $carData)
-            ->with('carConditions', $carConditions);
+            ->with('carConditions', $carConditions)
+            ->with('forCarConditions', $forCarConditions);
     }
 
     /**
@@ -111,7 +113,7 @@ class CarController extends AppBaseController
      *
      * @return Response
      */
-    public function create()
+    public function create($id)
     {
         // VARIAVEIS REFERENTES AS LISTAGENS DE MODELOS ($modelName)
         $models = $this->modelRepository->all();
@@ -124,6 +126,9 @@ class CarController extends AppBaseController
         $drives = $this->carDriveRepository->all();
         $fuels = $this->carFuelRepository->all();
         $classes = $this->carClassRepository->all();
+        
+        //Car Conditions para a página create
+        $condition = $this->carConditionRepository->find($id);
 
         $carData = ([
             'models' => $models,
@@ -139,6 +144,7 @@ class CarController extends AppBaseController
         ]);
 
         return view('cars.create')
+            ->with('condition', $condition)
             ->with('carData', $carData);
     }
 

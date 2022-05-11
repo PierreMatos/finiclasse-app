@@ -6,7 +6,7 @@
             <div class="row mb-2">
                 <div class="col-sm-12">
                     <!-- <h1>{{ __('Edit car') }}</h1> -->
-                    <h1>{{__('Edit')}} {{ isset($car->model->make->name) ? $car->model->make->name : '' }}</h1>
+                    <h1>{{__('Edit')}} {{ isset($car->model->make->name) ? $car->model->make->name : '' }} - {{ $car->condition->name }}</h1>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
 
             <div class="card-body">
                 <div class="row">
-                    @include('cars.fields')
+                    @include('cars.fieldsEdit')
                 </div>
             </div>
 

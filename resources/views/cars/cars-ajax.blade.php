@@ -7,9 +7,7 @@
                     <h1>{{ __('Cars') }} - {{ __('NewCar') }}</h1>
                 </div>
                 <div class="col-sm-6">
-                    <a class="btn btn-primary adicionarBtn" href="{{ route('cars.create') }}">
-                        {{ __('Add New') }}
-                    </a>
+                    <a class="btn btn-success adicionarBtn" onClick="add()" href="javascript:void(0)">Novo Carro</a>
                 </div>
             </div>
         </div>
@@ -17,13 +15,6 @@
 
     <body>
         <div class="container mt-2">
-            <div class="row">
-                <div class="col-lg-12 margin-tb">
-                    <div class="mb-2 novoBtn">
-                        <a class="btn btn-success" onClick="add()" href="javascript:void(0)">Novo Carro</a>
-                    </div>
-                </div>
-            </div>
             @if ($message = Session::get('success'))
                 <div class="alert alert-success">
                     <p>{{ $message }}</p>
@@ -74,7 +65,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">{{ __('Model') }}</label>
                                 <div class="col-sm-12">
-                                    <select class="form-control" id="model_id" name="model_id">
+                                    <select class="form-control" id="model_id" name="model_id" disabled>
                                         <option selected value="" disabled>--</option>
                                         @foreach ($carData['models'] as $model)
                                             <option value="{{ $model->id }}">{{ $model->name }}</option>
@@ -252,7 +243,7 @@
 
         $('#order_date').datetimepicker({
             format: 'YYYY-MM-DD',
-            useCurrent: true,
+            useCurrent: true
         });
 
         function add() {

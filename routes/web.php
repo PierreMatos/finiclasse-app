@@ -7,12 +7,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BenefitController;
 use App\Http\Controllers\CampaignController;
-use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\FinancingController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\WebNotificationController;
-use App\Http\Controllers\DataTableAjaxCRUDController;
-use App\Http\Controllers\BusinessStudyAuthorizationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,27 +87,26 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
     Route::resource('carClasses', App\Http\Controllers\CarClassController::class);
 
     Route::resource('cars', App\Http\Controllers\CarController::class);
+    Route::get('cars/create/{id}', [App\Http\Controllers\CarController::class, 'create'])->name('create');
     Route::post('fetch-models', [CarController::class, 'fetchModel']);
-    // Route::get( ['carController', 'getCars'])->name('getCars');
     Route::get('/getcars', [CarController::class, 'getCars'])->name('getcars');
-    // Route::get('/carstate/{car_id}/{state_id}/{price}', [CarController::class, 'carState'])->name('carstate');
 
-    // Download
+    //Download
     Route::get('/download-financing{id}', [FinancingController::class, 'download']);
     Route::get('/download-campaign{id}', [CampaignController::class, 'download']);
     Route::get('/download-benefit{id}', [BenefitController::class, 'download']);
 
-    // Validate Create RGPD with Email
+    //Validate Create RGPD with Email
     Route::get('createValidateRGPD/{id}', [UserController::class, 'createValidateRGPD'])->name('createValidateRGPD');
 
-    // PDF
+    //PDF
     Route::get('pdf/{id}', function ($id) {
         $user = App\Models\User::where('id', $id)->first();
         $pdf = PDF::setOption('enable-local-file-access', true)->loadView('pdf', ['user' => $user]);
         return $pdf->stream('pdf_rgpd.pdf');
     });
 
-    // Infy0m
+    //Infy0m
 
     Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder')->name('io_generator_builder');
 
@@ -122,81 +118,44 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
 
     Route::post('generator_builder/rollback', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@rollback')->name('io_generator_builder_rollback');
 
-    Route::post(
-        'generator_builder/generate-from-file',
-        '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generateFromFile'
-    )->name('io_generator_builder_generate_from_file');
-
-    Route::get('/clear-cache', function () {
-        $exitCode = Artisan::call('cache:clear');
-        // return what you want
-    });
-    //Reoptimized class loader :
-    Route::get('/optimize', function () {
-        $exitCode = Artisan::call('optimize');
-        return '<h1>Reoptimized class loader</h1>';
-    });
-    //Route cache:
-    Route::get('/route-cache', function () {
-        $exitCode = Artisan::call('route:cache');
-        return '<h1>Routes cached</h1>';
-    });
-
-    //Clear Route cache:
-    Route::get('/route-clear', function () {
-        $exitCode = Artisan::call('route:clear');
-        return '<h1>Route cache cleared</h1>';
-    });
-
-    //Clear View cache:
-    Route::get('/view-clear', function () {
-        $exitCode = Artisan::call('view:clear');
-        return '<h1>View cache cleared</h1>';
-    });
-
-    //Clear Config cache:
-    Route::get('/config-cache', function () {
-        $exitCode = Artisan::call('config:cache');
-        return '<h1>Clear Config cleared</h1>';
-    });
-
     //Mails Exemplos:
+    if (!App::environment('production')) {
+        //Proposta Comercial
+        Route::get('/mailable', function () {
+            $proposal = App\Models\Proposal::find(8);
 
-    //Proposta Comercial
-    Route::get('/mailable', function () {
-        $proposal = App\Models\Proposal::find(47);
+            return new App\Mail\ProposalOrder($proposal);
+        });
 
-        return new App\Mail\ProposalOrder($proposal);
-    });;
+        Route::get('/mailable-pos', function () {
+            $proposal = App\Models\Proposal::find("");
 
-    Route::get('/mailable-pos', function () {
-        $proposal = App\Models\Proposal::find(39);
+            return new App\Mail\ProposalOrder($proposal);
+        });
 
-        return new App\Mail\ProposalOrder($proposal);
-    });;
+        //RGPD
+        Route::get('/mailable2', function () {
+            $user = App\Models\User::find(14);
 
-    //RGPD
-    Route::get('/mailable2', function () {
-        $user = App\Models\User::find(14);
+            return new App\Mail\ValidateRGPD($user);
+        });
 
-        return new App\Mail\ValidateRGPD($user);
-    });;
+        //Notificação negócio para validação
+        Route::get('/mailable3', function () {
+            $proposal = App\Models\Proposal::find(8);
 
-    //Notificação negócio para validação
-    Route::get('/mailable3', function () {
-        $proposal = App\Models\Proposal::find(8);
+            return new App\Mail\ProposalApproval($proposal);
+        });
 
-        return new App\Mail\ProposalApproval($proposal);
-    });
+        //Notificação retoma para validação
+        Route::get('/mailable4', function () {
+            $proposal = App\Models\Proposal::find(8);
 
-    //Notificação retoma para validação
-    Route::get('/mailable4', function () {
-        $proposal = App\Models\Proposal::find(8);
+            return new App\Mail\TradeInApproval($proposal);
+        });
+    }
 
-        return new App\Mail\TradeInApproval($proposal);
-    });
-
-    // Datatable Car
+    //Datatable Car
     Route::get('new-car', [CarController::class, 'indexNewCars'])->name('new-car');
     Route::post('store-car', [CarController::class, 'storeNewCars']);
     Route::post('edit-car', [CarController::class, 'editNewCars']);
@@ -215,24 +174,24 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
     Route::post('/store-token', [WebNotificationController::class, 'storeToken'])->name('store.token');
     // Route::post('/send-web-notification', [WebNotificationController::class, 'sendWebNotification'])->name('send.web-notification');
 
-    // Notifications
+    //Notifications
     Route::post('/mark-as-read', [NotificationController::class, 'markNotification'])->name('markNotification');
 });
 
-//support
+//Support
 Route::get('help-backoffice', function () {
     return view('help.backoffice');
 });
 
-//support
+//Support
 Route::get('help-app', function () {
     return view('help.app');
 });
 
-// Validate Store RGPD with Email
+//Validate Store RGPD with Email
 Route::get('storeValidateRGPD/{id}', [UserController::class, 'storeValidateRGPD'])->name('storeValidateRGPD');
 
-// Thankyou page
+//Thankyou page
 Route::get('thankyou', function () {
     return view('thankyou');
 });

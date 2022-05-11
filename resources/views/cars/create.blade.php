@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>{{ __('Create car') }}</h1>
+                    <h1>{{ __('Create car') }} - {{ $condition->name }}</h1>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
             <div class="card-body">
 
                 <div class="row">
-                    @include('cars.fields')
+                    @include('cars.fieldsCreate')
                 </div>
 
             </div>
