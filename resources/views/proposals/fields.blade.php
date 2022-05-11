@@ -548,7 +548,7 @@
             </div>
 
             @if (isset($proposal->initialBusinessStudy->id))
-                @if ($proposal->state_id == 3)
+                @if ($proposal->state_id === 3)
                     <div class="row mt-5 mb-5 justify-content-center">
                         <div class="form-group row" role="group" aria-label="Basic example">
                             <div class="col-6">
@@ -560,6 +560,26 @@
                                 <button type="button"
                                     id="{{ isset($proposal->initialBusinessStudy->id) ? $proposal->initialBusinessStudy->id : '' }}"
                                     value="5" class="btn btn-danger businessAuth"> Rejeitar</button>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            @endif
+
+            @if (isset($proposal->initialBusinessStudy->id))
+                @if ($proposal->state_id === 1)
+                    <div class="row mt-5 mb-5 justify-content-center">
+                        <div class="form-group row" role="group" aria-label="Basic example">
+                            <div class="col-12">
+                                @if($proposal->initialBusinessStudy->business_study_authorization_id === 4)
+                                    <div class="alert alert-success" role="alert">
+                                        O estudo de negócio foi aceite
+                                    </div>
+                                @elseif($proposal->initialBusinessStudy->business_study_authorization_id === 5)
+                                    <div class="alert alert-danger" role="alert">
+                                        O estudo de negócio foi rejeitado
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

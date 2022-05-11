@@ -85,16 +85,6 @@ div.dataTables_wrapper div.dataTables_filter input {
     color: #000;
 }
 
-.btn-closePending:not(:disabled):not(.disabled).active {
-    background-color: #42b6f5;
-    color: #fff;
-}
-
-.btn-closePending:hover {
-    background-color: #42b6f5;
-    color: #fff;
-}
-
 .btn-shared:not(:disabled):not(.disabled).active {
     background-color: #fff;
     color: #000;
