@@ -6,7 +6,6 @@ use Flash;
 use Response;
 use App\Models\Car;
 use App\Models\CarModel;
-use App\Models\Proposal;
 use App\Providers\NewCar;
 use Illuminate\Http\Request;
 use App\Repositories\CarRepository;
@@ -430,7 +429,10 @@ class CarController extends AppBaseController
     public function storeNewCars(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'make_id' => 'required',
             'model_id' => 'required',
+            'stand_id' => 'required',
+            'state_id' => 'required',
         ]);
 
         if ($validator->passes()) {
@@ -457,10 +459,13 @@ class CarController extends AppBaseController
                 ]
             );
 
-            //Event notification
-            event(new NewCar($car)); 
+            //Dispara só quando o carro é criado
+            if($car->wasRecentlyCreated) {
+                //Event notification
+                event(new NewCar($car));
+            }
 
-            return Response()->json($car);
+            return response()->json($car);
         }
 
         return response()->json(['error' => $validator->errors()]);
@@ -478,7 +483,7 @@ class CarController extends AppBaseController
         $where = array('id' => $request->id);
         $car = Car::where($where)->with('model.make')->first();
 
-        return Response()->json($car);
+        return response()->json($car);
     }
 
 

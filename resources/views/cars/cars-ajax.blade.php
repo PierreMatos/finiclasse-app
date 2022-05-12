@@ -15,11 +15,14 @@
 
     <body>
         <div class="container mt-2">
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{ $message }}</p>
-                </div>
-            @endif
+            {{-- Success --}}
+            <div class="alert alert-success" id="successMsg" style="display:none;">
+                <ul></ul>
+            </div>
+            {{-- Errors --}}
+            <div class="alert alert-danger print-error-msg" style="display:none; padding-bottom: 0px;">
+                <ul></ul>
+            </div>
             <div class="card-body">
                 <table class="table table-bordered" id="ajax-crud-datatable">
                     <thead>
@@ -107,7 +110,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">{{ __('State') }}</label>
+                                <label class="col-sm-3 control-label">{{ __('State') }}</label>
                                 <div class="col-sm-12">
                                     <select class="form-control" id="state_id" name="state_id">
                                         <option selected value="" disabled>--</option>
@@ -129,13 +132,16 @@
                                     <input type="text" class="form-control" id="observations" name="observations">
                                 </div>
                             </div>
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-primary" id="btn-save">{{ __('Save') }}</button>
-                            </div>
-                        </form>
                     </div>
                     <div class="modal-footer">
+                        <div class="col-sm-offset-2 col-sm-12">
+                            <button type="submit" class="btn btn-primary" id="btn-save"
+                                style="float: left;">{{ __('Save') }}</button>
+                            <button type="button" class="btn btn-secondary closeModal" data-dismiss="modal"
+                                style="float: right;">{{ __('Cancel') }}</button>
+                        </div>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -150,6 +156,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
             var table = $('#ajax-crud-datatable').DataTable({
                 processing: true,
                 serverSide: false,
@@ -242,9 +249,14 @@
         });
 
         $('#order_date').datetimepicker({
-            format: 'YYYY-MM-DD',
+            format: 'DD-MM-YYYY',
             useCurrent: true
         });
+
+        var translations = {
+            change: "@lang('translation.change successfully')",
+            delete: "@lang('translation.delete car')",
+        };
 
         function add() {
             $('#CarForm').trigger("reset");
@@ -254,6 +266,9 @@
         }
 
         function editFunc(id) {
+
+            $("#model_id").prop("disabled", false);
+
             $.ajax({
                 type: "POST",
                 url: "{{ url('edit-car') }}",
@@ -272,14 +287,22 @@
                     $('#komm').val(res.komm);
                     $('#stand_id').val(res.stand_id);
                     $('#state_id').val(res.state_id);
-                    $('#order_date').val(moment(res.order_date).format('MM/DD/YYYY'));
+
+                    var order_date = res.order_date;
+
+                    if (order_date === null) {
+                        $('#order_date').val('');
+                    } else if (order_date !== null) {
+                        $('#order_date').val(moment(res.order_date).format('DD/MM/YYYY'));
+                    }
+
                     $('#observations').val(res.observations);
                 }
             });
         }
 
         function deleteFunc(id) {
-            if (confirm("Delete Record?") == true) {
+            if (confirm("Tem a certeza?") == true) {
                 var id = id;
                 // ajax
                 $.ajax({
@@ -292,12 +315,27 @@
                     success: function(res) {
                         var oTable = $('#ajax-crud-datatable').dataTable();
                         oTable.fnDraw(false);
+
+                        $('#ajax-crud-datatable').DataTable().ajax.reload();
+
+                        $("#successMsg").text(translations.delete).css('display', 'block');
+                        setTimeout(function() {
+                            $("#successMsg").css('display', 'none');
+                        }, 5000);
                     }
                 });
             }
         }
+
         $('#CarForm').submit(function(e) {
             e.preventDefault();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
             var formData = new FormData(this);
             $.ajax({
                 type: 'POST',
@@ -307,18 +345,37 @@
                 contentType: false,
                 processData: false,
                 success: (data) => {
-                    $("#car-modal").modal('hide');
-                    var oTable = $('#ajax-crud-datatable').dataTable();
-                    oTable.fnDraw(false);
-                    $("#btn-save").html('Guardar');
-                    $("#btn-save").attr("disabled", false);
+                    if ($.isEmptyObject(data.error)) {
 
-                    $('#ajax-crud-datatable').DataTable().ajax.reload();
-                },
-                error: function(data) {
-                    console.log(data);
+                        $("#car-modal").modal('hide');
+                        var oTable = $('#ajax-crud-datatable').dataTable();
+                        oTable.fnDraw(false);
+                        $("#btn-save").html('Guardar');
+                        $("#btn-save").attr("disabled", false);
+
+                        $('#ajax-crud-datatable').DataTable().ajax.reload();
+
+                        $(".print-error-msg").css('display', 'none');
+
+                        $("#successMsg").text(translations.change).css('display', 'block');
+                        setTimeout(function() {
+                            $("#successMsg").css('display', 'none');
+                        }, 5000);
+
+                    } else {
+                        printErrorMsg(data.error);
+                        $("#car-modal").modal('hide');
+                    }
                 }
             });
+
+            function printErrorMsg(msg) {
+                $(".print-error-msg").find("ul").html('');
+                $(".print-error-msg").css('display', 'block');
+                $.each(msg, function(key, value) {
+                    $(".print-error-msg").find("ul").append('<li>' + value + '</li>');
+                });
+            }
         });
 
         // Marca-Modelo relation
@@ -394,6 +451,11 @@
 
     .adicionarBtn {
         float: right;
+    }
+
+    .closeModal:hover {
+        background-color: #5a6268 !important;
+        border-color: #545b62 !important;
     }
 
 </style>

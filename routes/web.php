@@ -158,8 +158,8 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
     //Datatable Car
     Route::get('new-car', [CarController::class, 'indexNewCars'])->name('new-car');
     Route::post('store-car', [CarController::class, 'storeNewCars']);
-    Route::post('edit-car', [CarController::class, 'editNewCars']);
-    Route::post('delete-car', [CarController::class, 'destroyNewCars']);
+    Route::post('edit-car', [CarController::class, 'editNewCars'])->name('edit-car');
+    Route::post('delete-car', [CarController::class, 'destroyNewCar']);
 
     Route::patch('/businessAuthaction/{id}', [App\Http\Controllers\BusinessStudyController::class, 'businessAuth'])->name('businessAuthaction');
 

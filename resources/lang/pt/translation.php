@@ -25,5 +25,7 @@ return [
     'user deleted' => 'Utilizador apagado com sucesso',
     'user updated' => 'Utilizador atualizado com sucesso',
     'user not found' => 'Utilizador não encontrado',
-    'email success' => 'E-mail enviado com sucesso!'
+    'email success' => 'E-mail enviado com sucesso',
+    'change successfully' => 'Alteração realizada com sucesso',
+    'delete car' => 'Carro apagado com sucesso'
 ];

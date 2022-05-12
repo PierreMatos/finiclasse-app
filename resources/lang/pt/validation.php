@@ -136,6 +136,7 @@ return [
         'model_id' => 'modelo',
         'motorization' => 'motorização',
         'color_exterior' => 'cor',
+        'stand_id' => 'stand',
         'state_id' => 'estado',
         'order_date' => 'produção',
         'observations' => 'observações'
