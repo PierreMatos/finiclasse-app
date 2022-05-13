@@ -37,4 +37,20 @@ class StandRepository extends BaseRepository
     {
         return Stand::class;
     }
+
+    public function getStands($user){
+
+        if ($user->hasRole(['admin', 'Administrador', 'Diretor comercial'])){
+        
+            $stands = Stand::all(); 
+
+            return $stands;
+
+        }elseif($user->hasRole(['Chefe de vendas'])){
+
+            $stands = Stand::where('id','=', $user->stand_id)->get();
+
+            return $stands;
+        }
+    }
 }

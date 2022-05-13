@@ -81,7 +81,7 @@ return [
         'array'   => 'O conteúdo pode não ter mais do que :max itens.',
         'file'    => 'O tamanho do ficheiro não pode ser maior que :max kilobytes.',
         'numeric' => 'O valor não pode ser maior que :max.',
-        'string'  => 'A cadeia de texto não pode ser maior que :max caracteres.',
+        'string'  => 'O campo de :attribute não pode ser maior que :max caracteres.',
     ],
     'mimes'                => 'Este deve ser um ficheiro do tipo: :values.',
     'mimetypes'            => 'Este deve ser um ficheiro do tipo: :values.',

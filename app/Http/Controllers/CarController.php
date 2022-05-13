@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Flash;
 use Response;
+use Carbon\Carbon;
 use App\Models\Car;
 use App\Models\CarModel;
 use App\Providers\NewCar;
@@ -397,7 +398,7 @@ class CarController extends AppBaseController
                     return $car->state->name;
                 })
                 ->addColumn('order_date', function (Car $car) {
-                    return $car->order_date ? $car->order_date->format('M/Y') : '';
+                    return $car->order_date ? with(new Carbon($car->order_date))->translatedFormat('F/Y') : '';
                 })
                 ->rawColumns(['action'])
                 ->addIndexColumn()
@@ -433,6 +434,7 @@ class CarController extends AppBaseController
             'model_id' => 'required',
             'stand_id' => 'required',
             'state_id' => 'required',
+            'observations' => 'string|max:100|nullable',
         ]);
 
         if ($validator->passes()) {

@@ -7,8 +7,6 @@ use Response;
 use Validator;
 use Carbon\Carbon;
 use App\Models\Car;
-use App\Models\User;
-use App\Models\LeadUser;
 use App\Mail\ValidateRGPD;
 use App\Providers\NewLead;
 use Illuminate\Http\Request;
@@ -65,7 +63,7 @@ class UserController extends AppBaseController
     public function create()
     {
         // VARIAVEIS REFERENTES AS LISTAGENS DE MODELOS ($modelName)
-        $stands = $this->standRepository->all();
+        $stands = $this->standRepository->getStands(Auth::user());
         $clientTypes = $this->clientTypeRepository->all();
         $cars = Car::whereNotNull('plate')->get();
         $leads = $this->userRepository->getSellers(Auth::user());
@@ -329,7 +327,7 @@ class UserController extends AppBaseController
     {
         $user = Auth::user();
 
-        $sellers =  $this->userRepository->getSellers($user);
+        $sellers = $this->userRepository->getSellers($user);
 
         return view('sellers.index')
             ->with('users', $sellers);

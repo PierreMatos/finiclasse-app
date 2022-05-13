@@ -250,7 +250,8 @@
 
         $('#order_date').datetimepicker({
             format: 'DD-MM-YYYY',
-            useCurrent: true
+            useCurrent: true,
+            locale:'pt'
         });
 
         var translations = {

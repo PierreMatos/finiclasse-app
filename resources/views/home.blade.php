@@ -67,7 +67,7 @@
             <!-- small box -->
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3>{{ intval(round($proposalsCloseNew)) }}<sup style="font-size: 20px">%</sup></h3>
+                    <h3>{{ intval(round($proposalsCloseNew)) }}<sup style="font-size: 20px"></sup></h3>
 
                     <p>Propostas fechadas de viaturas novas</p>
                 </div>
