@@ -50,7 +50,7 @@ class ProposalResource extends JsonResource
                 'email' => $this->client->email ?? '',
                 'client_type' => $this->client->clientType->name ?? '',
                 'nif' => $this->client->nif ?? '',
-                'city' => $this->city,
+                'city' => $this->client->city ?? '',
                 'adress' => $this->client->adress ?? '',
                 'zip_code' => $this->client->zip_code ?? '',
                 'phone' => $this->client->phone ?? '',
