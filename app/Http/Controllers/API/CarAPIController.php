@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\CreateCarAPIRequest;
-use App\Http\Requests\API\UpdateCarAPIRequest;
+use Response;
 use App\Models\Car;
 use App\Models\User;
-use App\Repositories\CarRepository;
+use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
-use App\Http\Resources\CarResource;
-use App\Http\Resources\CarCollection;
-use Response;
+use App\Providers\PushAddTradeIn;
 use Illuminate\Support\Facades\DB;
+use App\Http\Resources\CarResource;
+use App\Repositories\CarRepository;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Resources\CarCollection;
 use Illuminate\Support\Facades\Validator;
 USE App\Mail\TradeInApproval;
-use App\Providers\PushAddTradeIn;
-use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\API\CreateCarAPIRequest;
+use App\Http\Requests\API\UpdateCarAPIRequest;
 
 /**
  * Class CarController
