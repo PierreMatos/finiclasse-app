@@ -18,7 +18,10 @@ class ProposalResource extends JsonResource
      */
     public function toArray($request)
     {
-        $pos = $this->car->getFirstMediaUrl('pos');
+        if($this->car !== null){
+            $pos = $this->car->getFirstMediaUrl('pos');
+        }
+
         $imagesTradein = collect();
         $images = collect();
 
