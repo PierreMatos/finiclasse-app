@@ -167,39 +167,16 @@ class CarAPIController extends AppBaseController
         /** @var Car $car */
         $car = $this->carRepository->find($id);
 
-        // //Apagar imagem antiga se for mudada
-        // if ($request->hasFile('image')) {
-        //     $car->clearMediaCollection('cars');
-        // }
-    
-        //Apagar POS antiga se for mudada
-        if ($request->hasFile('pos')) {
-            $car->clearMediaCollection('pos');
-        }
-
-        //Verificar se a imagem existe
-        // $file = $request->file('image');
-
-        //Verificar se a POS existe
-        // $file = $request->file('pos');
-
-        //adicionar imagem
-        if (empty($request->hasFile('image'))) {
-            //Passar a variable input sem colocar nova imagem
-            $input = $request->all();
-        } else {
-            //Actualizar imagem se colocar uma nova
-            $input = $request->all();
-
+        // add images
+        if ($request->hasFile('image')) {
             $fileAdders = $car->addMultipleMediaFromRequest(['image'])
                 ->each(function ($fileAdder) {
                     $fileAdder->toMediaCollection('cars','s3');
                 });
         }
 
-        $file = $request->file('pos');
-
         //Verificar se a imagem existe POS
+        $file = $request->file('pos');
         if($request->hasFile('file') == null) {
             //Passar a variable input sem colocar nova imagem
             $input = $request->all();
