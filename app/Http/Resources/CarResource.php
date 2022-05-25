@@ -17,10 +17,11 @@ class CarResource extends JsonResource
     {
         $images = collect();
         $items = $this->getMedia('cars');
+        $avatar = $this->getFirstMediaUrl('cars','thumb');
         foreach($items as $item){
             $images->push($item->getUrl());
-            // $images->push($item->getUrl('thumb')); 
         }
+        
         $pos = $this->getFirstMediaUrl('pos');
 
         return [
@@ -86,7 +87,7 @@ class CarResource extends JsonResource
             'tradein_observations' => $this->tradein_observations,
             'consumption' => $this->consumption,
             'potencial_buyer' => $this->potencial_buyer,
-            'avatar' => $this->getFirstMediaUrl('cars','thumb'),
+            'avatar' => $avatar,
             'images' => $images,
             'pos' => $pos,
             'created_at' => $this->created_at,
