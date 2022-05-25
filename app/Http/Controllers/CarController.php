@@ -271,7 +271,7 @@ class CarController extends AppBaseController
     {
         $request->validate([
             'image' => 'array|max:4',
-            'image.*' => 'nullable|mimes:jpeg,png,jpg|dimensions:max_width=5000,max_height=5000|file|max:10000'
+            'image.*' => 'nullable|mimes:jpeg,png,jpg|dimensions:max_width=10000,max_height=10000|file|max:10000'
         ]);
 
         $car = $this->carRepository->find($id);
