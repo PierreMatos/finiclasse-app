@@ -175,7 +175,7 @@
                         @if ($proposal->car->state->id === 5)
                             @if ($proposal->car->getFirstMediaUrl('pos'))
                                 <a href="{{ $proposal->car->getFirstMediaUrl('pos') }}" target="_blank"
-                                    class="btn btn-default" style="margin-top: 10px;">Ver Ficheiro
+                                    class="btn btn-default" style="margin-top: 10px;">Ver proposta de nova viatura
                                 </a>
                             @else
                             @endif
