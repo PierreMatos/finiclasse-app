@@ -32,7 +32,7 @@ class ValidateRGPD extends Mailable
     public function build()
     {
         return $this->from(env('MAIL_FROM_ADDRESS'), 'Finiclasse')
-            ->to('franciscocarvalho88@gmail.com')
+            ->to('jfcarvalho@remotepartner.co')
             ->bcc('orlandocarvalho@remotepartner.co')
             ->subject('Validação RGPD')
             ->markdown('mail.validateRGPD');
