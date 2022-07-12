@@ -102,7 +102,7 @@ class UserController extends AppBaseController
 
         $input = $request->all();
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             Flash::error($validator->errors());
             return redirect(route('users.index'));
         }
@@ -114,9 +114,9 @@ class UserController extends AppBaseController
         } elseif ($url == 'sellers.store') {
             $user = $this->userRepository->create($input)->assignRole('Vendedor');
         }
-        
+
         //atribuir lead user a vendedor
-        if($request->vendor_id){
+        if ($request->vendor_id) {
             $user->vendor()->attach($request->vendor_id);
 
             //Event for Notification
@@ -236,12 +236,17 @@ class UserController extends AppBaseController
 
         // dd($request->vendor_id);
         //atribuir lead user a vendedor
-        if($request->vendor_id != '')  {
-            
-            if($request->vendor_id != $user->vendor->first()->id){
-                
+        if ($request->vendor_id != '') {
+
+            $oldVendor = null;
+
+            if ($user->vendor->isNotEmpty()) {
+                $oldVendor = $user->vendor->first()->id;
+            }
+            if ($request->vendor_id != $oldVendor) {
+
                 $user->vendor()->sync($request->vendor_id);
-                
+
                 $user = $this->userRepository->update($request->all(), $id);
 
                 //Event for Notification
@@ -251,9 +256,8 @@ class UserController extends AppBaseController
                 event(new PushNewLead($user));
             } else {
                 $user = $this->userRepository->update($request->all(), $id);
-            } 
-        }
-        else {
+            }
+        } else {
             $user = $this->userRepository->update($request->all(), $id);
         }
 
