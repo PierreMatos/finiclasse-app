@@ -447,7 +447,14 @@ class ProposalAPIController extends AppBaseController
             // $totalBenefits = [$BenefitN * ($basePrice + $Extras)];
 
             $totalExtras = $preTotalExtras + $ptl + $sigpu + $totalTransf;
-            $subTotal = $basePrice + $totalExtras - ($totalBenefits + $totalCampaigns);
+
+            if ($proposal->car->condition_id == 2){
+
+                $subTotal = $proposal->car->price - ($totalBenefits + $totalCampaigns);
+            }else{
+
+                $subTotal = $basePrice + $totalExtras - ($totalBenefits + $totalCampaigns);
+            }
 
             // IVA
             // $iva = $ivaTX * $price;
