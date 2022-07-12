@@ -157,7 +157,7 @@ class UsersSeeder extends Seeder
                 'email' => 'agostinho.barroso@finiclasse.com',
                 'mobile_phone' => NULL,
                 'password' => '$2y$10$YOn/Xq6vfvi9oaixrtW8QuM2W0mawkLLqIxL.IoGqrsqOqbIsfBNu',
-                'stand_id' => 2,
+                'stand_id' => 1,
                 'finiclasse_employee' => 1,
                 'remember_token' => NULL,
                 'created_at' => '2019-10-15 17:55:39',
