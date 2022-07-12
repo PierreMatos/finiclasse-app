@@ -6,8 +6,8 @@
         <h2 style="color: #fff; line-height: 0px;">Representante oficial</h2>
         <h2 style="color: #fff;">Mercedes-Benz, Smart e SEAT</h2>
         <div style="justify-content: none; float: left;">
-            <a href="https://www.instagram.com/finiclasse" target="_blank"><img src="storage/images/icon-insta.svg" /></a>
-            <a href="https://www.facebook.com/finiclasse" target="_blank"><img src="storage/images/icon-face.svg" /></a>
+            <a href="https://www.instagram.com/finiclasse" target="_blank"><img src="{{ asset('storage/images/icon-insta.svg') }}" /></a>
+            <a href="https://www.facebook.com/finiclasse" target="_blank"><img src="{{ asset('storage/images/icon-face.svg') }}" /></a>
         </div>
     </div>
     <div style="width: 70%; display: inline-grid; color: #fff;">
