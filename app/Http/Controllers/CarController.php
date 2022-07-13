@@ -372,9 +372,19 @@ class CarController extends AppBaseController
             event(new PushValidatedTradeIn($car));
         }
 
+        //if reject -> delete car and desync and push notify
+        if ($request->state == 7){
+
+            $proposal = $car->proposalTradeIn;
+            $proposal->tradein_id = null;
+            $proposal->save();
+
+            $car = $this->carRepository->delete($car->id);
+
+        }
         // return response()->json(['success'=> 'Retoma editada com sucesso']);
 
-        return response()->json(['success' => Flash::success(__('translation.retoma accepted'))]);
+        return response()->json(['success' => Flash::success(__('translation.tradein accepted'))]);
 
         return redirect(route('proposals.index'));
         // }

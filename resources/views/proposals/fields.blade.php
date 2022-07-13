@@ -333,12 +333,12 @@
                     <button type="button" id="{{ isset($proposal->tradein->id) ? $proposal->tradein->id : '' }}"
                         value="8" class="trade btn btn-info"> Aceitar</button>
                     <button type="button" id="{{ isset($proposal->tradein->id) ? $proposal->tradein->id : '' }}"
-                        value="7" class="tradeReject btn btn-info"> Rejeitar</button>
+                        value="7" class="trade btn btn-info"> Rejeitar</button>
                 @elseif($proposal->tradein->state_id == 8)
                     <button type="button" id="{{ isset($proposal->tradein->id) ? $proposal->tradein->id : '' }}"
                         value="8" class="trade btn btn-success" disabled> Aceitar</button>
                     <button type="button" id="{{ isset($proposal->tradein->id) ? $proposal->tradein->id : '' }}"
-                        value="7" class="tradeReject btn btn-info" disabled> Rejeitar</button>
+                        value="7" class="trade btn btn-info" disabled> Rejeitar</button>
                 @endif
             @endif
             <br>
