@@ -39,7 +39,10 @@ class HomeController extends Controller
         // $carsCount = Car::count();
 
         //all cars except POS
-        $carsCount = Car::where('state_id', '!=', 5)->count();
+        $carsCount = Car::where('state_id', '!=', 5)
+                        ->where('state_id', '!=', 7)
+                        ->count();
+                        
         // $clientsCount = User::where('finiclasse_employee', '==', '0')->count();
         $user = Auth::user();
         $clientsCount =  $this->userRepository->getClients($user)->count();
