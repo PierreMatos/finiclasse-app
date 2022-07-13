@@ -161,7 +161,7 @@
             <td style="padding: 10px;"><b>{{$proposal->tradein->tradein_purchase ?? 0}} €</b></td>
         </tr>
         @endif
-        @if ($proposal->finalBusinessStudy->total_benefits ?? $proposal->initialBusinessStudy->total_benefits !== '')
+        @if ($proposal->financings->isNotEmpty())
         <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
             <td style="padding: 10px;">Apoio:</td>
             <td style="padding: 10px;"><b>{{$proposal->finalBusinessStudy->total_benefits ?? $proposal->initialBusinessStudy->total_benefits}} €</b></td>
