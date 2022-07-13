@@ -380,7 +380,7 @@ class CarController extends AppBaseController
             $proposal->tradein_id = null;
             $proposal->save();
 
-            $car = $this->carRepository->delete($car->id);
+            $this->carRepository->delete($car->id);
 
             event(new PushRejectedTradeIn($car));
         }
