@@ -122,34 +122,34 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
     if (!App::environment('production')) {
         //Proposta Comercial
         Route::get('/mailable', function () {
-            $proposal = App\Models\Proposal::find(8);
+            $proposal = App\Models\Proposal::find("");
 
             return new App\Mail\ProposalOrder($proposal);
         });
 
         Route::get('/mailable-pos', function () {
-            $proposal = App\Models\Proposal::find(40);
+            $proposal = App\Models\Proposal::find("");
 
             return new App\Mail\ProposalOrder($proposal);
         });
 
         //RGPD
         Route::get('/mailable2', function () {
-            $user = App\Models\User::find(14);
+            $user = App\Models\User::find("");
 
             return new App\Mail\ValidateRGPD($user);
         });
 
         //Notificação negócio para validação
         Route::get('/mailable3', function () {
-            $proposal = App\Models\Proposal::find(8);
+            $proposal = App\Models\Proposal::find("");
 
             return new App\Mail\ProposalApproval($proposal);
         });
 
         //Notificação retoma para validação
         Route::get('/mailable4', function () {
-            $proposal = App\Models\Proposal::find(8);
+            $proposal = App\Models\Proposal::find("");
 
             return new App\Mail\TradeInApproval($proposal);
         });
