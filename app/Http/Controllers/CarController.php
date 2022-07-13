@@ -22,6 +22,7 @@ use App\Repositories\CarModelRepository;
 use App\Repositories\CarStateRepository;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\AppBaseController;
+use App\Providers\PushRejectedTradeIn;
 use App\Repositories\CarCategoryRepository;
 use App\Repositories\CarConditionRepository;
 use App\Repositories\CarTransmissionRepository;
@@ -381,10 +382,11 @@ class CarController extends AppBaseController
 
             $car = $this->carRepository->delete($car->id);
 
+            event(new PushRejectedTradeIn($car));
         }
         // return response()->json(['success'=> 'Retoma editada com sucesso']);
 
-        return response()->json(['success' => Flash::success(__('translation.tradein accepted'))]);
+        return response()->json(['success' => Flash::success(__('translation.tradein rejected'))]);
 
         return redirect(route('proposals.index'));
         // }
