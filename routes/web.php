@@ -176,6 +176,9 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
 
     //Notifications
     Route::post('/mark-as-read', [NotificationController::class, 'markNotification'])->name('markNotification');
+
+    //Aceitar ou rejeitar retoma
+    Route::post('/tradeinaction', [CarController::class, 'carState'])->name('tradeinaction');
 });
 
 //Support
@@ -195,8 +198,3 @@ Route::get('storeValidateRGPD/{id}', [UserController::class, 'storeValidateRGPD'
 Route::get('thankyou', function () {
     return view('thankyou');
 });
-
-Route::post('/tradeinaction', [CarController::class, 'carState'])->name('tradeinaction');
-
-//Apagar depois dos testes
-Route::get('/send_proposal/{id}', [App\Http\Controllers\API\ProposalAPIController::class, 'sendProposal'])->name('send_proposal');
