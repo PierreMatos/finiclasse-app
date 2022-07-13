@@ -37,15 +37,15 @@
                 <td style="padding: 0px;"> <img src="{{ asset($proposal->car->getFirstMediaUrl('cars'))}}" /> </td>
             </tr>
         @endif
-        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between !important;">
             <td style="padding: 10px;">Condição: <b>{{$proposal->car->condition->name}}</b></td>
             <td style="padding: 10px;">Tipo: <b>{{$proposal->car->state->name}}</b></td>
         </tr>
-        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between !important;">
             <td style="padding: 10px;">Marca: <b>{{$proposal->car->model->make->name}}</b></td>
             <td style="padding: 10px;">Modelo: <b>{{$proposal->car->model->name}}</b></td>
         </tr>
-        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between !important;">
             @if ($proposal->car->state->id === 5)
             <td style="padding: 10px;">Komm: <b>{{$proposal->car->komm}}</b></td>
             @else
@@ -54,11 +54,11 @@
             <td style="padding: 10px;">Variante: <b>{{$proposal->car->variant}}</b></td>
         </tr>
         @if ($proposal->car->state->id !== 5)
-        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between !important;">
             <td style="padding: 10px;">Km: <b>{{$proposal->car->km}}</b></td>
             <td style="padding: 10px;">Ano: <b>{{$proposal->car->registration->format('Y/m/d')}}</b></td>
         </tr>
-        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between !important;">
             <td style="padding: 10px;">Combustível: <b>{{$proposal->car->fuel->name}}</b></td>
             <td style="padding: 10px;">Caixa: <b>{{$proposal->car->transmission->name}}</b></td>
         </tr>
@@ -110,7 +110,7 @@
                 <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Campanha</th>
             </tr>
                 @foreach ($proposal->campaigns as $campaign)
-                    <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+                    <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between !important;">
                         <td style="padding: 10px;">Tipo: <b>{{$campaign->pivot->name}}</b></td>
                         <td style="padding: 10px;"><b>{{$campaign->pivot->value}} {{$campaign->pivot->type}}</b></td>
                     </tr>
@@ -126,7 +126,7 @@
                 <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Apoio</th>
             </tr>
                 @foreach ($proposal->benefits as $benefit)
-                    <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+                    <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between !important;">
                         <td style="padding: 10px;">Tipo: <b>{{$benefit->pivot->name}}</b></td>
                         <td style="padding: 10px;"><b>{{$benefit->pivot->value}} {{$benefit->pivot->type}}</b></td>
                     </tr>
@@ -142,7 +142,7 @@
             <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Financiamento</th>
         </tr>
             @foreach ($proposal->financings as $financing)
-                <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+                <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between !important;">
                     <td style="padding: 10px;">Tipo: <b>{{$financing->name}}</b></td>
                 </tr>
             @endforeach
@@ -156,15 +156,15 @@
         <tr style="border-bottom: 1px solid #C2C2C2;">
             <th style="text-align: left; text-transform: uppercase; background-color: #C2C2C2; padding: 10px; border: none;">Proposta Nº {{$proposal->id}}</th>
         </tr>
-        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between !important;">
             <td style="padding: 10px;">Valor da retoma:</td>
             <td style="padding: 10px;"><b>{{$proposal->tradein->tradein_purchase ?? 0}} €</b></td>
         </tr>
-        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between !important;">
             <td style="padding: 10px;">Apoio:</td>
             <td style="padding: 10px;"><b>{{$proposal->finalBusinessStudy->total_benefits ?? $proposal->initialBusinessStudy->total_benefits}} €</b></td>
         </tr>
-        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between !important;">
             <td style="padding: 10px;"><b>Preço a pagar:</b></td>
             <td style="padding: 10px;"><b>{{$proposal->finalBusinessStudy->sale ?? $proposal->initialBusinessStudy->sale}} €</b></td>
         </tr>

@@ -704,7 +704,7 @@
 
                     <!-- INICIAL -->
                     <div class="form-group col-sm-8">
-                        <h6 style="font-weight: 700; line-height: 1.5;">Valor a liquidar</h6>
+                        <h6 style="font-weight: 700; line-height: 1.5;">Preço a liquidar</h6>
                         <p class="form-control studyBR" readonly>
                             @money($proposal->initialBusinessStudy->settle_amount)
                         </p>
@@ -812,7 +812,7 @@
 
                     <!-- FINAL -->
                     <div class="form-group col-sm-8 fr">
-                        {!! Form::label('settle_amount', 'Valor a liquidar') !!}
+                        {!! Form::label('settle_amount', 'Preço a liquidar') !!}
                         {!! Form::text('settle_amount', isset($proposal->finalBusinessStudy->settle_amount) ? $proposal->finalBusinessStudy->settle_amount : '', ['class' => 'form-control studyBR']) !!}
                     </div>
 
