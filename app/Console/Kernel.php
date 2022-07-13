@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('quote:daily')
-            ->dailyAt('10:10')->weekdays()->timezone('Europe/Lisbon');
+            ->dailyAt('9:00')->weekdays()->timezone('Europe/Lisbon');
 
         $schedule->command('quote:weekly')
             ->weeklyOn(1, '9:00')->timezone('Europe/Lisbon');
