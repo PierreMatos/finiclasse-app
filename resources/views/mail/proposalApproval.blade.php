@@ -24,11 +24,7 @@
         <td style="padding: 10px;"><b>@money($proposal->finalBusinessStudy->total_benefits)</b></td>
     </tr>
     <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
-        <td style="padding: 10px;"><b>Valor a pagar:</b></td>
-        <td style="padding: 10px;"><b>@money($proposal->finalBusinessStudy->sale)</b></td>
-    </tr>
-    <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
-        <td style="padding: 10px;"><b>Valor a pagar:</b></td>
+        <td style="padding: 10px;"><b>Preço a pagar:</b></td>
         <td style="padding: 10px;"><b>@money($proposal->finalBusinessStudy->sale)</b></td>
     </tr>
     @if ($proposal->car->condition_id == 1)
@@ -45,7 +41,7 @@
         <td style="padding: 10px;"><b>@money($proposal->finalBusinessStudy->total_diff_amount)</b></td>
     </tr>
     <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
-        <td style="padding: 10px;"><b>Valor a liquidar::</b></td>
+        <td style="padding: 10px;"><b>Preço a liquidar::</b></td>
         <td style="padding: 10px;"><b>@money($proposal->finalBusinessStudy->settle_amount)</b></td>
     </tr>
     @endif
@@ -97,7 +93,7 @@
             <td style="padding: 10px;"><b>@money($proposal->initialBusinessStudy->total_diff_amount)</b></td>
         </tr>
         <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
-            <td style="padding: 10px;"><b>Valor a liquidar:</b></td>
+            <td style="padding: 10px;"><b>Preço a liquidar:</b></td>
             <td style="padding: 10px;"><b>@money($proposal->initialBusinessStudy->settle_amount)</b></td>
         </tr>
     @endif

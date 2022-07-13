@@ -64,8 +64,8 @@
         </tr>
         @endif
         <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
-            @if ($proposal->car->state->id === 5)
-            <td style="padding: 10px;">Valor a liquidar: <b>{{$proposal->initialBusinessStudy->settle_amount}} €</b></td>
+            @if ($proposal->car->condition_id !== 1)
+            <td style="padding: 10px;">Preço a liquidar: <b>{{$proposal->initialBusinessStudy->settle_amount}} €</b></td>
             @else
             <td style="padding: 10px;">Preço Base: <b>{{$proposal->car->price_base}} €</b></td>
             @endif
@@ -97,7 +97,7 @@
                 <td style="padding: 10px;">Ano/mês: <b>{{$proposal->tradein->registration->isoFormat('M/Y')}}</b></td>
             </tr>
             <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
-                <td style="padding: 10px;">Valor: <b>{{$proposal->tradein->tradein_purchase}}</b></td>
+                <td style="padding: 10px;">Valor: <b>{{$proposal->tradein->tradein_purchase}} €</b></td>
             </tr>
         </table>
     @endif
@@ -165,7 +165,7 @@
             <td style="padding: 10px;"><b>{{$proposal->finalBusinessStudy->total_benefits ?? $proposal->initialBusinessStudy->total_benefits}} €</b></td>
         </tr>
         <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
-            <td style="padding: 10px;"><b>Valor a pagar:</b></td>
+            <td style="padding: 10px;"><b>Preço a pagar:</b></td>
             <td style="padding: 10px;"><b>{{$proposal->finalBusinessStudy->sale ?? $proposal->initialBusinessStudy->sale}} €</b></td>
         </tr>
     </table>

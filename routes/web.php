@@ -128,7 +128,7 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
         });
 
         Route::get('/mailable-pos', function () {
-            $proposal = App\Models\Proposal::find("");
+            $proposal = App\Models\Proposal::find(40);
 
             return new App\Mail\ProposalOrder($proposal);
         });

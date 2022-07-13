@@ -11,6 +11,7 @@ use App\Providers\ClosedProposal;
 use App\Providers\PushAddTradeIn;
 use App\Providers\SharedProposal;
 use App\Providers\PushCheckProposal;
+use App\Providers\PushRejectedTradeIn;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\PushValidatedTradeIn;
 use App\Providers\PushProposalSubmitted;
@@ -25,6 +26,7 @@ use App\Listeners\SendClosedProposalNotification;
 use App\Listeners\SendPushAddTradeInNotification;
 use App\Listeners\SendSharedProposalNotification;
 use App\Listeners\SendPushCheckProposalNotification;
+use App\Listeners\SendPushRejectedTradeInNotification;
 use App\Listeners\SendPushValidatedTradeInNotification;
 use App\Listeners\SendPushProposalSubmittedNotification;
 use App\Listeners\SendPushValidatedProposalNotification;
@@ -78,6 +80,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         PushCheckProposal::class => [
             SendPushCheckProposalNotification::class
+        ],
+        PushRejectedTradeIn::class => [
+            SendPushRejectedTradeInNotification::class
         ],
     ];
 
