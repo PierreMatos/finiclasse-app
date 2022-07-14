@@ -38,9 +38,9 @@ class CarConditionsSeeder extends Seeder
             ),
             2 => 
             array (
-                'id' => 3,
+                'id' => 4,
                 'name' => 'Semi-novo',
-                'order' => 3,
+                'order' => 4,
                 'visible' => 1,
                 'color' => '#fffff',
                 'created_at' => '2019-10-22 15:50:48',

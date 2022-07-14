@@ -379,12 +379,12 @@
 
             </div>
         </div>
-    @elseif($condition->id === 3)
+    @elseif($condition->id === 4)
         <div class="tab-pane active" id="geral" role="tabpanel" aria-labelledby="geral-tab">
             <div class="row">
 
                 <!-- Condition Id Field -->
-                <input type="hidden" name="condition_id" value="3">
+                <input type="hidden" name="condition_id" value="4">
 
                 <!-- Make Name Field -->
                 <div class="form-group col-md-3">
