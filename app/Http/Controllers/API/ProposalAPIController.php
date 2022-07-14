@@ -599,7 +599,7 @@ class ProposalAPIController extends AppBaseController
             }
 
 
-            if ($proposal->car->condition_id == 2 || $proposal->car->condition_id == 4 && $sale != null) {
+            if (($proposal->car->condition_id == 2 || $proposal->car->condition_id == 4) && $sale != null) {
 
                 // $auth = $authorizations->find(6);
 
