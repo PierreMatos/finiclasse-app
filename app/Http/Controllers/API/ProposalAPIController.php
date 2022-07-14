@@ -165,6 +165,7 @@ class ProposalAPIController extends AppBaseController
     // public function update($id, UpdateProposalAPIRequest $request)
     public function update($id, Request $request)
     {
+
         $input = $request->all();
 
         /** @var Proposal $proposal */
@@ -569,6 +570,7 @@ class ProposalAPIController extends AppBaseController
             // $authorizations = $businessStudyAuthorizationRepository->all();
 
             $business_study_authorization_id = 1;
+
             foreach ($authorizations as $authorization) {
 
                 $min = $authorization->min;
@@ -582,7 +584,7 @@ class ProposalAPIController extends AppBaseController
                             $proposal->state_id = 1;
                             // $proposal->save();
 
-                        } elseif ($authorization->id == 1 && $proposal->state->id !== 2 && $proposal->state->id !== 4) {
+                        } elseif ($authorization->id == 1 && $proposal->state->id !== 2 && $proposal->state->id !== 4 && $sale != null) {
                             $proposal->state_id = 3;
                         }
 
@@ -615,6 +617,7 @@ class ProposalAPIController extends AppBaseController
                     $proposal->initialBusinessStudy->business_study_authorization_id =  6;
                     $proposal->state_id = 3;
                     $proposal->save();
+
                 } elseif ($margin > 0) {
 
                     $business_study_authorization_id = 7;
