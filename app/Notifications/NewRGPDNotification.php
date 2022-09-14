@@ -56,7 +56,7 @@ class NewRGPDNotification extends Notification
     {
         return [
             'id' => $this->user->id,
-            'link' => '',
+            'link' => 'users.show',
             'icon' => 'fas fa-user-tie mr-2',
             'text' => 'O cliente ' . $this->user->name . ' validou o RGPD',
             'reactIcon' => 'cliente',

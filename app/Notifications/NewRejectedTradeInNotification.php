@@ -56,7 +56,7 @@ class NewRejectedTradeInNotification extends Notification
     {
         return [
             'id' => $this->car->proposalTradeIn->id,
-            'link' => '',
+            'link' => 'proposals.edit',
             'icon' => 'fas fa-file-contract mr-2',
             'text' => 'Retoma rejeitada na proposta nº ' . $this->car->proposalTradeIn->id,
             'reactIcon' => 'proposta',
