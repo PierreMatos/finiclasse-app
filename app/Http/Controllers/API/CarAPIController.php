@@ -260,4 +260,11 @@ class CarAPIController extends AppBaseController
 
 
     }
+
+    public function isSold($car){
+
+        $car->state_id = 6;
+        $car->save();
+
+    }
 }

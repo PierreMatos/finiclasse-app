@@ -324,4 +324,6 @@ class Car extends Model implements HasMedia
             ->height(232)
             ->sharpen(10);
     }
+
+
 }

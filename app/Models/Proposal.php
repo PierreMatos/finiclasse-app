@@ -202,4 +202,22 @@ class Proposal extends Model
         return $this->belongsToMany(Financing::class, 'financing_proposals');
     }
 
+    public function isClosed(): bool
+    {
+        if ($this->state_id == 5){
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isLost(): bool
+    {
+        if ($this->state_id == 4){
+            return true;
+        }
+
+        return false;
+    }
+
 }
