@@ -582,19 +582,33 @@ class ProposalAPIController extends AppBaseController
 
                         if ($authorization->id !== 1) {
                             $proposal->state_id = 1;
+                            //aceite
+                            $proposal->initialBusinessStudy->business_study_authorization_id =  1;
+                            $business_study_authorization_id = $authorization->id;
+
+
                             // $proposal->save();
 
                         } elseif ($authorization->id == 1 && $proposal->state->id !== 2 && $proposal->state->id !== 4 && $sale != null) {
                             $proposal->state_id = 3;
+                            $proposal->initialBusinessStudy->business_study_authorization_id =  3;
+                            $business_study_authorization_id = $authorization->id;
                         }
 
-                        $proposal->save();
-
-                        $business_study_authorization_id = $authorization->id;
-                        // return $business_study_authorization_id;
-                        $proposal->initialBusinessStudy->business_study_authorization_id =  $authorization->id;
-                        $proposal->save();
                     }
+                    // else{
+                    //     dd('oi');
+                    //     $business_study_authorization_id = 3;
+                    //     $proposal->initialBusinessStudy->business_study_authorization_id =  3;
+                    //     $proposal->save();
+                    //     // dd($proposal->initialBusinessStudy);
+
+
+                    // }
+                    // $proposal->save();
+                    // $business_study_authorization_id = $authorizeId;
+                    // return $business_study_authorization_id;
+                    // $proposal->initialBusinessStudy->business_study_authorization_id =  $authorization->id;
                 }
             }
 
