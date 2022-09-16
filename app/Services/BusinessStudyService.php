@@ -27,7 +27,6 @@ class BusinessStudyService {
     public function update(BusinessStudy $businessStudy){
 
         $proposal = Proposal::find($businessStudy->initialProposal->id);
-        // $proposal = new Proposal($businessStudy->initialProposal()->get()->toArray());
 
         if ( (!empty($proposal->car) && !($proposal->isClosed())  && !($proposal->isLost()) )) {
 
@@ -226,14 +225,13 @@ class BusinessStudyService {
 
     public function setAuthorization($proposal){
 
-
-        $sale=0;
-
         $authorizations = BusinessStudyAuthorization::all();
 
         $businessStudy = BusinessStudy::find($proposal->initialBusinessStudy->id);
 
         $business_study_authorization_id = 1;
+
+        $sale=0;
 
         foreach ($authorizations as $authorization) {
 
@@ -245,17 +243,18 @@ class BusinessStudyService {
                 if ($discPerc >= $min && $discPerc <= $max && ($authorization->id == 1 || $authorization->id == 2 || $authorization->id == 3)) {
 
                     if ($authorization->id !== 1) {
+
                         $proposal->state_id = 1;
                         // $proposal->save();
 
                     } elseif ($authorization->id == 1 && $proposal->state->id !== 2 && $proposal->state->id !== 4 && $sale != null) {
+
                         $proposal->state_id = 3;
+
                     }
 
                     $proposal->save();
-
                     $business_study_authorization_id = $authorization->id;
-                    // return $business_study_authorization_id;
                     $proposal->initialBusinessStudy->business_study_authorization_id =  $authorization->id;
                     $proposal->save();
                 }

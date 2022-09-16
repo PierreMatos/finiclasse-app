@@ -68,21 +68,16 @@ class ProposalService {
 
         //Event notification
         $this->sendNotifications($proposal);
+
+        return $proposal;
             
     }
-
-
 
     public function closeDeal(){
 
         $this->car->isSold();
 
-
     }
-
-
-
-
 
     public function sendNotifications(Proposal $proposal){
 

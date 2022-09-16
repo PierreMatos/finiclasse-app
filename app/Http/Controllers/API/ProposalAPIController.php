@@ -173,17 +173,15 @@ class ProposalAPIController extends AppBaseController
     // public function update($id, UpdateProposalAPIRequest $request)
     public function update($id, UpdateProposalAPIRequests $request)
     {
-        //validations
-        $proposal = $this->proposalRepository->find($id);
-        
+        $proposal = Proposal::find($id);
+
         if (empty($proposal)) {
             return $this->sendError('Proposal not found');
         }
 
-        // $this->proposalService->update($request->all(),$id);
-        $data = (New ProposalService())->update($request->all(),$id);
+        $new = $this->proposalService->update($request->input(),$id);
 
-        return $this->sendResponse(new ProposalResource($proposal), 'Proposal updated successfully');
+        return $this->sendResponse(new ProposalResource($new), 'Proposal updated successfully');
 
     }
 
