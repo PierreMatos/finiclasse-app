@@ -62,10 +62,6 @@ class ProposalRepository extends BaseRepository
 
         }elseif($user->hasRole(['Chefe de vendas'])){
 
-            // $proposal->vendor->stand_id = $user->stand_id;
-            // $proposals = Proposal::where('stand_id','=', $user->stand_id)->orderBy('created_at', 'desc')->get();
-            // $proposals = Proposal::orderBy('created_at', 'desc')->get();
-
             $proposals = Proposal::whereHas('vendor', function($q){
 
                 $q->where('stand_id', '=', Auth::user()->stand_id);
@@ -81,10 +77,6 @@ class ProposalRepository extends BaseRepository
 
         $proposals = Proposal::where('vendor_id', '=', $vendor)
             ->where('client_id', '=', $client)
-            // ->where(function($query) {
-            //     $query->where('state_id', '2')
-            //           ->orWhere('state_id', '>', 4);
-            // })
             ->orderBy('created_at', 'desc')->get();
 
         return $proposals;

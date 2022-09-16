@@ -26,9 +26,10 @@ use App\Models\BusinessStudyAuthorization;
 use App\Http\Controllers\AppBaseController;
 use App\Repositories\BusinessStudyRepository;
 use App\Http\Requests\API\CreateProposalAPIRequest;
-use App\Http\Requests\API\UpdateProposalAPIRequest;
+use App\Http\Requests\API\UpdateProposalAPIRequests;
 use App\Providers\PushProposalSubmitted;
 use App\Repositories\BusinessStudyAuthorizationRepository;
+use App\Services\ProposalService;
 
 
 /**
@@ -42,13 +43,20 @@ class ProposalAPIController extends AppBaseController
     private $proposalRepository;
     private $businessStudyRepository;
     private $carRepository;
+
+    private $ProposalService;
+
     // private $businessStudyAuthorizationRepository;
 
-    public function __construct(ProposalRepository $proposalRepo, BusinessStudyRepository $businessStudyRepo, CarRepository $carRepo)
+    public function __construct(ProposalRepository $proposalRepo, 
+                                BusinessStudyRepository $businessStudyRepo,
+                                CarRepository $carRepo,
+                                ProposalService $proposalServ)
     {
         $this->proposalRepository = $proposalRepo;
         $this->businessStudyRepository = $businessStudyRepo;
         $this->carRepository = $carRepo;
+        $this->proposalService = $proposalServ;
         // $this->businessStudyAuthorizationRepository = $businessStudyAuthorizationRepo;
     }
 
@@ -163,14 +171,20 @@ class ProposalAPIController extends AppBaseController
      * @return Response
      */
     // public function update($id, UpdateProposalAPIRequest $request)
-    public function update($id, UpdateProposalAPIRequest $request)
+    public function update($id, UpdateProposalAPIRequests $request)
     {
-
-        $this->ProposalService->update($id, $request->id);
-
+        //validations
+        $proposal = $this->proposalRepository->find($id);
         
+        if (empty($proposal)) {
+            return $this->sendError('Proposal not found');
+        }
+
+        // $this->proposalService->update($request->all(),$id);
+        $data = (New ProposalService())->update($request->all(),$id);
 
         return $this->sendResponse(new ProposalResource($proposal), 'Proposal updated successfully');
+
     }
 
     /**

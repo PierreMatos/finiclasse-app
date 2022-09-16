@@ -112,11 +112,11 @@ class Proposal extends Model
      *
      * @var array
      */
-    public static $rules = [
-        // 'state_id' => 'required',
-        // 'business_study_id' => 'required'
-        'vendor_id' => 'required'
-    ];
+    // public static $rules = [
+    //     // 'state_id' => 'required',
+    //     // 'business_study_id' => 'required'
+    //     'vendor_id' => 'required'
+    // ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -202,9 +202,32 @@ class Proposal extends Model
         return $this->belongsToMany(Financing::class, 'financing_proposals');
     }
 
-    public function isClosed(): bool
+    public function isClosed()
+    {
+        if ($this->state_id == 2){
+
+            return true;
+
+        }
+
+        return false;
+    }
+
+    public function isOpen()
+    {
+        if ($this->state_id == 1){
+
+            return true;
+
+        }
+
+        return false;
+    }
+ 
+    public function isShared(): bool
     {
         if ($this->state_id == 5){
+
             return true;
         }
 
@@ -218,6 +241,34 @@ class Proposal extends Model
         }
 
         return false;
+    }
+
+    public function getTotalCampaigns(){
+
+        foreach ($this->campaigns as $campaign) {
+
+            if ($campaign->pivot->type == '%') {
+
+                $totalCampaigns += ($campaign->pivot->value / 100) * ($basePrice + $preTotalExtras);
+            } elseif ($campaign->pivot->type == '€') {
+
+                $totalCampaigns += $campaign->pivot->value - ($basePrice + $preTotalExtras);
+            }
+        }
+    }
+
+    public function getTotalBenefits(){
+
+        foreach ($this->benefits as $benefit) {
+
+            if ($benefit->pivot->type == '%') {
+
+                $totalBenefits += ($benefit->pivot->value / 100) * ($basePrice + $preTotalExtras);
+            } elseif ($benefit->pivot->type == '€') {
+
+                $totalBenefits += $benefit->pivot->value;
+            }
+        }
     }
 
 }

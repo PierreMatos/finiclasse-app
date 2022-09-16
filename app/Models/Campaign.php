@@ -89,4 +89,5 @@ class Campaign extends Model implements HasMedia
     {
         return $this->belongsTo(\App\Models\CarModel::class, 'model_id', 'id');
     }
+
 }

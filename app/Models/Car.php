@@ -325,5 +325,38 @@ class Car extends Model implements HasMedia
             ->sharpen(10);
     }
 
+    //TradeIn
+    public function isProposed(): bool
+    {
+        if ($this->state_id == 7){
+
+            return true;
+
+        }
+
+        return false;
+    }
+
+    public function isUsed(): bool
+    {
+        if ($this->condition_id == 2){
+
+            return true;
+
+        }
+
+        return false;
+    }
+
+    public function isNew(): bool
+    {
+        if ($this->condition_id == 1){
+
+            return true;
+
+        }
+
+        return false;
+    }
 
 }

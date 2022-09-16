@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\API;
+namespace App\Http\Requests;
 
-use App\Models\Proposal;
-use InfyOm\Generator\Request\APIRequest;
+use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateProposalAPIRequest extends APIRequest
+class UpdateProposalAPIRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +23,8 @@ class UpdateProposalAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $rules = Proposal::$rules;
-        
-        return $rules;
+        return [
+            //
+        ];
     }
 }
