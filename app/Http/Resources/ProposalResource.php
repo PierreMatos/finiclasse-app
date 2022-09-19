@@ -105,6 +105,7 @@ class ProposalResource extends JsonResource
                 'model' => $this->tradein->model->name ?? '',
                 'model_id' => $this->tradein->model->id ?? '',
                 'category' => $this->tradein->category->name ?? '',
+                'category_id' => $this->tradein->variant ?? '',
                 'category_id' => $this->tradein->category->id ?? '',
                 'km' => $this->tradein->km ?? '',
                 'motorization' => $this->tradein->motorization ?? '',
