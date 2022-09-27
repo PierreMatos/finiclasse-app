@@ -118,6 +118,11 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
 
     Route::post('generator_builder/rollback', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@rollback')->name('io_generator_builder_rollback');
 
+    Route::post(
+        'generator_builder/generate-from-file',
+        '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@generateFromFile'
+    )->name('io_generator_builder_generate_from_file');
+    
     //Mails Exemplos:
     if (!App::environment('production')) {
         //Proposta Comercial
