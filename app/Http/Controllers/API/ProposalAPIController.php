@@ -575,44 +575,38 @@ class ProposalAPIController extends AppBaseController
             $profitmargins = ProfitMargin::all();
 
 
-            foreach ($profitmargins as $profitmargin) {
+            if($proposal->car->isNew()){
 
-                
-                // dd($profitmargin->category);
-                // dd($proposal->car->category);
-                // dd($profitmargin->make_id);
-                
-                if($profitmargin->make_id == $proposal->car->model->make_id && $profitmargin->car_fuel_id == $proposal->car->fuel_id && $profitmargin->category == $proposal->car->category) {
-                    
-                    if($discPerc < $profitmargin->level_1){
-
-                        $proposal->initialBusinessStudy->level1();
-
+                foreach ($profitmargins as $profitmargin) {
+    
+                    if($profitmargin->make_id == $proposal->car->model->make_id && $profitmargin->car_fuel_id == $proposal->car->fuel_id && $profitmargin->category == $proposal->car->category) {
+                        
+                        if($discPerc < $profitmargin->level_1){
+    
+                            $business_study_authorization_id = 1;
+    
+                        }
+    
+                        if($discPerc >= $profitmargin->level_1 && $discPerc < $profitmargin->level_2){
+    
+                            $business_study_authorization_id = 2;
+    
+                            event(new PushProposalSubmitted($proposal));
+                        }
+    
+                        if($discPerc > $profitmargin->level_3){
+    
+                            //level 3                        
+                            $business_study_authorization_id = 3;
+                            
+                            //push para director comercial
+                            event(new PushProposalSubmitted($proposal));
+    
+                        }
+    
                     }
-
-                    if($discPerc >= $profitmargin->level_1 && $discPerc < $profitmargin->level_2){
-
-                        $proposal->initialBusinessStudy->level2(); 
-                        // change business_study_authorization_id to level2() _id = 2 => name + color 
-                        //send notifications ? =>go to services
-                    }
-
-                    if($discPerc > $profitmargin->level_3){
-
-                        event(new PushProposalSubmitted($proposal));
-                        $proposal->initialBusinessStudy->business_study_authorization_id = 1;
-                        // dd($proposal->vendor->stand->name);
-
-                        $proposal->save();
-
-                        //push para director comercial
-
-                        // $proposal->initialBusinessStudy->level3();
-
-
-                    }
-
                 }
+
             }
 
             // foreach ($authorizations as $authorization) {

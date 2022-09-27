@@ -324,4 +324,16 @@ class Car extends Model implements HasMedia
             ->height(232)
             ->sharpen(10);
     }
+
+    public function isNew(){
+        
+        if( $this->car_condition_id == 1 ){
+
+            return true;
+
+        }
+        
+        return false;
+
+    }
 }

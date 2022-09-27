@@ -29,13 +29,32 @@ class SendPushProposalSubmittedNotification
     {
         $url = 'https://fcm.googleapis.com/fcm/send';
 
-        $adminsAndDirectorsAndChefeByStand = User::where([['device_key', '!=', null]])
+
+        if ($event->proposal->initialBusinessStudy->isLevel3()){
+
+            $adminsAndDirectorsAndChefeByStand = User::where([['device_key', '!=', null]])
             ->whereHas('roles', function ($query) {
                 $query
                     ->whereIn('roles.name', ['Administrador', 'Diretor comercial']);
-            })->orwhere([['device_key', '!=', null]])->whereHas('roles', function ($query) {
+            })->where('stand_id', $event->proposal->vendor->stand_id)->pluck('device_key')->all();
+
+        }
+
+        if ($event->proposal->initialBusinessStudy->isLevel2()){
+
+            $adminsAndDirectorsAndChefeByStand = User::where([['device_key', '!=', null]])->whereHas('roles', function ($query) {
                 $query->where('roles.name', 'Chefe de vendas');
             })->where('stand_id', $event->proposal->vendor->stand_id)->pluck('device_key')->all();
+
+        }
+
+        // $adminsAndDirectorsAndChefeByStand = User::where([['device_key', '!=', null]])
+        //     ->whereHas('roles', function ($query) {
+        //         $query
+        //             ->whereIn('roles.name', ['Administrador', 'Diretor comercial']);
+        //     })->orwhere([['device_key', '!=', null]])->whereHas('roles', function ($query) {
+        //         $query->where('roles.name', 'Chefe de vendas');
+        //     })->where('stand_id', $event->proposal->vendor->stand_id)->pluck('device_key')->all();
 
         $serverKey = env('FIREBASE_KEY');
         // $serverKey = "AAAAJGCgkBw:APA91bEXpYBXP1KscbxjO60Y1bKGfqeMnZfdhWXlLghFNISyw6f4_z5uefCnOYB_HQcEAyONcy8seKzdQYGsC5kdKa8m61rP28OPqweX-7wHUDKdBylBeY4XbBqY0_hmPM0-jBwFRo-P";

@@ -164,4 +164,12 @@ class BusinessStudy extends Model
         return $this->hasOne(\App\Models\Car::class, 'initial_business_study_id' , 'id');
     }
 
+    public function isLevel3(){
+        return true;
+    }
+
+    public function isLevel2(){
+        return false;
+    }
+
 }
