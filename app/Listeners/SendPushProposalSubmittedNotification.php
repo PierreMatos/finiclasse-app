@@ -37,7 +37,8 @@ class SendPushProposalSubmittedNotification
                 $query->where('roles.name', 'Chefe de vendas');
             })->where('stand_id', $event->proposal->vendor->stand_id)->pluck('device_key')->all();
 
-        $serverKey = env('FIREBASE_KEY');
+        // $serverKey = env('FIREBASE_KEY');
+        $serverKey = "AAAAJGCgkBw:APA91bEXpYBXP1KscbxjO60Y1bKGfqeMnZfdhWXlLghFNISyw6f4_z5uefCnOYB_HQcEAyONcy8seKzdQYGsC5kdKa8m61rP28OPqweX-7wHUDKdBylBeY4XbBqY0_hmPM0-jBwFRo-P";
 
         $data = [
             "registration_ids" => $adminsAndDirectorsAndChefeByStand,

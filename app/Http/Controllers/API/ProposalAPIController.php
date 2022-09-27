@@ -584,69 +584,64 @@ class ProposalAPIController extends AppBaseController
                 
                 if($profitmargin->make_id == $proposal->car->model->make_id && $profitmargin->car_fuel_id == $proposal->car->fuel_id && $profitmargin->category == $proposal->car->category) {
                     
-                    dd($profitmargin->level_1);
-                    if($discPerc < $level_1){
+                    if($discPerc < $profitmargin->level_1){
 
                         $proposal->initialBusinessStudy->level1();
 
                     }
 
-                    if($discPerc >= $level_1 && $discPerc < $level_2){
+                    if($discPerc >= $profitmargin->level_1 && $discPerc < $profitmargin->level_2){
 
                         $proposal->initialBusinessStudy->level2(); 
                         // change business_study_authorization_id to level2() _id = 2 => name + color 
                         //send notifications ? =>go to services
                     }
 
-                    if($discPerc > $level_2){
+                    if($discPerc > $profitmargin->level_3){
 
-                        $proposal->initialBusinessStudy->level3();
+                        event(new PushProposalSubmitted($proposal));
+                        $proposal->initialBusinessStudy->business_study_authorization_id = 1;
+                        // dd($proposal->vendor->stand->name);
+
+                        $proposal->save();
+
+                        //push para director comercial
+
+                        // $proposal->initialBusinessStudy->level3();
+
 
                     }
 
                 }
             }
 
-            foreach ($authorizations as $authorization) {
+            // foreach ($authorizations as $authorization) {
 
-                $min = $authorization->min;
-                $max = $authorization->max;
+            //     $min = $authorization->min;
+            //     $max = $authorization->max;
 
-                if ($proposal->car->condition_id == 1) {
+            //     if ($proposal->car->condition_id == 1) {
 
-                    if ($discPerc >= $min && $discPerc <= $max && ($authorization->id == 1 || $authorization->id == 2 || $authorization->id == 3)) {
+            //         if ($discPerc >= $min && $discPerc <= $max && ($authorization->id == 1 || $authorization->id == 2 || $authorization->id == 3)) {
 
-                        if ($authorization->id !== 1) {
-                            $proposal->state_id = 1;
-                            //aceite
-                            $proposal->initialBusinessStudy->business_study_authorization_id =  1;
-                            $business_study_authorization_id = $authorization->id;
-
-
-                            // $proposal->save();
-
-                        } elseif ($authorization->id == 1 && $proposal->state->id !== 2 && $proposal->state->id !== 4 && $sale != null) {
-                            $proposal->state_id = 3;
-                            $proposal->initialBusinessStudy->business_study_authorization_id =  3;
-                            $business_study_authorization_id = $authorization->id;
-                        }
-
-                    }
-                    // else{
-                    //     dd('oi');
-                    //     $business_study_authorization_id = 3;
-                    //     $proposal->initialBusinessStudy->business_study_authorization_id =  3;
-                    //     $proposal->save();
-                    //     // dd($proposal->initialBusinessStudy);
+            //             if ($authorization->id !== 1) {
+            //                 $proposal->state_id = 1;
+            //                 //aceite
+            //                 $proposal->initialBusinessStudy->business_study_authorization_id =  1;
+            //                 $business_study_authorization_id = $authorization->id;
 
 
-                    // }
-                    // $proposal->save();
-                    // $business_study_authorization_id = $authorizeId;
-                    // return $business_study_authorization_id;
-                    // $proposal->initialBusinessStudy->business_study_authorization_id =  $authorization->id;
-                }
-            }
+            //                 // $proposal->save();
+
+            //             } elseif ($authorization->id == 1 && $proposal->state->id !== 2 && $proposal->state->id !== 4 && $sale != null) {
+            //                 $proposal->state_id = 3;
+            //                 $proposal->initialBusinessStudy->business_study_authorization_id =  3;
+            //                 $business_study_authorization_id = $authorization->id;
+            //             }
+
+            //         }
+            //     }
+            // }
 
 
             if (($proposal->car->condition_id == 2 || $proposal->car->condition_id == 4) && $sale != null) {
