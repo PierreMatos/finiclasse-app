@@ -581,7 +581,7 @@ class ProposalAPIController extends AppBaseController
     
                     if($profitmargin->make_id == $proposal->car->model->make_id && $profitmargin->car_fuel_id == $proposal->car->fuel_id && $profitmargin->category == $proposal->car->category) {
                         
-                        if($discPerc < $profitmargin->level_1){
+                        if($discPerc > $profitmargin->level_1){
     
                             $business_study_authorization_id = 1;
     
@@ -606,7 +606,6 @@ class ProposalAPIController extends AppBaseController
     
                     }
                 }
-
             }
 
             // foreach ($authorizations as $authorization) {

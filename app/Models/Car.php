@@ -327,12 +327,12 @@ class Car extends Model implements HasMedia
 
     public function isNew(){
         
-        if( $this->car_condition_id == 1 ){
+        if( $this->condition_id == 1 ){
 
             return true;
 
         }
-        
+
         return false;
 
     }
