@@ -203,3 +203,6 @@ Route::get('storeValidateRGPD/{id}', [UserController::class, 'storeValidateRGPD'
 Route::get('thankyou', function () {
     return view('thankyou');
 });
+
+
+Route::resource('profitMargins', App\Http\Controllers\ProfitMarginController::class);

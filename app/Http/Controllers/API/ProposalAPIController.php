@@ -23,6 +23,7 @@ use App\Repositories\ProposalRepository;
 use \Illuminate\Support\Facades\Validator;
 use App\Http\Resources\ProposalCollection;
 use App\Models\BusinessStudyAuthorization;
+use App\Models\ProfitMargin;
 use App\Http\Controllers\AppBaseController;
 use App\Repositories\BusinessStudyRepository;
 use App\Http\Requests\API\CreateProposalAPIRequest;
@@ -570,6 +571,41 @@ class ProposalAPIController extends AppBaseController
             // $authorizations = $businessStudyAuthorizationRepository->all();
 
             $business_study_authorization_id = 1;
+
+            $profitmargins = ProfitMargin::all();
+
+
+            foreach ($profitmargins as $profitmargin) {
+
+                
+                // dd($profitmargin->category);
+                // dd($proposal->car->category);
+                // dd($profitmargin->make_id);
+                
+                if($profitmargin->make_id == $proposal->car->model->make_id && $profitmargin->car_fuel_id == $proposal->car->fuel_id && $profitmargin->category == $proposal->car->category) {
+                    
+                    dd($profitmargin->level_1);
+                    if($discPerc < $level_1){
+
+                        $proposal->initialBusinessStudy->level1();
+
+                    }
+
+                    if($discPerc >= $level_1 && $discPerc < $level_2){
+
+                        $proposal->initialBusinessStudy->level2(); 
+                        // change business_study_authorization_id to level2() _id = 2 => name + color 
+                        //send notifications ? =>go to services
+                    }
+
+                    if($discPerc > $level_2){
+
+                        $proposal->initialBusinessStudy->level3();
+
+                    }
+
+                }
+            }
 
             foreach ($authorizations as $authorization) {
 

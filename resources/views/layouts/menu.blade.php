@@ -340,4 +340,11 @@
             }
         });
     </script>
-@endpush
+@endpush<li class="nav-item">
+    <a href="{{ route('profitMargins.index') }}"
+       class="nav-link {{ Request::is('profitMargins*') ? 'active' : '' }}">
+        <p>Profit Margins</p>
+    </a>
+</li>
+
+

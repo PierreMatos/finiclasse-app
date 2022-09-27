@@ -124,3 +124,6 @@ Route::middleware('auth:api')->group(function () {
 });
 
 Route::resource('business_study_states', App\Http\Controllers\API\BusinessStudyStatesAPIController::class);
+
+
+Route::resource('profit_margins', App\Http\Controllers\API\ProfitMarginAPIController::class);
