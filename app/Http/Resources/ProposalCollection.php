@@ -72,6 +72,8 @@ class ProposalCollection extends ResourceCollection
                 'name' => $proposal->car->model->make->name ?? '',
                 'model' => $proposal->car->model->name ?? '',
                 'price' => $proposal->car->price_base ?? '',
+                'sub_total' => $proposal->car->sub_total ?? '',
+                'condition_id' => $proposal->car->condition_id ?? '',
                 'avatar' => $avatar ?? '',
             ],
             'tradein_id' => $proposal->tradein_id,
