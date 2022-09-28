@@ -47,6 +47,7 @@ class CarCollection extends ResourceCollection
                 'km' => $car->km,
                 'registration' => isset($car->registration) ? $car->registration->isoFormat('M/Y') : '',
                 'condition' => $car->condition->name ?? '',
+                'condition_id' => $car->condition_id ?? '',
                 'avatar' => $avatar,
                 'created_at' => $car->created_at,
                 'created_at_diff' => $car->created_at->diffForHumans(),

@@ -37,6 +37,7 @@ class CarResource extends JsonResource
             'registration' => isset($this->registration) ? $this->registration->isoFormat('D/M/Y') : '',
             'registration_formatted' => isset($this->registration) ? $this->registration->isoFormat('M/Y') : '',
             'condition' => $this->condition->name ?? '',
+            'condition_id' => $this->condition_id ?? '',
             'state' => $this->state->name ?? '',
             'komm' => $this->komm,
             'warranty_stand' => $this->warranty_stand,
