@@ -1,5 +1,5 @@
 @component('mail::message')
-<h1 style="text-align: center; font-size: 20px; font-weight: bold; text-decoration: underline;">Resumo My Finiclasse</h1>
+<h1 style="text-align: center; font-size: 20px; font-weight: bold; text-decoration: underline;">Resumo Mensal</h1>
 
 <br>
 

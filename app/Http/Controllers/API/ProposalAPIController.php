@@ -592,6 +592,7 @@ class ProposalAPIController extends AppBaseController
                             $business_study_authorization_id = 2;
     
                             event(new PushProposalSubmitted($proposal));
+                            
                         }
     
                         if($discPerc > $profitmargin->level_3){
