@@ -16,8 +16,8 @@ class ResumeDaily extends Mailable
     public $users;
     public $proposalsOpen;
     public $proposalsClose;
-    public $startDate;
-    public $endDate;
+    public $from;
+    public $to;
 
     /**
      * Create a new message instance.
