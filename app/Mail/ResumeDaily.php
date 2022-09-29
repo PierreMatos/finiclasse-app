@@ -16,22 +16,22 @@ class ResumeDaily extends Mailable
     public $users;
     public $proposalsOpen;
     public $proposalsClose;
-    public $from;
-    public $to;
+    public $fromDate;
+    public $toDate;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($car, $user, $proposalOpen, $proposalClose, $to, $from)
+    public function __construct($car, $user, $proposalOpen, $proposalClose, $toDate, $fromDate)
     {
         $this->cars = $car;
         $this->users = $user;
         $this->proposalsOpen = $proposalOpen;
         $this->proposalsClose = $proposalClose;
-        $this->to = $to;
-        $this->from = $from;
+        $this->toDate = $toDate;
+        $this->fromDate = $fromDate;
     }
 
     /**
@@ -49,13 +49,13 @@ class ResumeDaily extends Mailable
         //For test 
         // dd($startDate);
         $adminsAndDirectorsAndChefe = User::whereIn('id', [16])->get();
-
+        
         $adminsAndDirectorsAndChefe->each(function ($item) {
             return $this->from(env('MAIL_FROM_ADDRESS'), 'Finiclasse')
-                ->to($item->email)
-                ->bcc('support@aideal.app')
-                ->subject('Resumo Finiclasse')
-                ->markdown('mail.resumeDaily');
+            ->to($item->email)
+            ->bcc('support@aideal.app')
+            ->subject('Resumo Finiclasse')
+            ->markdown('mail.resumeDaily');
         });
     }
 }

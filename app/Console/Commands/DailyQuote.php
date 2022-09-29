@@ -52,11 +52,11 @@ class DailyQuote extends Command
         // $cars = Car::where('updated_at', '>=', Carbon::yesterday()->('21:30'))
         //             ->where('state_id', '=', 1)
         //             ->count();
-
+        
         $users = User::where('created_at', '>=', Carbon::today())->count();
         $proposalsOpen = Proposal::query()->with('state')->where('state_id', '=', 1)->where('created_at', '>=', Carbon::today())->count();
         $proposalsClose = Proposal::query()->with('state')->where('state_id', '=', 2)->where('created_at', '>=', Carbon::today())->count();
-
+        
         Mail::send(new ResumeDaily($cars, $users, $proposalsOpen, $proposalsClose, $from, $to));
     }
 }
