@@ -16,18 +16,22 @@ class ResumeDaily extends Mailable
     public $users;
     public $proposalsOpen;
     public $proposalsClose;
+    public $startDate;
+    public $endDate;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($car, $user, $proposalOpen, $proposalClose)
+    public function __construct($car, $user, $proposalOpen, $proposalClose, $to, $from)
     {
         $this->cars = $car;
         $this->users = $user;
         $this->proposalsOpen = $proposalOpen;
         $this->proposalsClose = $proposalClose;
+        $this->to = $to;
+        $this->from = $from;
     }
 
     /**
@@ -43,6 +47,7 @@ class ResumeDaily extends Mailable
         // })->get('email');
 
         //For test 
+        // dd($startDate);
         $adminsAndDirectorsAndChefe = User::whereIn('id', [16])->get();
 
         $adminsAndDirectorsAndChefe->each(function ($item) {

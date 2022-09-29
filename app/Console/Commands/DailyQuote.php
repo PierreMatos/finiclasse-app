@@ -45,9 +45,9 @@ class DailyQuote extends Command
     {
         $dt = Carbon::yesterday();
 
-        $startDate = $dt->hour(7)->minute(0)->second(0)->toDateTimeString();
-        $endDate = $dt->hour(21)->minute(0)->second(0)->toDateTimeString();
-        $cars = Car::whereBetween('created_at', [$startDate, $endDate])->count();
+        $from = $dt->hour(7)->minute(0)->second(0)->toDateTimeString();
+        $to = $dt->hour(21)->minute(0)->second(0)->toDateTimeString();
+        $cars = Car::whereBetween('created_at', [$from, $to])->count();
 
         // $cars = Car::where('updated_at', '>=', Carbon::yesterday()->('21:30'))
         //             ->where('state_id', '=', 1)
