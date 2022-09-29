@@ -57,6 +57,6 @@ class DailyQuote extends Command
         $proposalsOpen = Proposal::query()->with('state')->where('state_id', '=', 1)->where('created_at', '>=', Carbon::today())->count();
         $proposalsClose = Proposal::query()->with('state')->where('state_id', '=', 2)->where('created_at', '>=', Carbon::today())->count();
 
-        Mail::send(new ResumeDaily($cars, $users, $proposalsOpen, $proposalsClose));
+        Mail::send(new ResumeDaily($cars, $users, $proposalsOpen, $proposalsClose, $startDate, $endDate));
     }
 }
