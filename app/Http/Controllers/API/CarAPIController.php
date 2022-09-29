@@ -18,6 +18,7 @@ USE App\Mail\TradeInApproval;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\API\CreateCarAPIRequest;
 use App\Http\Requests\API\UpdateCarAPIRequest;
+use Carbon\Carbon;
 
 /**
  * Class CarController
@@ -44,6 +45,38 @@ class CarAPIController extends AppBaseController
     public function index(Request $request)
     {
 
+        // dd('hey');
+        // $date = CarbonImmutable::now();
+        // $cars = $date->sub('1 day 3 hours')->calendar();
+        $yesterday = Carbon::yesterday();
+        $cars = Car::where(['created_at' => $yesterday]);
+        $cars = Car::all();
+        // $cars = carRepos->carRepository->where('created_at', $yesterday);
+        // $cars = Carbon::now();
+        $query = $this->carRepository->all();
+
+        // dd(now()->yesterday('GMT', '09:30'));
+        // Carbon::now()->between($item->from, $item->to);
+        // $from = now()->subYear('GMT', '21:00');
+        // $to = now();
+
+        // $cars = Car::where('created_at', '<=', $to);
+
+        // Carbon::yesterday();
+        $dt = Carbon::yesterday();
+
+        $startDate = $dt->hour(7)->minute(0)->second(0)->toDateTimeString();
+        $endDate = $dt->hour(21)->minute(0)->second(0)->toDateTimeString();
+        $posts = Car::whereBetween('created_at', [$startDate, $endDate])->count();
+
+        dd($posts);
+        // $cars = Car::where('created_at', '<=', now()->yesterday('GMT', '09:30'))
+        //        ->count();
+
+        // print_r($yesterday);
+        // dd($yesterday);
+        // $query = $query->where('created_at','==',$yesterday);
+        dd ($cars);
         // $cars = $this->carRepository->all(
         //     $request->except(['skip', 'limit']),
         //     $request->get('skip'),

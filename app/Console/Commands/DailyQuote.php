@@ -43,9 +43,16 @@ class DailyQuote extends Command
      */
     public function handle()
     {
-        $cars = Car::where('updated_at', '>=', Carbon::today())
-                    ->where('state_id', '=', 1)
-                    ->count();
+        $dt = Carbon::yesterday();
+
+        $startDate = $dt->hour(7)->minute(0)->second(0)->toDateTimeString();
+        $endDate = $dt->hour(21)->minute(0)->second(0)->toDateTimeString();
+        $cars = Car::whereBetween('created_at', [$startDate, $endDate])->count();
+
+        // $cars = Car::where('updated_at', '>=', Carbon::yesterday()->('21:30'))
+        //             ->where('state_id', '=', 1)
+        //             ->count();
+
         $users = User::where('created_at', '>=', Carbon::today())->count();
         $proposalsOpen = Proposal::query()->with('state')->where('state_id', '=', 1)->where('created_at', '>=', Carbon::today())->count();
         $proposalsClose = Proposal::query()->with('state')->where('state_id', '=', 2)->where('created_at', '>=', Carbon::today())->count();
