@@ -33,7 +33,7 @@ class ProposalRequestDeny extends Mailable
     public function build()
     {
         return $this->from(env('MAIL_FROM_ADDRESS'), 'Finiclasse')
-            ->to($this->proposal->initialBusinessStudy->businessStudyAuthorization->responsible)
+            ->to($this->proposal->vendor->email)
             ->bcc('support@aideal.app')
             ->subject('Proposta comercial Finiclasse APROVADA')
             ->markdown('mail.proposalApproval');
