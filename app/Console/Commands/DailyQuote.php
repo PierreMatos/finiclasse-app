@@ -45,7 +45,7 @@ class DailyQuote extends Command
     {
         $dt = Carbon::yesterday();
 
-        $from = $dt->hour(7)->minute(0)->second(0)->format('d-m');
+        $from = $dt->hour(7)->minute(0)->second(0)->toDateTimeString();
         $to = $dt->hour(21)->minute(0)->second(0)->toDateTimeString();
         $cars = Car::whereBetween('created_at', [$from, $to])->count();
 
@@ -55,6 +55,8 @@ class DailyQuote extends Command
         $proposalsOpen = Proposal::query()->with('state')->where('state_id', '=', 1)->whereBetween('created_at', [$from, $to])->count();
         $proposalsClose = Proposal::query()->with('state')->where('state_id', '=', 2)->whereBetween('created_at', [$from, $to])->count();
         
+        $from = $dt->hour(7)->minute(0)->second(0)->format(('d-m'));
+
         Mail::send(new ResumeDaily($cars, $users, $proposalsOpen, $proposalsClose, $from, $to));
     }
 }
