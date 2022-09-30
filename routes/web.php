@@ -195,7 +195,7 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
     Route::post('edit-car', [CarController::class, 'editNewCars'])->name('edit-car');
     Route::post('delete-car', [CarController::class, 'destroyNewCar']);
 
-    Route::patch('/proposalrequestresponse/{id}', [App\Http\Controllers\BusinessStudyController::class, 'proposalRequestResponse'])->name('proposal_request_response');
+    Route::patch('/proposal_request_response/{id}', [App\Http\Controllers\BusinessStudyController::class, 'proposalRequestResponse'])->name('proposal_request_response');
 
     //Finalizar proposta
     Route::patch('/closeProposal/{id}', [App\Http\Controllers\ProposalController::class, 'closeProposal'])->name('closeProposal');
