@@ -58,7 +58,7 @@ class ProposalRequestAcceptNotification extends Notification
             'id' => $this->proposal->id,
             'link' => 'proposals.edit',
             'icon' => 'fas fa-file-contract mr-2',
-            'text' => 'Proposta rejeitada nº ' . $this->proposal->id,
+            'text' => 'Proposta aceite nº ' . $this->proposal->id,
             'reactIcon' => 'proposta',
             'reactLink' => 'proposal/' . $this->proposal->id
         ];
