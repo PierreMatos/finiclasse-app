@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Carbon\Carbon;
 
 class ResumeDaily extends Mailable
 {
@@ -47,7 +48,6 @@ class ResumeDaily extends Mailable
         // })->get('email');
 
         //For test 
-        // dd($startDate);
         $adminsAndDirectorsAndChefe = User::whereIn('id', [16])->get();
         
         $adminsAndDirectorsAndChefe->each(function ($item) {

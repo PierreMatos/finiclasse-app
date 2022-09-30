@@ -49,7 +49,7 @@ class ResumeMonthly extends Mailable
             return $this->from(env('MAIL_FROM_ADDRESS'), 'Finiclasse')
                 ->to($item->email)
                 ->bcc('support@aideal.app')
-                ->subject('Resumo Finiclasse')
+                ->subject('Resumo mensal Finiclasse')
                 ->markdown('mail.resumeMonthly');
         });
     }
