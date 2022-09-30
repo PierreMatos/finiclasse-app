@@ -51,12 +51,13 @@ class DailyQuote extends Command
 
        
         $users = User::whereBetween('created_at', [$from, $to])->count();
-        $proposalsOpen = Proposal::with('state')->where('state_id', '=', 1)->whereBetween('created_at', [$from, $to])->count();
-        $proposalsOpen = Proposal::query()->with('state')->where('state_id', '=', 1)->whereBetween('created_at', [$from, $to])->count();
-        $proposalsClose = Proposal::query()->with('state')->where('state_id', '=', 2)->whereBetween('created_at', [$from, $to])->count();
+        $proposalsOpen = Proposal::whereBetween('updated_at', [$from, $to])->where('state_id', '=', 1)->count();
+        // $proposalsOpen = Proposal::with('state')->where('state_id', '=', 1)->whereBetween('created_at', [$from, $to])->count();
+        // $proposalsOpen = Proposal::query()->with('state')->where('state_id', '=', 1)->whereBetween('created_at', [$from, $to])->count();
+        $proposalsClose = Proposal::whereBetween('created_at', [$from, $to])->where('state_id', '=', 2)->count();
         
         $fromDate = $dt->hour(7)->minute(0)->second(0)->format(('d-m'));
-// dd($fromDate);
+
         Mail::send(new ResumeDaily($cars, $users, $proposalsOpen, $proposalsClose, $fromDate, $fromDate));
     }
 }

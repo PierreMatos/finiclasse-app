@@ -43,25 +43,18 @@ class WeeklyQuote extends Command
      */
     public function handle()
     {
-        $cars = Car::whereBetween(
-            'created_at',
-            [Carbon::now()->subWeek()->startOfWeek(), Carbon::now()->subWeek()->endOfWeek()]
-        )->count();
+        $from = Carbon::now()->subWeek()->startOfWeek();
+        $to = Carbon::now()->subWeek()->endOfWeek();
 
-        $users = User::whereBetween(
-            'created_at',
-            [Carbon::now()->subWeek()->startOfWeek(), Carbon::now()->subWeek()->endOfWeek()]
-        )->count();
+        $cars = Car::whereBetween('created_at', [$from, $to])->count();
 
-        $proposalsOpen = Proposal::query()->with('state')->where('state_id', '=', 1)->whereBetween(
-            'created_at',
-            [Carbon::now()->subWeek()->startOfWeek(), Carbon::now()->subWeek()->endOfWeek()]
-        )->count();
+        $users = User::whereBetween('created_at', [$from, $to])->count();
 
-        $proposalsClose = Proposal::query()->with('state')->where('state_id', '=', 2)->whereBetween(
-            'created_at',
-            [Carbon::now()->subWeek()->startOfWeek(), Carbon::now()->subWeek()->endOfWeek()]
-        )->count();
+        $proposalsOpen = Proposal::whereBetween('created_at', [$from, $to])
+            ->where('state_id', '=', 1)->count();
+
+        $proposalsClose = Proposal::whereBetween('created_at', [$from, $to])
+            ->where('state_id', '=', 2)->count();
 
         Mail::send(new ResumeWeekly($cars, $users, $proposalsOpen, $proposalsClose));
     }
