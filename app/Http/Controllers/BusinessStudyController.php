@@ -170,8 +170,8 @@ class BusinessStudyController extends AppBaseController
             $proposal = $businessStudy->initialProposal;
             $proposal->state_id = 1;
 
-            // $businessStudy->save();
-            // $proposal->save();
+            $businessStudy->save();
+            $proposal->save();
         }
 
         //Push & Notification Validated Proposal
