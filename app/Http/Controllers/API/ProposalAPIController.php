@@ -728,14 +728,12 @@ class ProposalAPIController extends AppBaseController
         return new ProposalOrder($proposal);
     }
 
+    //Send Proposal Request
     public function proposalApproval($id)
     {
 
         $proposal = Proposal::find($id);
         $authID = $proposal->initialBusinessStudy->businessStudyAuthorization->id;
-
-        // $x = $proposal->initialBusinessStudy->businessStudyAuthorization->responsible->email;
-        // dd($x);
 
         if ($authID == 2 || $authID == 3 || $authID == 6) {
 

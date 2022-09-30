@@ -554,12 +554,12 @@
                             <div class="col-6">
                                 <button type="button"
                                     id="{{ isset($proposal->initialBusinessStudy->id) ? $proposal->initialBusinessStudy->id : '' }}"
-                                    value="4" class="btn btn-success businessAuth">Aceitar</button>
+                                    value="4" class="btn btn-success proposalRequestResponse">Aceitar</button>
                             </div>
                             <div class="col-6">
                                 <button type="button"
                                     id="{{ isset($proposal->initialBusinessStudy->id) ? $proposal->initialBusinessStudy->id : '' }}"
-                                    value="5" class="btn btn-danger businessAuth">Rejeitar</button>
+                                    value="5" class="btn btn-danger proposalRequestResponse">Rejeitar</button>
                             </div>
                         </div>
                     </div>

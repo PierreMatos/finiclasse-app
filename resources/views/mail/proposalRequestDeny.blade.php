@@ -1,8 +1,7 @@
 @component('mail::message')
-<h1 style="text-align: center; font-size: 20px; font-weight: bold; text-decoration: underline;">Notificação de negócio para validação</h1>
+<h1 style="text-align: center; font-size: 20px; font-weight: bold; text-decoration: underline;">Notificação de negócio validado</h1>
 
 <br>
-<p style="text-align: center;">O vendedor {{ $proposal->vendor->name }} tem a seguinte proposta para ser validada:</p>
 
 @if (!empty($proposal->finalBusinessStudy->sub_total))
 

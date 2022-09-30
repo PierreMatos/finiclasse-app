@@ -141,7 +141,7 @@
 
         });
 
-        $(".businessAuth").click(function(e) {
+        $(".proposalRequestResponse").click(function(e) {
             console.log(this.id);
             var auth = $(this).val();
             $.ajaxSetup({
@@ -150,7 +150,7 @@
                 }
             });
             $.ajax({
-                url: "{{ url('/') }}/businessAuthaction/" + this.id,
+                url: "{{ url('/') }}/proposalrequestresponse/" + this.id,
                 type: "PATCH",
                 data: {
                     value: auth,

@@ -7,7 +7,12 @@ use App\Http\Requests\UpdateBusinessStudyRequest;
 use App\Repositories\BusinessStudyRepository;
 use App\Http\Controllers\AppBaseController;
 use App\Providers\PushValidatedProposal;
+use App\Providers\PushProposalRequestDeny;
+use App\Providers\PushProposalRequestAccept;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ProposalRequestDeny;
+use App\Mail\ProposalRequestAccept;
 use Flash;
 use Response;
 
@@ -155,7 +160,7 @@ class BusinessStudyController extends AppBaseController
         return redirect(route('businessStudies.index'));
     }
 
-    public function businessAuth($id, Request $request)
+    public function proposalRequestResponse($id, Request $request)
     {
 
         if ($id && $request->value) {
@@ -164,19 +169,30 @@ class BusinessStudyController extends AppBaseController
             $proposal = $businessStudy->initialProposal;
             $proposal->state_id = 1;
 
-            $businessStudy->save();
-            $proposal->save();
+            // $businessStudy->save();
+            // $proposal->save();
         }
 
         //Push & Notification Validated Proposal
         if ($businessStudy->business_study_authorization_id === 4) {
-            event(new PushValidatedProposal($proposal));
+
+            event(new PushProposalRequestAccept($proposal));
+
+            Mail::send(new ProposalAcceptRequest($proposal));    
+        }
+
+        if ($businessStudy->business_study_authorization_id === 5) {
+
+
+            event(new PushProposalRequestDeny($proposal));
+
+            Mail::send(new ProposalRequestDeny($proposal));    
         }
 
         if ($businessStudy->business_study_authorization_id === 4) {
             return response()->json(['success' => 'Negócio aceite com sucesso']);
         } elseif ($businessStudy->business_study_authorization_id === 5) {
-            return response()->json(['success' => 'Negócio rejeitado com sucesso']);
+            return response()->json(['success' => 'Negócio rejeitado']);
         }
     }
 }
