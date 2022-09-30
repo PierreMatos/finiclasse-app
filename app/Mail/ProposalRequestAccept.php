@@ -32,7 +32,6 @@ class ProposalRequestAccept extends Mailable
      */
     public function build()
     {
-        dd($this->proposal->vendor->email);
         return $this->from(env('MAIL_FROM_ADDRESS'), 'Finiclasse')
             ->to($this->proposal->vendor->email)
             ->bcc('support@aideal.app')
