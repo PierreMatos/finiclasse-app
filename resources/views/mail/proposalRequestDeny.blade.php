@@ -29,7 +29,7 @@
     @if ($proposal->car->condition_id == 1)
     <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
         <td style="padding: 10px;"><b>Percentagem:</b></td>
-        <td style="padding: 10px;"><b>($proposal->finalBusinessStudy->total_discount_perc) %</b></td>
+        <td style="padding: 10px;"><b>@money($proposal->finalBusinessStudy->total_discount_perc)</b></td>
     </tr>
     <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
         <td style="padding: 10px;"><b>Desconto:</b></td>
@@ -81,7 +81,7 @@
     @if ($proposal->car->condition_id == 1)
         <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
             <td style="padding: 10px;"><b>Percentagem:</b></td>
-            <td style="padding: 10px;"><b>($proposal->initialBusinessStudy->total_discount_perc) %</b></td>
+            <td style="padding: 10px;"><b>@money($proposal->initialBusinessStudy->total_discount_perc)</b></td>
         </tr>
         <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
             <td style="padding: 10px;"><b>Desconto:</b></td>
