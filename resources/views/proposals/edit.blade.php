@@ -150,7 +150,7 @@
                 }
             });
             $.ajax({
-                url: "{{ url('/') }}/proposalrequestresponse/" + this.id,
+                url: "{{ url('/') }}/proposal_request_response/" + this.id,
                 type: "PATCH",
                 data: {
                     value: auth,

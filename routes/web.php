@@ -11,6 +11,11 @@ use App\Http\Controllers\FinancingController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\WebNotificationController;
 
+use Carbon\Carbon;
+use App\Models\Car;
+use App\Models\User;
+use App\Models\Proposal;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -147,9 +152,33 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
 
         //Notificação negócio para validação
         Route::get('/mailable3', function () {
-            $proposal = App\Models\Proposal::find("");
+            // $proposal = App\Models\Proposal::find("");
 
-            return new App\Mail\ProposalApproval($proposal);
+            // return new App\Mail\ProposalApproval($proposal);
+
+            $dt = Carbon::yesterday();
+
+            $from = $dt->hour(7)->minute(0)->second(0)->toDateTimeString();
+            $to = $dt->hour(21)->minute(0)->second(0)->toDateTimeString();
+            $cars = Car::whereBetween('created_at', [$from, $to])->count();
+    
+            // $cars = Car::where('updated_at', '>=', Carbon::yesterday()->('21:30'))
+            //             ->where('state_id', '=', 1)
+            //             ->count();
+    
+            $users = User::where('created_at', '>=', Carbon::today())->count();
+            $proposalsOpen = Proposal::query()->with('state')->where('state_id', '=', 1)->where('created_at', '>=', Carbon::today())->count();
+            $proposalsClose = Proposal::query()->with('state')->where('state_id', '=', 2)->where('created_at', '>=', Carbon::today())->count();
+    
+            return view('mail.resumeDaily')
+            ->with('from', $from)
+            ->with('to', $to)
+            ->with('users', $users)
+            ->with('proposalsOpen', $proposalsOpen)
+            ->with('proposalsOpenUsed', $proposalsOpenUsed)
+            ->with('proposalsClose', $proposalsClose);
+
+
         });
 
         //Notificação retoma para validação
@@ -166,7 +195,7 @@ Route::group(['middleware' => ['role:admin|Administrador|Diretor comercial|Chefe
     Route::post('edit-car', [CarController::class, 'editNewCars'])->name('edit-car');
     Route::post('delete-car', [CarController::class, 'destroyNewCar']);
 
-    Route::patch('/businessAuthaction/{id}', [App\Http\Controllers\BusinessStudyController::class, 'businessAuth'])->name('businessAuthaction');
+    Route::patch('/proposalrequestresponse/{id}', [App\Http\Controllers\BusinessStudyController::class, 'proposalRequestResponse'])->name('proposal_request_response');
 
     //Finalizar proposta
     Route::patch('/closeProposal/{id}', [App\Http\Controllers\ProposalController::class, 'closeProposal'])->name('closeProposal');
