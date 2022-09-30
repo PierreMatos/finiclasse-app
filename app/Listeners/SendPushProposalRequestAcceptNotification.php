@@ -38,7 +38,7 @@ class SendPushProposalRequestAcceptNotification
         $data = [
             "registration_ids" => $vendors,
             "notification" => [
-                "title" => 'Proposta rejeitada',
+                "title" => 'Proposta aceite',
                 "body" => 'Proposta nº ' . $event->proposal->id
             ]
         ];

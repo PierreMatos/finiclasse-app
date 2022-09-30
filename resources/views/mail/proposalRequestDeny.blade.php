@@ -1,5 +1,5 @@
 @component('mail::message')
-<h1 style="text-align: center; font-size: 20px; font-weight: bold; text-decoration: underline;">Notificação de negócio validado</h1>
+<h1 style="text-align: center; font-size: 20px; font-weight: bold; text-decoration: underline;">Notificação de negócio rejeitado</h1>
 
 <br>
 

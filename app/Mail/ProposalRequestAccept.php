@@ -36,6 +36,6 @@ class ProposalRequestAccept extends Mailable
             ->to($this->proposal->vendor->email)
             ->bcc('support@aideal.app')
             ->subject('Proposta comercial Finiclasse APROVADA')
-            ->markdown('mail.proposalApproval');
+            ->markdown('mail.proposalRequestAccept');
     }
 }
