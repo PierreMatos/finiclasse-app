@@ -34,7 +34,6 @@ class PushProposalRequestDeny
      */
     public function broadcastOn()
     {
-        dd('yo2');
         return new PrivateChannel('channel-name');
     }
 }

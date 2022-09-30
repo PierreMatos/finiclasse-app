@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ProposalRequestDeny;
 use App\Mail\ProposalRequestAccept;
+// use App\Models\User;
 use Flash;
 use Response;
 
@@ -178,13 +179,14 @@ class BusinessStudyController extends AppBaseController
 
             event(new PushProposalRequestAccept($proposal));
 
-            Mail::send(new ProposalAcceptRequest($proposal));    
+            Mail::send(new ProposalRequestAccept($proposal));    
         }
 
         if ($businessStudy->business_study_authorization_id === 5) {
 
-
             event(new PushProposalRequestDeny($proposal));
+
+            // $vendorsNotification = User::where('id', '=', $proposal->vendor->id)->get();
 
             Mail::send(new ProposalRequestDeny($proposal));    
         }
