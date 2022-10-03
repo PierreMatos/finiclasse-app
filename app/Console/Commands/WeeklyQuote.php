@@ -50,10 +50,10 @@ class WeeklyQuote extends Command
 
         $users = User::whereBetween('created_at', [$from, $to])->count();
 
-        $proposalsOpen = Proposal::whereBetween('created_at', [$from, $to])
+        $proposalsOpen = Proposal::whereBetween('updated_at', [$from, $to])
             ->where('state_id', '=', 1)->count();
 
-        $proposalsClose = Proposal::whereBetween('created_at', [$from, $to])
+        $proposalsClose = Proposal::whereBetween('updated_at', [$from, $to])
             ->where('state_id', '=', 2)->count();
 
         Mail::send(new ResumeWeekly($cars, $users, $proposalsOpen, $proposalsClose));

@@ -45,83 +45,12 @@ class CarAPIController extends AppBaseController
     public function index(Request $request)
     {
 
-        // dd('hey');
-        // $date = CarbonImmutable::now();
-        // $cars = $date->sub('1 day 3 hours')->calendar();
-        $yesterday = Carbon::yesterday();
-        $cars = Car::where(['created_at' => $yesterday]);
-        $cars = Car::all();
-        // $cars = carRepos->carRepository->where('created_at', $yesterday);
-        // $cars = Carbon::now();
-        $query = $this->carRepository->all();
-
-        // dd(now()->yesterday('GMT', '09:30'));
-        // Carbon::now()->between($item->from, $item->to);
-        // $from = now()->subYear('GMT', '21:00');
-        // $to = now();
-
-        // $cars = Car::where('created_at', '<=', $to);
-
-        // Carbon::yesterday();
-        $dt = Carbon::yesterday();
-
-        $startDate = $dt->hour(7)->minute(0)->second(0)->toDateTimeString();
-        $endDate = $dt->hour(21)->minute(0)->second(0)->toDateTimeString();
-        $posts = Car::whereBetween('created_at', [$startDate, $endDate])->count();
-
-        dd($posts);
-        // $cars = Car::where('created_at', '<=', now()->yesterday('GMT', '09:30'))
-        //        ->count();
-
-        // print_r($yesterday);
-        // dd($yesterday);
-        // $query = $query->where('created_at','==',$yesterday);
-        dd ($cars);
-        // $cars = $this->carRepository->all(
-        //     $request->except(['skip', 'limit']),
-        //     $request->get('skip'),
-        //     $request->get('limit')
-        // );
-
-        // dd($this->carRepository->all());
+       // dd($this->carRepository->all());
 
         //TODO NAO mostrar carros reservados
         return new CarCollection( $this->carRepository->all());
 
-        // return new CarCollection( $this->carRepository->paginate(2));
-
-        // return $this->sendResponse(new CarCollection($cars::paginate()), 'Car Models retrieved successfully');
-
-        // if ($request->condition != null) {
-
-        //     $cars = Car::where('condition_id','=',$request->condition)->simplePaginate(5);
-
-        // } else {
-
-        //     $cars = Car::simplePaginate(5);
-
-        // }
         
-        // return new CarCollection($cars);
-
-
-
-
-
-        // return $this->sendResponse(new CarCollection($cars), 'Cars retrieved successfully');
-
-        //return JSON with Resource
-            // return CarCollection::collection($data, [
-            //     'success' => true,
-            //     'message' => 'Cars retrieved successfully',
-            // ]);
-
-
-
-            // return (new CarResource(Car::paginate(5)));
-        // return $this->sendResponse(new CarCollection(Car::paginate(5)), 'Cars retrieved successfully');
-        // return $this->sendResponse(CarCollection::collection(Car::all()), 'Cars retrieved successfully');
-        // return $this->sendResponse(CarResource::collection($cars), 'Cars retrieved successfully');
     }
 
     /**
