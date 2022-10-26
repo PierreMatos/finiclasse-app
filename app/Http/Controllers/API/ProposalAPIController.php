@@ -405,7 +405,12 @@ class ProposalAPIController extends AppBaseController
             // if ($proposal->state->name == 'Aberto' || $proposal->state->name == 'Pendente'){
             $sale = $proposal->initialBusinessStudy->sale;
             $totalTransf = $proposal->initialBusinessStudy->total_transf ?? 0;
-            $ivaTX = $proposal->initialBusinessStudy->ivatx ?? 0.23;
+
+            if ($proposal->car->condition->name == "Novo") {
+
+                $ivaTX = $proposal->initialBusinessStudy->ivatx ?? 0.23;
+
+            }
 
 
             // }
