@@ -239,6 +239,7 @@ class ProposalAPIController extends AppBaseController
                 'total_discount_perc' => $businessStudyCalculated['total_discount_perc'],
                 'isv' => $businessStudyCalculated['isv'],
                 'iva' => $businessStudyCalculated['iva'],
+                'ivatx' => $businessStudyCalculated['ivatx'],
                 'sigpu' => $businessStudyCalculated['sigpu'],
                 'ptl' => $businessStudyCalculated['ptl'],
                 'base_price' => $businessStudyCalculated['base_price'],
@@ -407,8 +408,9 @@ class ProposalAPIController extends AppBaseController
             $totalTransf = $proposal->initialBusinessStudy->total_transf ?? 0;
 
             if ($proposal->car->condition->name == "Novo") {
-
+                
                 $ivaTX = $proposal->initialBusinessStudy->ivatx ?? 0.23;
+                // dd($ivaTX);
 
             }
 
@@ -696,6 +698,7 @@ class ProposalAPIController extends AppBaseController
             'sub_total'  => $subTotal,
             'isv' => $isv,
             'IVA Taxa' => $ivaTX,
+            'ivatx' => $ivaTX,
             'iva' => $iva,
             'total' => $total,
             'sale' => $sale,
