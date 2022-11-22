@@ -587,14 +587,17 @@ class ProposalAPIController extends AppBaseController
                     if($profitmargin->make_id == $proposal->car->model->make_id && $profitmargin->car_fuel_id == $proposal->car->fuel_id && $profitmargin->category == $proposal->car->category) {
                         
                         if($discPerc > $profitmargin->level_1){
-    
+                            
                             $business_study_authorization_id = 1;
-    
+                            
                         }
-    
+                        
                         if($discPerc >= $profitmargin->level_1 && $discPerc < $profitmargin->level_2){
-    
+                            
                             $business_study_authorization_id = 2;
+                            $proposal->state_id = 3;
+                            $proposal->save();
+                            // dd($proposal->state->name);
     
                             event(new PushProposalSubmitted($proposal));
                             
@@ -604,7 +607,9 @@ class ProposalAPIController extends AppBaseController
     
                             //level 3                        
                             $business_study_authorization_id = 3;
-                            
+                            $proposal->state_id = 3;
+                            $proposal->save();
+                            // dd($proposal->state->name);
                             //push para director comercial
                             event(new PushProposalSubmitted($proposal));
     
