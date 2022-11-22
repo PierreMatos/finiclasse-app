@@ -580,7 +580,7 @@ class ProposalAPIController extends AppBaseController
             $profitmargins = ProfitMargin::all();
 
 
-            if($proposal->car->isNew()){
+            if($proposal->car->isNew() && $proposal->initialBusinessStudy->sale != null ){
 
                 foreach ($profitmargins as $profitmargin) {
     
