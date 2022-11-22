@@ -438,9 +438,11 @@ class ProposalAPIController extends AppBaseController
                 if ($campaign->pivot->type == '%') {
 
                     $totalCampaigns += ($campaign->pivot->value / 100) * ($basePrice + $preTotalExtras);
+
                 } elseif ($campaign->pivot->type == '€') {
 
-                    $totalCampaigns += $campaign->pivot->value - ($basePrice + $preTotalExtras);
+                    $totalCampaigns += $campaign->pivot->value;
+                    //  - ($basePrice + $preTotalExtras);
                 }
             }
 
