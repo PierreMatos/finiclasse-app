@@ -11,7 +11,6 @@ use App\Repositories\MakeRepository;
 use App\Repositories\CarFuelRepository;
 use App\Repositories\CarCategoryRepository;
 use App\Repositories\CarModelRepository;
-use App\Repositories\CarCategoryRepository;
 use Flash;
 use Response;
 
