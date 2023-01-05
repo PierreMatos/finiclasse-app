@@ -133,13 +133,11 @@ class ProfitMarginController extends AppBaseController
     {
         $profitMargin = $this->profitMarginRepository->find($id);
 
-        $models = $this->modelRepository->all();
         $makes = $this->makeRepository->all();
         $categories = $this->carCategoryRepository->all();
         $fuels = $this->carFuelRepository->all();
 
         $carData = ([
-            'models' => $models,
             'makes' => $makes,
             'categories' => $categories,
             'fuels' => $fuels,
