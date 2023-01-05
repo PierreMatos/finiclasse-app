@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Repositories\MakeRepository;
 use App\Repositories\CarFuelRepository;
 use App\Repositories\CarCategoryRepository;
+use App\Repositories\CarModelRepository;
+use App\Repositories\CarCategoryRepository;
 use Flash;
 use Response;
 
@@ -132,13 +134,27 @@ class ProfitMarginController extends AppBaseController
     {
         $profitMargin = $this->profitMarginRepository->find($id);
 
+        $models = $this->modelRepository->all();
+        $makes = $this->makeRepository->all();
+        $categories = $this->carCategoryRepository->all();
+        $fuels = $this->carFuelRepository->all();
+
+        $carData = ([
+            'models' => $models,
+            'makes' => $makes,
+            'categories' => $categories,
+            'fuels' => $fuels,
+        ]);
+
         if (empty($profitMargin)) {
             Flash::error('Profit Margin not found');
 
             return redirect(route('profitMargins.index'));
         }
 
-        return view('profit_margins.edit')->with('profitMargin', $profitMargin);
+        return view('profit_margins.edit')
+            ->with('profitMargin', $profitMargin)
+            ->with('carData', $carData);
     }
 
     /**

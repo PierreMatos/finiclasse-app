@@ -313,6 +313,16 @@
                 </li>
             @endcan
 
+            @can('profitMargins.index')
+                <li class="nav-item">
+                    <a href="{{ route('profitMargins.index') }}"
+                    class="nav-link {{ Request::is('profitMargins*') ? 'active' : '' }}">
+                        <p>Profit Margins</p>
+                    </a>
+                </li>
+            @endcan
+
+
         </ul>
     </li>
 @endif
@@ -340,11 +350,7 @@
             }
         });
     </script>
-@endpush<li class="nav-item">
-    <a href="{{ route('profitMargins.index') }}"
-       class="nav-link {{ Request::is('profitMargins*') ? 'active' : '' }}">
-        <p>Profit Margins</p>
-    </a>
-</li>
+@endpush
+
 
 
