@@ -390,6 +390,7 @@ class ProposalAPIController extends AppBaseController
 
             $preTotalExtras = $proposal->car->extras_total;
             $basePrice = $proposal->car->price_base;
+            $price = $proposal->car->price;
             $ptl = $proposal->car->ptl;
             $sigpu = $proposal->car->sigpu;
             $isv =  $proposal->car->isv;
@@ -466,6 +467,7 @@ class ProposalAPIController extends AppBaseController
             if ($proposal->car->condition_id == 2){
 
                 $subTotal = $proposal->car->price - ($totalBenefits + $totalCampaigns);
+
             }else{
 
                 if ($basePrice != null){
@@ -486,9 +488,10 @@ class ProposalAPIController extends AppBaseController
             if ($proposal->car->condition_id == 1) {
 
                 $total = $subTotal + $isv + $iva;
+
             } elseif ($proposal->car->condition_id != 1) {
 
-                $total = $basePrice + $iva;
+                $total = $price;
             }
 
             // DISCONT
