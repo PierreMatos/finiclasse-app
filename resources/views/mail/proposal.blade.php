@@ -5,7 +5,7 @@
 <p style="text-align: center;">Exmo/a (s) {{ $proposal->client->name }} reportamos à consulta que nos efetuada a qual agradecendo a mesmo, vimos propor à sua apreciação a nossa melhor proposta.
 </p>
 
-    @if($proposal->client->client_type_id == 3)
+    @if ($proposal->client->client_type_id == 3)
     <p>
         Para condições de frotistas é necessário o envio da documentação para que seja validado o perfil.
     </p>
@@ -69,12 +69,13 @@
             <td style="padding: 10px;">Garantia: <b>{{$proposal->car->warranty_stand}}</b></td>
         </tr>
         @endif
-        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
+        <!-- <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);"> -->
             @if ($proposal->car->condition_id !== 1)
             <!-- <td style="padding: 10px;">Preço a liquidar: <b>{{$proposal->initialBusinessStudy->settle_amount}} €</b></td> -->
             @else
-            <td style="padding: 10px;">Preço Base: <b>{{$proposal->car->price_base}} €</b></td>
-        </tr>
+            <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
+                <td style="padding: 10px;">Preço Base: <b>{{$proposal->car->price_base}} €</b></td>
+            </tr>
                 @if ($proposal->car->delivery_date !== "")
                 <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
 
@@ -85,7 +86,8 @@
                     </td>
                 </tr>
                 @endif
-            @endif
+                @endif
+        <!-- </tr> -->
     </table>
 @endcomponent
 
