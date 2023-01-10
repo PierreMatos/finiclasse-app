@@ -2,10 +2,11 @@
 <h1 style="text-align: center; font-size: 20px; font-weight: bold; text-decoration: underline;">Proposta Comercial</h1>
 
 <br>
-<p style="text-align: center;">Exmo/a (s) {{ $proposal->client->name }} reportamos à consulta que nos efetuada a qual agradecendo a mesmo, vimos propor à sua apreciação a nossa melhor proposta.</p>
+<p style="text-align: center;">Exmo/a (s) {{ $proposal->client->name }} reportamos à consulta que nos efetuada à qual agradecendo a mesmo, vimos propor à sua apreciação a nossa melhor proposta.</p>
 
-{{$proposal->client->client_type_id}}
-<p>Para condições de frotistas é necessário o envio da documentação para que seja validado o perfil.</p>
+@if ($proposal->client->client_type_id == 3)
+    <p>Para condições de frotistas é necessário o envio da documentação para que seja validado o perfil.</p>
+@endif
 
 @component('mail::table')
   <table style="border-collapse: collapse;">
