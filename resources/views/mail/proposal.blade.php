@@ -4,7 +4,7 @@
 <br>
 <p style="text-align: center;">Exmo/a (s) {{ $proposal->client->name }} reportamos à consulta que nos efetuada à qual agradecendo a mesmo, vimos propor à sua apreciação a nossa melhor proposta.</p>
 
-@if ($proposal->client->client_type_id == 3)
+@if ($proposal->client->client_type_id === 3)
     <p>Para condições de frotistas é necessário o envio da documentação para que seja validado o perfil.</p>
 @endif
 
