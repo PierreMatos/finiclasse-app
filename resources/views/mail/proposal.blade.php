@@ -2,7 +2,14 @@
 <h1 style="text-align: center; font-size: 20px; font-weight: bold; text-decoration: underline;">Proposta Comercial</h1>
 
 <br>
-<p style="text-align: center;">Obrigado pela sua preferência!</p>
+<p style="text-align: center;">Exmo/a (s) {{ $proposal->client->name }} reportamos à consulta que nos efetuada a qual agradecendo a mesmo, vimos propor à sua apreciação a nossa melhor proposta.
+</p>
+
+    @if ($proposal->client->client_type_id == 3)
+    <p>
+        Para condições de frotistas é necessário o envio da documentação para que seja validado o perfil.
+    </p>
+    @endif
 
 @component('mail::table')
   <table style="border-collapse: collapse;">
@@ -59,8 +66,7 @@
             <td style="padding: 10px;">Ano: <b>{{$proposal->car->registration->format('Y/m/d')}}</b></td>
         </tr>
         <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
-            <td style="padding: 10px;">Combustível: <b>{{$proposal->car->fuel->name}}</b></td>
-            <td style="padding: 10px;">Caixa: <b>{{$proposal->car->transmission->name}}</b></td>
+            <td style="padding: 10px;">Garantia: <b>{{$proposal->car->warranty_stand}}</b></td>
         </tr>
         @endif
         <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
@@ -68,6 +74,12 @@
             <td style="padding: 10px;">Preço a liquidar: <b>{{$proposal->initialBusinessStudy->settle_amount}} €</b></td>
             @else
             <td style="padding: 10px;">Preço Base: <b>{{$proposal->car->price_base}} €</b></td>
+                @if ($proposal->car->delivery_date)
+                    <td style="padding: 10px;">Data de entrega: <b>{{$proposal->car->delivery_date}} €</b></td>
+                    <td>Prazo de entrega apresentado é meramente indicativo.
+                        Não nos responsabilizamos por qualquer atraso até à chegada da viatura.
+                    </td>
+                @endif
             @endif
         </tr>
     </table>
@@ -99,6 +111,11 @@
             <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
                 <td style="padding: 10px;">Valor: <b>{{$proposal->tradein->tradein_purchase}} €</b></td>
             </tr>
+            <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
+                <td style="padding:10px; font-size:10px;">
+                    Consideramos que a retoma acima apresentada se encontra em perfeitas condições técnicas, com a inspeção periódica válida e com os kms referidos. Caso contrário não garantimos o preço oferecido.
+                </td>
+            </tr>
         </table>
     @endif
 @endcomponent
@@ -112,7 +129,7 @@
                 @foreach ($proposal->campaigns as $campaign)
                     <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
                         <td style="padding: 10px;">Tipo: <b>{{$campaign->pivot->name}}</b></td>
-                        <td style="padding: 10px;"><b>{{$campaign->pivot->value}} {{$campaign->pivot->type}}</b></td>
+                        <!-- <td style="padding: 10px;"><b>{{$campaign->pivot->value}} {{$campaign->pivot->type}}</b></td> -->
                     </tr>
                 @endforeach
     </table>
@@ -128,7 +145,7 @@
                 @foreach ($proposal->benefits as $benefit)
                     <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
                         <td style="padding: 10px;">Tipo: <b>{{$benefit->pivot->name}}</b></td>
-                        <td style="padding: 10px;"><b>{{$benefit->pivot->value}} {{$benefit->pivot->type}}</b></td>
+                        <!-- <td style="padding: 10px;"><b>{{$benefit->pivot->value}} {{$benefit->pivot->type}}</b></td> -->
                     </tr>
                 @endforeach
     </table>
