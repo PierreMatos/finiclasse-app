@@ -73,17 +73,18 @@
             <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
                 <td style="padding: 10px;">Preço Base: <b>{{$proposal->car->price_base}} €</b></td>
             </tr>
-                @if ($proposal->car->delivery_date !== "")
+                @if ($proposal->car->delivery_date !== null)
                 <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
-
                     <td style="padding: 10px;">Data de entrega: <b>{{$proposal->car->delivery_date}} €</b></td>
-                    <td style="padding:10px; font-size:10px;">
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
+                <td style="padding:10px; font-size:12px;">
                         Prazo de entrega apresentado é meramente indicativo.
                         Não nos responsabilizamos por qualquer atraso até à chegada da viatura.
                     </td>
                 </tr>
                 @endif
-                @endif
+            @endif
         <!-- </tr> -->
     </table>
 @endcomponent
