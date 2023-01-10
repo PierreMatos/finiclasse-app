@@ -74,7 +74,7 @@
             <td style="padding: 10px;">Preço a liquidar: <b>{{$proposal->initialBusinessStudy->settle_amount}} €</b></td>
             @else
             <td style="padding: 10px;">Preço Base: <b>{{$proposal->car->price_base}} €</b></td>
-                @if ($proposal->car->delivery_date)
+                @if ($proposal->car->delivery_date !== "")
                     <td style="padding: 10px;">Data de entrega: <b>{{$proposal->car->delivery_date}} €</b></td>
                     <td>Prazo de entrega apresentado é meramente indicativo.
                         Não nos responsabilizamos por qualquer atraso até à chegada da viatura.
