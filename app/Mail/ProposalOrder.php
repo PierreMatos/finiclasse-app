@@ -39,7 +39,9 @@ class ProposalOrder extends Mailable
 
         if ($this->proposal->financings->isNotEmpty()) {
             foreach ($financingProposal as $media) {
-                $this->attach($media->getFirstMediaUrl('financingproposal'));
+                if($media->getFirstMediaUrl('financingproposal')){
+                    $this->attach($media->getFirstMediaUrl('financingproposal'));
+                }
             }
         }
         //

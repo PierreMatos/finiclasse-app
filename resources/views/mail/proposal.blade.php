@@ -71,17 +71,21 @@
         @endif
         <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
             @if ($proposal->car->condition_id !== 1)
-            <td style="padding: 10px;">Preço a liquidar: <b>{{$proposal->initialBusinessStudy->settle_amount}} €</b></td>
+            <!-- <td style="padding: 10px;">Preço a liquidar: <b>{{$proposal->initialBusinessStudy->settle_amount}} €</b></td> -->
             @else
             <td style="padding: 10px;">Preço Base: <b>{{$proposal->car->price_base}} €</b></td>
+        </tr>
                 @if ($proposal->car->delivery_date !== "")
+                <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
+
                     <td style="padding: 10px;">Data de entrega: <b>{{$proposal->car->delivery_date}} €</b></td>
-                    <td>Prazo de entrega apresentado é meramente indicativo.
+                    <td style="padding:10px; font-size:10px;">
+                        Prazo de entrega apresentado é meramente indicativo.
                         Não nos responsabilizamos por qualquer atraso até à chegada da viatura.
                     </td>
+                </tr>
                 @endif
             @endif
-        </tr>
     </table>
 @endcomponent
 
@@ -112,7 +116,7 @@
                 <td style="padding: 10px;">Valor: <b>{{$proposal->tradein->tradein_purchase}} €</b></td>
             </tr>
             <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
-                <td style="padding:10px; font-size:10px;">
+                <td style="padding:10px; font-size:12px;">
                     Consideramos que a retoma acima apresentada se encontra em perfeitas condições técnicas, com a inspeção periódica válida e com os kms referidos. Caso contrário não garantimos o preço oferecido.
                 </td>
             </tr>
@@ -176,12 +180,6 @@
         <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
             <td style="padding: 10px;">Valor da retoma:</td>
             <td style="padding: 10px;"><b>{{$proposal->tradein->tradein_purchase ?? 0}} €</b></td>
-        </tr>
-        @endif
-        @if ($proposal->benefits->isNotEmpty())
-        <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
-            <td style="padding: 10px;">Apoio:</td>
-            <td style="padding: 10px;"><b>{{$proposal->finalBusinessStudy->total_benefits ?? $proposal->initialBusinessStudy->total_benefits}} €</b></td>
         </tr>
         @endif
         <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
