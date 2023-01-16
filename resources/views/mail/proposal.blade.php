@@ -69,12 +69,8 @@
         </tr>
         @endif
         <!-- <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);"> -->
-            @if ($proposal->car->condition_id !== 1)
-            <!-- <td style="padding: 10px;">Preço a liquidar: <b>{{$proposal->initialBusinessStudy->settle_amount}} €</b></td> -->
-            @else
-            <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
-                <td style="padding: 10px;">Preço: <b>{{$proposal->car->price}} €</b></td>
-            </tr>
+            @if ($proposal->car->condition_id === 1)
+                <td style="padding: 10px;">PVP: <b>{{$proposal->initialBusinessStudy->total}} €</b></td>
                 @if ($proposal->car->delivery_date !== null)
                 <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
                     <td style="padding: 10px;">Data de entrega: <b>{{$proposal->car->delivery_date}} €</b></td>
@@ -86,6 +82,10 @@
                 </td>
                 </tr>
                 @endif
+            @else
+            <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%);">
+                <td style="padding: 10px;">Preço: <b>{{$proposal->car->price}} €</b></td>
+            </tr>
             @endif
         <!-- </tr> -->
     </table>
