@@ -149,7 +149,6 @@ class CarAPIController extends AppBaseController
         }
 
         $file = $request->file('pos');
-        return json_encode($file);
 
         //Verificar se a imagem existe POS
         if($request->hasFile('file') == null) {
@@ -179,7 +178,7 @@ class CarAPIController extends AppBaseController
 
         $car = $this->carRepository->update($input, $id);
 
-        return $this->sendResponse(new CarResource($car), 'Car updated successfully');
+        return $this->sendResponse($file, 'Car updated successfully');
     }
 
     /**
