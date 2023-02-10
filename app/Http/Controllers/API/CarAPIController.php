@@ -67,7 +67,7 @@ class CarAPIController extends AppBaseController
 
         $input = $request->all();
 
-        $request->price = $request->sigpu + $request->ptl + $request->isv + $request->price_base + $request->extras_total * $request->iva ;
+        $input['price'] = $request->sigpu + $request->ptl + $request->isv + $request->price_base + $request->extras_total * $request->iva ;
 
         //convert react string into bool 
         if (isset($input['potencial_buyer'])){
