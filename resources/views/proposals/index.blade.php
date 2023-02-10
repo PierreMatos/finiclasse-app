@@ -92,10 +92,10 @@
                         }
                     },
                     {
-                        text: 'Pedido de fecho',
+                        text: 'Concluído',
                         className: 'btn-close',
                         action: function() {
-                            table.search('Pedido de fecho').draw();
+                            table.search('Concluído').draw();
                             table.button(0).active(false);
                             table.button(1).active(false);
                             table.button(3).active(false);

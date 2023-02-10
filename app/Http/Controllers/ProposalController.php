@@ -182,7 +182,7 @@ class ProposalController extends AppBaseController
     public function closeProposal($id, Request $request)
     {
         $proposal = $this->proposalRepository->find($id);
-        $proposal->state_id = $request->value;
+        $proposal->state_id = 6;
         $proposal->save();
 
         return response()->json(['success'=> 'Negócio finalizado com sucesso']);

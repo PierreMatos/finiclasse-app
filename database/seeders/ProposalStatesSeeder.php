@@ -29,7 +29,7 @@ class ProposalStatesSeeder extends Seeder
             1 => 
             array (
                 'id' => 2,
-                'name' => 'Pedido de fecho',
+                'name' => 'Fechado',
                 'order' => 2,
                 'color' => '#f6c8cc',
                 'visible' => 1,
@@ -69,9 +69,9 @@ class ProposalStatesSeeder extends Seeder
             5 => 
             array (
                 'id' => 6,
-                'name' => 'Fechado',
+                'name' => 'Concluído',
                 'order' => 6,
-                'color' => '#42b6f5',
+                'color' => '#7B5375',
                 'visible' => 1,
                 'created_at' => '2019-10-22 15:50:48',
                 'updated_at' => '2019-10-22 15:50:48',
