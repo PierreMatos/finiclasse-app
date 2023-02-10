@@ -67,10 +67,12 @@ class CarAPIController extends AppBaseController
 
         $input = $request->all();
 
+        $request->price = $request->sigpu + $request->ptl + $request->isv + $request->price_base + $request->extras_total * $request->iva ;
+
         //convert react string into bool 
         if (isset($input['potencial_buyer'])){
 
-            $input['potencial_buyer'] = json_decode($input['potencial_buyer']);
+            $input['potencial_buyer'] = json_decode($input['potencial_buyer']); 
             
         }
 
@@ -126,7 +128,6 @@ class CarAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        return json_encode($input);
         /** @var Car $car */
         $car = $this->carRepository->find($id);
 
@@ -179,7 +180,7 @@ class CarAPIController extends AppBaseController
 
         $car = $this->carRepository->update($input, $id);
 
-        return $this->sendResponse($file, 'Car updated successfully');
+        return $this->sendResponse($input, 'Car updated successfully');
     }
 
     /**
