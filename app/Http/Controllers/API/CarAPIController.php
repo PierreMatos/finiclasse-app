@@ -126,6 +126,7 @@ class CarAPIController extends AppBaseController
     {
         $input = $request->all();
 
+        return json_encode($input);
         /** @var Car $car */
         $car = $this->carRepository->find($id);
 
