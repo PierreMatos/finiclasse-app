@@ -62,8 +62,10 @@
         @if ($proposal->car->state->id !== 5)
         <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
             <td style="padding: 10px;">Km: <b>{{$proposal->car->km}}</b></td>
-            <td style="padding: 10px;">Ano: <b>{{$proposal->car->registration->format('Y/m/d')}}</b></td>
-        </tr>
+            @if ($proposal->car->registration !== null)
+                <td style="padding: 10px;">Ano: <b>{{$proposal->car->registration ?? $proposal->car->registration->format('Y/m/d')}}</b></td>
+            @endif
+            </tr>
         <tr style="border-bottom: 1px solid rgba(112, 112, 112, 21%); display: flex; justify-content: space-between;">
             <td style="padding: 10px;">Garantia: <b>{{$proposal->car->warranty_stand}}</b></td>
         </tr>
