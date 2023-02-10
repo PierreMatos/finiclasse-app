@@ -3,6 +3,7 @@
         <thead>
             <tr>
                 <th>{{ __('State') }}</th>
+                <th>{{ __('ID') }}</th>
                 <th>{{ __('Client') }}</th>
                 <th>{{ __('Vendor') }}</th>
                 <th>{{ __('Car') }}</th>
@@ -15,6 +16,7 @@
             @foreach ($proposals->sortByDesc('created_at') as $proposal)
                 <tr style="background-color: {{ isset($proposal->state->name) ? $proposal->state->color : '' }}">
                     <td>{{ isset($proposal->state->name) ? $proposal->state->name : '' }}</td>
+                    <td>{{ isset($proposal->state->name) ? $proposal->id : '' }}</td>
                     <td>{{ isset($proposal->client->name) ? $proposal->client->name : '' }}</td>
                     <td>{{ isset($proposal->vendor->name) ? $proposal->vendor->name : '' }}</td>
                     <td>{{ isset($proposal->car->model->make->name) ? $proposal->car->model->make->name : '' }}</td>
