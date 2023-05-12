@@ -132,7 +132,7 @@
                 </div>
 
                 <div style="display: flex;">
-                    @if ($proposal->car->state->id === 5)
+                    @if ( isset($proposal->car->state->id) === 5)
                         <!-- Komm Field -->
                         <div class="form-group col-sm-6">
                             {!! Form::label('komm', 'Komm') !!}
@@ -172,7 +172,7 @@
                 <div style="display: flex;">
                     <!-- POS PDF Field -->
                     <div class="form-group col-sm-6">
-                        @if ($proposal->car->state->id === 5)
+                        @if (isset($proposal->car->state->id) === 5)
                             @if ($proposal->car->getFirstMediaUrl('pos'))
                                 <a href="{{ $proposal->car->getFirstMediaUrl('pos') }}" target="_blank"
                                     class="btn btn-default" style="margin-top: 10px;">Ver proposta de nova viatura
@@ -195,7 +195,7 @@
                 </div>
 
                 <div style="display: flex; margin-top: 50px;">
-                    @if ($proposal->car->state->id === 5)
+                    @if (isset($proposal->car->state->id) === 5)
                         <!-- Base Price Field -->
                         <div class="form-group col-sm-8">
                             <p>Preço Base (incl. IVA)</p>
